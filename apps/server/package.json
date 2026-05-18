@@ -25,13 +25,12 @@
     "zod": "^3.24.0",
     "pino": "^9.5.0",
     "pino-pretty": "^13.0.0",
-    "@anthropic-ai/sdk": "^0.34.0",
     "openai": "^4.77.0",
     "bullmq": "^5.28.0",
     "ioredis": "^5.4.1",
-    "@repo/db": "workspace:*",
-    "@repo/validators": "workspace:*",
-    "@repo/types": "workspace:*"
+    "@useframe/db": "workspace:*",
+    "@useframe/validators": "workspace:*",
+    "@useframe/types": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

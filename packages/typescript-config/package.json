@@ -1,9 +1,10 @@
 {
-  "name": "@repo/typescript-config",
+  "name": "@useframe/typescript-config",
   "version": "0.0.0",
   "private": true,
-  "license": "MIT",
-  "publishConfig": {
-    "access": "public"
+  "exports": {
+    "./base": "./base.json",
+    "./nextjs": "./nextjs.json",
+    "./node": "./node.json"
   }
 }
