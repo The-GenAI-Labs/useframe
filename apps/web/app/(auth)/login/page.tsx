@@ -1,8 +1,11 @@
+import AuthForm from "@/components/auth/AuthForm";
 import AuthLayout from "@/components/auth/AuthLayout";
 
 const Login = () => {
     return (
-        <AuthLayout />
+        <AuthLayout>
+            <AuthForm mode="signup"/>
+        </AuthLayout>
     )
 }
 

@@ -1,18 +1,29 @@
-const AuthLayout = () => {
+import Image from "next/image"
+
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div className="bg-white flex items-center justify-around p-4 rounded-4xl h-[95vh] w-[95vw] m-auto">
-                {/* image and design */}
-                <div className="bg-amber-600 m-4 rounded-4xl w-[42%] h-[93%]">
+        <div className="min-h-screen flex items-center justify-center bg-zinc-100 dark:bg-orange-200 p-4">
+            <div className="bg-white dark:bg-white flex items-stretch rounded-4xl overflow-hidden shadow-xl h-[93vh] w-[95vw] max-w-7xl">
 
+                {/* left — image panel */}
+                <div className="hidden md:block w-[45%] relative">
+                    <Image
+                        src="/paper.jpeg"
+                        alt="Auth background"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
                 </div>
-                {/* form */}
-                <div className="w-[50%] h-[93%]">
 
+                {/* right — form panel */}
+                <div className="flex-1 flex flex-col justify-center px-10 py-12 overflow-y-auto">
+                    {children}
                 </div>
+
             </div>
         </div>
     )
 }
 
-export default AuthLayout;
+export default AuthLayout
