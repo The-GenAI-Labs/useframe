@@ -2,9 +2,11 @@
   "name": "@useframe/typescript-config",
   "version": "0.0.0",
   "private": true,
+  "main": "./nextjs.json",
   "exports": {
-    "./base": "./base.json",
-    "./nextjs": "./nextjs.json",
-    "./node": "./node.json"
+    "./base.json": "./base.json",
+    "./nextjs.json": "./nextjs.json",
+    "./node.json": "./node.json",
+    "./react-library.json": "./react-library.json"
   }
 }
