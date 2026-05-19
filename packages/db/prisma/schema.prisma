@@ -1,13 +1,523 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// packages/db/prisma/schema.prisma
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+// ─── ENUMS ────────────────────────────────────────────────────────────────────
+
+enum Plan {
+  FREE
+  PRO
+  TEAM
+}
+
+enum ProjectStatus {
+  DRAFT
+  GENERATING
+  READY
+  DEPLOYING
+  LIVE
+  FAILED
+}
+
+enum DeploymentStatus {
+  QUEUED
+  BUILDING
+  UPLOADING
+  DNS_PROVISIONING
+  LIVE
+  FAILED
+  ROLLED_BACK
+}
+
+enum PipelineStage {
+  RETRIEVAL
+  SPECIALISTS
+  CRITIQUE
+  REFINEMENT
+  SYNTHESIS
+  COPY
+  SEO
+  COMPLETE
+  FAILED
+}
+
+enum OAuthProvider {
+  GOOGLE
+  GITHUB
+  EMAIL
+}
+
+enum DomainStatus {
+  PENDING
+  VERIFYING
+  ACTIVE
+  FAILED
+}
+
+enum NicheCategory {
+  EDTECH
+  HEALTH_WELLNESS
+  FINTECH
+  SAAS_B2B
+  ECOMMERCE
+  FOOD_LIFESTYLE
+  FITNESS
+  LUXURY
+  MEDITATION
+  KIDS
+  OTHER
+}
+
+enum CopyFramework {
+  AIDA
+  PAS
+  FAB
+  PASTOR
+}
+
+// ─── USER ─────────────────────────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  avatarUrl     String?
+  plan          Plan      @default(FREE)
+  planExpiresAt DateTime?
+
+  pipelineRunsUsed  Int @default(0)
+  pipelineRunsLimit Int @default(5)
+  projectsLimit     Int @default(2)
+  deploymentsLimit  Int @default(10)
+
+  stripeCustomerId     String? @unique
+  stripeSubscriptionId String? @unique
+
+  deletedAt DateTime?
+  isActive  Boolean   @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accounts     OAuthAccount[]
+  projects     Project[]
+  deployments  Deployment[]
+  sessions     Session[]
+  usageLogs    UsageLog[]
+  subscription Subscription?
+
+  @@index([email])
+  @@index([stripeCustomerId])
+  @@index([deletedAt])
+  @@map("users")
+}
+
+// ─── OAUTH ACCOUNT ────────────────────────────────────────────────────────────
+
+model OAuthAccount {
+  id                String        @id @default(cuid())
+  userId            String
+  provider          OAuthProvider
+  providerAccountId String
+  accessToken       String?
+  refreshToken      String?
+  expiresAt         DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map("oauth_accounts")
+}
+
+// ─── SESSION ──────────────────────────────────────────────────────────────────
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  token        String   @unique
+  expiresAt    DateTime
+  ipAddress    String?
+  userAgent    String?
+  lastActiveAt DateTime @default(now())
+
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+// ─── SUBSCRIPTION ─────────────────────────────────────────────────────────────
+
+model Subscription {
+  id                   String    @id @default(cuid())
+  userId               String    @unique
+  stripeSubscriptionId String    @unique
+  stripePriceId        String
+  plan                 Plan
+  status               String
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean   @default(false)
+  canceledAt           DateTime?
+  trialEndsAt          DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([stripeSubscriptionId])
+  @@map("subscriptions")
+}
+
+// ─── PROJECT ──────────────────────────────────────────────────────────────────
+
+model Project {
+  id             String        @id @default(cuid())
+  userId         String
+  name           String
+  slug           String        @unique
+  startupIdea    String
+  niche          NicheCategory @default(OTHER)
+  targetAudience String
+  status         ProjectStatus @default(DRAFT)
+
+  description String?
+  websiteUrl  String?
+  logoUrl     String?
+
+  deletedAt  DateTime?
+  archivedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scienceSpecs ScienceSpec[]
+  pages        Page[]
+  deployments  Deployment[]
+  customDomain CustomDomain?
+  pipelineLogs PipelineLog[]
+  analytics    ProjectAnalytics?
+
+  @@index([userId])
+  @@index([slug])
+  @@index([status])
+  @@index([deletedAt])
+  @@index([userId, deletedAt])
+  @@map("projects")
+}
+
+// ─── SCIENCE SPEC ─────────────────────────────────────────────────────────────
+
+model ScienceSpec {
+  id        String  @id @default(cuid())
+  projectId String
+  version   Int     @default(1)
+  isActive  Boolean @default(true)
+
+  pipelineDurationMs   Int?
+  chunksRetrieved      Int?
+  domainsRefined       String[]
+  lowConfidence        Boolean  @default(false)
+
+  colorConfidence      Float?
+  typographyConfidence Float?
+  animationConfidence  Float?
+  overallConfidence    Float?
+
+  colorSystem     Json
+  typography      Json
+  animationSystem Json
+  layoutSystem    Json
+  imageDirection  Json
+  copyFramework   CopyFramework
+  copySystem      Json
+  seoMeta         Json
+  allCitations    Json
+  userOverrides   Json?
+
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  project      Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  pages        Page[]
+  specVersions SpecVersion[]
+
+  @@index([projectId])
+  @@index([projectId, isActive])
+  @@index([projectId, version])
+  @@index([deletedAt])
+  @@map("science_specs")
+}
+
+// ─── SPEC VERSION ─────────────────────────────────────────────────────────────
+
+model SpecVersion {
+  id            String  @id @default(cuid())
+  scienceSpecId String
+  projectId     String
+  versionNumber Int
+  label         String?
+  snapshot      Json
+  restoredFrom  Int?
+
+  createdAt DateTime @default(now())
+
+  scienceSpec ScienceSpec @relation(fields: [scienceSpecId], references: [id], onDelete: Cascade)
+
+  @@unique([scienceSpecId, versionNumber])
+  @@index([scienceSpecId])
+  @@index([projectId])
+  @@map("spec_versions")
+}
+
+// ─── PAGE ─────────────────────────────────────────────────────────────────────
+
+model Page {
+  id            String  @id @default(cuid())
+  projectId     String
+  scienceSpecId String
+  slug          String
+  title         String
+  isPublished   Boolean @default(false)
+
+  sections     Json
+  seoOverrides Json?
+
+  builtHtml  String?
+  builtCss   String?
+  ogImageUrl String?
+  sitemapUrl String?
+
+  publishedAt DateTime?
+  deletedAt   DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project     Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  scienceSpec ScienceSpec     @relation(fields: [scienceSpecId], references: [id])
+  deployments Deployment[]
+  analytics   PageAnalytics[]
+
+  @@unique([projectId, slug])
+  @@index([projectId])
+  @@index([scienceSpecId])
+  @@index([isPublished])
+  @@index([deletedAt])
+  @@map("pages")
+}
+
+// ─── DEPLOYMENT ───────────────────────────────────────────────────────────────
+
+model Deployment {
+  id        String           @id @default(cuid())
+  projectId String
+  pageId    String
+  userId    String
+  version   Int              @default(1)
+  status    DeploymentStatus @default(QUEUED)
+
+  subdomain    String
+  customDomain String?
+  liveUrl      String?
+
+  buildLog        String?
+  buildDurationMs Int?
+  deployedAt      DateTime?
+  failedAt        DateTime?
+  failureReason   String?
+
+  rolledBackAt     DateTime?
+  rolledBackFromId String?
+
+  r2BucketKey String?
+  ogImageKey  String?
+  assetsKey   String?
+
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  page    Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@index([projectId])
+  @@index([pageId])
+  @@index([userId])
+  @@index([status])
+  @@index([subdomain])
+  @@index([deletedAt])
+  @@map("deployments")
+}
+
+// ─── CUSTOM DOMAIN ────────────────────────────────────────────────────────────
+
+model CustomDomain {
+  id        String       @id @default(cuid())
+  projectId String       @unique
+  domain    String       @unique
+  status    DomainStatus @default(PENDING)
+
+  cloudflareRecordId String?
+  cnameTarget        String?
+  verifiedAt         DateTime?
+  lastCheckedAt      DateTime?
+  failureReason      String?
+
+  sslStatus    String?
+  sslIssuedAt  DateTime?
+  sslExpiresAt DateTime?
+
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([domain])
+  @@index([status])
+  @@index([deletedAt])
+  @@map("custom_domains")
+}
+
+// ─── PIPELINE LOG ─────────────────────────────────────────────────────────────
+
+model PipelineLog {
+  id        String        @id @default(cuid())
+  projectId String
+  jobId     String        @unique
+  stage     PipelineStage @default(RETRIEVAL)
+  status    String
+
+  retrievalMs   Int?
+  specialistsMs Int?
+  critiqueMs    Int?
+  refinementMs  Int?
+  synthesisMs   Int?
+  copyMs        Int?
+  seoMs         Int?
+  totalMs       Int?
+
+  chunksRetrieved Int?
+  lowConfidence   Boolean  @default(false)
+
+  colorScore      Float?
+  typographyScore Float?
+  animationScore  Float?
+  domainsRefined  String[]
+
+  errorMessage String?
+  errorStage   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([jobId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("pipeline_logs")
+}
+
+// ─── PROJECT ANALYTICS ────────────────────────────────────────────────────────
+
+model ProjectAnalytics {
+  id           String    @id @default(cuid())
+  projectId    String    @unique
+  totalViews   Int       @default(0)
+  uniqueViews  Int       @default(0)
+  totalDeploys Int       @default(0)
+  lastViewedAt DateTime?
+
+  updatedAt DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("project_analytics")
+}
+
+// ─── PAGE ANALYTICS ───────────────────────────────────────────────────────────
+
+model PageAnalytics {
+  id     String   @id @default(cuid())
+  pageId String
+  date   DateTime
+
+  views   Int @default(0)
+  uniques Int @default(0)
+
+  referrers Json?
+
+  desktop Int @default(0)
+  mobile  Int @default(0)
+  tablet  Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  page Page @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@unique([pageId, date])
+  @@index([pageId])
+  @@index([date])
+  @@map("page_analytics")
+}
+
+// ─── USAGE LOG ────────────────────────────────────────────────────────────────
+
+model UsageLog {
+  id        String  @id @default(cuid())
+  userId    String
+  action    String
+  projectId String?
+  meta      Json?
+
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+  @@index([userId, action])
+  @@map("usage_logs")
+}
+
+// ─── WAITLIST ─────────────────────────────────────────────────────────────────
+
+model Waitlist {
+  id         String    @id @default(cuid())
+  email      String    @unique
+  name       String?
+  useCase    String?
+  source     String?
+  approved   Boolean   @default(false)
+  approvedAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([approved])
+  @@map("waitlist")
 }
