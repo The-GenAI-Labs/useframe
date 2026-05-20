@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { Mail, Lock, User } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -29,7 +30,7 @@ interface AuthFormProps {
 
 const AuthForm = ({ mode }: AuthFormProps) => {
   const isLogin = mode === "login"
-
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -178,12 +179,13 @@ const AuthForm = ({ mode }: AuthFormProps) => {
       {/* bottom link */}
       <p className="text-center text-sm text-zinc-500">
         {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-        <Link
-          href={isLogin ? "/signup" : "/login"}
+        <button
+          type="button"
+          onClick={() => router.push(isLogin ? "/signup" : "/login")}
           className="text-orange-500 hover:text-orange-600 font-medium cursor-pointer transition-colors"
         >
           {isLogin ? "Sign up" : "Sign in"}
-        </Link>
+        </button>
       </p>
 
       {!isLogin && (

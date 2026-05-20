@@ -25,8 +25,8 @@ const IMAGES = [
 ]
 
 // split into two columns
-const LEFT_IMAGES = IMAGES.slice(0, 13)   // 13 images
-const RIGHT_IMAGES = IMAGES.slice(12, 25)  // 13 images (slight overlap for variety)
+const LEFT_IMAGES = IMAGES.slice(0, 13)  
+const RIGHT_IMAGES = IMAGES.slice(12, 25) 
 
 interface ColumnProps {
     images: string[]
@@ -34,7 +34,6 @@ interface ColumnProps {
 }
 
 const CarouselColumn = ({ images, direction }: ColumnProps) => {
-    // duplicate for seamless infinite loop
     const doubled = [...images, ...images]
 
     return (
@@ -58,7 +57,7 @@ const CarouselColumn = ({ images, direction }: ColumnProps) => {
                             src={src}
                             alt={`preview ${i}`}
                             fill
-                            className="object-cover"
+                            className="object-cover rounded-lg"
                             sizes="20vw"
                         />
                     </div>
@@ -71,20 +70,60 @@ const CarouselColumn = ({ images, direction }: ColumnProps) => {
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="min-h-screen flex items-center justify-center p-4" style={{
-            backgroundColor: "#fed3a2",
+            backgroundColor: "#fed3a1",
             backgroundImage: `linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px)`,
             backgroundSize: "32px 32px",
         }}>
+            
             <div className="bg-white dark:bg-white flex items-stretch rounded-4xl overflow-hidden shadow-xl h-[93vh] w-[95vw] max-w-7xl">
 
                 {/* left — carousel panel */}
-                <div className="hidden md:flex items-center justify-center w-[50%] bg-orange-50 p-4">
-                    <div className="flex gap-3 w-full h-[95%] rounded-4xl overflow-hidden">
+                <div className="hidden md:flex items-center justify-center w-[50%] bg-orange-50 p-5">
+
+                    <div className="relative flex gap-3 w-full h-full rounded-2xl overflow-hidden">
+
                         <CarouselColumn images={LEFT_IMAGES} direction="up" />
                         <CarouselColumn images={RIGHT_IMAGES} direction="down" />
+
+                        {/* badge — centered inside carousel box */}
+                        <div className="absolute inset-x-0 top-8 flex justify-center pointer-events-none z-20">
+
+                            {/* glow blur behind badge */}
+                            <div className="absolute w-[300px] h-[80px] rounded-full bg-white/40 blur-2xl" />
+
+                            {/* badge pill */}
+                            <div
+                                className="relative flex items-center gap-3 px-5 py-3 rounded-full border border-white/50"
+                                style={{
+                                    background: "rgba(255,255,255,0.22)",
+                                    backdropFilter: "blur(14px)",
+                                    WebkitBackdropFilter: "blur(14px)",
+                                    boxShadow: "0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6)",
+                                }}
+                            >
+                                {/* left fade line */}
+                                <div className="w-12 h-px bg-gradient-to-r from-transparent to-orange-400/80" />
+
+                                {/* text */}
+                                <span
+                                    className="text-md font-bold tracking-[0.22em] uppercase whitespace-nowrap"
+                                    style={{
+                                        color: "#92400e",
+                                        textShadow: "0 1px 10px rgba(255,255,255,0.9)",
+                                    }}
+                                >
+                                    Backed by Science
+                                </span>
+
+                                {/* right fade line */}
+                                <div className="w-12 h-px bg-gradient-to-l from-transparent to-orange-400/80" />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
+                
                 {/* right — form panel */}
                 <div className="flex-1 flex flex-col justify-center px-10 py-12 overflow-y-auto">
                     {children}
