@@ -159,6 +159,9 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.62.0
         version: 5.100.10(@tanstack/react-query@5.100.10(react@19.2.0))(react@19.2.0)
+      '@useframe/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@useframe/types':
         specifier: workspace:*
         version: link:../../packages/types

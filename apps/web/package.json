@@ -19,6 +19,7 @@
     "@tanstack/react-query-devtools": "^5.62.0",
     "@useframe/types": "workspace:*",
     "@useframe/ui": "workspace:*",
+    "@useframe/db": "workspace:*",
     "@useframe/validators": "workspace:*",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",

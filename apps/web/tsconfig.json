@@ -5,7 +5,11 @@
     "plugins": [{ "name": "next" }],
     "strictNullChecks": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@useframe/db": ["../../packages/db/src/index.ts"],
+      "@useframe/types": ["../../packages/types/src/index.ts"],
+      "@useframe/validators": ["../../packages/validators/src/index.ts"],
+      "@useframe/ui": ["../../packages/ui/src/index.ts"]
     },
     "jsx": "preserve"
   },
