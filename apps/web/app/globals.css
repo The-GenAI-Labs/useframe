@@ -34,3 +34,12 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%); }
+    100% { transform: translateX(100%) translateY(100%); }
+}
+
+.animate-shine {
+    animation: shine 6s ease-in-out infinite;
+}

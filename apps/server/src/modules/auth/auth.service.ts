@@ -8,7 +8,6 @@ import type { RegisterInput, LoginInput } from "./auth.schema.js"
 
 export const AuthService = {
 
-    // ── REGISTER ──────────────────────────────────────────────────────────────
     async register(input: RegisterInput, res: Response) {
         const { name, email, password } = input
 
@@ -56,7 +55,6 @@ export const AuthService = {
         }
     },
 
-    // ── LOGIN ─────────────────────────────────────────────────────────────────
     async login(input: LoginInput, res: Response) {
         const { email, password } = input
 
@@ -113,7 +111,6 @@ export const AuthService = {
         }
     },
 
-    // ── REFRESH ───────────────────────────────────────────────────────────────
     async refresh(refreshToken: string, res: Response) {
         if (!refreshToken) {
             throw new AppError("No refresh token", 401)
@@ -146,12 +143,10 @@ export const AuthService = {
         return { accessToken: newAccess }
     },
 
-    // ── LOGOUT ────────────────────────────────────────────────────────────────
     async logout(res: Response) {
         clearRefreshTokenCookie(res)
     },
 
-    // ── ME ────────────────────────────────────────────────────────────────────
     async getMe(userId: string) {
         const user = await prisma.user.findUnique({
             where: { id: userId, deletedAt: null },
