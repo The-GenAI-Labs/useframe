@@ -1,20 +1,42 @@
+"use client";
+
+import { useCallback } from "react";
+import { useRouter } from "next/navigation";
+import GridBackground from "@/components/chat/GridBackground";
+import WelcomeCards from "@/components/chat/WelcomeCards";
+import ChatInput from "@/components/chat/ChatInput";
+
 export default function ChatHomePage() {
+  const router = useRouter();
+
+  const handleSubmit = useCallback((message: string) => {
+    console.log("message:", message);
+  }, []);
+
+  const handleCardClick = useCallback((id: string) => {
+    console.log("card:", id);
+  }, []);
+
   return (
-    <div className="flex h-full items-center justify-center bg-[#0a0a0a]">
-      <div className="flex flex-col gap-4 w-full max-w-2xl px-8">
+    <div className="relative flex h-full min-h-screen w-full overflow-hidden">
+      <GridBackground />
 
-        {/* Large square card */}
-        <div className="w-48 h-48 rounded-2xl border border-white/15 bg-transparent" />
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-8 py-12">
+        <div className="flex flex-col gap-6 w-1/2 min-w-[420px]">
 
-        {/* Two medium cards side by side */}
-        <div className="flex gap-4">
-          <div className="flex-1 h-14 rounded-xl border border-white/15" />
-          <div className="flex-1 h-14 rounded-xl border border-white/15" />
+          <div>
+            <h1 className="text-4xl font-semibold text-black/85 tracking-tight">
+              Hi, there!
+            </h1>
+            <p className="text-xl text-black/35 mt-1 font-normal">
+              How can I assist you today?
+            </p>
+          </div>
+
+          <WelcomeCards onCardClick={handleCardClick} />
+
+          <ChatInput onSubmit={handleSubmit} />
         </div>
-
-        {/* Wide card */}
-        <div className="w-full h-24 rounded-2xl border border-white/15" />
-
       </div>
     </div>
   );
