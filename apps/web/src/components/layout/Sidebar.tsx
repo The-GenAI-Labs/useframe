@@ -9,12 +9,12 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     return (
         <aside
             className={`
-                flex flex-col h-full bg-transparent
+                flex flex-col h-full bg-white border-r border-black/15
                 transition-all duration-300 ease-in-out shrink-0 overflow-hidden
                 ${isOpen ? "w-64" : "w-0"}
             `}
         >
-            {/* Top — toggle lives here only, no duplicate */}
+            {/* Top */}
             <div className="flex items-center justify-between px-4 py-4">
                 <span className="text-black/60 text-sm font-medium tracking-wide whitespace-nowrap">
                     UseFrame
