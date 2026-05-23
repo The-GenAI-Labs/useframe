@@ -1,4 +1,5 @@
-import express from "express"
+import express, { Request, Response, NextFunction } from "express"
+import type { Express } from "express";
 import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
@@ -7,12 +8,12 @@ import { env } from "@/config/env.js"
 import authRoutes from "@/modules/auth/auth.routes.js"
 import { errorHandler } from "@/middleware/errorHandler.js"
 
-const app: any = express()
+const app: Express = express()
 
 app.use(helmet())
 app.use(cors({
     origin: env.CLIENT_URL,
-    credentials: true, 
+    credentials: true,
 }))
 
 app.use(express.json({ limit: "10kb" }))
@@ -23,13 +24,13 @@ if (env.NODE_ENV === "development") {
     app.use(morgan("dev"))
 }
 
-app.get("/health", (_, res) => {
+app.get("/health", (_req: Request, res: Response) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() })
 })
 
 app.use("/api/auth", authRoutes)
-
-app.use("*", (_, res) => {
+// only * cannot be written in new latest express version so *splat anything can be wrtien here instead of saplt
+app.use("/{*splat}", (_req: Request, res: Response) => {
     res.status(404).json({ success: false, message: "Route not found" })
 })
 

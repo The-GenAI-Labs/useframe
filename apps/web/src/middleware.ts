@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth"
 import { NextResponse } from "next/server"
-
+export const runtime = 'nodejs';
 const PROTECTED_ROUTES = ["/dashboard", "/projects", "/settings"]
 const AUTH_ROUTES = ["/login", "/signup"]
 
@@ -12,12 +12,10 @@ export default auth((req) => {
     const isProtected = PROTECTED_ROUTES.some((r) => path.startsWith(r))
     const isAuthRoute = AUTH_ROUTES.includes(path)
 
-    // not logged in but trying to access protected route
     if (isProtected && !isLoggedIn) {
         return NextResponse.redirect(new URL("/login", nextUrl))
     }
 
-    // logged in trying to access auth routes
     if (isAuthRoute && isLoggedIn) {
         return NextResponse.redirect(new URL("/dashboard", nextUrl))
     }
