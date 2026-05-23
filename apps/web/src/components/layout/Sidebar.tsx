@@ -9,7 +9,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     return (
         <aside
             className={`
-                flex flex-col h-full bg-white border-r border-black/15
+                flex flex-col h-full bg-white
                 transition-all duration-300 ease-in-out shrink-0 overflow-hidden
                 ${isOpen ? "w-64" : "w-0"}
             `}

@@ -42,7 +42,7 @@ export default memo(function ChatInput({ onSubmit }: ChatInputProps) {
     return (
         <div className="w-full flex flex-col gap-3">
             {/* Input box */}
-            <div className="bg-white backdrop-blur-md border border-black/8 rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-white backdrop-blur-md border border-black/8 rounded-3xl shadow-sm overflow-hidden">
                 <div className="px-4 pt-3 pb-2">
                     <textarea
                         {...register("message")}

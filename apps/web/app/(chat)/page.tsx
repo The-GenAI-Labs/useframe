@@ -18,7 +18,7 @@ export default function ChatHomePage() {
   }, []);
 
   return (
-    <div className="relative flex h-full min-h-screen w-full overflow-hidden">
+    <div className="relative flex h-full w-full overflow-hidden">
       <GridBackground />
 
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-8 py-12">
