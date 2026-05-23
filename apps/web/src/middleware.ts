@@ -1,6 +1,9 @@
-import { auth } from "@/lib/auth"
+import NextAuth from "next-auth"
+import { authConfig } from "@/lib/auth.config"
 import { NextResponse } from "next/server"
-export const runtime = 'nodejs';
+
+const { auth } = NextAuth(authConfig)
+
 const PROTECTED_ROUTES = ["/dashboard", "/projects", "/settings"]
 const AUTH_ROUTES = ["/login", "/signup"]
 
@@ -24,7 +27,5 @@ export default auth((req) => {
 })
 
 export const config = {
-    matcher: [
-        "/((?!api|_next/static|_next/image|favicon.ico|auth|public).*)",
-    ],
+    matcher: ["/((?!api|_next/static|_next/image|favicon.ico|auth|public).*)"],
 }
