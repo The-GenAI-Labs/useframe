@@ -19,7 +19,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
 
       {/* logo */}
       <div className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-rose-500 rounded-lg" />
+        <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg" />
         <span className="font-semibold text-gray-700 text-lg">UseFrame</span>
       </div>
 
@@ -57,7 +57,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
         <button
           type="button"
           onClick={() => router.push(isLogin ? "/signup" : "/login")}
-          className="text-orange-500 hover:text-orange-600 font-medium cursor-pointer transition-colors"
+          className="text-blue-500 hover:text-blue-600 font-medium cursor-pointer transition-colors"
         >
           {isLogin ? "Sign up" : "Sign in"}
         </button>

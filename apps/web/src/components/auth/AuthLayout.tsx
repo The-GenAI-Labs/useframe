@@ -39,10 +39,10 @@ const CarouselColumn = ({ images, direction }: ColumnProps) => {
     return (
         <div className="relative h-full overflow-hidden w-[42%]" style={{margin:"auto"}}>
             {/* top fade */}
-            <div className="absolute -top-1 -left-1 -right-1 h-16 z-10 bg-gradient-to-b from-orange-50 to-transparent pointer-events-none" />
+            <div className="absolute -top-1 -left-1 -right-1 h-16 z-10 bg-gradient-to-b from-blue-50 to-transparent pointer-events-none" />
 
             {/* bottom fade */}
-            <div className="absolute -bottom-3 -left-1 -right-1 h-16 z-10 bg-gradient-to-t from-orange-50 to-transparent pointer-events-none" />
+            <div className="absolute -bottom-3 -left-1 -right-1 h-16 z-10 bg-gradient-to-t from-blue-50 to-transparent pointer-events-none" />
 
             <div
                 className={`flex flex-col gap-3 ${direction === "up" ? "animate-scroll-up" : "animate-scroll-down"
@@ -70,15 +70,15 @@ const CarouselColumn = ({ images, direction }: ColumnProps) => {
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="min-h-screen flex items-center justify-center p-4" style={{
-            backgroundColor: "#fed3a1",
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.07) 1px, transparent 1px)`,
+            backgroundColor: "#dbeafe",
+            backgroundImage: `linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px)`,
             backgroundSize: "32px 32px",
         }}>
-            
+
             <div className="bg-white dark:bg-white flex items-stretch rounded-4xl overflow-hidden shadow-xl h-[93vh] w-[95vw] max-w-7xl">
 
                 {/* left — carousel panel */}
-                <div className="hidden md:flex items-center justify-center w-[50%] bg-orange-50 p-5">
+                <div className="hidden md:flex items-center justify-center w-[50%] bg-blue-50 p-5">
 
                     <div className="relative flex gap-3 w-full h-full rounded-2xl overflow-hidden">
 
@@ -98,17 +98,17 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                                     background: "rgba(255,255,255,0.22)",
                                     backdropFilter: "blur(14px)",
                                     WebkitBackdropFilter: "blur(14px)",
-                                    boxShadow: "0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6)",
+                                    boxShadow: "0 8px 32px rgba(59,130,246,0.15), inset 0 1px 0 rgba(255,255,255,0.6)",
                                 }}
                             >
                                 {/* left fade line */}
-                                <div className="w-12 h-px bg-gradient-to-r from-transparent to-orange-400/80" />
+                                <div className="w-12 h-px bg-gradient-to-r from-transparent to-blue-400/80" />
 
                                 {/* text */}
                                 <span
                                     className="text-md font-bold tracking-[0.22em] uppercase whitespace-nowrap"
                                     style={{
-                                        color: "#92400e",
+                                        color: "#1e40af",
                                         textShadow: "0 1px 10px rgba(255,255,255,0.9)",
                                     }}
                                 >
@@ -116,7 +116,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                                 </span>
 
                                 {/* right fade line */}
-                                <div className="w-12 h-px bg-gradient-to-l from-transparent to-orange-400/80" />
+                                <div className="w-12 h-px bg-gradient-to-l from-transparent to-blue-400/80" />
                             </div>
                         </div>
 
@@ -125,8 +125,71 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
                 
                 {/* right — form panel */}
-                <div className="flex-1 flex flex-col justify-center px-10 py-12 overflow-y-auto">
-                    {children}
+                <div className="relative flex-1 flex flex-col justify-center px-10 py-12 overflow-hidden">
+
+                    {/* criss-cross grid — bottom half */}
+                    <div
+                        className="absolute inset-x-0 bottom-0 h-[55%] pointer-events-none"
+                        style={{
+                            backgroundImage: `
+                                linear-gradient(rgba(59,130,246,0.18) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(59,130,246,0.18) 1px, transparent 1px)
+                            `,
+                            backgroundSize: "18px 18px",
+                            WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 35%, transparent 100%)",
+                            maskImage: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 35%, transparent 100%)",
+                        }}
+                    />
+
+                    {/* soft blue glow bloom at the very bottom */}
+                    <div
+                        className="absolute inset-x-0 bottom-0 h-[40%] pointer-events-none"
+                        style={{
+                            background: "radial-gradient(ellipse 80% 60% at 50% 110%, rgba(99,179,237,0.22) 0%, transparent 70%)",
+                        }}
+                    />
+
+                    {/* shadow vignette at bottom edge */}
+                    <div
+                        className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+                        style={{
+                            background: "linear-gradient(to top, rgba(219,234,254,0.35) 0%, transparent 100%)",
+                        }}
+                    />
+
+                    {/* criss-cross grid — top half */}
+                    <div
+                        className="absolute inset-x-0 top-0 h-[55%] pointer-events-none"
+                        style={{
+                            backgroundImage: `
+                                linear-gradient(rgba(59,130,246,0.18) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(59,130,246,0.18) 1px, transparent 1px)
+                            `,
+                            backgroundSize: "18px 18px",
+                            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 35%, transparent 100%)",
+                            maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 35%, transparent 100%)",
+                        }}
+                    />
+
+                    {/* soft blue glow bloom at the very top */}
+                    <div
+                        className="absolute inset-x-0 top-0 h-[40%] pointer-events-none"
+                        style={{
+                            background: "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,179,237,0.22) 0%, transparent 70%)",
+                        }}
+                    />
+
+                    {/* shadow vignette at top edge */}
+                    <div
+                        className="absolute inset-x-0 top-0 h-24 pointer-events-none"
+                        style={{
+                            background: "linear-gradient(to bottom, rgba(219,234,254,0.35) 0%, transparent 100%)",
+                        }}
+                    />
+
+                    <div className="relative z-10 overflow-y-auto flex flex-col justify-center flex-1">
+                        {children}
+                    </div>
                 </div>
 
             </div>

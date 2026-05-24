@@ -41,8 +41,8 @@ export const MagicLinkForm = () => {
     if (sent) {
         return (
             <div className="flex flex-col items-center gap-3 py-4">
-                <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-orange-500" />
+                <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-blue-500" />
                 </div>
                 <p className="text-sm font-medium text-gray-700">Check your email</p>
                 <p className="text-xs text-zinc-400 text-center">
@@ -61,14 +61,14 @@ export const MagicLinkForm = () => {
                     placeholder="john.doe@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="pl-9 h-11 text-gray-600 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-zinc-300"
+                    className="pl-9 h-11 text-gray-600 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-blue-300"
                 />
             </div>
             {error && <p className="text-xs text-red-500">{error}</p>}
             <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-11 bg-orange-100 hover:bg-orange-200 text-orange-600 font-medium border-0 shadow-none cursor-pointer focus-visible:ring-0"
+                className="w-full h-11 bg-blue-100 hover:bg-blue-200 text-blue-600 font-medium border-0 shadow-none cursor-pointer focus-visible:ring-0"
                 variant="outline"
             >
                 {loading ? "Sending link..." : "Continue with email"}

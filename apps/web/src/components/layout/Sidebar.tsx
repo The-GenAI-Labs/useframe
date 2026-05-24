@@ -105,6 +105,25 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 </div>
             </div>
 
+            <div className="px-3 pb-3 flex gap-2 shrink-0">
+                <button className="group flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl bg-black/[0.03] hover:bg-blue-50 border border-black/[0.07] hover:border-blue-200 transition-all duration-150 cursor-pointer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-black/35 group-hover:text-blue-500 transition-colors">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                    </svg>
+                    <span className="text-[12.5px] font-semibold text-black/40 group-hover:text-blue-600 whitespace-nowrap transition-colors">New Project</span>
+                </button>
+
+                <button className="group flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl bg-black/[0.03] hover:bg-blue-50 border border-black/[0.07] hover:border-blue-200 transition-all duration-150 cursor-pointer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-black/35 group-hover:text-blue-500 transition-colors">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        <line x1="12" y1="9" x2="12" y2="13" />
+                        <line x1="10" y1="11" x2="14" y2="11" />
+                    </svg>
+                    <span className="text-[12.5px] font-semibold text-black/40 group-hover:text-blue-600 whitespace-nowrap transition-colors">New Chat</span>
+                </button>
+            </div>
+
             {/* ── Nav links ── */}
             <div className="px-3 pb-3 flex flex-col gap-1 shrink-0">
                 <button className={NAV_BTN}>
