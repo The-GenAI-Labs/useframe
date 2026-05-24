@@ -31,7 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     {showToggle && !sidebarOpen && (
                         <button
                             onClick={() => handleToggle(true)}
-                            className="absolute top-4 left-4 z-50 p-1.5 rounded-lg transition-colors text-black/40 hover:text-black/70 cursor-pointer"
+                            className="absolute top-4 left-4 z-50 p-1.5 rounded-lg transition-colors text-black/40 hover:text-black/70 cursor-ew-resize"
                         >
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                                 <rect x="3" y="3" width="18" height="18" rx="3" />

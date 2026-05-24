@@ -68,7 +68,7 @@ export const MagicLinkForm = () => {
             <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-11 bg-blue-100 hover:bg-blue-200 text-blue-600 font-medium border-0 shadow-none cursor-pointer focus-visible:ring-0"
+                className="w-full h-11 bg-blue-100 shadow-md hover:bg-blue-200 text-blue-600 font-medium border-0 cursor-pointer focus-visible:ring-0"
                 variant="outline"
             >
                 {loading ? "Sending link..." : "Continue with email"}

@@ -42,7 +42,7 @@ export const OAuthButton = ({ provider }: OAuthButtonProps) => {
             variant="outline"
             onClick={handleClick}
             disabled={loading}
-            className="w-full h-11 text-gray-700 cursor-pointer focus-visible:ring-0 focus-visible:ring-offset-0"
+            className="w-full h-11 hover:bg-blue-50 shadow-md text-gray-700 cursor-pointer focus-visible:ring-0 focus-visible:ring-offset-0"
         >
             {provider === "google" ? <GoogleIcon /> : <GitHubIcon />}
             {loading
