@@ -71,8 +71,8 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="min-h-screen flex items-center justify-center p-4" style={{
             backgroundColor: "#dbeafe",
-            backgroundImage: `linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px)`,
-            backgroundSize: "32px 32px",
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.15) 1px, transparent 1px)`,
+            backgroundSize: "3px 3px",
         }}>
 
             <div className="bg-white dark:bg-white flex items-stretch rounded-4xl overflow-hidden shadow-xl h-[93vh] w-[95vw] max-w-7xl">
@@ -135,7 +135,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                                 linear-gradient(rgba(59,130,246,0.18) 1px, transparent 1px),
                                 linear-gradient(90deg, rgba(59,130,246,0.18) 1px, transparent 1px)
                             `,
-                            backgroundSize: "18px 18px",
+                            backgroundSize: "12px 12px",
                             WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 35%, transparent 100%)",
                             maskImage: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 35%, transparent 100%)",
                         }}
@@ -162,10 +162,10 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                         className="absolute inset-x-0 top-0 h-[55%] pointer-events-none"
                         style={{
                             backgroundImage: `
-                                linear-gradient(rgba(59,130,246,0.18) 1px, transparent 1px),
-                                linear-gradient(90deg, rgba(59,130,246,0.18) 1px, transparent 1px)
+                                linear-gradient(rgba(59,130,246,0.13) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(59,130,246,0.13) 1px, transparent 1px)
                             `,
-                            backgroundSize: "18px 18px",
+                            backgroundSize: "12px 12px",
                             WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 35%, transparent 100%)",
                             maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 35%, transparent 100%)",
                         }}
