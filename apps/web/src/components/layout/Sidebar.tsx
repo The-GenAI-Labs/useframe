@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useChatModalStore } from "@/store/chatModalStore";
 
 interface SidebarProps {
@@ -55,6 +57,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     const [projectsOpen, setProjectsOpen] = useState(false);
     const [chatsOpen, setChatsOpen] = useState(false);
     const openChatModal = useChatModalStore((s) => s.open);
+    const pathname = usePathname();
 
     return (
         <aside
@@ -126,22 +129,22 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
             </div>
 
             <div className="px-3 pb-3 flex flex-col gap-1 shrink-0">
-                <button className={NAV_BTN}>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={NAV_ICON}>
+                <Link href="/research" className={`${NAV_BTN} ${pathname === "/research" ? "text-blue-600 bg-blue-50" : ""}`}>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${NAV_ICON} ${pathname === "/research" ? "text-blue-500" : ""}`}>
                         <circle cx="12" cy="12" r="10" />
                         <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
                     </svg>
                     Research
-                </button>
-                <button className={NAV_BTN}>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={NAV_ICON}>
+                </Link>
+                <Link href="/templates" className={`${NAV_BTN} ${pathname === "/templates" ? "text-blue-600 bg-blue-50" : ""}`}>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${NAV_ICON} ${pathname === "/templates" ? "text-blue-500" : ""}`}>
                         <rect x="3" y="3" width="7" height="7" rx="1" />
                         <rect x="14" y="3" width="7" height="7" rx="1" />
                         <rect x="3" y="14" width="7" height="7" rx="1" />
                         <rect x="14" y="14" width="7" height="7" rx="1" />
                     </svg>
                     Templates
-                </button>
+                </Link>
             </div>
 
             <div className="mx-4 border-t border-black/35 border-dashed mb-3 shrink-0" />
@@ -233,15 +236,16 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                         <p className="text-black/30 text-[11px] truncate leading-tight">john@example.com</p>
                     </div>
 
-                    <button
+                    <Link
+                        href="/settings"
                         title="Settings"
-                        className="w-8 h-8 flex items-center justify-center rounded-xl border border-black/10 bg-white text-black/35 hover:text-blue-500 hover:border-blue-300 hover:bg-blue-50 transition-all duration-150 cursor-pointer shrink-0"
+                        className={`w-8 h-8 flex items-center justify-center rounded-xl border border-black/10 bg-white text-black/35 hover:text-blue-500 hover:border-blue-300 hover:bg-blue-50 transition-all duration-150 cursor-pointer shrink-0 ${pathname === "/settings" ? "text-blue-500 border-blue-300 bg-blue-50" : ""}`}
                     >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <circle cx="12" cy="12" r="3" />
                             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
                         </svg>
-                    </button>
+                    </Link>
 
                     <button
                         title="Log out"
