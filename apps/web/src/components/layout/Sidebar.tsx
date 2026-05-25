@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useChatModalStore } from "@/store/chatModalStore";
 
 interface SidebarProps {
     isOpen: boolean;
@@ -53,6 +54,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     const [starredOpen, setStarredOpen] = useState(true);
     const [projectsOpen, setProjectsOpen] = useState(false);
     const [chatsOpen, setChatsOpen] = useState(false);
+    const openChatModal = useChatModalStore((s) => s.open);
 
     return (
         <aside
@@ -62,7 +64,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 ${isOpen ? "w-64" : "w-0"}
             `}
         >
-            {/* ── Logo + toggle ── */}
+            {/* logo toggl*/}
             <div className="flex items-center justify-between px-4 pt-5 pb-4 shrink-0">
                 <div className="flex items-center gap-2.5 whitespace-nowrap">
                     <div className="w-7 h-7 rounded-lg bg-black flex items-center justify-center shrink-0">
@@ -86,7 +88,6 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 </button>
             </div>
 
-            {/* ── Search ── */}
             <div className="px-3 pb-4 shrink-0">
                 <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-black/4 border border-black/[0.07]">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-black/30 shrink-0">
@@ -114,7 +115,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     <span className="text-[12.5px] font-semibold text-black/40 group-hover:text-blue-600 whitespace-nowrap transition-colors">New Project</span>
                 </button>
 
-                <button className="group flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl bg-black/[0.03] hover:bg-blue-50 border border-black/[0.07] hover:border-blue-200 transition-all duration-150 cursor-pointer">
+                <button onClick={openChatModal} className="group flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl bg-black/3 hover:bg-blue-50 border border-black/[0.07] hover:border-blue-200 transition-all duration-150 cursor-pointer">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-black/35 group-hover:text-blue-500 transition-colors">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                         <line x1="12" y1="9" x2="12" y2="13" />
@@ -124,10 +125,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 </button>
             </div>
 
-            {/* ── Nav links ── */}
             <div className="px-3 pb-3 flex flex-col gap-1 shrink-0">
                 <button className={NAV_BTN}>
-                    {/* Research — compass / search-plus icon */}
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={NAV_ICON}>
                         <circle cx="12" cy="12" r="10" />
                         <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
@@ -135,7 +134,6 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     Research
                 </button>
                 <button className={NAV_BTN}>
-                    {/* Templates — layout grid icon */}
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={NAV_ICON}>
                         <rect x="3" y="3" width="7" height="7" rx="1" />
                         <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -146,10 +144,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 </button>
             </div>
 
-            {/* ── Divider ── */}
             <div className="mx-4 border-t border-black/35 border-dashed mb-3 shrink-0" />
 
-            {/* ── Scrollable dropdowns ── */}
             <div className="flex-1 overflow-y-auto px-3 flex flex-col gap-1.5 pb-2">
 
                 {/* Starred */}
@@ -177,7 +173,6 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     )}
                 </div>
 
-                {/* Projects */}
                 <div>
                     <button onClick={() => setProjectsOpen(p => !p)} className={SECTION_BTN}>
                         <span className={SECTION_LABEL}>
@@ -202,7 +197,6 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     )}
                 </div>
 
-                {/* Chats */}
                 <div>
                     <button onClick={() => setChatsOpen(p => !p)} className={SECTION_BTN}>
                         <span className={SECTION_LABEL}>
@@ -229,20 +223,16 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
 
             </div>
 
-            {/* ── User + Actions ── */}
             <div className="px-3 py-4 shrink-0 border-t border-black/[0.07]">
                 <div className="flex items-center gap-2.5">
-                    {/* Avatar */}
                     <div className="w-8 h-8 rounded-full bg-black/10 flex items-center justify-center text-black/55 text-sm font-bold shrink-0">
                         J
                     </div>
-                    {/* Name + email */}
                     <div className="flex-1 min-w-0">
                         <p className="text-black/75 text-[13px] font-semibold truncate leading-tight">John Doe</p>
                         <p className="text-black/30 text-[11px] truncate leading-tight">john@example.com</p>
                     </div>
 
-                    {/* Settings */}
                     <button
                         title="Settings"
                         className="w-8 h-8 flex items-center justify-center rounded-xl border border-black/10 bg-white text-black/35 hover:text-blue-500 hover:border-blue-300 hover:bg-blue-50 transition-all duration-150 cursor-pointer shrink-0"
@@ -253,7 +243,6 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                         </svg>
                     </button>
 
-                    {/* Logout */}
                     <button
                         title="Log out"
                         className="w-8 h-8 flex items-center justify-center rounded-xl border border-black/10 bg-white text-black/35 hover:text-red-500 hover:border-red-300 hover:bg-red-50 transition-all duration-150 cursor-pointer shrink-0"
