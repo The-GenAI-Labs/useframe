@@ -77,16 +77,17 @@ export function ChatModal() {
                 role="dialog"
                 aria-modal="true"
                 aria-label="AI Assistant"
-                className="fixed inset-0 z-9999 flex items-center justify-center pointer-events-none px-4"
+                className="fixed inset-0 z-9999 flex items-end md:items-center justify-center pointer-events-none md:px-4"
             >
                 <div
                     className={`
-                        pointer-events-auto bg-white rounded-3xl shadow-2xl border border-black/8
+                        pointer-events-auto bg-white shadow-2xl border border-black/8
                         flex flex-col overflow-hidden
                         transition-all duration-300 ease-out
                         animate-modal-scale-in
-                        w-full max-w-110
-                        ${hasMessages ? "h-150" : "h-auto"}
+                        w-full rounded-t-3xl md:rounded-3xl
+                        max-w-full md:max-w-110
+                        ${hasMessages ? "h-[92vh] md:h-150" : "h-auto"}
                     `}
                     onClick={(e) => e.stopPropagation()}
                 >
@@ -173,7 +174,7 @@ export function ChatModal() {
                             </div>
                         </>
                     ) : (
-                        <div className="flex flex-col items-center gap-5 px-5 pt-6 pb-5">
+                        <div className="flex flex-col items-center gap-4 px-4 pt-5 pb-5 md:gap-5 md:px-5 md:pt-6">
                             <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
                                 <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
                                     <path d="M12 2L9 9H2l5.5 4-2 7L12 16l6.5 4-2-7L22 9h-7z" />

@@ -61,7 +61,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
             className={`
                 flex flex-col h-full bg-white
                 transition-all duration-300 ease-in-out shrink-0 overflow-hidden
-                ${isOpen ? "w-64" : "w-0"}
+                w-64 ${isOpen ? "md:w-64" : "md:w-0"}
             `}
         >
             {/* logo toggl*/}

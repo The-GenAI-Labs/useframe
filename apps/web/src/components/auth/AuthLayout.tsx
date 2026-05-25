@@ -69,13 +69,13 @@ const CarouselColumn = ({ images, direction }: ColumnProps) => {
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="min-h-screen flex items-center justify-center p-4" style={{
+        <div className="min-h-screen flex items-center justify-center p-2 md:p-4" style={{
             backgroundColor: "#dbeafe",
             backgroundImage: `linear-gradient(rgba(0,0,0,0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.15) 1px, transparent 1px)`,
             backgroundSize: "3px 3px",
         }}>
 
-            <div className="bg-white dark:bg-white flex items-stretch rounded-4xl overflow-hidden shadow-xl h-[93vh] w-[95vw] max-w-7xl">
+            <div className="bg-white dark:bg-white flex items-stretch rounded-3xl md:rounded-4xl overflow-hidden shadow-xl h-[96vh] md:h-[93vh] w-full md:w-[95vw] max-w-7xl">
 
                 {/* left — carousel panel */}
                 <div className="hidden md:flex items-center justify-center w-[50%] bg-blue-50 p-5">
@@ -125,7 +125,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
                 
                 {/* right — form panel */}
-                <div className="relative flex-1 flex flex-col justify-center px-10 py-12 overflow-hidden">
+                <div className="relative flex-1 flex flex-col justify-center px-5 py-8 md:px-10 md:py-12 overflow-hidden">
 
                     {/* criss-cross grid — bottom half */}
                     <div

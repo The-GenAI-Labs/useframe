@@ -23,11 +23,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="flex items-center justify-center h-screen w-screen bg-white">
-            <div className="flex h-[95vh] w-[97vw] transition-all duration-300 ease-in-out">
+            {/* on mobile the sidebar overlays as a drawer; on desktop it shifts content */}
+            <div className="flex h-full md:h-[95vh] w-full md:w-[97vw] transition-all duration-300 ease-in-out">
 
-                <Sidebar isOpen={sidebarOpen} onToggle={() => handleToggle(false)} />
+                {/* mobile: full-height overlay drawer, desktop: inline panel */}
+                {sidebarOpen && (
+                    <div
+                        className="md:hidden fixed inset-0 z-40 bg-black/30"
+                        onClick={() => handleToggle(false)}
+                    />
+                )}
+                <div className={`
+                    md:static fixed inset-y-0 left-0 z-50
+                    transition-transform duration-300 ease-in-out
+                    ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+                `}>
+                    <Sidebar isOpen={sidebarOpen} onToggle={() => handleToggle(false)} />
+                </div>
 
-                <main className="relative flex-1 bg-white border border-gray-300 rounded-4xl overflow-y-auto transition-all duration-300 ease-in-out">
+                <main className="relative flex-1 bg-white md:border md:border-gray-300 md:rounded-4xl overflow-y-auto transition-all duration-300 ease-in-out">
                     {showToggle && !sidebarOpen && (
                         <button
                             onClick={() => handleToggle(true)}
