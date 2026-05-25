@@ -1,7 +1,7 @@
-import GitHub from "next-auth/providers/github"
-import Google from "next-auth/providers/google"
-import Resend from "next-auth/providers/resend"
-import type { NextAuthConfig } from "next-auth"
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
+import Resend from "next-auth/providers/resend";
+import type { NextAuthConfig } from "next-auth";
 
 export const authConfig: NextAuthConfig = {
     providers: [
@@ -27,17 +27,11 @@ export const authConfig: NextAuthConfig = {
         error: "/auth-error",
     },
 
+    // route-level protection is handled entirely in middleware.ts
+    // authorized callback kept minimal — just passes through
     callbacks: {
-        authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = !!auth?.user
-            const isProtected = nextUrl.pathname.startsWith("/dashboard")
-            const isAuthRoute = ["/login", "/signup"].includes(nextUrl.pathname)
-
-            if (isProtected && !isLoggedIn) return false
-            if (isAuthRoute && isLoggedIn)
-                return Response.redirect(new URL("/dashboard", nextUrl))
-
-            return true
+        authorized() {
+            return true;
         },
     },
-}
+};
