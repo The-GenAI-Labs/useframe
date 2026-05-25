@@ -9,7 +9,7 @@ import { ModalChatInput } from "./ModalChatInput";
 import { MessageList } from "./MessageList";
 
 export function ChatModal() {
-    const { status, messages, isStreaming, sendMessage, close, minimize, activeChatId } =
+    const { status, messages, isStreaming, sendMessage, close, minimize } =
         useChatModalStore();
 
     const router = useRouter();
@@ -58,13 +58,9 @@ export function ChatModal() {
     );
 
     const handleExpand = useCallback(() => {
-        close();
-        if (hasMessages && activeChatId) {
-            router.push(`/chat/${activeChatId}`);
-        } else {
-            router.push("/chat");
-        }
-    }, [close, hasMessages, activeChatId, router]);
+        close(); // keep messages in store — ChatView reads same store
+        router.push("/chat");
+    }, [close, router]);
 
     if (status !== "open") return null;
 
