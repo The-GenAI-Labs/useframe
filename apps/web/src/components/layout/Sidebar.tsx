@@ -129,6 +129,12 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
             </div>
 
             <div className="px-3 pb-3 flex flex-col gap-1 shrink-0">
+                <Link href="/web-score" className={`${NAV_BTN} ${pathname === "/web-score" ? "text-blue-600 bg-blue-50" : ""}`}>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${NAV_ICON} ${pathname === "/web-score" ? "text-blue-500" : ""}`}>
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>
+                    Web Score
+                </Link>
                 <Link href="/research" className={`${NAV_BTN} ${pathname === "/research" ? "text-blue-600 bg-blue-50" : ""}`}>
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${NAV_ICON} ${pathname === "/research" ? "text-blue-500" : ""}`}>
                         <circle cx="12" cy="12" r="10" />
