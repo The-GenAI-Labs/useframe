@@ -41,7 +41,7 @@ export default memo(function ChatInput({ onSubmit }: ChatInputProps) {
 
     return (
         <div className="w-full flex flex-col gap-3">
-            <div className="bg-surface border border-base rounded-3xl shadow-sm overflow-hidden">
+            <div className="border border-base rounded-3xl shadow-sm overflow-hidden" style={{ backgroundColor: "var(--bg-primary)" }}>
                 <div className="px-4 pt-3 pb-2">
                     <textarea
                         {...register("message")}
@@ -101,7 +101,7 @@ export default memo(function ChatInput({ onSubmit }: ChatInputProps) {
                     <button
                         key={s}
                         onClick={() => onSubmit(s)}
-                        className="px-3 py-1.5 rounded-full border border-base bg-surface text-xs text-sec hover:text-pri hover:border-em hover:bg-tertiary transition-all cursor-pointer whitespace-nowrap"
+                        className="px-3 py-1.5 rounded-full border border-base bg-card text-xs text-sec hover:text-pri hover:border-em hover:bg-tertiary transition-all cursor-pointer whitespace-nowrap"
                     >
                         {s}
                     </button>
