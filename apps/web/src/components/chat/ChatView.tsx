@@ -66,11 +66,10 @@ export default function ChatView() {
                 `}
             >
                 <div className="flex items-center justify-between px-3 pt-4 pb-2 shrink-0">
-                    <span className="text-[11px] font-semibold text-black/30 uppercase tracking-wider">History</span>
                     <button
                         type="button"
                         onClick={handleNewChat}
-                        className="p-1 rounded-lg hover:bg-black/5 text-black/30 hover:text-black/60 transition-colors cursor-pointer"
+                        className="p-1 rounded-lg mt-10 hover:bg-black/5 text-black/30 hover:text-black/60 transition-colors cursor-pointer"
                         aria-label="New chat"
                     >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">

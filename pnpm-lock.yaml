@@ -397,7 +397,7 @@ importers:
         specifier: workspace:*
         version: link:../types
       zod:
-        specifier: ^3.24.3
+        specifier: ^3.25.76
         version: 3.25.76
     devDependencies:
       '@useframe/typescript-config':

@@ -44,7 +44,7 @@ const Card = memo(function Card({
             <img
                 src={card.image}
                 alt={card.topic}
-                className="w-full h-full border-[15px] border-white object-cover transition-transform rounded-4xl duration-500 ease-out group-hover:scale-[1.03]"
+                className="w-full h-full border-15 border-white object-cover transition-transform rounded-4xl duration-500 ease-out group-hover:scale-[1.03]"
             />
 
             <div className="absolute bottom-3 left-0 right-0 flex justify-center z-20">
@@ -176,7 +176,7 @@ interface WelcomeCardsProps {
 
 export default memo(function WelcomeCards({ onCardClick }: WelcomeCardsProps) {
     return (
-        <div className="flex gap-3 w-full px-1 py-1">
+        <div className="flex flex-row gap-3 w-full px-1 py-1">
             <ScrollColumn cards={LEFT_CARDS} onCardClick={onCardClick} />
             <ScrollColumn cards={RIGHT_CARDS} onCardClick={onCardClick} />
         </div>

@@ -79,7 +79,7 @@ export const ModalChatInput = memo(function ModalChatInput({
 
     return (
         <div className="flex flex-col gap-2">
-            <div className={`bg-white border rounded-2xl overflow-hidden transition-colors ${errors.message ? "border-red-300" : "border-black/10"}`}>
+            <div className={`bg-white/80 border rounded-2xl overflow-hidden transition-colors ${errors.message ? "border-red-300" : "border-black/10"}`}>
                 <div className="px-3.5 pt-3 pb-2">
                     <textarea
                         {...rest}

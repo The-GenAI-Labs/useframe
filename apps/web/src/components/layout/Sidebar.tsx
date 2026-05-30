@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useChatModalStore } from "@/store/chatModalStore";
 
 interface SidebarProps {
@@ -58,6 +58,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     const [chatsOpen, setChatsOpen] = useState(false);
     const openChatModal = useChatModalStore((s) => s.open);
     const pathname = usePathname();
+    const router = useRouter();
 
     return (
         <aside
@@ -110,7 +111,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
             </div>
 
             <div className="px-3 pb-3 flex gap-2 shrink-0">
-                <button className="group flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl bg-black/[0.03] hover:bg-blue-50 border border-black/[0.07] hover:border-blue-200 transition-all duration-150 cursor-pointer">
+                <button onClick={() => router.push("/")} className="group flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl bg-black/3 hover:bg-blue-50 border border-black/[0.07] hover:border-blue-200 transition-all duration-150 cursor-pointer">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-black/35 group-hover:text-blue-500 transition-colors">
                         <path d="M12 20h9" />
                         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />

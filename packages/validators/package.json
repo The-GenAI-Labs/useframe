@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@useframe/types": "workspace:*",
-    "zod": "^3.24.3"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@useframe/typescript-config": "workspace:*",

@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useChatModalStore } from "@/store/chatModalStore";
 import { Backdrop } from "./Backdrop";
-import { SuggestionChips } from "./SuggestionChips";
 import { ModalChatInput } from "./ModalChatInput";
 import { MessageList } from "./MessageList";
 
@@ -77,49 +76,28 @@ export function ChatModal() {
             >
                 <div
                     className={`
-                        pointer-events-auto bg-white shadow-2xl border border-black/8
+                        pointer-events-auto bg-white/50 backdrop-blur-md shadow-2xl border border-white/40
                         flex flex-col overflow-hidden
                         transition-all duration-300 ease-out
                         animate-modal-scale-in
                         w-full rounded-t-3xl md:rounded-3xl
-                        max-w-full md:max-w-110
+                        max-w-full md:max-w-130
                         ${hasMessages ? "h-[92vh] md:h-150" : "h-auto"}
                     `}
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div className="flex items-center justify-between px-4 pt-4 pb-3 shrink-0">
                         <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 rounded-lg bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-sm">
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="white">
-                                    <path d="M12 2L9 9H2l5.5 4-2 7L12 16l6.5 4-2-7L22 9h-7z" />
-                                </svg>
-                            </div>
+                            <div className="w-6 h-6 rounded-lg bg-linear-to-br from-blue-400 to-blue-600 shadow-sm" />
                             <button
                                 type="button"
                                 className="flex items-center gap-1 text-[13px] font-semibold text-black/80 hover:text-black transition-colors cursor-pointer"
                             >
                                 New chat
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                                    <polyline points="6 9 12 15 18 9" />
-                                </svg>
                             </button>
                         </div>
 
                         <div className="flex items-center gap-1">
-                            <button
-                                type="button"
-                                className="p-1.5 rounded-lg text-black/30 hover:text-black/60 hover:bg-black/5 transition-colors cursor-pointer"
-                                aria-label="Settings"
-                            >
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                                    <line x1="4" y1="6" x2="20" y2="6" />
-                                    <line x1="8" y1="12" x2="20" y2="12" />
-                                    <line x1="4" y1="18" x2="20" y2="18" />
-                                    <circle cx="6" cy="6" r="2" fill="currentColor" stroke="none" />
-                                    <circle cx="10" cy="12" r="2" fill="currentColor" stroke="none" />
-                                    <circle cx="6" cy="18" r="2" fill="currentColor" stroke="none" />
-                                </svg>
-                            </button>
 
                             <button
                                 type="button"
@@ -170,25 +148,19 @@ export function ChatModal() {
                             </div>
                         </>
                     ) : (
-                        <div className="flex flex-col items-center gap-4 px-4 pt-5 pb-5 md:gap-5 md:px-5 md:pt-6">
-                            <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
-                                <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
-                                    <path d="M12 2L9 9H2l5.5 4-2 7L12 16l6.5 4-2-7L22 9h-7z" />
-                                </svg>
-                            </div>
+                        <div className="flex flex-col items-center gap-4 px-4 pt-5 pb-5 md:px-5">
+                            {/* <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-blue-400 to-blue-600 shadow-lg" /> */}
 
                             <div className="text-center">
-                                <h2 className="text-[22px] font-bold text-black/85 tracking-tight leading-tight">
+                                {/* <h2 className="text-[20px] font-bold text-black/85 tracking-tight leading-tight">
                                     How can I help?
-                                </h2>
+                                </h2> */}
                                 <p className="text-sm text-black/40 mt-1 leading-snug">
                                     Ask me to update your workspace, assign<br />tasks, or automate workflows.
                                 </p>
                             </div>
 
-                            <SuggestionChips onSelect={handleSend} />
-
-                            <div className="w-full flex flex-col gap-2.5">
+                            <div className="w-full">
                                 <ModalChatInput onSend={handleSend} autoFocus />
                             </div>
                         </div>

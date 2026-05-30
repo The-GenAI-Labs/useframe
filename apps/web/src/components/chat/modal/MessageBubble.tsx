@@ -24,7 +24,7 @@ export const MessageBubble = memo(function MessageBubble({ message, isStreaming 
             <div
                 className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
                     isUser
-                        ? "bg-black text-white rounded-tr-sm"
+                        ? "bg-white text-black/80 rounded-tr-sm border border-black/8 shadow-sm"
                         : "bg-white border border-black/8 text-black/80 rounded-tl-sm shadow-sm"
                 }`}
             >
