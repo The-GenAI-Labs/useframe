@@ -79,7 +79,7 @@ export const ModalChatInput = memo(function ModalChatInput({
 
     return (
         <div className="flex flex-col gap-2">
-            <div className={`bg-white/80 border rounded-2xl overflow-hidden transition-colors ${errors.message ? "border-red-300" : "border-black/10"}`}>
+            <div className={`bg-surface border rounded-2xl overflow-hidden transition-colors ${errors.message ? "border-red-300" : "border-base"}`}>
                 <div className="px-3.5 pt-3 pb-2">
                     <textarea
                         {...rest}
@@ -87,23 +87,23 @@ export const ModalChatInput = memo(function ModalChatInput({
                         onKeyDown={handleKeyDown}
                         placeholder={placeholder}
                         rows={2}
-                        className="w-full resize-none bg-transparent text-sm text-black/80 placeholder:text-black/30 outline-none leading-relaxed"
+                        className="w-full resize-none bg-transparent text-sm text-pri placeholder:text-mut outline-none leading-relaxed"
                     />
                 </div>
 
                 <div className="flex items-center justify-between px-3 pb-2.5">
                     <div className="flex items-center gap-1.5">
-                        <button type="button" className="p-1.5 rounded-lg hover:bg-black/5 transition-colors text-black/30 hover:text-black/55 cursor-pointer">
+                        <button type="button" className="p-1.5 rounded-lg hover:bg-tertiary transition-colors text-mut hover:text-sec cursor-pointer">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                                 <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" />
                             </svg>
                         </button>
 
-                        <div className="w-px h-3.5 bg-black/10" />
+                        <div className="w-px h-3.5 border-base" style={{ backgroundColor: "var(--border)" }} />
 
                         <ModelSelector />
 
-                        <button type="button" className="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-black/5 transition-colors text-black/30 hover:text-black/55 text-[11px] cursor-pointer">
+                        <button type="button" className="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-tertiary transition-colors text-mut hover:text-sec text-[11px] cursor-pointer">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                                 <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" />
                                 <path d="M12 6v6l4 2" />
@@ -112,9 +112,8 @@ export const ModalChatInput = memo(function ModalChatInput({
                         </button>
                     </div>
 
-                    {/* Mic + Send */}
                     <div className="flex items-center gap-1.5">
-                        <button type="button" className="p-1.5 rounded-lg hover:bg-black/5 transition-colors text-black/30 hover:text-black/55 cursor-pointer">
+                        <button type="button" className="p-1.5 rounded-lg hover:bg-tertiary transition-colors text-mut hover:text-sec cursor-pointer">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                                 <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" />
                                 <path d="M19 10v2a7 7 0 01-14 0v-2" />
@@ -127,7 +126,8 @@ export const ModalChatInput = memo(function ModalChatInput({
                             type="button"
                             onClick={handleSubmit(onValid)}
                             disabled={!canSend}
-                            className="w-7 h-7 rounded-full bg-black flex items-center justify-center text-white disabled:opacity-20 disabled:cursor-not-allowed hover:bg-black/80 transition-all cursor-pointer"
+                            className="w-7 h-7 rounded-full flex items-center justify-center text-white disabled:opacity-20 disabled:cursor-not-allowed transition-all cursor-pointer"
+                            style={{ backgroundColor: "var(--text-primary)" }}
                         >
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
                                 <line x1="12" y1="19" x2="12" y2="5" />

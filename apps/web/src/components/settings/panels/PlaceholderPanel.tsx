@@ -9,7 +9,7 @@ export const PlaceholderPanel = memo(function PlaceholderPanel({ title }: Placeh
     return (
         <div className="flex flex-col gap-1">
             <SectionHeading>{title}</SectionHeading>
-            <p className="text-[13px] text-black/30 mt-2">This section is coming soon.</p>
+            <p className="text-[13px] text-mut mt-2">This section is coming soon.</p>
         </div>
     );
 });

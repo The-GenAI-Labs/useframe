@@ -16,17 +16,17 @@ export default function ChatView() {
     return (
         <div className="flex flex-col h-full w-full overflow-hidden">
             {/* Top bar */}
-            <div className="flex items-center justify-between px-6 pt-4 pb-3 shrink-0 border-b border-black/6">
+            <div className="flex items-center justify-between px-6 pt-4 pb-3 shrink-0 border-b border-base">
                 <div className="flex items-center gap-2">
                     <div className="w-6 h-6 rounded-lg bg-linear-to-br from-blue-400 to-blue-600 shadow-sm" />
-                    <span className="text-[13px] font-semibold text-black/70">
+                    <span className="text-[13px] font-semibold text-sec">
                         {hasMessages ? "UseFrame AI" : "New chat"}
                     </span>
                 </div>
                 <button
                     type="button"
                     onClick={handleNewChat}
-                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-black/8 text-[12px] text-black/45 hover:text-black/65 hover:border-black/15 hover:bg-black/3 transition-all cursor-pointer"
+                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-base text-[12px] text-sec hover:text-pri hover:border-em hover:bg-tertiary transition-all cursor-pointer"
                 >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
                         <line x1="12" y1="5" x2="12" y2="19" />
@@ -39,7 +39,7 @@ export default function ChatView() {
             {hasMessages ? (
                 <>
                     <MessageList messages={messages} isStreaming={isStreaming} />
-                    <div className="px-6 pb-5 pt-3 shrink-0 border-t border-black/6">
+                    <div className="px-6 pb-5 pt-3 shrink-0 border-t border-base">
                         <div className="max-w-2xl mx-auto">
                             <ModalChatInput onSend={handleSend} placeholder="Reply…" />
                         </div>
@@ -50,8 +50,8 @@ export default function ChatView() {
                     <div className="w-full max-w-xl flex flex-col items-center gap-5">
                         <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-blue-400 to-blue-600 shadow-lg" />
                         <div className="text-center">
-                            <h1 className="text-2xl font-bold text-black/85 tracking-tight">How can I help?</h1>
-                            <p className="text-sm text-black/40 mt-1.5 leading-snug">
+                            <h1 className="text-2xl font-bold text-pri tracking-tight">How can I help?</h1>
+                            <p className="text-sm text-mut mt-1.5 leading-snug">
                                 Ask me to update your workspace, assign tasks, or automate workflows.
                             </p>
                         </div>

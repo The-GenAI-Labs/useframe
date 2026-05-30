@@ -22,9 +22,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
 
     return (
-        <div className="flex items-center justify-center h-screen w-screen bg-white">
+        <div className="flex items-center justify-center h-screen w-screen bg-shell">
             {/* on mobile the sidebar overlays as a drawer; on desktop it shifts content */}
-            <div className="flex h-full md:h-[95vh] w-full md:w-[97vw] transition-all duration-300 ease-in-out">
+            <div className="flex h-full md:h-[96vh] w-full md:w-[98vw] md:rounded-3xl overflow-hidden transition-all duration-300 ease-in-out">
 
                 {/* mobile: full-height overlay drawer, desktop: inline panel */}
                 {sidebarOpen && (
@@ -41,11 +41,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <Sidebar isOpen={sidebarOpen} onToggle={() => handleToggle(false)} />
                 </div>
 
-                <main className="relative flex-1 h-full bg-white md:border md:border-gray-300 md:rounded-4xl overflow-hidden transition-all duration-300 ease-in-out">
+                <main className="relative flex-1 h-full bg-surface md:rounded-r-3xl overflow-hidden transition-all duration-300 ease-in-out">
                     {showToggle && !sidebarOpen && (
                         <button
                             onClick={() => handleToggle(true)}
-                            className="absolute top-4 left-4 z-50 p-1.5 rounded-lg transition-colors text-black/40 hover:text-black/70 cursor-ew-resize"
+                            className="absolute top-4 left-4 z-50 p-1.5 rounded-lg transition-colors text-sec hover:text-pri cursor-ew-resize"
                         >
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                                 <rect x="3" y="3" width="18" height="18" rx="3" />

@@ -27,7 +27,7 @@ export const MinimizedPill = memo(function MinimizedPill() {
                 .pill-flow-border {
                     position: relative;
                     border-radius: 1rem;
-                    background: #fff;
+                    background: var(--bg-primary);
                 }
                 .pill-flow-border::before {
                     content: "";
@@ -67,7 +67,7 @@ export const MinimizedPill = memo(function MinimizedPill() {
                 className="pill-flow-border fixed bottom-16 right-1 z-9999 flex items-center gap-2.5 pl-6 pr-6 py-4 m-5 shadow-2xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group"
             >
                 <div className="flex flex-col items-start min-w-0">
-                    <span className="text-[10px] text-black/80 leading-tight truncate max-w-35">
+                    <span className="text-[10px] text-pri leading-tight truncate max-w-35">
                         {preview}
                     </span>
                 </div>

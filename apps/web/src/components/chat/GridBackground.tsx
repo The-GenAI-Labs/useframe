@@ -2,7 +2,7 @@ import { memo } from "react";
 
 export default memo(function GridBackground() {
     return (
-        <div className="absolute inset-0 rounded-4xl overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 rounded-4xl bg-gray-800 overflow-hidden pointer-events-none">
             <img
                 src="/chat/useframecloud.jpg"
                 alt=""

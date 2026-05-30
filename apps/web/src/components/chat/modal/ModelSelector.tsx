@@ -13,7 +13,7 @@ export const ModelSelector = memo(function ModelSelector() {
             <button
                 type="button"
                 onClick={() => setOpen((p) => !p)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-black/8 bg-white text-[11px] font-medium text-black/60 hover:border-black/15 hover:text-black/80 transition-all cursor-pointer shadow-sm"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-base bg-surface text-[11px] font-medium text-sec hover:border-em hover:text-pri transition-all cursor-pointer shadow-sm"
             >
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                     <circle cx="12" cy="12" r="10" />
@@ -28,13 +28,13 @@ export const ModelSelector = memo(function ModelSelector() {
             </button>
 
             {open && (
-                <div className="absolute bottom-full mb-1.5 left-0 bg-white border border-black/10 rounded-xl shadow-lg py-1 z-50 min-w-[140px]">
+                <div className="absolute bottom-full mb-1.5 left-0 bg-surface border border-base rounded-xl shadow-lg py-1 z-50 min-w-35">
                     {MODELS.map((m) => (
                         <button
                             key={m}
                             type="button"
                             onClick={() => { setSelected(m); setOpen(false); }}
-                            className={`w-full text-left px-3 py-2 text-xs transition-colors cursor-pointer ${selected === m ? "text-blue-600 bg-blue-50 font-medium" : "text-black/60 hover:bg-gray-50"}`}
+                            className={`w-full text-left px-3 py-2 text-xs transition-colors cursor-pointer ${selected === m ? "text-blue-600 bg-blue-50 dark:bg-blue-950/40 font-medium" : "text-sec hover:bg-tertiary"}`}
                         >
                             {m}
                         </button>

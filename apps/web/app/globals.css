@@ -4,6 +4,67 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ── Design token system ── */
+:root {
+    /* outer shell + sidebar bg */
+    --bg-shell:      #E8E7E2;
+    /* main content panel bg — lighter than shell */
+    --bg-surface:    #F5F4EF;
+    /* card / input bg */
+    --bg-primary:    #FFFFFF;
+    /* hover step 1 */
+    --bg-tertiary:   #EEEDE8;
+    /* hover step 2 / user bubbles */
+    --bg-bubble:     #E8E7E1;
+
+    --text-primary:  #1A1915;
+    --text-secondary:#6B6860;
+    --text-muted:    #9B9890;
+    --border:        #E0DED8;
+    --border-em:     #C8C7C0;
+}
+
+.dark {
+    /* outer shell + sidebar bg — very dark */
+    --bg-shell:      #0D0D0C;
+    /* main content panel — slightly lighter than shell */
+    --bg-surface:    #1A1915;
+    /* card / input bg */
+    --bg-primary:    #1A1915;
+    /* hover step 1 */
+    --bg-tertiary:   #242320;
+    /* hover step 2 */
+    --bg-bubble:     #2C2C28;
+
+    --text-primary:  #F5F4EF;
+    --text-secondary:#A8A69E;
+    --text-muted:    #6B6860;
+    --border:        #2E2D29;
+    --border-em:     #3D3C38;
+}
+
+/* Semantic utility classes */
+.bg-shell    { background-color: var(--bg-shell); }
+.bg-surface  { background-color: var(--bg-surface); }
+.bg-page     { background-color: var(--bg-surface); } /* alias */
+.bg-card     { background-color: var(--bg-primary); }
+.bg-tertiary { background-color: var(--bg-tertiary); }
+.bg-bubble   { background-color: var(--bg-bubble); }
+.bg-pri      { background-color: var(--text-primary); }
+.text-pri    { color: var(--text-primary); }
+.text-sec    { color: var(--text-secondary); }
+.text-mut    { color: var(--text-muted); }
+.border-base { border-color: var(--border); }
+.border-em   { border-color: var(--border-em); }
+
+
+/* Inverted surface — for buttons that use primary text color as bg */
+.bg-inv   { background-color: var(--text-primary); }
+.text-inv { color: var(--bg-surface); }
+
+/* Combined shorthands */
+.divide-base > * + * { border-color: var(--border); }
+
 /* vertical carousel animations */
 @keyframes scroll-up {
   0%   { transform: translateY(0); }

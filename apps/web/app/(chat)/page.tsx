@@ -18,17 +18,17 @@ export default function ChatHomePage() {
   }, []);
 
   return (
-    <div className="relative flex h-full w-full overflow-hidden">
+    <div className="relative flex h-full w-full overflow-hidden" style={{ backgroundColor: "var(--bg-shell) !important" }}>
       <GridBackground />
 
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-8 py-12">
         <div className="flex flex-col gap-6 w-1/2 min-w-[420px]">
 
           <div>
-            <h1 className="text-4xl font-semibold text-black/85 tracking-tight">
+            <h1 className="text-4xl font-semibold tracking-tight" style={{ color: "var(--text-primary)" }}>
               Hi, there!
             </h1>
-            <p className="text-xl text-black/35 mt-1 font-normal">
+            <p className="text-xl mt-1 font-normal" style={{ color: "var(--text-secondary)" }}>
               How can I assist you today?
             </p>
           </div>

@@ -36,7 +36,7 @@ function RingScore({ score, size = 96 }: { score: number; size?: number }) {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="6"
-                className="text-black/6"
+                style={{ stroke: "var(--border)" }}
             />
             <circle
                 cx={size / 2}
@@ -58,7 +58,7 @@ function ScoreBar({ value, max }: { value: number; max: number }) {
     const color =
         pct >= 80 ? "bg-blue-500" : pct >= 55 ? "bg-amber-400" : "bg-red-400";
     return (
-        <div className="h-1.5 w-full rounded-full bg-black/6 overflow-hidden">
+        <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: "var(--border)" }}>
             <div
                 className={`h-full rounded-full ${color} transition-all duration-700`}
                 style={{ width: `${pct}%` }}
@@ -237,17 +237,17 @@ export default function WebScoreView() {
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                             </svg>
                         </div>
-                        <h1 className="text-2xl font-bold text-black/85 tracking-tight">Web Score</h1>
+                        <h1 className="text-2xl font-bold text-pri tracking-tight">Web Score</h1>
                     </div>
-                    <p className="text-sm text-black/40 ml-0.5">
+                    <p className="text-sm text-mut ml-0.5">
                         Science-based design audit — get a score across 6 UX dimensions.
                     </p>
                 </div>
 
                 {/* URL input */}
                 <div className="flex gap-2 max-w-2xl">
-                    <div className="flex-1 flex items-center gap-2.5 px-4 py-3 rounded-2xl border border-black/10 bg-white shadow-sm focus-within:border-blue-300 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-black/25 shrink-0">
+                    <div className="flex-1 flex items-center gap-2.5 px-4 py-3 rounded-2xl border border-base bg-surface shadow-sm focus-within:border-blue-300 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-mut shrink-0">
                             <circle cx="12" cy="12" r="10" />
                             <line x1="2" y1="12" x2="22" y2="12" />
                             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
@@ -258,14 +258,14 @@ export default function WebScoreView() {
                             onChange={(e) => setUrlInput(e.target.value)}
                             onKeyDown={(e) => e.key === "Enter" && state.status !== "scanning" && handleScan()}
                             placeholder="yoursite.com or paste full URL"
-                            className="flex-1 bg-transparent text-[13.5px] text-black/70 placeholder:text-black/25 outline-none"
+                            className="flex-1 bg-transparent text-[13.5px] text-sec placeholder:text-mut outline-none"
                             disabled={state.status === "scanning"}
                         />
                         {state.status === "done" && (
                             <button
                                 type="button"
                                 onClick={handleReset}
-                                className="text-black/25 hover:text-black/50 transition-colors cursor-pointer shrink-0"
+                                className="text-mut hover:text-sec transition-colors cursor-pointer shrink-0"
                                 aria-label="Clear"
                             >
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
@@ -279,7 +279,7 @@ export default function WebScoreView() {
                         type="button"
                         onClick={handleScan}
                         disabled={!urlInput.trim() || state.status === "scanning"}
-                        className="px-5 py-3 rounded-2xl bg-black text-white text-[13px] font-semibold hover:bg-black/80 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer shrink-0 shadow-sm"
+                        className="px-5 py-3 rounded-2xl text-[13px] font-semibold disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer shrink-0 shadow-sm" style={{ backgroundColor: "var(--text-primary)", color: "var(--bg-primary)" }}
                     >
                         {state.status === "scanning" ? "Scanning…" : "Analyze"}
                     </button>
@@ -290,7 +290,7 @@ export default function WebScoreView() {
             {state.status === "scanning" && (
                 <div className="flex flex-col items-center justify-center flex-1 gap-6 px-6 py-12">
                     <div className="relative w-20 h-20">
-                        <div className="absolute inset-0 rounded-full border-4 border-black/6" />
+                        <div className="absolute inset-0 rounded-full border-4 border-base" />
                         <div className="absolute inset-0 rounded-full border-4 border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent animate-spin" />
                         <div className="absolute inset-0 flex items-center justify-center">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className="text-blue-500">
@@ -299,14 +299,14 @@ export default function WebScoreView() {
                         </div>
                     </div>
                     <div className="flex flex-col items-center gap-1.5">
-                        <p className="text-sm font-semibold text-black/70">{SCAN_STEPS[Math.min(scanStep, SCAN_STEPS.length - 1)]}</p>
-                        <p className="text-xs text-black/30">{state.url}</p>
+                        <p className="text-sm font-semibold text-sec">{SCAN_STEPS[Math.min(scanStep, SCAN_STEPS.length - 1)]}</p>
+                        <p className="text-xs text-mut">{state.url}</p>
                     </div>
                     <div className="flex gap-1">
                         {SCAN_STEPS.map((_, i) => (
                             <div
                                 key={i}
-                                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i <= scanStep ? "bg-blue-500" : "bg-black/10"}`}
+                                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i <= scanStep ? "bg-blue-500" : "bg-tertiary"}`}
                             />
                         ))}
                     </div>
@@ -317,12 +317,12 @@ export default function WebScoreView() {
             {state.status === "done" && (
                 <div className="px-6 md:px-10 pb-10 flex flex-col gap-6">
                     {/* Overall score hero */}
-                    <div className="flex flex-col md:flex-row gap-5 items-start md:items-center p-6 rounded-3xl border border-black/[0.07] bg-white shadow-sm max-w-2xl">
+                    <div className="flex flex-col md:flex-row gap-5 items-start md:items-center p-6 rounded-3xl border border-base bg-surface shadow-sm max-w-2xl">
                         <div className="relative shrink-0">
                             <RingScore score={state.overall} size={96} />
                             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                <span className="text-[22px] font-bold text-black/85 leading-none">{state.overall}</span>
-                                <span className="text-[10px] text-black/30 font-medium">/100</span>
+                                <span className="text-[22px] font-bold text-pri leading-none">{state.overall}</span>
+                                <span className="text-[10px] text-mut font-medium">/100</span>
                             </div>
                         </div>
 
@@ -333,8 +333,8 @@ export default function WebScoreView() {
                                     {state.overall >= 80 ? "Production ready" : state.overall >= 60 ? "Needs improvement" : "Critical issues"}
                                 </span>
                             </div>
-                            <p className="text-sm text-black/50 leading-relaxed truncate">{state.url}</p>
-                            <p className="text-xs text-black/30">
+                            <p className="text-sm text-sec leading-relaxed truncate">{state.url}</p>
+                            <p className="text-xs text-mut">
                                 Scanned at {state.scannedAt?.toLocaleTimeString()} · 6 dimensions analyzed
                             </p>
                         </div>
@@ -348,16 +348,16 @@ export default function WebScoreView() {
                             return (
                                 <div
                                     key={cat.key}
-                                    className="flex flex-col gap-3 p-4 rounded-2xl border border-black/[0.07] bg-white hover:border-black/12 hover:shadow-sm transition-all"
+                                    className="flex flex-col gap-3 p-4 rounded-2xl border border-base bg-surface hover:border-em hover:shadow-sm transition-all"
                                 >
                                     <div className="flex items-start justify-between gap-2">
                                         <div className="flex items-center gap-2.5">
-                                            <div className="w-8 h-8 rounded-xl bg-black/4 flex items-center justify-center text-black/40 shrink-0">
+                                            <div className="w-8 h-8 rounded-xl bg-tertiary flex items-center justify-center text-mut shrink-0">
                                                 {cat.icon}
                                             </div>
                                             <div>
-                                                <p className="text-[13px] font-semibold text-black/75 leading-tight">{cat.label}</p>
-                                                <p className="text-[11px] text-black/35 leading-tight mt-0.5">{cat.description}</p>
+                                                <p className="text-[13px] font-semibold text-sec leading-tight">{cat.label}</p>
+                                                <p className="text-[11px] text-mut leading-tight mt-0.5">{cat.description}</p>
                                             </div>
                                         </div>
                                         <div className={`flex items-center justify-center w-8 h-8 rounded-xl text-sm font-bold shrink-0 ${gb} ${gc}`}>
@@ -367,19 +367,19 @@ export default function WebScoreView() {
 
                                     <div className="flex flex-col gap-1.5">
                                         <div className="flex items-center justify-between">
-                                            <span className="text-[11px] text-black/30">Score</span>
-                                            <span className="text-[12px] font-semibold text-black/60">{pct}/100</span>
+                                            <span className="text-[11px] text-mut">Score</span>
+                                            <span className="text-[12px] font-semibold text-sec">{pct}/100</span>
                                         </div>
                                         <ScoreBar value={cat.score} max={cat.max} />
                                     </div>
 
-                                    <div className="flex items-start gap-2 px-3 py-2.5 rounded-xl bg-black/[0.025] border border-black/[0.04]">
+                                    <div className="flex items-start gap-2 px-3 py-2.5 rounded-xl bg-tertiary border border-base">
                                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-blue-400 shrink-0 mt-0.5">
                                             <circle cx="12" cy="12" r="10" />
                                             <line x1="12" y1="8" x2="12" y2="12" />
                                             <line x1="12" y1="16" x2="12.01" y2="16" />
                                         </svg>
-                                        <p className="text-[11.5px] text-black/45 leading-relaxed">{cat.insight}</p>
+                                        <p className="text-[11.5px] text-sec leading-relaxed">{cat.insight}</p>
                                     </div>
                                 </div>
                             );
@@ -391,7 +391,7 @@ export default function WebScoreView() {
                         <button
                             type="button"
                             onClick={handleReset}
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-[12.5px] font-medium text-black/50 hover:text-black/70 hover:border-black/20 hover:bg-black/3 transition-all cursor-pointer"
+                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-base text-[12.5px] font-medium text-sec hover:text-sec hover:border-em hover:bg-tertiary transition-all cursor-pointer"
                         >
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                                 <polyline points="1 4 1 10 7 10" />
@@ -401,7 +401,7 @@ export default function WebScoreView() {
                         </button>
                         <button
                             type="button"
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-[12.5px] font-medium text-black/50 hover:text-black/70 hover:border-black/20 hover:bg-black/3 transition-all cursor-pointer"
+                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-base text-[12.5px] font-medium text-sec hover:text-sec hover:border-em hover:bg-tertiary transition-all cursor-pointer"
                         >
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -418,20 +418,20 @@ export default function WebScoreView() {
             {state.status === "idle" && (
                 <div className="flex-1 flex items-center justify-center px-6 pb-10">
                     <div className="flex flex-col items-center gap-4 text-center max-w-xs">
-                        <div className="w-16 h-16 rounded-3xl bg-black/3 border border-black/[0.06] flex items-center justify-center">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" className="text-black/20">
+                        <div className="w-16 h-16 rounded-3xl bg-tertiary border border-base flex items-center justify-center">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" className="text-mut">
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                             </svg>
                         </div>
                         <div>
-                            <p className="text-sm font-semibold text-black/40">Paste any URL above</p>
-                            <p className="text-xs text-black/25 mt-1 leading-relaxed">
+                            <p className="text-sm font-semibold text-mut">Paste any URL above</p>
+                            <p className="text-xs text-mut mt-1 leading-relaxed">
                                 We'll analyze visual hierarchy, layout, typography, color system, UX patterns, and responsiveness.
                             </p>
                         </div>
                         <div className="flex flex-wrap gap-1.5 justify-center">
                             {["Visual Hierarchy", "Typography", "Color System", "UX Patterns", "Layout", "Responsiveness"].map((t) => (
-                                <span key={t} className="px-2.5 py-1 rounded-lg bg-black/4 text-[11px] text-black/35 font-medium">
+                                <span key={t} className="px-2.5 py-1 rounded-lg bg-tertiary text-[11px] text-mut font-medium">
                                     {t}
                                 </span>
                             ))}

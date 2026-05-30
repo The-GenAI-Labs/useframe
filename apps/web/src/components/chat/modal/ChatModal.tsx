@@ -76,7 +76,7 @@ export function ChatModal() {
             >
                 <div
                     className={`
-                        pointer-events-auto bg-white/50 backdrop-blur-md shadow-2xl border border-white/40
+                        pointer-events-auto backdrop-blur-md shadow-2xl
                         flex flex-col overflow-hidden
                         transition-all duration-300 ease-out
                         animate-modal-scale-in
@@ -84,6 +84,7 @@ export function ChatModal() {
                         max-w-full md:max-w-130
                         ${hasMessages ? "h-[92vh] md:h-150" : "h-auto"}
                     `}
+                    style={{ backgroundColor: "color-mix(in srgb, var(--bg-primary) 75%, transparent)", border: "1px solid var(--border)" }}
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div className="flex items-center justify-between px-4 pt-4 pb-3 shrink-0">
@@ -91,20 +92,14 @@ export function ChatModal() {
                             <div className="w-6 h-6 rounded-lg bg-linear-to-br from-blue-400 to-blue-600 shadow-sm" />
                             <button
                                 type="button"
-                                className="flex items-center gap-1 text-[13px] font-semibold text-black/80 hover:text-black transition-colors cursor-pointer"
+                                className="flex items-center gap-1 text-[13px] font-semibold text-pri hover:text-pri transition-colors cursor-pointer"
                             >
                                 New chat
                             </button>
                         </div>
 
                         <div className="flex items-center gap-1">
-
-                            <button
-                                type="button"
-                                onClick={handleExpand}
-                                className="p-1.5 rounded-lg text-black/30 hover:text-black/60 hover:bg-black/5 transition-colors cursor-pointer"
-                                aria-label="Open in full page"
-                            >
+                            <button type="button" onClick={handleExpand} className="p-1.5 rounded-lg text-mut hover:text-sec hover:bg-tertiary transition-colors cursor-pointer" aria-label="Open in full page">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                                     <polyline points="15 3 21 3 21 9" />
                                     <polyline points="9 21 3 21 3 15" />
@@ -112,24 +107,12 @@ export function ChatModal() {
                                     <line x1="3" y1="21" x2="10" y2="14" />
                                 </svg>
                             </button>
-
-                            <button
-                                type="button"
-                                onClick={minimize}
-                                className="p-1.5 rounded-lg text-black/30 hover:text-black/60 hover:bg-black/5 transition-colors cursor-pointer"
-                                aria-label="Minimize chat"
-                            >
+                            <button type="button" onClick={minimize} className="p-1.5 rounded-lg text-mut hover:text-sec hover:bg-tertiary transition-colors cursor-pointer" aria-label="Minimize chat">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                                     <line x1="5" y1="12" x2="19" y2="12" />
                                 </svg>
                             </button>
-
-                            <button
-                                type="button"
-                                onClick={close}
-                                className="p-1.5 rounded-lg text-black/30 hover:text-black/60 hover:bg-black/5 transition-colors cursor-pointer"
-                                aria-label="Close chat"
-                            >
+                            <button type="button" onClick={close} className="p-1.5 rounded-lg text-mut hover:text-sec hover:bg-tertiary transition-colors cursor-pointer" aria-label="Close chat">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                                     <line x1="18" y1="6" x2="6" y2="18" />
                                     <line x1="6" y1="6" x2="18" y2="18" />
@@ -138,12 +121,12 @@ export function ChatModal() {
                         </div>
                     </div>
 
-                    <div className="h-px bg-black/6 mx-4 shrink-0" />
+                    <div className="h-px mx-4 shrink-0 border-base" style={{ backgroundColor: "var(--border)" }} />
 
                     {hasMessages ? (
                         <>
                             <MessageList messages={messages} isStreaming={isStreaming} />
-                            <div className="px-4 pb-4 pt-2 shrink-0 border-t border-black/6 flex flex-col gap-2">
+                            <div className="px-4 pb-4 pt-2 shrink-0 border-t border-base flex flex-col gap-2">
                                 <ModalChatInput onSend={handleSend} placeholder="Reply…" />
                             </div>
                         </>
@@ -155,7 +138,7 @@ export function ChatModal() {
                                 {/* <h2 className="text-[20px] font-bold text-black/85 tracking-tight leading-tight">
                                     How can I help?
                                 </h2> */}
-                                <p className="text-sm text-black/40 mt-1 leading-snug">
+                                <p className="text-sm text-mut mt-1 leading-snug">
                                     Ask me to update your workspace, assign<br />tasks, or automate workflows.
                                 </p>
                             </div>

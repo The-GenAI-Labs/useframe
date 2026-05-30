@@ -1,19 +1,18 @@
 "use client";
 
-import { memo, useState, useCallback } from "react";
-
-type Mode = "system" | "light" | "dark";
+import { memo, useCallback } from "react";
+import { useThemeStore, type Theme } from "@/store/themeStore";
 
 export const AppearanceToggle = memo(function AppearanceToggle() {
-    const [mode, setMode] = useState<Mode>("light");
-    const set = useCallback((m: Mode) => () => setMode(m), []);
+    const { theme, setTheme } = useThemeStore();
+    const set = useCallback((m: Theme) => () => setTheme(m), [setTheme]);
 
     return (
-        <div className="flex items-center gap-1 p-1 rounded-lg bg-black/4 border border-black/[0.07]">
+        <div className="flex items-center gap-1 p-1 rounded-lg bg-tertiary border border-base">
             <button
                 type="button"
                 onClick={set("system")}
-                className={`p-1.5 rounded-md transition-colors cursor-pointer ${mode === "system" ? "bg-white shadow-sm text-black/70" : "text-black/30 hover:text-black/55"}`}
+                className={`p-1.5 rounded-md transition-colors cursor-pointer ${theme === "system" ? "bg-surface shadow-sm text-pri" : "text-mut hover:text-sec"}`}
                 aria-label="System"
             >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
@@ -25,7 +24,7 @@ export const AppearanceToggle = memo(function AppearanceToggle() {
             <button
                 type="button"
                 onClick={set("light")}
-                className={`p-1.5 rounded-md transition-colors cursor-pointer ${mode === "light" ? "bg-white shadow-sm text-black/70" : "text-black/30 hover:text-black/55"}`}
+                className={`p-1.5 rounded-md transition-colors cursor-pointer ${theme === "light" ? "bg-surface shadow-sm text-pri" : "text-mut hover:text-sec"}`}
                 aria-label="Light"
             >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
@@ -43,7 +42,7 @@ export const AppearanceToggle = memo(function AppearanceToggle() {
             <button
                 type="button"
                 onClick={set("dark")}
-                className={`p-1.5 rounded-md transition-colors cursor-pointer ${mode === "dark" ? "bg-white shadow-sm text-black/70" : "text-black/30 hover:text-black/55"}`}
+                className={`p-1.5 rounded-md transition-colors cursor-pointer ${theme === "dark" ? "bg-surface shadow-sm text-pri" : "text-mut hover:text-sec"}`}
                 aria-label="Dark"
             >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">

@@ -10,7 +10,7 @@ export default function SettingsView() {
     const handleChange = useCallback((item: NavItem) => setActive(item), []);
 
     return (
-        <div className="flex h-full w-full bg-white overflow-hidden">
+        <div className="flex h-full w-full bg-surface overflow-hidden">
             <SettingsNav active={active} onChange={handleChange} />
             <main className="flex-1 overflow-y-auto px-10 pt-10 pb-12" style={{ scrollbarWidth: "none" }}>
                 <div className="max-w-xl">
