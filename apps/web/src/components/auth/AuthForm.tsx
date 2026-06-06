@@ -17,12 +17,6 @@ const AuthForm = ({ mode }: AuthFormProps) => {
   return (
     <div className="w-full max-w-[380px] mx-auto flex flex-col gap-5">
 
-      {/* logo */}
-      <div className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg" />
-        <span className="font-semibold text-gray-700 text-lg">UseFrame</span>
-      </div>
-
       {/* heading */}
       <div className="flex flex-col gap-1">
         <h1 className="text-3xl text-gray-800 font-bold tracking-tight">

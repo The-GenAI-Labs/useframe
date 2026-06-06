@@ -76,17 +76,6 @@ export const BoardTopBar = memo(function BoardTopBar({
             style={{ backgroundColor: "var(--bg-primary)", borderColor: "var(--border)" }}
         >
             <div className="flex items-center gap-2.5">
-                <div
-                    className="w-6 h-6 rounded-md flex items-center justify-center"
-                    style={{ background: "linear-gradient(135deg,#8B5CF6,#3B82F6)" }}
-                >
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="7" height="7" rx="1"/>
-                        <rect x="14" y="3" width="7" height="7" rx="1"/>
-                        <rect x="3" y="14" width="7" height="7" rx="1"/>
-                        <rect x="14" y="14" width="7" height="7" rx="1"/>
-                    </svg>
-                </div>
                 <span className="text-[13px] font-semibold" style={{ color: "var(--text-primary)" }}>
                     Untitled Board
                 </span>

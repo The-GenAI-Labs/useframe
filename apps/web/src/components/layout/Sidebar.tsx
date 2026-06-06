@@ -1,11 +1,11 @@
 ﻿"use client";
 
 import { useState, useRef, useEffect, useCallback, memo } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useChatModalStore } from "@/store/chatModalStore";
 import { useSearchModalStore } from "@/store/searchModalStore";
-import Image from "next/image";
 
 interface SidebarProps {
     isOpen: boolean;
@@ -208,9 +208,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         `}>
             <div className="flex items-center justify-between px-4 pt-5 pb-4 shrink-0">
                 <div className="flex items-center gap-2.5 whitespace-nowrap">
-                    <div className="w-7 h-7 rounded-lg bg-gray-500 flex items-center justify-center shrink-0">
-                        <Image src="/useFrame logo.png" alt="useframe logo" width={100} height={100} />
-                    </div>
+                    <Image src="/useFrame.png" alt="useframe" width={28} height={28} className="shrink-0" />
                     <span className="text-pri text-[15px] font-bold tracking-tight">useframe</span>
                 </div>
                 <button onClick={onToggle} className={`text-mut ${H_TXT2} transition-colors p-1.5 rounded-lg cursor-ew-resize`}>
