@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <Sidebar isOpen={sidebarOpen} onToggle={() => handleToggle(false)} />
                 </div>
 
-                <main className="relative flex-1 h-full bg-surface md:rounded-r-3xl overflow-hidden transition-all duration-300 ease-in-out">
+                <main className={`relative flex-1 h-full bg-surface overflow-hidden transition-all duration-300 ease-in-out md:rounded-r-3xl ${sidebarOpen ? "md:rounded-l-4xl" : ""}`}>
                     {showToggle && !sidebarOpen && (
                         <button
                             onClick={() => handleToggle(true)}
