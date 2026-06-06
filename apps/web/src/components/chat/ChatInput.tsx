@@ -11,7 +11,11 @@ interface ChatInputProps {
     onSubmit: (message: string) => void;
 }
 
-const SUGGESTIONS = ["Identify similar images online", "Summarize this transcript", "Analyze the contents"];
+const SUGGESTIONS = [
+    { label: "Analyse Competitor", color: "#F97316" },
+    { label: "Analyse Website",    color: "#22C55E" },
+    { label: "Build New",          color: "#EAB308" },
+];
 
 export default memo(function ChatInput({ onSubmit }: ChatInputProps) {
     const { register, handleSubmit, reset, watch } = useForm<ChatInputForm>({
@@ -96,14 +100,33 @@ export default memo(function ChatInput({ onSubmit }: ChatInputProps) {
                 </div>
             </div>
 
-            <div className="flex items-center gap-2 flex-wrap justify-center">
+            <div className="flex items-center gap-1.5 justify-center">
                 {SUGGESTIONS.map((s) => (
                     <button
-                        key={s}
-                        onClick={() => onSubmit(s)}
-                        className="px-3 py-1.5 rounded-full border border-base bg-card text-xs text-sec hover:text-pri hover:border-em hover:bg-tertiary transition-all cursor-pointer whitespace-nowrap"
+                        key={s.label}
+                        onClick={() => onSubmit(s.label)}
+                        className="group flex items-center gap-2 px-3 py-2 rounded-xl border cursor-pointer transition-all duration-150"
+                        style={{
+                            backgroundColor: "color-mix(in srgb, var(--bg-primary) 55%, transparent)",
+                            backdropFilter: "blur(12px)",
+                            WebkitBackdropFilter: "blur(12px)",
+                            borderColor: "var(--border)",
+                        }}
+                        onMouseEnter={e => (e.currentTarget as HTMLElement).style.backgroundColor = "color-mix(in srgb, var(--bg-primary) 75%, transparent)"}
+                        onMouseLeave={e => (e.currentTarget as HTMLElement).style.backgroundColor = "color-mix(in srgb, var(--bg-primary) 55%, transparent)"}
                     >
-                        {s}
+                        <span className="text-[12px] font-medium whitespace-nowrap" style={{ color: "var(--text-secondary)" }}>
+                            {s.label}
+                        </span>
+                        <span
+                            className="w-5 h-5 rounded-md flex items-center justify-center shrink-0"
+                            style={{ backgroundColor: s.color }}
+                        >
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="13 6 19 12 13 18" />
+                            </svg>
+                        </span>
                     </button>
                 ))}
             </div>
