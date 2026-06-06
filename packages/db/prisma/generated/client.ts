@@ -47,40 +47,95 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model OAuthAccount
+ * Model UserCredential
  * 
  */
-export type OAuthAccount = Prisma.OAuthAccountModel
+export type UserCredential = Prisma.UserCredentialModel
 /**
- * Model Session
+ * Model UserIdentity
  * 
  */
-export type Session = Prisma.SessionModel
+export type UserIdentity = Prisma.UserIdentityModel
+/**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = Prisma.RefreshTokenModel
+/**
+ * Model UserSession
+ * 
+ */
+export type UserSession = Prisma.UserSessionModel
+/**
+ * Model EmailVerificationToken
+ * 
+ */
+export type EmailVerificationToken = Prisma.EmailVerificationTokenModel
+/**
+ * Model PasswordResetToken
+ * 
+ */
+export type PasswordResetToken = Prisma.PasswordResetTokenModel
+/**
+ * Model PhoneOtp
+ * 
+ */
+export type PhoneOtp = Prisma.PhoneOtpModel
+/**
+ * Model Plan
+ * 
+ */
+export type Plan = Prisma.PlanModel
 /**
  * Model Subscription
  * 
  */
 export type Subscription = Prisma.SubscriptionModel
 /**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model WebhookEvent
+ * 
+ */
+export type WebhookEvent = Prisma.WebhookEventModel
+/**
+ * Model CreditBalance
+ * 
+ */
+export type CreditBalance = Prisma.CreditBalanceModel
+/**
+ * Model CreditTransaction
+ * 
+ */
+export type CreditTransaction = Prisma.CreditTransactionModel
+/**
  * Model Project
  * 
  */
 export type Project = Prisma.ProjectModel
 /**
- * Model ScienceSpec
+ * Model ProjectVersion
  * 
  */
-export type ScienceSpec = Prisma.ScienceSpecModel
-/**
- * Model SpecVersion
- * 
- */
-export type SpecVersion = Prisma.SpecVersionModel
+export type ProjectVersion = Prisma.ProjectVersionModel
 /**
  * Model Page
  * 
  */
 export type Page = Prisma.PageModel
+/**
+ * Model Conversation
+ * 
+ */
+export type Conversation = Prisma.ConversationModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel
 /**
  * Model Deployment
  * 
@@ -116,3 +171,18 @@ export type UsageLog = Prisma.UsageLogModel
  * 
  */
 export type Waitlist = Prisma.WaitlistModel
+/**
+ * Model ResearchReport
+ * 
+ */
+export type ResearchReport = Prisma.ResearchReportModel
+/**
+ * Model ResearchArticle
+ * 
+ */
+export type ResearchArticle = Prisma.ResearchArticleModel
+/**
+ * Model CompetitorScan
+ * 
+ */
+export type CompetitorScan = Prisma.CompetitorScanModel

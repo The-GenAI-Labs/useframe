@@ -20,154 +20,100 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
-  _avg: UserAvgAggregateOutputType | null
-  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
-}
-
-export type UserAvgAggregateOutputType = {
-  pipelineRunsUsed: number | null
-  pipelineRunsLimit: number | null
-  projectsLimit: number | null
-  deploymentsLimit: number | null
-}
-
-export type UserSumAggregateOutputType = {
-  pipelineRunsUsed: number | null
-  pipelineRunsLimit: number | null
-  projectsLimit: number | null
-  deploymentsLimit: number | null
 }
 
 export type UserMinAggregateOutputType = {
   id: string | null
   email: string | null
-  name: string | null
+  phone: string | null
+  displayName: string | null
   avatarUrl: string | null
-  plan: $Enums.Plan | null
-  planExpiresAt: Date | null
-  pipelineRunsUsed: number | null
-  pipelineRunsLimit: number | null
-  projectsLimit: number | null
-  deploymentsLimit: number | null
-  stripeCustomerId: string | null
-  stripeSubscriptionId: string | null
-  deletedAt: Date | null
-  isActive: boolean | null
+  status: $Enums.UserStatus | null
+  emailVerifiedAt: Date | null
+  phoneVerifiedAt: Date | null
+  lastLoginAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: string | null
   email: string | null
-  name: string | null
+  phone: string | null
+  displayName: string | null
   avatarUrl: string | null
-  plan: $Enums.Plan | null
-  planExpiresAt: Date | null
-  pipelineRunsUsed: number | null
-  pipelineRunsLimit: number | null
-  projectsLimit: number | null
-  deploymentsLimit: number | null
-  stripeCustomerId: string | null
-  stripeSubscriptionId: string | null
-  deletedAt: Date | null
-  isActive: boolean | null
+  status: $Enums.UserStatus | null
+  emailVerifiedAt: Date | null
+  phoneVerifiedAt: Date | null
+  lastLoginAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   email: number
-  name: number
+  phone: number
+  displayName: number
   avatarUrl: number
-  plan: number
-  planExpiresAt: number
-  pipelineRunsUsed: number
-  pipelineRunsLimit: number
-  projectsLimit: number
-  deploymentsLimit: number
-  stripeCustomerId: number
-  stripeSubscriptionId: number
-  deletedAt: number
-  isActive: number
+  status: number
+  emailVerifiedAt: number
+  phoneVerifiedAt: number
+  lastLoginAt: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   _all: number
 }
 
 
-export type UserAvgAggregateInputType = {
-  pipelineRunsUsed?: true
-  pipelineRunsLimit?: true
-  projectsLimit?: true
-  deploymentsLimit?: true
-}
-
-export type UserSumAggregateInputType = {
-  pipelineRunsUsed?: true
-  pipelineRunsLimit?: true
-  projectsLimit?: true
-  deploymentsLimit?: true
-}
-
 export type UserMinAggregateInputType = {
   id?: true
   email?: true
-  name?: true
+  phone?: true
+  displayName?: true
   avatarUrl?: true
-  plan?: true
-  planExpiresAt?: true
-  pipelineRunsUsed?: true
-  pipelineRunsLimit?: true
-  projectsLimit?: true
-  deploymentsLimit?: true
-  stripeCustomerId?: true
-  stripeSubscriptionId?: true
-  deletedAt?: true
-  isActive?: true
+  status?: true
+  emailVerifiedAt?: true
+  phoneVerifiedAt?: true
+  lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   email?: true
-  name?: true
+  phone?: true
+  displayName?: true
   avatarUrl?: true
-  plan?: true
-  planExpiresAt?: true
-  pipelineRunsUsed?: true
-  pipelineRunsLimit?: true
-  projectsLimit?: true
-  deploymentsLimit?: true
-  stripeCustomerId?: true
-  stripeSubscriptionId?: true
-  deletedAt?: true
-  isActive?: true
+  status?: true
+  emailVerifiedAt?: true
+  phoneVerifiedAt?: true
+  lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   email?: true
-  name?: true
+  phone?: true
+  displayName?: true
   avatarUrl?: true
-  plan?: true
-  planExpiresAt?: true
-  pipelineRunsUsed?: true
-  pipelineRunsLimit?: true
-  projectsLimit?: true
-  deploymentsLimit?: true
-  stripeCustomerId?: true
-  stripeSubscriptionId?: true
-  deletedAt?: true
-  isActive?: true
+  status?: true
+  emailVerifiedAt?: true
+  phoneVerifiedAt?: true
+  lastLoginAt?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -209,18 +155,6 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: UserAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: UserSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -251,8 +185,6 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
-  _avg?: UserAvgAggregateInputType
-  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -260,23 +192,17 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: string
   email: string
-  name: string | null
+  phone: string | null
+  displayName: string | null
   avatarUrl: string | null
-  plan: $Enums.Plan
-  planExpiresAt: Date | null
-  pipelineRunsUsed: number
-  pipelineRunsLimit: number
-  projectsLimit: number
-  deploymentsLimit: number
-  stripeCustomerId: string | null
-  stripeSubscriptionId: string | null
-  deletedAt: Date | null
-  isActive: boolean
+  status: $Enums.UserStatus
+  emailVerifiedAt: Date | null
+  phoneVerifiedAt: Date | null
+  lastLoginAt: Date | null
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date | null
   _count: UserCountAggregateOutputType | null
-  _avg: UserAvgAggregateOutputType | null
-  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -302,103 +228,115 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
-  name?: Prisma.StringNullableFilter<"User"> | string | null
+  phone?: Prisma.StringNullableFilter<"User"> | string | null
+  displayName?: Prisma.StringNullableFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
-  plan?: Prisma.EnumPlanFilter<"User"> | $Enums.Plan
-  planExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFilter<"User"> | number
-  pipelineRunsLimit?: Prisma.IntFilter<"User"> | number
-  projectsLimit?: Prisma.IntFilter<"User"> | number
-  deploymentsLimit?: Prisma.IntFilter<"User"> | number
-  stripeCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
-  stripeSubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
-  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  isActive?: Prisma.BoolFilter<"User"> | boolean
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  phoneVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  accounts?: Prisma.OAuthAccountListRelationFilter
-  projects?: Prisma.ProjectListRelationFilter
-  deployments?: Prisma.DeploymentListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
-  usageLogs?: Prisma.UsageLogListRelationFilter
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  credentials?: Prisma.XOR<Prisma.UserCredentialNullableScalarRelationFilter, Prisma.UserCredentialWhereInput> | null
+  identities?: Prisma.UserIdentityListRelationFilter
+  refreshTokens?: Prisma.RefreshTokenListRelationFilter
+  sessions?: Prisma.UserSessionListRelationFilter
+  emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
+  passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  phoneOtps?: Prisma.PhoneOtpListRelationFilter
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
+  payments?: Prisma.PaymentListRelationFilter
+  creditBalance?: Prisma.XOR<Prisma.CreditBalanceNullableScalarRelationFilter, Prisma.CreditBalanceWhereInput> | null
+  creditTransactions?: Prisma.CreditTransactionListRelationFilter
+  projects?: Prisma.ProjectListRelationFilter
+  conversations?: Prisma.ConversationListRelationFilter
+  deployments?: Prisma.DeploymentListRelationFilter
+  usageLogs?: Prisma.UsageLogListRelationFilter
+  competitorScans?: Prisma.CompetitorScanListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  name?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  plan?: Prisma.SortOrder
-  planExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  pipelineRunsUsed?: Prisma.SortOrder
-  pipelineRunsLimit?: Prisma.SortOrder
-  projectsLimit?: Prisma.SortOrder
-  deploymentsLimit?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
-  stripeSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  isActive?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  accounts?: Prisma.OAuthAccountOrderByRelationAggregateInput
-  projects?: Prisma.ProjectOrderByRelationAggregateInput
-  deployments?: Prisma.DeploymentOrderByRelationAggregateInput
-  sessions?: Prisma.SessionOrderByRelationAggregateInput
-  usageLogs?: Prisma.UsageLogOrderByRelationAggregateInput
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  credentials?: Prisma.UserCredentialOrderByWithRelationInput
+  identities?: Prisma.UserIdentityOrderByRelationAggregateInput
+  refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
+  sessions?: Prisma.UserSessionOrderByRelationAggregateInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenOrderByRelationAggregateInput
+  passwordResetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
+  phoneOtps?: Prisma.PhoneOtpOrderByRelationAggregateInput
   subscription?: Prisma.SubscriptionOrderByWithRelationInput
+  payments?: Prisma.PaymentOrderByRelationAggregateInput
+  creditBalance?: Prisma.CreditBalanceOrderByWithRelationInput
+  creditTransactions?: Prisma.CreditTransactionOrderByRelationAggregateInput
+  projects?: Prisma.ProjectOrderByRelationAggregateInput
+  conversations?: Prisma.ConversationOrderByRelationAggregateInput
+  deployments?: Prisma.DeploymentOrderByRelationAggregateInput
+  usageLogs?: Prisma.UsageLogOrderByRelationAggregateInput
+  competitorScans?: Prisma.CompetitorScanOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
-  stripeCustomerId?: string
-  stripeSubscriptionId?: string
+  phone?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  name?: Prisma.StringNullableFilter<"User"> | string | null
+  displayName?: Prisma.StringNullableFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
-  plan?: Prisma.EnumPlanFilter<"User"> | $Enums.Plan
-  planExpiresAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFilter<"User"> | number
-  pipelineRunsLimit?: Prisma.IntFilter<"User"> | number
-  projectsLimit?: Prisma.IntFilter<"User"> | number
-  deploymentsLimit?: Prisma.IntFilter<"User"> | number
-  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  isActive?: Prisma.BoolFilter<"User"> | boolean
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  phoneVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  lastLoginAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  accounts?: Prisma.OAuthAccountListRelationFilter
-  projects?: Prisma.ProjectListRelationFilter
-  deployments?: Prisma.DeploymentListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
-  usageLogs?: Prisma.UsageLogListRelationFilter
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  credentials?: Prisma.XOR<Prisma.UserCredentialNullableScalarRelationFilter, Prisma.UserCredentialWhereInput> | null
+  identities?: Prisma.UserIdentityListRelationFilter
+  refreshTokens?: Prisma.RefreshTokenListRelationFilter
+  sessions?: Prisma.UserSessionListRelationFilter
+  emailVerificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
+  passwordResetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  phoneOtps?: Prisma.PhoneOtpListRelationFilter
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
-}, "id" | "email" | "stripeCustomerId" | "stripeSubscriptionId">
+  payments?: Prisma.PaymentListRelationFilter
+  creditBalance?: Prisma.XOR<Prisma.CreditBalanceNullableScalarRelationFilter, Prisma.CreditBalanceWhereInput> | null
+  creditTransactions?: Prisma.CreditTransactionListRelationFilter
+  projects?: Prisma.ProjectListRelationFilter
+  conversations?: Prisma.ConversationListRelationFilter
+  deployments?: Prisma.DeploymentListRelationFilter
+  usageLogs?: Prisma.UsageLogListRelationFilter
+  competitorScans?: Prisma.CompetitorScanListRelationFilter
+}, "id" | "email" | "phone">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  name?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  plan?: Prisma.SortOrder
-  planExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  pipelineRunsUsed?: Prisma.SortOrder
-  pipelineRunsLimit?: Prisma.SortOrder
-  projectsLimit?: Prisma.SortOrder
-  deploymentsLimit?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
-  stripeSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
-  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  isActive?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
-  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
-  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -407,248 +345,230 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  displayName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  plan?: Prisma.EnumPlanWithAggregatesFilter<"User"> | $Enums.Plan
-  planExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  pipelineRunsUsed?: Prisma.IntWithAggregatesFilter<"User"> | number
-  pipelineRunsLimit?: Prisma.IntWithAggregatesFilter<"User"> | number
-  projectsLimit?: Prisma.IntWithAggregatesFilter<"User"> | number
-  deploymentsLimit?: Prisma.IntWithAggregatesFilter<"User"> | number
-  stripeCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  stripeSubscriptionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  phoneVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  lastLoginAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountCreateNestedManyWithoutUserInput
-  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
-  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountUncheckedCreateNestedManyWithoutUserInput
-  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
-  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUpdateManyWithoutUserNestedInput
-  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
-  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUncheckedUpdateManyWithoutUserNestedInput
-  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
-  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
-  plan?: Prisma.SortOrder
-  planExpiresAt?: Prisma.SortOrder
-  pipelineRunsUsed?: Prisma.SortOrder
-  pipelineRunsLimit?: Prisma.SortOrder
-  projectsLimit?: Prisma.SortOrder
-  deploymentsLimit?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrder
-  stripeSubscriptionId?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrder
+  phoneVerifiedAt?: Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type UserAvgOrderByAggregateInput = {
-  pipelineRunsUsed?: Prisma.SortOrder
-  pipelineRunsLimit?: Prisma.SortOrder
-  projectsLimit?: Prisma.SortOrder
-  deploymentsLimit?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
-  plan?: Prisma.SortOrder
-  planExpiresAt?: Prisma.SortOrder
-  pipelineRunsUsed?: Prisma.SortOrder
-  pipelineRunsLimit?: Prisma.SortOrder
-  projectsLimit?: Prisma.SortOrder
-  deploymentsLimit?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrder
-  stripeSubscriptionId?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrder
+  phoneVerifiedAt?: Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  name?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  displayName?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
-  plan?: Prisma.SortOrder
-  planExpiresAt?: Prisma.SortOrder
-  pipelineRunsUsed?: Prisma.SortOrder
-  pipelineRunsLimit?: Prisma.SortOrder
-  projectsLimit?: Prisma.SortOrder
-  deploymentsLimit?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrder
-  stripeSubscriptionId?: Prisma.SortOrder
-  deletedAt?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  emailVerifiedAt?: Prisma.SortOrder
+  phoneVerifiedAt?: Prisma.SortOrder
+  lastLoginAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-}
-
-export type UserSumOrderByAggregateInput = {
-  pipelineRunsUsed?: Prisma.SortOrder
-  pipelineRunsLimit?: Prisma.SortOrder
-  projectsLimit?: Prisma.SortOrder
-  deploymentsLimit?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -664,42 +584,58 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type EnumPlanFieldUpdateOperationsInput = {
-  set?: $Enums.Plan
+export type EnumUserStatusFieldUpdateOperationsInput = {
+  set?: $Enums.UserStatus
 }
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type UserCreateNestedOneWithoutAccountsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
+export type UserCreateNestedOneWithoutCredentialsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCredentialsInput, Prisma.UserUncheckedCreateWithoutCredentialsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCredentialsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountsInput
-  upsert?: Prisma.UserUpsertWithoutAccountsInput
+export type UserUpdateOneRequiredWithoutCredentialsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCredentialsInput, Prisma.UserUncheckedCreateWithoutCredentialsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCredentialsInput
+  upsert?: Prisma.UserUpsertWithoutCredentialsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCredentialsInput, Prisma.UserUpdateWithoutCredentialsInput>, Prisma.UserUncheckedUpdateWithoutCredentialsInput>
+}
+
+export type UserCreateNestedOneWithoutIdentitiesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentitiesInput, Prisma.UserUncheckedCreateWithoutIdentitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIdentitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentitiesInput, Prisma.UserUncheckedCreateWithoutIdentitiesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentitiesInput
+  upsert?: Prisma.UserUpsertWithoutIdentitiesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIdentitiesInput, Prisma.UserUpdateWithoutIdentitiesInput>, Prisma.UserUncheckedUpdateWithoutIdentitiesInput>
+}
+
+export type UserCreateNestedOneWithoutRefreshTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRefreshTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRefreshTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRefreshTokensInput
+  upsert?: Prisma.UserUpsertWithoutRefreshTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRefreshTokensInput, Prisma.UserUpdateWithoutRefreshTokensInput>, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
 }
 
 export type UserCreateNestedOneWithoutSessionsInput = {
@@ -716,6 +652,48 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
+export type UserCreateNestedOneWithoutEmailVerificationTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationTokensInput, Prisma.UserUncheckedCreateWithoutEmailVerificationTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailVerificationTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutEmailVerificationTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationTokensInput, Prisma.UserUncheckedCreateWithoutEmailVerificationTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailVerificationTokensInput
+  upsert?: Prisma.UserUpsertWithoutEmailVerificationTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEmailVerificationTokensInput, Prisma.UserUpdateWithoutEmailVerificationTokensInput>, Prisma.UserUncheckedUpdateWithoutEmailVerificationTokensInput>
+}
+
+export type UserCreateNestedOneWithoutPasswordResetTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetTokensInput, Prisma.UserUncheckedCreateWithoutPasswordResetTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordResetTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPasswordResetTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetTokensInput, Prisma.UserUncheckedCreateWithoutPasswordResetTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPasswordResetTokensInput
+  upsert?: Prisma.UserUpsertWithoutPasswordResetTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPasswordResetTokensInput, Prisma.UserUpdateWithoutPasswordResetTokensInput>, Prisma.UserUncheckedUpdateWithoutPasswordResetTokensInput>
+}
+
+export type UserCreateNestedOneWithoutPhoneOtpsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPhoneOtpsInput, Prisma.UserUncheckedCreateWithoutPhoneOtpsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhoneOtpsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPhoneOtpsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPhoneOtpsInput, Prisma.UserUncheckedCreateWithoutPhoneOtpsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhoneOtpsInput
+  upsert?: Prisma.UserUpsertWithoutPhoneOtpsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPhoneOtpsInput, Prisma.UserUpdateWithoutPhoneOtpsInput>, Prisma.UserUncheckedUpdateWithoutPhoneOtpsInput>
+}
+
 export type UserCreateNestedOneWithoutSubscriptionInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionInput
@@ -730,6 +708,48 @@ export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionInput, Prisma.UserUpdateWithoutSubscriptionInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
 }
 
+export type UserCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.UserUpsertWithoutPaymentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPaymentsInput, Prisma.UserUpdateWithoutPaymentsInput>, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type UserCreateNestedOneWithoutCreditBalanceInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreditBalanceInput, Prisma.UserUncheckedCreateWithoutCreditBalanceInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreditBalanceInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreditBalanceNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreditBalanceInput, Prisma.UserUncheckedCreateWithoutCreditBalanceInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreditBalanceInput
+  upsert?: Prisma.UserUpsertWithoutCreditBalanceInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreditBalanceInput, Prisma.UserUpdateWithoutCreditBalanceInput>, Prisma.UserUncheckedUpdateWithoutCreditBalanceInput>
+}
+
+export type UserCreateNestedOneWithoutCreditTransactionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreditTransactionsInput, Prisma.UserUncheckedCreateWithoutCreditTransactionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreditTransactionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreditTransactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreditTransactionsInput, Prisma.UserUncheckedCreateWithoutCreditTransactionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreditTransactionsInput
+  upsert?: Prisma.UserUpsertWithoutCreditTransactionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreditTransactionsInput, Prisma.UserUpdateWithoutCreditTransactionsInput>, Prisma.UserUncheckedUpdateWithoutCreditTransactionsInput>
+}
+
 export type UserCreateNestedOneWithoutProjectsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutProjectsInput, Prisma.UserUncheckedCreateWithoutProjectsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutProjectsInput
@@ -742,6 +762,20 @@ export type UserUpdateOneRequiredWithoutProjectsNestedInput = {
   upsert?: Prisma.UserUpsertWithoutProjectsInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProjectsInput, Prisma.UserUpdateWithoutProjectsInput>, Prisma.UserUncheckedUpdateWithoutProjectsInput>
+}
+
+export type UserCreateNestedOneWithoutConversationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationsInput, Prisma.UserUncheckedCreateWithoutConversationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutConversationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutConversationsInput, Prisma.UserUncheckedCreateWithoutConversationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutConversationsInput
+  upsert?: Prisma.UserUpsertWithoutConversationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutConversationsInput, Prisma.UserUpdateWithoutConversationsInput>, Prisma.UserUncheckedUpdateWithoutConversationsInput>
 }
 
 export type UserCreateNestedOneWithoutDeploymentsInput = {
@@ -772,164 +806,486 @@ export type UserUpdateOneRequiredWithoutUsageLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUsageLogsInput, Prisma.UserUpdateWithoutUsageLogsInput>, Prisma.UserUncheckedUpdateWithoutUsageLogsInput>
 }
 
-export type UserCreateWithoutAccountsInput = {
+export type UserCreateNestedOneWithoutCompetitorScansInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCompetitorScansInput, Prisma.UserUncheckedCreateWithoutCompetitorScansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCompetitorScansInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCompetitorScansNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCompetitorScansInput, Prisma.UserUncheckedCreateWithoutCompetitorScansInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCompetitorScansInput
+  upsert?: Prisma.UserUpsertWithoutCompetitorScansInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCompetitorScansInput, Prisma.UserUpdateWithoutCompetitorScansInput>, Prisma.UserUncheckedUpdateWithoutCompetitorScansInput>
+}
+
+export type UserCreateWithoutCredentialsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
-  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutAccountsInput = {
+export type UserUncheckedCreateWithoutCredentialsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
-  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutAccountsInput = {
+export type UserCreateOrConnectWithoutCredentialsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCredentialsInput, Prisma.UserUncheckedCreateWithoutCredentialsInput>
 }
 
-export type UserUpsertWithoutAccountsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAccountsInput, Prisma.UserUncheckedCreateWithoutAccountsInput>
+export type UserUpsertWithoutCredentialsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCredentialsInput, Prisma.UserUncheckedUpdateWithoutCredentialsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCredentialsInput, Prisma.UserUncheckedCreateWithoutCredentialsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutAccountsInput = {
+export type UserUpdateToOneWithWhereWithoutCredentialsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAccountsInput, Prisma.UserUncheckedUpdateWithoutAccountsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCredentialsInput, Prisma.UserUncheckedUpdateWithoutCredentialsInput>
 }
 
-export type UserUpdateWithoutAccountsInput = {
+export type UserUpdateWithoutCredentialsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
-  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutAccountsInput = {
+export type UserUncheckedUpdateWithoutCredentialsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
-  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutIdentitiesInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutIdentitiesInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutIdentitiesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIdentitiesInput, Prisma.UserUncheckedCreateWithoutIdentitiesInput>
+}
+
+export type UserUpsertWithoutIdentitiesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIdentitiesInput, Prisma.UserUncheckedUpdateWithoutIdentitiesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIdentitiesInput, Prisma.UserUncheckedCreateWithoutIdentitiesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIdentitiesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIdentitiesInput, Prisma.UserUncheckedUpdateWithoutIdentitiesInput>
+}
+
+export type UserUpdateWithoutIdentitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIdentitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRefreshTokensInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRefreshTokensInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRefreshTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+}
+
+export type UserUpsertWithoutRefreshTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRefreshTokensInput, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRefreshTokensInput, Prisma.UserUncheckedCreateWithoutRefreshTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRefreshTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRefreshTokensInput, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>
+}
+
+export type UserUpdateWithoutRefreshTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRefreshTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountUncheckedCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
-  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -951,97 +1307,529 @@ export type UserUpdateToOneWithWhereWithoutSessionsInput = {
 export type UserUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
-  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUncheckedUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutEmailVerificationTokensInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationTokensInput, Prisma.UserUncheckedCreateWithoutEmailVerificationTokensInput>
+}
+
+export type UserUpsertWithoutEmailVerificationTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEmailVerificationTokensInput, Prisma.UserUncheckedUpdateWithoutEmailVerificationTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEmailVerificationTokensInput, Prisma.UserUncheckedCreateWithoutEmailVerificationTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEmailVerificationTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEmailVerificationTokensInput, Prisma.UserUncheckedUpdateWithoutEmailVerificationTokensInput>
+}
+
+export type UserUpdateWithoutEmailVerificationTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPasswordResetTokensInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetTokensInput, Prisma.UserUncheckedCreateWithoutPasswordResetTokensInput>
+}
+
+export type UserUpsertWithoutPasswordResetTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPasswordResetTokensInput, Prisma.UserUncheckedUpdateWithoutPasswordResetTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPasswordResetTokensInput, Prisma.UserUncheckedCreateWithoutPasswordResetTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPasswordResetTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPasswordResetTokensInput, Prisma.UserUncheckedUpdateWithoutPasswordResetTokensInput>
+}
+
+export type UserUpdateWithoutPasswordResetTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPhoneOtpsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPhoneOtpsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPhoneOtpsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPhoneOtpsInput, Prisma.UserUncheckedCreateWithoutPhoneOtpsInput>
+}
+
+export type UserUpsertWithoutPhoneOtpsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPhoneOtpsInput, Prisma.UserUncheckedUpdateWithoutPhoneOtpsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPhoneOtpsInput, Prisma.UserUncheckedCreateWithoutPhoneOtpsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPhoneOtpsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPhoneOtpsInput, Prisma.UserUncheckedUpdateWithoutPhoneOtpsInput>
+}
+
+export type UserUpdateWithoutPhoneOtpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountUncheckedCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionInput = {
@@ -1063,97 +1851,529 @@ export type UserUpdateToOneWithWhereWithoutSubscriptionInput = {
 export type UserUpdateWithoutSubscriptionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUncheckedUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPaymentsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPaymentsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
+}
+
+export type UserUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPaymentsInput, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaymentsInput, Prisma.UserUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPaymentsInput, Prisma.UserUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type UserUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCreditBalanceInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCreditBalanceInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCreditBalanceInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreditBalanceInput, Prisma.UserUncheckedCreateWithoutCreditBalanceInput>
+}
+
+export type UserUpsertWithoutCreditBalanceInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreditBalanceInput, Prisma.UserUncheckedUpdateWithoutCreditBalanceInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreditBalanceInput, Prisma.UserUncheckedCreateWithoutCreditBalanceInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreditBalanceInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreditBalanceInput, Prisma.UserUncheckedUpdateWithoutCreditBalanceInput>
+}
+
+export type UserUpdateWithoutCreditBalanceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreditBalanceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCreditTransactionsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCreditTransactionsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCreditTransactionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreditTransactionsInput, Prisma.UserUncheckedCreateWithoutCreditTransactionsInput>
+}
+
+export type UserUpsertWithoutCreditTransactionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreditTransactionsInput, Prisma.UserUncheckedUpdateWithoutCreditTransactionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreditTransactionsInput, Prisma.UserUncheckedCreateWithoutCreditTransactionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreditTransactionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreditTransactionsInput, Prisma.UserUncheckedUpdateWithoutCreditTransactionsInput>
+}
+
+export type UserUpdateWithoutCreditTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountCreateNestedManyWithoutUserInput
-  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountUncheckedCreateNestedManyWithoutUserInput
-  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -1175,97 +2395,257 @@ export type UserUpdateToOneWithWhereWithoutProjectsInput = {
 export type UserUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUpdateManyWithoutUserNestedInput
-  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUncheckedUpdateManyWithoutUserNestedInput
-  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutConversationsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutConversationsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutConversationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsInput, Prisma.UserUncheckedCreateWithoutConversationsInput>
+}
+
+export type UserUpsertWithoutConversationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationsInput, Prisma.UserUncheckedUpdateWithoutConversationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsInput, Prisma.UserUncheckedCreateWithoutConversationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutConversationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationsInput, Prisma.UserUncheckedUpdateWithoutConversationsInput>
+}
+
+export type UserUpdateWithoutConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeploymentsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountCreateNestedManyWithoutUserInput
-  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeploymentsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountUncheckedCreateNestedManyWithoutUserInput
-  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeploymentsInput = {
@@ -1287,97 +2667,121 @@ export type UserUpdateToOneWithWhereWithoutDeploymentsInput = {
 export type UserUpdateWithoutDeploymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUpdateManyWithoutUserNestedInput
-  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeploymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUncheckedUpdateManyWithoutUserNestedInput
-  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUsageLogsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountCreateNestedManyWithoutUserInput
-  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
-  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUsageLogsInput = {
   id?: string
   email: string
-  name?: string | null
+  phone?: string | null
+  displayName?: string | null
   avatarUrl?: string | null
-  plan?: $Enums.Plan
-  planExpiresAt?: Date | string | null
-  pipelineRunsUsed?: number
-  pipelineRunsLimit?: number
-  projectsLimit?: number
-  deploymentsLimit?: number
-  stripeCustomerId?: string | null
-  stripeSubscriptionId?: string | null
-  deletedAt?: Date | string | null
-  isActive?: boolean
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accounts?: Prisma.OAuthAccountUncheckedCreateNestedManyWithoutUserInput
-  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
-  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUsageLogsInput = {
@@ -1399,49 +2803,197 @@ export type UserUpdateToOneWithWhereWithoutUsageLogsInput = {
 export type UserUpdateWithoutUsageLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUpdateManyWithoutUserNestedInput
-  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
-  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUsageLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  plan?: Prisma.EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-  planExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  pipelineRunsUsed?: Prisma.IntFieldUpdateOperationsInput | number
-  pipelineRunsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  projectsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  deploymentsLimit?: Prisma.IntFieldUpdateOperationsInput | number
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accounts?: Prisma.OAuthAccountUncheckedUpdateManyWithoutUserNestedInput
-  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
-  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCompetitorScansInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCompetitorScansInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCompetitorScansInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCompetitorScansInput, Prisma.UserUncheckedCreateWithoutCompetitorScansInput>
+}
+
+export type UserUpsertWithoutCompetitorScansInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCompetitorScansInput, Prisma.UserUncheckedUpdateWithoutCompetitorScansInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCompetitorScansInput, Prisma.UserUncheckedCreateWithoutCompetitorScansInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCompetitorScansInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCompetitorScansInput, Prisma.UserUncheckedUpdateWithoutCompetitorScansInput>
+}
+
+export type UserUpdateWithoutCompetitorScansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCompetitorScansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1450,19 +3002,35 @@ export type UserUncheckedUpdateWithoutUsageLogsInput = {
  */
 
 export type UserCountOutputType = {
-  accounts: number
-  projects: number
-  deployments: number
+  identities: number
+  refreshTokens: number
   sessions: number
+  emailVerificationTokens: number
+  passwordResetTokens: number
+  phoneOtps: number
+  payments: number
+  creditTransactions: number
+  projects: number
+  conversations: number
+  deployments: number
   usageLogs: number
+  competitorScans: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accounts?: boolean | UserCountOutputTypeCountAccountsArgs
-  projects?: boolean | UserCountOutputTypeCountProjectsArgs
-  deployments?: boolean | UserCountOutputTypeCountDeploymentsArgs
+  identities?: boolean | UserCountOutputTypeCountIdentitiesArgs
+  refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  emailVerificationTokens?: boolean | UserCountOutputTypeCountEmailVerificationTokensArgs
+  passwordResetTokens?: boolean | UserCountOutputTypeCountPasswordResetTokensArgs
+  phoneOtps?: boolean | UserCountOutputTypeCountPhoneOtpsArgs
+  payments?: boolean | UserCountOutputTypeCountPaymentsArgs
+  creditTransactions?: boolean | UserCountOutputTypeCountCreditTransactionsArgs
+  projects?: boolean | UserCountOutputTypeCountProjectsArgs
+  conversations?: boolean | UserCountOutputTypeCountConversationsArgs
+  deployments?: boolean | UserCountOutputTypeCountDeploymentsArgs
   usageLogs?: boolean | UserCountOutputTypeCountUsageLogsArgs
+  competitorScans?: boolean | UserCountOutputTypeCountCompetitorScansArgs
 }
 
 /**
@@ -1478,8 +3046,57 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.OAuthAccountWhereInput
+export type UserCountOutputTypeCountIdentitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserIdentityWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRefreshTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RefreshTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserSessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEmailVerificationTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmailVerificationTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPasswordResetTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PasswordResetTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPhoneOtpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PhoneOtpWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreditTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CreditTransactionWhereInput
 }
 
 /**
@@ -1492,15 +3109,15 @@ export type UserCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountDeploymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DeploymentWhereInput
+export type UserCountOutputTypeCountConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConversationWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SessionWhereInput
+export type UserCountOutputTypeCountDeploymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeploymentWhereInput
 }
 
 /**
@@ -1510,98 +3127,109 @@ export type UserCountOutputTypeCountUsageLogsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.UsageLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCompetitorScansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CompetitorScanWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
-  name?: boolean
+  phone?: boolean
+  displayName?: boolean
   avatarUrl?: boolean
-  plan?: boolean
-  planExpiresAt?: boolean
-  pipelineRunsUsed?: boolean
-  pipelineRunsLimit?: boolean
-  projectsLimit?: boolean
-  deploymentsLimit?: boolean
-  stripeCustomerId?: boolean
-  stripeSubscriptionId?: boolean
-  deletedAt?: boolean
-  isActive?: boolean
+  status?: boolean
+  emailVerifiedAt?: boolean
+  phoneVerifiedAt?: boolean
+  lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
-  projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
-  deployments?: boolean | Prisma.User$deploymentsArgs<ExtArgs>
+  deletedAt?: boolean
+  credentials?: boolean | Prisma.User$credentialsArgs<ExtArgs>
+  identities?: boolean | Prisma.User$identitiesArgs<ExtArgs>
+  refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  usageLogs?: boolean | Prisma.User$usageLogsArgs<ExtArgs>
+  emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
+  passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
+  phoneOtps?: boolean | Prisma.User$phoneOtpsArgs<ExtArgs>
   subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
+  payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  creditBalance?: boolean | Prisma.User$creditBalanceArgs<ExtArgs>
+  creditTransactions?: boolean | Prisma.User$creditTransactionsArgs<ExtArgs>
+  projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
+  conversations?: boolean | Prisma.User$conversationsArgs<ExtArgs>
+  deployments?: boolean | Prisma.User$deploymentsArgs<ExtArgs>
+  usageLogs?: boolean | Prisma.User$usageLogsArgs<ExtArgs>
+  competitorScans?: boolean | Prisma.User$competitorScansArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
-  name?: boolean
+  phone?: boolean
+  displayName?: boolean
   avatarUrl?: boolean
-  plan?: boolean
-  planExpiresAt?: boolean
-  pipelineRunsUsed?: boolean
-  pipelineRunsLimit?: boolean
-  projectsLimit?: boolean
-  deploymentsLimit?: boolean
-  stripeCustomerId?: boolean
-  stripeSubscriptionId?: boolean
-  deletedAt?: boolean
-  isActive?: boolean
+  status?: boolean
+  emailVerifiedAt?: boolean
+  phoneVerifiedAt?: boolean
+  lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
-  name?: boolean
+  phone?: boolean
+  displayName?: boolean
   avatarUrl?: boolean
-  plan?: boolean
-  planExpiresAt?: boolean
-  pipelineRunsUsed?: boolean
-  pipelineRunsLimit?: boolean
-  projectsLimit?: boolean
-  deploymentsLimit?: boolean
-  stripeCustomerId?: boolean
-  stripeSubscriptionId?: boolean
-  deletedAt?: boolean
-  isActive?: boolean
+  status?: boolean
+  emailVerifiedAt?: boolean
+  phoneVerifiedAt?: boolean
+  lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   email?: boolean
-  name?: boolean
+  phone?: boolean
+  displayName?: boolean
   avatarUrl?: boolean
-  plan?: boolean
-  planExpiresAt?: boolean
-  pipelineRunsUsed?: boolean
-  pipelineRunsLimit?: boolean
-  projectsLimit?: boolean
-  deploymentsLimit?: boolean
-  stripeCustomerId?: boolean
-  stripeSubscriptionId?: boolean
-  deletedAt?: boolean
-  isActive?: boolean
+  status?: boolean
+  emailVerifiedAt?: boolean
+  phoneVerifiedAt?: boolean
+  lastLoginAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "avatarUrl" | "plan" | "planExpiresAt" | "pipelineRunsUsed" | "pipelineRunsLimit" | "projectsLimit" | "deploymentsLimit" | "stripeCustomerId" | "stripeSubscriptionId" | "deletedAt" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "phone" | "displayName" | "avatarUrl" | "status" | "emailVerifiedAt" | "phoneVerifiedAt" | "lastLoginAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
-  projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
-  deployments?: boolean | Prisma.User$deploymentsArgs<ExtArgs>
+  credentials?: boolean | Prisma.User$credentialsArgs<ExtArgs>
+  identities?: boolean | Prisma.User$identitiesArgs<ExtArgs>
+  refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  usageLogs?: boolean | Prisma.User$usageLogsArgs<ExtArgs>
+  emailVerificationTokens?: boolean | Prisma.User$emailVerificationTokensArgs<ExtArgs>
+  passwordResetTokens?: boolean | Prisma.User$passwordResetTokensArgs<ExtArgs>
+  phoneOtps?: boolean | Prisma.User$phoneOtpsArgs<ExtArgs>
   subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
+  payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
+  creditBalance?: boolean | Prisma.User$creditBalanceArgs<ExtArgs>
+  creditTransactions?: boolean | Prisma.User$creditTransactionsArgs<ExtArgs>
+  projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
+  conversations?: boolean | Prisma.User$conversationsArgs<ExtArgs>
+  deployments?: boolean | Prisma.User$deploymentsArgs<ExtArgs>
+  usageLogs?: boolean | Prisma.User$usageLogsArgs<ExtArgs>
+  competitorScans?: boolean | Prisma.User$competitorScansArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1610,30 +3238,36 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    accounts: Prisma.$OAuthAccountPayload<ExtArgs>[]
-    projects: Prisma.$ProjectPayload<ExtArgs>[]
-    deployments: Prisma.$DeploymentPayload<ExtArgs>[]
-    sessions: Prisma.$SessionPayload<ExtArgs>[]
-    usageLogs: Prisma.$UsageLogPayload<ExtArgs>[]
+    credentials: Prisma.$UserCredentialPayload<ExtArgs> | null
+    identities: Prisma.$UserIdentityPayload<ExtArgs>[]
+    refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
+    sessions: Prisma.$UserSessionPayload<ExtArgs>[]
+    emailVerificationTokens: Prisma.$EmailVerificationTokenPayload<ExtArgs>[]
+    passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
+    phoneOtps: Prisma.$PhoneOtpPayload<ExtArgs>[]
     subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
+    payments: Prisma.$PaymentPayload<ExtArgs>[]
+    creditBalance: Prisma.$CreditBalancePayload<ExtArgs> | null
+    creditTransactions: Prisma.$CreditTransactionPayload<ExtArgs>[]
+    projects: Prisma.$ProjectPayload<ExtArgs>[]
+    conversations: Prisma.$ConversationPayload<ExtArgs>[]
+    deployments: Prisma.$DeploymentPayload<ExtArgs>[]
+    usageLogs: Prisma.$UsageLogPayload<ExtArgs>[]
+    competitorScans: Prisma.$CompetitorScanPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     email: string
-    name: string | null
+    phone: string | null
+    displayName: string | null
     avatarUrl: string | null
-    plan: $Enums.Plan
-    planExpiresAt: Date | null
-    pipelineRunsUsed: number
-    pipelineRunsLimit: number
-    projectsLimit: number
-    deploymentsLimit: number
-    stripeCustomerId: string | null
-    stripeSubscriptionId: string | null
-    deletedAt: Date | null
-    isActive: boolean
+    status: $Enums.UserStatus
+    emailVerifiedAt: Date | null
+    phoneVerifiedAt: Date | null
+    lastLoginAt: Date | null
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2028,12 +3662,22 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OAuthAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  projects<T extends Prisma.User$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  deployments<T extends Prisma.User$deploymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deploymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeploymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  usageLogs<T extends Prisma.User$usageLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$usageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  credentials<T extends Prisma.User$credentialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$credentialsArgs<ExtArgs>>): Prisma.Prisma__UserCredentialClient<runtime.Types.Result.GetResult<Prisma.$UserCredentialPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  identities<T extends Prisma.User$identitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$identitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserIdentityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  emailVerificationTokens<T extends Prisma.User$emailVerificationTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailVerificationTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailVerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  passwordResetTokens<T extends Prisma.User$passwordResetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  phoneOtps<T extends Prisma.User$phoneOtpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$phoneOtpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PhoneOtpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscription<T extends Prisma.User$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  payments<T extends Prisma.User$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  creditBalance<T extends Prisma.User$creditBalanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$creditBalanceArgs<ExtArgs>>): Prisma.Prisma__CreditBalanceClient<runtime.Types.Result.GetResult<Prisma.$CreditBalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  creditTransactions<T extends Prisma.User$creditTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$creditTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CreditTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  projects<T extends Prisma.User$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  conversations<T extends Prisma.User$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deployments<T extends Prisma.User$deploymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deploymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeploymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  usageLogs<T extends Prisma.User$usageLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$usageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  competitorScans<T extends Prisma.User$competitorScansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$competitorScansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompetitorScanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2065,20 +3709,16 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
-  readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly phone: Prisma.FieldRef<"User", 'String'>
+  readonly displayName: Prisma.FieldRef<"User", 'String'>
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
-  readonly plan: Prisma.FieldRef<"User", 'Plan'>
-  readonly planExpiresAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly pipelineRunsUsed: Prisma.FieldRef<"User", 'Int'>
-  readonly pipelineRunsLimit: Prisma.FieldRef<"User", 'Int'>
-  readonly projectsLimit: Prisma.FieldRef<"User", 'Int'>
-  readonly deploymentsLimit: Prisma.FieldRef<"User", 'Int'>
-  readonly stripeCustomerId: Prisma.FieldRef<"User", 'String'>
-  readonly stripeSubscriptionId: Prisma.FieldRef<"User", 'String'>
-  readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
+  readonly status: Prisma.FieldRef<"User", 'UserStatus'>
+  readonly emailVerifiedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly phoneVerifiedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly lastLoginAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -2472,27 +4112,252 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.accounts
+ * User.credentials
  */
-export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$credentialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the OAuthAccount
+   * Select specific fields to fetch from the UserCredential
    */
-  select?: Prisma.OAuthAccountSelect<ExtArgs> | null
+  select?: Prisma.UserCredentialSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the OAuthAccount
+   * Omit specific fields from the UserCredential
    */
-  omit?: Prisma.OAuthAccountOmit<ExtArgs> | null
+  omit?: Prisma.UserCredentialOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OAuthAccountInclude<ExtArgs> | null
-  where?: Prisma.OAuthAccountWhereInput
-  orderBy?: Prisma.OAuthAccountOrderByWithRelationInput | Prisma.OAuthAccountOrderByWithRelationInput[]
-  cursor?: Prisma.OAuthAccountWhereUniqueInput
+  include?: Prisma.UserCredentialInclude<ExtArgs> | null
+  where?: Prisma.UserCredentialWhereInput
+}
+
+/**
+ * User.identities
+ */
+export type User$identitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserIdentity
+   */
+  select?: Prisma.UserIdentitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserIdentity
+   */
+  omit?: Prisma.UserIdentityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIdentityInclude<ExtArgs> | null
+  where?: Prisma.UserIdentityWhereInput
+  orderBy?: Prisma.UserIdentityOrderByWithRelationInput | Prisma.UserIdentityOrderByWithRelationInput[]
+  cursor?: Prisma.UserIdentityWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.OAuthAccountScalarFieldEnum | Prisma.OAuthAccountScalarFieldEnum[]
+  distinct?: Prisma.UserIdentityScalarFieldEnum | Prisma.UserIdentityScalarFieldEnum[]
+}
+
+/**
+ * User.refreshTokens
+ */
+export type User$refreshTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RefreshToken
+   */
+  select?: Prisma.RefreshTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RefreshToken
+   */
+  omit?: Prisma.RefreshTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RefreshTokenInclude<ExtArgs> | null
+  where?: Prisma.RefreshTokenWhereInput
+  orderBy?: Prisma.RefreshTokenOrderByWithRelationInput | Prisma.RefreshTokenOrderByWithRelationInput[]
+  cursor?: Prisma.RefreshTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RefreshTokenScalarFieldEnum | Prisma.RefreshTokenScalarFieldEnum[]
+}
+
+/**
+ * User.sessions
+ */
+export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserSession
+   */
+  select?: Prisma.UserSessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserSession
+   */
+  omit?: Prisma.UserSessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserSessionInclude<ExtArgs> | null
+  where?: Prisma.UserSessionWhereInput
+  orderBy?: Prisma.UserSessionOrderByWithRelationInput | Prisma.UserSessionOrderByWithRelationInput[]
+  cursor?: Prisma.UserSessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserSessionScalarFieldEnum | Prisma.UserSessionScalarFieldEnum[]
+}
+
+/**
+ * User.emailVerificationTokens
+ */
+export type User$emailVerificationTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmailVerificationToken
+   */
+  select?: Prisma.EmailVerificationTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmailVerificationToken
+   */
+  omit?: Prisma.EmailVerificationTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmailVerificationTokenInclude<ExtArgs> | null
+  where?: Prisma.EmailVerificationTokenWhereInput
+  orderBy?: Prisma.EmailVerificationTokenOrderByWithRelationInput | Prisma.EmailVerificationTokenOrderByWithRelationInput[]
+  cursor?: Prisma.EmailVerificationTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmailVerificationTokenScalarFieldEnum | Prisma.EmailVerificationTokenScalarFieldEnum[]
+}
+
+/**
+ * User.passwordResetTokens
+ */
+export type User$passwordResetTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PasswordResetToken
+   */
+  select?: Prisma.PasswordResetTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PasswordResetToken
+   */
+  omit?: Prisma.PasswordResetTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PasswordResetTokenInclude<ExtArgs> | null
+  where?: Prisma.PasswordResetTokenWhereInput
+  orderBy?: Prisma.PasswordResetTokenOrderByWithRelationInput | Prisma.PasswordResetTokenOrderByWithRelationInput[]
+  cursor?: Prisma.PasswordResetTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PasswordResetTokenScalarFieldEnum | Prisma.PasswordResetTokenScalarFieldEnum[]
+}
+
+/**
+ * User.phoneOtps
+ */
+export type User$phoneOtpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PhoneOtp
+   */
+  select?: Prisma.PhoneOtpSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PhoneOtp
+   */
+  omit?: Prisma.PhoneOtpOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PhoneOtpInclude<ExtArgs> | null
+  where?: Prisma.PhoneOtpWhereInput
+  orderBy?: Prisma.PhoneOtpOrderByWithRelationInput | Prisma.PhoneOtpOrderByWithRelationInput[]
+  cursor?: Prisma.PhoneOtpWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PhoneOtpScalarFieldEnum | Prisma.PhoneOtpScalarFieldEnum[]
+}
+
+/**
+ * User.subscription
+ */
+export type User$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
+}
+
+/**
+ * User.payments
+ */
+export type User$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * User.creditBalance
+ */
+export type User$creditBalanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CreditBalance
+   */
+  select?: Prisma.CreditBalanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CreditBalance
+   */
+  omit?: Prisma.CreditBalanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CreditBalanceInclude<ExtArgs> | null
+  where?: Prisma.CreditBalanceWhereInput
+}
+
+/**
+ * User.creditTransactions
+ */
+export type User$creditTransactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CreditTransaction
+   */
+  select?: Prisma.CreditTransactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CreditTransaction
+   */
+  omit?: Prisma.CreditTransactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CreditTransactionInclude<ExtArgs> | null
+  where?: Prisma.CreditTransactionWhereInput
+  orderBy?: Prisma.CreditTransactionOrderByWithRelationInput | Prisma.CreditTransactionOrderByWithRelationInput[]
+  cursor?: Prisma.CreditTransactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CreditTransactionScalarFieldEnum | Prisma.CreditTransactionScalarFieldEnum[]
 }
 
 /**
@@ -2520,6 +4385,30 @@ export type User$projectsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
+ * User.conversations
+ */
+export type User$conversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Conversation
+   */
+  select?: Prisma.ConversationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Conversation
+   */
+  omit?: Prisma.ConversationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConversationInclude<ExtArgs> | null
+  where?: Prisma.ConversationWhereInput
+  orderBy?: Prisma.ConversationOrderByWithRelationInput | Prisma.ConversationOrderByWithRelationInput[]
+  cursor?: Prisma.ConversationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
+}
+
+/**
  * User.deployments
  */
 export type User$deploymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2541,30 +4430,6 @@ export type User$deploymentsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.DeploymentScalarFieldEnum | Prisma.DeploymentScalarFieldEnum[]
-}
-
-/**
- * User.sessions
- */
-export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Session
-   */
-  select?: Prisma.SessionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Session
-   */
-  omit?: Prisma.SessionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SessionInclude<ExtArgs> | null
-  where?: Prisma.SessionWhereInput
-  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
-  cursor?: Prisma.SessionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
 }
 
 /**
@@ -2592,22 +4457,27 @@ export type User$usageLogsArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.subscription
+ * User.competitorScans
  */
-export type User$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$competitorScansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Subscription
+   * Select specific fields to fetch from the CompetitorScan
    */
-  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  select?: Prisma.CompetitorScanSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Subscription
+   * Omit specific fields from the CompetitorScan
    */
-  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  omit?: Prisma.CompetitorScanOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SubscriptionInclude<ExtArgs> | null
-  where?: Prisma.SubscriptionWhereInput
+  include?: Prisma.CompetitorScanInclude<ExtArgs> | null
+  where?: Prisma.CompetitorScanWhereInput
+  orderBy?: Prisma.CompetitorScanOrderByWithRelationInput | Prisma.CompetitorScanOrderByWithRelationInput[]
+  cursor?: Prisma.CompetitorScanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CompetitorScanScalarFieldEnum | Prisma.CompetitorScanScalarFieldEnum[]
 }
 
 /**

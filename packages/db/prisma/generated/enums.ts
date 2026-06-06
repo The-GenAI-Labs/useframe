@@ -9,13 +9,70 @@
 * 🟢 You can import this file directly.
 */
 
-export const Plan = {
-  FREE: 'FREE',
-  PRO: 'PRO',
-  TEAM: 'TEAM'
+export const UserStatus = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  BANNED: 'BANNED'
 } as const
 
-export type Plan = (typeof Plan)[keyof typeof Plan]
+export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
+
+
+export const SubscriptionStatus = {
+  ACTIVE: 'ACTIVE',
+  PAST_DUE: 'PAST_DUE',
+  CANCELLED: 'CANCELLED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
+
+
+export const BillingInterval = {
+  MONTHLY: 'MONTHLY',
+  YEARLY: 'YEARLY'
+} as const
+
+export type BillingInterval = (typeof BillingInterval)[keyof typeof BillingInterval]
+
+
+export const PaymentStatus = {
+  PENDING: 'PENDING',
+  SUCCESS: 'SUCCESS',
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const PaymentPurpose = {
+  SUBSCRIPTION: 'SUBSCRIPTION',
+  CREDIT_TOPUP: 'CREDIT_TOPUP'
+} as const
+
+export type PaymentPurpose = (typeof PaymentPurpose)[keyof typeof PaymentPurpose]
+
+
+export const CreditTxnType = {
+  RECURRING_GRANT: 'RECURRING_GRANT',
+  PURCHASED: 'PURCHASED',
+  SPEND: 'SPEND',
+  REFUND: 'REFUND',
+  ADJUSTMENT: 'ADJUSTMENT'
+} as const
+
+export type CreditTxnType = (typeof CreditTxnType)[keyof typeof CreditTxnType]
+
+
+export const ChatRole = {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type ChatRole = (typeof ChatRole)[keyof typeof ChatRole]
 
 
 export const ProjectStatus = {
@@ -52,7 +109,11 @@ export const PipelineStage = {
   COPY: 'COPY',
   SEO: 'SEO',
   COMPLETE: 'COMPLETE',
-  FAILED: 'FAILED'
+  FAILED: 'FAILED',
+  SCAN: 'SCAN',
+  RESEARCH: 'RESEARCH',
+  GENERATE: 'GENERATE',
+  DEPLOY: 'DEPLOY'
 } as const
 
 export type PipelineStage = (typeof PipelineStage)[keyof typeof PipelineStage]
@@ -102,3 +163,76 @@ export const CopyFramework = {
 } as const
 
 export type CopyFramework = (typeof CopyFramework)[keyof typeof CopyFramework]
+
+
+export const SiteType = {
+  SINGLE_PAGE: 'SINGLE_PAGE',
+  MULTI_PAGE: 'MULTI_PAGE'
+} as const
+
+export type SiteType = (typeof SiteType)[keyof typeof SiteType]
+
+
+export const PageType = {
+  HOME: 'HOME',
+  ABOUT: 'ABOUT',
+  CONTACT: 'CONTACT',
+  PRICING: 'PRICING',
+  PRODUCT: 'PRODUCT',
+  RESEARCH: 'RESEARCH',
+  DEMO: 'DEMO'
+} as const
+
+export type PageType = (typeof PageType)[keyof typeof PageType]
+
+
+export const ResearchKind = {
+  ARTICLE: 'ARTICLE',
+  CASE_STUDY: 'CASE_STUDY'
+} as const
+
+export type ResearchKind = (typeof ResearchKind)[keyof typeof ResearchKind]
+
+
+export const ResearchCategory = {
+  COLOR_PSYCHOLOGY: 'COLOR_PSYCHOLOGY',
+  TYPOGRAPHY: 'TYPOGRAPHY',
+  SCREEN_TIME: 'SCREEN_TIME',
+  LAYOUT: 'LAYOUT',
+  CONVERSION: 'CONVERSION',
+  ACCESSIBILITY: 'ACCESSIBILITY',
+  AGE_GROUP: 'AGE_GROUP',
+  INDUSTRY: 'INDUSTRY',
+  OTHER: 'OTHER'
+} as const
+
+export type ResearchCategory = (typeof ResearchCategory)[keyof typeof ResearchCategory]
+
+
+export const ScanType = {
+  COMPETITOR: 'COMPETITOR',
+  OWN_SITE: 'OWN_SITE'
+} as const
+
+export type ScanType = (typeof ScanType)[keyof typeof ScanType]
+
+
+export const ScanStatus = {
+  QUEUED: 'QUEUED',
+  RENDERING: 'RENDERING',
+  EXTRACTING: 'EXTRACTING',
+  ANALYZING: 'ANALYZING',
+  DONE: 'DONE',
+  FAILED: 'FAILED'
+} as const
+
+export type ScanStatus = (typeof ScanStatus)[keyof typeof ScanStatus]
+
+
+export const ProjectInputType = {
+  FROM_SCRATCH: 'FROM_SCRATCH',
+  FROM_COMPETITOR: 'FROM_COMPETITOR',
+  FROM_OWN_SITE: 'FROM_OWN_SITE'
+} as const
+
+export type ProjectInputType = (typeof ProjectInputType)[keyof typeof ProjectInputType]

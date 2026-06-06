@@ -44,7 +44,8 @@ export type PageAnalyticsSumAggregateOutputType = {
 
 export type PageAnalyticsMinAggregateOutputType = {
   id: string | null
-  pageId: string | null
+  projectId: string | null
+  path: string | null
   date: Date | null
   views: number | null
   uniques: number | null
@@ -57,7 +58,8 @@ export type PageAnalyticsMinAggregateOutputType = {
 
 export type PageAnalyticsMaxAggregateOutputType = {
   id: string | null
-  pageId: string | null
+  projectId: string | null
+  path: string | null
   date: Date | null
   views: number | null
   uniques: number | null
@@ -70,7 +72,8 @@ export type PageAnalyticsMaxAggregateOutputType = {
 
 export type PageAnalyticsCountAggregateOutputType = {
   id: number
-  pageId: number
+  projectId: number
+  path: number
   date: number
   views: number
   uniques: number
@@ -102,7 +105,8 @@ export type PageAnalyticsSumAggregateInputType = {
 
 export type PageAnalyticsMinAggregateInputType = {
   id?: true
-  pageId?: true
+  projectId?: true
+  path?: true
   date?: true
   views?: true
   uniques?: true
@@ -115,7 +119,8 @@ export type PageAnalyticsMinAggregateInputType = {
 
 export type PageAnalyticsMaxAggregateInputType = {
   id?: true
-  pageId?: true
+  projectId?: true
+  path?: true
   date?: true
   views?: true
   uniques?: true
@@ -128,7 +133,8 @@ export type PageAnalyticsMaxAggregateInputType = {
 
 export type PageAnalyticsCountAggregateInputType = {
   id?: true
-  pageId?: true
+  projectId?: true
+  path?: true
   date?: true
   views?: true
   uniques?: true
@@ -229,7 +235,8 @@ export type PageAnalyticsGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 
 export type PageAnalyticsGroupByOutputType = {
   id: string
-  pageId: string
+  projectId: string
+  path: string
   date: Date
   views: number
   uniques: number
@@ -266,7 +273,8 @@ export type PageAnalyticsWhereInput = {
   OR?: Prisma.PageAnalyticsWhereInput[]
   NOT?: Prisma.PageAnalyticsWhereInput | Prisma.PageAnalyticsWhereInput[]
   id?: Prisma.StringFilter<"PageAnalytics"> | string
-  pageId?: Prisma.StringFilter<"PageAnalytics"> | string
+  projectId?: Prisma.StringFilter<"PageAnalytics"> | string
+  path?: Prisma.StringFilter<"PageAnalytics"> | string
   date?: Prisma.DateTimeFilter<"PageAnalytics"> | Date | string
   views?: Prisma.IntFilter<"PageAnalytics"> | number
   uniques?: Prisma.IntFilter<"PageAnalytics"> | number
@@ -276,12 +284,13 @@ export type PageAnalyticsWhereInput = {
   tablet?: Prisma.IntFilter<"PageAnalytics"> | number
   createdAt?: Prisma.DateTimeFilter<"PageAnalytics"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PageAnalytics"> | Date | string
-  page?: Prisma.XOR<Prisma.PageScalarRelationFilter, Prisma.PageWhereInput>
+  project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
 }
 
 export type PageAnalyticsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  pageId?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
+  path?: Prisma.SortOrder
   date?: Prisma.SortOrder
   views?: Prisma.SortOrder
   uniques?: Prisma.SortOrder
@@ -291,16 +300,17 @@ export type PageAnalyticsOrderByWithRelationInput = {
   tablet?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  page?: Prisma.PageOrderByWithRelationInput
+  project?: Prisma.ProjectOrderByWithRelationInput
 }
 
 export type PageAnalyticsWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  pageId_date?: Prisma.PageAnalyticsPageIdDateCompoundUniqueInput
+  projectId_path_date?: Prisma.PageAnalyticsProjectIdPathDateCompoundUniqueInput
   AND?: Prisma.PageAnalyticsWhereInput | Prisma.PageAnalyticsWhereInput[]
   OR?: Prisma.PageAnalyticsWhereInput[]
   NOT?: Prisma.PageAnalyticsWhereInput | Prisma.PageAnalyticsWhereInput[]
-  pageId?: Prisma.StringFilter<"PageAnalytics"> | string
+  projectId?: Prisma.StringFilter<"PageAnalytics"> | string
+  path?: Prisma.StringFilter<"PageAnalytics"> | string
   date?: Prisma.DateTimeFilter<"PageAnalytics"> | Date | string
   views?: Prisma.IntFilter<"PageAnalytics"> | number
   uniques?: Prisma.IntFilter<"PageAnalytics"> | number
@@ -310,12 +320,13 @@ export type PageAnalyticsWhereUniqueInput = Prisma.AtLeast<{
   tablet?: Prisma.IntFilter<"PageAnalytics"> | number
   createdAt?: Prisma.DateTimeFilter<"PageAnalytics"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PageAnalytics"> | Date | string
-  page?: Prisma.XOR<Prisma.PageScalarRelationFilter, Prisma.PageWhereInput>
-}, "id" | "pageId_date">
+  project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+}, "id" | "projectId_path_date">
 
 export type PageAnalyticsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  pageId?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
+  path?: Prisma.SortOrder
   date?: Prisma.SortOrder
   views?: Prisma.SortOrder
   uniques?: Prisma.SortOrder
@@ -337,7 +348,8 @@ export type PageAnalyticsScalarWhereWithAggregatesInput = {
   OR?: Prisma.PageAnalyticsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PageAnalyticsScalarWhereWithAggregatesInput | Prisma.PageAnalyticsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PageAnalytics"> | string
-  pageId?: Prisma.StringWithAggregatesFilter<"PageAnalytics"> | string
+  projectId?: Prisma.StringWithAggregatesFilter<"PageAnalytics"> | string
+  path?: Prisma.StringWithAggregatesFilter<"PageAnalytics"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"PageAnalytics"> | Date | string
   views?: Prisma.IntWithAggregatesFilter<"PageAnalytics"> | number
   uniques?: Prisma.IntWithAggregatesFilter<"PageAnalytics"> | number
@@ -351,6 +363,7 @@ export type PageAnalyticsScalarWhereWithAggregatesInput = {
 
 export type PageAnalyticsCreateInput = {
   id?: string
+  path: string
   date: Date | string
   views?: number
   uniques?: number
@@ -360,12 +373,13 @@ export type PageAnalyticsCreateInput = {
   tablet?: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  page: Prisma.PageCreateNestedOneWithoutAnalyticsInput
+  project: Prisma.ProjectCreateNestedOneWithoutPageAnalyticsInput
 }
 
 export type PageAnalyticsUncheckedCreateInput = {
   id?: string
-  pageId: string
+  projectId: string
+  path: string
   date: Date | string
   views?: number
   uniques?: number
@@ -379,6 +393,7 @@ export type PageAnalyticsUncheckedCreateInput = {
 
 export type PageAnalyticsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  path?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   views?: Prisma.IntFieldUpdateOperationsInput | number
   uniques?: Prisma.IntFieldUpdateOperationsInput | number
@@ -388,12 +403,13 @@ export type PageAnalyticsUpdateInput = {
   tablet?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  page?: Prisma.PageUpdateOneRequiredWithoutAnalyticsNestedInput
+  project?: Prisma.ProjectUpdateOneRequiredWithoutPageAnalyticsNestedInput
 }
 
 export type PageAnalyticsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  pageId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  path?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   views?: Prisma.IntFieldUpdateOperationsInput | number
   uniques?: Prisma.IntFieldUpdateOperationsInput | number
@@ -407,7 +423,8 @@ export type PageAnalyticsUncheckedUpdateInput = {
 
 export type PageAnalyticsCreateManyInput = {
   id?: string
-  pageId: string
+  projectId: string
+  path: string
   date: Date | string
   views?: number
   uniques?: number
@@ -421,6 +438,7 @@ export type PageAnalyticsCreateManyInput = {
 
 export type PageAnalyticsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  path?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   views?: Prisma.IntFieldUpdateOperationsInput | number
   uniques?: Prisma.IntFieldUpdateOperationsInput | number
@@ -434,7 +452,8 @@ export type PageAnalyticsUpdateManyMutationInput = {
 
 export type PageAnalyticsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  pageId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  path?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   views?: Prisma.IntFieldUpdateOperationsInput | number
   uniques?: Prisma.IntFieldUpdateOperationsInput | number
@@ -456,14 +475,16 @@ export type PageAnalyticsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type PageAnalyticsPageIdDateCompoundUniqueInput = {
-  pageId: string
+export type PageAnalyticsProjectIdPathDateCompoundUniqueInput = {
+  projectId: string
+  path: string
   date: Date | string
 }
 
 export type PageAnalyticsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  pageId?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
+  path?: Prisma.SortOrder
   date?: Prisma.SortOrder
   views?: Prisma.SortOrder
   uniques?: Prisma.SortOrder
@@ -485,7 +506,8 @@ export type PageAnalyticsAvgOrderByAggregateInput = {
 
 export type PageAnalyticsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  pageId?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
+  path?: Prisma.SortOrder
   date?: Prisma.SortOrder
   views?: Prisma.SortOrder
   uniques?: Prisma.SortOrder
@@ -498,7 +520,8 @@ export type PageAnalyticsMaxOrderByAggregateInput = {
 
 export type PageAnalyticsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  pageId?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
+  path?: Prisma.SortOrder
   date?: Prisma.SortOrder
   views?: Prisma.SortOrder
   uniques?: Prisma.SortOrder
@@ -517,50 +540,51 @@ export type PageAnalyticsSumOrderByAggregateInput = {
   tablet?: Prisma.SortOrder
 }
 
-export type PageAnalyticsCreateNestedManyWithoutPageInput = {
-  create?: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutPageInput, Prisma.PageAnalyticsUncheckedCreateWithoutPageInput> | Prisma.PageAnalyticsCreateWithoutPageInput[] | Prisma.PageAnalyticsUncheckedCreateWithoutPageInput[]
-  connectOrCreate?: Prisma.PageAnalyticsCreateOrConnectWithoutPageInput | Prisma.PageAnalyticsCreateOrConnectWithoutPageInput[]
-  createMany?: Prisma.PageAnalyticsCreateManyPageInputEnvelope
+export type PageAnalyticsCreateNestedManyWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutProjectInput, Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput> | Prisma.PageAnalyticsCreateWithoutProjectInput[] | Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.PageAnalyticsCreateOrConnectWithoutProjectInput | Prisma.PageAnalyticsCreateOrConnectWithoutProjectInput[]
+  createMany?: Prisma.PageAnalyticsCreateManyProjectInputEnvelope
   connect?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
 }
 
-export type PageAnalyticsUncheckedCreateNestedManyWithoutPageInput = {
-  create?: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutPageInput, Prisma.PageAnalyticsUncheckedCreateWithoutPageInput> | Prisma.PageAnalyticsCreateWithoutPageInput[] | Prisma.PageAnalyticsUncheckedCreateWithoutPageInput[]
-  connectOrCreate?: Prisma.PageAnalyticsCreateOrConnectWithoutPageInput | Prisma.PageAnalyticsCreateOrConnectWithoutPageInput[]
-  createMany?: Prisma.PageAnalyticsCreateManyPageInputEnvelope
+export type PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutProjectInput, Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput> | Prisma.PageAnalyticsCreateWithoutProjectInput[] | Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.PageAnalyticsCreateOrConnectWithoutProjectInput | Prisma.PageAnalyticsCreateOrConnectWithoutProjectInput[]
+  createMany?: Prisma.PageAnalyticsCreateManyProjectInputEnvelope
   connect?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
 }
 
-export type PageAnalyticsUpdateManyWithoutPageNestedInput = {
-  create?: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutPageInput, Prisma.PageAnalyticsUncheckedCreateWithoutPageInput> | Prisma.PageAnalyticsCreateWithoutPageInput[] | Prisma.PageAnalyticsUncheckedCreateWithoutPageInput[]
-  connectOrCreate?: Prisma.PageAnalyticsCreateOrConnectWithoutPageInput | Prisma.PageAnalyticsCreateOrConnectWithoutPageInput[]
-  upsert?: Prisma.PageAnalyticsUpsertWithWhereUniqueWithoutPageInput | Prisma.PageAnalyticsUpsertWithWhereUniqueWithoutPageInput[]
-  createMany?: Prisma.PageAnalyticsCreateManyPageInputEnvelope
+export type PageAnalyticsUpdateManyWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutProjectInput, Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput> | Prisma.PageAnalyticsCreateWithoutProjectInput[] | Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.PageAnalyticsCreateOrConnectWithoutProjectInput | Prisma.PageAnalyticsCreateOrConnectWithoutProjectInput[]
+  upsert?: Prisma.PageAnalyticsUpsertWithWhereUniqueWithoutProjectInput | Prisma.PageAnalyticsUpsertWithWhereUniqueWithoutProjectInput[]
+  createMany?: Prisma.PageAnalyticsCreateManyProjectInputEnvelope
   set?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
   disconnect?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
   delete?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
   connect?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
-  update?: Prisma.PageAnalyticsUpdateWithWhereUniqueWithoutPageInput | Prisma.PageAnalyticsUpdateWithWhereUniqueWithoutPageInput[]
-  updateMany?: Prisma.PageAnalyticsUpdateManyWithWhereWithoutPageInput | Prisma.PageAnalyticsUpdateManyWithWhereWithoutPageInput[]
+  update?: Prisma.PageAnalyticsUpdateWithWhereUniqueWithoutProjectInput | Prisma.PageAnalyticsUpdateWithWhereUniqueWithoutProjectInput[]
+  updateMany?: Prisma.PageAnalyticsUpdateManyWithWhereWithoutProjectInput | Prisma.PageAnalyticsUpdateManyWithWhereWithoutProjectInput[]
   deleteMany?: Prisma.PageAnalyticsScalarWhereInput | Prisma.PageAnalyticsScalarWhereInput[]
 }
 
-export type PageAnalyticsUncheckedUpdateManyWithoutPageNestedInput = {
-  create?: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutPageInput, Prisma.PageAnalyticsUncheckedCreateWithoutPageInput> | Prisma.PageAnalyticsCreateWithoutPageInput[] | Prisma.PageAnalyticsUncheckedCreateWithoutPageInput[]
-  connectOrCreate?: Prisma.PageAnalyticsCreateOrConnectWithoutPageInput | Prisma.PageAnalyticsCreateOrConnectWithoutPageInput[]
-  upsert?: Prisma.PageAnalyticsUpsertWithWhereUniqueWithoutPageInput | Prisma.PageAnalyticsUpsertWithWhereUniqueWithoutPageInput[]
-  createMany?: Prisma.PageAnalyticsCreateManyPageInputEnvelope
+export type PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutProjectInput, Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput> | Prisma.PageAnalyticsCreateWithoutProjectInput[] | Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.PageAnalyticsCreateOrConnectWithoutProjectInput | Prisma.PageAnalyticsCreateOrConnectWithoutProjectInput[]
+  upsert?: Prisma.PageAnalyticsUpsertWithWhereUniqueWithoutProjectInput | Prisma.PageAnalyticsUpsertWithWhereUniqueWithoutProjectInput[]
+  createMany?: Prisma.PageAnalyticsCreateManyProjectInputEnvelope
   set?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
   disconnect?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
   delete?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
   connect?: Prisma.PageAnalyticsWhereUniqueInput | Prisma.PageAnalyticsWhereUniqueInput[]
-  update?: Prisma.PageAnalyticsUpdateWithWhereUniqueWithoutPageInput | Prisma.PageAnalyticsUpdateWithWhereUniqueWithoutPageInput[]
-  updateMany?: Prisma.PageAnalyticsUpdateManyWithWhereWithoutPageInput | Prisma.PageAnalyticsUpdateManyWithWhereWithoutPageInput[]
+  update?: Prisma.PageAnalyticsUpdateWithWhereUniqueWithoutProjectInput | Prisma.PageAnalyticsUpdateWithWhereUniqueWithoutProjectInput[]
+  updateMany?: Prisma.PageAnalyticsUpdateManyWithWhereWithoutProjectInput | Prisma.PageAnalyticsUpdateManyWithWhereWithoutProjectInput[]
   deleteMany?: Prisma.PageAnalyticsScalarWhereInput | Prisma.PageAnalyticsScalarWhereInput[]
 }
 
-export type PageAnalyticsCreateWithoutPageInput = {
+export type PageAnalyticsCreateWithoutProjectInput = {
   id?: string
+  path: string
   date: Date | string
   views?: number
   uniques?: number
@@ -572,8 +596,9 @@ export type PageAnalyticsCreateWithoutPageInput = {
   updatedAt?: Date | string
 }
 
-export type PageAnalyticsUncheckedCreateWithoutPageInput = {
+export type PageAnalyticsUncheckedCreateWithoutProjectInput = {
   id?: string
+  path: string
   date: Date | string
   views?: number
   uniques?: number
@@ -585,30 +610,30 @@ export type PageAnalyticsUncheckedCreateWithoutPageInput = {
   updatedAt?: Date | string
 }
 
-export type PageAnalyticsCreateOrConnectWithoutPageInput = {
+export type PageAnalyticsCreateOrConnectWithoutProjectInput = {
   where: Prisma.PageAnalyticsWhereUniqueInput
-  create: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutPageInput, Prisma.PageAnalyticsUncheckedCreateWithoutPageInput>
+  create: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutProjectInput, Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput>
 }
 
-export type PageAnalyticsCreateManyPageInputEnvelope = {
-  data: Prisma.PageAnalyticsCreateManyPageInput | Prisma.PageAnalyticsCreateManyPageInput[]
+export type PageAnalyticsCreateManyProjectInputEnvelope = {
+  data: Prisma.PageAnalyticsCreateManyProjectInput | Prisma.PageAnalyticsCreateManyProjectInput[]
   skipDuplicates?: boolean
 }
 
-export type PageAnalyticsUpsertWithWhereUniqueWithoutPageInput = {
+export type PageAnalyticsUpsertWithWhereUniqueWithoutProjectInput = {
   where: Prisma.PageAnalyticsWhereUniqueInput
-  update: Prisma.XOR<Prisma.PageAnalyticsUpdateWithoutPageInput, Prisma.PageAnalyticsUncheckedUpdateWithoutPageInput>
-  create: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutPageInput, Prisma.PageAnalyticsUncheckedCreateWithoutPageInput>
+  update: Prisma.XOR<Prisma.PageAnalyticsUpdateWithoutProjectInput, Prisma.PageAnalyticsUncheckedUpdateWithoutProjectInput>
+  create: Prisma.XOR<Prisma.PageAnalyticsCreateWithoutProjectInput, Prisma.PageAnalyticsUncheckedCreateWithoutProjectInput>
 }
 
-export type PageAnalyticsUpdateWithWhereUniqueWithoutPageInput = {
+export type PageAnalyticsUpdateWithWhereUniqueWithoutProjectInput = {
   where: Prisma.PageAnalyticsWhereUniqueInput
-  data: Prisma.XOR<Prisma.PageAnalyticsUpdateWithoutPageInput, Prisma.PageAnalyticsUncheckedUpdateWithoutPageInput>
+  data: Prisma.XOR<Prisma.PageAnalyticsUpdateWithoutProjectInput, Prisma.PageAnalyticsUncheckedUpdateWithoutProjectInput>
 }
 
-export type PageAnalyticsUpdateManyWithWhereWithoutPageInput = {
+export type PageAnalyticsUpdateManyWithWhereWithoutProjectInput = {
   where: Prisma.PageAnalyticsScalarWhereInput
-  data: Prisma.XOR<Prisma.PageAnalyticsUpdateManyMutationInput, Prisma.PageAnalyticsUncheckedUpdateManyWithoutPageInput>
+  data: Prisma.XOR<Prisma.PageAnalyticsUpdateManyMutationInput, Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectInput>
 }
 
 export type PageAnalyticsScalarWhereInput = {
@@ -616,7 +641,8 @@ export type PageAnalyticsScalarWhereInput = {
   OR?: Prisma.PageAnalyticsScalarWhereInput[]
   NOT?: Prisma.PageAnalyticsScalarWhereInput | Prisma.PageAnalyticsScalarWhereInput[]
   id?: Prisma.StringFilter<"PageAnalytics"> | string
-  pageId?: Prisma.StringFilter<"PageAnalytics"> | string
+  projectId?: Prisma.StringFilter<"PageAnalytics"> | string
+  path?: Prisma.StringFilter<"PageAnalytics"> | string
   date?: Prisma.DateTimeFilter<"PageAnalytics"> | Date | string
   views?: Prisma.IntFilter<"PageAnalytics"> | number
   uniques?: Prisma.IntFilter<"PageAnalytics"> | number
@@ -628,8 +654,9 @@ export type PageAnalyticsScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"PageAnalytics"> | Date | string
 }
 
-export type PageAnalyticsCreateManyPageInput = {
+export type PageAnalyticsCreateManyProjectInput = {
   id?: string
+  path: string
   date: Date | string
   views?: number
   uniques?: number
@@ -641,8 +668,9 @@ export type PageAnalyticsCreateManyPageInput = {
   updatedAt?: Date | string
 }
 
-export type PageAnalyticsUpdateWithoutPageInput = {
+export type PageAnalyticsUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  path?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   views?: Prisma.IntFieldUpdateOperationsInput | number
   uniques?: Prisma.IntFieldUpdateOperationsInput | number
@@ -654,8 +682,9 @@ export type PageAnalyticsUpdateWithoutPageInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PageAnalyticsUncheckedUpdateWithoutPageInput = {
+export type PageAnalyticsUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  path?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   views?: Prisma.IntFieldUpdateOperationsInput | number
   uniques?: Prisma.IntFieldUpdateOperationsInput | number
@@ -667,8 +696,9 @@ export type PageAnalyticsUncheckedUpdateWithoutPageInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PageAnalyticsUncheckedUpdateManyWithoutPageInput = {
+export type PageAnalyticsUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  path?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   views?: Prisma.IntFieldUpdateOperationsInput | number
   uniques?: Prisma.IntFieldUpdateOperationsInput | number
@@ -684,7 +714,8 @@ export type PageAnalyticsUncheckedUpdateManyWithoutPageInput = {
 
 export type PageAnalyticsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  pageId?: boolean
+  projectId?: boolean
+  path?: boolean
   date?: boolean
   views?: boolean
   uniques?: boolean
@@ -694,12 +725,13 @@ export type PageAnalyticsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   tablet?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pageAnalytics"]>
 
 export type PageAnalyticsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  pageId?: boolean
+  projectId?: boolean
+  path?: boolean
   date?: boolean
   views?: boolean
   uniques?: boolean
@@ -709,12 +741,13 @@ export type PageAnalyticsSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   tablet?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pageAnalytics"]>
 
 export type PageAnalyticsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  pageId?: boolean
+  projectId?: boolean
+  path?: boolean
   date?: boolean
   views?: boolean
   uniques?: boolean
@@ -724,12 +757,13 @@ export type PageAnalyticsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   tablet?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pageAnalytics"]>
 
 export type PageAnalyticsSelectScalar = {
   id?: boolean
-  pageId?: boolean
+  projectId?: boolean
+  path?: boolean
   date?: boolean
   views?: boolean
   uniques?: boolean
@@ -741,25 +775,26 @@ export type PageAnalyticsSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PageAnalyticsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pageId" | "date" | "views" | "uniques" | "referrers" | "desktop" | "mobile" | "tablet" | "createdAt" | "updatedAt", ExtArgs["result"]["pageAnalytics"]>
+export type PageAnalyticsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "path" | "date" | "views" | "uniques" | "referrers" | "desktop" | "mobile" | "tablet" | "createdAt" | "updatedAt", ExtArgs["result"]["pageAnalytics"]>
 export type PageAnalyticsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }
 export type PageAnalyticsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }
 export type PageAnalyticsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }
 
 export type $PageAnalyticsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PageAnalytics"
   objects: {
-    page: Prisma.$PagePayload<ExtArgs>
+    project: Prisma.$ProjectPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    pageId: string
+    projectId: string
+    path: string
     date: Date
     views: number
     uniques: number
@@ -1163,7 +1198,7 @@ readonly fields: PageAnalyticsFieldRefs;
  */
 export interface Prisma__PageAnalyticsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  page<T extends Prisma.PageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PageDefaultArgs<ExtArgs>>): Prisma.Prisma__PageClient<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1194,7 +1229,8 @@ export interface Prisma__PageAnalyticsClient<T, Null = never, ExtArgs extends ru
  */
 export interface PageAnalyticsFieldRefs {
   readonly id: Prisma.FieldRef<"PageAnalytics", 'String'>
-  readonly pageId: Prisma.FieldRef<"PageAnalytics", 'String'>
+  readonly projectId: Prisma.FieldRef<"PageAnalytics", 'String'>
+  readonly path: Prisma.FieldRef<"PageAnalytics", 'String'>
   readonly date: Prisma.FieldRef<"PageAnalytics", 'DateTime'>
   readonly views: Prisma.FieldRef<"PageAnalytics", 'Int'>
   readonly uniques: Prisma.FieldRef<"PageAnalytics", 'Int'>

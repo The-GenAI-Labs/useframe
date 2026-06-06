@@ -52,20 +52,34 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  OAuthAccount: 'OAuthAccount',
-  Session: 'Session',
+  UserCredential: 'UserCredential',
+  UserIdentity: 'UserIdentity',
+  RefreshToken: 'RefreshToken',
+  UserSession: 'UserSession',
+  EmailVerificationToken: 'EmailVerificationToken',
+  PasswordResetToken: 'PasswordResetToken',
+  PhoneOtp: 'PhoneOtp',
+  Plan: 'Plan',
   Subscription: 'Subscription',
+  Payment: 'Payment',
+  WebhookEvent: 'WebhookEvent',
+  CreditBalance: 'CreditBalance',
+  CreditTransaction: 'CreditTransaction',
   Project: 'Project',
-  ScienceSpec: 'ScienceSpec',
-  SpecVersion: 'SpecVersion',
+  ProjectVersion: 'ProjectVersion',
   Page: 'Page',
+  Conversation: 'Conversation',
+  Message: 'Message',
   Deployment: 'Deployment',
   CustomDomain: 'CustomDomain',
   PipelineLog: 'PipelineLog',
   ProjectAnalytics: 'ProjectAnalytics',
   PageAnalytics: 'PageAnalytics',
   UsageLog: 'UsageLog',
-  Waitlist: 'Waitlist'
+  Waitlist: 'Waitlist',
+  ResearchReport: 'ResearchReport',
+  ResearchArticle: 'ResearchArticle',
+  CompetitorScan: 'CompetitorScan'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -87,71 +101,211 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name',
+  phone: 'phone',
+  displayName: 'displayName',
   avatarUrl: 'avatarUrl',
-  plan: 'plan',
-  planExpiresAt: 'planExpiresAt',
-  pipelineRunsUsed: 'pipelineRunsUsed',
-  pipelineRunsLimit: 'pipelineRunsLimit',
-  projectsLimit: 'projectsLimit',
-  deploymentsLimit: 'deploymentsLimit',
-  stripeCustomerId: 'stripeCustomerId',
-  stripeSubscriptionId: 'stripeSubscriptionId',
-  deletedAt: 'deletedAt',
-  isActive: 'isActive',
+  status: 'status',
+  emailVerifiedAt: 'emailVerifiedAt',
+  phoneVerifiedAt: 'phoneVerifiedAt',
+  lastLoginAt: 'lastLoginAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const OAuthAccountScalarFieldEnum = {
+export const UserCredentialScalarFieldEnum = {
+  userId: 'userId',
+  passwordHash: 'passwordHash',
+  passwordChangedAt: 'passwordChangedAt',
+  requiresReset: 'requiresReset'
+} as const
+
+export type UserCredentialScalarFieldEnum = (typeof UserCredentialScalarFieldEnum)[keyof typeof UserCredentialScalarFieldEnum]
+
+
+export const UserIdentityScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   provider: 'provider',
-  providerAccountId: 'providerAccountId',
-  accessToken: 'accessToken',
-  refreshToken: 'refreshToken',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type OAuthAccountScalarFieldEnum = (typeof OAuthAccountScalarFieldEnum)[keyof typeof OAuthAccountScalarFieldEnum]
-
-
-export const SessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  token: 'token',
-  expiresAt: 'expiresAt',
-  ipAddress: 'ipAddress',
-  userAgent: 'userAgent',
-  lastActiveAt: 'lastActiveAt',
+  providerUserId: 'providerUserId',
+  emailAtProvider: 'emailAtProvider',
   createdAt: 'createdAt'
 } as const
 
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+export type UserIdentityScalarFieldEnum = (typeof UserIdentityScalarFieldEnum)[keyof typeof UserIdentityScalarFieldEnum]
+
+
+export const RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  familyId: 'familyId',
+  parentId: 'parentId',
+  userAgent: 'userAgent',
+  ip: 'ip',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
+
+
+export const UserSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  refreshTokenId: 'refreshTokenId',
+  deviceName: 'deviceName',
+  userAgent: 'userAgent',
+  ip: 'ip',
+  lastActiveAt: 'lastActiveAt',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
+
+
+export const EmailVerificationTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  email: 'email',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  consumedAt: 'consumedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
+
+
+export const PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  consumedAt: 'consumedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
+export const PhoneOtpScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  phone: 'phone',
+  codeHash: 'codeHash',
+  attempts: 'attempts',
+  maxAttempts: 'maxAttempts',
+  expiresAt: 'expiresAt',
+  consumedAt: 'consumedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PhoneOtpScalarFieldEnum = (typeof PhoneOtpScalarFieldEnum)[keyof typeof PhoneOtpScalarFieldEnum]
+
+
+export const PlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  rank: 'rank',
+  priceMonthly: 'priceMonthly',
+  priceYearly: 'priceYearly',
+  currency: 'currency',
+  creditAllowance: 'creditAllowance',
+  monthlyGenerationQuota: 'monthlyGenerationQuota',
+  requiresPhoneVerification: 'requiresPhoneVerification',
+  features: 'features',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+} as const
+
+export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
 
 
 export const SubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  stripeSubscriptionId: 'stripeSubscriptionId',
-  stripePriceId: 'stripePriceId',
-  plan: 'plan',
+  planId: 'planId',
   status: 'status',
+  billingInterval: 'billingInterval',
   currentPeriodStart: 'currentPeriodStart',
   currentPeriodEnd: 'currentPeriodEnd',
   cancelAtPeriodEnd: 'cancelAtPeriodEnd',
-  canceledAt: 'canceledAt',
-  trialEndsAt: 'trialEndsAt',
+  providerSubscriptionId: 'providerSubscriptionId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  purpose: 'purpose',
+  subscriptionId: 'subscriptionId',
+  amount: 'amount',
+  currency: 'currency',
+  status: 'status',
+  provider: 'provider',
+  providerOrderId: 'providerOrderId',
+  providerPaymentId: 'providerPaymentId',
+  paymentMethod: 'paymentMethod',
+  capturedAt: 'capturedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const WebhookEventScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  eventType: 'eventType',
+  provider: 'provider',
+  payload: 'payload',
+  processed: 'processed',
+  processedAt: 'processedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type WebhookEventScalarFieldEnum = (typeof WebhookEventScalarFieldEnum)[keyof typeof WebhookEventScalarFieldEnum]
+
+
+export const CreditBalanceScalarFieldEnum = {
+  userId: 'userId',
+  balance: 'balance',
+  periodStart: 'periodStart',
+  periodEnd: 'periodEnd',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CreditBalanceScalarFieldEnum = (typeof CreditBalanceScalarFieldEnum)[keyof typeof CreditBalanceScalarFieldEnum]
+
+
+export const CreditTransactionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  delta: 'delta',
+  type: 'type',
+  reason: 'reason',
+  balanceAfter: 'balanceAfter',
+  refId: 'refId',
+  paymentId: 'paymentId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type CreditTransactionScalarFieldEnum = (typeof CreditTransactionScalarFieldEnum)[keyof typeof CreditTransactionScalarFieldEnum]
 
 
 export const ProjectScalarFieldEnum = {
@@ -163,9 +317,13 @@ export const ProjectScalarFieldEnum = {
   niche: 'niche',
   targetAudience: 'targetAudience',
   status: 'status',
+  inputType: 'inputType',
+  sourceUrl: 'sourceUrl',
+  docsKey: 'docsKey',
   description: 'description',
-  websiteUrl: 'websiteUrl',
   logoUrl: 'logoUrl',
+  currentVersionId: 'currentVersionId',
+  pinned: 'pinned',
   deletedAt: 'deletedAt',
   archivedAt: 'archivedAt',
   createdAt: 'createdAt',
@@ -175,64 +333,33 @@ export const ProjectScalarFieldEnum = {
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
-export const ScienceSpecScalarFieldEnum = {
+export const ProjectVersionScalarFieldEnum = {
   id: 'id',
-  projectId: 'projectId',
-  version: 'version',
-  isActive: 'isActive',
-  pipelineDurationMs: 'pipelineDurationMs',
-  chunksRetrieved: 'chunksRetrieved',
-  domainsRefined: 'domainsRefined',
-  lowConfidence: 'lowConfidence',
-  colorConfidence: 'colorConfidence',
-  typographyConfidence: 'typographyConfidence',
-  animationConfidence: 'animationConfidence',
-  overallConfidence: 'overallConfidence',
-  colorSystem: 'colorSystem',
-  typography: 'typography',
-  animationSystem: 'animationSystem',
-  layoutSystem: 'layoutSystem',
-  imageDirection: 'imageDirection',
-  copyFramework: 'copyFramework',
-  copySystem: 'copySystem',
-  seoMeta: 'seoMeta',
-  allCitations: 'allCitations',
-  userOverrides: 'userOverrides',
-  deletedAt: 'deletedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ScienceSpecScalarFieldEnum = (typeof ScienceSpecScalarFieldEnum)[keyof typeof ScienceSpecScalarFieldEnum]
-
-
-export const SpecVersionScalarFieldEnum = {
-  id: 'id',
-  scienceSpecId: 'scienceSpecId',
   projectId: 'projectId',
   versionNumber: 'versionNumber',
   label: 'label',
+  siteType: 'siteType',
+  seo: 'seo',
+  parentVersionId: 'parentVersionId',
+  createdByMessageId: 'createdByMessageId',
   snapshot: 'snapshot',
-  restoredFrom: 'restoredFrom',
   createdAt: 'createdAt'
 } as const
 
-export type SpecVersionScalarFieldEnum = (typeof SpecVersionScalarFieldEnum)[keyof typeof SpecVersionScalarFieldEnum]
+export type ProjectVersionScalarFieldEnum = (typeof ProjectVersionScalarFieldEnum)[keyof typeof ProjectVersionScalarFieldEnum]
 
 
 export const PageScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
-  scienceSpecId: 'scienceSpecId',
+  versionId: 'versionId',
+  type: 'type',
   slug: 'slug',
   title: 'title',
-  isPublished: 'isPublished',
   sections: 'sections',
-  seoOverrides: 'seoOverrides',
-  builtHtml: 'builtHtml',
-  builtCss: 'builtCss',
+  seo: 'seo',
   ogImageUrl: 'ogImageUrl',
-  sitemapUrl: 'sitemapUrl',
+  isPublished: 'isPublished',
   publishedAt: 'publishedAt',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
@@ -242,9 +369,38 @@ export const PageScalarFieldEnum = {
 export type PageScalarFieldEnum = (typeof PageScalarFieldEnum)[keyof typeof PageScalarFieldEnum]
 
 
+export const ConversationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  projectId: 'projectId',
+  title: 'title',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  role: 'role',
+  content: 'content',
+  producedVersionId: 'producedVersionId',
+  model: 'model',
+  inputTokens: 'inputTokens',
+  outputTokens: 'outputTokens',
+  createdAt: 'createdAt'
+} as const
+
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
 export const DeploymentScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
+  versionId: 'versionId',
   pageId: 'pageId',
   userId: 'userId',
   version: 'version',
@@ -294,6 +450,8 @@ export type CustomDomainScalarFieldEnum = (typeof CustomDomainScalarFieldEnum)[k
 export const PipelineLogScalarFieldEnum = {
   id: 'id',
   projectId: 'projectId',
+  versionId: 'versionId',
+  scanId: 'scanId',
   jobId: 'jobId',
   stage: 'stage',
   status: 'status',
@@ -335,7 +493,8 @@ export type ProjectAnalyticsScalarFieldEnum = (typeof ProjectAnalyticsScalarFiel
 
 export const PageAnalyticsScalarFieldEnum = {
   id: 'id',
-  pageId: 'pageId',
+  projectId: 'projectId',
+  path: 'path',
   date: 'date',
   views: 'views',
   uniques: 'uniques',
@@ -374,6 +533,80 @@ export const WaitlistScalarFieldEnum = {
 } as const
 
 export type WaitlistScalarFieldEnum = (typeof WaitlistScalarFieldEnum)[keyof typeof WaitlistScalarFieldEnum]
+
+
+export const ResearchReportScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  inputType: 'inputType',
+  sourceScanId: 'sourceScanId',
+  summary: 'summary',
+  primaryColor: 'primaryColor',
+  secondaryColor: 'secondaryColor',
+  accentColor: 'accentColor',
+  colorPalette: 'colorPalette',
+  colorRationale: 'colorRationale',
+  fontPrimary: 'fontPrimary',
+  fontSecondary: 'fontSecondary',
+  typographyRationale: 'typographyRationale',
+  layoutStyle: 'layoutStyle',
+  layoutRationale: 'layoutRationale',
+  imageStyle: 'imageStyle',
+  imageDirection: 'imageDirection',
+  imageRationale: 'imageRationale',
+  animationStyle: 'animationStyle',
+  targetAgeGroup: 'targetAgeGroup',
+  toneOfVoice: 'toneOfVoice',
+  seoKeywords: 'seoKeywords',
+  competitorInsights: 'competitorInsights',
+  citations: 'citations',
+  confidenceScore: 'confidenceScore',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResearchReportScalarFieldEnum = (typeof ResearchReportScalarFieldEnum)[keyof typeof ResearchReportScalarFieldEnum]
+
+
+export const ResearchArticleScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  kind: 'kind',
+  category: 'category',
+  summary: 'summary',
+  sections: 'sections',
+  body: 'body',
+  coverImageUrl: 'coverImageUrl',
+  tags: 'tags',
+  references: 'references',
+  isPublished: 'isPublished',
+  publishedAt: 'publishedAt',
+  viewCount: 'viewCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResearchArticleScalarFieldEnum = (typeof ResearchArticleScalarFieldEnum)[keyof typeof ResearchArticleScalarFieldEnum]
+
+
+export const CompetitorScanScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  projectId: 'projectId',
+  sourceUrl: 'sourceUrl',
+  scanType: 'scanType',
+  status: 'status',
+  screenshotKey: 'screenshotKey',
+  rawHtmlKey: 'rawHtmlKey',
+  designTokens: 'designTokens',
+  extractedContent: 'extractedContent',
+  failureReason: 'failureReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CompetitorScanScalarFieldEnum = (typeof CompetitorScanScalarFieldEnum)[keyof typeof CompetitorScanScalarFieldEnum]
 
 
 export const SortOrder = {

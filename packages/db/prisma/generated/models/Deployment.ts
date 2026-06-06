@@ -39,6 +39,7 @@ export type DeploymentSumAggregateOutputType = {
 export type DeploymentMinAggregateOutputType = {
   id: string | null
   projectId: string | null
+  versionId: string | null
   pageId: string | null
   userId: string | null
   version: number | null
@@ -64,6 +65,7 @@ export type DeploymentMinAggregateOutputType = {
 export type DeploymentMaxAggregateOutputType = {
   id: string | null
   projectId: string | null
+  versionId: string | null
   pageId: string | null
   userId: string | null
   version: number | null
@@ -89,6 +91,7 @@ export type DeploymentMaxAggregateOutputType = {
 export type DeploymentCountAggregateOutputType = {
   id: number
   projectId: number
+  versionId: number
   pageId: number
   userId: number
   version: number
@@ -126,6 +129,7 @@ export type DeploymentSumAggregateInputType = {
 export type DeploymentMinAggregateInputType = {
   id?: true
   projectId?: true
+  versionId?: true
   pageId?: true
   userId?: true
   version?: true
@@ -151,6 +155,7 @@ export type DeploymentMinAggregateInputType = {
 export type DeploymentMaxAggregateInputType = {
   id?: true
   projectId?: true
+  versionId?: true
   pageId?: true
   userId?: true
   version?: true
@@ -176,6 +181,7 @@ export type DeploymentMaxAggregateInputType = {
 export type DeploymentCountAggregateInputType = {
   id?: true
   projectId?: true
+  versionId?: true
   pageId?: true
   userId?: true
   version?: true
@@ -288,7 +294,8 @@ export type DeploymentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type DeploymentGroupByOutputType = {
   id: string
   projectId: string
-  pageId: string
+  versionId: string
+  pageId: string | null
   userId: string
   version: number
   status: $Enums.DeploymentStatus
@@ -336,7 +343,8 @@ export type DeploymentWhereInput = {
   NOT?: Prisma.DeploymentWhereInput | Prisma.DeploymentWhereInput[]
   id?: Prisma.StringFilter<"Deployment"> | string
   projectId?: Prisma.StringFilter<"Deployment"> | string
-  pageId?: Prisma.StringFilter<"Deployment"> | string
+  versionId?: Prisma.StringFilter<"Deployment"> | string
+  pageId?: Prisma.StringNullableFilter<"Deployment"> | string | null
   userId?: Prisma.StringFilter<"Deployment"> | string
   version?: Prisma.IntFilter<"Deployment"> | number
   status?: Prisma.EnumDeploymentStatusFilter<"Deployment"> | $Enums.DeploymentStatus
@@ -357,14 +365,16 @@ export type DeploymentWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
-  page?: Prisma.XOR<Prisma.PageScalarRelationFilter, Prisma.PageWhereInput>
+  projectVersion?: Prisma.XOR<Prisma.ProjectVersionScalarRelationFilter, Prisma.ProjectVersionWhereInput>
+  page?: Prisma.XOR<Prisma.PageNullableScalarRelationFilter, Prisma.PageWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type DeploymentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
-  pageId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  pageId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   version?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -385,6 +395,7 @@ export type DeploymentOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
+  projectVersion?: Prisma.ProjectVersionOrderByWithRelationInput
   page?: Prisma.PageOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
 }
@@ -395,7 +406,8 @@ export type DeploymentWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.DeploymentWhereInput[]
   NOT?: Prisma.DeploymentWhereInput | Prisma.DeploymentWhereInput[]
   projectId?: Prisma.StringFilter<"Deployment"> | string
-  pageId?: Prisma.StringFilter<"Deployment"> | string
+  versionId?: Prisma.StringFilter<"Deployment"> | string
+  pageId?: Prisma.StringNullableFilter<"Deployment"> | string | null
   userId?: Prisma.StringFilter<"Deployment"> | string
   version?: Prisma.IntFilter<"Deployment"> | number
   status?: Prisma.EnumDeploymentStatusFilter<"Deployment"> | $Enums.DeploymentStatus
@@ -416,14 +428,16 @@ export type DeploymentWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
-  page?: Prisma.XOR<Prisma.PageScalarRelationFilter, Prisma.PageWhereInput>
+  projectVersion?: Prisma.XOR<Prisma.ProjectVersionScalarRelationFilter, Prisma.ProjectVersionWhereInput>
+  page?: Prisma.XOR<Prisma.PageNullableScalarRelationFilter, Prisma.PageWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type DeploymentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
-  pageId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  pageId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   version?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -456,7 +470,8 @@ export type DeploymentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.DeploymentScalarWhereWithAggregatesInput | Prisma.DeploymentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
   projectId?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
-  pageId?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
+  versionId?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
+  pageId?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
   userId?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
   version?: Prisma.IntWithAggregatesFilter<"Deployment"> | number
   status?: Prisma.EnumDeploymentStatusWithAggregatesFilter<"Deployment"> | $Enums.DeploymentStatus
@@ -499,14 +514,16 @@ export type DeploymentCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutDeploymentsInput
-  page: Prisma.PageCreateNestedOneWithoutDeploymentsInput
+  projectVersion: Prisma.ProjectVersionCreateNestedOneWithoutDeploymentsInput
+  page?: Prisma.PageCreateNestedOneWithoutDeploymentsInput
   user: Prisma.UserCreateNestedOneWithoutDeploymentsInput
 }
 
 export type DeploymentUncheckedCreateInput = {
   id?: string
   projectId: string
-  pageId: string
+  versionId: string
+  pageId?: string | null
   userId: string
   version?: number
   status?: $Enums.DeploymentStatus
@@ -549,14 +566,16 @@ export type DeploymentUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutDeploymentsNestedInput
-  page?: Prisma.PageUpdateOneRequiredWithoutDeploymentsNestedInput
+  projectVersion?: Prisma.ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput
+  page?: Prisma.PageUpdateOneWithoutDeploymentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutDeploymentsNestedInput
 }
 
 export type DeploymentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  pageId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
@@ -581,7 +600,8 @@ export type DeploymentUncheckedUpdateInput = {
 export type DeploymentCreateManyInput = {
   id?: string
   projectId: string
-  pageId: string
+  versionId: string
+  pageId?: string | null
   userId: string
   version?: number
   status?: $Enums.DeploymentStatus
@@ -628,7 +648,8 @@ export type DeploymentUpdateManyMutationInput = {
 export type DeploymentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  pageId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
@@ -663,6 +684,7 @@ export type DeploymentOrderByRelationAggregateInput = {
 export type DeploymentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
   pageId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   version?: Prisma.SortOrder
@@ -693,6 +715,7 @@ export type DeploymentAvgOrderByAggregateInput = {
 export type DeploymentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
   pageId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   version?: Prisma.SortOrder
@@ -718,6 +741,7 @@ export type DeploymentMaxOrderByAggregateInput = {
 export type DeploymentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
   pageId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   version?: Prisma.SortOrder
@@ -829,6 +853,48 @@ export type DeploymentUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.DeploymentScalarWhereInput | Prisma.DeploymentScalarWhereInput[]
 }
 
+export type DeploymentCreateNestedManyWithoutProjectVersionInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutProjectVersionInput, Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput> | Prisma.DeploymentCreateWithoutProjectVersionInput[] | Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput[]
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutProjectVersionInput | Prisma.DeploymentCreateOrConnectWithoutProjectVersionInput[]
+  createMany?: Prisma.DeploymentCreateManyProjectVersionInputEnvelope
+  connect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+}
+
+export type DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutProjectVersionInput, Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput> | Prisma.DeploymentCreateWithoutProjectVersionInput[] | Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput[]
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutProjectVersionInput | Prisma.DeploymentCreateOrConnectWithoutProjectVersionInput[]
+  createMany?: Prisma.DeploymentCreateManyProjectVersionInputEnvelope
+  connect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+}
+
+export type DeploymentUpdateManyWithoutProjectVersionNestedInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutProjectVersionInput, Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput> | Prisma.DeploymentCreateWithoutProjectVersionInput[] | Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput[]
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutProjectVersionInput | Prisma.DeploymentCreateOrConnectWithoutProjectVersionInput[]
+  upsert?: Prisma.DeploymentUpsertWithWhereUniqueWithoutProjectVersionInput | Prisma.DeploymentUpsertWithWhereUniqueWithoutProjectVersionInput[]
+  createMany?: Prisma.DeploymentCreateManyProjectVersionInputEnvelope
+  set?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  disconnect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  delete?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  connect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  update?: Prisma.DeploymentUpdateWithWhereUniqueWithoutProjectVersionInput | Prisma.DeploymentUpdateWithWhereUniqueWithoutProjectVersionInput[]
+  updateMany?: Prisma.DeploymentUpdateManyWithWhereWithoutProjectVersionInput | Prisma.DeploymentUpdateManyWithWhereWithoutProjectVersionInput[]
+  deleteMany?: Prisma.DeploymentScalarWhereInput | Prisma.DeploymentScalarWhereInput[]
+}
+
+export type DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutProjectVersionInput, Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput> | Prisma.DeploymentCreateWithoutProjectVersionInput[] | Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput[]
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutProjectVersionInput | Prisma.DeploymentCreateOrConnectWithoutProjectVersionInput[]
+  upsert?: Prisma.DeploymentUpsertWithWhereUniqueWithoutProjectVersionInput | Prisma.DeploymentUpsertWithWhereUniqueWithoutProjectVersionInput[]
+  createMany?: Prisma.DeploymentCreateManyProjectVersionInputEnvelope
+  set?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  disconnect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  delete?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  connect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  update?: Prisma.DeploymentUpdateWithWhereUniqueWithoutProjectVersionInput | Prisma.DeploymentUpdateWithWhereUniqueWithoutProjectVersionInput[]
+  updateMany?: Prisma.DeploymentUpdateManyWithWhereWithoutProjectVersionInput | Prisma.DeploymentUpdateManyWithWhereWithoutProjectVersionInput[]
+  deleteMany?: Prisma.DeploymentScalarWhereInput | Prisma.DeploymentScalarWhereInput[]
+}
+
 export type DeploymentCreateNestedManyWithoutPageInput = {
   create?: Prisma.XOR<Prisma.DeploymentCreateWithoutPageInput, Prisma.DeploymentUncheckedCreateWithoutPageInput> | Prisma.DeploymentCreateWithoutPageInput[] | Prisma.DeploymentUncheckedCreateWithoutPageInput[]
   connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutPageInput | Prisma.DeploymentCreateOrConnectWithoutPageInput[]
@@ -896,13 +962,15 @@ export type DeploymentCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutDeploymentsInput
-  page: Prisma.PageCreateNestedOneWithoutDeploymentsInput
+  projectVersion: Prisma.ProjectVersionCreateNestedOneWithoutDeploymentsInput
+  page?: Prisma.PageCreateNestedOneWithoutDeploymentsInput
 }
 
 export type DeploymentUncheckedCreateWithoutUserInput = {
   id?: string
   projectId: string
-  pageId: string
+  versionId: string
+  pageId?: string | null
   version?: number
   status?: $Enums.DeploymentStatus
   subdomain: string
@@ -955,7 +1023,8 @@ export type DeploymentScalarWhereInput = {
   NOT?: Prisma.DeploymentScalarWhereInput | Prisma.DeploymentScalarWhereInput[]
   id?: Prisma.StringFilter<"Deployment"> | string
   projectId?: Prisma.StringFilter<"Deployment"> | string
-  pageId?: Prisma.StringFilter<"Deployment"> | string
+  versionId?: Prisma.StringFilter<"Deployment"> | string
+  pageId?: Prisma.StringNullableFilter<"Deployment"> | string | null
   userId?: Prisma.StringFilter<"Deployment"> | string
   version?: Prisma.IntFilter<"Deployment"> | number
   status?: Prisma.EnumDeploymentStatusFilter<"Deployment"> | $Enums.DeploymentStatus
@@ -997,13 +1066,15 @@ export type DeploymentCreateWithoutProjectInput = {
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  page: Prisma.PageCreateNestedOneWithoutDeploymentsInput
+  projectVersion: Prisma.ProjectVersionCreateNestedOneWithoutDeploymentsInput
+  page?: Prisma.PageCreateNestedOneWithoutDeploymentsInput
   user: Prisma.UserCreateNestedOneWithoutDeploymentsInput
 }
 
 export type DeploymentUncheckedCreateWithoutProjectInput = {
   id?: string
-  pageId: string
+  versionId: string
+  pageId?: string | null
   userId: string
   version?: number
   status?: $Enums.DeploymentStatus
@@ -1051,6 +1122,82 @@ export type DeploymentUpdateManyWithWhereWithoutProjectInput = {
   data: Prisma.XOR<Prisma.DeploymentUpdateManyMutationInput, Prisma.DeploymentUncheckedUpdateManyWithoutProjectInput>
 }
 
+export type DeploymentCreateWithoutProjectVersionInput = {
+  id?: string
+  version?: number
+  status?: $Enums.DeploymentStatus
+  subdomain: string
+  customDomain?: string | null
+  liveUrl?: string | null
+  buildLog?: string | null
+  buildDurationMs?: number | null
+  deployedAt?: Date | string | null
+  failedAt?: Date | string | null
+  failureReason?: string | null
+  rolledBackAt?: Date | string | null
+  rolledBackFromId?: string | null
+  r2BucketKey?: string | null
+  ogImageKey?: string | null
+  assetsKey?: string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutDeploymentsInput
+  page?: Prisma.PageCreateNestedOneWithoutDeploymentsInput
+  user: Prisma.UserCreateNestedOneWithoutDeploymentsInput
+}
+
+export type DeploymentUncheckedCreateWithoutProjectVersionInput = {
+  id?: string
+  projectId: string
+  pageId?: string | null
+  userId: string
+  version?: number
+  status?: $Enums.DeploymentStatus
+  subdomain: string
+  customDomain?: string | null
+  liveUrl?: string | null
+  buildLog?: string | null
+  buildDurationMs?: number | null
+  deployedAt?: Date | string | null
+  failedAt?: Date | string | null
+  failureReason?: string | null
+  rolledBackAt?: Date | string | null
+  rolledBackFromId?: string | null
+  r2BucketKey?: string | null
+  ogImageKey?: string | null
+  assetsKey?: string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DeploymentCreateOrConnectWithoutProjectVersionInput = {
+  where: Prisma.DeploymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DeploymentCreateWithoutProjectVersionInput, Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput>
+}
+
+export type DeploymentCreateManyProjectVersionInputEnvelope = {
+  data: Prisma.DeploymentCreateManyProjectVersionInput | Prisma.DeploymentCreateManyProjectVersionInput[]
+  skipDuplicates?: boolean
+}
+
+export type DeploymentUpsertWithWhereUniqueWithoutProjectVersionInput = {
+  where: Prisma.DeploymentWhereUniqueInput
+  update: Prisma.XOR<Prisma.DeploymentUpdateWithoutProjectVersionInput, Prisma.DeploymentUncheckedUpdateWithoutProjectVersionInput>
+  create: Prisma.XOR<Prisma.DeploymentCreateWithoutProjectVersionInput, Prisma.DeploymentUncheckedCreateWithoutProjectVersionInput>
+}
+
+export type DeploymentUpdateWithWhereUniqueWithoutProjectVersionInput = {
+  where: Prisma.DeploymentWhereUniqueInput
+  data: Prisma.XOR<Prisma.DeploymentUpdateWithoutProjectVersionInput, Prisma.DeploymentUncheckedUpdateWithoutProjectVersionInput>
+}
+
+export type DeploymentUpdateManyWithWhereWithoutProjectVersionInput = {
+  where: Prisma.DeploymentScalarWhereInput
+  data: Prisma.XOR<Prisma.DeploymentUpdateManyMutationInput, Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionInput>
+}
+
 export type DeploymentCreateWithoutPageInput = {
   id?: string
   version?: number
@@ -1072,12 +1219,14 @@ export type DeploymentCreateWithoutPageInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutDeploymentsInput
+  projectVersion: Prisma.ProjectVersionCreateNestedOneWithoutDeploymentsInput
   user: Prisma.UserCreateNestedOneWithoutDeploymentsInput
 }
 
 export type DeploymentUncheckedCreateWithoutPageInput = {
   id?: string
   projectId: string
+  versionId: string
   userId: string
   version?: number
   status?: $Enums.DeploymentStatus
@@ -1128,7 +1277,8 @@ export type DeploymentUpdateManyWithWhereWithoutPageInput = {
 export type DeploymentCreateManyUserInput = {
   id?: string
   projectId: string
-  pageId: string
+  versionId: string
+  pageId?: string | null
   version?: number
   status?: $Enums.DeploymentStatus
   subdomain: string
@@ -1170,13 +1320,15 @@ export type DeploymentUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutDeploymentsNestedInput
-  page?: Prisma.PageUpdateOneRequiredWithoutDeploymentsNestedInput
+  projectVersion?: Prisma.ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput
+  page?: Prisma.PageUpdateOneWithoutDeploymentsNestedInput
 }
 
 export type DeploymentUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  pageId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
   subdomain?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1200,7 +1352,8 @@ export type DeploymentUncheckedUpdateWithoutUserInput = {
 export type DeploymentUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  pageId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   version?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
   subdomain?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1223,7 +1376,8 @@ export type DeploymentUncheckedUpdateManyWithoutUserInput = {
 
 export type DeploymentCreateManyProjectInput = {
   id?: string
-  pageId: string
+  versionId: string
+  pageId?: string | null
   userId: string
   version?: number
   status?: $Enums.DeploymentStatus
@@ -1265,13 +1419,15 @@ export type DeploymentUpdateWithoutProjectInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  page?: Prisma.PageUpdateOneRequiredWithoutDeploymentsNestedInput
+  projectVersion?: Prisma.ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput
+  page?: Prisma.PageUpdateOneWithoutDeploymentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutDeploymentsNestedInput
 }
 
 export type DeploymentUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  pageId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
@@ -1295,7 +1451,108 @@ export type DeploymentUncheckedUpdateWithoutProjectInput = {
 
 export type DeploymentUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  pageId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildLog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildDurationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deployedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rolledBackAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rolledBackFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DeploymentCreateManyProjectVersionInput = {
+  id?: string
+  projectId: string
+  pageId?: string | null
+  userId: string
+  version?: number
+  status?: $Enums.DeploymentStatus
+  subdomain: string
+  customDomain?: string | null
+  liveUrl?: string | null
+  buildLog?: string | null
+  buildDurationMs?: number | null
+  deployedAt?: Date | string | null
+  failedAt?: Date | string | null
+  failureReason?: string | null
+  rolledBackAt?: Date | string | null
+  rolledBackFromId?: string | null
+  r2BucketKey?: string | null
+  ogImageKey?: string | null
+  assetsKey?: string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DeploymentUpdateWithoutProjectVersionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildLog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildDurationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deployedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rolledBackAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rolledBackFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutDeploymentsNestedInput
+  page?: Prisma.PageUpdateOneWithoutDeploymentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutDeploymentsNestedInput
+}
+
+export type DeploymentUncheckedUpdateWithoutProjectVersionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildLog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildDurationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deployedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rolledBackAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rolledBackFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DeploymentUncheckedUpdateManyWithoutProjectVersionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
@@ -1320,6 +1577,7 @@ export type DeploymentUncheckedUpdateManyWithoutProjectInput = {
 export type DeploymentCreateManyPageInput = {
   id?: string
   projectId: string
+  versionId: string
   userId: string
   version?: number
   status?: $Enums.DeploymentStatus
@@ -1362,12 +1620,14 @@ export type DeploymentUpdateWithoutPageInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutDeploymentsNestedInput
+  projectVersion?: Prisma.ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutDeploymentsNestedInput
 }
 
 export type DeploymentUncheckedUpdateWithoutPageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
@@ -1392,6 +1652,7 @@ export type DeploymentUncheckedUpdateWithoutPageInput = {
 export type DeploymentUncheckedUpdateManyWithoutPageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   version?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
@@ -1418,6 +1679,7 @@ export type DeploymentUncheckedUpdateManyWithoutPageInput = {
 export type DeploymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   projectId?: boolean
+  versionId?: boolean
   pageId?: boolean
   userId?: boolean
   version?: boolean
@@ -1439,13 +1701,15 @@ export type DeploymentSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
+  page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deployment"]>
 
 export type DeploymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   projectId?: boolean
+  versionId?: boolean
   pageId?: boolean
   userId?: boolean
   version?: boolean
@@ -1467,13 +1731,15 @@ export type DeploymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
+  page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deployment"]>
 
 export type DeploymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   projectId?: boolean
+  versionId?: boolean
   pageId?: boolean
   userId?: boolean
   version?: boolean
@@ -1495,13 +1761,15 @@ export type DeploymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
+  page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deployment"]>
 
 export type DeploymentSelectScalar = {
   id?: boolean
   projectId?: boolean
+  versionId?: boolean
   pageId?: boolean
   userId?: boolean
   version?: boolean
@@ -1524,20 +1792,23 @@ export type DeploymentSelectScalar = {
   updatedAt?: boolean
 }
 
-export type DeploymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "pageId" | "userId" | "version" | "status" | "subdomain" | "customDomain" | "liveUrl" | "buildLog" | "buildDurationMs" | "deployedAt" | "failedAt" | "failureReason" | "rolledBackAt" | "rolledBackFromId" | "r2BucketKey" | "ogImageKey" | "assetsKey" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["deployment"]>
+export type DeploymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionId" | "pageId" | "userId" | "version" | "status" | "subdomain" | "customDomain" | "liveUrl" | "buildLog" | "buildDurationMs" | "deployedAt" | "failedAt" | "failureReason" | "rolledBackAt" | "rolledBackFromId" | "r2BucketKey" | "ogImageKey" | "assetsKey" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["deployment"]>
 export type DeploymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
+  page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type DeploymentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
+  page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type DeploymentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
+  page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -1545,13 +1816,15 @@ export type $DeploymentPayload<ExtArgs extends runtime.Types.Extensions.Internal
   name: "Deployment"
   objects: {
     project: Prisma.$ProjectPayload<ExtArgs>
-    page: Prisma.$PagePayload<ExtArgs>
+    projectVersion: Prisma.$ProjectVersionPayload<ExtArgs>
+    page: Prisma.$PagePayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     projectId: string
-    pageId: string
+    versionId: string
+    pageId: string | null
     userId: string
     version: number
     status: $Enums.DeploymentStatus
@@ -1966,7 +2239,8 @@ readonly fields: DeploymentFieldRefs;
 export interface Prisma__DeploymentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  page<T extends Prisma.PageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PageDefaultArgs<ExtArgs>>): Prisma.Prisma__PageClient<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  projectVersion<T extends Prisma.ProjectVersionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectVersionDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectVersionClient<runtime.Types.Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  page<T extends Prisma.Deployment$pageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deployment$pageArgs<ExtArgs>>): Prisma.Prisma__PageClient<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1999,6 +2273,7 @@ export interface Prisma__DeploymentClient<T, Null = never, ExtArgs extends runti
 export interface DeploymentFieldRefs {
   readonly id: Prisma.FieldRef<"Deployment", 'String'>
   readonly projectId: Prisma.FieldRef<"Deployment", 'String'>
+  readonly versionId: Prisma.FieldRef<"Deployment", 'String'>
   readonly pageId: Prisma.FieldRef<"Deployment", 'String'>
   readonly userId: Prisma.FieldRef<"Deployment", 'String'>
   readonly version: Prisma.FieldRef<"Deployment", 'Int'>
@@ -2417,6 +2692,25 @@ export type DeploymentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Deployments to delete.
    */
   limit?: number
+}
+
+/**
+ * Deployment.page
+ */
+export type Deployment$pageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Page
+   */
+  select?: Prisma.PageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Page
+   */
+  omit?: Prisma.PageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PageInclude<ExtArgs> | null
+  where?: Prisma.PageWhereInput
 }
 
 /**

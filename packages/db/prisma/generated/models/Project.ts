@@ -33,9 +33,13 @@ export type ProjectMinAggregateOutputType = {
   niche: $Enums.NicheCategory | null
   targetAudience: string | null
   status: $Enums.ProjectStatus | null
+  inputType: $Enums.ProjectInputType | null
+  sourceUrl: string | null
+  docsKey: string | null
   description: string | null
-  websiteUrl: string | null
   logoUrl: string | null
+  currentVersionId: string | null
+  pinned: boolean | null
   deletedAt: Date | null
   archivedAt: Date | null
   createdAt: Date | null
@@ -51,9 +55,13 @@ export type ProjectMaxAggregateOutputType = {
   niche: $Enums.NicheCategory | null
   targetAudience: string | null
   status: $Enums.ProjectStatus | null
+  inputType: $Enums.ProjectInputType | null
+  sourceUrl: string | null
+  docsKey: string | null
   description: string | null
-  websiteUrl: string | null
   logoUrl: string | null
+  currentVersionId: string | null
+  pinned: boolean | null
   deletedAt: Date | null
   archivedAt: Date | null
   createdAt: Date | null
@@ -69,9 +77,13 @@ export type ProjectCountAggregateOutputType = {
   niche: number
   targetAudience: number
   status: number
+  inputType: number
+  sourceUrl: number
+  docsKey: number
   description: number
-  websiteUrl: number
   logoUrl: number
+  currentVersionId: number
+  pinned: number
   deletedAt: number
   archivedAt: number
   createdAt: number
@@ -89,9 +101,13 @@ export type ProjectMinAggregateInputType = {
   niche?: true
   targetAudience?: true
   status?: true
+  inputType?: true
+  sourceUrl?: true
+  docsKey?: true
   description?: true
-  websiteUrl?: true
   logoUrl?: true
+  currentVersionId?: true
+  pinned?: true
   deletedAt?: true
   archivedAt?: true
   createdAt?: true
@@ -107,9 +123,13 @@ export type ProjectMaxAggregateInputType = {
   niche?: true
   targetAudience?: true
   status?: true
+  inputType?: true
+  sourceUrl?: true
+  docsKey?: true
   description?: true
-  websiteUrl?: true
   logoUrl?: true
+  currentVersionId?: true
+  pinned?: true
   deletedAt?: true
   archivedAt?: true
   createdAt?: true
@@ -125,9 +145,13 @@ export type ProjectCountAggregateInputType = {
   niche?: true
   targetAudience?: true
   status?: true
+  inputType?: true
+  sourceUrl?: true
+  docsKey?: true
   description?: true
-  websiteUrl?: true
   logoUrl?: true
+  currentVersionId?: true
+  pinned?: true
   deletedAt?: true
   archivedAt?: true
   createdAt?: true
@@ -216,9 +240,13 @@ export type ProjectGroupByOutputType = {
   niche: $Enums.NicheCategory
   targetAudience: string
   status: $Enums.ProjectStatus
+  inputType: $Enums.ProjectInputType
+  sourceUrl: string | null
+  docsKey: string | null
   description: string | null
-  websiteUrl: string | null
   logoUrl: string | null
+  currentVersionId: string | null
+  pinned: boolean
   deletedAt: Date | null
   archivedAt: Date | null
   createdAt: Date
@@ -255,20 +283,28 @@ export type ProjectWhereInput = {
   niche?: Prisma.EnumNicheCategoryFilter<"Project"> | $Enums.NicheCategory
   targetAudience?: Prisma.StringFilter<"Project"> | string
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFilter<"Project"> | $Enums.ProjectInputType
+  sourceUrl?: Prisma.StringNullableFilter<"Project"> | string | null
+  docsKey?: Prisma.StringNullableFilter<"Project"> | string | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
-  websiteUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   logoUrl?: Prisma.StringNullableFilter<"Project"> | string | null
+  currentVersionId?: Prisma.StringNullableFilter<"Project"> | string | null
+  pinned?: Prisma.BoolFilter<"Project"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  scienceSpecs?: Prisma.ScienceSpecListRelationFilter
+  versions?: Prisma.ProjectVersionListRelationFilter
   pages?: Prisma.PageListRelationFilter
+  conversations?: Prisma.ConversationListRelationFilter
   deployments?: Prisma.DeploymentListRelationFilter
   customDomain?: Prisma.XOR<Prisma.CustomDomainNullableScalarRelationFilter, Prisma.CustomDomainWhereInput> | null
   pipelineLogs?: Prisma.PipelineLogListRelationFilter
   analytics?: Prisma.XOR<Prisma.ProjectAnalyticsNullableScalarRelationFilter, Prisma.ProjectAnalyticsWhereInput> | null
+  pageAnalytics?: Prisma.PageAnalyticsListRelationFilter
+  researchReport?: Prisma.XOR<Prisma.ResearchReportNullableScalarRelationFilter, Prisma.ResearchReportWhereInput> | null
+  competitorScans?: Prisma.CompetitorScanListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -280,20 +316,28 @@ export type ProjectOrderByWithRelationInput = {
   niche?: Prisma.SortOrder
   targetAudience?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  docsKey?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentVersionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  pinned?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  scienceSpecs?: Prisma.ScienceSpecOrderByRelationAggregateInput
+  versions?: Prisma.ProjectVersionOrderByRelationAggregateInput
   pages?: Prisma.PageOrderByRelationAggregateInput
+  conversations?: Prisma.ConversationOrderByRelationAggregateInput
   deployments?: Prisma.DeploymentOrderByRelationAggregateInput
   customDomain?: Prisma.CustomDomainOrderByWithRelationInput
   pipelineLogs?: Prisma.PipelineLogOrderByRelationAggregateInput
   analytics?: Prisma.ProjectAnalyticsOrderByWithRelationInput
+  pageAnalytics?: Prisma.PageAnalyticsOrderByRelationAggregateInput
+  researchReport?: Prisma.ResearchReportOrderByWithRelationInput
+  competitorScans?: Prisma.CompetitorScanOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -308,20 +352,28 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   niche?: Prisma.EnumNicheCategoryFilter<"Project"> | $Enums.NicheCategory
   targetAudience?: Prisma.StringFilter<"Project"> | string
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFilter<"Project"> | $Enums.ProjectInputType
+  sourceUrl?: Prisma.StringNullableFilter<"Project"> | string | null
+  docsKey?: Prisma.StringNullableFilter<"Project"> | string | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
-  websiteUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   logoUrl?: Prisma.StringNullableFilter<"Project"> | string | null
+  currentVersionId?: Prisma.StringNullableFilter<"Project"> | string | null
+  pinned?: Prisma.BoolFilter<"Project"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  scienceSpecs?: Prisma.ScienceSpecListRelationFilter
+  versions?: Prisma.ProjectVersionListRelationFilter
   pages?: Prisma.PageListRelationFilter
+  conversations?: Prisma.ConversationListRelationFilter
   deployments?: Prisma.DeploymentListRelationFilter
   customDomain?: Prisma.XOR<Prisma.CustomDomainNullableScalarRelationFilter, Prisma.CustomDomainWhereInput> | null
   pipelineLogs?: Prisma.PipelineLogListRelationFilter
   analytics?: Prisma.XOR<Prisma.ProjectAnalyticsNullableScalarRelationFilter, Prisma.ProjectAnalyticsWhereInput> | null
+  pageAnalytics?: Prisma.PageAnalyticsListRelationFilter
+  researchReport?: Prisma.XOR<Prisma.ResearchReportNullableScalarRelationFilter, Prisma.ResearchReportWhereInput> | null
+  competitorScans?: Prisma.CompetitorScanListRelationFilter
 }, "id" | "slug">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -333,9 +385,13 @@ export type ProjectOrderByWithAggregationInput = {
   niche?: Prisma.SortOrder
   targetAudience?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  docsKey?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentVersionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  pinned?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   archivedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -357,9 +413,13 @@ export type ProjectScalarWhereWithAggregatesInput = {
   niche?: Prisma.EnumNicheCategoryWithAggregatesFilter<"Project"> | $Enums.NicheCategory
   targetAudience?: Prisma.StringWithAggregatesFilter<"Project"> | string
   status?: Prisma.EnumProjectStatusWithAggregatesFilter<"Project"> | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeWithAggregatesFilter<"Project"> | $Enums.ProjectInputType
+  sourceUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  docsKey?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  websiteUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   logoUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  currentVersionId?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  pinned?: Prisma.BoolWithAggregatesFilter<"Project"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
   archivedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
@@ -374,20 +434,28 @@ export type ProjectCreateInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
-  scienceSpecs?: Prisma.ScienceSpecCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -399,19 +467,27 @@ export type ProjectUncheckedCreateInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -422,20 +498,28 @@ export type ProjectUpdateInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
-  scienceSpecs?: Prisma.ScienceSpecUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -447,19 +531,27 @@ export type ProjectUncheckedUpdateInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -471,9 +563,13 @@ export type ProjectCreateManyInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
@@ -488,9 +584,13 @@ export type ProjectUpdateManyMutationInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -506,9 +606,13 @@ export type ProjectUncheckedUpdateManyInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -534,9 +638,13 @@ export type ProjectCountOrderByAggregateInput = {
   niche?: Prisma.SortOrder
   targetAudience?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrder
+  docsKey?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
+  currentVersionId?: Prisma.SortOrder
+  pinned?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -552,9 +660,13 @@ export type ProjectMaxOrderByAggregateInput = {
   niche?: Prisma.SortOrder
   targetAudience?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrder
+  docsKey?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
+  currentVersionId?: Prisma.SortOrder
+  pinned?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -570,9 +682,13 @@ export type ProjectMinOrderByAggregateInput = {
   niche?: Prisma.SortOrder
   targetAudience?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  inputType?: Prisma.SortOrder
+  sourceUrl?: Prisma.SortOrder
+  docsKey?: Prisma.SortOrder
   description?: Prisma.SortOrder
-  websiteUrl?: Prisma.SortOrder
   logoUrl?: Prisma.SortOrder
+  currentVersionId?: Prisma.SortOrder
+  pinned?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   archivedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -582,6 +698,11 @@ export type ProjectMinOrderByAggregateInput = {
 export type ProjectScalarRelationFilter = {
   is?: Prisma.ProjectWhereInput
   isNot?: Prisma.ProjectWhereInput
+}
+
+export type ProjectNullableScalarRelationFilter = {
+  is?: Prisma.ProjectWhereInput | null
+  isNot?: Prisma.ProjectWhereInput | null
 }
 
 export type ProjectCreateNestedManyWithoutUserInput = {
@@ -634,18 +755,22 @@ export type EnumProjectStatusFieldUpdateOperationsInput = {
   set?: $Enums.ProjectStatus
 }
 
-export type ProjectCreateNestedOneWithoutScienceSpecsInput = {
-  create?: Prisma.XOR<Prisma.ProjectCreateWithoutScienceSpecsInput, Prisma.ProjectUncheckedCreateWithoutScienceSpecsInput>
-  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutScienceSpecsInput
+export type EnumProjectInputTypeFieldUpdateOperationsInput = {
+  set?: $Enums.ProjectInputType
+}
+
+export type ProjectCreateNestedOneWithoutVersionsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutVersionsInput, Prisma.ProjectUncheckedCreateWithoutVersionsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutVersionsInput
   connect?: Prisma.ProjectWhereUniqueInput
 }
 
-export type ProjectUpdateOneRequiredWithoutScienceSpecsNestedInput = {
-  create?: Prisma.XOR<Prisma.ProjectCreateWithoutScienceSpecsInput, Prisma.ProjectUncheckedCreateWithoutScienceSpecsInput>
-  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutScienceSpecsInput
-  upsert?: Prisma.ProjectUpsertWithoutScienceSpecsInput
+export type ProjectUpdateOneRequiredWithoutVersionsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutVersionsInput, Prisma.ProjectUncheckedCreateWithoutVersionsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutVersionsInput
+  upsert?: Prisma.ProjectUpsertWithoutVersionsInput
   connect?: Prisma.ProjectWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutScienceSpecsInput, Prisma.ProjectUpdateWithoutScienceSpecsInput>, Prisma.ProjectUncheckedUpdateWithoutScienceSpecsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutVersionsInput, Prisma.ProjectUpdateWithoutVersionsInput>, Prisma.ProjectUncheckedUpdateWithoutVersionsInput>
 }
 
 export type ProjectCreateNestedOneWithoutPagesInput = {
@@ -660,6 +785,22 @@ export type ProjectUpdateOneRequiredWithoutPagesNestedInput = {
   upsert?: Prisma.ProjectUpsertWithoutPagesInput
   connect?: Prisma.ProjectWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutPagesInput, Prisma.ProjectUpdateWithoutPagesInput>, Prisma.ProjectUncheckedUpdateWithoutPagesInput>
+}
+
+export type ProjectCreateNestedOneWithoutConversationsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutConversationsInput, Prisma.ProjectUncheckedCreateWithoutConversationsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutConversationsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneWithoutConversationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutConversationsInput, Prisma.ProjectUncheckedCreateWithoutConversationsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutConversationsInput
+  upsert?: Prisma.ProjectUpsertWithoutConversationsInput
+  disconnect?: Prisma.ProjectWhereInput | boolean
+  delete?: Prisma.ProjectWhereInput | boolean
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutConversationsInput, Prisma.ProjectUpdateWithoutConversationsInput>, Prisma.ProjectUncheckedUpdateWithoutConversationsInput>
 }
 
 export type ProjectCreateNestedOneWithoutDeploymentsInput = {
@@ -718,6 +859,50 @@ export type ProjectUpdateOneRequiredWithoutAnalyticsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutAnalyticsInput, Prisma.ProjectUpdateWithoutAnalyticsInput>, Prisma.ProjectUncheckedUpdateWithoutAnalyticsInput>
 }
 
+export type ProjectCreateNestedOneWithoutPageAnalyticsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutPageAnalyticsInput, Prisma.ProjectUncheckedCreateWithoutPageAnalyticsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutPageAnalyticsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutPageAnalyticsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutPageAnalyticsInput, Prisma.ProjectUncheckedCreateWithoutPageAnalyticsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutPageAnalyticsInput
+  upsert?: Prisma.ProjectUpsertWithoutPageAnalyticsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutPageAnalyticsInput, Prisma.ProjectUpdateWithoutPageAnalyticsInput>, Prisma.ProjectUncheckedUpdateWithoutPageAnalyticsInput>
+}
+
+export type ProjectCreateNestedOneWithoutResearchReportInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutResearchReportInput, Prisma.ProjectUncheckedCreateWithoutResearchReportInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutResearchReportInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutResearchReportNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutResearchReportInput, Prisma.ProjectUncheckedCreateWithoutResearchReportInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutResearchReportInput
+  upsert?: Prisma.ProjectUpsertWithoutResearchReportInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutResearchReportInput, Prisma.ProjectUpdateWithoutResearchReportInput>, Prisma.ProjectUncheckedUpdateWithoutResearchReportInput>
+}
+
+export type ProjectCreateNestedOneWithoutCompetitorScansInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCompetitorScansInput, Prisma.ProjectUncheckedCreateWithoutCompetitorScansInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCompetitorScansInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneWithoutCompetitorScansNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCompetitorScansInput, Prisma.ProjectUncheckedCreateWithoutCompetitorScansInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCompetitorScansInput
+  upsert?: Prisma.ProjectUpsertWithoutCompetitorScansInput
+  disconnect?: Prisma.ProjectWhereInput | boolean
+  delete?: Prisma.ProjectWhereInput | boolean
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutCompetitorScansInput, Prisma.ProjectUpdateWithoutCompetitorScansInput>, Prisma.ProjectUncheckedUpdateWithoutCompetitorScansInput>
+}
+
 export type ProjectCreateWithoutUserInput = {
   id?: string
   name: string
@@ -726,19 +911,27 @@ export type ProjectCreateWithoutUserInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  scienceSpecs?: Prisma.ScienceSpecCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutUserInput = {
@@ -749,19 +942,27 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutUserInput = {
@@ -802,16 +1003,20 @@ export type ProjectScalarWhereInput = {
   niche?: Prisma.EnumNicheCategoryFilter<"Project"> | $Enums.NicheCategory
   targetAudience?: Prisma.StringFilter<"Project"> | string
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFilter<"Project"> | $Enums.ProjectInputType
+  sourceUrl?: Prisma.StringNullableFilter<"Project"> | string | null
+  docsKey?: Prisma.StringNullableFilter<"Project"> | string | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
-  websiteUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   logoUrl?: Prisma.StringNullableFilter<"Project"> | string | null
+  currentVersionId?: Prisma.StringNullableFilter<"Project"> | string | null
+  pinned?: Prisma.BoolFilter<"Project"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   archivedAt?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Project"> | Date | string
 }
 
-export type ProjectCreateWithoutScienceSpecsInput = {
+export type ProjectCreateWithoutVersionsInput = {
   id?: string
   name: string
   slug: string
@@ -819,22 +1024,30 @@ export type ProjectCreateWithoutScienceSpecsInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
   pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
 }
 
-export type ProjectUncheckedCreateWithoutScienceSpecsInput = {
+export type ProjectUncheckedCreateWithoutVersionsInput = {
   id?: string
   userId: string
   name: string
@@ -843,37 +1056,45 @@ export type ProjectUncheckedCreateWithoutScienceSpecsInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
 }
 
-export type ProjectCreateOrConnectWithoutScienceSpecsInput = {
+export type ProjectCreateOrConnectWithoutVersionsInput = {
   where: Prisma.ProjectWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProjectCreateWithoutScienceSpecsInput, Prisma.ProjectUncheckedCreateWithoutScienceSpecsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutVersionsInput, Prisma.ProjectUncheckedCreateWithoutVersionsInput>
 }
 
-export type ProjectUpsertWithoutScienceSpecsInput = {
-  update: Prisma.XOR<Prisma.ProjectUpdateWithoutScienceSpecsInput, Prisma.ProjectUncheckedUpdateWithoutScienceSpecsInput>
-  create: Prisma.XOR<Prisma.ProjectCreateWithoutScienceSpecsInput, Prisma.ProjectUncheckedCreateWithoutScienceSpecsInput>
+export type ProjectUpsertWithoutVersionsInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutVersionsInput, Prisma.ProjectUncheckedUpdateWithoutVersionsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutVersionsInput, Prisma.ProjectUncheckedCreateWithoutVersionsInput>
   where?: Prisma.ProjectWhereInput
 }
 
-export type ProjectUpdateToOneWithWhereWithoutScienceSpecsInput = {
+export type ProjectUpdateToOneWithWhereWithoutVersionsInput = {
   where?: Prisma.ProjectWhereInput
-  data: Prisma.XOR<Prisma.ProjectUpdateWithoutScienceSpecsInput, Prisma.ProjectUncheckedUpdateWithoutScienceSpecsInput>
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutVersionsInput, Prisma.ProjectUncheckedUpdateWithoutVersionsInput>
 }
 
-export type ProjectUpdateWithoutScienceSpecsInput = {
+export type ProjectUpdateWithoutVersionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
@@ -881,22 +1102,30 @@ export type ProjectUpdateWithoutScienceSpecsInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
   pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
 }
 
-export type ProjectUncheckedUpdateWithoutScienceSpecsInput = {
+export type ProjectUncheckedUpdateWithoutVersionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -905,18 +1134,26 @@ export type ProjectUncheckedUpdateWithoutScienceSpecsInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPagesInput = {
@@ -927,19 +1164,27 @@ export type ProjectCreateWithoutPagesInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
-  scienceSpecs?: Prisma.ScienceSpecCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPagesInput = {
@@ -951,18 +1196,26 @@ export type ProjectUncheckedCreateWithoutPagesInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPagesInput = {
@@ -989,19 +1242,27 @@ export type ProjectUpdateWithoutPagesInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
-  scienceSpecs?: Prisma.ScienceSpecUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPagesInput = {
@@ -1013,18 +1274,166 @@ export type ProjectUncheckedUpdateWithoutPagesInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutConversationsInput = {
+  id?: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutConversationsInput = {
+  id?: string
+  userId: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutConversationsInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutConversationsInput, Prisma.ProjectUncheckedCreateWithoutConversationsInput>
+}
+
+export type ProjectUpsertWithoutConversationsInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutConversationsInput, Prisma.ProjectUncheckedUpdateWithoutConversationsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutConversationsInput, Prisma.ProjectUncheckedCreateWithoutConversationsInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutConversationsInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutConversationsInput, Prisma.ProjectUncheckedUpdateWithoutConversationsInput>
+}
+
+export type ProjectUpdateWithoutConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutDeploymentsInput = {
@@ -1035,19 +1444,27 @@ export type ProjectCreateWithoutDeploymentsInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
-  scienceSpecs?: Prisma.ScienceSpecCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutDeploymentsInput = {
@@ -1059,18 +1476,26 @@ export type ProjectUncheckedCreateWithoutDeploymentsInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutDeploymentsInput = {
@@ -1097,19 +1522,27 @@ export type ProjectUpdateWithoutDeploymentsInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
-  scienceSpecs?: Prisma.ScienceSpecUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
@@ -1121,18 +1554,26 @@ export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutCustomDomainInput = {
@@ -1143,19 +1584,27 @@ export type ProjectCreateWithoutCustomDomainInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
-  scienceSpecs?: Prisma.ScienceSpecCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutCustomDomainInput = {
@@ -1167,18 +1616,26 @@ export type ProjectUncheckedCreateWithoutCustomDomainInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutCustomDomainInput = {
@@ -1205,19 +1662,27 @@ export type ProjectUpdateWithoutCustomDomainInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
-  scienceSpecs?: Prisma.ScienceSpecUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutCustomDomainInput = {
@@ -1229,18 +1694,26 @@ export type ProjectUncheckedUpdateWithoutCustomDomainInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPipelineLogsInput = {
@@ -1251,19 +1724,27 @@ export type ProjectCreateWithoutPipelineLogsInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
-  scienceSpecs?: Prisma.ScienceSpecCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPipelineLogsInput = {
@@ -1275,18 +1756,26 @@ export type ProjectUncheckedCreateWithoutPipelineLogsInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPipelineLogsInput = {
@@ -1313,19 +1802,27 @@ export type ProjectUpdateWithoutPipelineLogsInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
-  scienceSpecs?: Prisma.ScienceSpecUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPipelineLogsInput = {
@@ -1337,18 +1834,26 @@ export type ProjectUncheckedUpdateWithoutPipelineLogsInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutAnalyticsInput = {
@@ -1359,19 +1864,27 @@ export type ProjectCreateWithoutAnalyticsInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjectsInput
-  scienceSpecs?: Prisma.ScienceSpecCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutAnalyticsInput = {
@@ -1383,18 +1896,26 @@ export type ProjectUncheckedCreateWithoutAnalyticsInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedCreateNestedManyWithoutProjectInput
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutAnalyticsInput = {
@@ -1421,19 +1942,27 @@ export type ProjectUpdateWithoutAnalyticsInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
-  scienceSpecs?: Prisma.ScienceSpecUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutAnalyticsInput = {
@@ -1445,18 +1974,446 @@ export type ProjectUncheckedUpdateWithoutAnalyticsInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutPageAnalyticsInput = {
+  id?: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutPageAnalyticsInput = {
+  id?: string
+  userId: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutPageAnalyticsInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutPageAnalyticsInput, Prisma.ProjectUncheckedCreateWithoutPageAnalyticsInput>
+}
+
+export type ProjectUpsertWithoutPageAnalyticsInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutPageAnalyticsInput, Prisma.ProjectUncheckedUpdateWithoutPageAnalyticsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutPageAnalyticsInput, Prisma.ProjectUncheckedCreateWithoutPageAnalyticsInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutPageAnalyticsInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutPageAnalyticsInput, Prisma.ProjectUncheckedUpdateWithoutPageAnalyticsInput>
+}
+
+export type ProjectUpdateWithoutPageAnalyticsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutPageAnalyticsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutResearchReportInput = {
+  id?: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutResearchReportInput = {
+  id?: string
+  userId: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutResearchReportInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutResearchReportInput, Prisma.ProjectUncheckedCreateWithoutResearchReportInput>
+}
+
+export type ProjectUpsertWithoutResearchReportInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutResearchReportInput, Prisma.ProjectUncheckedUpdateWithoutResearchReportInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutResearchReportInput, Prisma.ProjectUncheckedCreateWithoutResearchReportInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutResearchReportInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutResearchReportInput, Prisma.ProjectUncheckedUpdateWithoutResearchReportInput>
+}
+
+export type ProjectUpdateWithoutResearchReportInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutResearchReportInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutCompetitorScansInput = {
+  id?: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutCompetitorScansInput = {
+  id?: string
+  userId: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutCompetitorScansInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutCompetitorScansInput, Prisma.ProjectUncheckedCreateWithoutCompetitorScansInput>
+}
+
+export type ProjectUpsertWithoutCompetitorScansInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutCompetitorScansInput, Prisma.ProjectUncheckedUpdateWithoutCompetitorScansInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutCompetitorScansInput, Prisma.ProjectUncheckedCreateWithoutCompetitorScansInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutCompetitorScansInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutCompetitorScansInput, Prisma.ProjectUncheckedUpdateWithoutCompetitorScansInput>
+}
+
+export type ProjectUpdateWithoutCompetitorScansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutCompetitorScansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyUserInput = {
@@ -1467,9 +2424,13 @@ export type ProjectCreateManyUserInput = {
   niche?: $Enums.NicheCategory
   targetAudience: string
   status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  sourceUrl?: string | null
+  docsKey?: string | null
   description?: string | null
-  websiteUrl?: string | null
   logoUrl?: string | null
+  currentVersionId?: string | null
+  pinned?: boolean
   deletedAt?: Date | string | null
   archivedAt?: Date | string | null
   createdAt?: Date | string
@@ -1484,19 +2445,27 @@ export type ProjectUpdateWithoutUserInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scienceSpecs?: Prisma.ScienceSpecUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutUserInput = {
@@ -1507,19 +2476,27 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scienceSpecs?: Prisma.ScienceSpecUncheckedUpdateManyWithoutProjectNestedInput
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutUserInput = {
@@ -1530,9 +2507,13 @@ export type ProjectUncheckedUpdateManyWithoutUserInput = {
   niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
   targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1545,17 +2526,23 @@ export type ProjectUncheckedUpdateManyWithoutUserInput = {
  */
 
 export type ProjectCountOutputType = {
-  scienceSpecs: number
+  versions: number
   pages: number
+  conversations: number
   deployments: number
   pipelineLogs: number
+  pageAnalytics: number
+  competitorScans: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  scienceSpecs?: boolean | ProjectCountOutputTypeCountScienceSpecsArgs
+  versions?: boolean | ProjectCountOutputTypeCountVersionsArgs
   pages?: boolean | ProjectCountOutputTypeCountPagesArgs
+  conversations?: boolean | ProjectCountOutputTypeCountConversationsArgs
   deployments?: boolean | ProjectCountOutputTypeCountDeploymentsArgs
   pipelineLogs?: boolean | ProjectCountOutputTypeCountPipelineLogsArgs
+  pageAnalytics?: boolean | ProjectCountOutputTypeCountPageAnalyticsArgs
+  competitorScans?: boolean | ProjectCountOutputTypeCountCompetitorScansArgs
 }
 
 /**
@@ -1571,8 +2558,8 @@ export type ProjectCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * ProjectCountOutputType without action
  */
-export type ProjectCountOutputTypeCountScienceSpecsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ScienceSpecWhereInput
+export type ProjectCountOutputTypeCountVersionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectVersionWhereInput
 }
 
 /**
@@ -1580,6 +2567,13 @@ export type ProjectCountOutputTypeCountScienceSpecsArgs<ExtArgs extends runtime.
  */
 export type ProjectCountOutputTypeCountPagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PageWhereInput
+}
+
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConversationWhereInput
 }
 
 /**
@@ -1596,6 +2590,20 @@ export type ProjectCountOutputTypeCountPipelineLogsArgs<ExtArgs extends runtime.
   where?: Prisma.PipelineLogWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountPageAnalyticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PageAnalyticsWhereInput
+}
+
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountCompetitorScansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CompetitorScanWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1606,20 +2614,28 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   niche?: boolean
   targetAudience?: boolean
   status?: boolean
+  inputType?: boolean
+  sourceUrl?: boolean
+  docsKey?: boolean
   description?: boolean
-  websiteUrl?: boolean
   logoUrl?: boolean
+  currentVersionId?: boolean
+  pinned?: boolean
   deletedAt?: boolean
   archivedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  scienceSpecs?: boolean | Prisma.Project$scienceSpecsArgs<ExtArgs>
+  versions?: boolean | Prisma.Project$versionsArgs<ExtArgs>
   pages?: boolean | Prisma.Project$pagesArgs<ExtArgs>
+  conversations?: boolean | Prisma.Project$conversationsArgs<ExtArgs>
   deployments?: boolean | Prisma.Project$deploymentsArgs<ExtArgs>
   customDomain?: boolean | Prisma.Project$customDomainArgs<ExtArgs>
   pipelineLogs?: boolean | Prisma.Project$pipelineLogsArgs<ExtArgs>
   analytics?: boolean | Prisma.Project$analyticsArgs<ExtArgs>
+  pageAnalytics?: boolean | Prisma.Project$pageAnalyticsArgs<ExtArgs>
+  researchReport?: boolean | Prisma.Project$researchReportArgs<ExtArgs>
+  competitorScans?: boolean | Prisma.Project$competitorScansArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -1632,9 +2648,13 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   niche?: boolean
   targetAudience?: boolean
   status?: boolean
+  inputType?: boolean
+  sourceUrl?: boolean
+  docsKey?: boolean
   description?: boolean
-  websiteUrl?: boolean
   logoUrl?: boolean
+  currentVersionId?: boolean
+  pinned?: boolean
   deletedAt?: boolean
   archivedAt?: boolean
   createdAt?: boolean
@@ -1651,9 +2671,13 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   niche?: boolean
   targetAudience?: boolean
   status?: boolean
+  inputType?: boolean
+  sourceUrl?: boolean
+  docsKey?: boolean
   description?: boolean
-  websiteUrl?: boolean
   logoUrl?: boolean
+  currentVersionId?: boolean
+  pinned?: boolean
   deletedAt?: boolean
   archivedAt?: boolean
   createdAt?: boolean
@@ -1670,24 +2694,32 @@ export type ProjectSelectScalar = {
   niche?: boolean
   targetAudience?: boolean
   status?: boolean
+  inputType?: boolean
+  sourceUrl?: boolean
+  docsKey?: boolean
   description?: boolean
-  websiteUrl?: boolean
   logoUrl?: boolean
+  currentVersionId?: boolean
+  pinned?: boolean
   deletedAt?: boolean
   archivedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "slug" | "startupIdea" | "niche" | "targetAudience" | "status" | "description" | "websiteUrl" | "logoUrl" | "deletedAt" | "archivedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "slug" | "startupIdea" | "niche" | "targetAudience" | "status" | "inputType" | "sourceUrl" | "docsKey" | "description" | "logoUrl" | "currentVersionId" | "pinned" | "deletedAt" | "archivedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  scienceSpecs?: boolean | Prisma.Project$scienceSpecsArgs<ExtArgs>
+  versions?: boolean | Prisma.Project$versionsArgs<ExtArgs>
   pages?: boolean | Prisma.Project$pagesArgs<ExtArgs>
+  conversations?: boolean | Prisma.Project$conversationsArgs<ExtArgs>
   deployments?: boolean | Prisma.Project$deploymentsArgs<ExtArgs>
   customDomain?: boolean | Prisma.Project$customDomainArgs<ExtArgs>
   pipelineLogs?: boolean | Prisma.Project$pipelineLogsArgs<ExtArgs>
   analytics?: boolean | Prisma.Project$analyticsArgs<ExtArgs>
+  pageAnalytics?: boolean | Prisma.Project$pageAnalyticsArgs<ExtArgs>
+  researchReport?: boolean | Prisma.Project$researchReportArgs<ExtArgs>
+  competitorScans?: boolean | Prisma.Project$competitorScansArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1701,12 +2733,16 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Project"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
-    scienceSpecs: Prisma.$ScienceSpecPayload<ExtArgs>[]
+    versions: Prisma.$ProjectVersionPayload<ExtArgs>[]
     pages: Prisma.$PagePayload<ExtArgs>[]
+    conversations: Prisma.$ConversationPayload<ExtArgs>[]
     deployments: Prisma.$DeploymentPayload<ExtArgs>[]
     customDomain: Prisma.$CustomDomainPayload<ExtArgs> | null
     pipelineLogs: Prisma.$PipelineLogPayload<ExtArgs>[]
     analytics: Prisma.$ProjectAnalyticsPayload<ExtArgs> | null
+    pageAnalytics: Prisma.$PageAnalyticsPayload<ExtArgs>[]
+    researchReport: Prisma.$ResearchReportPayload<ExtArgs> | null
+    competitorScans: Prisma.$CompetitorScanPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1717,9 +2753,13 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     niche: $Enums.NicheCategory
     targetAudience: string
     status: $Enums.ProjectStatus
+    inputType: $Enums.ProjectInputType
+    sourceUrl: string | null
+    docsKey: string | null
     description: string | null
-    websiteUrl: string | null
     logoUrl: string | null
+    currentVersionId: string | null
+    pinned: boolean
     deletedAt: Date | null
     archivedAt: Date | null
     createdAt: Date
@@ -2119,12 +3159,16 @@ readonly fields: ProjectFieldRefs;
 export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  scienceSpecs<T extends Prisma.Project$scienceSpecsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$scienceSpecsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScienceSpecPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  versions<T extends Prisma.Project$versionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$versionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pages<T extends Prisma.Project$pagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$pagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  conversations<T extends Prisma.Project$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deployments<T extends Prisma.Project$deploymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$deploymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeploymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   customDomain<T extends Prisma.Project$customDomainArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$customDomainArgs<ExtArgs>>): Prisma.Prisma__CustomDomainClient<runtime.Types.Result.GetResult<Prisma.$CustomDomainPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   pipelineLogs<T extends Prisma.Project$pipelineLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$pipelineLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PipelineLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   analytics<T extends Prisma.Project$analyticsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$analyticsArgs<ExtArgs>>): Prisma.Prisma__ProjectAnalyticsClient<runtime.Types.Result.GetResult<Prisma.$ProjectAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  pageAnalytics<T extends Prisma.Project$pageAnalyticsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$pageAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  researchReport<T extends Prisma.Project$researchReportArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$researchReportArgs<ExtArgs>>): Prisma.Prisma__ResearchReportClient<runtime.Types.Result.GetResult<Prisma.$ResearchReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  competitorScans<T extends Prisma.Project$competitorScansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$competitorScansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompetitorScanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2162,9 +3206,13 @@ export interface ProjectFieldRefs {
   readonly niche: Prisma.FieldRef<"Project", 'NicheCategory'>
   readonly targetAudience: Prisma.FieldRef<"Project", 'String'>
   readonly status: Prisma.FieldRef<"Project", 'ProjectStatus'>
+  readonly inputType: Prisma.FieldRef<"Project", 'ProjectInputType'>
+  readonly sourceUrl: Prisma.FieldRef<"Project", 'String'>
+  readonly docsKey: Prisma.FieldRef<"Project", 'String'>
   readonly description: Prisma.FieldRef<"Project", 'String'>
-  readonly websiteUrl: Prisma.FieldRef<"Project", 'String'>
   readonly logoUrl: Prisma.FieldRef<"Project", 'String'>
+  readonly currentVersionId: Prisma.FieldRef<"Project", 'String'>
+  readonly pinned: Prisma.FieldRef<"Project", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"Project", 'DateTime'>
   readonly archivedAt: Prisma.FieldRef<"Project", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Project", 'DateTime'>
@@ -2570,27 +3618,27 @@ export type ProjectDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Project.scienceSpecs
+ * Project.versions
  */
-export type Project$scienceSpecsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Project$versionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ScienceSpec
+   * Select specific fields to fetch from the ProjectVersion
    */
-  select?: Prisma.ScienceSpecSelect<ExtArgs> | null
+  select?: Prisma.ProjectVersionSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ScienceSpec
+   * Omit specific fields from the ProjectVersion
    */
-  omit?: Prisma.ScienceSpecOmit<ExtArgs> | null
+  omit?: Prisma.ProjectVersionOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ScienceSpecInclude<ExtArgs> | null
-  where?: Prisma.ScienceSpecWhereInput
-  orderBy?: Prisma.ScienceSpecOrderByWithRelationInput | Prisma.ScienceSpecOrderByWithRelationInput[]
-  cursor?: Prisma.ScienceSpecWhereUniqueInput
+  include?: Prisma.ProjectVersionInclude<ExtArgs> | null
+  where?: Prisma.ProjectVersionWhereInput
+  orderBy?: Prisma.ProjectVersionOrderByWithRelationInput | Prisma.ProjectVersionOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectVersionWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ScienceSpecScalarFieldEnum | Prisma.ScienceSpecScalarFieldEnum[]
+  distinct?: Prisma.ProjectVersionScalarFieldEnum | Prisma.ProjectVersionScalarFieldEnum[]
 }
 
 /**
@@ -2615,6 +3663,30 @@ export type Project$pagesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.PageScalarFieldEnum | Prisma.PageScalarFieldEnum[]
+}
+
+/**
+ * Project.conversations
+ */
+export type Project$conversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Conversation
+   */
+  select?: Prisma.ConversationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Conversation
+   */
+  omit?: Prisma.ConversationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConversationInclude<ExtArgs> | null
+  where?: Prisma.ConversationWhereInput
+  orderBy?: Prisma.ConversationOrderByWithRelationInput | Prisma.ConversationOrderByWithRelationInput[]
+  cursor?: Prisma.ConversationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
 }
 
 /**
@@ -2701,6 +3773,73 @@ export type Project$analyticsArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.ProjectAnalyticsInclude<ExtArgs> | null
   where?: Prisma.ProjectAnalyticsWhereInput
+}
+
+/**
+ * Project.pageAnalytics
+ */
+export type Project$pageAnalyticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PageAnalytics
+   */
+  select?: Prisma.PageAnalyticsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PageAnalytics
+   */
+  omit?: Prisma.PageAnalyticsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PageAnalyticsInclude<ExtArgs> | null
+  where?: Prisma.PageAnalyticsWhereInput
+  orderBy?: Prisma.PageAnalyticsOrderByWithRelationInput | Prisma.PageAnalyticsOrderByWithRelationInput[]
+  cursor?: Prisma.PageAnalyticsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PageAnalyticsScalarFieldEnum | Prisma.PageAnalyticsScalarFieldEnum[]
+}
+
+/**
+ * Project.researchReport
+ */
+export type Project$researchReportArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResearchReport
+   */
+  select?: Prisma.ResearchReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ResearchReport
+   */
+  omit?: Prisma.ResearchReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchReportInclude<ExtArgs> | null
+  where?: Prisma.ResearchReportWhereInput
+}
+
+/**
+ * Project.competitorScans
+ */
+export type Project$competitorScansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompetitorScan
+   */
+  select?: Prisma.CompetitorScanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CompetitorScan
+   */
+  omit?: Prisma.CompetitorScanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompetitorScanInclude<ExtArgs> | null
+  where?: Prisma.CompetitorScanWhereInput
+  orderBy?: Prisma.CompetitorScanOrderByWithRelationInput | Prisma.CompetitorScanOrderByWithRelationInput[]
+  cursor?: Prisma.CompetitorScanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CompetitorScanScalarFieldEnum | Prisma.CompetitorScanScalarFieldEnum[]
 }
 
 /**

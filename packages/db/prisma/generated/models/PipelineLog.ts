@@ -59,6 +59,8 @@ export type PipelineLogSumAggregateOutputType = {
 export type PipelineLogMinAggregateOutputType = {
   id: string | null
   projectId: string | null
+  versionId: string | null
+  scanId: string | null
   jobId: string | null
   stage: $Enums.PipelineStage | null
   status: string | null
@@ -84,6 +86,8 @@ export type PipelineLogMinAggregateOutputType = {
 export type PipelineLogMaxAggregateOutputType = {
   id: string | null
   projectId: string | null
+  versionId: string | null
+  scanId: string | null
   jobId: string | null
   stage: $Enums.PipelineStage | null
   status: string | null
@@ -109,6 +113,8 @@ export type PipelineLogMaxAggregateOutputType = {
 export type PipelineLogCountAggregateOutputType = {
   id: number
   projectId: number
+  versionId: number
+  scanId: number
   jobId: number
   stage: number
   status: number
@@ -167,6 +173,8 @@ export type PipelineLogSumAggregateInputType = {
 export type PipelineLogMinAggregateInputType = {
   id?: true
   projectId?: true
+  versionId?: true
+  scanId?: true
   jobId?: true
   stage?: true
   status?: true
@@ -192,6 +200,8 @@ export type PipelineLogMinAggregateInputType = {
 export type PipelineLogMaxAggregateInputType = {
   id?: true
   projectId?: true
+  versionId?: true
+  scanId?: true
   jobId?: true
   stage?: true
   status?: true
@@ -217,6 +227,8 @@ export type PipelineLogMaxAggregateInputType = {
 export type PipelineLogCountAggregateInputType = {
   id?: true
   projectId?: true
+  versionId?: true
+  scanId?: true
   jobId?: true
   stage?: true
   status?: true
@@ -330,6 +342,8 @@ export type PipelineLogGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type PipelineLogGroupByOutputType = {
   id: string
   projectId: string
+  versionId: string | null
+  scanId: string | null
   jobId: string
   stage: $Enums.PipelineStage
   status: string
@@ -379,6 +393,8 @@ export type PipelineLogWhereInput = {
   NOT?: Prisma.PipelineLogWhereInput | Prisma.PipelineLogWhereInput[]
   id?: Prisma.StringFilter<"PipelineLog"> | string
   projectId?: Prisma.StringFilter<"PipelineLog"> | string
+  versionId?: Prisma.StringNullableFilter<"PipelineLog"> | string | null
+  scanId?: Prisma.StringNullableFilter<"PipelineLog"> | string | null
   jobId?: Prisma.StringFilter<"PipelineLog"> | string
   stage?: Prisma.EnumPipelineStageFilter<"PipelineLog"> | $Enums.PipelineStage
   status?: Prisma.StringFilter<"PipelineLog"> | string
@@ -406,6 +422,8 @@ export type PipelineLogWhereInput = {
 export type PipelineLogOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  scanId?: Prisma.SortOrderInput | Prisma.SortOrder
   jobId?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -437,6 +455,8 @@ export type PipelineLogWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PipelineLogWhereInput[]
   NOT?: Prisma.PipelineLogWhereInput | Prisma.PipelineLogWhereInput[]
   projectId?: Prisma.StringFilter<"PipelineLog"> | string
+  versionId?: Prisma.StringNullableFilter<"PipelineLog"> | string | null
+  scanId?: Prisma.StringNullableFilter<"PipelineLog"> | string | null
   stage?: Prisma.EnumPipelineStageFilter<"PipelineLog"> | $Enums.PipelineStage
   status?: Prisma.StringFilter<"PipelineLog"> | string
   retrievalMs?: Prisma.IntNullableFilter<"PipelineLog"> | number | null
@@ -463,6 +483,8 @@ export type PipelineLogWhereUniqueInput = Prisma.AtLeast<{
 export type PipelineLogOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  scanId?: Prisma.SortOrderInput | Prisma.SortOrder
   jobId?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -497,6 +519,8 @@ export type PipelineLogScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PipelineLogScalarWhereWithAggregatesInput | Prisma.PipelineLogScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PipelineLog"> | string
   projectId?: Prisma.StringWithAggregatesFilter<"PipelineLog"> | string
+  versionId?: Prisma.StringNullableWithAggregatesFilter<"PipelineLog"> | string | null
+  scanId?: Prisma.StringNullableWithAggregatesFilter<"PipelineLog"> | string | null
   jobId?: Prisma.StringWithAggregatesFilter<"PipelineLog"> | string
   stage?: Prisma.EnumPipelineStageWithAggregatesFilter<"PipelineLog"> | $Enums.PipelineStage
   status?: Prisma.StringWithAggregatesFilter<"PipelineLog"> | string
@@ -522,6 +546,8 @@ export type PipelineLogScalarWhereWithAggregatesInput = {
 
 export type PipelineLogCreateInput = {
   id?: string
+  versionId?: string | null
+  scanId?: string | null
   jobId: string
   stage?: $Enums.PipelineStage
   status: string
@@ -549,6 +575,8 @@ export type PipelineLogCreateInput = {
 export type PipelineLogUncheckedCreateInput = {
   id?: string
   projectId: string
+  versionId?: string | null
+  scanId?: string | null
   jobId: string
   stage?: $Enums.PipelineStage
   status: string
@@ -574,6 +602,8 @@ export type PipelineLogUncheckedCreateInput = {
 
 export type PipelineLogUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.EnumPipelineStageFieldUpdateOperationsInput | $Enums.PipelineStage
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -601,6 +631,8 @@ export type PipelineLogUpdateInput = {
 export type PipelineLogUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.EnumPipelineStageFieldUpdateOperationsInput | $Enums.PipelineStage
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -627,6 +659,8 @@ export type PipelineLogUncheckedUpdateInput = {
 export type PipelineLogCreateManyInput = {
   id?: string
   projectId: string
+  versionId?: string | null
+  scanId?: string | null
   jobId: string
   stage?: $Enums.PipelineStage
   status: string
@@ -652,6 +686,8 @@ export type PipelineLogCreateManyInput = {
 
 export type PipelineLogUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.EnumPipelineStageFieldUpdateOperationsInput | $Enums.PipelineStage
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -678,6 +714,8 @@ export type PipelineLogUpdateManyMutationInput = {
 export type PipelineLogUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.EnumPipelineStageFieldUpdateOperationsInput | $Enums.PipelineStage
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -711,9 +749,19 @@ export type PipelineLogOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type PipelineLogCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  scanId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -755,6 +803,8 @@ export type PipelineLogAvgOrderByAggregateInput = {
 export type PipelineLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  scanId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -780,6 +830,8 @@ export type PipelineLogMaxOrderByAggregateInput = {
 export type PipelineLogMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  scanId?: Prisma.SortOrder
   jobId?: Prisma.SortOrder
   stage?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -867,6 +919,14 @@ export type EnumPipelineStageFieldUpdateOperationsInput = {
   set?: $Enums.PipelineStage
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type PipelineLogUpdatedomainsRefinedInput = {
   set?: string[]
   push?: string | string[]
@@ -874,6 +934,8 @@ export type PipelineLogUpdatedomainsRefinedInput = {
 
 export type PipelineLogCreateWithoutProjectInput = {
   id?: string
+  versionId?: string | null
+  scanId?: string | null
   jobId: string
   stage?: $Enums.PipelineStage
   status: string
@@ -899,6 +961,8 @@ export type PipelineLogCreateWithoutProjectInput = {
 
 export type PipelineLogUncheckedCreateWithoutProjectInput = {
   id?: string
+  versionId?: string | null
+  scanId?: string | null
   jobId: string
   stage?: $Enums.PipelineStage
   status: string
@@ -954,6 +1018,8 @@ export type PipelineLogScalarWhereInput = {
   NOT?: Prisma.PipelineLogScalarWhereInput | Prisma.PipelineLogScalarWhereInput[]
   id?: Prisma.StringFilter<"PipelineLog"> | string
   projectId?: Prisma.StringFilter<"PipelineLog"> | string
+  versionId?: Prisma.StringNullableFilter<"PipelineLog"> | string | null
+  scanId?: Prisma.StringNullableFilter<"PipelineLog"> | string | null
   jobId?: Prisma.StringFilter<"PipelineLog"> | string
   stage?: Prisma.EnumPipelineStageFilter<"PipelineLog"> | $Enums.PipelineStage
   status?: Prisma.StringFilter<"PipelineLog"> | string
@@ -979,6 +1045,8 @@ export type PipelineLogScalarWhereInput = {
 
 export type PipelineLogCreateManyProjectInput = {
   id?: string
+  versionId?: string | null
+  scanId?: string | null
   jobId: string
   stage?: $Enums.PipelineStage
   status: string
@@ -1004,6 +1072,8 @@ export type PipelineLogCreateManyProjectInput = {
 
 export type PipelineLogUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.EnumPipelineStageFieldUpdateOperationsInput | $Enums.PipelineStage
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1029,6 +1099,8 @@ export type PipelineLogUpdateWithoutProjectInput = {
 
 export type PipelineLogUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.EnumPipelineStageFieldUpdateOperationsInput | $Enums.PipelineStage
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1054,6 +1126,8 @@ export type PipelineLogUncheckedUpdateWithoutProjectInput = {
 
 export type PipelineLogUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  scanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   stage?: Prisma.EnumPipelineStageFieldUpdateOperationsInput | $Enums.PipelineStage
   status?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1082,6 +1156,8 @@ export type PipelineLogUncheckedUpdateManyWithoutProjectInput = {
 export type PipelineLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   projectId?: boolean
+  versionId?: boolean
+  scanId?: boolean
   jobId?: boolean
   stage?: boolean
   status?: boolean
@@ -1109,6 +1185,8 @@ export type PipelineLogSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type PipelineLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   projectId?: boolean
+  versionId?: boolean
+  scanId?: boolean
   jobId?: boolean
   stage?: boolean
   status?: boolean
@@ -1136,6 +1214,8 @@ export type PipelineLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type PipelineLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   projectId?: boolean
+  versionId?: boolean
+  scanId?: boolean
   jobId?: boolean
   stage?: boolean
   status?: boolean
@@ -1163,6 +1243,8 @@ export type PipelineLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type PipelineLogSelectScalar = {
   id?: boolean
   projectId?: boolean
+  versionId?: boolean
+  scanId?: boolean
   jobId?: boolean
   stage?: boolean
   status?: boolean
@@ -1186,7 +1268,7 @@ export type PipelineLogSelectScalar = {
   updatedAt?: boolean
 }
 
-export type PipelineLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "jobId" | "stage" | "status" | "retrievalMs" | "specialistsMs" | "critiqueMs" | "refinementMs" | "synthesisMs" | "copyMs" | "seoMs" | "totalMs" | "chunksRetrieved" | "lowConfidence" | "colorScore" | "typographyScore" | "animationScore" | "domainsRefined" | "errorMessage" | "errorStage" | "createdAt" | "updatedAt", ExtArgs["result"]["pipelineLog"]>
+export type PipelineLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionId" | "scanId" | "jobId" | "stage" | "status" | "retrievalMs" | "specialistsMs" | "critiqueMs" | "refinementMs" | "synthesisMs" | "copyMs" | "seoMs" | "totalMs" | "chunksRetrieved" | "lowConfidence" | "colorScore" | "typographyScore" | "animationScore" | "domainsRefined" | "errorMessage" | "errorStage" | "createdAt" | "updatedAt", ExtArgs["result"]["pipelineLog"]>
 export type PipelineLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }
@@ -1205,6 +1287,8 @@ export type $PipelineLogPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     projectId: string
+    versionId: string | null
+    scanId: string | null
     jobId: string
     stage: $Enums.PipelineStage
     status: string
@@ -1652,6 +1736,8 @@ export interface Prisma__PipelineLogClient<T, Null = never, ExtArgs extends runt
 export interface PipelineLogFieldRefs {
   readonly id: Prisma.FieldRef<"PipelineLog", 'String'>
   readonly projectId: Prisma.FieldRef<"PipelineLog", 'String'>
+  readonly versionId: Prisma.FieldRef<"PipelineLog", 'String'>
+  readonly scanId: Prisma.FieldRef<"PipelineLog", 'String'>
   readonly jobId: Prisma.FieldRef<"PipelineLog", 'String'>
   readonly stage: Prisma.FieldRef<"PipelineLog", 'PipelineStage'>
   readonly status: Prisma.FieldRef<"PipelineLog", 'String'>

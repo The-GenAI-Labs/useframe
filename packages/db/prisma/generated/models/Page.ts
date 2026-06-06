@@ -27,14 +27,12 @@ export type AggregatePage = {
 export type PageMinAggregateOutputType = {
   id: string | null
   projectId: string | null
-  scienceSpecId: string | null
+  versionId: string | null
+  type: $Enums.PageType | null
   slug: string | null
   title: string | null
-  isPublished: boolean | null
-  builtHtml: string | null
-  builtCss: string | null
   ogImageUrl: string | null
-  sitemapUrl: string | null
+  isPublished: boolean | null
   publishedAt: Date | null
   deletedAt: Date | null
   createdAt: Date | null
@@ -44,14 +42,12 @@ export type PageMinAggregateOutputType = {
 export type PageMaxAggregateOutputType = {
   id: string | null
   projectId: string | null
-  scienceSpecId: string | null
+  versionId: string | null
+  type: $Enums.PageType | null
   slug: string | null
   title: string | null
-  isPublished: boolean | null
-  builtHtml: string | null
-  builtCss: string | null
   ogImageUrl: string | null
-  sitemapUrl: string | null
+  isPublished: boolean | null
   publishedAt: Date | null
   deletedAt: Date | null
   createdAt: Date | null
@@ -61,16 +57,14 @@ export type PageMaxAggregateOutputType = {
 export type PageCountAggregateOutputType = {
   id: number
   projectId: number
-  scienceSpecId: number
+  versionId: number
+  type: number
   slug: number
   title: number
-  isPublished: number
   sections: number
-  seoOverrides: number
-  builtHtml: number
-  builtCss: number
+  seo: number
   ogImageUrl: number
-  sitemapUrl: number
+  isPublished: number
   publishedAt: number
   deletedAt: number
   createdAt: number
@@ -82,14 +76,12 @@ export type PageCountAggregateOutputType = {
 export type PageMinAggregateInputType = {
   id?: true
   projectId?: true
-  scienceSpecId?: true
+  versionId?: true
+  type?: true
   slug?: true
   title?: true
-  isPublished?: true
-  builtHtml?: true
-  builtCss?: true
   ogImageUrl?: true
-  sitemapUrl?: true
+  isPublished?: true
   publishedAt?: true
   deletedAt?: true
   createdAt?: true
@@ -99,14 +91,12 @@ export type PageMinAggregateInputType = {
 export type PageMaxAggregateInputType = {
   id?: true
   projectId?: true
-  scienceSpecId?: true
+  versionId?: true
+  type?: true
   slug?: true
   title?: true
-  isPublished?: true
-  builtHtml?: true
-  builtCss?: true
   ogImageUrl?: true
-  sitemapUrl?: true
+  isPublished?: true
   publishedAt?: true
   deletedAt?: true
   createdAt?: true
@@ -116,16 +106,14 @@ export type PageMaxAggregateInputType = {
 export type PageCountAggregateInputType = {
   id?: true
   projectId?: true
-  scienceSpecId?: true
+  versionId?: true
+  type?: true
   slug?: true
   title?: true
-  isPublished?: true
   sections?: true
-  seoOverrides?: true
-  builtHtml?: true
-  builtCss?: true
+  seo?: true
   ogImageUrl?: true
-  sitemapUrl?: true
+  isPublished?: true
   publishedAt?: true
   deletedAt?: true
   createdAt?: true
@@ -208,16 +196,14 @@ export type PageGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type PageGroupByOutputType = {
   id: string
   projectId: string
-  scienceSpecId: string
+  versionId: string
+  type: $Enums.PageType
   slug: string
   title: string
-  isPublished: boolean
   sections: runtime.JsonValue
-  seoOverrides: runtime.JsonValue | null
-  builtHtml: string | null
-  builtCss: string | null
+  seo: runtime.JsonValue | null
   ogImageUrl: string | null
-  sitemapUrl: string | null
+  isPublished: boolean
   publishedAt: Date | null
   deletedAt: Date | null
   createdAt: Date
@@ -248,89 +234,78 @@ export type PageWhereInput = {
   NOT?: Prisma.PageWhereInput | Prisma.PageWhereInput[]
   id?: Prisma.StringFilter<"Page"> | string
   projectId?: Prisma.StringFilter<"Page"> | string
-  scienceSpecId?: Prisma.StringFilter<"Page"> | string
+  versionId?: Prisma.StringFilter<"Page"> | string
+  type?: Prisma.EnumPageTypeFilter<"Page"> | $Enums.PageType
   slug?: Prisma.StringFilter<"Page"> | string
   title?: Prisma.StringFilter<"Page"> | string
-  isPublished?: Prisma.BoolFilter<"Page"> | boolean
   sections?: Prisma.JsonFilter<"Page">
-  seoOverrides?: Prisma.JsonNullableFilter<"Page">
-  builtHtml?: Prisma.StringNullableFilter<"Page"> | string | null
-  builtCss?: Prisma.StringNullableFilter<"Page"> | string | null
+  seo?: Prisma.JsonNullableFilter<"Page">
   ogImageUrl?: Prisma.StringNullableFilter<"Page"> | string | null
-  sitemapUrl?: Prisma.StringNullableFilter<"Page"> | string | null
+  isPublished?: Prisma.BoolFilter<"Page"> | boolean
   publishedAt?: Prisma.DateTimeNullableFilter<"Page"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Page"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
-  scienceSpec?: Prisma.XOR<Prisma.ScienceSpecScalarRelationFilter, Prisma.ScienceSpecWhereInput>
+  version?: Prisma.XOR<Prisma.ProjectVersionScalarRelationFilter, Prisma.ProjectVersionWhereInput>
   deployments?: Prisma.DeploymentListRelationFilter
-  analytics?: Prisma.PageAnalyticsListRelationFilter
 }
 
 export type PageOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
-  scienceSpecId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isPublished?: Prisma.SortOrder
   sections?: Prisma.SortOrder
-  seoOverrides?: Prisma.SortOrderInput | Prisma.SortOrder
-  builtHtml?: Prisma.SortOrderInput | Prisma.SortOrder
-  builtCss?: Prisma.SortOrderInput | Prisma.SortOrder
+  seo?: Prisma.SortOrderInput | Prisma.SortOrder
   ogImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  sitemapUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
-  scienceSpec?: Prisma.ScienceSpecOrderByWithRelationInput
+  version?: Prisma.ProjectVersionOrderByWithRelationInput
   deployments?: Prisma.DeploymentOrderByRelationAggregateInput
-  analytics?: Prisma.PageAnalyticsOrderByRelationAggregateInput
 }
 
 export type PageWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  projectId_slug?: Prisma.PageProjectIdSlugCompoundUniqueInput
+  versionId_slug?: Prisma.PageVersionIdSlugCompoundUniqueInput
   AND?: Prisma.PageWhereInput | Prisma.PageWhereInput[]
   OR?: Prisma.PageWhereInput[]
   NOT?: Prisma.PageWhereInput | Prisma.PageWhereInput[]
   projectId?: Prisma.StringFilter<"Page"> | string
-  scienceSpecId?: Prisma.StringFilter<"Page"> | string
+  versionId?: Prisma.StringFilter<"Page"> | string
+  type?: Prisma.EnumPageTypeFilter<"Page"> | $Enums.PageType
   slug?: Prisma.StringFilter<"Page"> | string
   title?: Prisma.StringFilter<"Page"> | string
-  isPublished?: Prisma.BoolFilter<"Page"> | boolean
   sections?: Prisma.JsonFilter<"Page">
-  seoOverrides?: Prisma.JsonNullableFilter<"Page">
-  builtHtml?: Prisma.StringNullableFilter<"Page"> | string | null
-  builtCss?: Prisma.StringNullableFilter<"Page"> | string | null
+  seo?: Prisma.JsonNullableFilter<"Page">
   ogImageUrl?: Prisma.StringNullableFilter<"Page"> | string | null
-  sitemapUrl?: Prisma.StringNullableFilter<"Page"> | string | null
+  isPublished?: Prisma.BoolFilter<"Page"> | boolean
   publishedAt?: Prisma.DateTimeNullableFilter<"Page"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Page"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
-  scienceSpec?: Prisma.XOR<Prisma.ScienceSpecScalarRelationFilter, Prisma.ScienceSpecWhereInput>
+  version?: Prisma.XOR<Prisma.ProjectVersionScalarRelationFilter, Prisma.ProjectVersionWhereInput>
   deployments?: Prisma.DeploymentListRelationFilter
-  analytics?: Prisma.PageAnalyticsListRelationFilter
-}, "id" | "projectId_slug">
+}, "id" | "versionId_slug">
 
 export type PageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
-  scienceSpecId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isPublished?: Prisma.SortOrder
   sections?: Prisma.SortOrder
-  seoOverrides?: Prisma.SortOrderInput | Prisma.SortOrder
-  builtHtml?: Prisma.SortOrderInput | Prisma.SortOrder
-  builtCss?: Prisma.SortOrderInput | Prisma.SortOrder
+  seo?: Prisma.SortOrderInput | Prisma.SortOrder
   ogImageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  sitemapUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -346,16 +321,14 @@ export type PageScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PageScalarWhereWithAggregatesInput | Prisma.PageScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Page"> | string
   projectId?: Prisma.StringWithAggregatesFilter<"Page"> | string
-  scienceSpecId?: Prisma.StringWithAggregatesFilter<"Page"> | string
+  versionId?: Prisma.StringWithAggregatesFilter<"Page"> | string
+  type?: Prisma.EnumPageTypeWithAggregatesFilter<"Page"> | $Enums.PageType
   slug?: Prisma.StringWithAggregatesFilter<"Page"> | string
   title?: Prisma.StringWithAggregatesFilter<"Page"> | string
-  isPublished?: Prisma.BoolWithAggregatesFilter<"Page"> | boolean
   sections?: Prisma.JsonWithAggregatesFilter<"Page">
-  seoOverrides?: Prisma.JsonNullableWithAggregatesFilter<"Page">
-  builtHtml?: Prisma.StringNullableWithAggregatesFilter<"Page"> | string | null
-  builtCss?: Prisma.StringNullableWithAggregatesFilter<"Page"> | string | null
+  seo?: Prisma.JsonNullableWithAggregatesFilter<"Page">
   ogImageUrl?: Prisma.StringNullableWithAggregatesFilter<"Page"> | string | null
-  sitemapUrl?: Prisma.StringNullableWithAggregatesFilter<"Page"> | string | null
+  isPublished?: Prisma.BoolWithAggregatesFilter<"Page"> | boolean
   publishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Page"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Page"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Page"> | Date | string
@@ -364,101 +337,87 @@ export type PageScalarWhereWithAggregatesInput = {
 
 export type PageCreateInput = {
   id?: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutPagesInput
-  scienceSpec: Prisma.ScienceSpecCreateNestedOneWithoutPagesInput
+  version: Prisma.ProjectVersionCreateNestedOneWithoutPagesInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutPageInput
-  analytics?: Prisma.PageAnalyticsCreateNestedManyWithoutPageInput
 }
 
 export type PageUncheckedCreateInput = {
   id?: string
   projectId: string
-  scienceSpecId: string
+  versionId: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutPageInput
-  analytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutPageInput
 }
 
 export type PageUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutPagesNestedInput
-  scienceSpec?: Prisma.ScienceSpecUpdateOneRequiredWithoutPagesNestedInput
+  version?: Prisma.ProjectVersionUpdateOneRequiredWithoutPagesNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutPageNestedInput
-  analytics?: Prisma.PageAnalyticsUpdateManyWithoutPageNestedInput
 }
 
 export type PageUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  scienceSpecId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutPageNestedInput
-  analytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutPageNestedInput
 }
 
 export type PageCreateManyInput = {
   id?: string
   projectId: string
-  scienceSpecId: string
+  versionId: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
@@ -467,15 +426,13 @@ export type PageCreateManyInput = {
 
 export type PageUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -485,16 +442,14 @@ export type PageUpdateManyMutationInput = {
 export type PageUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  scienceSpecId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -511,24 +466,22 @@ export type PageOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type PageProjectIdSlugCompoundUniqueInput = {
-  projectId: string
+export type PageVersionIdSlugCompoundUniqueInput = {
+  versionId: string
   slug: string
 }
 
 export type PageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
-  scienceSpecId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isPublished?: Prisma.SortOrder
   sections?: Prisma.SortOrder
-  seoOverrides?: Prisma.SortOrder
-  builtHtml?: Prisma.SortOrder
-  builtCss?: Prisma.SortOrder
+  seo?: Prisma.SortOrder
   ogImageUrl?: Prisma.SortOrder
-  sitemapUrl?: Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -538,14 +491,12 @@ export type PageCountOrderByAggregateInput = {
 export type PageMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
-  scienceSpecId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isPublished?: Prisma.SortOrder
-  builtHtml?: Prisma.SortOrder
-  builtCss?: Prisma.SortOrder
   ogImageUrl?: Prisma.SortOrder
-  sitemapUrl?: Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -555,23 +506,21 @@ export type PageMaxOrderByAggregateInput = {
 export type PageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
-  scienceSpecId?: Prisma.SortOrder
+  versionId?: Prisma.SortOrder
+  type?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isPublished?: Prisma.SortOrder
-  builtHtml?: Prisma.SortOrder
-  builtCss?: Prisma.SortOrder
   ogImageUrl?: Prisma.SortOrder
-  sitemapUrl?: Prisma.SortOrder
+  isPublished?: Prisma.SortOrder
   publishedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
-export type PageScalarRelationFilter = {
-  is?: Prisma.PageWhereInput
-  isNot?: Prisma.PageWhereInput
+export type PageNullableScalarRelationFilter = {
+  is?: Prisma.PageWhereInput | null
+  isNot?: Prisma.PageWhereInput | null
 }
 
 export type PageCreateNestedManyWithoutProjectInput = {
@@ -616,46 +565,50 @@ export type PageUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.PageScalarWhereInput | Prisma.PageScalarWhereInput[]
 }
 
-export type PageCreateNestedManyWithoutScienceSpecInput = {
-  create?: Prisma.XOR<Prisma.PageCreateWithoutScienceSpecInput, Prisma.PageUncheckedCreateWithoutScienceSpecInput> | Prisma.PageCreateWithoutScienceSpecInput[] | Prisma.PageUncheckedCreateWithoutScienceSpecInput[]
-  connectOrCreate?: Prisma.PageCreateOrConnectWithoutScienceSpecInput | Prisma.PageCreateOrConnectWithoutScienceSpecInput[]
-  createMany?: Prisma.PageCreateManyScienceSpecInputEnvelope
+export type PageCreateNestedManyWithoutVersionInput = {
+  create?: Prisma.XOR<Prisma.PageCreateWithoutVersionInput, Prisma.PageUncheckedCreateWithoutVersionInput> | Prisma.PageCreateWithoutVersionInput[] | Prisma.PageUncheckedCreateWithoutVersionInput[]
+  connectOrCreate?: Prisma.PageCreateOrConnectWithoutVersionInput | Prisma.PageCreateOrConnectWithoutVersionInput[]
+  createMany?: Prisma.PageCreateManyVersionInputEnvelope
   connect?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
 }
 
-export type PageUncheckedCreateNestedManyWithoutScienceSpecInput = {
-  create?: Prisma.XOR<Prisma.PageCreateWithoutScienceSpecInput, Prisma.PageUncheckedCreateWithoutScienceSpecInput> | Prisma.PageCreateWithoutScienceSpecInput[] | Prisma.PageUncheckedCreateWithoutScienceSpecInput[]
-  connectOrCreate?: Prisma.PageCreateOrConnectWithoutScienceSpecInput | Prisma.PageCreateOrConnectWithoutScienceSpecInput[]
-  createMany?: Prisma.PageCreateManyScienceSpecInputEnvelope
+export type PageUncheckedCreateNestedManyWithoutVersionInput = {
+  create?: Prisma.XOR<Prisma.PageCreateWithoutVersionInput, Prisma.PageUncheckedCreateWithoutVersionInput> | Prisma.PageCreateWithoutVersionInput[] | Prisma.PageUncheckedCreateWithoutVersionInput[]
+  connectOrCreate?: Prisma.PageCreateOrConnectWithoutVersionInput | Prisma.PageCreateOrConnectWithoutVersionInput[]
+  createMany?: Prisma.PageCreateManyVersionInputEnvelope
   connect?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
 }
 
-export type PageUpdateManyWithoutScienceSpecNestedInput = {
-  create?: Prisma.XOR<Prisma.PageCreateWithoutScienceSpecInput, Prisma.PageUncheckedCreateWithoutScienceSpecInput> | Prisma.PageCreateWithoutScienceSpecInput[] | Prisma.PageUncheckedCreateWithoutScienceSpecInput[]
-  connectOrCreate?: Prisma.PageCreateOrConnectWithoutScienceSpecInput | Prisma.PageCreateOrConnectWithoutScienceSpecInput[]
-  upsert?: Prisma.PageUpsertWithWhereUniqueWithoutScienceSpecInput | Prisma.PageUpsertWithWhereUniqueWithoutScienceSpecInput[]
-  createMany?: Prisma.PageCreateManyScienceSpecInputEnvelope
+export type PageUpdateManyWithoutVersionNestedInput = {
+  create?: Prisma.XOR<Prisma.PageCreateWithoutVersionInput, Prisma.PageUncheckedCreateWithoutVersionInput> | Prisma.PageCreateWithoutVersionInput[] | Prisma.PageUncheckedCreateWithoutVersionInput[]
+  connectOrCreate?: Prisma.PageCreateOrConnectWithoutVersionInput | Prisma.PageCreateOrConnectWithoutVersionInput[]
+  upsert?: Prisma.PageUpsertWithWhereUniqueWithoutVersionInput | Prisma.PageUpsertWithWhereUniqueWithoutVersionInput[]
+  createMany?: Prisma.PageCreateManyVersionInputEnvelope
   set?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
   disconnect?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
   delete?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
   connect?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
-  update?: Prisma.PageUpdateWithWhereUniqueWithoutScienceSpecInput | Prisma.PageUpdateWithWhereUniqueWithoutScienceSpecInput[]
-  updateMany?: Prisma.PageUpdateManyWithWhereWithoutScienceSpecInput | Prisma.PageUpdateManyWithWhereWithoutScienceSpecInput[]
+  update?: Prisma.PageUpdateWithWhereUniqueWithoutVersionInput | Prisma.PageUpdateWithWhereUniqueWithoutVersionInput[]
+  updateMany?: Prisma.PageUpdateManyWithWhereWithoutVersionInput | Prisma.PageUpdateManyWithWhereWithoutVersionInput[]
   deleteMany?: Prisma.PageScalarWhereInput | Prisma.PageScalarWhereInput[]
 }
 
-export type PageUncheckedUpdateManyWithoutScienceSpecNestedInput = {
-  create?: Prisma.XOR<Prisma.PageCreateWithoutScienceSpecInput, Prisma.PageUncheckedCreateWithoutScienceSpecInput> | Prisma.PageCreateWithoutScienceSpecInput[] | Prisma.PageUncheckedCreateWithoutScienceSpecInput[]
-  connectOrCreate?: Prisma.PageCreateOrConnectWithoutScienceSpecInput | Prisma.PageCreateOrConnectWithoutScienceSpecInput[]
-  upsert?: Prisma.PageUpsertWithWhereUniqueWithoutScienceSpecInput | Prisma.PageUpsertWithWhereUniqueWithoutScienceSpecInput[]
-  createMany?: Prisma.PageCreateManyScienceSpecInputEnvelope
+export type PageUncheckedUpdateManyWithoutVersionNestedInput = {
+  create?: Prisma.XOR<Prisma.PageCreateWithoutVersionInput, Prisma.PageUncheckedCreateWithoutVersionInput> | Prisma.PageCreateWithoutVersionInput[] | Prisma.PageUncheckedCreateWithoutVersionInput[]
+  connectOrCreate?: Prisma.PageCreateOrConnectWithoutVersionInput | Prisma.PageCreateOrConnectWithoutVersionInput[]
+  upsert?: Prisma.PageUpsertWithWhereUniqueWithoutVersionInput | Prisma.PageUpsertWithWhereUniqueWithoutVersionInput[]
+  createMany?: Prisma.PageCreateManyVersionInputEnvelope
   set?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
   disconnect?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
   delete?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
   connect?: Prisma.PageWhereUniqueInput | Prisma.PageWhereUniqueInput[]
-  update?: Prisma.PageUpdateWithWhereUniqueWithoutScienceSpecInput | Prisma.PageUpdateWithWhereUniqueWithoutScienceSpecInput[]
-  updateMany?: Prisma.PageUpdateManyWithWhereWithoutScienceSpecInput | Prisma.PageUpdateManyWithWhereWithoutScienceSpecInput[]
+  update?: Prisma.PageUpdateWithWhereUniqueWithoutVersionInput | Prisma.PageUpdateWithWhereUniqueWithoutVersionInput[]
+  updateMany?: Prisma.PageUpdateManyWithWhereWithoutVersionInput | Prisma.PageUpdateManyWithWhereWithoutVersionInput[]
   deleteMany?: Prisma.PageScalarWhereInput | Prisma.PageScalarWhereInput[]
+}
+
+export type EnumPageTypeFieldUpdateOperationsInput = {
+  set?: $Enums.PageType
 }
 
 export type PageCreateNestedOneWithoutDeploymentsInput = {
@@ -664,66 +617,48 @@ export type PageCreateNestedOneWithoutDeploymentsInput = {
   connect?: Prisma.PageWhereUniqueInput
 }
 
-export type PageUpdateOneRequiredWithoutDeploymentsNestedInput = {
+export type PageUpdateOneWithoutDeploymentsNestedInput = {
   create?: Prisma.XOR<Prisma.PageCreateWithoutDeploymentsInput, Prisma.PageUncheckedCreateWithoutDeploymentsInput>
   connectOrCreate?: Prisma.PageCreateOrConnectWithoutDeploymentsInput
   upsert?: Prisma.PageUpsertWithoutDeploymentsInput
+  disconnect?: Prisma.PageWhereInput | boolean
+  delete?: Prisma.PageWhereInput | boolean
   connect?: Prisma.PageWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.PageUpdateToOneWithWhereWithoutDeploymentsInput, Prisma.PageUpdateWithoutDeploymentsInput>, Prisma.PageUncheckedUpdateWithoutDeploymentsInput>
 }
 
-export type PageCreateNestedOneWithoutAnalyticsInput = {
-  create?: Prisma.XOR<Prisma.PageCreateWithoutAnalyticsInput, Prisma.PageUncheckedCreateWithoutAnalyticsInput>
-  connectOrCreate?: Prisma.PageCreateOrConnectWithoutAnalyticsInput
-  connect?: Prisma.PageWhereUniqueInput
-}
-
-export type PageUpdateOneRequiredWithoutAnalyticsNestedInput = {
-  create?: Prisma.XOR<Prisma.PageCreateWithoutAnalyticsInput, Prisma.PageUncheckedCreateWithoutAnalyticsInput>
-  connectOrCreate?: Prisma.PageCreateOrConnectWithoutAnalyticsInput
-  upsert?: Prisma.PageUpsertWithoutAnalyticsInput
-  connect?: Prisma.PageWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PageUpdateToOneWithWhereWithoutAnalyticsInput, Prisma.PageUpdateWithoutAnalyticsInput>, Prisma.PageUncheckedUpdateWithoutAnalyticsInput>
-}
-
 export type PageCreateWithoutProjectInput = {
   id?: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  scienceSpec: Prisma.ScienceSpecCreateNestedOneWithoutPagesInput
+  version: Prisma.ProjectVersionCreateNestedOneWithoutPagesInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutPageInput
-  analytics?: Prisma.PageAnalyticsCreateNestedManyWithoutPageInput
 }
 
 export type PageUncheckedCreateWithoutProjectInput = {
   id?: string
-  scienceSpecId: string
+  versionId: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutPageInput
-  analytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutPageInput
 }
 
 export type PageCreateOrConnectWithoutProjectInput = {
@@ -758,126 +693,112 @@ export type PageScalarWhereInput = {
   NOT?: Prisma.PageScalarWhereInput | Prisma.PageScalarWhereInput[]
   id?: Prisma.StringFilter<"Page"> | string
   projectId?: Prisma.StringFilter<"Page"> | string
-  scienceSpecId?: Prisma.StringFilter<"Page"> | string
+  versionId?: Prisma.StringFilter<"Page"> | string
+  type?: Prisma.EnumPageTypeFilter<"Page"> | $Enums.PageType
   slug?: Prisma.StringFilter<"Page"> | string
   title?: Prisma.StringFilter<"Page"> | string
-  isPublished?: Prisma.BoolFilter<"Page"> | boolean
   sections?: Prisma.JsonFilter<"Page">
-  seoOverrides?: Prisma.JsonNullableFilter<"Page">
-  builtHtml?: Prisma.StringNullableFilter<"Page"> | string | null
-  builtCss?: Prisma.StringNullableFilter<"Page"> | string | null
+  seo?: Prisma.JsonNullableFilter<"Page">
   ogImageUrl?: Prisma.StringNullableFilter<"Page"> | string | null
-  sitemapUrl?: Prisma.StringNullableFilter<"Page"> | string | null
+  isPublished?: Prisma.BoolFilter<"Page"> | boolean
   publishedAt?: Prisma.DateTimeNullableFilter<"Page"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Page"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Page"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Page"> | Date | string
 }
 
-export type PageCreateWithoutScienceSpecInput = {
+export type PageCreateWithoutVersionInput = {
   id?: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutPagesInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutPageInput
-  analytics?: Prisma.PageAnalyticsCreateNestedManyWithoutPageInput
 }
 
-export type PageUncheckedCreateWithoutScienceSpecInput = {
+export type PageUncheckedCreateWithoutVersionInput = {
   id?: string
   projectId: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutPageInput
-  analytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutPageInput
 }
 
-export type PageCreateOrConnectWithoutScienceSpecInput = {
+export type PageCreateOrConnectWithoutVersionInput = {
   where: Prisma.PageWhereUniqueInput
-  create: Prisma.XOR<Prisma.PageCreateWithoutScienceSpecInput, Prisma.PageUncheckedCreateWithoutScienceSpecInput>
+  create: Prisma.XOR<Prisma.PageCreateWithoutVersionInput, Prisma.PageUncheckedCreateWithoutVersionInput>
 }
 
-export type PageCreateManyScienceSpecInputEnvelope = {
-  data: Prisma.PageCreateManyScienceSpecInput | Prisma.PageCreateManyScienceSpecInput[]
+export type PageCreateManyVersionInputEnvelope = {
+  data: Prisma.PageCreateManyVersionInput | Prisma.PageCreateManyVersionInput[]
   skipDuplicates?: boolean
 }
 
-export type PageUpsertWithWhereUniqueWithoutScienceSpecInput = {
+export type PageUpsertWithWhereUniqueWithoutVersionInput = {
   where: Prisma.PageWhereUniqueInput
-  update: Prisma.XOR<Prisma.PageUpdateWithoutScienceSpecInput, Prisma.PageUncheckedUpdateWithoutScienceSpecInput>
-  create: Prisma.XOR<Prisma.PageCreateWithoutScienceSpecInput, Prisma.PageUncheckedCreateWithoutScienceSpecInput>
+  update: Prisma.XOR<Prisma.PageUpdateWithoutVersionInput, Prisma.PageUncheckedUpdateWithoutVersionInput>
+  create: Prisma.XOR<Prisma.PageCreateWithoutVersionInput, Prisma.PageUncheckedCreateWithoutVersionInput>
 }
 
-export type PageUpdateWithWhereUniqueWithoutScienceSpecInput = {
+export type PageUpdateWithWhereUniqueWithoutVersionInput = {
   where: Prisma.PageWhereUniqueInput
-  data: Prisma.XOR<Prisma.PageUpdateWithoutScienceSpecInput, Prisma.PageUncheckedUpdateWithoutScienceSpecInput>
+  data: Prisma.XOR<Prisma.PageUpdateWithoutVersionInput, Prisma.PageUncheckedUpdateWithoutVersionInput>
 }
 
-export type PageUpdateManyWithWhereWithoutScienceSpecInput = {
+export type PageUpdateManyWithWhereWithoutVersionInput = {
   where: Prisma.PageScalarWhereInput
-  data: Prisma.XOR<Prisma.PageUpdateManyMutationInput, Prisma.PageUncheckedUpdateManyWithoutScienceSpecInput>
+  data: Prisma.XOR<Prisma.PageUpdateManyMutationInput, Prisma.PageUncheckedUpdateManyWithoutVersionInput>
 }
 
 export type PageCreateWithoutDeploymentsInput = {
   id?: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutPagesInput
-  scienceSpec: Prisma.ScienceSpecCreateNestedOneWithoutPagesInput
-  analytics?: Prisma.PageAnalyticsCreateNestedManyWithoutPageInput
+  version: Prisma.ProjectVersionCreateNestedOneWithoutPagesInput
 }
 
 export type PageUncheckedCreateWithoutDeploymentsInput = {
   id?: string
   projectId: string
-  scienceSpecId: string
+  versionId: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  analytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutPageInput
 }
 
 export type PageCreateOrConnectWithoutDeploymentsInput = {
@@ -898,152 +819,48 @@ export type PageUpdateToOneWithWhereWithoutDeploymentsInput = {
 
 export type PageUpdateWithoutDeploymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutPagesNestedInput
-  scienceSpec?: Prisma.ScienceSpecUpdateOneRequiredWithoutPagesNestedInput
-  analytics?: Prisma.PageAnalyticsUpdateManyWithoutPageNestedInput
+  version?: Prisma.ProjectVersionUpdateOneRequiredWithoutPagesNestedInput
 }
 
 export type PageUncheckedUpdateWithoutDeploymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  scienceSpecId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  analytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutPageNestedInput
-}
-
-export type PageCreateWithoutAnalyticsInput = {
-  id?: string
-  slug: string
-  title: string
-  isPublished?: boolean
-  sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
-  ogImageUrl?: string | null
-  sitemapUrl?: string | null
-  publishedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  project: Prisma.ProjectCreateNestedOneWithoutPagesInput
-  scienceSpec: Prisma.ScienceSpecCreateNestedOneWithoutPagesInput
-  deployments?: Prisma.DeploymentCreateNestedManyWithoutPageInput
-}
-
-export type PageUncheckedCreateWithoutAnalyticsInput = {
-  id?: string
-  projectId: string
-  scienceSpecId: string
-  slug: string
-  title: string
-  isPublished?: boolean
-  sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
-  ogImageUrl?: string | null
-  sitemapUrl?: string | null
-  publishedAt?: Date | string | null
-  deletedAt?: Date | string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutPageInput
-}
-
-export type PageCreateOrConnectWithoutAnalyticsInput = {
-  where: Prisma.PageWhereUniqueInput
-  create: Prisma.XOR<Prisma.PageCreateWithoutAnalyticsInput, Prisma.PageUncheckedCreateWithoutAnalyticsInput>
-}
-
-export type PageUpsertWithoutAnalyticsInput = {
-  update: Prisma.XOR<Prisma.PageUpdateWithoutAnalyticsInput, Prisma.PageUncheckedUpdateWithoutAnalyticsInput>
-  create: Prisma.XOR<Prisma.PageCreateWithoutAnalyticsInput, Prisma.PageUncheckedCreateWithoutAnalyticsInput>
-  where?: Prisma.PageWhereInput
-}
-
-export type PageUpdateToOneWithWhereWithoutAnalyticsInput = {
-  where?: Prisma.PageWhereInput
-  data: Prisma.XOR<Prisma.PageUpdateWithoutAnalyticsInput, Prisma.PageUncheckedUpdateWithoutAnalyticsInput>
-}
-
-export type PageUpdateWithoutAnalyticsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  project?: Prisma.ProjectUpdateOneRequiredWithoutPagesNestedInput
-  scienceSpec?: Prisma.ScienceSpecUpdateOneRequiredWithoutPagesNestedInput
-  deployments?: Prisma.DeploymentUpdateManyWithoutPageNestedInput
-}
-
-export type PageUncheckedUpdateWithoutAnalyticsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  projectId?: Prisma.StringFieldUpdateOperationsInput | string
-  scienceSpecId?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutPageNestedInput
 }
 
 export type PageCreateManyProjectInput = {
   id?: string
-  scienceSpecId: string
+  versionId: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
@@ -1052,132 +869,114 @@ export type PageCreateManyProjectInput = {
 
 export type PageUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scienceSpec?: Prisma.ScienceSpecUpdateOneRequiredWithoutPagesNestedInput
+  version?: Prisma.ProjectVersionUpdateOneRequiredWithoutPagesNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutPageNestedInput
-  analytics?: Prisma.PageAnalyticsUpdateManyWithoutPageNestedInput
 }
 
 export type PageUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  scienceSpecId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutPageNestedInput
-  analytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutPageNestedInput
 }
 
 export type PageUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  scienceSpecId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PageCreateManyScienceSpecInput = {
+export type PageCreateManyVersionInput = {
   id?: string
   projectId: string
+  type?: $Enums.PageType
   slug: string
   title: string
-  isPublished?: boolean
   sections: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: string | null
-  builtCss?: string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: string | null
-  sitemapUrl?: string | null
+  isPublished?: boolean
   publishedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type PageUpdateWithoutScienceSpecInput = {
+export type PageUpdateWithoutVersionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutPagesNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutPageNestedInput
-  analytics?: Prisma.PageAnalyticsUpdateManyWithoutPageNestedInput
 }
 
-export type PageUncheckedUpdateWithoutScienceSpecInput = {
+export type PageUncheckedUpdateWithoutVersionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutPageNestedInput
-  analytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutPageNestedInput
 }
 
-export type PageUncheckedUpdateManyWithoutScienceSpecInput = {
+export type PageUncheckedUpdateManyWithoutVersionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPageTypeFieldUpdateOperationsInput | $Enums.PageType
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sections?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  seoOverrides?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  builtHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  builtCss?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seo?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ogImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sitemapUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isPublished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   publishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1191,12 +990,10 @@ export type PageUncheckedUpdateManyWithoutScienceSpecInput = {
 
 export type PageCountOutputType = {
   deployments: number
-  analytics: number
 }
 
 export type PageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   deployments?: boolean | PageCountOutputTypeCountDeploymentsArgs
-  analytics?: boolean | PageCountOutputTypeCountAnalyticsArgs
 }
 
 /**
@@ -1216,137 +1013,117 @@ export type PageCountOutputTypeCountDeploymentsArgs<ExtArgs extends runtime.Type
   where?: Prisma.DeploymentWhereInput
 }
 
-/**
- * PageCountOutputType without action
- */
-export type PageCountOutputTypeCountAnalyticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PageAnalyticsWhereInput
-}
-
 
 export type PageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   projectId?: boolean
-  scienceSpecId?: boolean
+  versionId?: boolean
+  type?: boolean
   slug?: boolean
   title?: boolean
-  isPublished?: boolean
   sections?: boolean
-  seoOverrides?: boolean
-  builtHtml?: boolean
-  builtCss?: boolean
+  seo?: boolean
   ogImageUrl?: boolean
-  sitemapUrl?: boolean
+  isPublished?: boolean
   publishedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  scienceSpec?: boolean | Prisma.ScienceSpecDefaultArgs<ExtArgs>
+  version?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
   deployments?: boolean | Prisma.Page$deploymentsArgs<ExtArgs>
-  analytics?: boolean | Prisma.Page$analyticsArgs<ExtArgs>
   _count?: boolean | Prisma.PageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["page"]>
 
 export type PageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   projectId?: boolean
-  scienceSpecId?: boolean
+  versionId?: boolean
+  type?: boolean
   slug?: boolean
   title?: boolean
-  isPublished?: boolean
   sections?: boolean
-  seoOverrides?: boolean
-  builtHtml?: boolean
-  builtCss?: boolean
+  seo?: boolean
   ogImageUrl?: boolean
-  sitemapUrl?: boolean
+  isPublished?: boolean
   publishedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  scienceSpec?: boolean | Prisma.ScienceSpecDefaultArgs<ExtArgs>
+  version?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["page"]>
 
 export type PageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   projectId?: boolean
-  scienceSpecId?: boolean
+  versionId?: boolean
+  type?: boolean
   slug?: boolean
   title?: boolean
-  isPublished?: boolean
   sections?: boolean
-  seoOverrides?: boolean
-  builtHtml?: boolean
-  builtCss?: boolean
+  seo?: boolean
   ogImageUrl?: boolean
-  sitemapUrl?: boolean
+  isPublished?: boolean
   publishedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  scienceSpec?: boolean | Prisma.ScienceSpecDefaultArgs<ExtArgs>
+  version?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["page"]>
 
 export type PageSelectScalar = {
   id?: boolean
   projectId?: boolean
-  scienceSpecId?: boolean
+  versionId?: boolean
+  type?: boolean
   slug?: boolean
   title?: boolean
-  isPublished?: boolean
   sections?: boolean
-  seoOverrides?: boolean
-  builtHtml?: boolean
-  builtCss?: boolean
+  seo?: boolean
   ogImageUrl?: boolean
-  sitemapUrl?: boolean
+  isPublished?: boolean
   publishedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "scienceSpecId" | "slug" | "title" | "isPublished" | "sections" | "seoOverrides" | "builtHtml" | "builtCss" | "ogImageUrl" | "sitemapUrl" | "publishedAt" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["page"]>
+export type PageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionId" | "type" | "slug" | "title" | "sections" | "seo" | "ogImageUrl" | "isPublished" | "publishedAt" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["page"]>
 export type PageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  scienceSpec?: boolean | Prisma.ScienceSpecDefaultArgs<ExtArgs>
+  version?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
   deployments?: boolean | Prisma.Page$deploymentsArgs<ExtArgs>
-  analytics?: boolean | Prisma.Page$analyticsArgs<ExtArgs>
   _count?: boolean | Prisma.PageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  scienceSpec?: boolean | Prisma.ScienceSpecDefaultArgs<ExtArgs>
+  version?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
 }
 export type PageIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
-  scienceSpec?: boolean | Prisma.ScienceSpecDefaultArgs<ExtArgs>
+  version?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
 }
 
 export type $PagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Page"
   objects: {
     project: Prisma.$ProjectPayload<ExtArgs>
-    scienceSpec: Prisma.$ScienceSpecPayload<ExtArgs>
+    version: Prisma.$ProjectVersionPayload<ExtArgs>
     deployments: Prisma.$DeploymentPayload<ExtArgs>[]
-    analytics: Prisma.$PageAnalyticsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     projectId: string
-    scienceSpecId: string
+    versionId: string
+    type: $Enums.PageType
     slug: string
     title: string
-    isPublished: boolean
     sections: runtime.JsonValue
-    seoOverrides: runtime.JsonValue | null
-    builtHtml: string | null
-    builtCss: string | null
+    seo: runtime.JsonValue | null
     ogImageUrl: string | null
-    sitemapUrl: string | null
+    isPublished: boolean
     publishedAt: Date | null
     deletedAt: Date | null
     createdAt: Date
@@ -1746,9 +1523,8 @@ readonly fields: PageFieldRefs;
 export interface Prisma__PageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  scienceSpec<T extends Prisma.ScienceSpecDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ScienceSpecDefaultArgs<ExtArgs>>): Prisma.Prisma__ScienceSpecClient<runtime.Types.Result.GetResult<Prisma.$ScienceSpecPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  version<T extends Prisma.ProjectVersionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectVersionDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectVersionClient<runtime.Types.Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   deployments<T extends Prisma.Page$deploymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Page$deploymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeploymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  analytics<T extends Prisma.Page$analyticsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Page$analyticsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1780,16 +1556,14 @@ export interface Prisma__PageClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface PageFieldRefs {
   readonly id: Prisma.FieldRef<"Page", 'String'>
   readonly projectId: Prisma.FieldRef<"Page", 'String'>
-  readonly scienceSpecId: Prisma.FieldRef<"Page", 'String'>
+  readonly versionId: Prisma.FieldRef<"Page", 'String'>
+  readonly type: Prisma.FieldRef<"Page", 'PageType'>
   readonly slug: Prisma.FieldRef<"Page", 'String'>
   readonly title: Prisma.FieldRef<"Page", 'String'>
-  readonly isPublished: Prisma.FieldRef<"Page", 'Boolean'>
   readonly sections: Prisma.FieldRef<"Page", 'Json'>
-  readonly seoOverrides: Prisma.FieldRef<"Page", 'Json'>
-  readonly builtHtml: Prisma.FieldRef<"Page", 'String'>
-  readonly builtCss: Prisma.FieldRef<"Page", 'String'>
+  readonly seo: Prisma.FieldRef<"Page", 'Json'>
   readonly ogImageUrl: Prisma.FieldRef<"Page", 'String'>
-  readonly sitemapUrl: Prisma.FieldRef<"Page", 'String'>
+  readonly isPublished: Prisma.FieldRef<"Page", 'Boolean'>
   readonly publishedAt: Prisma.FieldRef<"Page", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Page", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Page", 'DateTime'>
@@ -2216,30 +1990,6 @@ export type Page$deploymentsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.DeploymentScalarFieldEnum | Prisma.DeploymentScalarFieldEnum[]
-}
-
-/**
- * Page.analytics
- */
-export type Page$analyticsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PageAnalytics
-   */
-  select?: Prisma.PageAnalyticsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PageAnalytics
-   */
-  omit?: Prisma.PageAnalyticsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PageAnalyticsInclude<ExtArgs> | null
-  where?: Prisma.PageAnalyticsWhereInput
-  orderBy?: Prisma.PageAnalyticsOrderByWithRelationInput | Prisma.PageAnalyticsOrderByWithRelationInput[]
-  cursor?: Prisma.PageAnalyticsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PageAnalyticsScalarFieldEnum | Prisma.PageAnalyticsScalarFieldEnum[]
 }
 
 /**
