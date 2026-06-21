@@ -40,7 +40,7 @@ const AuthError = async ({ searchParams }: AuthErrorPageProps) => {
                 variant="outline"
                 className="cursor-pointer focus-visible:ring-0 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 transition-colors"
             >
-                <Link href="/login">Back to sign in</Link>
+                <Link href="/signin">Back to sign in</Link>
             </Button>
         </div>
     );
