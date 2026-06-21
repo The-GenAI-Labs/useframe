@@ -7,8 +7,6 @@ import { SearchModal } from "@/components/search/SearchModal";
 export default async function ChatLayout({ children }: { children: React.ReactNode }) {
     const session = await auth();
 
-    // logged out: only `/` is reachable in this group (middleware guards the rest),
-    // and the marketing homepage renders without the app shell
     if (!session?.user) {
         return <>{children}</>;
     }
