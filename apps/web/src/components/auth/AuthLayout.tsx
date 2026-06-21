@@ -24,9 +24,8 @@ const IMAGES = [
     "/auth/login20.png",
 ]
 
-// split into two columns
-const LEFT_IMAGES = IMAGES.slice(0, 13)  
-const RIGHT_IMAGES = IMAGES.slice(12, 25) 
+const LEFT_IMAGES = IMAGES.slice(0, 13)
+const RIGHT_IMAGES = IMAGES.slice(12, 25)
 
 interface ColumnProps {
     images: string[]
@@ -38,10 +37,7 @@ const CarouselColumn = ({ images, direction }: ColumnProps) => {
 
     return (
         <div className="relative h-full overflow-hidden w-[42%]" style={{margin:"auto"}}>
-            {/* top fade */}
             <div className="absolute -top-1 -left-1 -right-1 h-16 z-10 bg-gradient-to-b from-blue-50 to-transparent pointer-events-none" />
-
-            {/* bottom fade */}
             <div className="absolute -bottom-3 -left-1 -right-1 h-16 z-10 bg-gradient-to-t from-blue-50 to-transparent pointer-events-none" />
 
             <div
@@ -77,7 +73,6 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
             <div className="bg-white dark:bg-white flex items-stretch rounded-3xl md:rounded-4xl overflow-hidden shadow-xl h-[96vh] md:h-[93vh] w-full md:w-[95vw] max-w-7xl">
 
-                {/* left — carousel panel */}
                 <div className="hidden md:flex items-center justify-center w-[50%] bg-blue-50 p-5">
 
                     <div className="relative flex gap-3 w-full h-full rounded-2xl overflow-hidden">
@@ -85,13 +80,8 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                         <CarouselColumn images={LEFT_IMAGES} direction="up" />
                         <CarouselColumn images={RIGHT_IMAGES} direction="down" />
 
-                        {/* badge — centered inside carousel box */}
                         <div className="absolute inset-x-0 top-8 flex justify-center pointer-events-none z-20">
-
-                            {/* glow blur behind badge */}
                             <div className="absolute w-[300px] h-[80px] rounded-full bg-white/40 blur-2xl" />
-
-                            {/* badge pill */}
                             <div
                                 className="relative flex items-center gap-3 px-5 py-3 rounded-full border border-white/50"
                                 style={{
@@ -101,10 +91,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                                     boxShadow: "0 8px 32px rgba(59,130,246,0.15), inset 0 1px 0 rgba(255,255,255,0.6)",
                                 }}
                             >
-                                {/* left fade line */}
                                 <div className="w-12 h-px bg-gradient-to-r from-transparent to-blue-400/80" />
-
-                                {/* text */}
                                 <span
                                     className="text-md font-bold tracking-[0.22em] uppercase whitespace-nowrap"
                                     style={{
@@ -115,7 +102,6 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                                     Backed by Science
                                 </span>
 
-                                {/* right fade line */}
                                 <div className="w-12 h-px bg-gradient-to-l from-transparent to-blue-400/80" />
                             </div>
                         </div>
@@ -123,11 +109,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 </div>
 
-                
-                {/* right — form panel */}
                 <div className="relative flex-1 flex flex-col justify-center px-5 py-8 md:px-10 md:py-12 overflow-hidden">
-
-                    {/* criss-cross grid — bottom half */}
                     <div
                         className="absolute inset-x-0 bottom-0 h-[55%] pointer-events-none"
                         style={{
@@ -141,23 +123,18 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                         }}
                     />
 
-                    {/* soft blue glow bloom at the very bottom */}
                     <div
                         className="absolute inset-x-0 bottom-0 h-[40%] pointer-events-none"
                         style={{
                             background: "radial-gradient(ellipse 80% 60% at 50% 110%, rgba(99,179,237,0.22) 0%, transparent 70%)",
                         }}
                     />
-
-                    {/* shadow vignette at bottom edge */}
                     <div
                         className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
                         style={{
                             background: "linear-gradient(to top, rgba(219,234,254,0.35) 0%, transparent 100%)",
                         }}
                     />
-
-                    {/* criss-cross grid — top half */}
                     <div
                         className="absolute inset-x-0 top-0 h-[55%] pointer-events-none"
                         style={{
@@ -171,15 +148,12 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                         }}
                     />
 
-                    {/* soft blue glow bloom at the very top */}
                     <div
                         className="absolute inset-x-0 top-0 h-[40%] pointer-events-none"
                         style={{
                             background: "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,179,237,0.22) 0%, transparent 70%)",
                         }}
                     />
-
-                    {/* shadow vignette at top edge */}
                     <div
                         className="absolute inset-x-0 top-0 h-24 pointer-events-none"
                         style={{
