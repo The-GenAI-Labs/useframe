@@ -4,16 +4,20 @@ import { NextResponse } from "next/server";
 
 const { auth } = NextAuth(authConfig);
 
-// routes that are always public regardless of session
 const PUBLIC_ROUTES = ["/"];
 
-// routes only accessible when logged out (redirect home if already authed)
-const AUTH_ROUTES = ["/login", "/signup", "/verify-request", "/auth-error"];
+const AUTH_ROUTES = ["/signin", "/verify-request", "/auth-error"];
+
+const STATIC_FILE = /\.(png|jpe?g|gif|svg|webp|ico|mp4|webm|woff2?)$/i;
 
 export default auth((req) => {
     const { nextUrl } = req;
     const isLoggedIn = !!req.auth?.user;
     const path = nextUrl.pathname;
+
+    if (STATIC_FILE.test(path)) {
+        return NextResponse.next();
+    }
 
     const isPublic = PUBLIC_ROUTES.includes(path);
     const isAuthRoute = AUTH_ROUTES.some((r) => path.startsWith(r));
@@ -27,9 +31,9 @@ export default auth((req) => {
     }
 
     if (!isLoggedIn) {
-        const loginUrl = new URL("/login", nextUrl);
-        loginUrl.searchParams.set("callbackUrl", path);
-        return NextResponse.redirect(loginUrl);
+        const signinUrl = new URL("/signin", nextUrl);
+        signinUrl.searchParams.set("callbackUrl", path);
+        return NextResponse.redirect(signinUrl);
     }
 
     return NextResponse.next();
