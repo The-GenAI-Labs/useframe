@@ -22,13 +22,11 @@ export const authConfig: NextAuthConfig = {
     session: { strategy: "jwt" },
 
     pages: {
-        signIn: "/login",
+        signIn: "/signin",
         verifyRequest: "/verify-request",
         error: "/auth-error",
     },
 
-    // route-level protection is handled entirely in middleware.ts
-    // authorized callback kept minimal — just passes through
     callbacks: {
         authorized() {
             return true;

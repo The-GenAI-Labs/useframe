@@ -16,7 +16,7 @@ const VerifyRequest = () => {
             </div>
             <p className="text-xs text-zinc-400">
                 Didn&apos;t receive it?{" "}
-                <Link href="/login" className="text-blue-500 hover:text-blue-600 font-medium transition-colors">
+                <Link href="/signin" className="text-blue-500 hover:text-blue-600 font-medium transition-colors">
                     Try again
                 </Link>
             </p>

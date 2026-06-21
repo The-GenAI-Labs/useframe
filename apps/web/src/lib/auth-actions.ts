@@ -1,7 +1,16 @@
 "use server";
 
 import { signIn, signOut } from "@/lib/auth";
+import { prisma } from "@useframe/db";
 import { AuthError } from "next-auth";
+
+export async function checkUserExists(email: string): Promise<boolean> {
+    const user = await prisma.user.findUnique({
+        where: { email },
+        select: { id: true },
+    });
+    return !!user;
+}
 
 export async function signInWithGoogle() {
     await signIn("google", { redirectTo: "/" });
@@ -28,5 +37,5 @@ export async function signInWithEmail(email: string) {
 }
 
 export async function signOutUser() {
-    await signOut({ redirectTo: "/login" });
+    await signOut({ redirectTo: "/signin" });
 }
