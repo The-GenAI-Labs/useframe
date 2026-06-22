@@ -1,10 +1,8 @@
 "use client";
 
 import { memo } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 
-// deterministic positions — Math.random() would mismatch between server and client render
 const PARTICLES = [
   { left: "12%", top: "24%", size: 5, delay: 0 },
   { left: "26%", top: "16%", size: 3, delay: 1.2 },
@@ -19,24 +17,26 @@ const PARTICLES = [
 export const BackgroundClouds = memo(function BackgroundClouds() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-      <Image
-        src="/chat/useframecloud.jpg"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover"
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster="/chat/useframecloud.jpg"
+        className="absolute inset-0 size-full object-cover"
+        src="/chat/useframe%20hero%20video.mp4"
       />
-      {/* heavy white wash on top — the reference sky is near-white with clouds only at the bottom */}
-      <div className="absolute inset-0 bg-linear-to-b from-white/90 via-white/55 to-white/0" />
+      <div className="absolute inset-0 bg-linear-to-b from-white/40 via-white/20 to-white/0" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-linear-to-t from-white via-white/70 to-transparent" />
 
       <motion.div
-        className="absolute -left-40 top-24 h-64 w-md rounded-full bg-white/50 blur-3xl"
+        className="absolute -left-40 top-24 h-64 w-md rounded-full bg-white/40 blur-3xl"
         animate={{ x: [0, 60, 0] }}
         transition={{ duration: 48, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute -right-48 top-40 h-72 w-xl rounded-full bg-white/40 blur-3xl"
+        className="absolute -right-48 top-40 h-72 w-xl rounded-full bg-white/30 blur-3xl"
         animate={{ x: [0, -70, 0] }}
         transition={{ duration: 56, repeat: Infinity, ease: "easeInOut" }}
       />
