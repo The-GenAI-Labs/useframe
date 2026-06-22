@@ -27,14 +27,14 @@ export const WorkspacePreview = memo(function WorkspacePreview() {
           <button
             type="button"
             aria-label="Upload files"
-            className="flex size-9 shrink-0 items-center justify-center rounded-full border border-blue-200 text-blue-500 transition-colors hover:bg-blue-50"
+            className="flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-blue-200 text-blue-500 transition-colors hover:bg-blue-50"
           >
             <Plus className="size-4" />
           </button>
           <div className="h-9 min-w-0 flex-1 rounded-xl bg-slate-100" />
           <button
             type="button"
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+            className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
           >
             <Database className="size-4 text-slate-500" />
             Data
@@ -56,7 +56,7 @@ export const WorkspacePreview = memo(function WorkspacePreview() {
           <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50"
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50"
             >
               <span className="flex size-4 items-center justify-center rounded bg-blue-600 text-[8px] font-bold text-white">
                 AI
@@ -66,7 +66,7 @@ export const WorkspacePreview = memo(function WorkspacePreview() {
             </button>
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50"
+              className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50"
             >
               <SlidersHorizontal className="size-3.5 text-slate-500" />
               Tone
@@ -78,13 +78,13 @@ export const WorkspacePreview = memo(function WorkspacePreview() {
             <button
               type="button"
               aria-label="Voice input"
-              className="p-1.5 text-slate-400 transition-colors hover:text-slate-600"
+              className="cursor-pointer p-1.5 text-slate-400 transition-colors hover:text-slate-600"
             >
               <Mic className="size-4" />
             </button>
             <button
               type="button"
-              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 py-1.5 pl-3.5 pr-1.5 text-sm font-medium text-white shadow-[0_6px_20px_rgba(37,99,235,0.45)] transition-all hover:bg-blue-500"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-blue-600 py-1.5 pl-3.5 pr-1.5 text-sm font-medium text-white shadow-[0_6px_20px_rgba(37,99,235,0.45)] transition-all hover:bg-blue-500"
             >
               <span className="inline-flex items-center gap-1.5">
                 <SendHorizontal className="size-4" />

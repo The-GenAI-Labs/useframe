@@ -22,7 +22,7 @@ export const QuickActions = memo(function QuickActions() {
       {ACTIONS.map((action) => (
         <Link
           key={action.label}
-          href="/signup"
+          href="/signin"
           className="group inline-flex items-center gap-2.5 rounded-full bg-white py-1.5 pl-4 pr-1.5 text-[13px] font-medium text-slate-800 shadow-md shadow-sky-950/5 transition-all hover:-translate-y-0.5 hover:shadow-lg"
         >
           {action.label}

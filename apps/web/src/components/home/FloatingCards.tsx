@@ -2,41 +2,63 @@
 
 import { memo } from "react";
 import { motion } from "framer-motion";
-import { CryptoWalletCard } from "./cards/CryptoWalletCard";
-import { ProjectOverviewCard } from "./cards/ProjectOverviewCard";
-import { RecentFilesCard } from "./cards/RecentFilesCard";
-import { AnalyticsCard } from "./cards/AnalyticsCard";
-import { TeamCollabCard } from "./cards/TeamCollabCard";
-import { InvoiceCard } from "./cards/InvoiceCard";
+import { ImageCycleCard } from "./ui/ImageCycleCard";
 
-const FLOATING = [
-  { id: "crypto", Card: CryptoWalletCard, posClass: "left-[3%] top-[13%]", rotate: -2, duration: 7, delay: 0 },
-  { id: "project", Card: ProjectOverviewCard, posClass: "left-[5.5%] top-[40%]", rotate: 1.5, duration: 8, delay: 0.6 },
-  { id: "files", Card: RecentFilesCard, posClass: "left-[3%] top-[62%]", rotate: -1.5, duration: 6.5, delay: 1.1 },
-  { id: "analytics", Card: AnalyticsCard, posClass: "right-[3%] top-[13%]", rotate: 2, duration: 7.5, delay: 0.3 },
-  { id: "team", Card: TeamCollabCard, posClass: "right-[3.5%] top-[44%]", rotate: -1.5, duration: 6.8, delay: 0.9 },
-  { id: "invoice", Card: InvoiceCard, posClass: "right-[6%] top-[64%]", rotate: 1.5, duration: 8.5, delay: 1.4 },
+const LEFT_IMAGES = [
+  "/auth/landing1.png",
+  "/auth/login1.png",
+  "/auth/login3.png",
+  "/auth/login5.png",
+  "/auth/login7.png",
+  "/auth/login9.png",
+  "/auth/login13.png",
+  "/auth/login16.png",
+  "/auth/login17.png",
+];
+
+const RIGHT_IMAGES = [
+  "/auth/landing2.png",
+  "/auth/login2.png",
+  "/auth/login4.png",
+  "/auth/login6.png",
+  "/auth/login8.png",
+  "/auth/login10.png",
+  "/auth/login12.png",
+  "/auth/login14.png",
+  "/auth/login18.png",
+  "/auth/login20.png",
 ];
 
 export const FloatingCards = memo(function FloatingCards() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-5 hidden xl:block">
-      {FLOATING.map(({ id, Card, posClass, rotate, duration, delay }, i) => (
-        <motion.div
-          key={id}
-          className={`pointer-events-auto absolute ${posClass}`}
-          initial={{ opacity: 0, y: 24, rotate, scale: 0.94 }}
-          animate={{ opacity: 1, y: [0, -8, 0], rotate, scale: 1 }}
-          whileHover={{ rotate: 0, scale: 1.04, zIndex: 20 }}
-          transition={{
-            opacity: { duration: 0.8, delay: 0.2 + i * 0.12 },
-            scale: { duration: 0.8, delay: 0.2 + i * 0.12 },
-            y: { duration, repeat: Infinity, ease: "easeInOut", delay },
-          }}
-        >
-          <Card />
-        </motion.div>
-      ))}
+      <motion.div
+        className="pointer-events-auto absolute left-[6%] top-[18%]"
+        initial={{ opacity: 0, y: 24, rotate: -2, scale: 0.94 }}
+        animate={{ opacity: 1, y: [0, -8, 0], rotate: -2, scale: 1 }}
+        whileHover={{ rotate: 0, scale: 1.03, zIndex: 20 }}
+        transition={{
+          opacity: { duration: 0.8, delay: 0.2 },
+          scale: { duration: 0.8, delay: 0.2 },
+          y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+        }}
+      >
+        <ImageCycleCard images={LEFT_IMAGES} label="Generated with UseFrame" interval={2400} />
+      </motion.div>
+
+      <motion.div
+        className="pointer-events-auto absolute right-[6%] top-[18%]"
+        initial={{ opacity: 0, y: 24, rotate: 2, scale: 0.94 }}
+        animate={{ opacity: 1, y: [0, -8, 0], rotate: 2, scale: 1 }}
+        whileHover={{ rotate: 0, scale: 1.03, zIndex: 20 }}
+        transition={{
+          opacity: { duration: 0.8, delay: 0.4 },
+          scale: { duration: 0.8, delay: 0.4 },
+          y: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.6 },
+        }}
+      >
+        <ImageCycleCard images={RIGHT_IMAGES} label="Designed in seconds" interval={3000} />
+      </motion.div>
     </div>
   );
 });
