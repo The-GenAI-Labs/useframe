@@ -11,6 +11,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@repo/events": "workspace:*",
+    "@repo/schemas": "workspace:*",
     "@useframe/db": "workspace:*",
     "@useframe/types": "workspace:*",
     "@useframe/validators": "workspace:*",

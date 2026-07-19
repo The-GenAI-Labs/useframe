@@ -9,6 +9,9 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User.ts'
+export type * from './models/Account.ts'
+export type * from './models/Session.ts'
+export type * from './models/VerificationToken.ts'
 export type * from './models/UserCredential.ts'
 export type * from './models/UserIdentity.ts'
 export type * from './models/RefreshToken.ts'

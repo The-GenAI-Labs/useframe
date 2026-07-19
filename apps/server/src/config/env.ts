@@ -13,6 +13,7 @@ const envSchema = z.object({
     JWT_REFRESH_EXPIRY: z.string().default("7d"),
     CLIENT_URL: z.string().default("http://localhost:3000"),
     BCRYPT_ROUNDS: z.string().default("12"),
+    REDIS_URL: z.string().default("redis://localhost:6379"),
 })
 
 const parsed = envSchema.safeParse(process.env)

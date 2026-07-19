@@ -254,6 +254,8 @@ export type UserWhereInput = {
   deployments?: Prisma.DeploymentListRelationFilter
   usageLogs?: Prisma.UsageLogListRelationFilter
   competitorScans?: Prisma.CompetitorScanListRelationFilter
+  authAccounts?: Prisma.AccountListRelationFilter
+  authSessions?: Prisma.SessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -285,6 +287,8 @@ export type UserOrderByWithRelationInput = {
   deployments?: Prisma.DeploymentOrderByRelationAggregateInput
   usageLogs?: Prisma.UsageLogOrderByRelationAggregateInput
   competitorScans?: Prisma.CompetitorScanOrderByRelationAggregateInput
+  authAccounts?: Prisma.AccountOrderByRelationAggregateInput
+  authSessions?: Prisma.SessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -319,6 +323,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   deployments?: Prisma.DeploymentListRelationFilter
   usageLogs?: Prisma.UsageLogListRelationFilter
   competitorScans?: Prisma.CompetitorScanListRelationFilter
+  authAccounts?: Prisma.AccountListRelationFilter
+  authSessions?: Prisma.SessionListRelationFilter
 }, "id" | "email" | "phone">
 
 export type UserOrderByWithAggregationInput = {
@@ -386,6 +392,8 @@ export type UserCreateInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -417,6 +425,8 @@ export type UserUncheckedCreateInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -448,6 +458,8 @@ export type UserUpdateInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -479,6 +491,8 @@ export type UserUncheckedUpdateInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -594,6 +608,34 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutAuthAccountsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthAccountsInput, Prisma.UserUncheckedCreateWithoutAuthAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthAccountsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAuthAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthAccountsInput, Prisma.UserUncheckedCreateWithoutAuthAccountsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthAccountsInput
+  upsert?: Prisma.UserUpsertWithoutAuthAccountsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuthAccountsInput, Prisma.UserUpdateWithoutAuthAccountsInput>, Prisma.UserUncheckedUpdateWithoutAuthAccountsInput>
+}
+
+export type UserCreateNestedOneWithoutAuthSessionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionsInput, Prisma.UserUncheckedCreateWithoutAuthSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAuthSessionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionsInput, Prisma.UserUncheckedCreateWithoutAuthSessionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAuthSessionsInput
+  upsert?: Prisma.UserUpsertWithoutAuthSessionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuthSessionsInput, Prisma.UserUpdateWithoutAuthSessionsInput>, Prisma.UserUncheckedUpdateWithoutAuthSessionsInput>
 }
 
 export type UserCreateNestedOneWithoutCredentialsInput = {
@@ -820,6 +862,294 @@ export type UserUpdateOneRequiredWithoutCompetitorScansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCompetitorScansInput, Prisma.UserUpdateWithoutCompetitorScansInput>, Prisma.UserUncheckedUpdateWithoutCompetitorScansInput>
 }
 
+export type UserCreateWithoutAuthAccountsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAuthAccountsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAuthAccountsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthAccountsInput, Prisma.UserUncheckedCreateWithoutAuthAccountsInput>
+}
+
+export type UserUpsertWithoutAuthAccountsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAuthAccountsInput, Prisma.UserUncheckedUpdateWithoutAuthAccountsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthAccountsInput, Prisma.UserUncheckedCreateWithoutAuthAccountsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAuthAccountsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAuthAccountsInput, Prisma.UserUncheckedUpdateWithoutAuthAccountsInput>
+}
+
+export type UserUpdateWithoutAuthAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAuthAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAuthSessionsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAuthSessionsInput = {
+  id?: string
+  email: string
+  phone?: string | null
+  displayName?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  emailVerifiedAt?: Date | string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedCreateNestedOneWithoutUserInput
+  identities?: Prisma.UserIdentityUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAuthSessionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionsInput, Prisma.UserUncheckedCreateWithoutAuthSessionsInput>
+}
+
+export type UserUpsertWithoutAuthSessionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAuthSessionsInput, Prisma.UserUncheckedUpdateWithoutAuthSessionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAuthSessionsInput, Prisma.UserUncheckedCreateWithoutAuthSessionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAuthSessionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAuthSessionsInput, Prisma.UserUncheckedUpdateWithoutAuthSessionsInput>
+}
+
+export type UserUpdateWithoutAuthSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAuthSessionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  credentials?: Prisma.UserCredentialUncheckedUpdateOneWithoutUserNestedInput
+  identities?: Prisma.UserIdentityUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  emailVerificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  passwordResetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutCredentialsInput = {
   id?: string
   email: string
@@ -848,6 +1178,8 @@ export type UserCreateWithoutCredentialsInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCredentialsInput = {
@@ -878,6 +1210,8 @@ export type UserUncheckedCreateWithoutCredentialsInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCredentialsInput = {
@@ -924,6 +1258,8 @@ export type UserUpdateWithoutCredentialsInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCredentialsInput = {
@@ -954,6 +1290,8 @@ export type UserUncheckedUpdateWithoutCredentialsInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutIdentitiesInput = {
@@ -984,6 +1322,8 @@ export type UserCreateWithoutIdentitiesInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIdentitiesInput = {
@@ -1014,6 +1354,8 @@ export type UserUncheckedCreateWithoutIdentitiesInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIdentitiesInput = {
@@ -1060,6 +1402,8 @@ export type UserUpdateWithoutIdentitiesInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIdentitiesInput = {
@@ -1090,6 +1434,8 @@ export type UserUncheckedUpdateWithoutIdentitiesInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRefreshTokensInput = {
@@ -1120,6 +1466,8 @@ export type UserCreateWithoutRefreshTokensInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -1150,6 +1498,8 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -1196,6 +1546,8 @@ export type UserUpdateWithoutRefreshTokensInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -1226,6 +1578,8 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1256,6 +1610,8 @@ export type UserCreateWithoutSessionsInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1286,6 +1642,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1332,6 +1690,8 @@ export type UserUpdateWithoutSessionsInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1362,6 +1722,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmailVerificationTokensInput = {
@@ -1392,6 +1754,8 @@ export type UserCreateWithoutEmailVerificationTokensInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
@@ -1422,6 +1786,8 @@ export type UserUncheckedCreateWithoutEmailVerificationTokensInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmailVerificationTokensInput = {
@@ -1468,6 +1834,8 @@ export type UserUpdateWithoutEmailVerificationTokensInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
@@ -1498,6 +1866,8 @@ export type UserUncheckedUpdateWithoutEmailVerificationTokensInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPasswordResetTokensInput = {
@@ -1528,6 +1898,8 @@ export type UserCreateWithoutPasswordResetTokensInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
@@ -1558,6 +1930,8 @@ export type UserUncheckedCreateWithoutPasswordResetTokensInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetTokensInput = {
@@ -1604,6 +1978,8 @@ export type UserUpdateWithoutPasswordResetTokensInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
@@ -1634,6 +2010,8 @@ export type UserUncheckedUpdateWithoutPasswordResetTokensInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPhoneOtpsInput = {
@@ -1664,6 +2042,8 @@ export type UserCreateWithoutPhoneOtpsInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPhoneOtpsInput = {
@@ -1694,6 +2074,8 @@ export type UserUncheckedCreateWithoutPhoneOtpsInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPhoneOtpsInput = {
@@ -1740,6 +2122,8 @@ export type UserUpdateWithoutPhoneOtpsInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
@@ -1770,6 +2154,8 @@ export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionInput = {
@@ -1800,6 +2186,8 @@ export type UserCreateWithoutSubscriptionInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionInput = {
@@ -1830,6 +2218,8 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionInput = {
@@ -1876,6 +2266,8 @@ export type UserUpdateWithoutSubscriptionInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionInput = {
@@ -1906,6 +2298,8 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -1936,6 +2330,8 @@ export type UserCreateWithoutPaymentsInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -1966,6 +2362,8 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2012,6 +2410,8 @@ export type UserUpdateWithoutPaymentsInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2042,6 +2442,8 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreditBalanceInput = {
@@ -2072,6 +2474,8 @@ export type UserCreateWithoutCreditBalanceInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreditBalanceInput = {
@@ -2102,6 +2506,8 @@ export type UserUncheckedCreateWithoutCreditBalanceInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreditBalanceInput = {
@@ -2148,6 +2554,8 @@ export type UserUpdateWithoutCreditBalanceInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreditBalanceInput = {
@@ -2178,6 +2586,8 @@ export type UserUncheckedUpdateWithoutCreditBalanceInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreditTransactionsInput = {
@@ -2208,6 +2618,8 @@ export type UserCreateWithoutCreditTransactionsInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreditTransactionsInput = {
@@ -2238,6 +2650,8 @@ export type UserUncheckedCreateWithoutCreditTransactionsInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreditTransactionsInput = {
@@ -2284,6 +2698,8 @@ export type UserUpdateWithoutCreditTransactionsInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
@@ -2314,6 +2730,8 @@ export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
@@ -2344,6 +2762,8 @@ export type UserCreateWithoutProjectsInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
@@ -2374,6 +2794,8 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -2420,6 +2842,8 @@ export type UserUpdateWithoutProjectsInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -2450,6 +2874,8 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationsInput = {
@@ -2480,6 +2906,8 @@ export type UserCreateWithoutConversationsInput = {
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationsInput = {
@@ -2510,6 +2938,8 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationsInput = {
@@ -2556,6 +2986,8 @@ export type UserUpdateWithoutConversationsInput = {
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -2586,6 +3018,8 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeploymentsInput = {
@@ -2616,6 +3050,8 @@ export type UserCreateWithoutDeploymentsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeploymentsInput = {
@@ -2646,6 +3082,8 @@ export type UserUncheckedCreateWithoutDeploymentsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeploymentsInput = {
@@ -2692,6 +3130,8 @@ export type UserUpdateWithoutDeploymentsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeploymentsInput = {
@@ -2722,6 +3162,8 @@ export type UserUncheckedUpdateWithoutDeploymentsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUsageLogsInput = {
@@ -2752,6 +3194,8 @@ export type UserCreateWithoutUsageLogsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUsageLogsInput = {
@@ -2782,6 +3226,8 @@ export type UserUncheckedCreateWithoutUsageLogsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUsageLogsInput = {
@@ -2828,6 +3274,8 @@ export type UserUpdateWithoutUsageLogsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUsageLogsInput = {
@@ -2858,6 +3306,8 @@ export type UserUncheckedUpdateWithoutUsageLogsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCompetitorScansInput = {
@@ -2888,6 +3338,8 @@ export type UserCreateWithoutCompetitorScansInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCompetitorScansInput = {
@@ -2918,6 +3370,8 @@ export type UserUncheckedCreateWithoutCompetitorScansInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  authAccounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  authSessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCompetitorScansInput = {
@@ -2964,6 +3418,8 @@ export type UserUpdateWithoutCompetitorScansInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCompetitorScansInput = {
@@ -2994,6 +3450,8 @@ export type UserUncheckedUpdateWithoutCompetitorScansInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  authAccounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  authSessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -3015,6 +3473,8 @@ export type UserCountOutputType = {
   deployments: number
   usageLogs: number
   competitorScans: number
+  authAccounts: number
+  authSessions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3031,6 +3491,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   deployments?: boolean | UserCountOutputTypeCountDeploymentsArgs
   usageLogs?: boolean | UserCountOutputTypeCountUsageLogsArgs
   competitorScans?: boolean | UserCountOutputTypeCountCompetitorScansArgs
+  authAccounts?: boolean | UserCountOutputTypeCountAuthAccountsArgs
+  authSessions?: boolean | UserCountOutputTypeCountAuthSessionsArgs
 }
 
 /**
@@ -3134,6 +3596,20 @@ export type UserCountOutputTypeCountCompetitorScansArgs<ExtArgs extends runtime.
   where?: Prisma.CompetitorScanWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAuthAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccountWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAuthSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3164,6 +3640,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   deployments?: boolean | Prisma.User$deploymentsArgs<ExtArgs>
   usageLogs?: boolean | Prisma.User$usageLogsArgs<ExtArgs>
   competitorScans?: boolean | Prisma.User$competitorScansArgs<ExtArgs>
+  authAccounts?: boolean | Prisma.User$authAccountsArgs<ExtArgs>
+  authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -3230,6 +3708,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   deployments?: boolean | Prisma.User$deploymentsArgs<ExtArgs>
   usageLogs?: boolean | Prisma.User$usageLogsArgs<ExtArgs>
   competitorScans?: boolean | Prisma.User$competitorScansArgs<ExtArgs>
+  authAccounts?: boolean | Prisma.User$authAccountsArgs<ExtArgs>
+  authSessions?: boolean | Prisma.User$authSessionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -3254,6 +3734,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     deployments: Prisma.$DeploymentPayload<ExtArgs>[]
     usageLogs: Prisma.$UsageLogPayload<ExtArgs>[]
     competitorScans: Prisma.$CompetitorScanPayload<ExtArgs>[]
+    authAccounts: Prisma.$AccountPayload<ExtArgs>[]
+    authSessions: Prisma.$SessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3678,6 +4160,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   deployments<T extends Prisma.User$deploymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deploymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeploymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   usageLogs<T extends Prisma.User$usageLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$usageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsageLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   competitorScans<T extends Prisma.User$competitorScansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$competitorScansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompetitorScanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  authAccounts<T extends Prisma.User$authAccountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  authSessions<T extends Prisma.User$authSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$authSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4478,6 +4962,54 @@ export type User$competitorScansArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.CompetitorScanScalarFieldEnum | Prisma.CompetitorScanScalarFieldEnum[]
+}
+
+/**
+ * User.authAccounts
+ */
+export type User$authAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Account
+   */
+  select?: Prisma.AccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Account
+   */
+  omit?: Prisma.AccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AccountInclude<ExtArgs> | null
+  where?: Prisma.AccountWhereInput
+  orderBy?: Prisma.AccountOrderByWithRelationInput | Prisma.AccountOrderByWithRelationInput[]
+  cursor?: Prisma.AccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.authSessions
+ */
+export type User$authSessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Session
+   */
+  select?: Prisma.SessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Session
+   */
+  omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  where?: Prisma.SessionWhereInput
+  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
+  cursor?: Prisma.SessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
 }
 
 /**
