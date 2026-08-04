@@ -1,17 +1,13 @@
 import { z } from "zod"
 
 export const ModelIdSchema = z.enum([
-  // Anthropic Claude
   "claude-sonnet-4-6",
   "claude-opus-4-8",
   "claude-haiku-4-5-20251001",
-  // DeepSeek
   "deepseek-v4-flash",
   "deepseek-v4-pro",
-  // OpenAI
   "gpt-4o",
   "gpt-4o-mini",
-  // Kimi
   "kimi-k2-6",
 ])
 

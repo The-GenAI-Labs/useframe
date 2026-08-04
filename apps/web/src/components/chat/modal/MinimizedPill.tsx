@@ -34,7 +34,7 @@ export const MinimizedPill = memo(function MinimizedPill() {
                     position: absolute;
                     inset: 0;
                     border-radius: inherit;
-                    padding: 4px; /* border thickness, was border-4 */
+                    padding: 4px;
                     background: conic-gradient(
                         from var(--pill-angle),
                         #66A8FF 0deg,
@@ -43,7 +43,6 @@ export const MinimizedPill = memo(function MinimizedPill() {
                         #fff 270deg,
                         #66A8FF 360deg
                     );
-                    /* mask so the gradient only shows in the border ring */
                     -webkit-mask:
                         linear-gradient(#fff 0 0) content-box,
                         linear-gradient(#fff 0 0);

@@ -31,7 +31,6 @@ app.get("/health", (_req: Request, res: Response) => {
 
 app.use("/api/auth", authRoutes)
 app.use("/api/projects", projectRoutes)
-// only * cannot be written in new latest express version so *splat anything can be wrtien here instead of saplt
 app.use("/{*splat}", (_req: Request, res: Response) => {
     res.status(404).json({ success: false, message: "Route not found" })
 })

@@ -15,7 +15,6 @@ export default function ChatView() {
 
     return (
         <div className="flex flex-col h-full w-full overflow-hidden">
-            {/* Top bar */}
             <div className="flex items-center justify-between px-6 pt-4 pb-3 shrink-0 border-b border-base">
                 <div className="flex items-center gap-2">
                     <div className="w-6 h-6 rounded-lg bg-linear-to-br from-blue-400 to-blue-600 shadow-sm" />

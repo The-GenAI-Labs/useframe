@@ -64,7 +64,6 @@ export function useSSE() {
               const data = JSON.parse(dataStr)
               opts.onEvent({ type: eventType, ...data } as SSEEvent)
             } catch {
-              // skip malformed
             }
           }
         }

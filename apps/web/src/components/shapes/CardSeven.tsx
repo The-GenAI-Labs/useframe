@@ -6,9 +6,6 @@ import { ShapeCard } from "./ShapeCard";
 import { generateSevenCornerPath } from "./generateSevenCornerPath";
 import type { SevenCornerParams } from "./types";
 
-// CardSeven — outer rounded card with a wider two-transition concave notch.
-// Same fluid, measured-path approach as CardFive.
-
 export interface CardSevenProps extends Partial<SevenCornerParams> {
   className?: string;
   style?: CSSProperties;

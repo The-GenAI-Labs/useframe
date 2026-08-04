@@ -84,7 +84,6 @@ export const ShapeEl = memo(function ShapeEl({ s, selected, onMouseDown, onDoubl
                         ].join(" ")}
                     />
                 )}
-                {/* fat transparent line widens the click target */}
                 <line x1={s.x} y1={s.y} x2={x2} y2={y2} stroke="transparent" strokeWidth={16} />
             </g>
         );
@@ -117,7 +116,6 @@ export const ShapeEl = memo(function ShapeEl({ s, selected, onMouseDown, onDoubl
                 fill={s.fill || s.stroke}
                 fontSize={s.fontSize ?? 18}
                 fontWeight={s.fontWeight ?? "400"}
-                // style={{ userSelect: "none" }}
                 {...shared}
             >
                 {s.text || "Text"}

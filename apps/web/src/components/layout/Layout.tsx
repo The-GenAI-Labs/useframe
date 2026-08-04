@@ -23,10 +23,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="flex items-center justify-center h-screen w-screen bg-shell">
-            {/* on mobile the sidebar overlays as a drawer; on desktop it shifts content */}
             <div className="flex h-full md:h-[96vh] w-full md:w-[98vw] md:rounded-3xl overflow-hidden transition-all duration-300 ease-in-out">
 
-                {/* mobile: full-height overlay drawer, desktop: inline panel */}
                 {sidebarOpen && (
                     <div
                         className="md:hidden fixed inset-0 z-40 bg-black/30"

@@ -29,7 +29,6 @@ export const errorHandler = (
         return
     }
 
-    // JWT errors
     if (err.name === "JsonWebTokenError") {
         res.status(401).json({ success: false, message: "Invalid token" })
         return
@@ -40,13 +39,11 @@ export const errorHandler = (
         return
     }
 
-    // Prisma unique constraint
     if ((err as any).code === "P2002") {
         res.status(409).json({ success: false, message: "Already exists" })
         return
     }
 
-    // fallback
     res.status(500).json({
         success: false,
         message: env.NODE_ENV === "development" ? err.message : "Internal server error",

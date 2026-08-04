@@ -36,8 +36,6 @@ export const loginSchema = z.object({
 })
 
 export const refreshSchema = z.object({
-    // refresh token comes from cookie, not body
-    // this schema is just a placeholder for future body fields
 })
 
 export type RegisterInput = z.infer<typeof registerSchema>

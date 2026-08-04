@@ -100,7 +100,6 @@ export function WorkspaceShell({ project }: Props) {
 
   return (
     <div className="flex h-full flex-col">
-      {/* Tab bar + model selector */}
       <div className="flex items-center justify-between border-b border-border px-4">
         <div className="flex items-center gap-1">
           <button
@@ -126,7 +125,6 @@ export function WorkspaceShell({ project }: Props) {
           </button>
         </div>
 
-        {/* Model selector — disabled while streaming */}
         <div className="py-1.5">
           <ModelSelector disabled={isStreaming} />
         </div>

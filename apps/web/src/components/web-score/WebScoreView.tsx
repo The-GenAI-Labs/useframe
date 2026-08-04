@@ -75,7 +75,6 @@ function gradeLabel(score: number) {
     return { grade: "F", color: "text-red-600", bg: "bg-red-50" };
 }
 
-// deterministic mock score from URL string — same URL = same result
 function scoreFromUrl(url: string): ScanState["categories"] {
     const seed = url.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
     const rnd = (min: number, max: number, offset: number) => {
@@ -244,7 +243,6 @@ export default function WebScoreView() {
                     </p>
                 </div>
 
-                {/* URL input */}
                 <div className="flex gap-2 max-w-2xl">
                     <div className="flex-1 flex items-center gap-2.5 px-4 py-3 rounded-2xl border border-base bg-surface shadow-sm focus-within:border-blue-300 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-mut shrink-0">
@@ -286,7 +284,6 @@ export default function WebScoreView() {
                 </div>
             </div>
 
-            {/* Scanning animation */}
             {state.status === "scanning" && (
                 <div className="flex flex-col items-center justify-center flex-1 gap-6 px-6 py-12">
                     <div className="relative w-20 h-20">
@@ -313,10 +310,8 @@ export default function WebScoreView() {
                 </div>
             )}
 
-            {/* Results */}
             {state.status === "done" && (
                 <div className="px-6 md:px-10 pb-10 flex flex-col gap-6">
-                    {/* Overall score hero */}
                     <div className="flex flex-col md:flex-row gap-5 items-start md:items-center p-6 rounded-3xl border border-base bg-surface shadow-sm max-w-2xl">
                         <div className="relative shrink-0">
                             <RingScore score={state.overall} size={96} />
@@ -340,7 +335,6 @@ export default function WebScoreView() {
                         </div>
                     </div>
 
-                    {/* Categories grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl">
                         {state.categories.map((cat) => {
                             const pct = Math.round((cat.score / cat.max) * 100);
@@ -386,7 +380,6 @@ export default function WebScoreView() {
                         })}
                     </div>
 
-                    {/* Action row */}
                     <div className="flex flex-wrap gap-2 max-w-2xl">
                         <button
                             type="button"
@@ -414,7 +407,6 @@ export default function WebScoreView() {
                 </div>
             )}
 
-            {/* Idle state hint */}
             {state.status === "idle" && (
                 <div className="flex-1 flex items-center justify-center px-6 pb-10">
                     <div className="flex flex-col items-center gap-4 text-center max-w-xs">

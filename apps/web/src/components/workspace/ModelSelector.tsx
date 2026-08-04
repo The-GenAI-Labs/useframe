@@ -22,7 +22,6 @@ const PROVIDER_LABELS: Record<ModelProvider, string> = {
 
 const PROVIDER_ORDER: ModelProvider[] = ["anthropic", "deepseek", "openai", "kimi"]
 
-// Group models by provider for the dropdown sections
 const grouped = PROVIDER_ORDER.map((provider) => ({
   provider,
   label: PROVIDER_LABELS[provider],

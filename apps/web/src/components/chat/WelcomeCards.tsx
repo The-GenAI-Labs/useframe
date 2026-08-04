@@ -125,7 +125,6 @@ function ScrollColumn({
 
     return (
         <div className="relative flex-1">
-            {/* Up arrow */}
             {!atTop && (
                 <button
                     onClick={scrollUp}
@@ -137,7 +136,6 @@ function ScrollColumn({
                 </button>
             )}
 
-            {/* Scrollable column */}
             <div
                 ref={scrollRef}
                 className="flex flex-col gap-3 overflow-y-auto rounded-3xl"
@@ -155,7 +153,6 @@ function ScrollColumn({
                 ))}
             </div>
 
-            {/* Down arrow */}
             {!atBottom && (
                 <button
                     onClick={scrollDown}

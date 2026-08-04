@@ -11,7 +11,6 @@ export const AuthService = {
     async register(input: RegisterInput, res: Response) {
         const { name, email, password } = input
 
-        // check existing user
         const existing = await prisma.user.findUnique({
             where: { email },
         })
@@ -20,10 +19,8 @@ export const AuthService = {
             throw new AppError("Email already in use", 409)
         }
 
-        // hash password
         const hashedPassword = await hashPassword(password)
 
-        // create user
         const user = await prisma.user.create({
             data: {
                 name,
@@ -41,12 +38,10 @@ export const AuthService = {
             },
         })
 
-        // generate tokens
         const tokenPayload = { id: user.id, email: user.email, plan: user.plan }
         const accessToken = signAccessToken(tokenPayload)
         const refreshToken = signRefreshToken(tokenPayload)
 
-        // set refresh token in httpOnly cookie
         setRefreshTokenCookie(res, refreshToken)
 
         return {
@@ -58,7 +53,6 @@ export const AuthService = {
     async login(input: LoginInput, res: Response) {
         const { email, password } = input
 
-        // find user — include password for comparison
         const user = await prisma.user.findUnique({
             where: { email, deletedAt: null },
             select: {
@@ -72,7 +66,6 @@ export const AuthService = {
             },
         })
 
-        // generic error — don't reveal if email exists
         if (!user) {
             throw new AppError("Invalid email or password", 401)
         }
@@ -94,15 +87,12 @@ export const AuthService = {
             throw new AppError("Invalid email or password", 401)
         }
 
-        // generate tokens
         const tokenPayload = { id: user.id, email: user.email, plan: user.plan }
         const accessToken = signAccessToken(tokenPayload)
         const refreshToken = signRefreshToken(tokenPayload)
 
-        // set refresh token cookie
         setRefreshTokenCookie(res, refreshToken)
 
-        // return user without password
         const { password: _, ...safeUser } = user
 
         return {
@@ -116,14 +106,12 @@ export const AuthService = {
             throw new AppError("No refresh token", 401)
         }
 
-        // verify refresh token
         const payload = verifyRefreshToken(refreshToken)
 
         if (payload.type !== "refresh") {
             throw new AppError("Invalid token type", 401)
         }
 
-        // verify user still exists and is active
         const user = await prisma.user.findUnique({
             where: { id: payload.id, deletedAt: null },
             select: { id: true, email: true, plan: true, isActive: true },
@@ -133,7 +121,6 @@ export const AuthService = {
             throw new AppError("User not found or inactive", 401)
         }
 
-        // issue new tokens
         const tokenPayload = { id: user.id, email: user.email, plan: user.plan }
         const newAccess = signAccessToken(tokenPayload)
         const newRefresh = signRefreshToken(tokenPayload)

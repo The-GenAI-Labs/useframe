@@ -57,7 +57,7 @@ export function ChatModal() {
     );
 
     const handleExpand = useCallback(() => {
-        close(); // keep messages in store — ChatView reads same store
+        close();
         router.push("/chat");
     }, [close, router]);
 
@@ -132,12 +132,7 @@ export function ChatModal() {
                         </>
                     ) : (
                         <div className="flex flex-col items-center gap-4 px-4 pt-5 pb-5 md:px-5">
-                            {/* <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-blue-400 to-blue-600 shadow-lg" /> */}
-
                             <div className="text-center">
-                                {/* <h2 className="text-[20px] font-bold text-black/85 tracking-tight leading-tight">
-                                    How can I help?
-                                </h2> */}
                                 <p className="text-sm text-mut mt-1 leading-snug">
                                     Ask me to update your workspace, assign<br />tasks, or automate workflows.
                                 </p>

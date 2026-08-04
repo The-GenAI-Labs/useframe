@@ -12,7 +12,6 @@ export interface CardFiveProps extends Partial<FiveCornerParams> {
   className?: string;
   style?: CSSProperties;
   children?: ReactNode;
-  /** disable float/hover (e.g. when embedded in another animated container). */
   static?: boolean;
 }
 

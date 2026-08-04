@@ -23,7 +23,6 @@ export const SearchModal = memo(function SearchModal() {
 
     useEffect(() => {
         if (!isOpen) { setQuery(""); return; }
-        // small delay so the element is mounted before focusing
         const t = setTimeout(() => inputRef.current?.focus(), 30);
         return () => clearTimeout(t);
     }, [isOpen]);
@@ -44,14 +43,12 @@ export const SearchModal = memo(function SearchModal() {
 
     return (
         <>
-            {/* Backdrop */}
             <div
                 className="fixed inset-0 z-[9998] bg-black/30 backdrop-blur-sm"
                 onClick={close}
                 aria-hidden="true"
             />
 
-            {/* Modal */}
             <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 pointer-events-none">
                 <div
                     role="dialog"
@@ -67,7 +64,6 @@ export const SearchModal = memo(function SearchModal() {
                     }}
                     onClick={e => e.stopPropagation()}
                 >
-                    {/* Input row */}
                     <div className="flex items-center gap-3 px-4 py-3.5 border-b" style={{ borderColor: "var(--border)" }}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" style={{ color: "var(--text-muted)" }}>
                             <circle cx="11" cy="11" r="8" />
@@ -96,7 +92,6 @@ export const SearchModal = memo(function SearchModal() {
                         </button>
                     </div>
 
-                    {/* New chat shortcut */}
                     <div className="px-2 pt-2">
                         <button
                             onClick={close}
@@ -115,7 +110,6 @@ export const SearchModal = memo(function SearchModal() {
                         </button>
                     </div>
 
-                    {/* Results */}
                     <div className="px-2 pb-2 max-h-72 overflow-y-auto" style={{ scrollbarWidth: "none" }}>
                         {filtered.length > 0 && (
                             <>
