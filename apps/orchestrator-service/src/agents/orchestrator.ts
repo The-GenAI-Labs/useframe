@@ -27,14 +27,12 @@ export async function runOrchestrator(
   }
 
   try {
-    // Stage 1: Research stub
     sseWrite(res, {
       type: "stage",
       stage: "RESEARCH",
       message: "Querying research corpus...",
     })
 
-    // Stage 2: Structure
     sseWrite(res, {
       type: "stage",
       stage: "GENERATE",
@@ -42,7 +40,6 @@ export async function runOrchestrator(
     })
     spec = await runStructureAgent(res, spec, request, model)
 
-    // Stage 3: Copy
     sseWrite(res, {
       type: "stage",
       stage: "COPY",
@@ -50,7 +47,6 @@ export async function runOrchestrator(
     })
     spec = await runCopyAgent(res, spec, request, model)
 
-    // Stage 4: Design
     sseWrite(res, {
       type: "stage",
       stage: "GENERATE",
@@ -58,7 +54,6 @@ export async function runOrchestrator(
     })
     spec = await runDesignAgent(res, spec, request, model)
 
-    // Stage 5: SEO
     sseWrite(res, {
       type: "stage",
       stage: "SEO",
@@ -66,7 +61,6 @@ export async function runOrchestrator(
     })
     spec = await runSeoAgent(spec, request, model)
 
-    // Stage 6: Critique
     sseWrite(res, {
       type: "stage",
       stage: "CRITIQUE",
@@ -74,7 +68,6 @@ export async function runOrchestrator(
     })
     spec = await runCritiqueAgent(spec, request, model)
 
-    // Persist snapshot
     const snapshot = toSnapshot(spec as SiteSpec)
 
     await prisma.projectVersion.update({

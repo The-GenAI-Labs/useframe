@@ -49,7 +49,6 @@ export async function runDesignAgent(
       designSystem = { ...fallback, ...parsed }
     }
   } catch {
-    // use fallback
   }
 
   return { ...spec, designSystem }

@@ -10,9 +10,6 @@ const envSchema = z.object({
   PORT: z.string().default("4001"),
   DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
 
-  // ── LLM provider keys ──────────────────────────────────────────────────────
-  // At least one must be set. Others are optional — the UI will only show
-  // models whose provider key is configured.
   ANTHROPIC_API_KEY: z.string().default(""),
   DEEPSEEK_API_KEY: z.string().default(""),
   OPENAI_API_KEY: z.string().default(""),
@@ -43,7 +40,6 @@ if (!parsed.success) {
 
 export const env = parsed.data
 
-// Expose which providers are live so the health endpoint can report them.
 export const CONFIGURED_PROVIDERS = {
   anthropic: env.ANTHROPIC_API_KEY !== "",
   deepseek: env.DEEPSEEK_API_KEY !== "",
