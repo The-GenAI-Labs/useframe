@@ -4,8 +4,10 @@ import { useState, useRef, useEffect, useCallback, memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useChatModalStore } from "@/store/chatModalStore";
 import { useSearchModalStore } from "@/store/searchModalStore";
+import { signOutUser } from "@/lib/auth-actions";
 
 interface SidebarProps {
     isOpen: boolean;
@@ -192,13 +194,30 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     const [starredOpen, setStarredOpen] = useState(true);
     const [projectsOpen, setProjectsOpen] = useState(false);
     const [chatsOpen, setChatsOpen] = useState(false);
+    const [loggingOut, setLoggingOut] = useState(false);
 
     const openChatModal = useChatModalStore((s) => s.open);
     const openSearch = useSearchModalStore((s) => s.open);
     const pathname = usePathname();
     const router = useRouter();
+    const { data: session } = useSession();
 
     const handleNewProject = useCallback(() => router.push("/"), [router]);
+
+    const handleLogout = useCallback(async () => {
+        if (loggingOut) return;
+        setLoggingOut(true);
+        try {
+            await signOutUser();
+        } finally {
+            setLoggingOut(false);
+        }
+    }, [loggingOut]);
+
+    const userName = session?.user?.name ?? "Guest";
+    const userEmail = session?.user?.email ?? "";
+    const userInitial = userName.charAt(0).toUpperCase();
+    const userImage = session?.user?.image;
 
     return (
         <aside className={`
@@ -350,10 +369,14 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
 
             <div className="px-3 py-4 shrink-0 border-t border-base">
                 <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-full bg-tertiary border border-base flex items-center justify-center text-sec text-sm font-bold shrink-0">J</div>
+                    {userImage ? (
+                        <Image src={userImage} alt={userName} width={32} height={32} className="w-8 h-8 rounded-full border border-base shrink-0 object-cover" />
+                    ) : (
+                        <div className="w-8 h-8 rounded-full bg-tertiary border border-base flex items-center justify-center text-sec text-sm font-bold shrink-0">{userInitial}</div>
+                    )}
                     <div className="flex-1 min-w-0">
-                        <p className="text-pri text-[13px] font-semibold truncate leading-tight">John Doe</p>
-                        <p className="text-mut text-[11px] truncate leading-tight">john@example.com</p>
+                        <p className="text-pri text-[13px] font-semibold truncate leading-tight">{userName}</p>
+                        <p className="text-mut text-[11px] truncate leading-tight">{userEmail}</p>
                     </div>
                     <Link href="/settings" title="Settings"
                         className={`w-8 h-8 flex items-center justify-center rounded-xl border transition-all duration-150 cursor-pointer shrink-0 ${H_BG2} ${H_BDR} ${pathname === "/settings" ? "text-pri bg-bubble border-em" : "text-mut bg-tertiary border-base"}`}>
@@ -362,12 +385,24 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
                         </svg>
                     </Link>
-                    <button title="Log out" className="w-8 h-8 flex items-center justify-center rounded-xl border border-base bg-tertiary text-mut hover:text-red-500 hover:border-red-300 hover:bg-red-50 dark:hover:bg-red-950/30 transition-all duration-150 cursor-pointer shrink-0">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                            <polyline points="16 17 21 12 16 7" />
-                            <line x1="21" y1="12" x2="9" y2="12" />
-                        </svg>
+                    <button
+                        title="Log out"
+                        onClick={handleLogout}
+                        disabled={loggingOut}
+                        aria-label="Log out"
+                        className="w-8 h-8 flex items-center justify-center rounded-xl border border-base bg-tertiary text-mut hover:text-red-500 hover:border-red-300 hover:bg-red-50 dark:hover:bg-red-950/30 transition-all duration-150 cursor-pointer shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                        {loggingOut ? (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="animate-spin">
+                                <path d="M21 12a9 9 0 1 1-9-9" />
+                            </svg>
+                        ) : (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+                        )}
                     </button>
                 </div>
             </div>
