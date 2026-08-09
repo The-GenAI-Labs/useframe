@@ -36,14 +36,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     transition-transform duration-300 ease-in-out
                     ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
                 `}>
-                    <Sidebar isOpen={sidebarOpen} onToggle={() => handleToggle(false)} />
+                    <Sidebar isOpen={sidebarOpen} onToggle={() => handleToggle(!sidebarOpen)} />
                 </div>
 
                 <main className={`relative flex-1 h-full bg-surface overflow-hidden transition-all duration-300 ease-in-out md:rounded-r-3xl ${sidebarOpen ? "md:rounded-l-4xl" : ""}`}>
                     {showToggle && !sidebarOpen && (
                         <button
                             onClick={() => handleToggle(true)}
-                            className="absolute top-4 left-4 z-50 p-1.5 rounded-lg transition-colors text-sec hover:text-pri cursor-ew-resize"
+                            className="md:hidden absolute top-4 left-4 z-50 p-1.5 rounded-lg transition-colors text-sec hover:text-pri cursor-ew-resize"
                         >
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                                 <rect x="3" y="3" width="18" height="18" rx="3" />
