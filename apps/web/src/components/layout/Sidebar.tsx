@@ -14,6 +14,32 @@ interface SidebarProps {
     onToggle: () => void;
 }
 
+interface RailTooltipProps {
+    label: string;
+    children: React.ReactNode;
+}
+
+const RailTooltip = memo(function RailTooltip({ label, children }: RailTooltipProps) {
+    const [show, setShow] = useState(false);
+    return (
+        <div
+            className="relative flex items-center justify-center"
+            onMouseEnter={() => setShow(true)}
+            onMouseLeave={() => setShow(false)}
+        >
+            {children}
+            <div
+                role="tooltip"
+                className={`pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-2.5 z-9999 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[12px] font-semibold shadow-lg transition-all duration-150 ease-out bg-white text-black dark:bg-white dark:text-black ${
+                    show ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"
+                }`}
+            >
+                {label}
+            </div>
+        </div>
+    );
+});
+
 function ChevronIcon({ open }: { open: boolean }) {
     return (
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -228,116 +254,124 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
 
     if (!isOpen) {
         return (
-            <aside className="hidden md:flex flex-col items-center h-full w-16 bg-shell md:rounded-l-3xl shrink-0 py-5 gap-2">
-                <button
-                    onClick={onToggle}
-                    title="Open sidebar"
-                    aria-label="Open sidebar"
-                    className={`text-mut ${H_TXT2} transition-colors p-1.5 rounded-lg cursor-e-resize mb-3`}
-                >
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="3" />
-                        <line x1="9" y1="3" x2="9" y2="21" />
-                    </svg>
-                </button>
+            <aside className="hidden md:flex flex-col items-center h-full w-14 bg-shell md:rounded-l-3xl shrink-0 py-5 gap-2">
+                <RailTooltip label="Open sidebar">
+                    <button
+                        onClick={onToggle}
+                        aria-label="Open sidebar"
+                        className={`text-mut ${H_TXT2} transition-colors p-1.5 rounded-lg cursor-e-resize mb-3`}
+                    >
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="3" />
+                            <line x1="9" y1="3" x2="9" y2="21" />
+                        </svg>
+                    </button>
+                </RailTooltip>
 
-                <button
-                    onClick={openSearch}
-                    title="Search"
-                    aria-label="Search"
-                    className={`w-10 h-10 flex items-center justify-center rounded-xl text-mut ${H_BG} ${H_TXT} transition-all duration-150 cursor-pointer shrink-0`}
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    </svg>
-                </button>
-                <button
-                    onClick={handleNewProject}
-                    title="New Project"
-                    aria-label="New Project"
-                    className={`w-10 h-10 flex items-center justify-center rounded-xl text-mut ${H_BG} ${H_TXT} transition-all duration-150 cursor-pointer shrink-0`}
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-                    </svg>
-                </button>
-                <button
-                    onClick={openChatModal}
-                    title="New Chat"
-                    aria-label="New Chat"
-                    className={`w-10 h-10 flex items-center justify-center rounded-xl text-mut ${H_BG} ${H_TXT} transition-all duration-150 cursor-pointer shrink-0`}
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                        <line x1="12" y1="9" x2="12" y2="13" />
-                        <line x1="10" y1="11" x2="14" y2="11" />
-                    </svg>
-                </button>
+                <RailTooltip label="Search">
+                    <button
+                        onClick={openSearch}
+                        aria-label="Search"
+                        className={`w-10 h-10 flex items-center justify-center rounded-xl text-mut ${H_BG} ${H_TXT} transition-all duration-150 cursor-pointer shrink-0`}
+                    >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                    </button>
+                </RailTooltip>
+                <RailTooltip label="New Project">
+                    <button
+                        onClick={handleNewProject}
+                        aria-label="New Project"
+                        className={`w-10 h-10 flex items-center justify-center rounded-xl text-mut ${H_BG} ${H_TXT} transition-all duration-150 cursor-pointer shrink-0`}
+                    >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                        </svg>
+                    </button>
+                </RailTooltip>
+                <RailTooltip label="New Chat">
+                    <button
+                        onClick={openChatModal}
+                        aria-label="New Chat"
+                        className={`w-10 h-10 flex items-center justify-center rounded-xl text-mut ${H_BG} ${H_TXT} transition-all duration-150 cursor-pointer shrink-0`}
+                    >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="10" y1="11" x2="14" y2="11" />
+                        </svg>
+                    </button>
+                </RailTooltip>
 
                 <div className="w-8 border-t border-base my-2 shrink-0" />
 
                 {navLinks.map(({ href, label, icon }) => {
                     const active = pathname === href;
                     return (
-                        <Link
-                            key={href}
-                            href={href}
-                            title={label}
-                            aria-label={label}
-                            className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
-                                active ? "bg-bubble text-pri" : `text-mut ${H_BG} ${H_TXT}`
-                            }`}
-                        >
-                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                {icon}
-                            </svg>
-                        </Link>
+                        <RailTooltip key={href} label={label}>
+                            <Link
+                                href={href}
+                                aria-label={label}
+                                className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
+                                    active ? "bg-bubble text-pri" : `text-mut ${H_BG} ${H_TXT}`
+                                }`}
+                            >
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    {icon}
+                                </svg>
+                            </Link>
+                        </RailTooltip>
                     );
                 })}
 
                 <div className="flex-1" />
 
-                <Link
-                    href="/settings"
-                    title="Settings"
-                    aria-label="Settings"
-                    className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
-                        pathname === "/settings" ? "text-pri bg-bubble" : `text-mut ${H_BG} ${H_TXT}`
-                    }`}
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="3" />
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-                    </svg>
-                </Link>
-                <button
-                    title="Log out"
-                    onClick={handleLogout}
-                    disabled={loggingOut}
-                    aria-label="Log out"
-                    className="w-10 h-10 flex items-center justify-center rounded-xl text-mut hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-all duration-150 cursor-pointer shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                    {loggingOut ? (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="animate-spin">
-                            <path d="M21 12a9 9 0 1 1-9-9" />
-                        </svg>
-                    ) : (
+                <RailTooltip label="Settings">
+                    <Link
+                        href="/settings"
+                        aria-label="Settings"
+                        className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
+                            pathname === "/settings" ? "text-pri bg-bubble" : `text-mut ${H_BG} ${H_TXT}`
+                        }`}
+                    >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                            <polyline points="16 17 21 12 16 7" />
-                            <line x1="21" y1="12" x2="9" y2="12" />
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
                         </svg>
-                    )}
-                </button>
+                    </Link>
+                </RailTooltip>
+                <RailTooltip label="Log out">
+                    <button
+                        onClick={handleLogout}
+                        disabled={loggingOut}
+                        aria-label="Log out"
+                        className="w-10 h-10 flex items-center justify-center rounded-xl text-mut hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-all duration-150 cursor-pointer shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                        {loggingOut ? (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="animate-spin">
+                                <path d="M21 12a9 9 0 1 1-9-9" />
+                            </svg>
+                        ) : (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                            </svg>
+                        )}
+                    </button>
+                </RailTooltip>
 
-                <div className="mt-1">
-                    {userImage ? (
-                        <Image src={userImage} alt={userName} width={32} height={32} className="w-8 h-8 rounded-full border border-base shrink-0 object-cover" />
-                    ) : (
-                        <div className="w-8 h-8 rounded-full bg-tertiary border border-base flex items-center justify-center text-sec text-sm font-bold shrink-0">{userInitial}</div>
-                    )}
-                </div>
+                <RailTooltip label={userName}>
+                    <div className="mt-1">
+                        {userImage ? (
+                            <Image src={userImage} alt={userName} width={32} height={32} className="w-8 h-8 rounded-full border border-base shrink-0 object-cover" />
+                        ) : (
+                            <div className="w-8 h-8 rounded-full bg-tertiary border border-base flex items-center justify-center text-sec text-sm font-bold shrink-0">{userInitial}</div>
+                        )}
+                    </div>
+                </RailTooltip>
             </aside>
         );
     }
