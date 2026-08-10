@@ -10,7 +10,7 @@ export default memo(function GridBackground() {
     return (
         <div className="absolute inset-0 rounded-4xl bg-gray-800 overflow-hidden pointer-events-none">
             <img
-                src={isDark ? "/chat/darkuseframecloud.png" : "/chat/useframecloud.jpg"}
+                src={isDark ? "/chat/darkuseframecloud.png" : "/chat/useframe cloudchat1.png"}
                 alt=""
                 className="absolute inset-0 w-full h-full object-cover"
             />

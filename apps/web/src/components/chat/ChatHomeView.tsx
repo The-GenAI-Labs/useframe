@@ -10,6 +10,7 @@ import { useClarify } from "@/hooks/useClarify";
 import { useGenerationStream } from "@/hooks/useGenerationStream";
 import { useClarifyStore } from "@/stores/clarifyStore";
 import { useModelStore } from "@/stores/modelStore";
+import { serif } from "@/components/home/fonts";
 
 function getGreeting(hour: number): string {
     if (hour < 12) return "Good morning";
@@ -171,12 +172,20 @@ export default function ChatHomeView() {
                 <div className="flex flex-col gap-6 w-1/2 min-w-[420px]">
                     {isIdle ? (
                         <>
-                            <div>
-                                <h1 className="text-4xl font-semibold tracking-tight flex items-center gap-2.5" style={{ color: "var(--text-primary)" }}>
-                                    <span>{greeting},</span>
-                                    <span>{userName}</span>
+                            <div className="flex flex-col items-center text-center">
+                                <span
+                                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-medium mb-3"
+                                    style={{ backgroundColor: "var(--bg-bubble)", color: "var(--text-secondary)" }}
+                                >
+                                    ✨ Welcome back
+                                </span>
+                                <h1
+                                    className={`${serif.className} text-5xl tracking-tight`}
+                                    style={{ color: "var(--text-primary)" }}
+                                >
+                                    {greeting}, {userName}
                                 </h1>
-                                <p className="text-xl mt-1 font-normal" style={{ color: "var(--text-secondary)" }}>
+                                <p className="text-lg mt-1 font-normal" style={{ color: "var(--text-secondary)" }}>
                                     How can I assist you today?
                                 </p>
                             </div>

@@ -115,7 +115,7 @@ const H_TXT = "hover:[color:var(--text-primary)]";
 const H_TXT2 = "hover:[color:var(--text-secondary)]";
 const H_BDR = "hover:[border-color:var(--border-em)]";
 
-const NAV_BTN = `group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sec ${H_BG} ${H_TXT} transition-all duration-150 text-[13.5px] font-medium cursor-pointer`;
+const NAV_BTN = `group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sec ${H_BG2} ${H_TXT} transition-all duration-150 text-[13.5px] font-medium cursor-pointer`;
 const SECTION_BTN = `w-full flex items-center justify-between px-3 py-2 rounded-xl text-mut ${H_BG} ${H_TXT2} transition-all duration-150 cursor-pointer`;
 const SECTION_LABEL = "flex items-center gap-2.5 text-[11.5px] font-semibold tracking-widest uppercase whitespace-nowrap";
 
@@ -287,7 +287,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     <button
                         onClick={handleGenerateClick}
                         aria-label="Generate"
-                        className={`w-10 h-10 flex items-center justify-center rounded-xl text-mut ${H_BG} ${H_TXT} transition-all duration-150 cursor-pointer shrink-0`}
+                        className="w-10 h-10 flex items-center justify-center rounded-xl text-white shadow-sm transition-all duration-150 cursor-pointer shrink-0 hover:opacity-90 hover:shadow-md"
+                        style={{ background: "linear-gradient(135deg, #818CF8 0%, #6366F1 100%)" }}
                     >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
@@ -318,7 +319,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                                 href={href}
                                 aria-label={label}
                                 className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
-                                    active ? "bg-bubble text-pri" : `text-mut ${H_BG} ${H_TXT}`
+                                    active ? "bg-bubble text-pri" : `text-mut ${H_BG2} ${H_TXT}`
                                 }`}
                             >
                                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -336,7 +337,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                         href="/settings"
                         aria-label="Settings"
                         className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
-                            pathname === "/settings" ? "text-pri bg-bubble" : `text-mut ${H_BG} ${H_TXT}`
+                            pathname === "/settings" ? "text-pri bg-bubble" : `text-mut ${H_BG2} ${H_TXT}`
                         }`}
                     >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -383,8 +384,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         <aside className="flex flex-col h-full bg-shell md:rounded-l-3xl shrink-0 overflow-hidden w-64">
             <div className="flex items-center justify-between px-4 pt-5 pb-4 shrink-0">
                 <div className="flex items-center gap-2.5 whitespace-nowrap">
-                    <Image src="/useFrame.png" alt="useframe" width={28} height={28} className="shrink-0" />
-                    <span className="text-pri text-[15px] font-bold tracking-tight">useframe</span>
+                    <Image src="/useFrame.png" alt="useframe" width={36} height={36} className="shrink-0" />
+                    <span className="text-pri text-[19px] font-bold tracking-tight">useframe</span>
                 </div>
                 <button onClick={onToggle} title="Close sidebar" aria-label="Close sidebar" className={`text-mut ${H_TXT2} transition-colors p-1.5 rounded-lg cursor-w-resize`}>
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -417,15 +418,13 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
             <div className="px-3 pb-3 flex gap-2 shrink-0">
                 <button
                     onClick={handleGenerateClick}
-                    className="group flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl border transition-all duration-200 cursor-pointer"
-                    style={{ backgroundColor: "var(--bg-tertiary)", borderColor: "var(--border)" }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-bubble)"; el.style.borderColor = "var(--border-em)"; }}
-                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-tertiary)"; el.style.borderColor = "var(--border)"; }}
+                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer text-white shadow-sm transition-all duration-200 hover:opacity-90 hover:shadow-md"
+                    style={{ background: "linear-gradient(135deg, #818CF8 0%, #6366F1 100%)" }}
                 >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" style={{ color: "var(--text-muted)" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
                         <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                     </svg>
-                    <span className="text-[12.5px] font-semibold whitespace-nowrap" style={{ color: "var(--text-secondary)" }}>Generate</span>
+                    <span className="text-[12.5px] font-semibold whitespace-nowrap">Generate</span>
                 </button>
                 <button
                     onClick={openChatModal}
