@@ -4,6 +4,7 @@ import helmet from "helmet"
 import morgan from "morgan"
 import { env, CONFIGURED_PROVIDERS } from "@/config/env.js"
 import generateRoute from "@/routes/generate.route.js"
+import clarifyRoute from "@/routes/clarify.route.js"
 import { MODELS } from "@/llm/providers.js"
 import { prisma } from "@useframe/db"
 
@@ -36,6 +37,7 @@ app.get("/health", (_req, res) => {
 })
 
 app.use("/", generateRoute)
+app.use("/", clarifyRoute)
 
 app.use(
   "/{*splat}",

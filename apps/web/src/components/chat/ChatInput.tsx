@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback } from "react";
+import { memo, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface ChatInputForm {
@@ -9,6 +9,7 @@ interface ChatInputForm {
 
 interface ChatInputProps {
     onSubmit: (message: string) => void;
+    autoFocus?: boolean;
 }
 
 const SUGGESTIONS = [
@@ -17,12 +18,16 @@ const SUGGESTIONS = [
     { label: "Build New",          color: "#EAB308" },
 ];
 
-export default memo(function ChatInput({ onSubmit }: ChatInputProps) {
-    const { register, handleSubmit, reset, watch } = useForm<ChatInputForm>({
+export default memo(function ChatInput({ onSubmit, autoFocus }: ChatInputProps) {
+    const { register, handleSubmit, reset, watch, setFocus } = useForm<ChatInputForm>({
         defaultValues: { message: "" },
     });
 
     const message = watch("message");
+
+    useEffect(() => {
+        if (autoFocus) setFocus("message");
+    }, [autoFocus, setFocus]);
 
     const onFormSubmit = useCallback(
         (data: ChatInputForm) => {

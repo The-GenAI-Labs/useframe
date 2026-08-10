@@ -5,9 +5,8 @@ import { useSearchParams } from "next/navigation"
 import { useGenerationStore } from "@/stores/generationStore"
 import { useGenerationStream } from "@/hooks/useGenerationStream"
 import { useModelStore } from "@/stores/modelStore"
-import { GenerationStream } from "./GenerationStream"
 import { ModelSelector } from "./ModelSelector"
-import { PreviewPane } from "@/components/webcontainer/PreviewPane"
+import { VersionSlider } from "./VersionSlider"
 
 const ORCHESTRATOR_URL =
   process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001"
@@ -25,6 +24,7 @@ type ProjectShape = {
   versions: {
     id: string
     versionNumber: number
+    label: string | null
     siteType: string
     snapshot: unknown
     createdAt: string
@@ -41,23 +41,39 @@ type Props = {
   project: ProjectShape
 }
 
+function hasSnapshot(snapshot: unknown): boolean {
+  return !!snapshot && typeof snapshot === "object" && Array.isArray((snapshot as { pages?: unknown }).pages)
+}
+
 export function WorkspaceShell({ project }: Props) {
   const searchParams = useSearchParams()
   const isScanning = searchParams.get("status") === "scanning"
-  const [tab, setTab] = useState<"stream" | "preview">("stream")
+  const arrivedGenerating = searchParams.get("status") === "generating"
   const { startGeneration } = useGenerationStream()
-  const { siteSpec, isStreaming } = useGenerationStore()
+  const { isStreaming, siteSpec } = useGenerationStore()
   const { selectedModelId } = useModelStore()
   const [generationStarted, setGenerationStarted] = useState(false)
+  const [generatingVersionId, setGeneratingVersionId] = useState<string | null>(
+    arrivedGenerating ? (project.versions[0]?.id ?? null) : null,
+  )
 
   const latestVersion = project.versions[0]
   const latestScan = project.competitorScans[0]
+  const needsGeneration = latestVersion && !hasSnapshot(latestVersion.snapshot)
+
+  // ?status=generating means generation was already kicked off elsewhere (the
+  // home page's clarify flow) and this navigation is just following the SSE
+  // stream's project_created event — the generationStore singleton already
+  // has the in-flight stream, so don't start a second one here.
+  const alreadyStreamingFromElsewhere = arrivedGenerating && (isStreaming || !!siteSpec)
 
   useEffect(() => {
-    if (generationStarted || !latestVersion) return
+    if (generationStarted || !needsGeneration) return
     if (isScanning && project.status === "GENERATING") return
+    if (alreadyStreamingFromElsewhere) return
 
     setGenerationStarted(true)
+    setGeneratingVersionId(latestVersion.id)
     startGeneration(ORCHESTRATOR_URL, {
       projectId: project.id,
       versionId: latestVersion.id,
@@ -76,13 +92,11 @@ export function WorkspaceShell({ project }: Props) {
     latestScan,
     isScanning,
     generationStarted,
+    needsGeneration,
     startGeneration,
     selectedModelId,
+    alreadyStreamingFromElsewhere,
   ])
-
-  useEffect(() => {
-    if (siteSpec) setTab("preview")
-  }, [siteSpec])
 
   if (isScanning && project.status === "GENERATING") {
     return (
@@ -100,42 +114,16 @@ export function WorkspaceShell({ project }: Props) {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center justify-between border-b border-border px-4">
-        <div className="flex items-center gap-1">
-          <button
-            className={`border-b-2 px-3 py-2.5 text-sm transition-colors ${
-              tab === "stream"
-                ? "border-indigo-500 text-foreground"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-            onClick={() => setTab("stream")}
-          >
-            Generation
-          </button>
-          <button
-            className={`border-b-2 px-3 py-2.5 text-sm transition-colors ${
-              tab === "preview"
-                ? "border-indigo-500 text-foreground"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            } ${!siteSpec ? "cursor-not-allowed opacity-40" : ""}`}
-            onClick={() => siteSpec && setTab("preview")}
-            disabled={!siteSpec}
-          >
-            Preview
-          </button>
-        </div>
-
-        <div className="py-1.5">
-          <ModelSelector disabled={isStreaming} />
-        </div>
+      <div className="flex items-center justify-end border-b border-base px-4 py-1.5 shrink-0">
+        <ModelSelector disabled={isStreaming} />
       </div>
 
       <div className="flex-1 overflow-hidden">
-        {tab === "stream" ? (
-          <GenerationStream />
-        ) : (
-          <PreviewPane siteSpec={siteSpec!} />
-        )}
+        <VersionSlider
+          slug={project.slug}
+          versions={project.versions}
+          generatingVersionId={generatingVersionId}
+        />
       </div>
     </div>
   )

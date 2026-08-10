@@ -26,8 +26,9 @@ function verifyToken(req: Request): { id: string; email: string; plan: string } 
 router.post(
   "/generate",
   (req: Request, res: Response, next: NextFunction): void => {
+    let user: { id: string; email: string; plan: string }
     try {
-      verifyToken(req)
+      user = verifyToken(req)
     } catch {
       res.status(401).json({ success: false, message: "Unauthorized" })
       return
@@ -45,7 +46,7 @@ router.post(
 
     initSSE(res)
 
-    runOrchestrator(res, parsed.data).catch(next)
+    runOrchestrator(res, parsed.data, user.id).catch(next)
   }
 )
 

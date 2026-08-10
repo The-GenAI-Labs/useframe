@@ -67,7 +67,7 @@ export const SectionSchema = z.object({
 })
 
 export const SiteSpecSchema = z.object({
-  projectId: z.string(),
+  projectId: z.string().optional(),
   versionId: z.string().optional(),
   siteType: z.enum(["SINGLE_PAGE", "MULTI_PAGE"]),
   pages: z.array(
@@ -148,6 +148,13 @@ export type SSEVersionReadyEvent = {
   snapshot: SiteSpec
 }
 
+export type SSEProjectCreatedEvent = {
+  type: "project_created"
+  projectId: string
+  versionId: string
+  slug: string
+}
+
 export type SSEErrorEvent = {
   type: "error"
   message: string
@@ -158,4 +165,5 @@ export type SSEEvent =
   | SSETokenEvent
   | SSESectionCompleteEvent
   | SSEVersionReadyEvent
+  | SSEProjectCreatedEvent
   | SSEErrorEvent

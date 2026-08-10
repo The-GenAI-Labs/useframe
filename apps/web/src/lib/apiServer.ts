@@ -104,6 +104,19 @@ export type ProjectDetail = {
     }[]
 }
 
+export type ProjectVersionSummary = {
+    id: string
+    versionNumber: number
+    label: string | null
+    siteType: string
+    snapshot: unknown
+    createdAt: string
+}
+
+export type CreateVersionResult = {
+    version: { id: string; versionNumber: number }
+}
+
 export const apiServer = {
     listProjects: () => apiFetch<ProjectSummary[]>("/api/projects"),
 
@@ -115,4 +128,12 @@ export const apiServer = {
 
     getProjectBySlug: (slug: string) =>
         apiFetch<ProjectDetail>(`/api/projects/${slug}`),
+
+    listVersions: (slug: string) =>
+        apiFetch<ProjectVersionSummary[]>(`/api/projects/${slug}/versions`),
+
+    createVersion: (slug: string) =>
+        apiFetch<CreateVersionResult>(`/api/projects/${slug}/versions`, {
+            method: "POST",
+        }),
 }

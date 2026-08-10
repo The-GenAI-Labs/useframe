@@ -6,8 +6,9 @@ import { useGenerationStore } from "@/stores/generationStore"
 import type { SSEEvent, SiteSpec, ModelId } from "@repo/schemas"
 
 type GeneratePayload = {
-  projectId: string
-  versionId: string
+  projectId?: string
+  versionId?: string
+  name?: string
   startupIdea: string
   niche: string
   targetAudience: string
@@ -15,6 +16,10 @@ type GeneratePayload = {
   sourceUrl?: string
   scanResult?: Record<string, unknown>
   modelId?: ModelId
+}
+
+type StartGenerationOptions = {
+  onProjectCreated?: (info: { projectId: string; versionId: string; slug: string }) => void
 }
 
 export function useGenerationStream() {
@@ -30,7 +35,7 @@ export function useGenerationStream() {
   } = useGenerationStore()
 
   const startGeneration = useCallback(
-    (orchestratorUrl: string, payload: GeneratePayload) => {
+    (orchestratorUrl: string, payload: GeneratePayload, options?: StartGenerationOptions) => {
       reset()
       setStreaming(true)
 
@@ -49,6 +54,13 @@ export function useGenerationStream() {
                 event.sectionType,
                 event.sectionIndex,
               )
+              break
+            case "project_created":
+              options?.onProjectCreated?.({
+                projectId: event.projectId,
+                versionId: event.versionId,
+                slug: event.slug,
+              })
               break
             case "version_ready":
               setSiteSpec(event.snapshot as SiteSpec)
