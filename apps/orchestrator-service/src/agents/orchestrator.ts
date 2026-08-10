@@ -1,6 +1,6 @@
 import type { Response } from "express"
 import { sseWrite, sseError } from "@/llm/stream.js"
-import { getModel } from "@/llm/providers.js"
+import { getDeepseekModel } from "@/llm/providers.js"
 import { runStructureAgent } from "./structure.agent.js"
 import { runCopyAgent } from "./copy.agent.js"
 import { runDesignAgent } from "./design.agent.js"
@@ -9,8 +9,7 @@ import { runCritiqueAgent } from "./critique.agent.js"
 import { toSnapshot } from "@/spec/toSnapshot.js"
 import { uniqueSlug } from "@/lib/slug.js"
 import { prisma } from "@useframe/db"
-import type { GenerateRequest, SiteSpec, ModelId } from "@repo/schemas"
-import { DEFAULT_MODEL_ID } from "@repo/schemas"
+import type { GenerateRequest, SiteSpec } from "@repo/schemas"
 
 async function ensureProject(
   request: GenerateRequest,
@@ -57,10 +56,10 @@ export async function runOrchestrator(
   request: GenerateRequest,
   userId: string,
 ): Promise<void> {
-  const modelId: ModelId = request.modelId ?? DEFAULT_MODEL_ID
-  const model = getModel(modelId)
+  // Forced to DeepSeek for now — swap to getClaudeModel() to switch back.
+  const model = getDeepseekModel()
 
-  console.log(`[orchestrator] Using model: ${modelId}`)
+  console.log(`[orchestrator] Using model: deepseek-chat`)
 
   let projectId = request.projectId
   let versionId = request.versionId

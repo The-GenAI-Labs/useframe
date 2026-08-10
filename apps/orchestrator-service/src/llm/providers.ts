@@ -37,6 +37,14 @@ const PROVIDER_MODEL_MAP: Record<ModelId, { provider: ModelProvider; apiModel: s
   "kimi-k2-6":                 { provider: "kimi",      apiModel: "moonshot-v1-8k" },
 }
 
+export function getClaudeModel(): LanguageModelV1 {
+  return anthropicProvider("claude-sonnet-4-6") as LanguageModelV1
+}
+
+export function getDeepseekModel(): LanguageModelV1 {
+  return deepseekProvider("deepseek-chat") as LanguageModelV1
+}
+
 export function getModel(modelId: ModelId = DEFAULT_MODEL_ID): LanguageModelV1 {
   const entry = PROVIDER_MODEL_MAP[modelId]
 
