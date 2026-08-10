@@ -115,7 +115,7 @@ const H_TXT = "hover:[color:var(--text-primary)]";
 const H_TXT2 = "hover:[color:var(--text-secondary)]";
 const H_BDR = "hover:[border-color:var(--border-em)]";
 
-const NAV_BTN = `group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sec ${H_BG2} ${H_TXT} transition-all duration-150 text-[13.5px] font-medium cursor-pointer`;
+const NAV_BTN = `group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sec ${H_BG} ${H_TXT} transition-all duration-150 text-[13.5px] font-medium cursor-pointer`;
 const SECTION_BTN = `w-full flex items-center justify-between px-3 py-2 rounded-xl text-mut ${H_BG} ${H_TXT2} transition-all duration-150 cursor-pointer`;
 const SECTION_LABEL = "flex items-center gap-2.5 text-[11.5px] font-semibold tracking-widest uppercase whitespace-nowrap";
 
@@ -319,7 +319,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                                 href={href}
                                 aria-label={label}
                                 className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
-                                    active ? "bg-bubble text-pri" : `text-mut ${H_BG2} ${H_TXT}`
+                                    active ? "bg-tertiary text-pri" : `text-mut ${H_BG} ${H_TXT}`
                                 }`}
                             >
                                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -337,7 +337,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                         href="/settings"
                         aria-label="Settings"
                         className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
-                            pathname === "/settings" ? "text-pri bg-bubble" : `text-mut ${H_BG2} ${H_TXT}`
+                            pathname === "/settings" ? "text-pri bg-tertiary" : `text-mut ${H_BG} ${H_TXT}`
                         }`}
                     >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -446,7 +446,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 {navLinks.map(({ href, label, icon }) => {
                     const active = pathname === href;
                     return (
-                        <Link key={href} href={href} className={`${NAV_BTN} ${active ? "bg-bubble text-pri font-semibold" : ""}`}>
+                        <Link key={href} href={href} className={`${NAV_BTN} ${active ? "bg-tertiary text-pri font-semibold" : ""}`}>
                             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-mut transition-colors duration-150">
                                 {icon}
                             </svg>
