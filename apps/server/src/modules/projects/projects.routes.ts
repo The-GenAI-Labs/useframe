@@ -13,6 +13,7 @@ router.get("/", ProjectsController.list)
 router.get("/:slug", ProjectsController.getBySlug)
 router.patch("/:slug", validate(UpdateProjectSchema), ProjectsController.update)
 router.get("/:slug/versions", ProjectsController.listVersions)
+router.post("/:slug/versions", ProjectsController.createVersion)
 router.get("/:slug/versions/:versionId", ProjectsController.getVersion)
 
 export default router

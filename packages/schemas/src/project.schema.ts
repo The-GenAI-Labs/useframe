@@ -35,15 +35,6 @@ export const CreateProjectSchema = z.object({
   sourceUrl: z.string().url("Must be a valid URL").optional(),
   siteType: SiteTypeEnum.optional(),
 })
-  .refine(
-    (data) =>
-      data.inputType === "FROM_SCRATCH" ||
-      (data.sourceUrl !== undefined && data.sourceUrl.length > 0),
-    {
-      message: "sourceUrl is required when inputType is not FROM_SCRATCH",
-      path: ["sourceUrl"],
-    }
-  )
 
 export const UpdateProjectSchema = z.object({
   name: z.string().min(1).max(100).optional(),
@@ -54,8 +45,9 @@ export const UpdateProjectSchema = z.object({
 })
 
 export const GenerateRequestSchema = z.object({
-  projectId: z.string().cuid(),
-  versionId: z.string().cuid(),
+  projectId: z.string().cuid().optional(),
+  versionId: z.string().cuid().optional(),
+  name: z.string().min(1).max(100).optional(),
   startupIdea: z.string(),
   niche: z.string(),
   targetAudience: z.string(),
@@ -65,8 +57,29 @@ export const GenerateRequestSchema = z.object({
   modelId: ModelIdSchema.optional(),
 })
 
+export const ClarifyRequestSchema = z.object({
+  startupIdea: z.string().min(3).max(2000),
+  answers: z.record(z.string(), z.string()).optional(),
+})
+
+export const ClarifyQuestionSchema = z.object({
+  id: z.string(),
+  question: z.string(),
+})
+
+export const ClarifyResponseSchema = z.object({
+  ready: z.boolean(),
+  questions: z.array(ClarifyQuestionSchema).optional(),
+  niche: NicheCategoryEnum.optional(),
+  targetAudience: z.string().optional(),
+  name: z.string().optional(),
+})
+
 export type CreateProjectInput = z.infer<typeof CreateProjectSchema>
 export type UpdateProjectInput = z.infer<typeof UpdateProjectSchema>
 export type GenerateRequest = z.infer<typeof GenerateRequestSchema>
 export type NicheCategory = z.infer<typeof NicheCategoryEnum>
 export type ProjectInputType = z.infer<typeof ProjectInputTypeEnum>
+export type ClarifyRequest = z.infer<typeof ClarifyRequestSchema>
+export type ClarifyQuestion = z.infer<typeof ClarifyQuestionSchema>
+export type ClarifyResponse = z.infer<typeof ClarifyResponseSchema>

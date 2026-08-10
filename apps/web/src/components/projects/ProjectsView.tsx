@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useProjectModalStore } from "@/store/projectModalStore";
 import type { ProjectSummary } from "@/lib/apiServer";
 
 const STATUS_STYLES: Record<string, string> = {
@@ -47,7 +47,7 @@ function ProjectCard({ project }: { project: ProjectSummary }) {
 }
 
 export default function ProjectsView({ initialProjects }: { initialProjects: ProjectSummary[] }) {
-    const router = useRouter();
+    const openProjectModal = useProjectModalStore((s) => s.open);
 
     return (
         <div className="flex flex-col h-full w-full px-8 py-10">
@@ -57,8 +57,8 @@ export default function ProjectsView({ initialProjects }: { initialProjects: Pro
                     <p className="text-sm text-mut">All your UseFrame projects in one place.</p>
                 </div>
                 <button
-                    onClick={() => router.push("/project/new")}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-pri text-shell text-[13px] font-semibold hover:opacity-90 transition-opacity duration-150 cursor-pointer"
+                    onClick={openProjectModal}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-inv text-inv text-[13px] font-semibold hover:opacity-90 transition-opacity duration-150 cursor-pointer"
                 >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
@@ -77,7 +77,7 @@ export default function ProjectsView({ initialProjects }: { initialProjects: Pro
                         </div>
                         <p className="text-sm font-medium text-mut">No projects yet</p>
                         <button
-                            onClick={() => router.push("/project/new")}
+                            onClick={openProjectModal}
                             className="text-[13px] font-semibold text-pri underline underline-offset-2 cursor-pointer"
                         >
                             Create your first project

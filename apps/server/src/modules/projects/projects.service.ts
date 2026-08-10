@@ -193,9 +193,39 @@ export const ProjectsService = {
         versionNumber: true,
         label: true,
         siteType: true,
+        snapshot: true,
         createdAt: true,
       },
     })
+  },
+
+  async createVersion(userId: string, slug: string) {
+    const project = await prisma.project.findFirst({
+      where: { slug, userId, deletedAt: null },
+    })
+    if (!project) throw new AppError("Project not found", 404)
+
+    const latest = await prisma.projectVersion.findFirst({
+      where: { projectId: project.id },
+      orderBy: { versionNumber: "desc" },
+      select: { versionNumber: true, siteType: true },
+    })
+
+    const version = await prisma.projectVersion.create({
+      data: {
+        projectId: project.id,
+        versionNumber: (latest?.versionNumber ?? 0) + 1,
+        siteType: latest?.siteType ?? "SINGLE_PAGE",
+        snapshot: {},
+      },
+    })
+
+    await prisma.project.update({
+      where: { id: project.id },
+      data: { currentVersionId: version.id, status: "GENERATING" },
+    })
+
+    return { version: { id: version.id, versionNumber: version.versionNumber } }
   },
 
   async getVersion(userId: string, slug: string, versionId: string) {

@@ -228,7 +228,9 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     const router = useRouter();
     const { data: session } = useSession();
 
-    const handleNewProject = useCallback(() => router.push("/"), [router]);
+    const handleGenerateClick = useCallback(() => {
+        router.push("/?focus=1");
+    }, [router]);
 
     const handleLogout = useCallback(async () => {
         if (loggingOut) return;
@@ -246,6 +248,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     const userImage = session?.user?.image;
 
     const navLinks = [
+        { href: "/projects", label: "Projects", icon: <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /> },
         { href: "/web-score", label: "Web Score", icon: <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /> },
         { href: "/research", label: "Research", icon: <><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></> },
         { href: "/templates", label: "Templates", icon: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></> },
@@ -280,10 +283,10 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                         </svg>
                     </button>
                 </RailTooltip>
-                <RailTooltip label="New Project">
+                <RailTooltip label="Generate">
                     <button
-                        onClick={handleNewProject}
-                        aria-label="New Project"
+                        onClick={handleGenerateClick}
+                        aria-label="Generate"
                         className={`w-10 h-10 flex items-center justify-center rounded-xl text-mut ${H_BG} ${H_TXT} transition-all duration-150 cursor-pointer shrink-0`}
                     >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -413,7 +416,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
 
             <div className="px-3 pb-3 flex gap-2 shrink-0">
                 <button
-                    onClick={handleNewProject}
+                    onClick={handleGenerateClick}
                     className="group flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl border transition-all duration-200 cursor-pointer"
                     style={{ backgroundColor: "var(--bg-tertiary)", borderColor: "var(--border)" }}
                     onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-bubble)"; el.style.borderColor = "var(--border-em)"; }}
@@ -422,7 +425,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" style={{ color: "var(--text-muted)" }}>
                         <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                     </svg>
-                    <span className="text-[12.5px] font-semibold whitespace-nowrap" style={{ color: "var(--text-secondary)" }}>New Project</span>
+                    <span className="text-[12.5px] font-semibold whitespace-nowrap" style={{ color: "var(--text-secondary)" }}>Generate</span>
                 </button>
                 <button
                     onClick={openChatModal}

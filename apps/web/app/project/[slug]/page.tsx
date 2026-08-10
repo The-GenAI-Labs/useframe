@@ -19,10 +19,10 @@ export default async function WorkspacePage({ params }: Props) {
     include: {
       versions: {
         orderBy: { versionNumber: "desc" },
-        take: 1,
         select: {
           id: true,
           versionNumber: true,
+          label: true,
           siteType: true,
           snapshot: true,
           createdAt: true,

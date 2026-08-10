@@ -84,7 +84,22 @@ export const projectsApi = {
   listVersions: async (slug: string) => {
     const { data } = await api.get<{
       success: true
-      data: { id: string; versionNumber: number; label: string | null; siteType: string; createdAt: string }[]
+      data: {
+        id: string
+        versionNumber: number
+        label: string | null
+        siteType: string
+        snapshot: Record<string, unknown>
+        createdAt: string
+      }[]
+    }>(`/projects/${slug}/versions`)
+    return data.data
+  },
+
+  createVersion: async (slug: string) => {
+    const { data } = await api.post<{
+      success: true
+      data: { version: { id: string; versionNumber: number } }
     }>(`/projects/${slug}/versions`)
     return data.data
   },

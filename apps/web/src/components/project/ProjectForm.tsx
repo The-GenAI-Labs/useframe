@@ -55,11 +55,14 @@ export function ProjectForm({ inputType, onSubmit, isLoading }: Props) {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<CreateProjectInput>({
     resolver: zodResolver(CreateProjectSchema),
     defaultValues: { inputType, siteType: undefined },
   })
+
+  const siteType = watch("siteType")
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -98,10 +101,10 @@ export function ProjectForm({ inputType, onSubmit, isLoading }: Props) {
               setValue("niche", v as CreateProjectInput["niche"])
             }
           >
-            <SelectTrigger>
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select niche" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent position="popper" sideOffset={6} className="z-9999">
               {NICHES.map((n) => (
                 <SelectItem key={n} value={n}>
                   {NICHE_LABELS[n]}
@@ -150,13 +153,17 @@ export function ProjectForm({ inputType, onSubmit, isLoading }: Props) {
 
       <div className="space-y-1.5">
         <Label>Site type</Label>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-2">
           {(["SINGLE_PAGE", "MULTI_PAGE"] as const).map((t) => (
             <button
               key={t}
               type="button"
               onClick={() => setValue("siteType", t)}
-              className="rounded-lg border border-border px-3 py-1.5 text-sm hover:border-muted-foreground/40"
+              className={`rounded-lg border px-3 py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer ${
+                siteType === t
+                  ? "border-em bg-bubble text-pri"
+                  : "border-base text-sec hover:border-em"
+              }`}
             >
               {t === "SINGLE_PAGE" ? "Single page" : "Multi page"}
             </button>
@@ -164,14 +171,22 @@ export function ProjectForm({ inputType, onSubmit, isLoading }: Props) {
           <button
             type="button"
             onClick={() => setValue("siteType", undefined)}
-            className="rounded-lg border border-border px-3 py-1.5 text-sm hover:border-muted-foreground/40"
+            className={`rounded-lg border px-3 py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer ${
+              siteType === undefined
+                ? "border-em bg-bubble text-pri"
+                : "border-base text-sec hover:border-em"
+            }`}
           >
             Let AI decide
           </button>
         </div>
       </div>
 
-      <Button type="submit" className="w-full" disabled={isLoading}>
+      <Button
+        type="submit"
+        className="w-full rounded-xl bg-inv py-3 text-[13.5px] font-semibold text-inv hover:bg-inv hover:opacity-90"
+        disabled={isLoading}
+      >
         {isLoading ? "Creating..." : "Create project"}
       </Button>
     </form>

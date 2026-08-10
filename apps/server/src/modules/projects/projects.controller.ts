@@ -88,6 +88,22 @@ export const ProjectsController = {
     }
   },
 
+  createVersion: async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const result = await ProjectsService.createVersion(
+        req.user!.id,
+        req.params.slug!
+      )
+      res.status(201).json({ success: true, data: result })
+    } catch (err) {
+      next(err)
+    }
+  },
+
   getVersion: async (
     req: AuthenticatedRequest,
     res: Response,
