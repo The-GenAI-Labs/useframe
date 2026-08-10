@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./queues": "./src/queues.ts",
-    "./payloads": "./src/payloads.ts"
+    ".": "./dist/index.js",
+    "./queues": "./dist/queues.js",
+    "./payloads": "./dist/payloads.js"
   },
   "scripts": {
+    "build": "tsc -p tsconfig.json",
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {

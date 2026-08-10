@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./siteSpec": "./src/siteSpec.ts",
-    "./project": "./src/project.schema.ts"
+    ".": "./dist/index.js",
+    "./siteSpec": "./dist/siteSpec.js",
+    "./project": "./dist/project.schema.js"
   },
   "scripts": {
+    "build": "tsc -p tsconfig.json",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {

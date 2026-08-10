@@ -8,6 +8,7 @@ const nextConfig = {
     turbopack: {
         root: path.resolve(__dirname, '../../'),
     },
+    transpilePackages: ['@repo/schemas', '@repo/events'],
     images: {
         remotePatterns: [
             { protocol: 'https', hostname: 'lh3.googleusercontent.com' },

@@ -1,8 +1,8 @@
 "use client"
 
 import { useCallback } from "react"
-import { useSSE } from "./useSSE.js"
-import { useGenerationStore } from "@/stores/generationStore.js"
+import { useSSE } from "./useSSE"
+import { useGenerationStore } from "@/stores/generationStore"
 import type { SSEEvent, SiteSpec, ModelId } from "@repo/schemas"
 
 type GeneratePayload = {

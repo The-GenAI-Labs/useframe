@@ -1,4 +1,4 @@
-import { api } from "../axios.js"
+import { api } from "../axios"
 import type { CreateProjectInput } from "@repo/schemas"
 
 export type CreateProjectResponse = {

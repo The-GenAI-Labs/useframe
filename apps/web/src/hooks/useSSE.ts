@@ -19,11 +19,12 @@ export function useSSE() {
       abortRef.current = controller
 
       try {
+        const accessToken = await getAccessToken()
         const res = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getAccessToken()}`,
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify(body),
           signal: controller.signal,
@@ -85,7 +86,13 @@ export function useSSE() {
   return { connect, disconnect }
 }
 
-function getAccessToken(): string {
-  if (typeof window === "undefined") return ""
-  return sessionStorage.getItem("access_token") ?? ""
+async function getAccessToken(): Promise<string> {
+  try {
+    const res = await fetch("/api/token")
+    if (!res.ok) return ""
+    const { accessToken } = (await res.json()) as { accessToken?: string }
+    return accessToken ?? ""
+  } catch {
+    return ""
+  }
 }
