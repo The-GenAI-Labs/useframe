@@ -26,7 +26,8 @@ function verifyToken(req: Request): { id: string; email: string; plan: string } 
 router.post("/clarify", async (req: Request, res: Response): Promise<void> => {
   try {
     verifyToken(req)
-  } catch {
+  } catch (err) {
+    console.error("[clarify] auth failed:", err instanceof Error ? err.message : err)
     res.status(401).json({ success: false, message: "Unauthorized" })
     return
   }

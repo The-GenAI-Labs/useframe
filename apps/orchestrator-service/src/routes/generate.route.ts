@@ -29,7 +29,8 @@ router.post(
     let user: { id: string; email: string; plan: string }
     try {
       user = verifyToken(req)
-    } catch {
+    } catch (err) {
+      console.error("[generate] auth failed:", err instanceof Error ? err.message : err)
       res.status(401).json({ success: false, message: "Unauthorized" })
       return
     }
