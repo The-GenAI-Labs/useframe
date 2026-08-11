@@ -108,7 +108,10 @@ export function VersionSlider({ slug, versions, generatingVersionId }: Props) {
                             {version.id === generatingVersionId ? (
                                 <GenerationStream />
                             ) : hasSnapshot(version.snapshot) ? (
-                                <PreviewPane siteSpec={version.snapshot} />
+                                <PreviewPane
+                                    siteSpec={version.snapshot}
+                                    active={version.id === versions[activeIndex]?.id}
+                                />
                             ) : (
                                 <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
                                     <p className="text-[13px] text-mut">This version hasn&apos;t been generated yet.</p>
