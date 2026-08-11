@@ -53,9 +53,10 @@ export function WorkspaceShell({ project }: Props) {
   const { isStreaming, siteSpec } = useGenerationStore()
   const { selectedModelId } = useModelStore()
   const [generationStarted, setGenerationStarted] = useState(false)
-  const [generatingVersionId, setGeneratingVersionId] = useState<string | null>(
+  const [streamVersionId, setStreamVersionId] = useState<string | null>(
     arrivedGenerating ? (project.versions[0]?.id ?? null) : null,
   )
+  const generatingVersionId = streamVersionId && isStreaming ? streamVersionId : null
 
   const latestVersion = project.versions[0]
   const latestScan = project.competitorScans[0]
@@ -73,7 +74,7 @@ export function WorkspaceShell({ project }: Props) {
     if (alreadyStreamingFromElsewhere) return
 
     setGenerationStarted(true)
-    setGeneratingVersionId(latestVersion.id)
+    setStreamVersionId(latestVersion.id)
     startGeneration(ORCHESTRATOR_URL, {
       projectId: project.id,
       versionId: latestVersion.id,
