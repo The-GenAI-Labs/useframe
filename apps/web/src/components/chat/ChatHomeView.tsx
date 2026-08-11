@@ -21,6 +21,32 @@ function getGreeting(hour: number): string {
 const ORCHESTRATOR_URL =
     process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001";
 
+function ChatHomeSkeleton() {
+    const glass = "bg-white/30 backdrop-blur-md border border-white/40"
+    return (
+        <div className="relative flex h-full w-full overflow-hidden" style={{ backgroundColor: "var(--bg-shell) !important" }}>
+            <GridBackground />
+
+            <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-8 py-12">
+                <div className="flex flex-col gap-6 w-1/2 min-w-[420px] animate-pulse">
+                    <div className="flex flex-col items-center text-center gap-3">
+                        <div className={`h-6 w-32 rounded-full ${glass}`} />
+                        <div className={`h-10 w-80 rounded-lg ${glass}`} />
+                        <div className={`h-5 w-56 rounded-lg ${glass}`} />
+                    </div>
+
+                    <div className="flex flex-row gap-3 w-full px-1 py-1">
+                        <div className={`flex-1 rounded-3xl ${glass}`} style={{ height: "220px" }} />
+                        <div className={`flex-1 rounded-3xl ${glass}`} style={{ height: "220px" }} />
+                    </div>
+
+                    <div className={`w-full h-24 rounded-3xl ${glass}`} />
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export default function ChatHomeView() {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -31,9 +57,15 @@ export default function ChatHomeView() {
     const { data: session } = useSession();
     const [isThinking, setIsThinking] = useState(false);
     const [greeting, setGreeting] = useState("Hi");
+    const [showSkeleton, setShowSkeleton] = useState(true);
 
     useEffect(() => {
         setGreeting(getGreeting(new Date().getHours()));
+    }, []);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setShowSkeleton(false), 1000);
+        return () => clearTimeout(timer);
     }, []);
 
     const userName = session?.user?.name ?? "there";
@@ -163,6 +195,10 @@ export default function ChatHomeView() {
     }, []);
 
     const isIdle = phase === "idle";
+
+    if (showSkeleton) {
+        return <ChatHomeSkeleton />;
+    }
 
     return (
         <div className="relative flex h-full w-full overflow-hidden" style={{ backgroundColor: "var(--bg-shell) !important" }}>

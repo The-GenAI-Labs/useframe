@@ -73,11 +73,9 @@ function sectionToJsx(section: SiteSpec["pages"][number]["sections"][number]): s
   }
 }
 
-function pageToComponent(page: SiteSpec["pages"][number], isDefault: boolean): string {
+function pageToComponent(page: SiteSpec["pages"][number], componentName: string): string {
   const sections = page.sections.map(sectionToJsx).join("\n")
-  const componentName = isDefault ? "HomePage" : `${page.type}Page`
-  return `
-export default function ${componentName}() {
+  return `export default function ${componentName}() {
   return (
     <main>
       ${sections}
@@ -89,7 +87,29 @@ export default function ${componentName}() {
 
 export function buildFsTree(spec: SiteSpec): FileSystemTree {
   const homePage = spec.pages.find((p) => p.type === "HOME") ?? spec.pages[0]!
-  const otherPages = spec.pages.filter((p) => p !== homePage)
+
+  const indexHtml = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${homePage.seo?.title ?? homePage.title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=${encodeURIComponent(spec.designSystem.fontPrimary)}:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+`
+
+  const mainJsx = `import { createRoot } from "react-dom/client"
+import App from "./App"
+import "./index.css"
+
+createRoot(document.getElementById("root")).render(<App />)
+`
 
   const files: FileSystemTree = {
     "package.json": {
@@ -98,48 +118,34 @@ export function buildFsTree(spec: SiteSpec): FileSystemTree {
           {
             name: "preview",
             private: true,
-            scripts: { dev: "next dev", build: "next build", start: "next start" },
-            dependencies: { next: "14.2.5", react: "18.3.1", "react-dom": "18.3.1" },
+            type: "module",
+            scripts: { dev: "vite --host" },
+            dependencies: { react: "18.3.1", "react-dom": "18.3.1" },
+            devDependencies: { vite: "5.4.0", "@vitejs/plugin-react": "4.3.1" },
           },
           null,
           2
         ),
       },
     },
-    "next.config.js": {
-      file: { contents: "/** @type {import('next').NextConfig} */\nmodule.exports = {}" },
+    "vite.config.js": {
+      file: {
+        contents: `import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+
+export default defineConfig({
+  plugins: [react()],
+  server: { host: true, strictPort: false },
+})
+`,
+      },
     },
-    app: {
+    "index.html": { file: { contents: indexHtml } },
+    src: {
       directory: {
-        "layout.tsx": {
-          file: {
-            contents: `import "./globals.css"
-export const metadata = { title: "${homePage.seo?.title ?? homePage.title}", description: "${homePage.seo?.description ?? ""}" }
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=${encodeURIComponent(spec.designSystem.fontPrimary)}:wght@400;600;700;800&display=swap" rel="stylesheet" />
-      </head>
-      <body>{children}</body>
-    </html>
-  )
-}`,
-          },
-        },
-        "globals.css": { file: { contents: cssVars(spec.designSystem) } },
-        "page.tsx": { file: { contents: pageToComponent(homePage, true) } },
-        ...Object.fromEntries(
-          otherPages.map((page) => [
-            page.slug,
-            {
-              directory: {
-                "page.tsx": { file: { contents: pageToComponent(page, false) } },
-              },
-            } as FileSystemTree[string],
-          ])
-        ),
+        "main.jsx": { file: { contents: mainJsx } },
+        "App.jsx": { file: { contents: pageToComponent(homePage, "App") } },
+        "index.css": { file: { contents: cssVars(spec.designSystem) } },
       },
     },
   }

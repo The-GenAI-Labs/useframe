@@ -6,14 +6,24 @@ import type { SiteSpec } from "@repo/schemas"
 
 type Props = {
   siteSpec: SiteSpec
+  active: boolean
 }
 
-export function PreviewPane({ siteSpec }: Props) {
+export function PreviewPane({ siteSpec, active }: Props) {
   const { state, boot } = useWebContainer()
 
   useEffect(() => {
+    if (!active) return
     boot(siteSpec)
-  }, [siteSpec, boot])
+  }, [active, siteSpec, boot])
+
+  if (!active && state.status === "idle") {
+    return (
+      <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
+        <p className="text-[13px] text-mut">Scroll to this version to load its preview.</p>
+      </div>
+    )
+  }
 
   if (state.status === "ready") {
     return (
