@@ -50,16 +50,6 @@ function ChevronIcon({ open }: { open: boolean }) {
     );
 }
 
-function FilledStarIcon() {
-    return <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>;
-}
-function FilledFolderIcon() {
-    return <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>;
-}
-function FilledChatIcon() {
-    return <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>;
-}
-
 const sampleStarred = [
     { id: 1, label: "Landing page copy" },
     { id: 2, label: "API docs rewrite" },
@@ -117,7 +107,7 @@ const H_BDR = "hover:[border-color:var(--border-em)]";
 
 const NAV_BTN = `group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sec ${H_BG} ${H_TXT} transition-all duration-150 text-[13.5px] font-medium cursor-pointer`;
 const SECTION_BTN = `w-full flex items-center justify-between px-3 py-2 rounded-xl text-mut ${H_BG} ${H_TXT2} transition-all duration-150 cursor-pointer`;
-const SECTION_LABEL = "flex items-center gap-2.5 text-[11.5px] font-semibold tracking-widest uppercase whitespace-nowrap";
+const SECTION_LABEL = "flex items-center gap-2.5 text-[13.5px] font-bold tracking-widest uppercase whitespace-nowrap";
 
 interface ItemDropdownProps {
     options: DropdownOption[];
@@ -176,7 +166,7 @@ const ItemDropdown = memo(function ItemDropdown({ options, onClose, triggerRef }
     );
 });
 
-interface SidebarItemProps { id: number; label: string; icon: React.ReactNode; dropdownOptions: DropdownOption[]; }
+interface SidebarItemProps { id: number; label: string; icon?: React.ReactNode; dropdownOptions: DropdownOption[]; }
 
 const SidebarItem = memo(function SidebarItem({ label, icon, dropdownOptions }: SidebarItemProps) {
     const [hovered, setHovered] = useState(false);
@@ -195,7 +185,7 @@ const SidebarItem = memo(function SidebarItem({ label, icon, dropdownOptions }: 
                 onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-tertiary)"; el.style.color = "var(--text-primary)"; }}
                 onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ""; el.style.color = "var(--text-secondary)"; }}
             >
-                <span className="shrink-0" style={{ color: "var(--text-muted)" }}>{icon}</span>
+                {icon && <span className="shrink-0" style={{ color: "var(--text-muted)" }}>{icon}</span>}
                 <span className="truncate flex-1">{label}</span>
                 <span className="shrink-0 transition-opacity duration-150" style={{ opacity: showDots ? 1 : 0, pointerEvents: showDots ? "auto" : "none" }}>
                     <button
@@ -462,7 +452,6 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 <div>
                     <button onClick={() => setStarredOpen(p => !p)} className={SECTION_BTN}>
                         <span className={SECTION_LABEL}>
-                            <span className="dark:text-white text-black opacity-75"><FilledStarIcon /></span>
                             Starred
                         </span>
                         <ChevronIcon open={starredOpen} />
@@ -470,9 +459,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     {starredOpen && (
                         <div className="mt-1 flex flex-col gap-0.5 pl-2">
                             {sampleStarred.map(item => (
-                                <SidebarItem key={item.id} id={item.id} label={item.label} dropdownOptions={STARRED_OPTIONS}
-                                    icon={<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>}
-                                />
+                                <SidebarItem key={item.id} id={item.id} label={item.label} dropdownOptions={STARRED_OPTIONS} />
                             ))}
                         </div>
                     )}
@@ -481,7 +468,6 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 <div>
                     <button onClick={() => setProjectsOpen(p => !p)} className={SECTION_BTN}>
                         <span className={SECTION_LABEL}>
-                            <span className="dark:text-white text-black opacity-75"><FilledFolderIcon /></span>
                             Projects
                         </span>
                         <ChevronIcon open={projectsOpen} />
@@ -489,9 +475,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     {projectsOpen && (
                         <div className="mt-1 flex flex-col gap-0.5 pl-2">
                             {sampleProjects.map(item => (
-                                <SidebarItem key={item.id} id={item.id} label={item.label} dropdownOptions={PROJECT_OPTIONS}
-                                    icon={<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>}
-                                />
+                                <SidebarItem key={item.id} id={item.id} label={item.label} dropdownOptions={PROJECT_OPTIONS} />
                             ))}
                         </div>
                     )}
@@ -500,7 +484,6 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 <div>
                     <button onClick={() => setChatsOpen(p => !p)} className={SECTION_BTN}>
                         <span className={SECTION_LABEL}>
-                            <span className="dark:text-white text-black opacity-75"><FilledChatIcon /></span>
                             Chats
                         </span>
                         <ChevronIcon open={chatsOpen} />
@@ -508,9 +491,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     {chatsOpen && (
                         <div className="mt-1 flex flex-col gap-0.5 pl-2">
                             {sampleChats.map(item => (
-                                <SidebarItem key={item.id} id={item.id} label={item.label} dropdownOptions={CHAT_OPTIONS}
-                                    icon={<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>}
-                                />
+                                <SidebarItem key={item.id} id={item.id} label={item.label} dropdownOptions={CHAT_OPTIONS} />
                             ))}
                         </div>
                     )}
