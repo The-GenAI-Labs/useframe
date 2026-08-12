@@ -32,10 +32,10 @@
 
 /* ── Design token system ── */
 :root {
-    /* outer shell + sidebar bg */
-    --bg-shell:      #E8E7E2;
-    /* main content panel bg — lighter than shell */
-    --bg-surface:    #F5F4EF;
+    /* outer shell + sidebar bg — visibly off-white */
+    --bg-shell:      #F9F7F3;
+    /* main content panel bg — near-white */
+    --bg-surface:    #FDFDFC;
     /* card / input bg */
     --bg-primary:    #FFFFFF;
     /* hover step 1 */

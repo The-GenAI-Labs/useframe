@@ -63,18 +63,9 @@ export default async function WorkspacePage({ params }: Props) {
 
   return (
     <div className="flex h-full flex-col bg-surface">
-      <header className="flex items-center border-b border-base px-6 py-3 shrink-0">
-        <h1 className="text-sm font-semibold text-pri">{project.name}</h1>
-        <span className="ml-3 rounded-full bg-tertiary px-2 py-0.5 text-xs capitalize text-mut">
-          {project.status.toLowerCase()}
-        </span>
-      </header>
-
-      <div className="flex-1 overflow-hidden">
-        <Suspense fallback={<WorkspaceLoading />}>
-          <WorkspaceShell project={serialised} />
-        </Suspense>
-      </div>
+      <Suspense fallback={<WorkspaceLoading />}>
+        <WorkspaceShell project={serialised} />
+      </Suspense>
     </div>
   )
 }
