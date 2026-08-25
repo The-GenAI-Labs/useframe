@@ -180,7 +180,7 @@ const SidebarItem = memo(function SidebarItem({ label, icon, dropdownOptions }: 
 
     return (
         <div className="relative" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-            <button
+            <div
                 className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] font-medium text-left transition-all duration-150 cursor-pointer"
                 style={{ color: "var(--text-secondary)" }}
                 onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-tertiary)"; el.style.color = "var(--text-primary)"; }}
@@ -201,7 +201,7 @@ const SidebarItem = memo(function SidebarItem({ label, icon, dropdownOptions }: 
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
                     </button>
                 </span>
-            </button>
+            </div>
             {dropOpen && <ItemDropdown options={dropdownOptions} onClose={handleClose} triggerRef={dotsBtnRef} />}
         </div>
     );
