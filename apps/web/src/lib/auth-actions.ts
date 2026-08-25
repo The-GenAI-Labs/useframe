@@ -5,11 +5,16 @@ import { prisma } from "@useframe/db";
 import { AuthError } from "next-auth";
 
 export async function checkUserExists(email: string): Promise<boolean> {
-    const user = await prisma.user.findUnique({
-        where: { email },
-        select: { id: true },
-    });
-    return !!user;
+    try {
+        const user = await prisma.user.findUnique({
+            where: { email },
+            select: { id: true },
+        });
+        return !!user;
+    } catch (error) {
+        console.error("checkUserExists failed:", error);
+        return false;
+    }
 }
 
 export async function signInWithGoogle() {

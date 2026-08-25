@@ -35,10 +35,23 @@ const Card = memo(function Card({
         copyTimer.current = setTimeout(() => setCopied(false), 2000);
     }, [card.topic]);
 
+    const handleKeyDown = useCallback(
+        (e: React.KeyboardEvent) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick(card.id);
+            }
+        },
+        [card.id, onClick]
+    );
+
     return (
-        <button
+        <div
+            role="button"
+            tabIndex={0}
             onClick={handleClick}
-            className="group relative w-full rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+            onKeyDown={handleKeyDown}
+            className="group relative w-full rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
             style={{ height: "220px" }}
         >
             <img
@@ -82,7 +95,7 @@ const Card = memo(function Card({
                     </div>
                 </div>
             </div>
-        </button>
+        </div>
     );
 });
 
