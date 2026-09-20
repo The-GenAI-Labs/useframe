@@ -1,16 +1,30 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Mail, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { OAuthButton } from "@/components/auth/OAuthButton";
 import { checkUserExists, signInWithEmail } from "@/lib/auth-actions";
 import { useAuthStore } from "@/store/authStore";
+
+const OAUTH_ERROR_MESSAGES: Record<string, string> = {
+    oauth: "Something went wrong signing you in. Please try again.",
+    oauth_not_configured: "sign-in isn't set up yet — use email instead, or try a different provider.",
+};
+
+function oauthErrorMessage(error: string, provider: string | null): string {
+    if (error === "oauth_not_configured") {
+        const label = provider === "google" ? "Google" : provider === "github" ? "GitHub" : "That provider";
+        return `${label} ${OAUTH_ERROR_MESSAGES.oauth_not_configured}`;
+    }
+    return OAUTH_ERROR_MESSAGES[error] ?? OAUTH_ERROR_MESSAGES.oauth;
+}
 
 const schema = z.object({
     email: z.string().email("Enter a valid email address"),
@@ -31,12 +45,23 @@ function InlineSeparator() {
 }
 
 export default function AuthForm() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
     const [step, setStep] = useState<Step>("email");
     const [isReturning, setIsReturning] = useState(false);
     const [submittedEmail, setSubmittedEmail] = useState("");
     const [serverError, setServerError] = useState("");
+    const [oauthError, setOauthError] = useState<string | null>(null);
     const [isPending, startTransition] = useTransition();
     const { magicLinkSent, setMagicLinkSent, resetMagicLink } = useAuthStore();
+
+    useEffect(() => {
+        const error = searchParams.get("error");
+        if (!error) return;
+        setOauthError(oauthErrorMessage(error, searchParams.get("provider")));
+        router.replace("/signin");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParams]);
 
     const {
         register,
@@ -119,6 +144,12 @@ export default function AuthForm() {
                         : `We'll create an account for ${submittedEmail}`}
                 </p>
             </div>
+
+            {oauthError && (
+                <p className="rounded-lg bg-red-50 px-3 py-2 text-center text-xs text-red-600">
+                    {oauthError}
+                </p>
+            )}
 
             <div className="flex flex-col gap-3">
                 <OAuthButton provider="google" />

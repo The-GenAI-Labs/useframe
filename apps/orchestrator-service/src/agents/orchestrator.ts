@@ -1,6 +1,6 @@
 import type { Response } from "express"
 import { sseWrite, sseError } from "@/llm/stream.js"
-import { getDeepseekModel } from "@/llm/providers.js"
+import { getModelForTier } from "@/llm/router.js"
 import { runStructureAgent } from "./structure.agent.js"
 import { runCopyAgent } from "./copy.agent.js"
 import { runDesignAgent } from "./design.agent.js"
@@ -29,6 +29,10 @@ async function ensureProject(
       startupIdea: request.startupIdea,
       niche: request.niche as never,
       targetAudience: request.targetAudience,
+      brandPersonality: request.brandPersonality,
+      pricePositioning: request.pricePositioning,
+      businessModel: request.businessModel,
+      differentiator: request.differentiator,
       inputType: request.inputType,
       sourceUrl: request.sourceUrl,
       status: "GENERATING",
@@ -48,6 +52,10 @@ async function ensureProject(
     data: { currentVersionId: version.id },
   })
 
+  await prisma.pipelineState.create({
+    data: { projectId: project.id, mode: request.pipelineMode ?? "MANUAL" },
+  })
+
   return { projectId: project.id, versionId: version.id }
 }
 
@@ -56,10 +64,9 @@ export async function runOrchestrator(
   request: GenerateRequest,
   userId: string,
 ): Promise<void> {
-  // Forced to DeepSeek for now — swap to getClaudeModel() to switch back.
-  const model = getDeepseekModel()
+  const model = getModelForTier(request.tier)
 
-  console.log(`[orchestrator] Using model: deepseek-chat`)
+  console.log(`[orchestrator] Using tier: ${request.tier}`)
 
   let projectId = request.projectId
   let versionId = request.versionId
@@ -82,17 +89,22 @@ export async function runOrchestrator(
       })
     }
 
+    // When this version has an approved DesignBrief (set by the Research
+    // step's /plan/approve flow), structure/design/copy execute it instead
+    // of deciding from scratch. Older projects or a manual /generate call
+    // with no brief simply have designBrief undefined here, and every agent
+    // falls back to its original from-scratch behavior — no breaking change.
+    const versionWithBrief = await prisma.projectVersion.findUnique({
+      where: { id: versionId },
+      select: { designBrief: true },
+    })
+
     let spec: Partial<SiteSpec> = {
       projectId,
       versionId,
       citations: [],
+      designBrief: (versionWithBrief?.designBrief as SiteSpec["designBrief"]) ?? undefined,
     }
-
-    sseWrite(res, {
-      type: "stage",
-      stage: "RESEARCH",
-      message: "Querying research corpus...",
-    })
 
     sseWrite(res, {
       type: "stage",
@@ -140,6 +152,13 @@ export async function runOrchestrator(
       where: { id: projectId },
       data: { status: "READY" },
     })
+
+    await prisma.pipelineState
+      .update({
+        where: { projectId },
+        data: { websiteStatus: "AWAITING_APPROVAL" },
+      })
+      .catch(() => {})
 
     sseWrite(res, {
       type: "version_ready",

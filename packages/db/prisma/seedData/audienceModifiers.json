@@ -1,0 +1,98 @@
+[
+  {
+    "audience": "children_under_10",
+    "modifies": {
+      "density": "very low",
+      "motion": "playful, frequent, high-feedback",
+      "contrast": "very high",
+      "fontSizeMin": "20px",
+      "buyer": "parent",
+      "trustSignals": ["parent/educator endorsement", "safety certification", "COPPA compliance"],
+      "avoid": ["small tap targets", "dense text blocks", "autoplaying sound", "dark patterns"]
+    }
+  },
+  {
+    "audience": "teens",
+    "modifies": {
+      "density": "medium",
+      "motion": "energetic, trend-aware",
+      "contrast": "high",
+      "fontSizeMin": "16px",
+      "buyer": "self or parent",
+      "trustSignals": ["peer/influencer proof", "community size", "authenticity"],
+      "avoid": ["corporate tone", "condescension", "overly formal copy"]
+    }
+  },
+  {
+    "audience": "adults",
+    "modifies": {
+      "density": "medium",
+      "motion": "subtle, purposeful",
+      "contrast": "standard (WCAG AA)",
+      "fontSizeMin": "16px",
+      "buyer": "self",
+      "trustSignals": ["testimonials", "credentials", "social proof counts"],
+      "avoid": ["excessive jargon", "unnecessary friction before value is shown"]
+    }
+  },
+  {
+    "audience": "seniors",
+    "modifies": {
+      "density": "low",
+      "motion": "minimal",
+      "contrast": "very high",
+      "fontSizeMin": "18px",
+      "buyer": "self or family member",
+      "trustSignals": ["clear phone/human support", "large legible pricing", "no-risk guarantees"],
+      "avoid": ["small text", "auto-advancing carousels", "multi-step forms", "jargon"]
+    }
+  },
+  {
+    "audience": "parents",
+    "modifies": {
+      "density": "medium",
+      "motion": "subtle",
+      "contrast": "standard (WCAG AA)",
+      "fontSizeMin": "16px",
+      "buyer": "self, purchasing for child",
+      "trustSignals": ["safety proof", "other-parent testimonials", "expert/pediatric endorsement"],
+      "avoid": ["overpromising outcomes for a child", "high-pressure urgency tactics"]
+    }
+  },
+  {
+    "audience": "b2b_buyers",
+    "modifies": {
+      "density": "medium-high",
+      "motion": "minimal, purposeful",
+      "contrast": "standard (WCAG AA)",
+      "fontSizeMin": "15px",
+      "buyer": "economic buyer / committee",
+      "trustSignals": ["customer logos", "case study ROI figures", "security/compliance badges"],
+      "avoid": ["consumer-style hype language", "hiding pricing entirely", "vague outcome claims"]
+    }
+  },
+  {
+    "audience": "developers",
+    "modifies": {
+      "density": "high",
+      "motion": "minimal",
+      "contrast": "standard (WCAG AA)",
+      "fontSizeMin": "14px",
+      "buyer": "self or technical lead",
+      "trustSignals": ["code samples", "docs quality", "open-source/GitHub stars", "uptime/API status page"],
+      "avoid": ["marketing fluff over technical specifics", "hiding API/docs behind a form"]
+    }
+  },
+  {
+    "audience": "general",
+    "modifies": {
+      "density": "medium",
+      "motion": "subtle",
+      "contrast": "standard (WCAG AA)",
+      "fontSizeMin": "16px",
+      "buyer": "self",
+      "trustSignals": ["testimonials", "reviews", "clear guarantees"],
+      "avoid": ["niche jargon", "assuming prior context"]
+    }
+  }
+]

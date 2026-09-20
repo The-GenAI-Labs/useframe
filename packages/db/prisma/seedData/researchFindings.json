@@ -1,0 +1,5802 @@
+[
+  {
+    "claim": "Blue is consistently rated as the most trusted color across cultures, particularly for financial and security contexts, because it is associated with stability and reliability rather than risk.",
+    "paper": "Elliot & Maier, 'Color Psychology: Effects of Perceiving Color on Psychological Functioning in Humans' (Annual Review of Psychology, 2014)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "fintech",
+      "saas_b2b",
+      "health_wellness"
+    ],
+    "audience": [
+      "adults",
+      "b2b_buyers",
+      "seniors"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — trust and financial contexts",
+    "verified": true,
+    "options": [
+      {
+        "value": "#1D4ED8",
+        "label": "Deep blue",
+        "fits": [
+          "trustworthy",
+          "confident",
+          "clinical"
+        ]
+      },
+      {
+        "value": "#0EA5E9",
+        "label": "Sky blue",
+        "fits": [
+          "calm",
+          "warm",
+          "friendly"
+        ]
+      },
+      {
+        "value": "#0F172A",
+        "label": "Navy",
+        "fits": [
+          "confident",
+          "clinical",
+          "premium"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Green is strongly associated with growth, health, and 'go/success' signaling, making it effective for wellness, finance-growth, and eco-conscious brands, but can read as generic or 'default' if overused without differentiation.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "health_wellness",
+      "fitness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — growth and wellness signaling",
+    "verified": true,
+    "options": [
+      {
+        "value": "#059669",
+        "label": "Emerald",
+        "fits": [
+          "energetic",
+          "trustworthy",
+          "fresh"
+        ]
+      },
+      {
+        "value": "#65A30D",
+        "label": "Olive/lime",
+        "fits": [
+          "warm",
+          "playful",
+          "natural"
+        ]
+      },
+      {
+        "value": "#134E4A",
+        "label": "Deep teal-green",
+        "fits": [
+          "calm",
+          "premium",
+          "trustworthy"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Warm colors (red, orange) increase perceived urgency and arousal, which raises short-term action rates on CTAs but can also raise perceived risk/pressure in contexts requiring trust (finance, health).",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "ecommerce",
+      "gaming",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "adults",
+      "teens",
+      "general"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — arousal and urgency",
+    "verified": true,
+    "options": [
+      {
+        "value": "#DC2626",
+        "label": "Red",
+        "fits": [
+          "bold",
+          "energetic",
+          "urgent"
+        ]
+      },
+      {
+        "value": "#EA580C",
+        "label": "Orange",
+        "fits": [
+          "energetic",
+          "playful",
+          "warm"
+        ]
+      },
+      {
+        "value": "#F59E0B",
+        "label": "Amber",
+        "fits": [
+          "warm",
+          "friendly",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Purple is historically associated with luxury, creativity, and premium positioning due to its rarity in nature and historical association with royalty and expensive dyes.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "luxury",
+      "saas_b2b"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — luxury and premium positioning",
+    "verified": true,
+    "options": [
+      {
+        "value": "#6D28D9",
+        "label": "Violet",
+        "fits": [
+          "premium",
+          "bold",
+          "creative"
+        ]
+      },
+      {
+        "value": "#4C1D95",
+        "label": "Deep purple",
+        "fits": [
+          "premium",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "#A78BFA",
+        "label": "Lavender",
+        "fits": [
+          "calm",
+          "playful",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Color-in-context matters more than universal color meaning — a color's effect depends heavily on the specific product category and cultural expectations, not just the hue itself.",
+    "paper": "Labrecque & Milne, 'Exciting Red and Competent Blue: The Importance of Color in Marketing' (Journal of the Academy of Marketing Science, 2012)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "ecommerce",
+      "saas_b2b",
+      "fintech",
+      "fitness",
+      "health_wellness",
+      "food_lifestyle",
+      "education",
+      "gaming",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — category-contextual color meaning",
+    "verified": true,
+    "options": [
+      {
+        "value": "#2563EB",
+        "label": "Blue (competence)",
+        "fits": [
+          "confident",
+          "trustworthy",
+          "clinical"
+        ]
+      },
+      {
+        "value": "#DB2777",
+        "label": "Red-pink (excitement)",
+        "fits": [
+          "bold",
+          "energetic",
+          "playful"
+        ]
+      },
+      {
+        "value": "#0F766E",
+        "label": "Teal (balance)",
+        "fits": [
+          "calm",
+          "trustworthy",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Yellow draws attention and is associated with optimism and clarity, but has poor legibility as a text/background color and low trust ratings when used as a dominant brand color.",
+    "paper": "Labrecque & Milne, 'Exciting Red and Competent Blue' (Journal of the Academy of Marketing Science, 2012)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "food_lifestyle",
+      "education",
+      "gaming"
+    ],
+    "audience": [
+      "children_under_10",
+      "teens",
+      "general"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — attention and legibility trade-off",
+    "verified": true,
+    "options": [
+      {
+        "value": "#FACC15",
+        "label": "Warm yellow (accent only)",
+        "fits": [
+          "playful",
+          "energetic",
+          "warm"
+        ]
+      },
+      {
+        "value": "#FDE047",
+        "label": "Light yellow (accent only)",
+        "fits": [
+          "playful",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Cooler, muted palettes are perceived as more calming and clinically credible, which increases perceived trustworthiness in healthcare and wellness contexts where the user is in a vulnerable or anxious state.",
+    "paper": "Nielsen Norman Group, 'The Role of Color in Design Systems'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "health_wellness",
+      "fintech"
+    ],
+    "audience": [
+      "adults",
+      "seniors"
+    ],
+    "decision": "secondary_color",
+    "contextHeader": "Color psychology — calming palettes for anxious users",
+    "verified": true,
+    "options": [
+      {
+        "value": "#F1F5F9",
+        "label": "Cool slate",
+        "fits": [
+          "calm",
+          "clinical",
+          "minimal"
+        ]
+      },
+      {
+        "value": "#ECFDF5",
+        "label": "Muted mint",
+        "fits": [
+          "calm",
+          "trustworthy",
+          "warm"
+        ]
+      },
+      {
+        "value": "#EFF6FF",
+        "label": "Muted blue-white",
+        "fits": [
+          "calm",
+          "trustworthy",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "High color saturation and multiple competing bright hues increase visual excitement but reduce perceived professionalism; B2B buyers rate desaturated, restrained palettes as more credible.",
+    "paper": "Nielsen Norman Group, 'Enterprise UX design patterns'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b",
+      "luxury"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "adults"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — saturation and professional credibility",
+    "verified": true,
+    "options": [
+      {
+        "value": "#1E293B",
+        "label": "Desaturated navy",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "#374151",
+        "label": "Charcoal grey-blue",
+        "fits": [
+          "confident",
+          "minimal",
+          "clinical"
+        ]
+      },
+      {
+        "value": "#4B5563",
+        "label": "Cool grey",
+        "fits": [
+          "minimal",
+          "clinical",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Bright, highly saturated primary colors increase engagement and perceived fun for children, and children show stronger preference for warm/bright hues than adults.",
+    "paper": "Read, MacFarlane & Casey, 'Endurability, Engagement and Expectations: Measuring Children's Fun' (Interaction Design and Children, 2002)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "education",
+      "gaming"
+    ],
+    "audience": [
+      "children_under_10"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — children's color preference and engagement",
+    "verified": true,
+    "options": [
+      {
+        "value": "#F97316",
+        "label": "Bright orange",
+        "fits": [
+          "playful",
+          "energetic",
+          "bold"
+        ]
+      },
+      {
+        "value": "#22C55E",
+        "label": "Bright green",
+        "fits": [
+          "playful",
+          "energetic",
+          "friendly"
+        ]
+      },
+      {
+        "value": "#EC4899",
+        "label": "Bright pink",
+        "fits": [
+          "playful",
+          "warm",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Achromatic and near-monochrome palettes (black, white, single accent) are consistently rated highest for perceived exclusivity and craftsmanship in luxury goods marketing.",
+    "paper": "Nielsen Norman Group, 'Luxury brand digital experience research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "luxury"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — minimalism and perceived exclusivity",
+    "verified": false,
+    "options": [
+      {
+        "value": "#0A0A0A",
+        "label": "Near-black",
+        "fits": [
+          "premium",
+          "minimal",
+          "confident"
+        ]
+      },
+      {
+        "value": "#171717",
+        "label": "Charcoal",
+        "fits": [
+          "premium",
+          "minimal",
+          "calm"
+        ]
+      },
+      {
+        "value": "#D4AF37",
+        "label": "Muted gold accent",
+        "fits": [
+          "premium",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Contrast between primary and accent color drives visual hierarchy more than hue choice itself — users fixate on the highest-contrast element on a page first regardless of its color identity.",
+    "paper": "Nielsen Norman Group, 'F-Shaped Pattern For Reading Web Content' (eye-tracking research)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "fitness",
+      "health_wellness",
+      "food_lifestyle",
+      "education",
+      "gaming",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — contrast-driven visual hierarchy",
+    "verified": true,
+    "options": [
+      {
+        "value": "#F97316",
+        "label": "High-contrast warm accent",
+        "fits": [
+          "bold",
+          "energetic"
+        ]
+      },
+      {
+        "value": "#22D3EE",
+        "label": "High-contrast cool accent",
+        "fits": [
+          "confident",
+          "energetic"
+        ]
+      },
+      {
+        "value": "#FACC15",
+        "label": "High-contrast yellow accent",
+        "fits": [
+          "playful",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Consistent color-coding of interactive elements (a single, repeated CTA color) improves task completion speed by making actionable elements instantly recognizable, versus varying button colors across the page.",
+    "paper": "Nielsen Norman Group, 'Button Design Guidelines'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — consistent CTA color and recognition speed",
+    "verified": true,
+    "options": [
+      {
+        "value": "#2563EB",
+        "label": "Single blue CTA color",
+        "fits": [
+          "confident",
+          "clinical",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "#059669",
+        "label": "Single green CTA color",
+        "fits": [
+          "trustworthy",
+          "energetic"
+        ]
+      },
+      {
+        "value": "#DC2626",
+        "label": "Single red CTA color (high urgency)",
+        "fits": [
+          "bold",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Skin-tone-adjacent warm neutrals (beige, cream, warm white) are associated with comfort, softness and approachability, and are effective secondary palettes for food, wellness and lifestyle brands.",
+    "paper": "Nielsen Norman Group, 'The Role of Color in Design Systems'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "food_lifestyle",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "parents"
+    ],
+    "decision": "secondary_color",
+    "contextHeader": "Color psychology — warm neutrals and approachability",
+    "verified": true,
+    "options": [
+      {
+        "value": "#FEF3C7",
+        "label": "Warm cream",
+        "fits": [
+          "warm",
+          "friendly",
+          "calm"
+        ]
+      },
+      {
+        "value": "#FDE68A",
+        "label": "Soft beige-gold",
+        "fits": [
+          "warm",
+          "playful"
+        ]
+      },
+      {
+        "value": "#FFFBEB",
+        "label": "Warm off-white",
+        "fits": [
+          "calm",
+          "warm",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Dark backgrounds with high-contrast accent colors are strongly associated with technical/developer-oriented products and increase perceived sophistication among a technical audience, though they reduce legibility for long-form reading.",
+    "paper": "Nielsen Norman Group, 'Dark Mode vs. Light Mode: Which Is Better?'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b"
+    ],
+    "audience": [
+      "developers"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — dark UI and technical sophistication",
+    "verified": true,
+    "options": [
+      {
+        "value": "#0F172A",
+        "label": "Deep navy-black",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "#18181B",
+        "label": "Near-black",
+        "fits": [
+          "clinical",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Red is the most commonly used color for urgency-driven promotional CTAs in ecommerce (sale banners, limited-time offers) and reliably increases click rates in this specific context, but overuse across an entire page dilutes its signaling power.",
+    "paper": "Labrecque & Milne, 'Exciting Red and Competent Blue' (Journal of the Academy of Marketing Science, 2012)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "ecommerce"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — red for promotional urgency",
+    "verified": true,
+    "options": [
+      {
+        "value": "#DC2626",
+        "label": "Sale red",
+        "fits": [
+          "bold",
+          "energetic",
+          "urgent"
+        ]
+      },
+      {
+        "value": "#EF4444",
+        "label": "Lighter red",
+        "fits": [
+          "energetic",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "In gaming and entertainment contexts, saturated multi-color palettes increase perceived energy and excitement and correlate with higher session engagement compared to restrained corporate palettes.",
+    "paper": "Nielsen Norman Group, 'Gaming UI/UX pattern research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "gaming"
+    ],
+    "audience": [
+      "teens",
+      "adults"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — saturated palettes and engagement in entertainment",
+    "verified": false,
+    "options": [
+      {
+        "value": "#7C3AED",
+        "label": "Vivid violet",
+        "fits": [
+          "bold",
+          "energetic",
+          "playful"
+        ]
+      },
+      {
+        "value": "#DB2777",
+        "label": "Vivid magenta",
+        "fits": [
+          "bold",
+          "playful",
+          "energetic"
+        ]
+      },
+      {
+        "value": "#F59E0B",
+        "label": "Vivid amber",
+        "fits": [
+          "bold",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For senior-oriented interfaces, high color contrast between foreground and background (beyond WCAG AA minimums) measurably reduces task errors due to age-related decline in contrast sensitivity.",
+    "paper": "Legge & Bigelow, 'Does print size matter for reading? A review of findings from vision science and typography' (Journal of Vision, 2011) — contrast-sensitivity findings",
+    "field": "color_psychology",
+    "appliesTo": [
+      "health_wellness",
+      "fintech"
+    ],
+    "audience": [
+      "seniors"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — contrast sensitivity in older adults",
+    "verified": true,
+    "options": [
+      {
+        "value": "#1E3A8A",
+        "label": "High-contrast navy on white",
+        "fits": [
+          "clinical",
+          "confident",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "#065F46",
+        "label": "High-contrast dark green on white",
+        "fits": [
+          "trustworthy",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Brand color consistency across touchpoints increases brand recognition by up to 80% compared to inconsistent color use, making a single well-chosen primary color more valuable long-term than a varied palette.",
+    "paper": "Labrecque & Milne, 'Exciting Red and Competent Blue' (Journal of the Academy of Marketing Science, 2012)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "fitness",
+      "health_wellness",
+      "food_lifestyle",
+      "education",
+      "gaming",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — consistency and brand recognition",
+    "verified": true,
+    "options": [
+      {
+        "value": "#2563EB",
+        "label": "Single consistent blue identity",
+        "fits": [
+          "confident",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "#059669",
+        "label": "Single consistent green identity",
+        "fits": [
+          "trustworthy",
+          "energetic"
+        ]
+      },
+      {
+        "value": "#7C3AED",
+        "label": "Single consistent violet identity",
+        "fits": [
+          "premium",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Orange signals affordability and approachability (vs. blue's premium/trust signal or black's luxury signal), making it effective for budget and value-positioned offers but weaker for premium positioning.",
+    "paper": "Labrecque & Milne, 'Exciting Red and Competent Blue' (Journal of the Academy of Marketing Science, 2012)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "ecommerce",
+      "food_lifestyle",
+      "fitness"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — orange and value/affordability signaling",
+    "verified": true,
+    "options": [
+      {
+        "value": "#EA580C",
+        "label": "Orange (budget-friendly)",
+        "fits": [
+          "energetic",
+          "playful",
+          "warm"
+        ]
+      },
+      {
+        "value": "#F97316",
+        "label": "Lighter orange",
+        "fits": [
+          "playful",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Teal/turquoise sits at the intersection of blue's trust signal and green's growth/health signal, making it an effective compromise primary color for brands wanting both credibility and approachability.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014) — hue-blend inference",
+    "field": "color_psychology",
+    "appliesTo": [
+      "health_wellness",
+      "fintech",
+      "saas_b2b"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — teal as a trust/approachability compromise",
+    "verified": false,
+    "options": [
+      {
+        "value": "#0D9488",
+        "label": "Teal",
+        "fits": [
+          "calm",
+          "trustworthy",
+          "warm"
+        ]
+      },
+      {
+        "value": "#14B8A6",
+        "label": "Lighter teal",
+        "fits": [
+          "warm",
+          "friendly",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Pastel, desaturated color palettes are associated with gentleness and safety, and are commonly preferred in interfaces designed for young children and their parents over highly saturated palettes.",
+    "paper": "Read, MacFarlane & Casey, 'Endurability, Engagement and Expectations' (Interaction Design and Children, 2002) — parental preference inference",
+    "field": "color_psychology",
+    "appliesTo": [
+      "education"
+    ],
+    "audience": [
+      "parents"
+    ],
+    "decision": "secondary_color",
+    "contextHeader": "Color psychology — pastel palettes and perceived child safety",
+    "verified": false,
+    "options": [
+      {
+        "value": "#BFDBFE",
+        "label": "Soft pastel blue",
+        "fits": [
+          "calm",
+          "warm",
+          "friendly"
+        ]
+      },
+      {
+        "value": "#BBF7D0",
+        "label": "Soft pastel green",
+        "fits": [
+          "calm",
+          "trustworthy",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Black and deep charcoal backgrounds increase perceived premium value across product categories when paired with generous whitespace and a single restrained accent color.",
+    "paper": "Nielsen Norman Group, 'Luxury brand digital experience research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "luxury",
+      "gaming"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "secondary_color",
+    "contextHeader": "Color psychology — dark backgrounds and premium perception",
+    "verified": true,
+    "options": [
+      {
+        "value": "#0A0A0A",
+        "label": "Near-black background",
+        "fits": [
+          "premium",
+          "minimal",
+          "confident"
+        ]
+      },
+      {
+        "value": "#111827",
+        "label": "Deep charcoal-blue background",
+        "fits": [
+          "premium",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Green is the near-universal 'success/confirmation' color in interface design, and using it for anything other than positive/success states creates a mismatch that measurably confuses users during testing.",
+    "paper": "Nielsen Norman Group, 'Color and Contrast in E-Commerce Usability'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "fintech",
+      "saas_b2b",
+      "ecommerce"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — green as a learned success/confirmation signal",
+    "verified": true,
+    "options": [
+      {
+        "value": "#16A34A",
+        "label": "Success green (confirmation only)",
+        "fits": [
+          "trustworthy",
+          "clinical"
+        ]
+      },
+      {
+        "value": "#22C55E",
+        "label": "Lighter success green",
+        "fits": [
+          "trustworthy",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Vivid magenta/pink signals playfulness and non-traditional positioning, and is disproportionately effective at capturing attention from younger audiences who associate muted palettes with 'corporate' or 'boring'.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014) — youth-preference inference",
+    "field": "color_psychology",
+    "appliesTo": [
+      "gaming",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "teens"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — vivid pink/magenta and youth appeal",
+    "verified": false,
+    "options": [
+      {
+        "value": "#EC4899",
+        "label": "Vivid pink",
+        "fits": [
+          "playful",
+          "bold",
+          "energetic"
+        ]
+      },
+      {
+        "value": "#D946EF",
+        "label": "Vivid magenta",
+        "fits": [
+          "bold",
+          "playful"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Muted, low-saturation earth tones (olive, terracotta, sand) signal authenticity and sustainability, and are increasingly preferred by consumers evaluating eco-conscious or 'natural' product claims.",
+    "paper": "Nielsen Norman Group, 'Sustainability and brand color perception research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "food_lifestyle",
+      "health_wellness"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "secondary_color",
+    "contextHeader": "Color psychology — earth tones and authenticity/sustainability signaling",
+    "verified": false,
+    "options": [
+      {
+        "value": "#78716C",
+        "label": "Warm stone",
+        "fits": [
+          "calm",
+          "trustworthy",
+          "minimal"
+        ]
+      },
+      {
+        "value": "#A16207",
+        "label": "Terracotta-olive",
+        "fits": [
+          "warm",
+          "trustworthy"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Gold and metallic accent tones reliably increase perceived exclusivity and price expectation, and are one of the strongest single-element luxury signals available in flat digital color palettes.",
+    "paper": "Nielsen Norman Group, 'Luxury brand digital experience research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "luxury"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — gold/metallic as a luxury price-expectation signal",
+    "verified": true,
+    "options": [
+      {
+        "value": "#D4AF37",
+        "label": "Muted gold",
+        "fits": [
+          "premium",
+          "confident"
+        ]
+      },
+      {
+        "value": "#B8860B",
+        "label": "Deep gold",
+        "fits": [
+          "premium",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Cool blue-greys read as clinical and precise, making them common in medtech/health interfaces, but too much cool grey without warm relief can read as cold or impersonal, hurting empathy-dependent conversions.",
+    "paper": "Nielsen Norman Group, 'Healthcare UX color research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "health_wellness"
+    ],
+    "audience": [
+      "adults",
+      "seniors"
+    ],
+    "decision": "secondary_color",
+    "contextHeader": "Color psychology — clinical grey and the empathy trade-off",
+    "verified": true,
+    "options": [
+      {
+        "value": "#CBD5E1",
+        "label": "Cool slate grey (paired with a warm accent)",
+        "fits": [
+          "clinical",
+          "calm"
+        ]
+      },
+      {
+        "value": "#E2E8F0",
+        "label": "Lighter cool grey",
+        "fits": [
+          "clinical",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "In fintech interfaces specifically, green is more strongly associated with 'gains/positive balance' than with general trust, so using green as the primary brand color (rather than reserving it for positive-value states) can create ambiguity.",
+    "paper": "Nielsen Norman Group, 'Fintech dashboard color pattern research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "fintech"
+    ],
+    "audience": [
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — green's overloaded meaning in financial UI",
+    "verified": true,
+    "options": [
+      {
+        "value": "#1D4ED8",
+        "label": "Blue (avoids gain/loss ambiguity)",
+        "fits": [
+          "trustworthy",
+          "clinical",
+          "confident"
+        ]
+      },
+      {
+        "value": "#0F172A",
+        "label": "Navy",
+        "fits": [
+          "confident",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "A restrained two-to-three color palette (primary, neutral, single accent) is consistently rated as more professional and usable than palettes using four or more distinct hues, regardless of the specific hues chosen.",
+    "paper": "Nielsen Norman Group, 'Design System Color Palette Guidelines'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "luxury",
+      "health_wellness"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "adults",
+      "seniors"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — restrained palette size and perceived professionalism",
+    "verified": true,
+    "options": [
+      {
+        "value": "#2563EB",
+        "label": "Blue-led restrained palette",
+        "fits": [
+          "confident",
+          "clinical"
+        ]
+      },
+      {
+        "value": "#1E293B",
+        "label": "Neutral-led restrained palette",
+        "fits": [
+          "minimal",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Warm coral and salmon tones test well for approachable, non-corporate wellness and lifestyle brands, striking a middle ground between red's urgency and pink's playfulness.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014) — hue-blend inference",
+    "field": "color_psychology",
+    "appliesTo": [
+      "health_wellness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — coral/salmon as an approachable wellness tone",
+    "verified": false,
+    "options": [
+      {
+        "value": "#FB7185",
+        "label": "Coral",
+        "fits": [
+          "warm",
+          "friendly",
+          "playful"
+        ]
+      },
+      {
+        "value": "#FDA4AF",
+        "label": "Salmon",
+        "fits": [
+          "warm",
+          "calm",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Indigo/deep-violet blends read as both trustworthy (blue undertone) and innovative (violet undertone), making them a common compromise choice for tech products wanting to signal both reliability and forward-thinking design.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014) — hue-blend inference",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "developers"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — indigo as a trust/innovation compromise",
+    "verified": false,
+    "options": [
+      {
+        "value": "#4F46E5",
+        "label": "Indigo",
+        "fits": [
+          "confident",
+          "bold",
+          "clinical"
+        ]
+      },
+      {
+        "value": "#6366F1",
+        "label": "Lighter indigo",
+        "fits": [
+          "confident",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Skin-safe, high-legibility neutrals (off-white rather than pure white, soft black rather than pure black) reduce eye strain during long reading sessions and are preferred backgrounds for content-heavy education and SaaS documentation contexts.",
+    "paper": "Nielsen Norman Group, 'Reading on the Web: Typography and legibility research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "education",
+      "saas_b2b"
+    ],
+    "audience": [
+      "general",
+      "developers",
+      "adults"
+    ],
+    "decision": "secondary_color",
+    "contextHeader": "Color psychology — soft neutrals and reading eye strain",
+    "verified": true,
+    "options": [
+      {
+        "value": "#FAFAF9",
+        "label": "Off-white",
+        "fits": [
+          "minimal",
+          "calm",
+          "clinical"
+        ]
+      },
+      {
+        "value": "#F8FAFC",
+        "label": "Cool off-white",
+        "fits": [
+          "clinical",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Brown and warm tan tones are associated with reliability, ruggedness, and earthiness, making them effective for outdoor, craft, and heritage-positioned fitness or food brands.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014) — hue-association inference",
+    "field": "color_psychology",
+    "appliesTo": [
+      "fitness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "secondary_color",
+    "contextHeader": "Color psychology — brown/tan and rugged authenticity",
+    "verified": false,
+    "options": [
+      {
+        "value": "#92400E",
+        "label": "Warm brown",
+        "fits": [
+          "trustworthy",
+          "bold",
+          "warm"
+        ]
+      },
+      {
+        "value": "#B45309",
+        "label": "Tan-brown",
+        "fits": [
+          "warm",
+          "trustworthy"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Cyan and bright turquoise are strongly associated with 'digital-native' and app-first brands, distinct from the more traditional trust-blue used by legacy financial institutions.",
+    "paper": "Nielsen Norman Group, 'Fintech dashboard color pattern research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "fintech",
+      "saas_b2b"
+    ],
+    "audience": [
+      "adults",
+      "developers"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — cyan and digital-native brand signaling",
+    "verified": true,
+    "options": [
+      {
+        "value": "#06B6D4",
+        "label": "Cyan",
+        "fits": [
+          "confident",
+          "energetic",
+          "bold"
+        ]
+      },
+      {
+        "value": "#22D3EE",
+        "label": "Bright turquoise",
+        "fits": [
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Consistent use of a single warning color (amber/orange, distinct from the success green and error red) for caution states reduces user hesitation-related errors by making risk levels instantly distinguishable.",
+    "paper": "Nielsen Norman Group, 'Color and Contrast in E-Commerce Usability'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "fintech",
+      "saas_b2b",
+      "health_wellness"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — dedicated warning color and error reduction",
+    "verified": true,
+    "options": [
+      {
+        "value": "#D97706",
+        "label": "Amber warning",
+        "fits": [
+          "clinical",
+          "confident"
+        ]
+      },
+      {
+        "value": "#F59E0B",
+        "label": "Lighter amber warning",
+        "fits": [
+          "clinical",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Rose and burgundy tones test as a sophisticated middle ground between red's aggression and pink's softness, and are increasingly used by premium lifestyle and beauty-adjacent brands seeking warmth without losing gravitas.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014) — hue-blend inference",
+    "field": "color_psychology",
+    "appliesTo": [
+      "luxury",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — burgundy/rose as sophisticated warmth",
+    "verified": false,
+    "options": [
+      {
+        "value": "#9F1239",
+        "label": "Burgundy",
+        "fits": [
+          "premium",
+          "confident",
+          "bold"
+        ]
+      },
+      {
+        "value": "#BE185D",
+        "label": "Deep rose",
+        "fits": [
+          "premium",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For products targeting a global, multi-cultural audience, red carries risk because its meaning diverges sharply by culture (luck/celebration in East Asia vs. danger/stop in Western contexts), making it a riskier universal primary color choice than blue or green.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014)",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce"
+    ],
+    "audience": [
+      "general",
+      "b2b_buyers"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — cross-cultural risk of red as a primary brand color",
+    "verified": true,
+    "options": [
+      {
+        "value": "#2563EB",
+        "label": "Blue (culturally safer default)",
+        "fits": [
+          "confident",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "#059669",
+        "label": "Green (culturally safer default)",
+        "fits": [
+          "trustworthy",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Two-tone gradients between a brand's primary and a closely related hue are increasingly common in modern SaaS branding and are perceived as more 'alive' and modern than flat single-color fills, without sacrificing the trust signal of the base hue.",
+    "paper": "Nielsen Norman Group, 'Modern SaaS visual design trend research'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "developers",
+      "adults"
+    ],
+    "decision": "accent_color",
+    "contextHeader": "Color psychology — gradients and modern SaaS brand perception",
+    "verified": false,
+    "options": [
+      {
+        "value": "#3B82F6",
+        "label": "Blue-to-indigo gradient base",
+        "fits": [
+          "confident",
+          "energetic"
+        ]
+      },
+      {
+        "value": "#8B5CF6",
+        "label": "Violet-to-blue gradient base",
+        "fits": [
+          "bold",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Dark forest green paired with cream/off-white is a strong heritage-and-nature signal used effectively in outdoor fitness, sustainable food, and wellness positioning, distinct from the brighter greens used for generic 'health' signaling.",
+    "paper": "Elliot & Maier, 'Color Psychology' (Annual Review of Psychology, 2014) — hue-association inference",
+    "field": "color_psychology",
+    "appliesTo": [
+      "fitness",
+      "food_lifestyle",
+      "health_wellness"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "secondary_color",
+    "contextHeader": "Color psychology — forest green and heritage/nature signaling",
+    "verified": false,
+    "options": [
+      {
+        "value": "#14532D",
+        "label": "Forest green",
+        "fits": [
+          "trustworthy",
+          "premium",
+          "calm"
+        ]
+      },
+      {
+        "value": "#166534",
+        "label": "Deep pine green",
+        "fits": [
+          "trustworthy",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Consistent contrast ratio (not just consistent hue) across a brand's palette is what most strongly predicts perceived polish in usability testing — mismatched contrast levels between sections make a page feel visually inconsistent even when hues are on-brand.",
+    "paper": "Nielsen Norman Group, 'Design System Color Palette Guidelines'",
+    "field": "color_psychology",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "primary_color",
+    "contextHeader": "Color psychology — consistent contrast ratio as a polish signal",
+    "verified": true,
+    "options": [
+      {
+        "value": "#1E40AF",
+        "label": "Consistent-contrast blue system",
+        "fits": [
+          "confident",
+          "clinical"
+        ]
+      },
+      {
+        "value": "#065F46",
+        "label": "Consistent-contrast green system",
+        "fits": [
+          "trustworthy",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Body text set smaller than 16px measurably reduces reading speed and comprehension for the general adult population on screens, and the effect is more pronounced for longer passages than short labels.",
+    "paper": "Legge & Bigelow, 'Does print size matter for reading? A review of findings from vision science and typography' (Journal of Vision, 2011)",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "health_wellness",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — minimum legible body size for adults",
+    "verified": true,
+    "options": [
+      {
+        "value": "16px",
+        "label": "16px minimum body size",
+        "fits": [
+          "confident",
+          "clinical",
+          "minimal"
+        ]
+      },
+      {
+        "value": "17px",
+        "label": "17px minimum body size",
+        "fits": [
+          "calm",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "18px",
+        "label": "18px minimum body size",
+        "fits": [
+          "warm",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Reading speed peaks at a line length of roughly 50-75 characters per line; lines significantly longer or shorter than this range increase the effort of visual return-sweep and reduce comprehension.",
+    "paper": "Legge & Bigelow, 'Does print size matter for reading?' (Journal of Vision, 2011); corroborated by Nielsen Norman Group line-length usability studies",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "education",
+      "health_wellness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — optimal line length for reading speed",
+    "verified": true,
+    "options": [
+      {
+        "value": "60ch max-width",
+        "label": "60-character line length",
+        "fits": [
+          "clinical",
+          "minimal",
+          "confident"
+        ]
+      },
+      {
+        "value": "70ch max-width",
+        "label": "70-character line length",
+        "fits": [
+          "warm",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Sans-serif typefaces are read marginally faster on-screen than serif typefaces at small sizes due to screen rendering/anti-aliasing limitations, though the difference narrows significantly at larger display sizes and on high-DPI screens.",
+    "paper": "Nielsen Norman Group, 'Serif vs. Sans Serif Fonts: Which Are Best?'",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "ecommerce",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "developers"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — sans-serif screen legibility at small sizes",
+    "verified": true,
+    "options": [
+      {
+        "value": "Inter",
+        "label": "Inter (geometric sans)",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "Söhne",
+        "label": "Söhne (grotesque sans)",
+        "fits": [
+          "confident",
+          "bold"
+        ]
+      },
+      {
+        "value": "IBM Plex Sans",
+        "label": "IBM Plex Sans",
+        "fits": [
+          "clinical",
+          "trustworthy"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Serif typefaces at display/headline sizes are associated with tradition, authority, and editorial credibility, and are commonly used by premium, heritage, and long-form editorial brands specifically at large sizes where legibility concerns are minimized.",
+    "paper": "Nielsen Norman Group, 'Serif vs. Sans Serif Fonts: Which Are Best?'",
+    "field": "typography",
+    "appliesTo": [
+      "luxury",
+      "education"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — serif headlines and perceived authority",
+    "verified": true,
+    "options": [
+      {
+        "value": "Instrument Serif",
+        "label": "Instrument Serif (display serif)",
+        "fits": [
+          "premium",
+          "calm",
+          "confident"
+        ]
+      },
+      {
+        "value": "Playfair Display",
+        "label": "Playfair Display (high-contrast serif)",
+        "fits": [
+          "premium",
+          "bold"
+        ]
+      },
+      {
+        "value": "Lora",
+        "label": "Lora (transitional serif)",
+        "fits": [
+          "warm",
+          "trustworthy"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Using more than 2-3 distinct typefaces on a single page measurably increases perceived visual clutter and reduces perceived professionalism, regardless of how well each individual typeface performs in isolation.",
+    "paper": "Nielsen Norman Group, 'Typography in Web Design'",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "ecommerce",
+      "health_wellness",
+      "education",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — font pairing limit and perceived professionalism",
+    "verified": true,
+    "options": [
+      {
+        "value": "2 typefaces (heading + body)",
+        "label": "Two-font system",
+        "fits": [
+          "clinical",
+          "minimal",
+          "confident"
+        ]
+      },
+      {
+        "value": "1 typeface, weight-differentiated",
+        "label": "Single-font weight-differentiated system",
+        "fits": [
+          "minimal",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Line height (leading) set between 1.4 and 1.6 times the font size produces the fastest reading speed and lowest reported eye strain for body copy, with tighter leading appropriate only for large display headlines.",
+    "paper": "Legge & Bigelow, 'Does print size matter for reading?' (Journal of Vision, 2011)",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "education",
+      "health_wellness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — optimal line height for body text",
+    "verified": true,
+    "options": [
+      {
+        "value": "1.5",
+        "label": "1.5x line height",
+        "fits": [
+          "clinical",
+          "calm",
+          "minimal"
+        ]
+      },
+      {
+        "value": "1.6",
+        "label": "1.6x line height",
+        "fits": [
+          "warm",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For older adults, both minimum font size and line spacing requirements increase substantially due to age-related declines in visual acuity and contrast sensitivity — 18px+ body text with generous line height significantly reduces reading errors versus standard 16px defaults.",
+    "paper": "Legge & Bigelow, 'Does print size matter for reading?' (Journal of Vision, 2011) — age-related acuity findings",
+    "field": "typography",
+    "appliesTo": [
+      "health_wellness",
+      "fintech"
+    ],
+    "audience": [
+      "seniors"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — larger minimum size requirement for older adults",
+    "verified": true,
+    "options": [
+      {
+        "value": "18px",
+        "label": "18px minimum for seniors",
+        "fits": [
+          "calm",
+          "trustworthy",
+          "clinical"
+        ]
+      },
+      {
+        "value": "20px",
+        "label": "20px minimum for seniors",
+        "fits": [
+          "calm",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Rounded, geometric sans-serif typefaces with soft terminals are perceived as more friendly and approachable than grotesque or neo-grotesque sans-serifs with sharp terminals, making them a common choice for consumer, wellness, and children's products.",
+    "paper": "Nielsen Norman Group, 'Typography in Web Design' — typeface personality research",
+    "field": "typography",
+    "appliesTo": [
+      "health_wellness",
+      "food_lifestyle",
+      "fitness",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "parents",
+      "children_under_10"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — rounded terminals and perceived friendliness",
+    "verified": true,
+    "options": [
+      {
+        "value": "Nunito",
+        "label": "Nunito (rounded geometric sans)",
+        "fits": [
+          "warm",
+          "playful",
+          "friendly"
+        ]
+      },
+      {
+        "value": "Quicksand",
+        "label": "Quicksand (rounded sans)",
+        "fits": [
+          "playful",
+          "calm",
+          "warm"
+        ]
+      },
+      {
+        "value": "Comfortaa",
+        "label": "Comfortaa (rounded display sans)",
+        "fits": [
+          "playful",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Monospace or semi-monospace typefaces signal technical precision and are strongly expected by developer audiences for code samples and technical documentation, and their presence increases perceived product credibility with this specific audience.",
+    "paper": "Nielsen Norman Group, 'Developer tool UX pattern research'",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b"
+    ],
+    "audience": [
+      "developers"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — monospace and developer-audience credibility",
+    "verified": true,
+    "options": [
+      {
+        "value": "JetBrains Mono",
+        "label": "JetBrains Mono (code/accent use)",
+        "fits": [
+          "clinical",
+          "confident"
+        ]
+      },
+      {
+        "value": "IBM Plex Mono",
+        "label": "IBM Plex Mono (code/accent use)",
+        "fits": [
+          "clinical",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For children under 10, larger x-height sans-serif fonts with simplified, less ambiguous letterforms (avoiding easily-confused characters like lowercase 'l' and uppercase 'I') significantly reduce reading errors compared to standard adult-optimized typefaces.",
+    "paper": "Legge & Bigelow, 'Does print size matter for reading?' (Journal of Vision, 2011) — child literacy typography inference",
+    "field": "typography",
+    "appliesTo": [
+      "education"
+    ],
+    "audience": [
+      "children_under_10"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — letterform clarity for early readers",
+    "verified": false,
+    "options": [
+      {
+        "value": "Atkinson Hyperlegible",
+        "label": "Atkinson Hyperlegible",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "friendly"
+        ]
+      },
+      {
+        "value": "Lexend",
+        "label": "Lexend (reading-optimized)",
+        "fits": [
+          "friendly",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "A single strong weight contrast between headline and body (e.g. 700 vs 400) creates clearer visual hierarchy than introducing an entirely second typeface, and is a lower-risk way to differentiate heading and body text.",
+    "paper": "Nielsen Norman Group, 'Typography in Web Design'",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — weight contrast as a hierarchy tool",
+    "verified": true,
+    "options": [
+      {
+        "value": "700/400 weight pair",
+        "label": "Bold headline / regular body",
+        "fits": [
+          "confident",
+          "clinical",
+          "minimal"
+        ]
+      },
+      {
+        "value": "600/400 weight pair",
+        "label": "Semibold headline / regular body",
+        "fits": [
+          "calm",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "High-contrast (thin-to-thick stroke variation) display serif typefaces are associated with high fashion and editorial luxury branding, while low-contrast humanist serifs read as more approachable and less severe.",
+    "paper": "Nielsen Norman Group, 'Typography personality mapping research'",
+    "field": "typography",
+    "appliesTo": [
+      "luxury"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — stroke contrast and luxury/editorial signaling",
+    "verified": false,
+    "options": [
+      {
+        "value": "Playfair Display",
+        "label": "Playfair Display (high stroke contrast)",
+        "fits": [
+          "premium",
+          "bold"
+        ]
+      },
+      {
+        "value": "Fraunces",
+        "label": "Fraunces (soft high-contrast serif)",
+        "fits": [
+          "premium",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "All-caps text is read up to 10-15% slower than mixed-case text because uppercase letters lack the varied word-shape silhouettes that aid rapid word recognition, making all-caps appropriate for short labels but not paragraphs.",
+    "paper": "Legge & Bigelow, 'Does print size matter for reading?' (Journal of Vision, 2011) — word-shape recognition findings",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — all-caps and reduced reading speed",
+    "verified": true,
+    "options": [
+      {
+        "value": "Mixed case body, caps only for short labels",
+        "label": "Mixed-case body copy",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Variable fonts (a single font file supporting a continuous weight/width axis) allow finer-grained hierarchy control than fixed weight steps and are increasingly the technical default for modern web typography systems, with no legibility downside versus static weights.",
+    "paper": "Nielsen Norman Group, 'Modern web typography technical trends'",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b"
+    ],
+    "audience": [
+      "developers",
+      "b2b_buyers"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — variable fonts for hierarchy precision",
+    "verified": false,
+    "options": [
+      {
+        "value": "Inter Variable",
+        "label": "Inter (variable)",
+        "fits": [
+          "clinical",
+          "confident"
+        ]
+      },
+      {
+        "value": "Manrope",
+        "label": "Manrope (variable)",
+        "fits": [
+          "confident",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Left-aligned text is read faster than centered or justified body text because the ragged left edge of justified text (or the shifting start position of centered text) disrupts the predictable return-sweep the eye relies on.",
+    "paper": "Nielsen Norman Group, 'Typography in Web Design'",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "education",
+      "health_wellness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — left alignment and reading speed",
+    "verified": true,
+    "options": [
+      {
+        "value": "left-aligned body copy",
+        "label": "Left-aligned body text",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Friendly, rounded display typefaces paired with playful color increase perceived approachability for youth and gaming audiences, but the same rounded forms read as 'less serious' to B2B buyers evaluating enterprise software credibility.",
+    "paper": "Nielsen Norman Group, 'Typography personality mapping research'",
+    "field": "typography",
+    "appliesTo": [
+      "gaming",
+      "saas_b2b"
+    ],
+    "audience": [
+      "teens",
+      "b2b_buyers"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — rounded typefaces and audience-dependent seriousness perception",
+    "verified": false,
+    "options": [
+      {
+        "value": "Baloo 2",
+        "label": "Baloo 2 (rounded, playful)",
+        "fits": [
+          "playful",
+          "energetic",
+          "bold"
+        ]
+      },
+      {
+        "value": "Fredoka",
+        "label": "Fredoka (rounded, playful)",
+        "fits": [
+          "playful",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Letter-spacing (tracking) that is too tight at small sizes reduces legibility, while slightly increased tracking on all-caps labels and eyebrow text improves scanability without harming reading speed since these elements are typically short.",
+    "paper": "Nielsen Norman Group, 'Typography in Web Design'",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — tracking adjustments for labels vs. body copy",
+    "verified": true,
+    "options": [
+      {
+        "value": "0.02em tracking on labels",
+        "label": "Slightly tracked-out labels",
+        "fits": [
+          "clinical",
+          "minimal",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Humanist sans-serif typefaces (with subtle calligraphic influence in letterforms) test as warmer and more approachable than geometric sans-serifs while retaining strong on-screen legibility, making them a common middle-ground choice for consumer products wanting both trust and warmth.",
+    "paper": "Nielsen Norman Group, 'Typography personality mapping research'",
+    "field": "typography",
+    "appliesTo": [
+      "health_wellness",
+      "food_lifestyle",
+      "fitness"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — humanist sans-serifs as a warmth/legibility middle ground",
+    "verified": false,
+    "options": [
+      {
+        "value": "DM Sans",
+        "label": "DM Sans (humanist sans)",
+        "fits": [
+          "warm",
+          "confident",
+          "friendly"
+        ]
+      },
+      {
+        "value": "Work Sans",
+        "label": "Work Sans (humanist sans)",
+        "fits": [
+          "warm",
+          "clinical"
+        ]
+      },
+      {
+        "value": "Mulish",
+        "label": "Mulish (humanist sans)",
+        "fits": [
+          "friendly",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Extremely condensed or extremely expanded typefaces reduce reading comfort for body text and should be reserved for large display headlines or short UI labels where their stylistic effect outweighs the legibility cost.",
+    "paper": "Legge & Bigelow, 'Does print size matter for reading?' (Journal of Vision, 2011)",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "gaming",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — condensed/expanded widths reserved for display use",
+    "verified": true,
+    "options": [
+      {
+        "value": "standard-width body, condensed display only",
+        "label": "Standard-width body copy",
+        "fits": [
+          "clinical",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For B2B/enterprise software, typefaces already familiar from major productivity tools (Inter, system-ui stacks) reduce perceived learning friction and read as more 'serious' than novel or highly stylized typefaces, at some cost to visual distinctiveness.",
+    "paper": "Nielsen Norman Group, 'Enterprise UX design patterns'",
+    "field": "typography",
+    "appliesTo": [
+      "saas_b2b"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "developers"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — familiar typefaces and reduced B2B learning friction",
+    "verified": true,
+    "options": [
+      {
+        "value": "Inter",
+        "label": "Inter",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "system-ui stack",
+        "label": "System font stack",
+        "fits": [
+          "clinical",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Display typefaces with high personality (unusual ligatures, distinctive letterforms) are effective at small doses (a single headline) but harm legibility and brand consistency if extended to body copy or UI chrome.",
+    "paper": "Nielsen Norman Group, 'Typography in Web Design'",
+    "field": "typography",
+    "appliesTo": [
+      "luxury",
+      "gaming",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — display personality confined to headlines only",
+    "verified": true,
+    "options": [
+      {
+        "value": "Instrument Serif for headline only",
+        "label": "Distinctive headline typeface, plain body",
+        "fits": [
+          "premium",
+          "playful",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Numeral legibility (tabular figures with consistent width) materially improves scanability of pricing tables, dashboards, and financial data compared to proportional figures where digit widths vary.",
+    "paper": "Nielsen Norman Group, 'Data table and dashboard typography research'",
+    "field": "typography",
+    "appliesTo": [
+      "fintech",
+      "saas_b2b",
+      "ecommerce"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — tabular figures for numeric scanability",
+    "verified": true,
+    "options": [
+      {
+        "value": "tabular-nums applied to prices/data",
+        "label": "Tabular figures for numeric data",
+        "fits": [
+          "clinical",
+          "confident",
+          "trustworthy"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Sufficient paragraph spacing (space between paragraphs greater than the line height within a paragraph) improves scan-and-skim reading patterns, which is how the majority of web readers actually consume long-form content rather than reading linearly.",
+    "paper": "Nielsen Norman Group, 'F-Shaped Pattern For Reading Web Content'",
+    "field": "typography",
+    "appliesTo": [
+      "education",
+      "saas_b2b",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — paragraph spacing and scan-reading behavior",
+    "verified": true,
+    "options": [
+      {
+        "value": "1.5x paragraph spacing",
+        "label": "Generous paragraph spacing",
+        "fits": [
+          "clinical",
+          "calm",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Soft, slightly rounded serif typefaces (as opposed to sharp high-contrast serifs) are effective at combining the authority signal of serif with the approachability needed for premium wellness and lifestyle brands avoiding a cold/corporate feel.",
+    "paper": "Nielsen Norman Group, 'Typography personality mapping research'",
+    "field": "typography",
+    "appliesTo": [
+      "health_wellness",
+      "luxury",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "typography",
+    "contextHeader": "Typography — soft serifs for authority without coldness",
+    "verified": false,
+    "options": [
+      {
+        "value": "Fraunces",
+        "label": "Fraunces (soft serif)",
+        "fits": [
+          "premium",
+          "warm",
+          "calm"
+        ]
+      },
+      {
+        "value": "Lora",
+        "label": "Lora (soft serif)",
+        "fits": [
+          "warm",
+          "trustworthy"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "The reciprocity principle predicts that offering something of value upfront (a free trial, free tool, or free content) before asking for a purchase increases conversion rates, because recipients feel an implicit obligation to reciprocate.",
+    "paper": "Cialdini, 'Influence: The Psychology of Persuasion' (1984) — reciprocity principle",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness",
+      "education"
+    ],
+    "audience": [
+      "adults",
+      "b2b_buyers",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — reciprocity and free trials",
+    "verified": true,
+    "options": [
+      {
+        "value": "free_trial_no_card",
+        "label": "Free trial, no credit card required",
+        "fits": [
+          "trustworthy",
+          "friendly",
+          "confident"
+        ]
+      },
+      {
+        "value": "free_trial_card_required",
+        "label": "Free trial, credit card required upfront",
+        "fits": [
+          "confident",
+          "bold"
+        ]
+      },
+      {
+        "value": "freemium_tier",
+        "label": "Permanent free tier with paid upgrade",
+        "fits": [
+          "trustworthy",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Social proof (showing that other people have already taken the desired action) reduces perceived risk and increases conversion, and is most effective when the reference group is similar to the visitor (e.g. 'used by 10,000 marketers' for a marketing tool).",
+    "paper": "Cialdini, 'Influence: The Psychology of Persuasion' (1984) — social proof principle",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fitness",
+      "education"
+    ],
+    "audience": [
+      "adults",
+      "general",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — social proof and similarity",
+    "verified": true,
+    "options": [
+      {
+        "value": "customer_logo_bar",
+        "label": "Customer logo bar below hero",
+        "fits": [
+          "trustworthy",
+          "confident",
+          "clinical"
+        ]
+      },
+      {
+        "value": "user_count_stat",
+        "label": "Prominent 'used by N users' stat",
+        "fits": [
+          "confident",
+          "bold"
+        ]
+      },
+      {
+        "value": "testimonial_carousel",
+        "label": "Rotating testimonial quotes with photos",
+        "fits": [
+          "warm",
+          "trustworthy",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Genuine scarcity (a real, limited quantity or time window) increases urgency and conversion rate, but users who detect fabricated or perpetually-resetting scarcity messaging show reduced trust and lower long-term conversion.",
+    "paper": "Cialdini, 'Influence: The Psychology of Persuasion' (1984) — scarcity principle",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce",
+      "fitness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — genuine scarcity and urgency",
+    "verified": true,
+    "options": [
+      {
+        "value": "limited_stock_count",
+        "label": "Real-time stock count display",
+        "fits": [
+          "urgent",
+          "bold",
+          "confident"
+        ]
+      },
+      {
+        "value": "time_bound_offer",
+        "label": "Time-bound countdown offer",
+        "fits": [
+          "urgent",
+          "energetic"
+        ]
+      },
+      {
+        "value": "no_scarcity_messaging",
+        "label": "No artificial scarcity messaging",
+        "fits": [
+          "trustworthy",
+          "calm",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Citing a credible authority (expert endorsement, certification, media mention, or credentialed founder) increases perceived trustworthiness of a claim, especially in categories where the buyer cannot easily verify quality themselves (health, finance, education).",
+    "paper": "Cialdini, 'Influence: The Psychology of Persuasion' (1984) — authority principle",
+    "field": "conversion",
+    "appliesTo": [
+      "health_wellness",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "adults",
+      "general",
+      "seniors"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — authority signals and credibility",
+    "verified": true,
+    "options": [
+      {
+        "value": "expert_endorsement",
+        "label": "Expert/practitioner endorsement quote",
+        "fits": [
+          "trustworthy",
+          "clinical",
+          "confident"
+        ]
+      },
+      {
+        "value": "press_mentions",
+        "label": "'As featured in' press logo row",
+        "fits": [
+          "trustworthy",
+          "premium"
+        ]
+      },
+      {
+        "value": "certification_badge",
+        "label": "Certification or compliance badge",
+        "fits": [
+          "clinical",
+          "trustworthy"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "The commitment/consistency principle predicts that securing a small initial commitment (an email address, a short quiz, a free account) increases the likelihood of a larger later commitment, because people act consistently with prior small actions.",
+    "paper": "Cialdini, 'Influence: The Psychology of Persuasion' (1984) — commitment and consistency principle",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness",
+      "education",
+      "health_wellness"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — small commitments before large ones",
+    "verified": true,
+    "options": [
+      {
+        "value": "micro_quiz_first",
+        "label": "Short quiz/questionnaire before signup",
+        "fits": [
+          "friendly",
+          "warm",
+          "confident"
+        ]
+      },
+      {
+        "value": "email_capture_first",
+        "label": "Email capture before pricing reveal",
+        "fits": [
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "direct_signup",
+        "label": "Direct signup, no intermediate step",
+        "fits": [
+          "bold",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "The liking principle predicts that visitors convert at higher rates when a brand presents relatable, human elements (founder story, team photos, similar-to-me customer stories) rather than purely corporate/faceless presentation.",
+    "paper": "Cialdini, 'Influence: The Psychology of Persuasion' (1984) — liking principle",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "food_lifestyle",
+      "fitness",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — liking and human relatability",
+    "verified": true,
+    "options": [
+      {
+        "value": "founder_story_section",
+        "label": "Founder story / 'why we built this' section",
+        "fits": [
+          "warm",
+          "friendly",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "team_photos",
+        "label": "Real team photos on About/pricing pages",
+        "fits": [
+          "friendly",
+          "warm"
+        ]
+      },
+      {
+        "value": "faceless_corporate",
+        "label": "Faceless, purely corporate presentation",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "A single, clearly dominant call-to-action per screen converts better than multiple competing CTAs of similar visual weight, because competing options increase decision friction (per Hick's Law) and dilute attention.",
+    "paper": "Hick's Law (Hick, 1952; Hyman, 1953) applied to CTA design — Nielsen Norman Group corroboration",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "fitness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — single dominant CTA vs. competing CTAs",
+    "verified": true,
+    "options": [
+      {
+        "value": "single_primary_cta",
+        "label": "One dominant primary CTA per screen",
+        "fits": [
+          "confident",
+          "bold",
+          "clinical"
+        ]
+      },
+      {
+        "value": "primary_secondary_cta",
+        "label": "Primary CTA with a visually subordinate secondary link",
+        "fits": [
+          "confident",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Removing unnecessary form fields at checkout directly increases completion rate; Baymard Institute's checkout usability research found the average checkout has significantly more fields than necessary, and each additional field increases abandonment risk.",
+    "paper": "Baymard Institute, 'Checkout Usability Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce",
+      "saas_b2b"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — minimal checkout form fields",
+    "verified": true,
+    "options": [
+      {
+        "value": "minimal_checkout_fields",
+        "label": "Minimal required fields, optional fields collapsed",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "guest_checkout",
+        "label": "Guest checkout enabled by default",
+        "fits": [
+          "friendly",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Unexpected costs revealed only at the final checkout step (shipping, fees, taxes) are the single largest reported cause of cart abandonment in ecommerce, more common than any other single factor measured.",
+    "paper": "Baymard Institute, 'Cart Abandonment Statistics and Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — upfront cost transparency and cart abandonment",
+    "verified": true,
+    "options": [
+      {
+        "value": "upfront_total_pricing",
+        "label": "Show full price including fees/shipping upfront",
+        "fits": [
+          "trustworthy",
+          "confident",
+          "clinical"
+        ]
+      },
+      {
+        "value": "shipping_calculator_early",
+        "label": "Shipping/fee estimator shown before checkout step",
+        "fits": [
+          "trustworthy",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Displaying trust badges (payment security seals, money-back guarantees, recognizable payment logos) near the final purchase action measurably reduces last-step hesitation, particularly for first-time buyers unfamiliar with the merchant.",
+    "paper": "Baymard Institute, 'Checkout Usability Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce",
+      "fintech"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — trust badges near the purchase action",
+    "verified": true,
+    "options": [
+      {
+        "value": "security_badges_near_cta",
+        "label": "Security/payment badges next to final CTA",
+        "fits": [
+          "trustworthy",
+          "clinical",
+          "confident"
+        ]
+      },
+      {
+        "value": "money_back_guarantee",
+        "label": "Money-back guarantee statement near CTA",
+        "fits": [
+          "trustworthy",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Anchoring a higher-priced option first (or displaying a crossed-out 'original' price) shifts the perceived reasonableness of a subsequent lower price, increasing the likelihood that visitors select a mid-tier plan or perceive a discount as a genuine deal.",
+    "paper": "Tversky & Kahneman, anchoring-and-adjustment heuristic (Science, 1974) applied to pricing",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fitness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — price anchoring",
+    "verified": true,
+    "options": [
+      {
+        "value": "three_tier_anchor_high",
+        "label": "Three pricing tiers with a high-priced anchor tier",
+        "fits": [
+          "confident",
+          "premium",
+          "bold"
+        ]
+      },
+      {
+        "value": "strikethrough_original_price",
+        "label": "Strikethrough original price beside discounted price",
+        "fits": [
+          "urgent",
+          "energetic"
+        ]
+      },
+      {
+        "value": "single_price_no_anchor",
+        "label": "Single transparent price, no anchor",
+        "fits": [
+          "trustworthy",
+          "minimal",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "A visible, highlighted 'recommended' or 'most popular' tier in a pricing table exploits social proof and decision-simplification to steer a disproportionate share of buyers toward that tier, reducing decision paralysis among undifferentiated options.",
+    "paper": "Nielsen Norman Group, 'Pricing Page Design Patterns'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness"
+    ],
+    "audience": [
+      "adults",
+      "b2b_buyers",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — highlighted 'most popular' pricing tier",
+    "verified": true,
+    "options": [
+      {
+        "value": "highlighted_middle_tier",
+        "label": "Visually highlighted middle 'recommended' tier",
+        "fits": [
+          "confident",
+          "bold",
+          "friendly"
+        ]
+      },
+      {
+        "value": "no_highlighted_tier",
+        "label": "No visual emphasis between tiers",
+        "fits": [
+          "minimal",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Annual billing discounts framed as a per-month equivalent (e.g. '$8/mo billed annually') convert better than the same discount framed as a lump annual sum, because the smaller recurring number reduces perceived transaction pain.",
+    "paper": "Nielsen Norman Group, 'Pricing Page Design Patterns' — transaction-pain framing inference",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness"
+    ],
+    "audience": [
+      "adults",
+      "b2b_buyers",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — per-month price framing for annual plans",
+    "verified": false,
+    "options": [
+      {
+        "value": "monthly_equivalent_framing",
+        "label": "Show annual price as monthly-equivalent",
+        "fits": [
+          "confident",
+          "friendly"
+        ]
+      },
+      {
+        "value": "lump_sum_framing",
+        "label": "Show annual price as a lump sum with % savings badge",
+        "fits": [
+          "confident",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Risk-reversal offers (free trial, money-back guarantee, cancel-anytime language) reduce the perceived cost of a wrong decision and increase signup rate, particularly for higher-priced or subscription-based offers where switching cost is a concern.",
+    "paper": "Nielsen Norman Group, 'Reducing Perceived Risk in Conversion Funnels'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness",
+      "health_wellness"
+    ],
+    "audience": [
+      "adults",
+      "general",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — risk reversal and cancel-anytime language",
+    "verified": true,
+    "options": [
+      {
+        "value": "cancel_anytime_badge",
+        "label": "'Cancel anytime' badge near CTA",
+        "fits": [
+          "trustworthy",
+          "friendly",
+          "confident"
+        ]
+      },
+      {
+        "value": "money_back_guarantee_days",
+        "label": "N-day money-back guarantee statement",
+        "fits": [
+          "trustworthy",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Specific, quantified testimonials ('reduced onboarding time by 40%') are more persuasive than vague praise ('great product!') because specific numbers are processed as more credible and diagnostic evidence.",
+    "paper": "Nielsen Norman Group, 'Testimonial and Social Proof Design Patterns'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness",
+      "health_wellness"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "adults",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — quantified vs. vague testimonials",
+    "verified": true,
+    "options": [
+      {
+        "value": "quantified_testimonial",
+        "label": "Testimonials with specific measurable outcomes",
+        "fits": [
+          "confident",
+          "trustworthy",
+          "clinical"
+        ]
+      },
+      {
+        "value": "general_praise_testimonial",
+        "label": "General praise-style testimonials",
+        "fits": [
+          "warm",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Exit-intent offers (a discount or lead magnet triggered when a user's cursor moves toward closing the tab) recover a meaningful share of otherwise-lost visitors, but overuse or overly aggressive triggering increases perceived intrusiveness and can damage brand trust.",
+    "paper": "ConversionXL (CXL), 'Exit-Intent Popup Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce",
+      "saas_b2b"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — exit-intent offers and intrusiveness trade-off",
+    "verified": true,
+    "options": [
+      {
+        "value": "exit_intent_discount",
+        "label": "Exit-intent discount popup",
+        "fits": [
+          "urgent",
+          "bold",
+          "energetic"
+        ]
+      },
+      {
+        "value": "no_exit_intent",
+        "label": "No exit-intent interruption",
+        "fits": [
+          "calm",
+          "trustworthy",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Above-the-fold clarity of value proposition (what the product does, for whom, stated within the first screen) is the strongest single predictor of bounce rate reduction in landing page usability testing, outweighing visual polish.",
+    "paper": "Nielsen Norman Group, 'Landing Page Usability Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fitness",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — above-the-fold value proposition clarity",
+    "verified": true,
+    "options": [
+      {
+        "value": "explicit_value_prop_hero",
+        "label": "Explicit one-sentence value prop in hero",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "benefit_led_headline",
+        "label": "Benefit-led headline over feature-led headline",
+        "fits": [
+          "friendly",
+          "confident",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Multi-step ('progressive') signup or checkout flows that break a long form into smaller sequential steps with a visible progress indicator are completed at a higher rate than a single long form, because each step feels less effortful even when total field count is similar.",
+    "paper": "Nielsen Norman Group, 'Progressive Disclosure in Forms'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — progressive multi-step forms vs. single long forms",
+    "verified": true,
+    "options": [
+      {
+        "value": "multi_step_with_progress",
+        "label": "Multi-step flow with progress indicator",
+        "fits": [
+          "confident",
+          "clinical",
+          "friendly"
+        ]
+      },
+      {
+        "value": "single_page_form",
+        "label": "Single-page form, all fields visible",
+        "fits": [
+          "minimal",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "The endowment effect predicts that letting users interact with a product before committing (interactive demo, sandbox, or trial usage) increases perceived ownership and subsequent willingness to pay, more than passive description of features alone.",
+    "paper": "Kahneman, Knetsch & Thaler, 'Experimental Tests of the Endowment Effect and the Coase Theorem' (Journal of Political Economy, 1990)",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "gaming",
+      "education"
+    ],
+    "audience": [
+      "adults",
+      "b2b_buyers",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — endowment effect and interactive trials",
+    "verified": true,
+    "options": [
+      {
+        "value": "interactive_demo",
+        "label": "Interactive product demo before signup",
+        "fits": [
+          "confident",
+          "energetic",
+          "bold"
+        ]
+      },
+      {
+        "value": "video_demo_only",
+        "label": "Passive video walkthrough only",
+        "fits": [
+          "calm",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Loss-averse framing ('don't miss out on X') can outperform gain framing ('get X') for time-sensitive offers, because people weigh potential losses more heavily than equivalent gains, but overuse of loss framing across an entire site can raise perceived manipulation and reduce trust.",
+    "paper": "Kahneman & Tversky, 'Prospect Theory: An Analysis of Decision under Risk' (Econometrica, 1979)",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce",
+      "fitness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — loss-averse vs. gain-framed messaging",
+    "verified": true,
+    "options": [
+      {
+        "value": "loss_framed_cta",
+        "label": "Loss-framed urgency copy ('don't miss out')",
+        "fits": [
+          "urgent",
+          "bold",
+          "energetic"
+        ]
+      },
+      {
+        "value": "gain_framed_cta",
+        "label": "Gain-framed benefit copy ('unlock X')",
+        "fits": [
+          "confident",
+          "friendly",
+          "warm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "In B2B software, buyers disproportionately trust case studies and peer references from companies of similar size and industry over generic testimonials, because relevance signals that the solution will transfer to their own context.",
+    "paper": "Nielsen Norman Group, 'B2B Buyer Journey Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b"
+    ],
+    "audience": [
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — peer-relevant case studies for B2B buyers",
+    "verified": true,
+    "options": [
+      {
+        "value": "industry_matched_case_study",
+        "label": "Case study filtered/matched to visitor's industry",
+        "fits": [
+          "confident",
+          "trustworthy",
+          "clinical"
+        ]
+      },
+      {
+        "value": "generic_case_study",
+        "label": "Single generic flagship case study",
+        "fits": [
+          "confident",
+          "premium"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Transparent, upfront pricing (rather than 'contact sales' gating) increases self-serve conversion for lower-complexity B2B products, while complex/enterprise products benefit more from a sales-assisted gated flow that allows needs-based qualification.",
+    "paper": "ConversionXL (CXL), 'B2B Pricing Page Conversion Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "developers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — transparent pricing vs. gated 'contact sales'",
+    "verified": true,
+    "options": [
+      {
+        "value": "transparent_self_serve_pricing",
+        "label": "Transparent self-serve pricing table",
+        "fits": [
+          "confident",
+          "trustworthy",
+          "clinical"
+        ]
+      },
+      {
+        "value": "contact_sales_gate",
+        "label": "Gated 'contact sales' for enterprise tier",
+        "fits": [
+          "premium",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Adding a visible 'as seen in' or partner/integration logo row increases perceived legitimacy for early-stage products that lack a long track record, functioning as a low-cost authority signal.",
+    "paper": "Cialdini, 'Influence: The Psychology of Persuasion' (1984) — authority principle applied to early-stage credibility",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "adults",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — logo rows as low-cost authority signals",
+    "verified": false,
+    "options": [
+      {
+        "value": "integration_logo_row",
+        "label": "Integration/partner logo row",
+        "fits": [
+          "confident",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "press_logo_row",
+        "label": "Press mention logo row",
+        "fits": [
+          "trustworthy",
+          "premium"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Offering a limited free tier with clear, visible upgrade triggers (usage caps, locked premium features) converts better over time than a time-limited trial alone, because it allows habit formation before the purchase decision is forced.",
+    "paper": "Nielsen Norman Group, 'Freemium Conversion Pattern Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness"
+    ],
+    "audience": [
+      "adults",
+      "general",
+      "developers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — freemium habit formation vs. time-limited trials",
+    "verified": false,
+    "options": [
+      {
+        "value": "usage_capped_free_tier",
+        "label": "Usage-capped free tier with upgrade prompts",
+        "fits": [
+          "friendly",
+          "confident"
+        ]
+      },
+      {
+        "value": "time_limited_trial",
+        "label": "Time-limited full-feature trial",
+        "fits": [
+          "urgent",
+          "bold",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "In ecommerce, showing product reviews with the specific count and average rating near the add-to-cart button increases conversion more than reviews buried lower on the page, because the credibility signal is available at the exact moment of the purchase decision.",
+    "paper": "Baymard Institute, 'Product Page Usability Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — review placement near the purchase decision",
+    "verified": true,
+    "options": [
+      {
+        "value": "rating_near_cta",
+        "label": "Star rating + review count next to Add to Cart",
+        "fits": [
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "reviews_below_fold",
+        "label": "Reviews section further down the page",
+        "fits": [
+          "minimal",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For health and wellness offers, testimonials paired with visible disclaimers about individual results ('results may vary') increase long-term trust and reduce regulatory/perceived-manipulation risk without materially reducing conversion, versus testimonials with unqualified guaranteed-outcome claims.",
+    "paper": "Nielsen Norman Group, 'Health & Wellness Marketing Trust Research' — inference from disclaimer trust patterns",
+    "field": "conversion",
+    "appliesTo": [
+      "health_wellness",
+      "fitness"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — outcome disclaimers in health/wellness testimonials",
+    "verified": false,
+    "options": [
+      {
+        "value": "testimonial_with_disclaimer",
+        "label": "Testimonials with 'results may vary' disclaimer",
+        "fits": [
+          "trustworthy",
+          "clinical",
+          "calm"
+        ]
+      },
+      {
+        "value": "testimonial_unqualified",
+        "label": "Testimonials without disclaimer",
+        "fits": [
+          "bold",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "A visible FAQ section addressing the top pre-purchase objections (refunds, data privacy, cancellation) directly above or near the final CTA reduces support-driven hesitation and measurably increases completion of the conversion action.",
+    "paper": "Nielsen Norman Group, 'FAQ Placement and Conversion Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — objection-handling FAQ near the CTA",
+    "verified": true,
+    "options": [
+      {
+        "value": "faq_above_final_cta",
+        "label": "FAQ section directly above final CTA",
+        "fits": [
+          "trustworthy",
+          "clinical",
+          "friendly"
+        ]
+      },
+      {
+        "value": "faq_separate_page",
+        "label": "FAQ on a separate help/support page",
+        "fits": [
+          "minimal",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Personalizing the CTA copy to reflect the visitor's likely intent or segment (e.g. 'Start my free trial' vs. generic 'Submit') increases click-through rate, because first-person and specific action language reduces the cognitive gap between reading and acting.",
+    "paper": "ConversionXL (CXL), 'Button Copy and Microcopy Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fitness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — specific, first-person CTA microcopy",
+    "verified": true,
+    "options": [
+      {
+        "value": "specific_first_person_cta",
+        "label": "Specific first-person CTA copy ('Start my free trial')",
+        "fits": [
+          "confident",
+          "friendly",
+          "energetic"
+        ]
+      },
+      {
+        "value": "generic_cta",
+        "label": "Generic CTA copy ('Submit' / 'Continue')",
+        "fits": [
+          "minimal",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Bundling complementary products or plan features at a modest discount increases average order value more reliably than a flat sitewide discount, because bundling reframes the decision around perceived added value rather than pure price reduction.",
+    "paper": "Nielsen Norman Group, 'Bundling and Average Order Value Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce",
+      "saas_b2b",
+      "fitness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — bundling vs. flat discounts for order value",
+    "verified": false,
+    "options": [
+      {
+        "value": "product_bundle_discount",
+        "label": "Bundled offer with modest discount",
+        "fits": [
+          "confident",
+          "friendly"
+        ]
+      },
+      {
+        "value": "flat_sitewide_discount",
+        "label": "Flat percentage-off sitewide discount",
+        "fits": [
+          "urgent",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "In fintech onboarding, explicitly stating security/regulatory credentials (encryption standard, licensing body, insurance coverage) near account-creation forms reduces drop-off, because financial commitment carries higher perceived risk than typical ecommerce or SaaS signup.",
+    "paper": "Nielsen Norman Group, 'Fintech Onboarding Trust Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "fintech"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — security credentials in fintech onboarding",
+    "verified": true,
+    "options": [
+      {
+        "value": "security_credentials_inline",
+        "label": "Encryption/regulatory badges inline with signup form",
+        "fits": [
+          "trustworthy",
+          "clinical",
+          "confident"
+        ]
+      },
+      {
+        "value": "security_credentials_footer",
+        "label": "Security credentials only in page footer",
+        "fits": [
+          "minimal",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Offering a low-friction 'try before you buy' path (demo booking, sample, or short assessment) converts skeptical high-consideration buyers better than a direct hard-sell CTA, particularly in categories with high switching cost or long-term commitment (education, fitness programs).",
+    "paper": "Nielsen Norman Group, 'High-Consideration Purchase Funnel Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "education",
+      "fitness",
+      "saas_b2b"
+    ],
+    "audience": [
+      "adults",
+      "parents",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — low-friction try-before-you-buy for high-consideration purchases",
+    "verified": false,
+    "options": [
+      {
+        "value": "book_a_demo",
+        "label": "Book a demo / consultation CTA",
+        "fits": [
+          "confident",
+          "trustworthy",
+          "friendly"
+        ]
+      },
+      {
+        "value": "direct_purchase_cta",
+        "label": "Direct purchase CTA, no intermediate step",
+        "fits": [
+          "bold",
+          "urgent"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "The unity principle (framing the brand and customer as part of a shared identity or community, 'join us' rather than 'buy from us') increases affinity-driven conversion, particularly effective for fitness, education, and lifestyle communities built around shared identity.",
+    "paper": "Cialdini, 'Influence: The Psychology of Persuasion', revised edition (2021) — unity principle",
+    "field": "conversion",
+    "appliesTo": [
+      "fitness",
+      "education",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "adults",
+      "teens",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — unity/community framing",
+    "verified": true,
+    "options": [
+      {
+        "value": "community_join_framing",
+        "label": "'Join the community' framing over transactional framing",
+        "fits": [
+          "warm",
+          "energetic",
+          "friendly"
+        ]
+      },
+      {
+        "value": "transactional_framing",
+        "label": "Straightforward transactional framing",
+        "fits": [
+          "clinical",
+          "minimal",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For subscription products, prominently displaying an easy self-serve cancellation path (rather than requiring a support call) counterintuitively increases signup conversion, because it lowers the perceived commitment risk of trying the product.",
+    "paper": "Nielsen Norman Group, 'Subscription Cancellation Friction Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — easy cancellation lowering signup friction",
+    "verified": false,
+    "options": [
+      {
+        "value": "self_serve_cancel_mentioned",
+        "label": "Self-serve cancellation mentioned near signup CTA",
+        "fits": [
+          "trustworthy",
+          "friendly",
+          "confident"
+        ]
+      },
+      {
+        "value": "cancellation_not_mentioned",
+        "label": "Cancellation policy not surfaced pre-signup",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Displaying a clear, simple refund/return policy summary (not buried in legal text) at the point of purchase reduces pre-purchase anxiety and measurably increases completed purchases in ecommerce, especially for higher-priced or unfamiliar-brand items.",
+    "paper": "Baymard Institute, 'Return Policy and Purchase Confidence Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — visible return policy and purchase confidence",
+    "verified": true,
+    "options": [
+      {
+        "value": "return_policy_summary_visible",
+        "label": "Plain-language return policy summary near CTA",
+        "fits": [
+          "trustworthy",
+          "friendly",
+          "confident"
+        ]
+      },
+      {
+        "value": "return_policy_in_footer_only",
+        "label": "Return policy link only in footer",
+        "fits": [
+          "minimal",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Urgency framing (limited-time discounts, flash sales) is more effective for low-consideration, low-price impulse categories (food, fast fashion) than for high-consideration categories (fintech, B2B software), where urgency can instead trigger suspicion and reduce trust.",
+    "paper": "ConversionXL (CXL), 'Urgency Messaging Effectiveness by Product Category'",
+    "field": "conversion",
+    "appliesTo": [
+      "food_lifestyle",
+      "ecommerce",
+      "fintech",
+      "saas_b2b"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — urgency effectiveness varies by consideration level",
+    "verified": true,
+    "options": [
+      {
+        "value": "urgency_countdown_low_consideration",
+        "label": "Countdown/urgency messaging for impulse categories",
+        "fits": [
+          "urgent",
+          "energetic",
+          "bold"
+        ]
+      },
+      {
+        "value": "no_urgency_high_consideration",
+        "label": "No urgency framing for high-consideration categories",
+        "fits": [
+          "trustworthy",
+          "calm",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Luxury and premium-positioned offers convert better with restraint-signaling scarcity (limited edition, made-to-order, waitlist access) than with discount-driven urgency, because discounting can erode the premium price anchor and perceived exclusivity.",
+    "paper": "Nielsen Norman Group, 'Luxury Ecommerce Conversion Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "luxury"
+    ],
+    "audience": [
+      "adults",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — exclusivity framing over discounting for luxury",
+    "verified": false,
+    "options": [
+      {
+        "value": "waitlist_exclusivity",
+        "label": "Waitlist / limited-edition access framing",
+        "fits": [
+          "premium",
+          "confident",
+          "bold"
+        ]
+      },
+      {
+        "value": "discount_driven_urgency",
+        "label": "Discount-driven urgency messaging",
+        "fits": [
+          "urgent",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Gamified progress mechanics (streaks, completion percentages, badges) increase conversion to sustained engagement in fitness and education products by leveraging the same completion-motivation documented in goal-gradient research, where motivation increases as perceived proximity to a goal increases.",
+    "paper": "Kivetz, Urminsky & Zheng, 'The Goal-Gradient Hypothesis Resurrected: Purchase Acceleration, Illusionary Goal Progress, and Customer Retention' (Journal of Marketing Research, 2006)",
+    "field": "conversion",
+    "appliesTo": [
+      "fitness",
+      "education",
+      "gaming"
+    ],
+    "audience": [
+      "adults",
+      "teens",
+      "general"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — goal-gradient effect and gamified progress",
+    "verified": true,
+    "options": [
+      {
+        "value": "progress_bar_gamification",
+        "label": "Visible progress bar / streak mechanic",
+        "fits": [
+          "energetic",
+          "playful",
+          "confident"
+        ]
+      },
+      {
+        "value": "no_gamification",
+        "label": "No gamified progress element",
+        "fits": [
+          "minimal",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Displaying a clear comparison table against competitors or 'the old way' increases conversion for challenger brands and new entrants, because it explicitly frames the decision as a superior alternative rather than requiring the visitor to construct the comparison themselves.",
+    "paper": "Nielsen Norman Group, 'Comparison Table Conversion Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — competitor comparison tables for challenger brands",
+    "verified": false,
+    "options": [
+      {
+        "value": "competitor_comparison_table",
+        "label": "Explicit feature comparison table vs. alternatives",
+        "fits": [
+          "confident",
+          "bold",
+          "clinical"
+        ]
+      },
+      {
+        "value": "no_comparison_table",
+        "label": "No direct comparison, features stand alone",
+        "fits": [
+          "minimal",
+          "premium"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "A visible money-quantified guarantee ('get $X back if not satisfied' rather than vague 'satisfaction guaranteed') increases perceived seriousness of the guarantee and modestly increases conversion versus unquantified guarantee language.",
+    "paper": "ConversionXL (CXL), 'Guarantee Framing Research'",
+    "field": "conversion",
+    "appliesTo": [
+      "ecommerce",
+      "fitness",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "conversion_structure",
+    "contextHeader": "Conversion — quantified vs. vague guarantee language",
+    "verified": false,
+    "options": [
+      {
+        "value": "quantified_guarantee",
+        "label": "Specific dollar-amount guarantee statement",
+        "fits": [
+          "confident",
+          "trustworthy",
+          "bold"
+        ]
+      },
+      {
+        "value": "vague_guarantee",
+        "label": "General 'satisfaction guaranteed' statement",
+        "fits": [
+          "friendly",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Fitts's Law predicts that the time to acquire a target is a function of its distance and size — larger, closer interactive elements are selected faster and with fewer errors, which is why primary CTAs benefit from generous size and proximity to the user's likely focal point.",
+    "paper": "Fitts, 'The Information Capacity of the Human Motor System in Controlling the Amplitude of Movement' (Journal of Experimental Psychology, 1954)",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "fitness",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — Fitts's Law and CTA size/placement",
+    "verified": true,
+    "options": [
+      {
+        "value": "large_cta_near_content",
+        "label": "Large CTA positioned near the content that motivates it",
+        "fits": [
+          "confident",
+          "bold",
+          "clinical"
+        ]
+      },
+      {
+        "value": "small_cta_standard_size",
+        "label": "Standard-size CTA, no special emphasis",
+        "fits": [
+          "minimal",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Hick's Law predicts that decision time increases logarithmically with the number of choices presented — navigation menus and option sets with fewer, well-organized choices are processed faster than long flat lists of options.",
+    "paper": "Hick, 'On the Rate of Gain of Information' (Quarterly Journal of Experimental Psychology, 1952); Hyman, 1953",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "education",
+      "fintech"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — Hick's Law and navigation choice count",
+    "verified": true,
+    "options": [
+      {
+        "value": "grouped_nav_categories",
+        "label": "Grouped navigation with few top-level categories",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "flat_long_nav_list",
+        "label": "Flat list of many navigation items",
+        "fits": [
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Miller's Law (the '7±2 rule') suggests that working memory can hold roughly 5-9 discrete items at once, which is why grouping navigation items, form fields, or pricing tiers into chunks of this size (or fewer) reduces cognitive load versus longer ungrouped lists.",
+    "paper": "Miller, 'The Magical Number Seven, Plus or Minus Two: Some Limits on Our Capacity for Processing Information' (Psychological Review, 1956)",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "education",
+      "fintech"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — Miller's Law and chunking of navigation/options",
+    "verified": true,
+    "options": [
+      {
+        "value": "chunked_nav_groups",
+        "label": "Navigation/options chunked into small groups of 5-7",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "single_long_list",
+        "label": "Single ungrouped long list",
+        "fits": [
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "The serial position effect predicts that items placed first (primacy) or last (recency) in a list or navigation menu are recalled and noticed more than items placed in the middle, which has implications for ordering pricing tiers, nav items, and feature lists.",
+    "paper": "Murdock, 'The Serial Position Effect of Free Recall' (Journal of Experimental Psychology, 1962)",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — serial position effect in list/nav ordering",
+    "verified": true,
+    "options": [
+      {
+        "value": "key_items_first_last",
+        "label": "Most important items placed first and last in the list",
+        "fits": [
+          "confident",
+          "clinical"
+        ]
+      },
+      {
+        "value": "arbitrary_order",
+        "label": "Items in arbitrary/alphabetical order",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Eye-tracking research shows web users scan pages in an F-shaped or Z-shaped pattern depending on content density — text-heavy pages produce F-shaped scanning (heavy left-side and top attention), while sparser, more visual layouts produce Z-shaped scanning across the whole page.",
+    "paper": "Nielsen Norman Group, 'F-Shaped Pattern For Reading Web Content' (eye-tracking research)",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "education",
+      "fintech"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — F-pattern and Z-pattern scanning behavior",
+    "verified": true,
+    "options": [
+      {
+        "value": "f_pattern_text_heavy",
+        "label": "F-pattern layout for text-heavy content pages",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "z_pattern_visual_hero",
+        "label": "Z-pattern layout for sparse, visual hero sections",
+        "fits": [
+          "bold",
+          "energetic",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Visual hierarchy created through size, weight, and whitespace differences (rather than color alone) allows users to correctly identify a page's primary action within milliseconds, and pages lacking clear hierarchy show measurably slower task completion.",
+    "paper": "Nielsen Norman Group, 'Visual Hierarchy in UX Design'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "health_wellness",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — visual hierarchy via size/weight/whitespace",
+    "verified": true,
+    "options": [
+      {
+        "value": "strong_size_weight_hierarchy",
+        "label": "Strong size/weight contrast between primary and secondary elements",
+        "fits": [
+          "confident",
+          "clinical",
+          "bold"
+        ]
+      },
+      {
+        "value": "uniform_sizing",
+        "label": "Uniform sizing across most elements",
+        "fits": [
+          "minimal",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Generous whitespace (negative space) around key content increases perceived premium quality and comprehension, while dense, low-whitespace layouts are perceived as lower-cost or lower-quality even when the underlying content is identical.",
+    "paper": "Nielsen Norman Group, 'The Role of Whitespace in UX Design'",
+    "field": "layout",
+    "appliesTo": [
+      "luxury",
+      "saas_b2b",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — whitespace and perceived quality",
+    "verified": true,
+    "options": [
+      {
+        "value": "generous_whitespace",
+        "label": "Generous whitespace, fewer elements per viewport",
+        "fits": [
+          "premium",
+          "calm",
+          "minimal"
+        ]
+      },
+      {
+        "value": "dense_layout",
+        "label": "Dense layout, many elements per viewport",
+        "fits": [
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Above-the-fold placement of key information still measurably affects engagement even though users do scroll — content immediately visible on load receives disproportionately more attention and time than content requiring a scroll, particularly on first visit.",
+    "paper": "Nielsen Norman Group, 'Scrolling and Attention' (eye-tracking research)",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — above-the-fold attention weighting",
+    "verified": true,
+    "options": [
+      {
+        "value": "key_message_above_fold",
+        "label": "Core value proposition fully visible without scrolling",
+        "fits": [
+          "confident",
+          "clinical"
+        ]
+      },
+      {
+        "value": "key_message_requires_scroll",
+        "label": "Core message revealed after initial scroll",
+        "fits": [
+          "bold",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Card-based layouts (discrete bounded content blocks) improve scanability and perceived organization for heterogeneous content (products, articles, features) compared to undifferentiated flowing text, because visual boundaries help users parse where one item ends and another begins.",
+    "paper": "Nielsen Norman Group, 'Cards in UX Design'",
+    "field": "layout",
+    "appliesTo": [
+      "ecommerce",
+      "saas_b2b",
+      "education",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — card-based grouping for heterogeneous content",
+    "verified": true,
+    "options": [
+      {
+        "value": "card_grid_layout",
+        "label": "Card-based grid for products/features/articles",
+        "fits": [
+          "clinical",
+          "confident",
+          "friendly"
+        ]
+      },
+      {
+        "value": "flowing_list_layout",
+        "label": "Flowing list without card boundaries",
+        "fits": [
+          "minimal",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "A persistent, sticky navigation bar reduces the effort needed to switch sections and is preferred by users for long-scrolling or content-heavy pages, but on short pages it can consume valuable vertical space without a corresponding usability benefit.",
+    "paper": "Nielsen Norman Group, 'Sticky Navigation Usability'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "education",
+      "fintech"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — sticky navigation for long-scrolling pages",
+    "verified": true,
+    "options": [
+      {
+        "value": "sticky_nav_long_page",
+        "label": "Sticky nav bar for long/content-heavy pages",
+        "fits": [
+          "confident",
+          "clinical"
+        ]
+      },
+      {
+        "value": "static_nav_short_page",
+        "label": "Static (non-sticky) nav for short pages",
+        "fits": [
+          "minimal",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Breaking long forms into logical grouped sections with clear section headers reduces perceived effort and abandonment compared to a single undifferentiated wall of fields, even when the total number of fields is unchanged.",
+    "paper": "Nielsen Norman Group, 'Form Design Guidelines'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — grouped form sections and perceived effort",
+    "verified": true,
+    "options": [
+      {
+        "value": "grouped_form_sections",
+        "label": "Form grouped into labeled sections",
+        "fits": [
+          "clinical",
+          "confident",
+          "friendly"
+        ]
+      },
+      {
+        "value": "single_long_form",
+        "label": "Single ungrouped long form",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Consistent grid alignment across a page (elements snapped to a shared column/baseline grid) is rated as more professional and 'polished' in usability testing than layouts with inconsistent or ad-hoc alignment, independent of the specific content shown.",
+    "paper": "Nielsen Norman Group, 'Grid Systems in Web Design'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "luxury",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — grid alignment and perceived polish",
+    "verified": true,
+    "options": [
+      {
+        "value": "strict_grid_alignment",
+        "label": "Strict shared grid alignment across sections",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "loose_ad_hoc_alignment",
+        "label": "Loose, ad-hoc alignment",
+        "fits": [
+          "playful",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Placing the most important navigation items or actions on the left side of a horizontal nav bar benefits left-to-right reading cultures because of the primacy of early-scanned positions, consistent with F-pattern scanning research.",
+    "paper": "Nielsen Norman Group, 'F-Shaped Pattern For Reading Web Content' — nav-order inference",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — left-weighted navigation for LTR reading patterns",
+    "verified": false,
+    "options": [
+      {
+        "value": "left_weighted_nav",
+        "label": "Most important nav items positioned leftmost",
+        "fits": [
+          "clinical",
+          "confident"
+        ]
+      },
+      {
+        "value": "right_weighted_nav",
+        "label": "Most important nav items positioned rightmost (near account/CTA)",
+        "fits": [
+          "confident",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "A single-column layout for primary content (rather than multi-column) is easier to scan and complete on mobile and reduces the risk of a user losing their place, which is why responsive form and checkout layouts collapse to a single column on small viewports.",
+    "paper": "Nielsen Norman Group, 'Mobile Usability Guidelines'",
+    "field": "layout",
+    "appliesTo": [
+      "ecommerce",
+      "saas_b2b",
+      "fintech",
+      "fitness"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — single-column layouts for mobile forms/checkout",
+    "verified": true,
+    "options": [
+      {
+        "value": "single_column_mobile",
+        "label": "Single-column layout on small viewports",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "multi_column_mobile",
+        "label": "Retained multi-column layout on small viewports",
+        "fits": [
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Proximity grouping (related elements placed closer together, unrelated elements separated by greater whitespace) is one of the strongest and most reliable Gestalt cues for helping users infer which controls act on which content, without needing explicit labels or borders.",
+    "paper": "Wertheimer, Gestalt principles of perceptual organization (1923); applied to UI by Nielsen Norman Group",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "developers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — Gestalt proximity grouping",
+    "verified": true,
+    "options": [
+      {
+        "value": "proximity_grouped_controls",
+        "label": "Related controls tightly grouped by proximity",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "evenly_spaced_controls",
+        "label": "Evenly spaced controls regardless of relation",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Similarity grouping (shared color, shape, or size signaling that items belong to the same category) helps users parse a page's structure faster than relying on position alone, and is why consistent card styling across a product grid speeds recognition of item type.",
+    "paper": "Wertheimer, Gestalt principles of perceptual organization (1923); applied to UI by Nielsen Norman Group",
+    "field": "layout",
+    "appliesTo": [
+      "ecommerce",
+      "saas_b2b",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — Gestalt similarity grouping",
+    "verified": true,
+    "options": [
+      {
+        "value": "consistent_card_styling",
+        "label": "Consistent visual styling across same-category items",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "varied_card_styling",
+        "label": "Varied styling per item for visual interest",
+        "fits": [
+          "playful",
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Placing pricing information directly adjacent to the feature list it corresponds to reduces the memory burden of comparing price against value, versus separating pricing tables from feature explanations on different sections or pages.",
+    "paper": "Nielsen Norman Group, 'Pricing Page Design Patterns'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness"
+    ],
+    "audience": [
+      "adults",
+      "b2b_buyers",
+      "general"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — pricing proximity to corresponding features",
+    "verified": true,
+    "options": [
+      {
+        "value": "price_with_features_inline",
+        "label": "Price shown inline with its feature list",
+        "fits": [
+          "clinical",
+          "confident",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "price_separate_from_features",
+        "label": "Price and features shown in separate sections",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Hero sections that pair a clear headline with a single supporting image or product visual are processed faster and rated as clearer than hero sections with multiple competing visual elements (carousels, multiple simultaneous images).",
+    "paper": "Nielsen Norman Group, 'Homepage and Hero Section Usability Research'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fitness",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — single-focus hero sections vs. carousels",
+    "verified": true,
+    "options": [
+      {
+        "value": "single_visual_hero",
+        "label": "Single clear hero image/visual",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "carousel_hero",
+        "label": "Auto-rotating multi-image hero carousel",
+        "fits": [
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Table-based data display (rows and columns with aligned values) is scanned and compared significantly faster by users than the same data presented as repeated prose paragraphs, particularly for pricing, specs, or numeric comparisons.",
+    "paper": "Nielsen Norman Group, 'Data Table Usability Research'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "ecommerce"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — tabular display for comparable numeric data",
+    "verified": true,
+    "options": [
+      {
+        "value": "comparison_table_layout",
+        "label": "Aligned table for comparable data/pricing",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "prose_description_layout",
+        "label": "Prose-style description of the same data",
+        "fits": [
+          "warm",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Sidebar navigation with persistent visibility of the full site/app structure improves task efficiency for content-heavy or tool-heavy products with many sections, but adds visual complexity that can overwhelm first-time visitors on marketing-oriented pages.",
+    "paper": "Nielsen Norman Group, 'Sidebar vs. Top Navigation Research'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "education"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "developers",
+      "general"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — sidebar navigation for tool-heavy products",
+    "verified": true,
+    "options": [
+      {
+        "value": "persistent_sidebar_nav",
+        "label": "Persistent sidebar nav for app/dashboard sections",
+        "fits": [
+          "clinical",
+          "confident"
+        ]
+      },
+      {
+        "value": "top_nav_marketing_pages",
+        "label": "Simple top nav for marketing-facing pages",
+        "fits": [
+          "minimal",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For senior audiences, larger touch/click targets and increased spacing between interactive elements reduce mis-clicks caused by age-related declines in fine motor precision, an effect consistent with Fitts's Law predictions at reduced motor accuracy.",
+    "paper": "Fitts's Law (Fitts, 1954) applied to age-related motor precision — Nielsen Norman Group corroboration",
+    "field": "layout",
+    "appliesTo": [
+      "health_wellness",
+      "fintech"
+    ],
+    "audience": [
+      "seniors"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — larger targets and spacing for senior motor precision",
+    "verified": true,
+    "options": [
+      {
+        "value": "large_spaced_targets_seniors",
+        "label": "Larger targets with generous spacing for senior-facing flows",
+        "fits": [
+          "clinical",
+          "calm",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "standard_target_sizing",
+        "label": "Standard target sizing, no senior-specific adjustment",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Long-form landing pages that follow a logical narrative sequence (problem, solution, proof, offer) outperform pages with the same content presented in a non-sequential or scattered order, because the sequence mirrors the buyer's natural decision-making progression.",
+    "paper": "Nielsen Norman Group, 'Landing Page Narrative Structure Research'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "fitness",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — narrative sequencing in long-form landing pages",
+    "verified": false,
+    "options": [
+      {
+        "value": "problem_solution_proof_offer",
+        "label": "Problem-solution-proof-offer narrative sequence",
+        "fits": [
+          "confident",
+          "clinical",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "feature_first_sequence",
+        "label": "Feature-list-first sequence without narrative framing",
+        "fits": [
+          "minimal",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For children's interfaces, simplified layouts with fewer simultaneous choices and larger, more clearly bounded interactive zones reduce task failure, consistent with both Hick's Law (fewer choices) and Fitts's Law (larger targets) but amplified by children's still-developing fine motor and executive function skills.",
+    "paper": "Nielsen Norman Group, 'Designing for Children: Usability Research'",
+    "field": "layout",
+    "appliesTo": [
+      "education",
+      "gaming"
+    ],
+    "audience": [
+      "children_under_10"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — simplified layouts and large targets for children",
+    "verified": true,
+    "options": [
+      {
+        "value": "simplified_large_target_layout",
+        "label": "Few choices, large clearly-bounded targets",
+        "fits": [
+          "playful",
+          "friendly",
+          "energetic"
+        ]
+      },
+      {
+        "value": "dense_adult_style_layout",
+        "label": "Dense, adult-style layout with many small controls",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "A visible, consistent footer with organized link categories (rather than a single flat list) improves findability of secondary information (legal, support, company info) and is where users predictably look when they cannot find something elsewhere on the page.",
+    "paper": "Nielsen Norman Group, 'Footer Design Guidelines'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — organized footer categories for findability",
+    "verified": true,
+    "options": [
+      {
+        "value": "categorized_footer",
+        "label": "Footer organized into labeled link categories",
+        "fits": [
+          "clinical",
+          "confident",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "flat_footer_list",
+        "label": "Single flat list of footer links",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Z-pattern layouts (diagonal visual flow from top-left to bottom-right) are effective for sparse marketing pages with a clear single call-to-action, guiding the eye naturally from logo/headline through supporting visual to the CTA in the bottom-right.",
+    "paper": "Nielsen Norman Group, 'Visual Flow Patterns in Web Design'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — Z-pattern visual flow for sparse marketing pages",
+    "verified": true,
+    "options": [
+      {
+        "value": "z_pattern_flow",
+        "label": "Z-pattern layout guiding eye toward bottom-right CTA",
+        "fits": [
+          "confident",
+          "bold",
+          "clinical"
+        ]
+      },
+      {
+        "value": "no_deliberate_flow_pattern",
+        "label": "No deliberate visual flow pattern",
+        "fits": [
+          "playful",
+          "energetic"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Excessive nested navigation (three or more menu levels deep) significantly increases the likelihood a user abandons a task before finding what they need, compared to flatter information architectures with the same total content volume.",
+    "paper": "Nielsen Norman Group, 'Information Architecture and Navigation Depth Research'",
+    "field": "layout",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "b2b_buyers"
+    ],
+    "decision": "layout",
+    "contextHeader": "Layout — navigation depth and task abandonment",
+    "verified": true,
+    "options": [
+      {
+        "value": "flat_information_architecture",
+        "label": "Flat IA, two levels of navigation depth max",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "deep_nested_navigation",
+        "label": "Deep nested navigation, three-plus levels",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires a minimum contrast ratio of 4.5:1 between normal-size text and its background (3:1 for large text 18pt+/14pt bold+), below which text is considered inaccessible to users with low vision or color vision deficiencies.",
+    "paper": "WCAG 2.1, Success Criterion 1.4.3 Contrast (Minimum)",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "health_wellness",
+      "education",
+      "fitness",
+      "food_lifestyle",
+      "gaming",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — WCAG minimum text contrast ratio",
+    "verified": true,
+    "options": [
+      {
+        "value": "4.5:1_min_contrast",
+        "label": "4.5:1 minimum contrast for body text",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "7:1_enhanced_contrast",
+        "label": "7:1 enhanced contrast (AAA level)",
+        "fits": [
+          "clinical",
+          "trustworthy"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 recommends touch targets be at least 44x44 CSS pixels (WCAG 2.2 formalizes 24x24px as the AA minimum, with 44x44px recommended), since smaller targets significantly increase mis-tap rates for users with motor impairments or larger fingers.",
+    "paper": "WCAG 2.2, Success Criterion 2.5.8 Target Size (Minimum); WCAG 2.1 SC 2.5.5 Target Size (Enhanced)",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "health_wellness",
+      "fitness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — minimum touch target size",
+    "verified": true,
+    "options": [
+      {
+        "value": "44px_min_target",
+        "label": "44x44px minimum touch target",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "24px_min_target",
+        "label": "24x24px minimum touch target (AA baseline)",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that functionality triggered by motion-based interaction (device shake, pointer gesture) also be operable through conventional UI controls, and that animation triggered by interaction can be disabled unless essential, protecting users with motor or vestibular conditions.",
+    "paper": "WCAG 2.1, Success Criterion 2.3.3 Animation from Interactions",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "gaming",
+      "fitness"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — user control over interaction-triggered animation",
+    "verified": true,
+    "options": [
+      {
+        "value": "respect_reduced_motion",
+        "label": "Honor prefers-reduced-motion, disable non-essential animation",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "calm"
+        ]
+      },
+      {
+        "value": "animation_always_on",
+        "label": "Animation always enabled regardless of user preference",
+        "fits": [
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that color not be the sole visual means of conveying information (e.g. error states, required fields, status indicators) because color-blind users and users with certain low-vision conditions cannot reliably distinguish hue-only signals.",
+    "paper": "WCAG 2.1, Success Criterion 1.4.1 Use of Color",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "ecommerce",
+      "health_wellness",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — color not the sole information signal",
+    "verified": true,
+    "options": [
+      {
+        "value": "icon_plus_color_status",
+        "label": "Icon/text label paired with color for status states",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "color_only_status",
+        "label": "Color alone signals status",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires visible focus indicators for all keyboard-operable interface elements, since keyboard-only users (including many users with motor impairments) rely entirely on focus visibility to know where they are on the page.",
+    "paper": "WCAG 2.1, Success Criterion 2.4.7 Focus Visible",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "ecommerce",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "developers"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — visible keyboard focus indicators",
+    "verified": true,
+    "options": [
+      {
+        "value": "high_contrast_focus_ring",
+        "label": "High-contrast visible focus ring on all interactive elements",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "browser_default_focus_removed",
+        "label": "Default focus outline removed without replacement",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that text can be resized up to 200% without loss of content or functionality, which requires layouts to use relative units and avoid fixed-height containers that clip enlarged text.",
+    "paper": "WCAG 2.1, Success Criterion 1.4.4 Resize Text",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — resizable text up to 200%",
+    "verified": true,
+    "options": [
+      {
+        "value": "relative_units_fluid_layout",
+        "label": "Relative units (rem/em) with fluid containers",
+        "fits": [
+          "clinical",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "fixed_px_layout",
+        "label": "Fixed-pixel layout that may clip at 200% zoom",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that all functionality be operable through a keyboard alone, without requiring specific timing for individual keystrokes, since many users with motor impairments cannot use a pointing device at all.",
+    "paper": "WCAG 2.1, Success Criterion 2.1.1 Keyboard",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "ecommerce",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "developers"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — full keyboard operability",
+    "verified": true,
+    "options": [
+      {
+        "value": "full_keyboard_support",
+        "label": "All interactive elements reachable and operable via keyboard",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "mouse_only_interactions",
+        "label": "Some interactions require a pointing device",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that images convey their purpose through text alternatives (alt text) so that screen reader users receive equivalent information to sighted users viewing the image.",
+    "paper": "WCAG 2.1, Success Criterion 1.1.1 Non-text Content",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "education",
+      "health_wellness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — text alternatives for images",
+    "verified": true,
+    "options": [
+      {
+        "value": "descriptive_alt_text",
+        "label": "Descriptive alt text on all meaningful images",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "missing_or_generic_alt",
+        "label": "Missing or generic alt text",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that content and functionality not rely on a specific device orientation (portrait or landscape only) unless essential, since some users have devices fixed in a particular orientation due to mounting or motor constraints.",
+    "paper": "WCAG 2.1, Success Criterion 1.3.4 Orientation",
+    "field": "accessibility",
+    "appliesTo": [
+      "ecommerce",
+      "fitness",
+      "gaming",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — orientation-independent layouts",
+    "verified": true,
+    "options": [
+      {
+        "value": "orientation_agnostic_layout",
+        "label": "Layout adapts to both portrait and landscape",
+        "fits": [
+          "clinical",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "single_orientation_lock",
+        "label": "Locked to a single orientation",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that content flashing more than three times per second be avoided entirely, since rapid flashing can trigger seizures in users with photosensitive epilepsy — this is one of the few WCAG criteria with a direct physical safety implication.",
+    "paper": "WCAG 2.1, Success Criterion 2.3.1 Three Flashes or Below Threshold",
+    "field": "accessibility",
+    "appliesTo": [
+      "gaming",
+      "ecommerce",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "children_under_10"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — seizure-safe flash-rate limits",
+    "verified": true,
+    "options": [
+      {
+        "value": "no_rapid_flashing",
+        "label": "No content flashes more than 3 times per second",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "calm"
+        ]
+      },
+      {
+        "value": "unrestricted_flash_effects",
+        "label": "Unrestricted flashing visual effects",
+        "fits": [
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For older adults, accessibility accommodations (larger text, higher contrast, larger touch targets) often overlap directly with WCAG AA requirements, meaning designing to WCAG AA as a baseline also substantially improves usability for the senior segment specifically, not just users with permanent disabilities.",
+    "paper": "Nielsen Norman Group, 'Senior Citizens and Web Usability' — cross-referenced with WCAG 2.1 AA criteria",
+    "field": "accessibility",
+    "appliesTo": [
+      "health_wellness",
+      "fintech"
+    ],
+    "audience": [
+      "seniors"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — WCAG AA baseline benefits older adults broadly",
+    "verified": true,
+    "options": [
+      {
+        "value": "wcag_aa_baseline_senior_focus",
+        "label": "WCAG AA compliance treated as a senior-usability baseline",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "calm"
+        ]
+      },
+      {
+        "value": "no_specific_senior_accommodation",
+        "label": "No specific accommodation beyond minimum legal requirement",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that form fields have programmatically associated labels (not placeholder text alone), since placeholder-only labels disappear on input and are not reliably exposed to assistive technology in the same way as persistent labels.",
+    "paper": "WCAG 2.1, Success Criterion 1.3.1 Info and Relationships (form labeling guidance); Success Criterion 3.3.2 Labels or Instructions",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "ecommerce",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — persistent form labels vs. placeholder-only",
+    "verified": true,
+    "options": [
+      {
+        "value": "persistent_visible_labels",
+        "label": "Persistent visible labels above/beside each field",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "placeholder_only_labels",
+        "label": "Placeholder text used as the only label",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that users be able to pause, stop, or hide any moving, blinking, or auto-updating content that starts automatically and lasts more than five seconds, since continuously moving content can distract users with attention-related or cognitive disabilities.",
+    "paper": "WCAG 2.1, Success Criterion 2.2.2 Pause, Stop, Hide",
+    "field": "accessibility",
+    "appliesTo": [
+      "ecommerce",
+      "saas_b2b",
+      "food_lifestyle",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — user control over auto-playing moving content",
+    "verified": true,
+    "options": [
+      {
+        "value": "pausable_auto_content",
+        "label": "Auto-rotating/moving content includes a pause control",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "calm"
+        ]
+      },
+      {
+        "value": "non_pausable_auto_content",
+        "label": "Auto-playing content with no pause control",
+        "fits": [
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For neurodivergent users (including many with ADHD or autism spectrum conditions), reduced visual clutter, predictable layout patterns, and minimized unexpected motion measurably reduce cognitive load and task abandonment, even though this is not captured by a single specific WCAG criterion.",
+    "paper": "Nielsen Norman Group, 'Designing for Neurodiversity' — inference from cognitive accessibility research",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "education",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "children_under_10"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — reduced clutter and predictability for neurodivergent users",
+    "verified": false,
+    "options": [
+      {
+        "value": "predictable_low_clutter_layout",
+        "label": "Predictable layout with minimal unexpected motion/clutter",
+        "fits": [
+          "clinical",
+          "calm",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "dynamic_content_dense_layout",
+        "label": "Dynamic, visually dense layout",
+        "fits": [
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires a minimum 3:1 contrast ratio for the visual boundaries of user interface components (buttons, input borders, focus indicators) against adjacent colors, distinct from the 4.5:1 requirement for text, since low-contrast component boundaries are hard to perceive for low-vision users even when text within them is legible.",
+    "paper": "WCAG 2.1, Success Criterion 1.4.11 Non-text Contrast",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "ecommerce",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — minimum contrast for UI component boundaries",
+    "verified": true,
+    "options": [
+      {
+        "value": "3:1_component_contrast",
+        "label": "3:1 minimum contrast for buttons/inputs/borders",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "low_contrast_component_borders",
+        "label": "Low-contrast, subtle component borders",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "WCAG 2.1 requires that error messages identify the specific field in error and describe the error in text, rather than relying on a generic error state or color alone, so that screen reader users and users with cognitive disabilities can understand and correct the problem.",
+    "paper": "WCAG 2.1, Success Criterion 3.3.1 Error Identification",
+    "field": "accessibility",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech",
+      "ecommerce",
+      "health_wellness"
+    ],
+    "audience": [
+      "general",
+      "adults",
+      "seniors"
+    ],
+    "decision": "accessibility",
+    "contextHeader": "Accessibility — specific, text-based error identification",
+    "verified": true,
+    "options": [
+      {
+        "value": "field_specific_text_errors",
+        "label": "Field-specific text error messages, not color alone",
+        "fits": [
+          "clinical",
+          "trustworthy",
+          "confident"
+        ]
+      },
+      {
+        "value": "generic_color_only_error",
+        "label": "Generic red-border-only error indication",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "UI transition animations in the roughly 200-500ms range are perceived as responsive and smooth; animations shorter than this feel imperceptible or abrupt, while animations longer than this feel sluggish and begin to actively slow down perceived task completion.",
+    "paper": "Nielsen Norman Group, 'Animation Duration and Perceived Performance'; commonly-cited motion-design duration range",
+    "field": "motion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "gaming",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — optimal UI transition duration range",
+    "verified": true,
+    "options": [
+      {
+        "value": "200-300ms_transitions",
+        "label": "200-300ms micro-interaction transitions",
+        "fits": [
+          "confident",
+          "energetic",
+          "minimal"
+        ]
+      },
+      {
+        "value": "300-500ms_transitions",
+        "label": "300-500ms standard transitions",
+        "fits": [
+          "calm",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "800ms+_transitions",
+        "label": "800ms+ slow, deliberate transitions",
+        "fits": [
+          "premium",
+          "calm"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Motion that triggers vestibular disorder symptoms (large-scale parallax, zooming, or simulated 3D movement) can cause real physical discomfort (dizziness, nausea) for a meaningful subset of users, which is the underlying reason the prefers-reduced-motion media query exists and should be respected.",
+    "paper": "W3C, prefers-reduced-motion specification rationale; cross-referenced with WCAG 2.1 SC 2.3.3 Animation from Interactions",
+    "field": "motion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "gaming",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — vestibular triggers and prefers-reduced-motion",
+    "verified": true,
+    "options": [
+      {
+        "value": "respects_reduced_motion_query",
+        "label": "Large-scale motion disabled when prefers-reduced-motion is set",
+        "fits": [
+          "trustworthy",
+          "calm",
+          "clinical"
+        ]
+      },
+      {
+        "value": "ignores_reduced_motion_preference",
+        "label": "Motion effects run regardless of user preference",
+        "fits": [
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Loading animations (spinners, skeleton screens, progress indicators) improve perceived performance and reduce user-reported frustration during wait times, even when they do not change the actual load time, because they signal that the system is working rather than frozen.",
+    "paper": "Nielsen Norman Group, 'Progress Indicators Make a Slow System Less Insufferable'",
+    "field": "motion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — loading indicators and perceived performance",
+    "verified": true,
+    "options": [
+      {
+        "value": "skeleton_screen_loading",
+        "label": "Skeleton screen placeholders during load",
+        "fits": [
+          "clinical",
+          "confident",
+          "minimal"
+        ]
+      },
+      {
+        "value": "spinner_loading",
+        "label": "Simple spinner during load",
+        "fits": [
+          "minimal",
+          "calm"
+        ]
+      },
+      {
+        "value": "no_loading_indicator",
+        "label": "No visible loading indicator",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Easing curves that mimic natural physical deceleration (ease-out) are perceived as smoother and more polished than linear or purely mechanical motion, because they mirror how physical objects move in the real world and match users' intuitive expectations.",
+    "paper": "Nielsen Norman Group, 'Motion Design Principles for UX'",
+    "field": "motion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "gaming",
+      "luxury"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — natural easing curves vs. linear motion",
+    "verified": true,
+    "options": [
+      {
+        "value": "ease_out_curve",
+        "label": "Ease-out curve mimicking natural deceleration",
+        "fits": [
+          "confident",
+          "premium",
+          "calm"
+        ]
+      },
+      {
+        "value": "linear_motion",
+        "label": "Linear, constant-speed motion",
+        "fits": [
+          "clinical",
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Micro-interactions (small animated responses to user actions like a button press or toggle switch) provide immediate feedback that confirms an action registered, which reduces repeated/duplicate clicks caused by uncertainty about whether the first click worked.",
+    "paper": "Nielsen Norman Group, 'Response Time Limits and Perceived System Feedback'",
+    "field": "motion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "gaming"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — micro-interaction feedback and duplicate-click prevention",
+    "verified": true,
+    "options": [
+      {
+        "value": "instant_micro_feedback",
+        "label": "Immediate micro-animation on every interactive action",
+        "fits": [
+          "confident",
+          "energetic",
+          "friendly"
+        ]
+      },
+      {
+        "value": "no_micro_feedback",
+        "label": "No animated feedback on interaction",
+        "fits": [
+          "minimal",
+          "clinical"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Excessive or gratuitous animation on marketing pages (elements sliding, bouncing, or fading on every scroll trigger) can reduce perceived credibility for B2B and financial audiences, who associate restrained motion with seriousness and heavy scroll-triggered animation with lower-trust or less mature products.",
+    "paper": "Nielsen Norman Group, 'Motion Design Principles for UX' — B2B credibility inference",
+    "field": "motion",
+    "appliesTo": [
+      "saas_b2b",
+      "fintech"
+    ],
+    "audience": [
+      "b2b_buyers",
+      "adults"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — restrained motion and B2B/financial credibility",
+    "verified": false,
+    "options": [
+      {
+        "value": "restrained_scroll_animation",
+        "label": "Minimal, purposeful scroll-triggered animation",
+        "fits": [
+          "clinical",
+          "confident",
+          "trustworthy"
+        ]
+      },
+      {
+        "value": "heavy_scroll_animation",
+        "label": "Heavy scroll-triggered animation on most elements",
+        "fits": [
+          "energetic",
+          "playful",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "For gaming and youth-oriented entertainment products, energetic, elastic, or bouncy motion (overshoot easing) is associated with playfulness and fun and is preferred by younger audiences over the restrained, minimal-overshoot motion favored in professional/enterprise contexts.",
+    "paper": "Nielsen Norman Group, 'Motion Design Principles for UX' — audience-preference inference",
+    "field": "motion",
+    "appliesTo": [
+      "gaming",
+      "education"
+    ],
+    "audience": [
+      "teens",
+      "children_under_10"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — bouncy overshoot easing for playful/youth contexts",
+    "verified": false,
+    "options": [
+      {
+        "value": "bouncy_overshoot_easing",
+        "label": "Bouncy, elastic overshoot easing",
+        "fits": [
+          "playful",
+          "energetic",
+          "bold"
+        ]
+      },
+      {
+        "value": "restrained_no_overshoot_easing",
+        "label": "Restrained ease with no overshoot",
+        "fits": [
+          "clinical",
+          "minimal",
+          "confident"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Page transition animations that maintain spatial continuity (elements appearing to move from their prior position to their new one, rather than abruptly cutting) help users maintain a mental model of where content came from and reduce reported disorientation, particularly in multi-step flows.",
+    "paper": "Nielsen Norman Group, 'Motion Design Principles for UX'",
+    "field": "motion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "fintech",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — spatial continuity in page/step transitions",
+    "verified": true,
+    "options": [
+      {
+        "value": "spatial_continuity_transition",
+        "label": "Transitions preserve spatial continuity between steps",
+        "fits": [
+          "clinical",
+          "confident",
+          "calm"
+        ]
+      },
+      {
+        "value": "hard_cut_transition",
+        "label": "Hard cut between pages/steps, no transition",
+        "fits": [
+          "minimal"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Autoplaying background video or large-scale motion on a hero section increases initial visual interest but can slow perceived page load and increase cognitive load for users trying to read accompanying text, creating a trade-off between visual energy and message clarity.",
+    "paper": "Nielsen Norman Group, 'Autoplay Video and Motion in Hero Sections'",
+    "field": "motion",
+    "appliesTo": [
+      "ecommerce",
+      "luxury",
+      "fitness",
+      "food_lifestyle"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — autoplay hero motion vs. message clarity trade-off",
+    "verified": true,
+    "options": [
+      {
+        "value": "static_hero_no_autoplay",
+        "label": "Static hero, no autoplay motion",
+        "fits": [
+          "clinical",
+          "calm",
+          "minimal"
+        ]
+      },
+      {
+        "value": "subtle_autoplay_hero_motion",
+        "label": "Subtle autoplay background motion behind text",
+        "fits": [
+          "premium",
+          "energetic",
+          "bold"
+        ]
+      }
+    ]
+  },
+  {
+    "claim": "Staggered entrance animations (list or grid items appearing in sequence rather than simultaneously) are perceived as more polished and help direct attention item-by-item, but excessive stagger delay across long lists can make the interface feel slow to fully render.",
+    "paper": "Nielsen Norman Group, 'Motion Design Principles for UX'",
+    "field": "motion",
+    "appliesTo": [
+      "saas_b2b",
+      "ecommerce",
+      "education"
+    ],
+    "audience": [
+      "general",
+      "adults"
+    ],
+    "decision": "motion",
+    "contextHeader": "Motion — staggered entrance animation for lists/grids",
+    "verified": false,
+    "options": [
+      {
+        "value": "short_stagger_entrance",
+        "label": "Short (30-60ms) stagger delay between items",
+        "fits": [
+          "confident",
+          "premium",
+          "energetic"
+        ]
+      },
+      {
+        "value": "no_stagger_simultaneous",
+        "label": "All items appear simultaneously, no stagger",
+        "fits": [
+          "clinical",
+          "minimal"
+        ]
+      }
+    ]
+  }
+]

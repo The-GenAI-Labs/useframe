@@ -47,50 +47,30 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model Account
+ * Model Identity
  * 
  */
-export type Account = Prisma.AccountModel
+export type Identity = Prisma.IdentityModel
 /**
  * Model Session
  * 
  */
 export type Session = Prisma.SessionModel
 /**
- * Model VerificationToken
- * 
- */
-export type VerificationToken = Prisma.VerificationTokenModel
-/**
- * Model UserCredential
- * 
- */
-export type UserCredential = Prisma.UserCredentialModel
-/**
- * Model UserIdentity
- * 
- */
-export type UserIdentity = Prisma.UserIdentityModel
-/**
  * Model RefreshToken
  * 
  */
 export type RefreshToken = Prisma.RefreshTokenModel
 /**
- * Model UserSession
+ * Model MagicLinkToken
  * 
  */
-export type UserSession = Prisma.UserSessionModel
+export type MagicLinkToken = Prisma.MagicLinkTokenModel
 /**
- * Model EmailVerificationToken
+ * Model TicketToken
  * 
  */
-export type EmailVerificationToken = Prisma.EmailVerificationTokenModel
-/**
- * Model PasswordResetToken
- * 
- */
-export type PasswordResetToken = Prisma.PasswordResetTokenModel
+export type TicketToken = Prisma.TicketTokenModel
 /**
  * Model PhoneOtp
  * 
@@ -101,6 +81,11 @@ export type PhoneOtp = Prisma.PhoneOtpModel
  * 
  */
 export type Plan = Prisma.PlanModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
 /**
  * Model Subscription
  * 
@@ -126,6 +111,11 @@ export type CreditBalance = Prisma.CreditBalanceModel
  * 
  */
 export type CreditTransaction = Prisma.CreditTransactionModel
+/**
+ * Model AutoReloadSetting
+ * 
+ */
+export type AutoReloadSetting = Prisma.AutoReloadSettingModel
 /**
  * Model Project
  * 
@@ -192,6 +182,36 @@ export type Waitlist = Prisma.WaitlistModel
  */
 export type ResearchReport = Prisma.ResearchReportModel
 /**
+ * Model ResearchFinding
+ * 
+ */
+export type ResearchFinding = Prisma.ResearchFindingModel
+/**
+ * Model FindingRelation
+ * 
+ */
+export type FindingRelation = Prisma.FindingRelationModel
+/**
+ * Model DomainPattern
+ * 
+ */
+export type DomainPattern = Prisma.DomainPatternModel
+/**
+ * Model AudienceModifier
+ * 
+ */
+export type AudienceModifier = Prisma.AudienceModifierModel
+/**
+ * Model GenerationOutcome
+ * 
+ */
+export type GenerationOutcome = Prisma.GenerationOutcomeModel
+/**
+ * Model PipelineState
+ * 
+ */
+export type PipelineState = Prisma.PipelineStateModel
+/**
  * Model ResearchArticle
  * 
  */
@@ -201,3 +221,18 @@ export type ResearchArticle = Prisma.ResearchArticleModel
  * 
  */
 export type CompetitorScan = Prisma.CompetitorScanModel
+/**
+ * Model ScoreResult
+ * 
+ */
+export type ScoreResult = Prisma.ScoreResultModel
+/**
+ * Model SearchQueryCache
+ * 
+ */
+export type SearchQueryCache = Prisma.SearchQueryCacheModel
+/**
+ * Model SeoAuditResult
+ * 
+ */
+export type SeoAuditResult = Prisma.SeoAuditResultModel

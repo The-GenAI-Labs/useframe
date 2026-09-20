@@ -1,0 +1,22 @@
+{
+  "name": "@repo/evals",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "runEvals": "tsx src/runEvals.ts",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/schemas": "workspace:*",
+    "@useframe/db": "workspace:*",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.22.1",
+    "typescript": "5.9.2"
+  }
+}

@@ -120,4 +120,54 @@ export const ProjectsController = {
       next(err)
     }
   },
+
+  getVersionSnapshot: async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const result = await ProjectsService.getVersionSnapshot(
+        req.user!.id,
+        req.params.slug!,
+        req.params.versionId!
+      )
+      res.json({ success: true, data: result })
+    } catch (err) {
+      next(err)
+    }
+  },
+
+  restoreVersion: async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const result = await ProjectsService.restoreVersion(
+        req.user!.id,
+        req.params.slug!,
+        req.params.versionId!
+      )
+      res.json({ success: true, data: result })
+    } catch (err) {
+      next(err)
+    }
+  },
+
+  getResearchReport: async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const result = await ProjectsService.getResearchReport(
+        req.user!.id,
+        req.params.slug!
+      )
+      res.json({ success: true, data: result })
+    } catch (err) {
+      next(err)
+    }
+  },
 }

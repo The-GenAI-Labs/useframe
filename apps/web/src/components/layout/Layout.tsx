@@ -36,7 +36,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     transition-transform duration-300 ease-in-out
                     ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
                 `}>
-                    <Sidebar isOpen={sidebarOpen} onToggle={() => handleToggle(!sidebarOpen)} />
+                    <div className={`h-full md:overflow-hidden transition-[width] duration-300 ease-in-out ${sidebarOpen ? "md:w-64" : "md:w-14"}`}>
+                        <Sidebar isOpen={sidebarOpen} onToggle={() => handleToggle(!sidebarOpen)} />
+                    </div>
                 </div>
 
                 <main className={`relative flex-1 h-full bg-surface overflow-hidden transition-all duration-300 ease-in-out md:rounded-r-3xl ${sidebarOpen ? "md:rounded-l-4xl" : "md:rounded-l-3xl md:ml-2"}`}>

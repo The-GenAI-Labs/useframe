@@ -26,7 +26,12 @@ export async function runSeoAgent(
       pageSlug: page.slug,
     })
 
-    const { text } = await generateText({ model, prompt, maxTokens: 400 })
+    const { text } = await generateText({
+      model,
+      prompt,
+      maxTokens: 400,
+      experimental_telemetry: { isEnabled: true, functionId: "seo-agent" },
+    })
 
     let seo = {}
     try {

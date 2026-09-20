@@ -2,6 +2,8 @@
 
 import { memo, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { usePipelineModeStore } from "@/stores/pipelineModeStore";
+import { PipelineModeToggle } from "@/components/workspace-tabs/PipelineModeToggle";
 
 interface ChatInputForm {
     message: string;
@@ -22,6 +24,7 @@ export default memo(function ChatInput({ onSubmit, autoFocus }: ChatInputProps) 
     const { register, handleSubmit, reset, watch, setFocus } = useForm<ChatInputForm>({
         defaultValues: { message: "" },
     });
+    const { defaultMode, setDefaultMode } = usePipelineModeStore();
 
     const message = watch("message");
 
@@ -89,6 +92,7 @@ export default memo(function ChatInput({ onSubmit, autoFocus }: ChatInputProps) 
                             </svg>
                             Improve Prompt
                         </button>
+                        <PipelineModeToggle mode={defaultMode} onChange={setDefaultMode} />
                     </div>
 
                     <button

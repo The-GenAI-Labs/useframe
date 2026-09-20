@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CreateProjectSchema } from "@repo/schemas"
 import type { CreateProjectInput, ProjectInputType } from "@repo/schemas"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -46,39 +45,30 @@ const NICHE_LABELS: Record<string, string> = {
 
 type Props = {
   inputType: ProjectInputType
+  /** Collected in step 1 of the modal, not re-asked here. */
+  name: string
+  siteType: CreateProjectInput["siteType"]
   onSubmit: (data: CreateProjectInput) => Promise<void>
   isLoading: boolean
 }
 
-export function ProjectForm({ inputType, onSubmit, isLoading }: Props) {
+export function ProjectForm({ inputType, name, siteType, onSubmit, isLoading }: Props) {
   const {
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
   } = useForm<CreateProjectInput>({
     resolver: zodResolver(CreateProjectSchema),
-    defaultValues: { inputType, siteType: undefined },
+    defaultValues: { inputType, name, siteType },
   })
 
-  const siteType = watch("siteType")
-
+  // flex-1 + mt-auto on the button mirrors step 1's layout, so Submit sits
+  // pinned at the bottom in exactly the same place Continue does.
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-1 flex-col gap-5">
       <input type="hidden" {...register("inputType")} value={inputType} />
-
-      <div className="space-y-1.5">
-        <Label htmlFor="name">Project name</Label>
-        <Input
-          id="name"
-          placeholder="My awesome startup"
-          {...register("name")}
-        />
-        {errors.name && (
-          <p className="text-xs text-destructive">{errors.name.message}</p>
-        )}
-      </div>
+      <input type="hidden" {...register("name")} value={name} />
 
       <div className="space-y-1.5">
         <Label htmlFor="startupIdea">Startup idea</Label>
@@ -132,13 +122,9 @@ export function ProjectForm({ inputType, onSubmit, isLoading }: Props) {
         </div>
       </div>
 
-      {inputType !== "FROM_SCRATCH" && (
+      {inputType === "FROM_OWN_SITE" && (
         <div className="space-y-1.5">
-          <Label htmlFor="sourceUrl">
-            {inputType === "FROM_COMPETITOR"
-              ? "Competitor URL"
-              : "Your site URL"}
-          </Label>
+          <Label htmlFor="sourceUrl">Your site URL</Label>
           <Input
             id="sourceUrl"
             type="url"
@@ -151,44 +137,15 @@ export function ProjectForm({ inputType, onSubmit, isLoading }: Props) {
         </div>
       )}
 
-      <div className="space-y-1.5">
-        <Label>Site type</Label>
-        <div className="flex flex-wrap gap-2">
-          {(["SINGLE_PAGE", "MULTI_PAGE"] as const).map((t) => (
-            <button
-              key={t}
-              type="button"
-              onClick={() => setValue("siteType", t)}
-              className={`rounded-lg border px-3 py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer ${
-                siteType === t
-                  ? "border-em bg-bubble text-pri"
-                  : "border-base text-sec hover:border-em"
-              }`}
-            >
-              {t === "SINGLE_PAGE" ? "Single page" : "Multi page"}
-            </button>
-          ))}
-          <button
-            type="button"
-            onClick={() => setValue("siteType", undefined)}
-            className={`rounded-lg border px-3 py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer ${
-              siteType === undefined
-                ? "border-em bg-bubble text-pri"
-                : "border-base text-sec hover:border-em"
-            }`}
-          >
-            Let AI decide
-          </button>
-        </div>
+      <div className="mt-auto pt-4">
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full rounded-2xl bg-inv py-3.5 text-[13.5px] font-semibold text-inv transition-opacity duration-150 hover:opacity-90 cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {isLoading ? "Submitting..." : "Submit"}
+        </button>
       </div>
-
-      <Button
-        type="submit"
-        className="w-full rounded-xl bg-inv py-3 text-[13.5px] font-semibold text-inv hover:bg-inv hover:opacity-90"
-        disabled={isLoading}
-      >
-        {isLoading ? "Creating..." : "Create project"}
-      </Button>
     </form>
   )
 }

@@ -1,71 +1,59 @@
-import { Suspense } from "react"
+"use client"
+
+import { use, useEffect, useState } from "react"
 import { notFound } from "next/navigation"
-import { auth } from "@/lib/auth"
-import { prisma } from "@useframe/db"
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell"
 import WorkspaceLoading from "./loading"
+import { projectsApi, type ProjectDetail } from "@/lib/api/services/projects.service"
+import { PageFadeIn } from "@/components/shared/PageFadeIn"
 
 type Props = {
   params: Promise<{ slug: string }>
 }
 
-export default async function WorkspacePage({ params }: Props) {
-  const { slug } = await params
-  const session = await auth()
-  if (!session?.user?.id) notFound()
+export default function WorkspacePage({ params }: Props) {
+  const { slug } = use(params)
+  const [project, setProject] = useState<ProjectDetail | null>(null)
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(true)
 
-  const project = await prisma.project.findFirst({
-    where: { slug, userId: session.user.id, deletedAt: null },
-    include: {
-      versions: {
-        orderBy: { versionNumber: "desc" },
-        select: {
-          id: true,
-          versionNumber: true,
-          label: true,
-          siteType: true,
-          snapshot: true,
-          createdAt: true,
-        },
-      },
-      competitorScans: {
-        where: {
-          status: { in: ["QUEUED", "RENDERING", "EXTRACTING", "ANALYZING", "DONE"] },
-        },
-        orderBy: { createdAt: "desc" },
-        take: 1,
-        select: {
-          id: true,
-          status: true,
-          designTokens: true,
-          extractedContent: true,
-        },
-      },
-    },
-  })
+  useEffect(() => {
+    let cancelled = false
+    setLoading(true)
+    setError(false)
 
-  if (!project) notFound()
+    projectsApi
+      .getBySlug(slug)
+      .then((data) => {
+        if (!cancelled) setProject(data)
+      })
+      .catch(() => {
+        if (!cancelled) setError(true)
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
 
-  const serialised = {
-    ...project,
-    createdAt: project.createdAt.toISOString(),
-    updatedAt: project.updatedAt.toISOString(),
-    versions: project.versions.map((v) => ({
-      ...v,
-      createdAt: v.createdAt.toISOString(),
-    })),
-    competitorScans: project.competitorScans.map((s) => ({
-      ...s,
-      designTokens: s.designTokens as Record<string, unknown> | null,
-      extractedContent: s.extractedContent as Record<string, unknown> | null,
-    })),
+    return () => {
+      cancelled = true
+    }
+  }, [slug])
+
+  if (error) notFound()
+
+  if (loading || !project) {
+    return (
+      <div className="flex h-full flex-col bg-surface">
+        <WorkspaceLoading />
+      </div>
+    )
   }
 
   return (
-    <div className="flex h-full flex-col bg-surface">
-      <Suspense fallback={<WorkspaceLoading />}>
-        <WorkspaceShell project={serialised} />
-      </Suspense>
-    </div>
+    <PageFadeIn>
+      <div className="flex h-full flex-col bg-surface">
+        <WorkspaceShell project={project} />
+      </div>
+    </PageFadeIn>
   )
 }

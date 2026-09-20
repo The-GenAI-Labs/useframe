@@ -5,10 +5,11 @@ node_modules
 .pnp
 .pnp.js
 
-# Local env files
-.env.development.local
-.env.test.local
-.env.production.local
+# Local env files — every .env in every app/service/package, at any depth,
+# except committed .env.example templates
+**/.env
+**/.env.*
+!**/.env.example
 
 # Testing
 coverage

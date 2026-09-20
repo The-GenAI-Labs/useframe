@@ -1,46 +1,43 @@
-"use server";
+"use client";
 
-import { signIn, signOut } from "@/lib/auth";
-import { prisma } from "@useframe/db";
-import { AuthError } from "next-auth";
+const API_SERVICE_URL = process.env.NEXT_PUBLIC_API_SERVICE_URL ?? "http://localhost:4000";
 
 export async function checkUserExists(email: string): Promise<boolean> {
+    // Cosmetic only — used purely to pick "Welcome back" vs "Create your
+    // account" copy in AuthForm. Never gates which backend call is made.
     try {
-        const user = await prisma.user.findUnique({
-            where: { email },
-            select: { id: true },
-        });
-        return !!user;
-    } catch (error) {
-        console.error("checkUserExists failed:", error);
+        const res = await fetch(
+            `${API_SERVICE_URL}/api/auth/check-email?email=${encodeURIComponent(email)}`
+        );
+        if (!res.ok) return false;
+        const body = await res.json();
+        return !!body?.data?.exists;
+    } catch {
         return false;
     }
 }
 
-export async function signInWithGoogle() {
-    await signIn("google", { redirectTo: "/" });
+export function signInWithGoogle() {
+    window.location.href = `${API_SERVICE_URL}/api/auth/google`;
 }
 
-export async function signInWithGitHub() {
-    await signIn("github", { redirectTo: "/" });
+export function signInWithGitHub() {
+    window.location.href = `${API_SERVICE_URL}/api/auth/github`;
 }
 
 export async function signInWithEmail(email: string) {
     try {
-        await signIn("resend", {
-            email,
-            redirectTo: "/",
-            redirect: false,
+        const res = await fetch(`${API_SERVICE_URL}/api/auth/magic-link`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email }),
         });
-        return { success: true };
-    } catch (error) {
-        if (error instanceof AuthError) {
-            return { success: false, error: error.message };
+        const body = await res.json();
+        if (!res.ok || !body.success) {
+            return { success: false, error: body?.message ?? "Something went wrong" };
         }
+        return { success: true };
+    } catch {
         return { success: false, error: "Something went wrong" };
     }
-}
-
-export async function signOutUser() {
-    await signOut({ redirectTo: "/signin" });
 }

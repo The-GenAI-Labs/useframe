@@ -7,7 +7,6 @@ import { MIN_ZOOM, MAX_ZOOM, TOOLS } from "./boardConstants";
 interface Props {
     zoom: number;
     showGrid: boolean;
-    darkCanvas: boolean;
     shapeCount: number;
     selectedCount: number;
     canUndo: boolean;
@@ -15,7 +14,6 @@ interface Props {
     activeTool: Tool;
     onZoom: (z: number) => void;
     onToggleGrid: () => void;
-    onToggleDark: () => void;
     onUndo: () => void;
     onRedo: () => void;
     onClear: () => void;
@@ -64,9 +62,9 @@ function TextBtn({ onClick, children, active }: {
 }
 
 export const BoardTopBar = memo(function BoardTopBar({
-    zoom, showGrid, darkCanvas, shapeCount, selectedCount,
+    zoom, showGrid, shapeCount, selectedCount,
     canUndo, canRedo, activeTool,
-    onZoom, onToggleGrid, onToggleDark, onUndo, onRedo, onClear,
+    onZoom, onToggleGrid, onUndo, onRedo, onClear,
 }: Props) {
     const toolLabel = TOOLS.find(t => t.id === activeTool)?.label ?? "";
 
@@ -102,13 +100,6 @@ export const BoardTopBar = memo(function BoardTopBar({
                         <rect x="14" y="14" width="7" height="7"/>
                     </svg>
                     Grid
-                </TextBtn>
-
-                <TextBtn onClick={onToggleDark} active={darkCanvas}>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
-                    Dark
                 </TextBtn>
             </div>
 

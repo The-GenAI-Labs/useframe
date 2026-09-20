@@ -7,6 +7,13 @@ import cookieParser from "cookie-parser"
 import { env } from "@/config/env.js"
 import authRoutes from "@/modules/auth/auth.routes.js"
 import projectRoutes from "@/modules/projects/projects.routes.js"
+import chatRoutes from "@/modules/chat/chat.routes.js"
+import scoreRoutes from "@/modules/score/score.routes.js"
+import seoRoutes from "@/modules/seo/seo.routes.js"
+import billingRoutes from "@/modules/billing/billing.routes.js"
+import creditsRoutes from "@/modules/credits/credits.routes.js"
+import findingsRoutes from "@/modules/findings/findings.routes.js"
+import generateRoutes from "@/modules/generate/generate.routes.js"
 import { errorHandler } from "@/middleware/errorHandler.js"
 
 const app: Express = express()
@@ -31,6 +38,13 @@ app.get("/health", (_req: Request, res: Response) => {
 
 app.use("/api/auth", authRoutes)
 app.use("/api/projects", projectRoutes)
+app.use("/api/chat", chatRoutes)
+app.use("/api/score", scoreRoutes)
+app.use("/api/seo", seoRoutes)
+app.use("/api/billing", billingRoutes)
+app.use("/api/credits", creditsRoutes)
+app.use("/api/findings", findingsRoutes)
+app.use("/api/generate", generateRoutes)
 app.use("/{*splat}", (_req: Request, res: Response) => {
     res.status(404).json({ success: false, message: "Route not found" })
 })

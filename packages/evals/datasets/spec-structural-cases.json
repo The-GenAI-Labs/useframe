@@ -1,0 +1,179 @@
+[
+  {
+    "name": "valid minimal single-page spec",
+    "expectValid": true,
+    "spec": {
+      "siteType": "SINGLE_PAGE",
+      "pages": [
+        {
+          "type": "HOME",
+          "slug": "home",
+          "title": "Home",
+          "sections": [
+            { "type": "HERO", "index": 0, "content": { "headline": "Welcome" } },
+            { "type": "FOOTER", "index": 1 }
+          ]
+        }
+      ],
+      "designSystem": {
+        "primaryColor": "#2563EB",
+        "secondaryColor": "#F1F5F9",
+        "accentColor": "#F97316",
+        "fontPrimary": "Inter",
+        "fontSecondary": "DM Sans",
+        "spacing": "comfortable",
+        "borderRadius": "md",
+        "animationStyle": "subtle"
+      },
+      "copyFramework": "AIDA",
+      "citations": []
+    }
+  },
+  {
+    "name": "missing pages array",
+    "expectValid": false,
+    "spec": {
+      "siteType": "SINGLE_PAGE",
+      "designSystem": {
+        "primaryColor": "#2563EB",
+        "secondaryColor": "#F1F5F9",
+        "accentColor": "#F97316",
+        "fontPrimary": "Inter",
+        "fontSecondary": "DM Sans",
+        "spacing": "comfortable",
+        "borderRadius": "md",
+        "animationStyle": "subtle"
+      },
+      "copyFramework": "AIDA",
+      "citations": []
+    }
+  },
+  {
+    "name": "invalid section type enum value",
+    "expectValid": false,
+    "spec": {
+      "siteType": "SINGLE_PAGE",
+      "pages": [
+        {
+          "type": "HOME",
+          "slug": "home",
+          "title": "Home",
+          "sections": [{ "type": "BANANA", "index": 0 }]
+        }
+      ],
+      "designSystem": {
+        "primaryColor": "#2563EB",
+        "secondaryColor": "#F1F5F9",
+        "accentColor": "#F97316",
+        "fontPrimary": "Inter",
+        "fontSecondary": "DM Sans",
+        "spacing": "comfortable",
+        "borderRadius": "md",
+        "animationStyle": "subtle"
+      },
+      "copyFramework": "AIDA",
+      "citations": []
+    }
+  },
+  {
+    "name": "invalid copyFramework enum value",
+    "expectValid": false,
+    "spec": {
+      "siteType": "SINGLE_PAGE",
+      "pages": [
+        { "type": "HOME", "slug": "home", "title": "Home", "sections": [{ "type": "HERO", "index": 0 }] }
+      ],
+      "designSystem": {
+        "primaryColor": "#2563EB",
+        "secondaryColor": "#F1F5F9",
+        "accentColor": "#F97316",
+        "fontPrimary": "Inter",
+        "fontSecondary": "DM Sans",
+        "spacing": "comfortable",
+        "borderRadius": "md",
+        "animationStyle": "subtle"
+      },
+      "copyFramework": "SCAMPER",
+      "citations": []
+    }
+  },
+  {
+    "name": "empty pages array (schema allows, structurally degenerate but valid)",
+    "expectValid": true,
+    "spec": {
+      "siteType": "SINGLE_PAGE",
+      "pages": [],
+      "designSystem": {
+        "primaryColor": "#2563EB",
+        "secondaryColor": "#F1F5F9",
+        "accentColor": "#F97316",
+        "fontPrimary": "Inter",
+        "fontSecondary": "DM Sans",
+        "spacing": "comfortable",
+        "borderRadius": "md",
+        "animationStyle": "subtle"
+      },
+      "copyFramework": "AIDA",
+      "citations": []
+    }
+  },
+  {
+    "name": "missing required designSystem field",
+    "expectValid": false,
+    "spec": {
+      "siteType": "SINGLE_PAGE",
+      "pages": [
+        { "type": "HOME", "slug": "home", "title": "Home", "sections": [{ "type": "HERO", "index": 0 }] }
+      ],
+      "designSystem": {
+        "primaryColor": "#2563EB",
+        "secondaryColor": "#F1F5F9",
+        "accentColor": "#F97316",
+        "fontPrimary": "Inter",
+        "fontSecondary": "DM Sans",
+        "spacing": "comfortable",
+        "borderRadius": "md"
+      },
+      "copyFramework": "AIDA",
+      "citations": []
+    }
+  },
+  {
+    "name": "valid multi-page spec with citationIds",
+    "expectValid": true,
+    "spec": {
+      "siteType": "MULTI_PAGE",
+      "pages": [
+        {
+          "type": "HOME",
+          "slug": "home",
+          "title": "Home",
+          "sections": [
+            { "type": "HERO", "index": 0, "content": { "headline": "Welcome" }, "citationIds": ["finding-1", "finding-2"] },
+            { "type": "PRICING", "index": 1 }
+          ]
+        },
+        {
+          "type": "ABOUT",
+          "slug": "about",
+          "title": "About",
+          "sections": [{ "type": "CUSTOM", "index": 0 }]
+        }
+      ],
+      "designSystem": {
+        "primaryColor": "#059669",
+        "secondaryColor": "#ECFDF5",
+        "accentColor": "#F59E0B",
+        "fontPrimary": "Nunito",
+        "fontSecondary": "Work Sans",
+        "spacing": "cozy",
+        "borderRadius": "lg",
+        "animationStyle": "playful"
+      },
+      "copyFramework": "PAS",
+      "citations": [
+        { "id": "finding-1", "title": "Trust blue", "source": "Elliot & Maier, 2014" }
+      ]
+    }
+  }
+]

@@ -107,6 +107,15 @@ export const HomeView = memo(function HomeView() {
           <PricingSection />
         </RevealSection>
 
+        <div
+          aria-hidden
+          className="pointer-events-none relative z-0 h-20 w-full sm:h-28"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent 0%, rgba(37,99,235,0.06) 50%, transparent 100%)",
+          }}
+        />
+
         <RevealSection depth={48} delay={0.04} yOffset={80}>
           <ShowcaseCarousel />
         </RevealSection>

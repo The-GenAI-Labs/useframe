@@ -12,12 +12,16 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.0.0",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "@repo/schemas": "workspace:*",
     "@useframe/types": "workspace:*",
+    "ai": "^4.0.0",
     "dotenv": "^16.6.1",
     "drizzle-orm": "^0.43.1",
     "pg": "^8.21.0",
@@ -29,6 +33,7 @@
     "@useframe/typescript-config": "workspace:*",
     "drizzle-kit": "^0.31.1",
     "prisma": "^7.8.0",
+    "tsx": "^4.22.1",
     "typescript": "5.9.2"
   }
 }

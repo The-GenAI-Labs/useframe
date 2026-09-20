@@ -5,6 +5,12 @@ import morgan from "morgan"
 import { env, CONFIGURED_PROVIDERS } from "@/config/env.js"
 import generateRoute from "@/routes/generate.route.js"
 import clarifyRoute from "@/routes/clarify.route.js"
+import iterateRoute from "@/routes/iterate.route.js"
+import chatRoute from "@/routes/chat.route.js"
+import researchRoute from "@/routes/research.route.js"
+import seoMaterializeRoute from "@/routes/seoMaterialize.route.js"
+import planRoute from "@/routes/plan.route.js"
+import extractRoute from "@/routes/extract.route.js"
 import { MODELS } from "@/llm/providers.js"
 import { prisma } from "@useframe/db"
 
@@ -38,6 +44,12 @@ app.get("/health", (_req, res) => {
 
 app.use("/", generateRoute)
 app.use("/", clarifyRoute)
+app.use("/", iterateRoute)
+app.use("/", chatRoute)
+app.use("/", researchRoute)
+app.use("/", seoMaterializeRoute)
+app.use("/", planRoute)
+app.use("/", extractRoute)
 
 app.use(
   "/{*splat}",

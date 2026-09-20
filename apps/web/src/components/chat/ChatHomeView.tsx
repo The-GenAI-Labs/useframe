@@ -1,25 +1,34 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import { useAuth } from "@/lib/authContext";
 import GridBackground from "@/components/chat/GridBackground";
-import WelcomeCards from "@/components/chat/WelcomeCards";
+import WelcomeCards, { type WelcomeTab } from "@/components/chat/WelcomeCards";
 import ChatInput from "@/components/chat/ChatInput";
 import { useClarify } from "@/hooks/useClarify";
-import { useGenerationStream } from "@/hooks/useGenerationStream";
 import { useClarifyStore } from "@/stores/clarifyStore";
-import { useModelStore } from "@/stores/modelStore";
 import { serif } from "@/components/home/fonts";
+import { PipelineToggle, type PipelineToggleStep } from "@/components/workspace-tabs/PipelineToggle";
+import { ExtractFlowPanel } from "@/components/chat/ExtractFlowPanel";
+import { usePendingPromptStore } from "@/stores/pendingPromptStore";
+import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
+import WorkspaceLoading from "../../../app/(chat)/project/[slug]/loading";
+import { projectsApi, type ProjectDetail } from "@/lib/api/services/projects.service";
+import type { CreateProjectInput } from "@repo/schemas";
+
+const HOME_STEPS: PipelineToggleStep[] = [
+    { id: "RESEARCH", label: "Research", status: "PENDING" },
+    { id: "WEBSITE", label: "Website", status: "PENDING" },
+    { id: "SEO", label: "SEO", status: "PENDING" },
+    { id: "DEPLOY", label: "Deploy", status: "PENDING" },
+];
 
 function getGreeting(hour: number): string {
     if (hour < 12) return "Good morning";
     if (hour < 17) return "Good afternoon";
     return "Good evening";
 }
-
-const ORCHESTRATOR_URL =
-    process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001";
 
 function ChatHomeSkeleton() {
     const glass = "bg-white/30 backdrop-blur-md border border-white/40"
@@ -48,27 +57,57 @@ function ChatHomeSkeleton() {
 }
 
 export default function ChatHomeView() {
-    const router = useRouter();
     const searchParams = useSearchParams();
     const shouldAutoFocus = searchParams.get("focus") === "1";
     const { clarify } = useClarify();
-    const { startGeneration } = useGenerationStream();
-    const { selectedModelId } = useModelStore();
-    const { data: session } = useSession();
+    const { user } = useAuth();
     const [isThinking, setIsThinking] = useState(false);
+    const [isCreatingProject, setIsCreatingProject] = useState(false);
     const [greeting, setGreeting] = useState("Hi");
     const [showSkeleton, setShowSkeleton] = useState(true);
+    const [activeTab, setActiveTab] = useState<WelcomeTab>("RESEARCH");
+    // New, additive guided-setup flow (/extract -> dynamic questions -> minimal
+    // create form -> /plan SSE). Entirely separate from the existing
+    // useClarifyStore turn-by-turn chat flow below, which is left untouched.
+    const [useGuidedSetup, setUseGuidedSetup] = useState(false);
+    // Once a project exists — either from typing an idea here, or from the
+    // create-project modal's "Start generation" — the home page renders the
+    // same 4-step human-in-the-loop pipeline (WorkspaceShell) that
+    // /project/[slug] uses, instead of navigating away. Research auto-starts
+    // as soon as the project exists (see ResearchTab); Website stays LOCKED
+    // server-side until Research is approved.
+    const [activeProject, setActiveProject] = useState<ProjectDetail | null>(null);
+    const [projectLoadError, setProjectLoadError] = useState(false);
 
     useEffect(() => {
         setGreeting(getGreeting(new Date().getHours()));
     }, []);
+
+    // Arriving from the create-project modal's "Start generation" — load
+    // that project and render its pipeline right here on /.
+    useEffect(() => {
+        const projectSlug = searchParams.get("project");
+        if (!projectSlug || searchParams.get("start") !== "1") return;
+        let cancelled = false;
+        projectsApi
+            .getBySlug(projectSlug)
+            .then((data) => {
+                if (!cancelled) setActiveProject(data);
+            })
+            .catch(() => {
+                if (!cancelled) setProjectLoadError(true);
+            });
+        return () => {
+            cancelled = true;
+        };
+    }, [searchParams]);
 
     useEffect(() => {
         const timer = setTimeout(() => setShowSkeleton(false), 1000);
         return () => clearTimeout(timer);
     }, []);
 
-    const userName = session?.user?.name ?? "there";
+    const userName = user?.name ?? "there";
 
     const {
         phase,
@@ -79,6 +118,10 @@ export default function ChatHomeView() {
         inferredName,
         inferredNiche,
         inferredTargetAudience,
+        inferredBrandPersonality,
+        inferredPricePositioning,
+        inferredBusinessModel,
+        inferredDifferentiator,
         inputType,
         sourceUrl,
         error,
@@ -90,29 +133,60 @@ export default function ChatHomeView() {
         reset,
     } = useClarifyStore();
 
+    // Creates the project via the same POST /projects the create-project
+    // modal uses (tier/credit resolution, PipelineState init, etc. all
+    // happen server-side as a result) instead of calling /generate directly
+    // — that's what makes Research auto-start and Website stay gated behind
+    // approval, exactly like a project created from the modal.
     const runGeneration = useCallback(
-        (niche: string, targetAudience: string, name: string) => {
+        async (
+            niche: string,
+            targetAudience: string,
+            name: string,
+            brandPersonality?: string,
+            pricePositioning?: string,
+            businessModel?: string,
+            differentiator?: string,
+        ) => {
             setGenerating();
-            startGeneration(
-                ORCHESTRATOR_URL,
-                {
+            setIsCreatingProject(true);
+            try {
+                const input: CreateProjectInput = {
                     name,
                     startupIdea,
-                    niche,
+                    niche: niche as CreateProjectInput["niche"],
                     targetAudience,
                     inputType,
                     sourceUrl: sourceUrl ?? undefined,
-                    modelId: selectedModelId,
-                },
-                {
-                    onProjectCreated: ({ slug }) => {
-                        reset();
-                        router.push(`/project/${slug}?status=generating`);
+                    extracted: {
+                        brandPersonality: brandPersonality ?? inferredBrandPersonality ?? undefined,
+                        pricePositioning: pricePositioning ?? inferredPricePositioning ?? undefined,
+                        businessModel: businessModel ?? inferredBusinessModel ?? undefined,
+                        differentiator: differentiator ?? inferredDifferentiator ?? undefined,
                     },
-                },
-            );
+                };
+                const result = await projectsApi.create(input);
+                const project = await projectsApi.getBySlug(result.project.slug);
+                reset();
+                setActiveProject(project);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "Couldn't create the project");
+            } finally {
+                setIsCreatingProject(false);
+            }
         },
-        [setGenerating, startGeneration, startupIdea, inputType, sourceUrl, selectedModelId, router, reset],
+        [
+            setGenerating,
+            startupIdea,
+            inputType,
+            sourceUrl,
+            inferredBrandPersonality,
+            inferredPricePositioning,
+            inferredBusinessModel,
+            inferredDifferentiator,
+            reset,
+            setError,
+        ],
     );
 
     const handleSubmit = useCallback(
@@ -123,18 +197,25 @@ export default function ChatHomeView() {
                 try {
                     const result = await clarify(message);
                     setIsThinking(false);
+                    setQuestions(result.ready ? [] : result.questions ?? [], {
+                        name: result.name,
+                        niche: result.niche,
+                        targetAudience: result.targetAudience,
+                        brandPersonality: result.brandPersonality,
+                        pricePositioning: result.pricePositioning,
+                        businessModel: result.businessModel,
+                        differentiator: result.differentiator,
+                    });
                     if (result.ready) {
                         runGeneration(
                             result.niche ?? "OTHER",
                             result.targetAudience ?? "General audience",
                             result.name ?? message.slice(0, 40),
+                            result.brandPersonality,
+                            result.pricePositioning,
+                            result.businessModel,
+                            result.differentiator,
                         );
-                    } else {
-                        setQuestions(result.questions ?? [], {
-                            name: result.name,
-                            niche: result.niche,
-                            targetAudience: result.targetAudience,
-                        });
                     }
                 } catch (err) {
                     setIsThinking(false);
@@ -154,18 +235,25 @@ export default function ChatHomeView() {
                 try {
                     const result = await clarify(startupIdea, nextAnswers);
                     setIsThinking(false);
+                    setQuestions(result.ready ? [] : result.questions ?? [], {
+                        name: result.name,
+                        niche: result.niche,
+                        targetAudience: result.targetAudience,
+                        brandPersonality: result.brandPersonality,
+                        pricePositioning: result.pricePositioning,
+                        businessModel: result.businessModel,
+                        differentiator: result.differentiator,
+                    });
                     if (result.ready) {
                         runGeneration(
                             result.niche ?? inferredNiche ?? "OTHER",
                             result.targetAudience ?? inferredTargetAudience ?? "General audience",
                             result.name ?? inferredName ?? startupIdea.slice(0, 40),
+                            result.brandPersonality ?? inferredBrandPersonality ?? undefined,
+                            result.pricePositioning ?? inferredPricePositioning ?? undefined,
+                            result.businessModel ?? inferredBusinessModel ?? undefined,
+                            result.differentiator ?? inferredDifferentiator ?? undefined,
                         );
-                    } else {
-                        setQuestions(result.questions ?? [], {
-                            name: result.name,
-                            niche: result.niche,
-                            targetAudience: result.targetAudience,
-                        });
                     }
                 } catch (err) {
                     setIsThinking(false);
@@ -187,6 +275,10 @@ export default function ChatHomeView() {
             inferredNiche,
             inferredTargetAudience,
             inferredName,
+            inferredBrandPersonality,
+            inferredPricePositioning,
+            inferredBusinessModel,
+            inferredDifferentiator,
         ],
     );
 
@@ -194,7 +286,47 @@ export default function ChatHomeView() {
         console.log("card:", id);
     }, []);
 
+    // A visitor typed an idea into the marketing homepage's hero chatbox
+    // while signed out, then landed here after completing sign-in. Pick up
+    // that stored prompt once and kick off the normal clarify flow with it,
+    // exactly as if they'd typed it into ChatInput themselves.
+    const pendingPrompt = usePendingPromptStore((s) => s.prompt);
+    const clearPendingPrompt = usePendingPromptStore((s) => s.clear);
+    useEffect(() => {
+        if (!pendingPrompt || phase !== "idle" || showSkeleton) return;
+        clearPendingPrompt();
+        handleSubmit(pendingPrompt);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pendingPrompt, phase, showSkeleton]);
+
     const isIdle = phase === "idle";
+
+    // A project exists (just created here, or arrived via ?project=&start=1
+    // from the create-project modal) — render its 4-step pipeline right on
+    // the home page instead of the idea prompt.
+    const projectSlugParam = searchParams.get("project");
+    const awaitingProjectFromParam = projectSlugParam && searchParams.get("start") === "1" && !activeProject && !projectLoadError;
+
+    if (isCreatingProject || awaitingProjectFromParam) {
+        return <WorkspaceLoading />;
+    }
+
+    if (projectLoadError) {
+        return (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-3 text-center">
+                <p className="text-sm font-semibold text-pri">Couldn&apos;t load that project</p>
+                <p className="text-xs text-mut">It may have been deleted, or the link is invalid.</p>
+            </div>
+        );
+    }
+
+    if (activeProject) {
+        return (
+            <div className="flex h-full flex-col bg-surface">
+                <WorkspaceShell project={activeProject} />
+            </div>
+        );
+    }
 
     if (showSkeleton) {
         return <ChatHomeSkeleton />;
@@ -221,11 +353,25 @@ export default function ChatHomeView() {
                                 >
                                     {greeting}, {userName}
                                 </h1>
-                                <p className="text-lg mt-1 font-normal" style={{ color: "var(--text-secondary)" }}>
+                                {/* <p className="text-lg mt-1 font-normal" style={{ color: "var(--text-secondary)" }}>
                                     How can I assist you today?
-                                </p>
+                                </p> */}
                             </div>
-                            <WelcomeCards onCardClick={handleCardClick} />
+                            <PipelineToggle
+                                steps={HOME_STEPS}
+                                activeStep={activeTab}
+                                interactive
+                                ignoreLock
+                                onSelectStep={(id) => setActiveTab(id as WelcomeTab)}
+                            />
+                            <WelcomeCards tab={activeTab} onCardClick={handleCardClick} />
+                            <button
+                                type="button"
+                                onClick={() => setUseGuidedSetup((v) => !v)}
+                                className="self-center text-[12px] font-medium text-mut hover:text-sec transition-colors cursor-pointer underline underline-offset-2"
+                            >
+                                {useGuidedSetup ? "Use chat instead" : "Try the new guided setup"}
+                            </button>
                         </>
                     ) : (
                         <div className="flex flex-col gap-3 max-h-[45vh] overflow-y-auto pr-1" style={{ scrollbarWidth: "none" }}>
@@ -257,8 +403,12 @@ export default function ChatHomeView() {
                         </div>
                     )}
 
-                    {phase !== "generating" && (
-                        <ChatInput onSubmit={handleSubmit} autoFocus={shouldAutoFocus} />
+                    {isIdle && useGuidedSetup ? (
+                        <ExtractFlowPanel />
+                    ) : (
+                        phase !== "generating" && (
+                            <ChatInput onSubmit={handleSubmit} autoFocus={shouldAutoFocus} />
+                        )
                     )}
                 </div>
             </div>

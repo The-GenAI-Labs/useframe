@@ -2,6 +2,7 @@
 
 import { useCallback, useRef } from "react"
 import type { SSEEvent } from "@repo/schemas"
+import { getCurrentAccessToken } from "@/lib/authContext"
 
 type SSEOptions = {
   onEvent: (event: SSEEvent) => void
@@ -19,7 +20,7 @@ export function useSSE() {
       abortRef.current = controller
 
       try {
-        const accessToken = await getAccessToken()
+        const accessToken = getCurrentAccessToken() ?? ""
         const res = await fetch(url, {
           method: "POST",
           headers: {
@@ -84,15 +85,4 @@ export function useSSE() {
   }, [])
 
   return { connect, disconnect }
-}
-
-async function getAccessToken(): Promise<string> {
-  try {
-    const res = await fetch("/api/token")
-    if (!res.ok) return ""
-    const { accessToken } = (await res.json()) as { accessToken?: string }
-    return accessToken ?? ""
-  } catch {
-    return ""
-  }
 }

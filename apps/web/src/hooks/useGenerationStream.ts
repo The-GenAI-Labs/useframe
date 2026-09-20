@@ -16,6 +16,11 @@ type GeneratePayload = {
   sourceUrl?: string
   scanResult?: Record<string, unknown>
   modelId?: ModelId
+  pipelineMode?: "AUTO" | "MANUAL"
+  brandPersonality?: string
+  pricePositioning?: string
+  businessModel?: string
+  differentiator?: string
 }
 
 type StartGenerationOptions = {

@@ -63,6 +63,7 @@ export type ProjectVersionCountAggregateOutputType = {
   label: number
   siteType: number
   seo: number
+  designBrief: number
   parentVersionId: number
   createdByMessageId: number
   snapshot: number
@@ -108,6 +109,7 @@ export type ProjectVersionCountAggregateInputType = {
   label?: true
   siteType?: true
   seo?: true
+  designBrief?: true
   parentVersionId?: true
   createdByMessageId?: true
   snapshot?: true
@@ -208,6 +210,7 @@ export type ProjectVersionGroupByOutputType = {
   label: string | null
   siteType: $Enums.SiteType
   seo: runtime.JsonValue
+  designBrief: runtime.JsonValue | null
   parentVersionId: string | null
   createdByMessageId: string | null
   snapshot: runtime.JsonValue
@@ -244,6 +247,7 @@ export type ProjectVersionWhereInput = {
   label?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   siteType?: Prisma.EnumSiteTypeFilter<"ProjectVersion"> | $Enums.SiteType
   seo?: Prisma.JsonFilter<"ProjectVersion">
+  designBrief?: Prisma.JsonNullableFilter<"ProjectVersion">
   parentVersionId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   createdByMessageId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   snapshot?: Prisma.JsonFilter<"ProjectVersion">
@@ -260,6 +264,7 @@ export type ProjectVersionOrderByWithRelationInput = {
   label?: Prisma.SortOrderInput | Prisma.SortOrder
   siteType?: Prisma.SortOrder
   seo?: Prisma.SortOrder
+  designBrief?: Prisma.SortOrderInput | Prisma.SortOrder
   parentVersionId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdByMessageId?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshot?: Prisma.SortOrder
@@ -280,6 +285,7 @@ export type ProjectVersionWhereUniqueInput = Prisma.AtLeast<{
   label?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   siteType?: Prisma.EnumSiteTypeFilter<"ProjectVersion"> | $Enums.SiteType
   seo?: Prisma.JsonFilter<"ProjectVersion">
+  designBrief?: Prisma.JsonNullableFilter<"ProjectVersion">
   parentVersionId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   createdByMessageId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   snapshot?: Prisma.JsonFilter<"ProjectVersion">
@@ -296,6 +302,7 @@ export type ProjectVersionOrderByWithAggregationInput = {
   label?: Prisma.SortOrderInput | Prisma.SortOrder
   siteType?: Prisma.SortOrder
   seo?: Prisma.SortOrder
+  designBrief?: Prisma.SortOrderInput | Prisma.SortOrder
   parentVersionId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdByMessageId?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshot?: Prisma.SortOrder
@@ -317,6 +324,7 @@ export type ProjectVersionScalarWhereWithAggregatesInput = {
   label?: Prisma.StringNullableWithAggregatesFilter<"ProjectVersion"> | string | null
   siteType?: Prisma.EnumSiteTypeWithAggregatesFilter<"ProjectVersion"> | $Enums.SiteType
   seo?: Prisma.JsonWithAggregatesFilter<"ProjectVersion">
+  designBrief?: Prisma.JsonNullableWithAggregatesFilter<"ProjectVersion">
   parentVersionId?: Prisma.StringNullableWithAggregatesFilter<"ProjectVersion"> | string | null
   createdByMessageId?: Prisma.StringNullableWithAggregatesFilter<"ProjectVersion"> | string | null
   snapshot?: Prisma.JsonWithAggregatesFilter<"ProjectVersion">
@@ -329,6 +337,7 @@ export type ProjectVersionCreateInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -345,6 +354,7 @@ export type ProjectVersionUncheckedCreateInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -359,6 +369,7 @@ export type ProjectVersionUpdateInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -375,6 +386,7 @@ export type ProjectVersionUncheckedUpdateInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -390,6 +402,7 @@ export type ProjectVersionCreateManyInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -402,6 +415,7 @@ export type ProjectVersionUpdateManyMutationInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -415,6 +429,7 @@ export type ProjectVersionUncheckedUpdateManyInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -443,6 +458,7 @@ export type ProjectVersionCountOrderByAggregateInput = {
   label?: Prisma.SortOrder
   siteType?: Prisma.SortOrder
   seo?: Prisma.SortOrder
+  designBrief?: Prisma.SortOrder
   parentVersionId?: Prisma.SortOrder
   createdByMessageId?: Prisma.SortOrder
   snapshot?: Prisma.SortOrder
@@ -564,6 +580,7 @@ export type ProjectVersionCreateWithoutProjectInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -578,6 +595,7 @@ export type ProjectVersionUncheckedCreateWithoutProjectInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -622,6 +640,7 @@ export type ProjectVersionScalarWhereInput = {
   label?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   siteType?: Prisma.EnumSiteTypeFilter<"ProjectVersion"> | $Enums.SiteType
   seo?: Prisma.JsonFilter<"ProjectVersion">
+  designBrief?: Prisma.JsonNullableFilter<"ProjectVersion">
   parentVersionId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   createdByMessageId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   snapshot?: Prisma.JsonFilter<"ProjectVersion">
@@ -634,6 +653,7 @@ export type ProjectVersionCreateWithoutPagesInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -649,6 +669,7 @@ export type ProjectVersionUncheckedCreateWithoutPagesInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -678,6 +699,7 @@ export type ProjectVersionUpdateWithoutPagesInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -693,6 +715,7 @@ export type ProjectVersionUncheckedUpdateWithoutPagesInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -706,6 +729,7 @@ export type ProjectVersionCreateWithoutDeploymentsInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -721,6 +745,7 @@ export type ProjectVersionUncheckedCreateWithoutDeploymentsInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -750,6 +775,7 @@ export type ProjectVersionUpdateWithoutDeploymentsInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -765,6 +791,7 @@ export type ProjectVersionUncheckedUpdateWithoutDeploymentsInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -778,6 +805,7 @@ export type ProjectVersionCreateManyProjectInput = {
   label?: string | null
   siteType?: $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: string | null
   createdByMessageId?: string | null
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -790,6 +818,7 @@ export type ProjectVersionUpdateWithoutProjectInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -804,6 +833,7 @@ export type ProjectVersionUncheckedUpdateWithoutProjectInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -818,6 +848,7 @@ export type ProjectVersionUncheckedUpdateManyWithoutProjectInput = {
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
   seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -871,6 +902,7 @@ export type ProjectVersionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   label?: boolean
   siteType?: boolean
   seo?: boolean
+  designBrief?: boolean
   parentVersionId?: boolean
   createdByMessageId?: boolean
   snapshot?: boolean
@@ -888,6 +920,7 @@ export type ProjectVersionSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   label?: boolean
   siteType?: boolean
   seo?: boolean
+  designBrief?: boolean
   parentVersionId?: boolean
   createdByMessageId?: boolean
   snapshot?: boolean
@@ -902,6 +935,7 @@ export type ProjectVersionSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   label?: boolean
   siteType?: boolean
   seo?: boolean
+  designBrief?: boolean
   parentVersionId?: boolean
   createdByMessageId?: boolean
   snapshot?: boolean
@@ -916,13 +950,14 @@ export type ProjectVersionSelectScalar = {
   label?: boolean
   siteType?: boolean
   seo?: boolean
+  designBrief?: boolean
   parentVersionId?: boolean
   createdByMessageId?: boolean
   snapshot?: boolean
   createdAt?: boolean
 }
 
-export type ProjectVersionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionNumber" | "label" | "siteType" | "seo" | "parentVersionId" | "createdByMessageId" | "snapshot" | "createdAt", ExtArgs["result"]["projectVersion"]>
+export type ProjectVersionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionNumber" | "label" | "siteType" | "seo" | "designBrief" | "parentVersionId" | "createdByMessageId" | "snapshot" | "createdAt", ExtArgs["result"]["projectVersion"]>
 export type ProjectVersionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   pages?: boolean | Prisma.ProjectVersion$pagesArgs<ExtArgs>
@@ -950,6 +985,7 @@ export type $ProjectVersionPayload<ExtArgs extends runtime.Types.Extensions.Inte
     label: string | null
     siteType: $Enums.SiteType
     seo: runtime.JsonValue
+    designBrief: runtime.JsonValue | null
     parentVersionId: string | null
     createdByMessageId: string | null
     snapshot: runtime.JsonValue
@@ -1386,6 +1422,7 @@ export interface ProjectVersionFieldRefs {
   readonly label: Prisma.FieldRef<"ProjectVersion", 'String'>
   readonly siteType: Prisma.FieldRef<"ProjectVersion", 'SiteType'>
   readonly seo: Prisma.FieldRef<"ProjectVersion", 'Json'>
+  readonly designBrief: Prisma.FieldRef<"ProjectVersion", 'Json'>
   readonly parentVersionId: Prisma.FieldRef<"ProjectVersion", 'String'>
   readonly createdByMessageId: Prisma.FieldRef<"ProjectVersion", 'String'>
   readonly snapshot: Prisma.FieldRef<"ProjectVersion", 'Json'>

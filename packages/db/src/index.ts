@@ -1,5 +1,7 @@
-import { PrismaClient } from "../prisma/generated/client"
+import { PrismaClient, Prisma } from "../prisma/generated/client"
 import { PrismaPg } from "@prisma/adapter-pg"
+
+export type { Prisma }
 
 const globalForPrisma = globalThis as unknown as {
     prisma: PrismaClient | undefined
@@ -21,3 +23,5 @@ export const prisma =
 if (process.env.NODE_ENV !== "production") {
     globalForPrisma.prisma = prisma
 }
+
+export * from "./cache/scanCache.js"

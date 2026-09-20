@@ -1,10 +1,12 @@
 generator client {
-  provider = "prisma-client"
-  output   = "./generated"
+  provider        = "prisma-client"
+  output          = "./generated"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider   = "postgresql"
+  extensions = [vector]
 }
 
 enum UserStatus {
@@ -31,6 +33,14 @@ enum PaymentStatus {
   FAILED
   REFUNDED
   PARTIALLY_REFUNDED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+  EXPIRED
 }
 
 enum PaymentPurpose {
@@ -87,7 +97,7 @@ enum PipelineStage {
   DEPLOY
 }
 
-enum OAuthProvider {
+enum AuthProvider {
   GOOGLE
   GITHUB
   EMAIL
@@ -174,171 +184,150 @@ enum ProjectInputType {
 }
 
 model User {
-  id              String     @id @default(cuid())
-  email           String     @unique
-  phone           String?    @unique
-  name            String?
-  image           String?
-  emailVerified   DateTime?
-  displayName     String?
-  avatarUrl       String?
-  status          UserStatus @default(ACTIVE)
-  emailVerifiedAt DateTime?
+  id        String     @id @default(cuid())
+  name      String?
+  avatarUrl String?
+  status    UserStatus @default(ACTIVE)
+
+  phone           String?   @unique // post-login verified attribute, NOT a login method
   phoneVerifiedAt DateTime?
   lastLoginAt     DateTime?
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
   deletedAt       DateTime?
 
-  credentials             UserCredential?
-  identities              UserIdentity[]
-  refreshTokens           RefreshToken[]
-  sessions                UserSession[]
-  emailVerificationTokens EmailVerificationToken[]
-  passwordResetTokens     PasswordResetToken[]
-  phoneOtps               PhoneOtp[]
-  subscription            Subscription?
-  payments                Payment[]
-  creditBalance           CreditBalance?
-  creditTransactions      CreditTransaction[]
-  projects                Project[]
-  conversations           Conversation[]
-  deployments             Deployment[]
-  usageLogs               UsageLog[]
-  competitorScans         CompetitorScan[]
-  authAccounts            Account[]
-  authSessions            Session[]
+  hasUsedFreeGeneration Boolean @default(false)
 
+  stripeCustomerId       String? @unique
+  defaultPaymentMethodId String?
+
+  identities    Identity[]
+  sessions      Session[]
+  refreshTokens RefreshToken[]
+  phoneOtps     PhoneOtp[]
+  ticketTokens  TicketToken[]
+
+  subscription       Subscription?
+  orders             Order[]
+  payments           Payment[]
+  creditBalance      CreditBalance?
+  creditTransactions CreditTransaction[]
+  autoReloadSetting  AutoReloadSetting?
+  projects           Project[]
+  conversations      Conversation[]
+  deployments        Deployment[]
+  usageLogs          UsageLog[]
+  competitorScans    CompetitorScan[]
+  scoreResults       ScoreResult[]
+  seoAuditResults    SeoAuditResult[]
+
+  @@index([status])
   @@index([deletedAt])
   @@map("users")
 }
 
-model Account {
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
+// IDENTITY — one row per way of logging in, uniform across all three:
+//   EMAIL  → externalId = the email address      (magic link)
+//   GOOGLE → externalId = Google's user id (sub)  (OAuth)
+//   GITHUB → externalId = GitHub's user id        (OAuth)
+// `email` = the verified email tied to this identity; it's the key
+// that makes "same email = same account" work. For EMAIL rows it
+// equals externalId (that overlap is the price of full uniformity).
+
+model Identity {
+  id         String       @id @default(cuid())
+  userId     String
+  type       AuthProvider // EMAIL | GOOGLE | GITHUB
+  externalId String // natural key within the type
+  email      String // verified email for this identity - linking key
+  isPrimary  Boolean      @default(false) // marks the user's contact email
+  verifiedAt DateTime?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@id([provider, providerAccountId])
+  @@unique([type, externalId]) // a given Google/GitHub/email identity links once
   @@index([userId])
-  @@map("auth_accounts")
+  @@index([email]) // fast "find account by this email" for linking
+  @@map("identities")
 }
 
 model Session {
-  sessionToken String   @unique
+  id           String    @id @default(cuid())
   userId       String
-  expires      DateTime
+  deviceName   String?
+  userAgent    String?
+  ip           String?
+  lastActiveAt DateTime  @default(now())
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  createdAt    DateTime  @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refreshTokens RefreshToken[]
 
   @@index([userId])
-  @@map("auth_sessions")
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@id([identifier, token])
-  @@map("auth_verification_tokens")
-}
-
-model UserCredential {
-  userId            String   @id
-  passwordHash      String
-  passwordChangedAt DateTime @default(now())
-  requiresReset     Boolean  @default(false)
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("user_credentials")
-}
-
-model UserIdentity {
-  id              String        @id @default(cuid())
-  userId          String
-  provider        OAuthProvider
-  providerUserId  String
-  emailAtProvider String?
-  createdAt       DateTime      @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerUserId])
-  @@index([userId])
-  @@map("user_identities")
+  @@index([expiresAt])
+  @@map("sessions")
 }
 
 model RefreshToken {
   id        String    @id @default(cuid())
+  sessionId String
   userId    String
   tokenHash String    @unique
   familyId  String
   parentId  String?
-  userAgent String?
-  ip        String?
   expiresAt DateTime
   revokedAt DateTime?
   createdAt DateTime  @default(now())
 
+  session  Session        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
   user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  parent   RefreshToken?  @relation("TokenLineage", fields: [parentId], references: [id])
-  children RefreshToken[] @relation("TokenLineage")
-  sessions UserSession[]
+  parent   RefreshToken?  @relation("TokenRotation", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children RefreshToken[] @relation("TokenRotation")
 
   @@index([userId])
+  @@index([sessionId])
   @@index([familyId])
+  @@index([expiresAt])
   @@map("refresh_tokens")
 }
 
-model UserSession {
-  id             String    @id @default(cuid())
-  userId         String
-  refreshTokenId String?
-  deviceName     String?
-  userAgent      String?
-  ip             String?
-  lastActiveAt   DateTime  @default(now())
-  expiresAt      DateTime
-  revokedAt      DateTime?
-  createdAt      DateTime  @default(now())
-
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  refreshToken RefreshToken? @relation(fields: [refreshTokenId], references: [id])
-
-  @@index([userId])
-  @@map("user_sessions")
-}
-
-model EmailVerificationToken {
+model MagicLinkToken {
   id         String    @id @default(cuid())
-  userId     String
   email      String
   tokenHash  String    @unique
   expiresAt  DateTime
   consumedAt DateTime?
   createdAt  DateTime  @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-  @@map("email_verification_tokens")
+  @@index([email])
+  @@index([expiresAt])
+  @@map("magic_link_tokens")
 }
 
-model PasswordResetToken {
+model TicketToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt])
+  @@map("ticket_tokens")
+}
+
+model PhoneOtp {
   id         String    @id @default(cuid())
   userId     String
-  tokenHash  String    @unique
+  phone      String
+  codeHash   String
+  attempts   Int       @default(0)
   expiresAt  DateTime
   consumedAt DateTime?
   createdAt  DateTime  @default(now())
@@ -346,23 +335,7 @@ model PasswordResetToken {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
-  @@map("password_reset_tokens")
-}
-
-model PhoneOtp {
-  id          String    @id @default(cuid())
-  userId      String
-  phone       String
-  codeHash    String
-  attempts    Int       @default(0)
-  maxAttempts Int       @default(5)
-  expiresAt   DateTime
-  consumedAt  DateTime?
-  createdAt   DateTime  @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
+  @@index([expiresAt])
   @@map("phone_otps")
 }
 
@@ -382,9 +355,31 @@ model Plan {
   isActive                  Boolean  @default(true)
   createdAt                 DateTime @default(now())
 
+  orders        Order[]
   subscriptions Subscription[]
 
   @@map("plans")
+}
+
+model Order {
+  id                String      @id @default(cuid())
+  userId            String
+  planId            String
+  amount            Int
+  currency          String      @default("USD")
+  status            OrderStatus @default(PENDING)
+  provider          String      @default("stripe")
+  providerSessionId String?     @unique
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan    Plan     @relation(fields: [planId], references: [id])
+  payment Payment?
+
+  @@index([userId])
+  @@index([status])
+  @@map("orders")
 }
 
 model Subscription {
@@ -410,6 +405,7 @@ model Subscription {
 
 model Payment {
   id                String         @id @default(cuid())
+  orderId           String?        @unique
   userId            String
   purpose           PaymentPurpose
   subscriptionId    String?
@@ -424,6 +420,7 @@ model Payment {
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
 
+  order              Order?              @relation(fields: [orderId], references: [id])
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   subscription       Subscription?       @relation(fields: [subscriptionId], references: [id])
   creditTransactions CreditTransaction[]
@@ -476,6 +473,18 @@ model CreditTransaction {
   @@map("credit_transactions")
 }
 
+model AutoReloadSetting {
+  userId         String   @id
+  enabled        Boolean  @default(false)
+  thresholdCents Int
+  topUpToCents   Int
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("auto_reload_settings")
+}
+
 model Project {
   id               String           @id @default(cuid())
   userId           String
@@ -484,6 +493,10 @@ model Project {
   startupIdea      String
   niche            NicheCategory    @default(OTHER)
   targetAudience   String
+  brandPersonality String?
+  pricePositioning String?
+  businessModel    String?
+  differentiator   String?
   status           ProjectStatus    @default(DRAFT)
   inputType        ProjectInputType @default(FROM_SCRATCH)
   sourceUrl        String?
@@ -491,6 +504,7 @@ model Project {
   description      String?
   logoUrl          String?
   currentVersionId String?
+  vercelProjectId  String?
   pinned           Boolean          @default(false)
   deletedAt        DateTime?
   archivedAt       DateTime?
@@ -507,6 +521,7 @@ model Project {
   analytics       ProjectAnalytics?
   pageAnalytics   PageAnalytics[]
   researchReport  ResearchReport?
+  pipelineState   PipelineState?
   competitorScans CompetitorScan[]
 
   @@index([userId])
@@ -524,6 +539,7 @@ model ProjectVersion {
   label              String?
   siteType           SiteType @default(MULTI_PAGE)
   seo                Json     @default("{}")
+  designBrief        Json?
   parentVersionId    String?
   createdByMessageId String?
   snapshot           Json
@@ -822,6 +838,106 @@ model ResearchReport {
   @@map("research_reports")
 }
 
+model ResearchFinding {
+  id            String                       @id @default(cuid())
+  claim         String
+  paper         String
+  field         String
+  appliesTo     String[]
+  audience      String[]
+  decision      String
+  options       Json
+  contextHeader String
+  verified      Boolean                      @default(true)
+  embedding     Unsupported("vector(1536)")?
+  createdAt     DateTime                     @default(now())
+
+  @@index([field])
+  @@index([decision])
+  @@map("research_findings")
+}
+
+model FindingRelation {
+  fromId   String
+  toId     String
+  relation String
+
+  @@id([fromId, toId])
+  @@map("finding_relations")
+}
+
+model DomainPattern {
+  domain            String   @id
+  typicalSections   String[]
+  toneRange         String[]
+  conversionPattern String
+  commonObjections  String[]
+  proofTypes        String[]
+
+  @@map("domain_patterns")
+}
+
+model AudienceModifier {
+  audience String @id
+  modifies Json
+
+  @@map("audience_modifiers")
+}
+
+model GenerationOutcome {
+  id        String   @id @default(cuid())
+  projectId String
+  versionId String
+  brief     Json
+  inputs    Json
+  userEdits Json?
+  score     Int?
+  deployed  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([projectId])
+  @@map("generation_outcomes")
+}
+
+enum PipelineStepId {
+  RESEARCH
+  WEBSITE
+  SEO
+  DEPLOY
+}
+
+enum PipelineStepStatus {
+  LOCKED
+  PENDING
+  RUNNING
+  AWAITING_APPROVAL
+  APPROVED
+  REJECTED
+}
+
+enum PipelineMode {
+  AUTO
+  MANUAL
+}
+
+model PipelineState {
+  id              String             @id @default(cuid())
+  projectId       String             @unique
+  mode            PipelineMode       @default(MANUAL)
+  currentStep     PipelineStepId     @default(RESEARCH)
+  researchStatus  PipelineStepStatus @default(PENDING)
+  websiteStatus   PipelineStepStatus @default(LOCKED)
+  seoStatus       PipelineStepStatus @default(LOCKED)
+  deployStatus    PipelineStepStatus @default(LOCKED)
+  feedbackHistory Json               @default("[]")
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("pipeline_states")
+}
+
 model ResearchArticle {
   id            String           @id @default(cuid())
   slug          String           @unique
@@ -851,6 +967,7 @@ model CompetitorScan {
   userId           String
   projectId        String?
   sourceUrl        String
+  normalizedUrl    String
   scanType         ScanType   @default(COMPETITOR)
   status           ScanStatus @default(QUEUED)
   screenshotKey    String?
@@ -858,6 +975,7 @@ model CompetitorScan {
   designTokens     Json?
   extractedContent Json?
   failureReason    String?
+  expiresAt        DateTime?
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
 
@@ -867,5 +985,90 @@ model CompetitorScan {
   @@index([userId])
   @@index([projectId])
   @@index([status])
+  @@index([normalizedUrl, status])
   @@map("competitor_scans")
+}
+
+enum ScoreStatus {
+  PENDING
+  SCANNING
+  ANALYZING
+  DONE
+  FAILED
+}
+
+model ScoreResult {
+  id               String      @id @default(cuid())
+  userId           String
+  url              String
+  normalizedUrl    String
+  analysisType     String
+  scorerVersion    String      @default("v1")
+  status           ScoreStatus @default(PENDING)
+  screenshotBase64 String?     @db.Text
+  report           Json?
+  failureReason    String?
+  expiresAt        DateTime?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([userId])
+  @@index([normalizedUrl, analysisType, scorerVersion])
+  @@map("score_results")
+}
+
+model SearchQueryCache {
+  id        String   @id @default(cuid())
+  queryHash String   @unique
+  results   Json
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("search_query_cache")
+}
+
+enum SeoAuditStatus {
+  PENDING
+  CRAWLING
+  AUDITING
+  DONE
+  FAILED
+}
+
+enum SeoAuditTier {
+  free
+  paid
+}
+
+model SeoAuditResult {
+  id                 String         @id @default(cuid())
+  userId             String
+  url                String
+  domain             String?
+  tier               SeoAuditTier   @default(free)
+  status             SeoAuditStatus @default(PENDING)
+  performanceScore   Int?
+  accessibilityScore Int?
+  seoScore           Int?
+  bestPracticesScore Int?
+  pagesCrawled       Int?
+  crawlResults       Json?
+  keywords           Json?
+  auditJson          Json?
+  computedScore      Int?
+  llmSummary         Json?
+  expiresAt          DateTime?
+  failureReason      String?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([userId])
+  @@index([domain, tier])
+  @@map("seo_audit_results")
 }

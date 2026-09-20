@@ -1,7 +1,8 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useWebContainer } from "./useWebContainer"
+import { CitationTooltip } from "./CitationTooltip"
 import type { SiteSpec } from "@repo/schemas"
 
 type Props = {
@@ -9,13 +10,46 @@ type Props = {
   active: boolean
 }
 
+type HoverState = { citationIds: string[]; rect: { top: number; left: number; width: number; height: number } } | null
+
 export function PreviewPane({ siteSpec, active }: Props) {
   const { state, boot } = useWebContainer()
+  const [hover, setHover] = useState<HoverState>(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {
     if (!active) return
     boot(siteSpec)
   }, [active, siteSpec, boot])
+
+  useEffect(() => {
+    function handleMessage(event: MessageEvent) {
+      const data = event.data
+      if (!data || typeof data !== "object") return
+      if (event.source !== iframeRef.current?.contentWindow) return
+
+      if (data.type === "citation-hover" && Array.isArray(data.citationIds)) {
+        // The iframe reports coordinates relative to its own viewport —
+        // offset by the iframe's own position in the parent page so the
+        // fixed-position tooltip lands in the right spot.
+        const frameRect = iframeRef.current?.getBoundingClientRect()
+        const r = data.rect
+        setHover({
+          citationIds: data.citationIds,
+          rect: {
+            top: (frameRect?.top ?? 0) + r.top,
+            left: (frameRect?.left ?? 0) + r.left,
+            width: r.width,
+            height: r.height,
+          },
+        })
+      } else if (data.type === "citation-hover-end") {
+        setHover(null)
+      }
+    }
+    window.addEventListener("message", handleMessage)
+    return () => window.removeEventListener("message", handleMessage)
+  }, [])
 
   if (!active && state.status === "idle") {
     return (
@@ -27,12 +61,22 @@ export function PreviewPane({ siteSpec, active }: Props) {
 
   if (state.status === "ready") {
     return (
-      <iframe
-        src={state.url}
-        className="h-full w-full border-0"
-        allow="cross-origin-isolated"
-        title="Site preview"
-      />
+      <>
+        <iframe
+          ref={iframeRef}
+          src={state.url}
+          className="h-full w-full border-0"
+          allow="cross-origin-isolated"
+          title="Site preview"
+        />
+        {hover && (
+          <CitationTooltip
+            citationIds={hover.citationIds}
+            citations={siteSpec.citations}
+            rect={hover.rect}
+          />
+        )}
+      </>
     )
   }
 

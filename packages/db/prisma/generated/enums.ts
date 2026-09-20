@@ -47,6 +47,17 @@ export const PaymentStatus = {
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 
+export const OrderStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
 export const PaymentPurpose = {
   SUBSCRIPTION: 'SUBSCRIPTION',
   CREDIT_TOPUP: 'CREDIT_TOPUP'
@@ -119,13 +130,13 @@ export const PipelineStage = {
 export type PipelineStage = (typeof PipelineStage)[keyof typeof PipelineStage]
 
 
-export const OAuthProvider = {
+export const AuthProvider = {
   GOOGLE: 'GOOGLE',
   GITHUB: 'GITHUB',
   EMAIL: 'EMAIL'
 } as const
 
-export type OAuthProvider = (typeof OAuthProvider)[keyof typeof OAuthProvider]
+export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
 
 
 export const DomainStatus = {
@@ -236,3 +247,63 @@ export const ProjectInputType = {
 } as const
 
 export type ProjectInputType = (typeof ProjectInputType)[keyof typeof ProjectInputType]
+
+
+export const PipelineStepId = {
+  RESEARCH: 'RESEARCH',
+  WEBSITE: 'WEBSITE',
+  SEO: 'SEO',
+  DEPLOY: 'DEPLOY'
+} as const
+
+export type PipelineStepId = (typeof PipelineStepId)[keyof typeof PipelineStepId]
+
+
+export const PipelineStepStatus = {
+  LOCKED: 'LOCKED',
+  PENDING: 'PENDING',
+  RUNNING: 'RUNNING',
+  AWAITING_APPROVAL: 'AWAITING_APPROVAL',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type PipelineStepStatus = (typeof PipelineStepStatus)[keyof typeof PipelineStepStatus]
+
+
+export const PipelineMode = {
+  AUTO: 'AUTO',
+  MANUAL: 'MANUAL'
+} as const
+
+export type PipelineMode = (typeof PipelineMode)[keyof typeof PipelineMode]
+
+
+export const ScoreStatus = {
+  PENDING: 'PENDING',
+  SCANNING: 'SCANNING',
+  ANALYZING: 'ANALYZING',
+  DONE: 'DONE',
+  FAILED: 'FAILED'
+} as const
+
+export type ScoreStatus = (typeof ScoreStatus)[keyof typeof ScoreStatus]
+
+
+export const SeoAuditStatus = {
+  PENDING: 'PENDING',
+  CRAWLING: 'CRAWLING',
+  AUDITING: 'AUDITING',
+  DONE: 'DONE',
+  FAILED: 'FAILED'
+} as const
+
+export type SeoAuditStatus = (typeof SeoAuditStatus)[keyof typeof SeoAuditStatus]
+
+
+export const SeoAuditTier = {
+  free: 'free',
+  paid: 'paid'
+} as const
+
+export type SeoAuditTier = (typeof SeoAuditTier)[keyof typeof SeoAuditTier]

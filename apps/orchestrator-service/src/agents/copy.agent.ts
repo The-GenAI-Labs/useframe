@@ -33,9 +33,16 @@ export async function runCopyAgent(
         pageType: page.type,
         sectionType: section.type,
         sectionIndex: section.index,
+        brandTone: spec.designBrief?.brand.tone,
+        frameworkRationale: spec.designBrief?.frameworkRationale,
       })
 
-      const result = streamText({ model, prompt, maxTokens: 1000 })
+      const result = streamText({
+        model,
+        prompt,
+        maxTokens: 1000,
+        experimental_telemetry: { isEnabled: true, functionId: "copy-agent" },
+      })
 
       let fullText = ""
       for await (const chunk of result.textStream) {

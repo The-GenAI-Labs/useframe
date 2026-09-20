@@ -1,0 +1,12 @@
+[
+  { "startupIdea": "A budgeting app that helps people save for their first home", "niche": "FINTECH", "targetAudience": "young professionals saving for a first home" },
+  { "startupIdea": "A boutique CrossFit gym opening its first location", "niche": "FITNESS", "targetAudience": "adults aged 25-40 in the local area" },
+  { "startupIdea": "A B2B SaaS tool for engineering teams to track on-call incidents", "niche": "SAAS_B2B", "targetAudience": "engineering managers at mid-size tech companies" },
+  { "startupIdea": "A subscription box for artisanal coffee from small roasters", "niche": "FOOD_LIFESTYLE", "targetAudience": "coffee enthusiasts willing to pay a premium" },
+  { "startupIdea": "An online course platform teaching kids to code through games", "niche": "EDTECH", "targetAudience": "parents of children aged 7-12" },
+  { "startupIdea": "A telehealth platform for on-demand therapy sessions", "niche": "HEALTH_WELLNESS", "targetAudience": "adults seeking accessible mental health support" },
+  { "startupIdea": "A direct-to-consumer skincare brand using clean ingredients", "niche": "ECOMMERCE", "targetAudience": "adults concerned about ingredient transparency" },
+  { "startupIdea": "A handmade leather goods atelier selling made-to-order bags", "niche": "LUXURY", "targetAudience": "adults seeking premium, long-lasting goods" },
+  { "startupIdea": "A guided meditation app with sessions from real practitioners", "niche": "MEDITATION", "targetAudience": "adults new to meditation looking to reduce stress" },
+  { "startupIdea": "A marketplace connecting freelance developers with startups", "niche": "SAAS_B2B", "targetAudience": "early-stage startup founders hiring their first engineers" }
+]

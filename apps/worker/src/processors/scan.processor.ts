@@ -1,13 +1,40 @@
 import { Worker } from "bullmq"
 import type { Job } from "bullmq"
 import { chromium } from "playwright"
-import { prisma } from "@useframe/db"
+import { prisma, resolveContext, getCachedScan, cacheScan } from "@useframe/db"
 import { QUEUES } from "@repo/events"
 import type { ScanJobPayload } from "@repo/events"
 import { redis } from "../lib/redis.js"
 
 async function processScan(job: Job<ScanJobPayload>): Promise<void> {
-  const { scanId, projectId, sourceUrl } = job.data
+  const { scanId, userId, projectId, sourceUrl } = job.data
+
+  // Cache-check-first: if a DONE, unexpired scan of this normalized URL
+  // already exists (and this isn't the requesting user's own project),
+  // reuse it instead of spending a Playwright run. Must run before the
+  // first "RENDERING" status write below.
+  const cacheContext = await resolveContext(sourceUrl, userId)
+  const cachedScan = await getCachedScan(sourceUrl, cacheContext)
+  if (cachedScan) {
+    await prisma.competitorScan.update({
+      where: { id: scanId },
+      data: {
+        status: "DONE",
+        screenshotKey: cachedScan.screenshotKey,
+        rawHtmlKey: cachedScan.rawHtmlKey,
+        designTokens: cachedScan.designTokens ?? undefined,
+        extractedContent: cachedScan.extractedContent ?? undefined,
+      },
+    })
+
+    await prisma.project.update({
+      where: { id: projectId },
+      data: { status: "READY" },
+    })
+
+    console.log(`[scan] Cache hit scanId=${scanId} (reused scan ${cachedScan.id})`)
+    return
+  }
 
   await prisma.competitorScan.update({
     where: { id: scanId },
@@ -102,6 +129,8 @@ async function processScan(job: Job<ScanJobPayload>): Promise<void> {
       where: { id: projectId },
       data: { status: "READY" },
     })
+
+    await cacheScan(scanId, sourceUrl, cacheContext)
 
     console.log(`[scan] Completed scanId=${scanId}`)
   } catch (err) {

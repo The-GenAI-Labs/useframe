@@ -29,11 +29,13 @@ export type CompetitorScanMinAggregateOutputType = {
   userId: string | null
   projectId: string | null
   sourceUrl: string | null
+  normalizedUrl: string | null
   scanType: $Enums.ScanType | null
   status: $Enums.ScanStatus | null
   screenshotKey: string | null
   rawHtmlKey: string | null
   failureReason: string | null
+  expiresAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -43,11 +45,13 @@ export type CompetitorScanMaxAggregateOutputType = {
   userId: string | null
   projectId: string | null
   sourceUrl: string | null
+  normalizedUrl: string | null
   scanType: $Enums.ScanType | null
   status: $Enums.ScanStatus | null
   screenshotKey: string | null
   rawHtmlKey: string | null
   failureReason: string | null
+  expiresAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -57,6 +61,7 @@ export type CompetitorScanCountAggregateOutputType = {
   userId: number
   projectId: number
   sourceUrl: number
+  normalizedUrl: number
   scanType: number
   status: number
   screenshotKey: number
@@ -64,6 +69,7 @@ export type CompetitorScanCountAggregateOutputType = {
   designTokens: number
   extractedContent: number
   failureReason: number
+  expiresAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -75,11 +81,13 @@ export type CompetitorScanMinAggregateInputType = {
   userId?: true
   projectId?: true
   sourceUrl?: true
+  normalizedUrl?: true
   scanType?: true
   status?: true
   screenshotKey?: true
   rawHtmlKey?: true
   failureReason?: true
+  expiresAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -89,11 +97,13 @@ export type CompetitorScanMaxAggregateInputType = {
   userId?: true
   projectId?: true
   sourceUrl?: true
+  normalizedUrl?: true
   scanType?: true
   status?: true
   screenshotKey?: true
   rawHtmlKey?: true
   failureReason?: true
+  expiresAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -103,6 +113,7 @@ export type CompetitorScanCountAggregateInputType = {
   userId?: true
   projectId?: true
   sourceUrl?: true
+  normalizedUrl?: true
   scanType?: true
   status?: true
   screenshotKey?: true
@@ -110,6 +121,7 @@ export type CompetitorScanCountAggregateInputType = {
   designTokens?: true
   extractedContent?: true
   failureReason?: true
+  expiresAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -192,6 +204,7 @@ export type CompetitorScanGroupByOutputType = {
   userId: string
   projectId: string | null
   sourceUrl: string
+  normalizedUrl: string
   scanType: $Enums.ScanType
   status: $Enums.ScanStatus
   screenshotKey: string | null
@@ -199,6 +212,7 @@ export type CompetitorScanGroupByOutputType = {
   designTokens: runtime.JsonValue | null
   extractedContent: runtime.JsonValue | null
   failureReason: string | null
+  expiresAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: CompetitorScanCountAggregateOutputType | null
@@ -229,6 +243,7 @@ export type CompetitorScanWhereInput = {
   userId?: Prisma.StringFilter<"CompetitorScan"> | string
   projectId?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
   sourceUrl?: Prisma.StringFilter<"CompetitorScan"> | string
+  normalizedUrl?: Prisma.StringFilter<"CompetitorScan"> | string
   scanType?: Prisma.EnumScanTypeFilter<"CompetitorScan"> | $Enums.ScanType
   status?: Prisma.EnumScanStatusFilter<"CompetitorScan"> | $Enums.ScanStatus
   screenshotKey?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
@@ -236,6 +251,7 @@ export type CompetitorScanWhereInput = {
   designTokens?: Prisma.JsonNullableFilter<"CompetitorScan">
   extractedContent?: Prisma.JsonNullableFilter<"CompetitorScan">
   failureReason?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
+  expiresAt?: Prisma.DateTimeNullableFilter<"CompetitorScan"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CompetitorScan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CompetitorScan"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -247,6 +263,7 @@ export type CompetitorScanOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
+  normalizedUrl?: Prisma.SortOrder
   scanType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   screenshotKey?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -254,6 +271,7 @@ export type CompetitorScanOrderByWithRelationInput = {
   designTokens?: Prisma.SortOrderInput | Prisma.SortOrder
   extractedContent?: Prisma.SortOrderInput | Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -268,6 +286,7 @@ export type CompetitorScanWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"CompetitorScan"> | string
   projectId?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
   sourceUrl?: Prisma.StringFilter<"CompetitorScan"> | string
+  normalizedUrl?: Prisma.StringFilter<"CompetitorScan"> | string
   scanType?: Prisma.EnumScanTypeFilter<"CompetitorScan"> | $Enums.ScanType
   status?: Prisma.EnumScanStatusFilter<"CompetitorScan"> | $Enums.ScanStatus
   screenshotKey?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
@@ -275,6 +294,7 @@ export type CompetitorScanWhereUniqueInput = Prisma.AtLeast<{
   designTokens?: Prisma.JsonNullableFilter<"CompetitorScan">
   extractedContent?: Prisma.JsonNullableFilter<"CompetitorScan">
   failureReason?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
+  expiresAt?: Prisma.DateTimeNullableFilter<"CompetitorScan"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CompetitorScan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CompetitorScan"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -286,6 +306,7 @@ export type CompetitorScanOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
+  normalizedUrl?: Prisma.SortOrder
   scanType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   screenshotKey?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -293,6 +314,7 @@ export type CompetitorScanOrderByWithAggregationInput = {
   designTokens?: Prisma.SortOrderInput | Prisma.SortOrder
   extractedContent?: Prisma.SortOrderInput | Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CompetitorScanCountOrderByAggregateInput
@@ -308,6 +330,7 @@ export type CompetitorScanScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"CompetitorScan"> | string
   projectId?: Prisma.StringNullableWithAggregatesFilter<"CompetitorScan"> | string | null
   sourceUrl?: Prisma.StringWithAggregatesFilter<"CompetitorScan"> | string
+  normalizedUrl?: Prisma.StringWithAggregatesFilter<"CompetitorScan"> | string
   scanType?: Prisma.EnumScanTypeWithAggregatesFilter<"CompetitorScan"> | $Enums.ScanType
   status?: Prisma.EnumScanStatusWithAggregatesFilter<"CompetitorScan"> | $Enums.ScanStatus
   screenshotKey?: Prisma.StringNullableWithAggregatesFilter<"CompetitorScan"> | string | null
@@ -315,6 +338,7 @@ export type CompetitorScanScalarWhereWithAggregatesInput = {
   designTokens?: Prisma.JsonNullableWithAggregatesFilter<"CompetitorScan">
   extractedContent?: Prisma.JsonNullableWithAggregatesFilter<"CompetitorScan">
   failureReason?: Prisma.StringNullableWithAggregatesFilter<"CompetitorScan"> | string | null
+  expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CompetitorScan"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CompetitorScan"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CompetitorScan"> | Date | string
 }
@@ -322,6 +346,7 @@ export type CompetitorScanScalarWhereWithAggregatesInput = {
 export type CompetitorScanCreateInput = {
   id?: string
   sourceUrl: string
+  normalizedUrl: string
   scanType?: $Enums.ScanType
   status?: $Enums.ScanStatus
   screenshotKey?: string | null
@@ -329,6 +354,7 @@ export type CompetitorScanCreateInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCompetitorScansInput
@@ -340,6 +366,7 @@ export type CompetitorScanUncheckedCreateInput = {
   userId: string
   projectId?: string | null
   sourceUrl: string
+  normalizedUrl: string
   scanType?: $Enums.ScanType
   status?: $Enums.ScanStatus
   screenshotKey?: string | null
@@ -347,6 +374,7 @@ export type CompetitorScanUncheckedCreateInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -354,6 +382,7 @@ export type CompetitorScanUncheckedCreateInput = {
 export type CompetitorScanUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -361,6 +390,7 @@ export type CompetitorScanUpdateInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCompetitorScansNestedInput
@@ -372,6 +402,7 @@ export type CompetitorScanUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -379,6 +410,7 @@ export type CompetitorScanUncheckedUpdateInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -388,6 +420,7 @@ export type CompetitorScanCreateManyInput = {
   userId: string
   projectId?: string | null
   sourceUrl: string
+  normalizedUrl: string
   scanType?: $Enums.ScanType
   status?: $Enums.ScanStatus
   screenshotKey?: string | null
@@ -395,6 +428,7 @@ export type CompetitorScanCreateManyInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -402,6 +436,7 @@ export type CompetitorScanCreateManyInput = {
 export type CompetitorScanUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -409,6 +444,7 @@ export type CompetitorScanUpdateManyMutationInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -418,6 +454,7 @@ export type CompetitorScanUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -425,6 +462,7 @@ export type CompetitorScanUncheckedUpdateManyInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -444,6 +482,7 @@ export type CompetitorScanCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
+  normalizedUrl?: Prisma.SortOrder
   scanType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   screenshotKey?: Prisma.SortOrder
@@ -451,6 +490,7 @@ export type CompetitorScanCountOrderByAggregateInput = {
   designTokens?: Prisma.SortOrder
   extractedContent?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -460,11 +500,13 @@ export type CompetitorScanMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
+  normalizedUrl?: Prisma.SortOrder
   scanType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   screenshotKey?: Prisma.SortOrder
   rawHtmlKey?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -474,11 +516,13 @@ export type CompetitorScanMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
+  normalizedUrl?: Prisma.SortOrder
   scanType?: Prisma.SortOrder
   status?: Prisma.SortOrder
   screenshotKey?: Prisma.SortOrder
   rawHtmlKey?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
+  expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -578,6 +622,7 @@ export type EnumScanStatusFieldUpdateOperationsInput = {
 export type CompetitorScanCreateWithoutUserInput = {
   id?: string
   sourceUrl: string
+  normalizedUrl: string
   scanType?: $Enums.ScanType
   status?: $Enums.ScanStatus
   screenshotKey?: string | null
@@ -585,6 +630,7 @@ export type CompetitorScanCreateWithoutUserInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   project?: Prisma.ProjectCreateNestedOneWithoutCompetitorScansInput
@@ -594,6 +640,7 @@ export type CompetitorScanUncheckedCreateWithoutUserInput = {
   id?: string
   projectId?: string | null
   sourceUrl: string
+  normalizedUrl: string
   scanType?: $Enums.ScanType
   status?: $Enums.ScanStatus
   screenshotKey?: string | null
@@ -601,6 +648,7 @@ export type CompetitorScanUncheckedCreateWithoutUserInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -639,6 +687,7 @@ export type CompetitorScanScalarWhereInput = {
   userId?: Prisma.StringFilter<"CompetitorScan"> | string
   projectId?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
   sourceUrl?: Prisma.StringFilter<"CompetitorScan"> | string
+  normalizedUrl?: Prisma.StringFilter<"CompetitorScan"> | string
   scanType?: Prisma.EnumScanTypeFilter<"CompetitorScan"> | $Enums.ScanType
   status?: Prisma.EnumScanStatusFilter<"CompetitorScan"> | $Enums.ScanStatus
   screenshotKey?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
@@ -646,6 +695,7 @@ export type CompetitorScanScalarWhereInput = {
   designTokens?: Prisma.JsonNullableFilter<"CompetitorScan">
   extractedContent?: Prisma.JsonNullableFilter<"CompetitorScan">
   failureReason?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
+  expiresAt?: Prisma.DateTimeNullableFilter<"CompetitorScan"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CompetitorScan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CompetitorScan"> | Date | string
 }
@@ -653,6 +703,7 @@ export type CompetitorScanScalarWhereInput = {
 export type CompetitorScanCreateWithoutProjectInput = {
   id?: string
   sourceUrl: string
+  normalizedUrl: string
   scanType?: $Enums.ScanType
   status?: $Enums.ScanStatus
   screenshotKey?: string | null
@@ -660,6 +711,7 @@ export type CompetitorScanCreateWithoutProjectInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCompetitorScansInput
@@ -669,6 +721,7 @@ export type CompetitorScanUncheckedCreateWithoutProjectInput = {
   id?: string
   userId: string
   sourceUrl: string
+  normalizedUrl: string
   scanType?: $Enums.ScanType
   status?: $Enums.ScanStatus
   screenshotKey?: string | null
@@ -676,6 +729,7 @@ export type CompetitorScanUncheckedCreateWithoutProjectInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -710,6 +764,7 @@ export type CompetitorScanCreateManyUserInput = {
   id?: string
   projectId?: string | null
   sourceUrl: string
+  normalizedUrl: string
   scanType?: $Enums.ScanType
   status?: $Enums.ScanStatus
   screenshotKey?: string | null
@@ -717,6 +772,7 @@ export type CompetitorScanCreateManyUserInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -724,6 +780,7 @@ export type CompetitorScanCreateManyUserInput = {
 export type CompetitorScanUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -731,6 +788,7 @@ export type CompetitorScanUpdateWithoutUserInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneWithoutCompetitorScansNestedInput
@@ -740,6 +798,7 @@ export type CompetitorScanUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -747,6 +806,7 @@ export type CompetitorScanUncheckedUpdateWithoutUserInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -755,6 +815,7 @@ export type CompetitorScanUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -762,6 +823,7 @@ export type CompetitorScanUncheckedUpdateManyWithoutUserInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -770,6 +832,7 @@ export type CompetitorScanCreateManyProjectInput = {
   id?: string
   userId: string
   sourceUrl: string
+  normalizedUrl: string
   scanType?: $Enums.ScanType
   status?: $Enums.ScanStatus
   screenshotKey?: string | null
@@ -777,6 +840,7 @@ export type CompetitorScanCreateManyProjectInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
+  expiresAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -784,6 +848,7 @@ export type CompetitorScanCreateManyProjectInput = {
 export type CompetitorScanUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -791,6 +856,7 @@ export type CompetitorScanUpdateWithoutProjectInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCompetitorScansNestedInput
@@ -800,6 +866,7 @@ export type CompetitorScanUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -807,6 +874,7 @@ export type CompetitorScanUncheckedUpdateWithoutProjectInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -815,6 +883,7 @@ export type CompetitorScanUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  normalizedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   scanType?: Prisma.EnumScanTypeFieldUpdateOperationsInput | $Enums.ScanType
   status?: Prisma.EnumScanStatusFieldUpdateOperationsInput | $Enums.ScanStatus
   screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -822,6 +891,7 @@ export type CompetitorScanUncheckedUpdateManyWithoutProjectInput = {
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -833,6 +903,7 @@ export type CompetitorScanSelect<ExtArgs extends runtime.Types.Extensions.Intern
   userId?: boolean
   projectId?: boolean
   sourceUrl?: boolean
+  normalizedUrl?: boolean
   scanType?: boolean
   status?: boolean
   screenshotKey?: boolean
@@ -840,6 +911,7 @@ export type CompetitorScanSelect<ExtArgs extends runtime.Types.Extensions.Intern
   designTokens?: boolean
   extractedContent?: boolean
   failureReason?: boolean
+  expiresAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -851,6 +923,7 @@ export type CompetitorScanSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   userId?: boolean
   projectId?: boolean
   sourceUrl?: boolean
+  normalizedUrl?: boolean
   scanType?: boolean
   status?: boolean
   screenshotKey?: boolean
@@ -858,6 +931,7 @@ export type CompetitorScanSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   designTokens?: boolean
   extractedContent?: boolean
   failureReason?: boolean
+  expiresAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -869,6 +943,7 @@ export type CompetitorScanSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   userId?: boolean
   projectId?: boolean
   sourceUrl?: boolean
+  normalizedUrl?: boolean
   scanType?: boolean
   status?: boolean
   screenshotKey?: boolean
@@ -876,6 +951,7 @@ export type CompetitorScanSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   designTokens?: boolean
   extractedContent?: boolean
   failureReason?: boolean
+  expiresAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -887,6 +963,7 @@ export type CompetitorScanSelectScalar = {
   userId?: boolean
   projectId?: boolean
   sourceUrl?: boolean
+  normalizedUrl?: boolean
   scanType?: boolean
   status?: boolean
   screenshotKey?: boolean
@@ -894,11 +971,12 @@ export type CompetitorScanSelectScalar = {
   designTokens?: boolean
   extractedContent?: boolean
   failureReason?: boolean
+  expiresAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CompetitorScanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "projectId" | "sourceUrl" | "scanType" | "status" | "screenshotKey" | "rawHtmlKey" | "designTokens" | "extractedContent" | "failureReason" | "createdAt" | "updatedAt", ExtArgs["result"]["competitorScan"]>
+export type CompetitorScanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "projectId" | "sourceUrl" | "normalizedUrl" | "scanType" | "status" | "screenshotKey" | "rawHtmlKey" | "designTokens" | "extractedContent" | "failureReason" | "expiresAt" | "createdAt" | "updatedAt", ExtArgs["result"]["competitorScan"]>
 export type CompetitorScanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.CompetitorScan$projectArgs<ExtArgs>
@@ -923,6 +1001,7 @@ export type $CompetitorScanPayload<ExtArgs extends runtime.Types.Extensions.Inte
     userId: string
     projectId: string | null
     sourceUrl: string
+    normalizedUrl: string
     scanType: $Enums.ScanType
     status: $Enums.ScanStatus
     screenshotKey: string | null
@@ -930,6 +1009,7 @@ export type $CompetitorScanPayload<ExtArgs extends runtime.Types.Extensions.Inte
     designTokens: runtime.JsonValue | null
     extractedContent: runtime.JsonValue | null
     failureReason: string | null
+    expiresAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["competitorScan"]>
@@ -1361,6 +1441,7 @@ export interface CompetitorScanFieldRefs {
   readonly userId: Prisma.FieldRef<"CompetitorScan", 'String'>
   readonly projectId: Prisma.FieldRef<"CompetitorScan", 'String'>
   readonly sourceUrl: Prisma.FieldRef<"CompetitorScan", 'String'>
+  readonly normalizedUrl: Prisma.FieldRef<"CompetitorScan", 'String'>
   readonly scanType: Prisma.FieldRef<"CompetitorScan", 'ScanType'>
   readonly status: Prisma.FieldRef<"CompetitorScan", 'ScanStatus'>
   readonly screenshotKey: Prisma.FieldRef<"CompetitorScan", 'String'>
@@ -1368,6 +1449,7 @@ export interface CompetitorScanFieldRefs {
   readonly designTokens: Prisma.FieldRef<"CompetitorScan", 'Json'>
   readonly extractedContent: Prisma.FieldRef<"CompetitorScan", 'Json'>
   readonly failureReason: Prisma.FieldRef<"CompetitorScan", 'String'>
+  readonly expiresAt: Prisma.FieldRef<"CompetitorScan", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CompetitorScan", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CompetitorScan", 'DateTime'>
 }

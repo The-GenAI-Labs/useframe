@@ -300,6 +300,7 @@ export type PlanWhereInput = {
   features?: Prisma.JsonFilter<"Plan">
   isActive?: Prisma.BoolFilter<"Plan"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Plan"> | Date | string
+  orders?: Prisma.OrderListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
 }
 
@@ -318,6 +319,7 @@ export type PlanOrderByWithRelationInput = {
   features?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  orders?: Prisma.OrderOrderByRelationAggregateInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
 }
 
@@ -339,6 +341,7 @@ export type PlanWhereUniqueInput = Prisma.AtLeast<{
   features?: Prisma.JsonFilter<"Plan">
   isActive?: Prisma.BoolFilter<"Plan"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Plan"> | Date | string
+  orders?: Prisma.OrderListRelationFilter
   subscriptions?: Prisma.SubscriptionListRelationFilter
 }, "id" | "slug">
 
@@ -399,6 +402,7 @@ export type PlanCreateInput = {
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
+  orders?: Prisma.OrderCreateNestedManyWithoutPlanInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutPlanInput
 }
 
@@ -417,6 +421,7 @@ export type PlanUncheckedCreateInput = {
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutPlanInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutPlanInput
 }
 
@@ -435,6 +440,7 @@ export type PlanUpdateInput = {
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUpdateManyWithoutPlanNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput
 }
 
@@ -453,6 +459,7 @@ export type PlanUncheckedUpdateInput = {
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutPlanNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutPlanNestedInput
 }
 
@@ -577,6 +584,28 @@ export type PlanScalarRelationFilter = {
   isNot?: Prisma.PlanWhereInput
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type PlanCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.PlanCreateWithoutOrdersInput, Prisma.PlanUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.PlanCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.PlanWhereUniqueInput
+}
+
+export type PlanUpdateOneRequiredWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.PlanCreateWithoutOrdersInput, Prisma.PlanUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.PlanCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.PlanUpsertWithoutOrdersInput
+  connect?: Prisma.PlanWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PlanUpdateToOneWithWhereWithoutOrdersInput, Prisma.PlanUpdateWithoutOrdersInput>, Prisma.PlanUncheckedUpdateWithoutOrdersInput>
+}
+
 export type PlanCreateNestedOneWithoutSubscriptionsInput = {
   create?: Prisma.XOR<Prisma.PlanCreateWithoutSubscriptionsInput, Prisma.PlanUncheckedCreateWithoutSubscriptionsInput>
   connectOrCreate?: Prisma.PlanCreateOrConnectWithoutSubscriptionsInput
@@ -589,6 +618,94 @@ export type PlanUpdateOneRequiredWithoutSubscriptionsNestedInput = {
   upsert?: Prisma.PlanUpsertWithoutSubscriptionsInput
   connect?: Prisma.PlanWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.PlanUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.PlanUpdateWithoutSubscriptionsInput>, Prisma.PlanUncheckedUpdateWithoutSubscriptionsInput>
+}
+
+export type PlanCreateWithoutOrdersInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  rank: number
+  priceMonthly?: number
+  priceYearly?: number
+  currency?: string
+  creditAllowance?: number
+  monthlyGenerationQuota?: number | null
+  requiresPhoneVerification?: boolean
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  createdAt?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutPlanInput
+}
+
+export type PlanUncheckedCreateWithoutOrdersInput = {
+  id?: string
+  name: string
+  slug: string
+  description?: string | null
+  rank: number
+  priceMonthly?: number
+  priceYearly?: number
+  currency?: string
+  creditAllowance?: number
+  monthlyGenerationQuota?: number | null
+  requiresPhoneVerification?: boolean
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: boolean
+  createdAt?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutPlanInput
+}
+
+export type PlanCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.PlanWhereUniqueInput
+  create: Prisma.XOR<Prisma.PlanCreateWithoutOrdersInput, Prisma.PlanUncheckedCreateWithoutOrdersInput>
+}
+
+export type PlanUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.PlanUpdateWithoutOrdersInput, Prisma.PlanUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.PlanCreateWithoutOrdersInput, Prisma.PlanUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.PlanWhereInput
+}
+
+export type PlanUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.PlanWhereInput
+  data: Prisma.XOR<Prisma.PlanUpdateWithoutOrdersInput, Prisma.PlanUncheckedUpdateWithoutOrdersInput>
+}
+
+export type PlanUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  priceMonthly?: Prisma.IntFieldUpdateOperationsInput | number
+  priceYearly?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  creditAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  monthlyGenerationQuota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresPhoneVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput
+}
+
+export type PlanUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rank?: Prisma.IntFieldUpdateOperationsInput | number
+  priceMonthly?: Prisma.IntFieldUpdateOperationsInput | number
+  priceYearly?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  creditAllowance?: Prisma.IntFieldUpdateOperationsInput | number
+  monthlyGenerationQuota?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresPhoneVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutPlanNestedInput
 }
 
 export type PlanCreateWithoutSubscriptionsInput = {
@@ -606,6 +723,7 @@ export type PlanCreateWithoutSubscriptionsInput = {
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
+  orders?: Prisma.OrderCreateNestedManyWithoutPlanInput
 }
 
 export type PlanUncheckedCreateWithoutSubscriptionsInput = {
@@ -623,6 +741,7 @@ export type PlanUncheckedCreateWithoutSubscriptionsInput = {
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: boolean
   createdAt?: Date | string
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutPlanInput
 }
 
 export type PlanCreateOrConnectWithoutSubscriptionsInput = {
@@ -656,6 +775,7 @@ export type PlanUpdateWithoutSubscriptionsInput = {
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUpdateManyWithoutPlanNestedInput
 }
 
 export type PlanUncheckedUpdateWithoutSubscriptionsInput = {
@@ -673,6 +793,7 @@ export type PlanUncheckedUpdateWithoutSubscriptionsInput = {
   features?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutPlanNestedInput
 }
 
 
@@ -681,10 +802,12 @@ export type PlanUncheckedUpdateWithoutSubscriptionsInput = {
  */
 
 export type PlanCountOutputType = {
+  orders: number
   subscriptions: number
 }
 
 export type PlanCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  orders?: boolean | PlanCountOutputTypeCountOrdersArgs
   subscriptions?: boolean | PlanCountOutputTypeCountSubscriptionsArgs
 }
 
@@ -696,6 +819,13 @@ export type PlanCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the PlanCountOutputType
    */
   select?: Prisma.PlanCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PlanCountOutputType without action
+ */
+export type PlanCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderWhereInput
 }
 
 /**
@@ -721,6 +851,7 @@ export type PlanSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   features?: boolean
   isActive?: boolean
   createdAt?: boolean
+  orders?: boolean | Prisma.Plan$ordersArgs<ExtArgs>
   subscriptions?: boolean | Prisma.Plan$subscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.PlanCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["plan"]>
@@ -778,6 +909,7 @@ export type PlanSelectScalar = {
 
 export type PlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "rank" | "priceMonthly" | "priceYearly" | "currency" | "creditAllowance" | "monthlyGenerationQuota" | "requiresPhoneVerification" | "features" | "isActive" | "createdAt", ExtArgs["result"]["plan"]>
 export type PlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  orders?: boolean | Prisma.Plan$ordersArgs<ExtArgs>
   subscriptions?: boolean | Prisma.Plan$subscriptionsArgs<ExtArgs>
   _count?: boolean | Prisma.PlanCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -787,6 +919,7 @@ export type PlanIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $PlanPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Plan"
   objects: {
+    orders: Prisma.$OrderPayload<ExtArgs>[]
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1198,6 +1331,7 @@ readonly fields: PlanFieldRefs;
  */
 export interface Prisma__PlanClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  orders<T extends Prisma.Plan$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Plan$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscriptions<T extends Prisma.Plan$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Plan$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1632,6 +1766,30 @@ export type PlanDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Plans to delete.
    */
   limit?: number
+}
+
+/**
+ * Plan.orders
+ */
+export type Plan$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null
+  where?: Prisma.OrderWhereInput
+  orderBy?: Prisma.OrderOrderByWithRelationInput | Prisma.OrderOrderByWithRelationInput[]
+  cursor?: Prisma.OrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
 }
 
 /**

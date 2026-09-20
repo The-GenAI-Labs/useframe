@@ -2,24 +2,52 @@
 
 import { memo, useCallback, useRef, useState, useEffect } from "react";
 
-const CARDS = [
-    { id: "1", image: "/auth/login1.png", topic: "Fitness" },
-    { id: "2", image: "/auth/login2.png", topic: "Beauty" },
-    { id: "3", image: "/auth/login3.png", topic: "Sports" },
-    { id: "4", image: "/auth/login4.png", topic: "AI" },
-    { id: "5", image: "/auth/login5.png", topic: "Food" },
-    { id: "6", image: "/auth/login6.png", topic: "Tech" },
-    { id: "7", image: "/auth/login7.png", topic: "Tuition" },
-    { id: "8", image: "/auth/login8.png", topic: "School" },
-    { id: "9", image: "/auth/login9.png", topic: "Gadget" },
-    { id: "10", image: "/auth/login10.png", topic: "Other" },
-] as const;
+export type WelcomeTab = "RESEARCH" | "WEBSITE" | "SEO" | "DEPLOY";
+
+const CARDS_BY_TAB: Record<WelcomeTab, { id: string; image: string; topic: string }[]> = {
+    RESEARCH: [
+        { id: "r1", image: "/auth/login1.png", topic: "Fitness" },
+        { id: "r2", image: "/auth/login2.png", topic: "Beauty" },
+        { id: "r3", image: "/auth/login3.png", topic: "Sports" },
+        { id: "r4", image: "/auth/login4.png", topic: "AI" },
+        { id: "r5", image: "/auth/login5.png", topic: "Food" },
+        { id: "r6", image: "/auth/login6.png", topic: "Tech" },
+        { id: "r7", image: "/auth/login7.png", topic: "Tuition" },
+        { id: "r8", image: "/auth/login8.png", topic: "School" },
+        { id: "r9", image: "/auth/login9.png", topic: "Gadget" },
+        { id: "r10", image: "/auth/login10.png", topic: "Other" },
+    ],
+    WEBSITE: [
+        { id: "w1", image: "/auth/login2.png", topic: "Landing page" },
+        { id: "w2", image: "/auth/login4.png", topic: "SaaS site" },
+        { id: "w3", image: "/auth/login6.png", topic: "Portfolio" },
+        { id: "w4", image: "/auth/login8.png", topic: "Agency" },
+        { id: "w5", image: "/auth/login1.png", topic: "E-commerce" },
+        { id: "w6", image: "/auth/login3.png", topic: "Startup" },
+    ],
+    SEO: [
+        { id: "s1", image: "/auth/login5.png", topic: "Keyword audit" },
+        { id: "s2", image: "/auth/login7.png", topic: "Site speed" },
+        { id: "s3", image: "/auth/login9.png", topic: "Backlinks" },
+        { id: "s4", image: "/auth/login10.png", topic: "Meta tags" },
+        { id: "s5", image: "/auth/login2.png", topic: "Sitemap" },
+        { id: "s6", image: "/auth/login6.png", topic: "Competitors" },
+    ],
+    DEPLOY: [
+        { id: "d1", image: "/auth/login3.png", topic: "Vercel" },
+        { id: "d2", image: "/auth/login8.png", topic: "Custom domain" },
+        { id: "d3", image: "/auth/login1.png", topic: "SSL & DNS" },
+        { id: "d4", image: "/auth/login4.png", topic: "Rollback" },
+    ],
+};
+
+type WelcomeCard = { id: string; image: string; topic: string };
 
 const Card = memo(function Card({
     card,
     onClick,
 }: {
-    card: (typeof CARDS)[number];
+    card: WelcomeCard;
     onClick: (id: string) => void;
 }) {
     const [copied, setCopied] = useState(false);
@@ -99,14 +127,11 @@ const Card = memo(function Card({
     );
 });
 
-const LEFT_CARDS = CARDS.filter((_, i) => i % 2 === 0);
-const RIGHT_CARDS = CARDS.filter((_, i) => i % 2 === 1);
-
 function ScrollColumn({
     cards,
     onCardClick,
 }: {
-    cards: readonly (typeof CARDS)[number][];
+    cards: WelcomeCard[];
     onCardClick: (id: string) => void;
 }) {
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -181,14 +206,19 @@ function ScrollColumn({
 }
 
 interface WelcomeCardsProps {
+    tab: WelcomeTab;
     onCardClick: (id: string) => void;
 }
 
-export default memo(function WelcomeCards({ onCardClick }: WelcomeCardsProps) {
+export default memo(function WelcomeCards({ tab, onCardClick }: WelcomeCardsProps) {
+    const cards = CARDS_BY_TAB[tab];
+    const leftCards = cards.filter((_, i) => i % 2 === 0);
+    const rightCards = cards.filter((_, i) => i % 2 === 1);
+
     return (
         <div className="flex flex-row gap-3 w-full px-1 py-1">
-            <ScrollColumn cards={LEFT_CARDS} onCardClick={onCardClick} />
-            <ScrollColumn cards={RIGHT_CARDS} onCardClick={onCardClick} />
+            <ScrollColumn cards={leftCards} onCardClick={onCardClick} />
+            <ScrollColumn cards={rightCards} onCardClick={onCardClick} />
         </div>
     );
 });

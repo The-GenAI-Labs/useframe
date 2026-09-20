@@ -18,7 +18,20 @@ export default function BoardView() {
     const [zoom, setZoom] = useState(1);
     const [pan, setPan] = useState<Point>({ x: 0, y: 0 });
     const [showGrid, setShowGrid] = useState(true);
+    // Canvas follows the app's global dark mode (no separate manual toggle) —
+    // read the "dark" class ThemeInitializer/applyTheme() sets on <html>, and
+    // stay in sync via MutationObserver since it can change from Settings at
+    // any time while this page is mounted.
     const [darkCanvas, setDarkCanvas] = useState(false);
+    useEffect(() => {
+        const root = document.documentElement;
+        setDarkCanvas(root.classList.contains("dark"));
+        const observer = new MutationObserver(() => {
+            setDarkCanvas(root.classList.contains("dark"));
+        });
+        observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+        return () => observer.disconnect();
+    }, []);
 
     const [fill, setFill] = useState("#FFFFFF");
     const [stroke, setStroke] = useState("#1A1915");
@@ -285,7 +298,6 @@ export default function BoardView() {
             <BoardTopBar
                 zoom={zoom}
                 showGrid={showGrid}
-                darkCanvas={darkCanvas}
                 shapeCount={shapes.length}
                 selectedCount={selected.length}
                 canUndo={histIdx > 0}
@@ -293,7 +305,6 @@ export default function BoardView() {
                 activeTool={tool}
                 onZoom={setZoom}
                 onToggleGrid={() => setShowGrid(g => !g)}
-                onToggleDark={() => setDarkCanvas(d => !d)}
                 onUndo={undo}
                 onRedo={redo}
                 onClear={handleClear}

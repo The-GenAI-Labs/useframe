@@ -16,6 +16,7 @@
     "@useframe/db": "workspace:*",
     "@useframe/types": "workspace:*",
     "@useframe/validators": "workspace:*",
+    "arctic": "^3.7.0",
     "bcryptjs": "^2.4.3",
     "bullmq": "^5.28.0",
     "compression": "^1.7.5",

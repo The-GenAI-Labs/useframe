@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { projectsApi } from "@/lib/api/services/projects.service";
+import { chatApi } from "@/lib/api/services/chat.service";
 
 export type Role = "user" | "assistant";
 
@@ -7,6 +9,8 @@ export interface Message {
     role: Role;
     content: string;
     createdAt: Date;
+    producedVersion?: { id: string; versionNumber: number } | null;
+    isError?: boolean;
 }
 
 export type ModalStatus = "closed" | "open" | "minimized";
@@ -18,6 +22,10 @@ interface ChatModalState {
     activeChatId: string | null;
     isStreaming: boolean;
 
+    projectSlug: string | null;
+    versionId: string | null;
+    conversationId: string | null;
+
     open: () => void;
     close: () => void;
     minimize: () => void;
@@ -25,17 +33,11 @@ interface ChatModalState {
     sendMessage: (content: string) => void;
     setInputDraft: (v: string) => void;
     reset: () => void;
+    setProjectContext: (slug: string | null, versionId: string | null) => void;
 }
 
 let msgCounter = 0;
 const uid = () => `msg-${++msgCounter}-${Date.now()}`;
-
-const MOCK_REPLIES: string[] = [
-    "I can help with that! Let me think through the best approach for your workflow.",
-    "Great question. Here's what I'd suggest based on your workspace context.",
-    "Sure! I'll break this down into clear steps so it's easy to follow.",
-    "Absolutely — let me pull up the relevant context and walk you through it.",
-];
 
 export const useChatModalStore = create<ChatModalState>((set, get) => ({
     status: "closed",
@@ -44,6 +46,10 @@ export const useChatModalStore = create<ChatModalState>((set, get) => ({
     activeChatId: null,
     isStreaming: false,
 
+    projectSlug: null,
+    versionId: null,
+    conversationId: null,
+
     open: () => set({ status: "open" }),
     close: () => set({ status: "closed" }),
     minimize: () => set({ status: "minimized" }),
@@ -51,7 +57,12 @@ export const useChatModalStore = create<ChatModalState>((set, get) => ({
 
     setInputDraft: (v) => set({ inputDraft: v }),
 
+    setProjectContext: (slug, versionId) =>
+        set({ projectSlug: slug, versionId }),
+
     sendMessage: (content) => {
+        const { projectSlug, versionId } = get();
+
         const userMsg: Message = {
             id: uid(),
             role: "user",
@@ -59,44 +70,67 @@ export const useChatModalStore = create<ChatModalState>((set, get) => ({
             createdAt: new Date(),
         };
 
-        const chatId = get().activeChatId ?? `chat-${Date.now()}`;
         set((s) => ({
             messages: [...s.messages, userMsg],
-            activeChatId: chatId,
             inputDraft: "",
             isStreaming: true,
         }));
 
-        const reply = MOCK_REPLIES[Math.floor(Math.random() * MOCK_REPLIES.length)];
-        const assistantId = uid();
-        const assistantMsg: Message = {
-            id: assistantId,
-            role: "assistant",
-            content: "",
-            createdAt: new Date(),
+        const onSuccess = (result: {
+            message: { content: string };
+            conversationId: string;
+            newVersion?: { id: string; versionNumber: number } | null;
+        }) => {
+            const assistantMsg: Message = {
+                id: uid(),
+                role: "assistant",
+                content: result.message.content,
+                createdAt: new Date(),
+                producedVersion: result.newVersion ?? null,
+            };
+            set((s) => ({
+                messages: [...s.messages, assistantMsg],
+                conversationId: result.conversationId,
+                isStreaming: false,
+            }));
         };
 
-        set((s) => ({ messages: [...s.messages, assistantMsg] }));
-
-        let i = 0;
-        const interval = setInterval(() => {
-            i++;
-            const partial = reply.slice(0, i * 3);
+        const onError = (err: unknown) => {
+            const errorMsg: Message = {
+                id: uid(),
+                role: "assistant",
+                content:
+                    err instanceof Error
+                        ? err.message
+                        : "Something went wrong. Please try again.",
+                createdAt: new Date(),
+                isError: true,
+            };
             set((s) => ({
-                messages: s.messages.map((m) =>
-                    m.id === assistantId ? { ...m, content: partial } : m
-                ),
+                messages: [...s.messages, errorMsg],
+                isStreaming: false,
             }));
-            if (i * 3 >= reply.length) {
-                clearInterval(interval);
-                set((s) => ({
-                    isStreaming: false,
-                    messages: s.messages.map((m) =>
-                        m.id === assistantId ? { ...m, content: reply } : m
-                    ),
-                }));
-            }
-        }, 30);
+        };
+
+        if (projectSlug && versionId) {
+            projectsApi
+                .sendMessage(projectSlug, {
+                    conversationId: get().conversationId ?? undefined,
+                    content,
+                    versionId,
+                })
+                .then(onSuccess)
+                .catch(onError);
+            return;
+        }
+
+        chatApi
+            .sendMessage({
+                conversationId: get().conversationId ?? undefined,
+                content,
+            })
+            .then(onSuccess)
+            .catch(onError);
     },
 
     reset: () =>
@@ -106,5 +140,6 @@ export const useChatModalStore = create<ChatModalState>((set, get) => ({
             inputDraft: "",
             activeChatId: null,
             isStreaming: false,
+            conversationId: null,
         }),
 }));

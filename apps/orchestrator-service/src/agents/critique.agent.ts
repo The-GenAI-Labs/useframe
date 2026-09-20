@@ -2,10 +2,19 @@ import { generateText } from "ai"
 import type { LanguageModelV1 } from "ai"
 import type { SiteSpec } from "@repo/schemas"
 import type { GenerateRequest } from "@repo/schemas"
+import { makeCritiqueTools } from "./critique.tools.js"
 import {
   DEFAULT_CRITIQUE_PROMPT,
   type CritiquePromptVars,
 } from "@/prompts/critique.prompt.js"
+
+type CritiqueIssue = {
+  pageSlug: string
+  sectionIndex: number
+  issue: string
+  field: "headline" | "subheadline" | "body" | "cta.primary"
+  fix: string
+}
 
 export async function runCritiqueAgent(
   spec: Partial<SiteSpec>,
@@ -17,11 +26,12 @@ export async function runCritiqueAgent(
     siteType: spec.siteType,
     copyFramework: spec.copyFramework,
     pages: spec.pages?.map((p) => ({
-      type: p.type,
       slug: p.slug,
       sections: p.sections.map((s) => ({
+        index: s.index,
         type: s.type,
         headline: s.content?.headline,
+        body: s.content?.body,
       })),
     })),
     designSystem: spec.designSystem,
@@ -34,40 +44,46 @@ export async function runCritiqueAgent(
     targetAudience: request.targetAudience,
   })
 
-  const { text } = await generateText({ model, prompt, maxTokens: 800 })
+  const { text } = await generateText({
+    model,
+    tools: makeCritiqueTools(spec, spec.designBrief),
+    maxSteps: 8,
+    system: `You review a generated landing page for real issues.
+USE TOOLS for anything measurable — contrast, heading structure, copy length, brief compliance, CTAs.
+DO NOT estimate these yourself; call the relevant tool instead.
+Only use your own judgment for: does the copy tone match the brand tone, is the narrative coherent
+across sections, is any section redundant with another.
+After checking, respond ONLY with valid JSON: { "issues": [{ "pageSlug": "string", "sectionIndex": 0,
+"issue": "string", "field": "headline | subheadline | body | cta.primary",
+"fix": "string (the replacement value for that field)" }] }.
+Use an empty array if there are no real problems. Do not invent issues to seem thorough.`,
+    prompt,
+    experimental_telemetry: { isEnabled: true, functionId: "critique-agent" },
+  })
 
   try {
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) return spec
-    const { patches } = JSON.parse(jsonMatch[0])
-    if (!Array.isArray(patches) || patches.length === 0) return spec
+    const { issues } = JSON.parse(jsonMatch[0]) as { issues?: CritiqueIssue[] }
+    if (!Array.isArray(issues) || issues.length === 0) return spec
 
     const patchedPages = (spec.pages ?? []).map((page) => {
-      const relevantPatches = patches.filter(
-        (p: { pageSlug: string }) => p.pageSlug === page.slug,
-      )
-      if (relevantPatches.length === 0) return page
+      const relevant = issues.filter((i) => i.pageSlug === page.slug)
+      if (relevant.length === 0) return page
 
       const patchedSections = page.sections.map((section) => {
-        const sectionPatches = relevantPatches.filter(
-          (p: { sectionIndex: number }) => p.sectionIndex === section.index,
-        )
-        if (sectionPatches.length === 0) return section
+        const sectionIssues = relevant.filter((i) => i.sectionIndex === section.index)
+        if (sectionIssues.length === 0) return section
 
-        let patchedSection = { ...section, content: { ...section.content } }
-        for (const patch of sectionPatches as {
-          field: string
-          value: string
-        }[]) {
-          const parts = patch.field.split(".")
-          if (parts[0] === "content" && parts.length === 2 && parts[1]) {
-            patchedSection.content = {
-              ...patchedSection.content,
-              [parts[1]]: patch.value,
-            }
+        let content = { ...section.content }
+        for (const { field, fix } of sectionIssues) {
+          if (field === "cta.primary") {
+            content = { ...content, cta: { ...content.cta, primary: fix } }
+          } else {
+            content = { ...content, [field]: fix }
           }
         }
-        return patchedSection
+        return { ...section, content }
       })
 
       return { ...page, sections: patchedSections }

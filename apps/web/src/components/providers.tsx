@@ -1,10 +1,8 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SessionProvider as NextAuthSessionProvider } from "next-auth/react";
+import { AuthProvider } from "@/lib/authContext";
 import { useRef } from "react";
-
-const SessionProvider = NextAuthSessionProvider as React.ComponentType<{ children: React.ReactNode }>;
 
 export function Providers({ children }: { children: React.ReactNode }) {
     const clientRef = useRef<QueryClient | null>(null);
@@ -23,10 +21,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <SessionProvider>
+        <AuthProvider>
             <QueryClientProvider client={clientRef.current}>
                 {children}
             </QueryClientProvider>
-        </SessionProvider>
+        </AuthProvider>
     );
 }

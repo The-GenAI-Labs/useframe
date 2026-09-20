@@ -5,6 +5,7 @@ import type { ScanJobPayload } from "@repo/events"
 import { redis } from "@/lib/redis.js"
 import { uniqueSlug } from "@/lib/slug.js"
 import { AppError } from "@/middleware/errorHandler.js"
+import { GenerateService } from "@/modules/generate/generate.service.js"
 import type { CreateProjectInput, UpdateProjectInput } from "./projects.schema.js"
 
 const scanQueue = new Queue(QUEUES.SCAN, { connection: redis })
@@ -12,20 +13,34 @@ const scanQueue = new Queue(QUEUES.SCAN, { connection: redis })
 export const ProjectsService = {
   async createProject(userId: string, input: CreateProjectInput) {
     const slug = uniqueSlug(input.name)
+    const extracted = input.extracted
 
     const project = await prisma.project.create({
       data: {
         userId,
         name: input.name,
         slug,
-        startupIdea: input.startupIdea,
-        niche: input.niche,
-        targetAudience: input.targetAudience,
+        startupIdea: input.ideaText ?? input.startupIdea,
+        niche: extracted?.niche ?? input.niche,
+        targetAudience: extracted?.targetAudience ?? input.targetAudience,
+        brandPersonality: extracted?.brandPersonality,
+        pricePositioning: extracted?.pricePositioning,
+        businessModel: extracted?.businessModel,
+        differentiator: extracted?.differentiator,
         inputType: input.inputType,
         sourceUrl: input.sourceUrl,
         status: "DRAFT",
       },
     })
+
+    // Tier determination happens as a side effect of project creation so the
+    // frontend gets it back in the same response and can immediately open
+    // the /plan SSE connection with the resolved tier — mirrors
+    // orchestrator.ts's ensureProject() pattern of doing side-effecting work
+    // inline with the primary create rather than requiring a second round
+    // trip. Reuses GenerateService.authorize() rather than duplicating its
+    // free-flag/credit-deduction logic.
+    const { tier } = await GenerateService.authorize(userId)
 
     const version = await prisma.projectVersion.create({
       data: {
@@ -39,6 +54,10 @@ export const ProjectsService = {
     await prisma.project.update({
       where: { id: project.id },
       data: { currentVersionId: version.id },
+    })
+
+    await prisma.pipelineState.create({
+      data: { projectId: project.id },
     })
 
     let scanQueued = false
@@ -90,6 +109,7 @@ export const ProjectsService = {
       },
       version: { id: version.id, versionNumber: version.versionNumber },
       scanQueued,
+      tier,
     }
   },
 
@@ -127,10 +147,10 @@ export const ProjectsService = {
       include: {
         versions: {
           orderBy: { versionNumber: "desc" },
-          take: 1,
           select: {
             id: true,
             versionNumber: true,
+            label: true,
             siteType: true,
             snapshot: true,
             createdAt: true,
@@ -240,5 +260,55 @@ export const ProjectsService = {
     })
     if (!version) throw new AppError("Version not found", 404)
     return version
+  },
+
+  async getVersionSnapshot(userId: string, slug: string, versionId: string) {
+    const project = await prisma.project.findFirst({
+      where: { slug, userId, deletedAt: null },
+      select: { id: true },
+    })
+    if (!project) throw new AppError("Project not found", 404)
+
+    const version = await prisma.projectVersion.findFirst({
+      where: { id: versionId, projectId: project.id },
+      select: { snapshot: true },
+    })
+    if (!version) throw new AppError("Version not found", 404)
+    return { snapshot: version.snapshot }
+  },
+
+  async restoreVersion(userId: string, slug: string, versionId: string) {
+    const project = await prisma.project.findFirst({
+      where: { slug, userId, deletedAt: null },
+      select: { id: true },
+    })
+    if (!project) throw new AppError("Project not found", 404)
+
+    const version = await prisma.projectVersion.findFirst({
+      where: { id: versionId, projectId: project.id },
+      select: { id: true },
+    })
+    if (!version) throw new AppError("Version not found", 404)
+
+    await prisma.project.update({
+      where: { id: project.id },
+      data: { currentVersionId: version.id },
+    })
+
+    return { currentVersionId: version.id }
+  },
+
+  async getResearchReport(userId: string, slug: string) {
+    const project = await prisma.project.findFirst({
+      where: { slug, userId, deletedAt: null },
+      select: { id: true },
+    })
+    if (!project) throw new AppError("Project not found", 404)
+
+    const report = await prisma.researchReport.findUnique({
+      where: { projectId: project.id },
+    })
+
+    return { report: report ?? null }
   },
 }

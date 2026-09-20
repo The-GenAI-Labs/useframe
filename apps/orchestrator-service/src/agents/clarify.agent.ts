@@ -12,7 +12,12 @@ export async function runClarifyAgent(
     answers: request.answers,
   })
 
-  const { text } = await generateText({ model, prompt, maxTokens: 500 })
+  const { text } = await generateText({
+    model,
+    prompt,
+    maxTokens: 500,
+    experimental_telemetry: { isEnabled: true, functionId: "clarify-agent" },
+  })
 
   try {
     const jsonMatch = text.match(/\{[\s\S]*\}/)
@@ -25,6 +30,10 @@ export async function runClarifyAgent(
       niche: parsed.niche,
       targetAudience: parsed.targetAudience,
       name: parsed.name,
+      brandPersonality: parsed.brandPersonality,
+      pricePositioning: parsed.pricePositioning,
+      businessModel: parsed.businessModel,
+      differentiator: parsed.differentiator,
     }
   } catch {
     return {

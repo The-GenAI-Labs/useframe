@@ -1,60 +1,90 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
+import { scoreApi, type ScoreReport, type ScoreCriterionResult } from "@/lib/api/services/score.service";
+import { RingScore, gradeLabel } from "@/components/shared/RingScore";
+import { ModeToggle, type ScoreMode } from "@/components/web-score/ModeToggle";
+import { AnalyzeShell } from "@/components/web-score/AnalyzeShell";
+import SeoAuditView from "@/components/web-score/SeoAuditView";
 
-interface ScoreCategory {
-    key: string;
-    label: string;
-    description: string;
-    score: number;
-    max: number;
-    insight: string;
-    icon: React.ReactNode;
-}
+type CriterionKey = keyof Omit<ScoreReport, "overallScore">;
 
-interface ScanState {
-    status: "idle" | "scanning" | "done";
-    url: string;
-    overall: number;
-    categories: ScoreCategory[];
-    scannedAt: Date | null;
-}
+const CRITERIA_META: Record<CriterionKey, { label: string; description: string; icon: React.ReactNode }> = {
+    visualHierarchy: {
+        label: "Visual Hierarchy",
+        description: "Primary CTA dominance, heading hierarchy, reading flow, whitespace",
+        icon: (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M3 9h18M9 21V9" />
+            </svg>
+        ),
+    },
+    typographyReadability: {
+        label: "Typography & Readability",
+        description: "Font size, line length, line height, font-family count",
+        icon: (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <polyline points="4 7 4 4 20 4 20 7" />
+                <line x1="9" y1="20" x2="15" y2="20" />
+                <line x1="12" y1="4" x2="12" y2="20" />
+            </svg>
+        ),
+    },
+    colorContrastA11y: {
+        label: "Color, Contrast & A11y",
+        description: "WCAG contrast ratios, palette size, niche-appropriate color",
+        icon: (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a10 10 0 0 1 0 20" />
+                <path d="M2 12h20" />
+            </svg>
+        ),
+    },
+    copyPersuasion: {
+        label: "Copy & Persuasion",
+        description: "Value proposition clarity, CTA text, social proof, objection handling",
+        icon: (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+        ),
+    },
+    seoTechnical: {
+        label: "SEO & Technical",
+        description: "Title/meta tags, heading structure, Open Graph tags",
+        icon: (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" />
+                <line x1="12" y1="18" x2="12.01" y2="18" />
+            </svg>
+        ),
+    },
+};
 
-function RingScore({ score, size = 96 }: { score: number; size?: number }) {
-    const radius = (size - 12) / 2;
-    const circumference = 2 * Math.PI * radius;
-    const filled = (score / 100) * circumference;
-    const color =
-        score >= 80 ? "#3b82f6" : score >= 55 ? "#f59e0b" : "#ef4444";
+const CRITERION_KEYS: CriterionKey[] = [
+    "visualHierarchy",
+    "typographyReadability",
+    "colorContrastA11y",
+    "copyPersuasion",
+    "seoTechnical",
+];
 
-    return (
-        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transform: "rotate(-90deg)" }}>
-            <circle
-                cx={size / 2}
-                cy={size / 2}
-                r={radius}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="6"
-                style={{ stroke: "var(--border)" }}
-            />
-            <circle
-                cx={size / 2}
-                cy={size / 2}
-                r={radius}
-                fill="none"
-                stroke={color}
-                strokeWidth="6"
-                strokeDasharray={`${filled} ${circumference}`}
-                strokeLinecap="round"
-                style={{ transition: "stroke-dasharray 1s cubic-bezier(.4,0,.2,1)" }}
-            />
-        </svg>
-    );
-}
+type ViewState =
+    | { status: "idle" }
+    | { status: "polling"; scoreId: string; url: string; phase: "PENDING" | "SCANNING" | "ANALYZING" }
+    | { status: "done"; url: string; report: ScoreReport; screenshotBase64: string | null }
+    | { status: "failed"; url: string; reason: string };
 
-function ScoreBar({ value, max }: { value: number; max: number }) {
-    const pct = Math.round((value / max) * 100);
+const PHASE_TEXT: Record<string, string> = {
+    PENDING: "Queuing scan…",
+    SCANNING: "Rendering the page and capturing a screenshot…",
+    ANALYZING: "Analyzing with AI across 5 criteria…",
+};
+
+function ScoreBar({ value }: { value: number }) {
+    const pct = Math.max(0, Math.min(100, Math.round(value)));
     const color =
         pct >= 80 ? "bg-blue-500" : pct >= 55 ? "bg-amber-400" : "bg-red-400";
     return (
@@ -67,224 +97,179 @@ function ScoreBar({ value, max }: { value: number; max: number }) {
     );
 }
 
-function gradeLabel(score: number) {
-    if (score >= 90) return { grade: "A", color: "text-blue-600", bg: "bg-blue-50" };
-    if (score >= 75) return { grade: "B", color: "text-blue-500", bg: "bg-blue-50" };
-    if (score >= 60) return { grade: "C", color: "text-amber-600", bg: "bg-amber-50" };
-    if (score >= 45) return { grade: "D", color: "text-orange-600", bg: "bg-orange-50" };
-    return { grade: "F", color: "text-red-600", bg: "bg-red-50" };
-}
+function CriterionCard({ criterionKey, result }: { criterionKey: CriterionKey; result: ScoreCriterionResult }) {
+    const [expanded, setExpanded] = useState(false);
+    const meta = CRITERIA_META[criterionKey];
+    const { grade, color, bg } = gradeLabel(result.score);
 
-function scoreFromUrl(url: string): ScanState["categories"] {
-    const seed = url.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
-    const rnd = (min: number, max: number, offset: number) => {
-        const v = ((seed * (offset + 1) * 2654435761) >>> 0) % (max - min + 1);
-        return min + v;
-    };
+    return (
+        <div className="flex flex-col gap-3 p-4 rounded-2xl border border-base bg-surface hover:border-em hover:shadow-sm transition-all">
+            <div className="flex items-start justify-between gap-2">
+                <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-tertiary flex items-center justify-center text-mut shrink-0">
+                        {meta.icon}
+                    </div>
+                    <div>
+                        <p className="text-[13px] font-semibold text-sec leading-tight">{meta.label}</p>
+                        <p className="text-[11px] text-mut leading-tight mt-0.5">{meta.description}</p>
+                    </div>
+                </div>
+                <div className={`flex items-center justify-center w-8 h-8 rounded-xl text-sm font-bold shrink-0 ${bg} ${color}`}>
+                    {grade}
+                </div>
+            </div>
 
-    return [
-        {
-            key: "visual",
-            label: "Visual Hierarchy",
-            description: "Contrast ratios, type scale, whitespace, focal points",
-            score: rnd(55, 98, 1),
-            max: 100,
-            insight: "Strong typographic scale detected. Ensure H1 contrast ≥ 4.5:1 on all backgrounds.",
-            icon: (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <path d="M3 9h18M9 21V9" />
-                </svg>
-            ),
-        },
-        {
-            key: "layout",
-            label: "Layout & Grid",
-            description: "Alignment, spacing consistency, grid adherence",
-            score: rnd(50, 95, 2),
-            max: 100,
-            insight: "Consistent 8pt grid detected. Check right-column alignment on mobile breakpoint.",
-            icon: (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                    <rect x="3" y="3" width="7" height="7" rx="1" />
-                    <rect x="14" y="3" width="7" height="7" rx="1" />
-                    <rect x="3" y="14" width="7" height="7" rx="1" />
-                    <rect x="14" y="14" width="7" height="7" rx="1" />
-                </svg>
-            ),
-        },
-        {
-            key: "typography",
-            label: "Typography",
-            description: "Line height, font pairing, readability, text density",
-            score: rnd(48, 96, 3),
-            max: 100,
-            insight: "Line height is optimal (1.5–1.7). Consider reducing font families to ≤ 2 for cohesion.",
-            icon: (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                    <polyline points="4 7 4 4 20 4 20 7" />
-                    <line x1="9" y1="20" x2="15" y2="20" />
-                    <line x1="12" y1="4" x2="12" y2="20" />
-                </svg>
-            ),
-        },
-        {
-            key: "color",
-            label: "Color System",
-            description: "Palette harmony, accessible contrast, brand consistency",
-            score: rnd(52, 97, 4),
-            max: 100,
-            insight: "Primary palette is harmonious. Secondary accent overused — reserve for CTAs only.",
-            icon: (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+            <div className="flex flex-col gap-1.5">
+                <div className="flex items-center justify-between">
+                    <span className="text-[11px] text-mut">Score</span>
+                    <span className="text-[12px] font-semibold text-sec">{result.score}/100</span>
+                </div>
+                <ScoreBar value={result.score} />
+            </div>
+
+            <div className="flex items-start gap-2 px-3 py-2.5 rounded-xl bg-tertiary border border-base">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-blue-400 shrink-0 mt-0.5">
                     <circle cx="12" cy="12" r="10" />
-                    <path d="M12 2a10 10 0 0 1 0 20" />
-                    <path d="M2 12h20" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
                 </svg>
-            ),
-        },
-        {
-            key: "ux",
-            label: "UX Patterns",
-            description: "CTA placement, navigation clarity, interaction feedback",
-            score: rnd(45, 94, 5),
-            max: 100,
-            insight: "Primary CTA position is above the fold. Add loading states to async interactions.",
-            icon: (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-            ),
-        },
-        {
-            key: "responsive",
-            label: "Responsiveness",
-            description: "Mobile breakpoints, touch targets, viewport adaptation",
-            score: rnd(50, 96, 6),
-            max: 100,
-            insight: "Desktop breakpoints look solid. Touch targets on mobile nav should be ≥ 44px.",
-            icon: (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                    <rect x="5" y="2" width="14" height="20" rx="2" />
-                    <line x1="12" y1="18" x2="12.01" y2="18" />
-                </svg>
-            ),
-        },
-    ];
+                <div className="flex flex-col gap-1">
+                    <p className="text-[11.5px] text-sec leading-relaxed">{result.explanation}</p>
+                    <p className="text-[10.5px] text-mut italic">{result.citation}</p>
+                </div>
+            </div>
+
+            {result.issues.length > 0 && (
+                <div>
+                    <button
+                        type="button"
+                        onClick={() => setExpanded((v) => !v)}
+                        className="text-[11px] font-medium text-mut hover:text-sec transition-colors cursor-pointer"
+                    >
+                        {expanded ? "Hide" : "Show"} {result.issues.length} issue{result.issues.length > 1 ? "s" : ""}
+                    </button>
+                    {expanded && (
+                        <ul className="mt-1.5 flex flex-col gap-1">
+                            {result.issues.map((issue, i) => (
+                                <li key={i} className="text-[11px] text-mut leading-relaxed pl-3 relative before:content-['•'] before:absolute before:left-0">
+                                    {issue}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            )}
+        </div>
+    );
 }
 
-const SCAN_STEPS = [
-    "Fetching page structure…",
-    "Analyzing visual hierarchy…",
-    "Checking layout grid…",
-    "Evaluating typography…",
-    "Auditing color system…",
-    "Testing UX patterns…",
-    "Running responsiveness check…",
-    "Compiling score…",
-];
+export default function WebScoreView({ initialUrl = "" }: { initialUrl?: string }) {
+    const [mode, setMode] = useState<ScoreMode>("score");
+    const [urlInput, setUrlInput] = useState(initialUrl);
+    const [state, setState] = useState<ViewState>({ status: "idle" });
+    const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-export default function WebScoreView() {
-    const [urlInput, setUrlInput] = useState("");
-    const [state, setState] = useState<ScanState>({
-        status: "idle",
-        url: "",
-        overall: 0,
-        categories: [],
-        scannedAt: null,
-    });
-    const [scanStep, setScanStep] = useState(0);
+    useEffect(() => {
+        return () => {
+            if (pollRef.current) clearInterval(pollRef.current);
+        };
+    }, []);
 
     const handleScan = useCallback(() => {
         const raw = urlInput.trim();
         if (!raw) return;
         const url = raw.startsWith("http") ? raw : `https://${raw}`;
 
-        setState({ status: "scanning", url, overall: 0, categories: [], scannedAt: null });
-        setScanStep(0);
+        scoreApi
+            .create(url)
+            .then(({ scoreId }) => {
+                setState({ status: "polling", scoreId, url, phase: "PENDING" });
 
-        let step = 0;
-        const stepInterval = setInterval(() => {
-            step++;
-            setScanStep(step);
-            if (step >= SCAN_STEPS.length - 1) clearInterval(stepInterval);
-        }, 420);
-
-        setTimeout(() => {
-            clearInterval(stepInterval);
-            const cats = scoreFromUrl(url);
-            const overall = Math.round(cats.reduce((s, c) => s + (c.score / c.max) * 100, 0) / cats.length);
-            setState({ status: "done", url, overall, categories: cats, scannedAt: new Date() });
-        }, SCAN_STEPS.length * 420 + 200);
+                pollRef.current = setInterval(() => {
+                    scoreApi
+                        .get(scoreId)
+                        .then((result) => {
+                            if (result.status === "DONE" && result.report) {
+                                if (pollRef.current) clearInterval(pollRef.current);
+                                scoreApi
+                                    .getScreenshot(scoreId)
+                                    .then(({ screenshotBase64 }) => {
+                                        setState({ status: "done", url, report: result.report!, screenshotBase64 });
+                                    })
+                                    .catch(() => {
+                                        setState({ status: "done", url, report: result.report!, screenshotBase64: null });
+                                    });
+                            } else if (result.status === "FAILED") {
+                                if (pollRef.current) clearInterval(pollRef.current);
+                                setState({ status: "failed", url, reason: result.failureReason ?? "Something went wrong." });
+                            } else {
+                                setState((s) =>
+                                    s.status === "polling"
+                                        ? { ...s, phase: result.status as "PENDING" | "SCANNING" | "ANALYZING" }
+                                        : s
+                                );
+                            }
+                        })
+                        .catch(() => {
+                            if (pollRef.current) clearInterval(pollRef.current);
+                            setState({ status: "failed", url, reason: "Lost connection while checking status." });
+                        });
+                }, 2000);
+            })
+            .catch((err) => {
+                setState({
+                    status: "failed",
+                    url,
+                    reason: err instanceof Error ? err.message : "Failed to start the scan.",
+                });
+            });
     }, [urlInput]);
 
     const handleReset = useCallback(() => {
-        setState({ status: "idle", url: "", overall: 0, categories: [], scannedAt: null });
+        if (pollRef.current) clearInterval(pollRef.current);
+        setState({ status: "idle" });
         setUrlInput("");
-        setScanStep(0);
     }, []);
 
-    const { grade, color: gradeColor, bg: gradeBg } = gradeLabel(state.overall);
+    const isBusy = state.status === "polling";
+    const overallScore = state.status === "done" ? state.report.overallScore : 0;
+    const { grade, color: gradeColor, bg: gradeBg } = gradeLabel(overallScore);
+
+    if (mode === "seo") {
+        return <SeoAuditView initialUrl={initialUrl} modeToggle={<ModeToggle mode={mode} onChange={setMode} />} />;
+    }
 
     return (
-        <div className="flex flex-col h-full w-full overflow-y-auto" style={{ scrollbarWidth: "none" }}>
-            <div className="px-6 md:px-10 pt-8 pb-4 shrink-0">
-                <div className="flex flex-col gap-1 mb-6">
-                    <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-xl bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-sm shrink-0">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                            </svg>
-                        </div>
-                        <h1 className="text-2xl font-bold text-pri tracking-tight">Web Score</h1>
-                    </div>
-                    <p className="text-sm text-mut ml-0.5">
-                        Science-based design audit — get a score across 6 UX dimensions.
-                    </p>
-                </div>
-
-                <div className="flex gap-2 max-w-2xl">
-                    <div className="flex-1 flex items-center gap-2.5 px-4 py-3 rounded-2xl border border-base bg-surface shadow-sm focus-within:border-blue-300 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-mut shrink-0">
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="2" y1="12" x2="22" y2="12" />
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                        </svg>
-                        <input
-                            type="text"
-                            value={urlInput}
-                            onChange={(e) => setUrlInput(e.target.value)}
-                            onKeyDown={(e) => e.key === "Enter" && state.status !== "scanning" && handleScan()}
-                            placeholder="yoursite.com or paste full URL"
-                            className="flex-1 bg-transparent text-[13.5px] text-sec placeholder:text-mut outline-none"
-                            disabled={state.status === "scanning"}
-                        />
-                        {state.status === "done" && (
-                            <button
-                                type="button"
-                                onClick={handleReset}
-                                className="text-mut hover:text-sec transition-colors cursor-pointer shrink-0"
-                                aria-label="Clear"
-                            >
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-                                    <line x1="18" y1="6" x2="6" y2="18" />
-                                    <line x1="6" y1="6" x2="18" y2="18" />
-                                </svg>
-                            </button>
-                        )}
-                    </div>
-                    <button
-                        type="button"
-                        onClick={handleScan}
-                        disabled={!urlInput.trim() || state.status === "scanning"}
-                        className="px-5 py-3 rounded-2xl text-[13px] font-semibold disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer shrink-0 shadow-sm" style={{ backgroundColor: "var(--text-primary)", color: "var(--bg-primary)" }}
-                    >
-                        {state.status === "scanning" ? "Scanning…" : "Analyze"}
-                    </button>
-                </div>
-            </div>
-
-            {state.status === "scanning" && (
+        <AnalyzeShell
+            showHero={state.status === "idle"}
+            modeToggle={<ModeToggle mode={mode} onChange={setMode} />}
+            headline={
+                <>
+                    Full AI Analysis Of Your
+                    <br />
+                    <span className="text-blue-500"> Website&apos;s Design</span>
+                </>
+            }
+            subtext={
+                <>
+                    Score visual hierarchy, color, typography, copy, and content
+                    <br />
+                    with actionable insights across the whole page.
+                </>
+            }
+            urlInput={urlInput}
+            onUrlChange={setUrlInput}
+            onSubmit={handleScan}
+            onClear={handleReset}
+            isBusy={isBusy}
+            isDone={state.status === "done" || state.status === "failed"}
+            submitLabel="Analyze"
+            submitBusyLabel="Scanning…"
+            placeholder="yourwebsite.com or paste full URL"
+            accentGradient="bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+            accentRing="focus-within:border-blue-300 focus-within:ring-blue-100"
+        >
+            {state.status === "polling" && (
                 <div className="flex flex-col items-center justify-center flex-1 gap-6 px-6 py-12">
                     <div className="relative w-20 h-20">
                         <div className="absolute inset-0 rounded-full border-4 border-base" />
@@ -296,16 +281,33 @@ export default function WebScoreView() {
                         </div>
                     </div>
                     <div className="flex flex-col items-center gap-1.5">
-                        <p className="text-sm font-semibold text-sec">{SCAN_STEPS[Math.min(scanStep, SCAN_STEPS.length - 1)]}</p>
+                        <p className="text-sm font-semibold text-sec">{PHASE_TEXT[state.phase]}</p>
                         <p className="text-xs text-mut">{state.url}</p>
                     </div>
-                    <div className="flex gap-1">
-                        {SCAN_STEPS.map((_, i) => (
-                            <div
-                                key={i}
-                                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i <= scanStep ? "bg-blue-500" : "bg-tertiary"}`}
-                            />
-                        ))}
+                </div>
+            )}
+
+            {state.status === "failed" && (
+                <div className="flex-1 flex items-center justify-center px-6 pb-10">
+                    <div className="flex flex-col items-center gap-4 text-center max-w-sm">
+                        <div className="w-16 h-16 rounded-3xl bg-red-50 border border-red-200 flex items-center justify-center dark:bg-red-950/30 dark:border-red-900">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" className="text-red-500">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="8" x2="12" y2="12" />
+                                <line x1="12" y1="16" x2="12.01" y2="16" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p className="text-sm font-semibold text-pri">Couldn&apos;t analyze that page</p>
+                            <p className="text-xs text-mut mt-1 leading-relaxed">{state.reason}</p>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={handleReset}
+                            className="px-4 py-2 rounded-xl border border-base text-[12.5px] font-medium text-sec hover:border-em hover:bg-tertiary transition-all cursor-pointer"
+                        >
+                            Try again
+                        </button>
                     </div>
                 </div>
             )}
@@ -314,9 +316,9 @@ export default function WebScoreView() {
                 <div className="px-6 md:px-10 pb-10 flex flex-col gap-6">
                     <div className="flex flex-col md:flex-row gap-5 items-start md:items-center p-6 rounded-3xl border border-base bg-surface shadow-sm max-w-2xl">
                         <div className="relative shrink-0">
-                            <RingScore score={state.overall} size={96} />
+                            <RingScore score={overallScore} size={96} />
                             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                <span className="text-[22px] font-bold text-pri leading-none">{state.overall}</span>
+                                <span className="text-[22px] font-bold text-pri leading-none">{overallScore}</span>
                                 <span className="text-[10px] text-mut font-medium">/100</span>
                             </div>
                         </div>
@@ -325,59 +327,26 @@ export default function WebScoreView() {
                             <div className="flex items-center gap-2">
                                 <span className={`text-2xl font-bold ${gradeColor}`}>Grade {grade}</span>
                                 <span className={`text-xs font-semibold px-2.5 py-1 rounded-xl ${gradeBg} ${gradeColor}`}>
-                                    {state.overall >= 80 ? "Production ready" : state.overall >= 60 ? "Needs improvement" : "Critical issues"}
+                                    {overallScore >= 80 ? "Production ready" : overallScore >= 60 ? "Needs improvement" : "Critical issues"}
                                 </span>
                             </div>
                             <p className="text-sm text-sec leading-relaxed truncate">{state.url}</p>
-                            <p className="text-xs text-mut">
-                                Scanned at {state.scannedAt?.toLocaleTimeString()} · 6 dimensions analyzed
-                            </p>
+                            <p className="text-xs text-mut">5 research-backed criteria analyzed</p>
                         </div>
+
+                        {state.screenshotBase64 && (
+                            <img
+                                src={`data:image/png;base64,${state.screenshotBase64}`}
+                                alt="Page screenshot"
+                                className="w-24 h-auto rounded-xl border border-base object-cover self-stretch shrink-0"
+                            />
+                        )}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl">
-                        {state.categories.map((cat) => {
-                            const pct = Math.round((cat.score / cat.max) * 100);
-                            const { grade: g, color: gc, bg: gb } = gradeLabel(pct);
-                            return (
-                                <div
-                                    key={cat.key}
-                                    className="flex flex-col gap-3 p-4 rounded-2xl border border-base bg-surface hover:border-em hover:shadow-sm transition-all"
-                                >
-                                    <div className="flex items-start justify-between gap-2">
-                                        <div className="flex items-center gap-2.5">
-                                            <div className="w-8 h-8 rounded-xl bg-tertiary flex items-center justify-center text-mut shrink-0">
-                                                {cat.icon}
-                                            </div>
-                                            <div>
-                                                <p className="text-[13px] font-semibold text-sec leading-tight">{cat.label}</p>
-                                                <p className="text-[11px] text-mut leading-tight mt-0.5">{cat.description}</p>
-                                            </div>
-                                        </div>
-                                        <div className={`flex items-center justify-center w-8 h-8 rounded-xl text-sm font-bold shrink-0 ${gb} ${gc}`}>
-                                            {g}
-                                        </div>
-                                    </div>
-
-                                    <div className="flex flex-col gap-1.5">
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-[11px] text-mut">Score</span>
-                                            <span className="text-[12px] font-semibold text-sec">{pct}/100</span>
-                                        </div>
-                                        <ScoreBar value={cat.score} max={cat.max} />
-                                    </div>
-
-                                    <div className="flex items-start gap-2 px-3 py-2.5 rounded-xl bg-tertiary border border-base">
-                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="text-blue-400 shrink-0 mt-0.5">
-                                            <circle cx="12" cy="12" r="10" />
-                                            <line x1="12" y1="8" x2="12" y2="12" />
-                                            <line x1="12" y1="16" x2="12.01" y2="16" />
-                                        </svg>
-                                        <p className="text-[11.5px] text-sec leading-relaxed">{cat.insight}</p>
-                                    </div>
-                                </div>
-                            );
-                        })}
+                        {CRITERION_KEYS.map((key) => (
+                            <CriterionCard key={key} criterionKey={key} result={state.report[key]} />
+                        ))}
                     </div>
 
                     <div className="flex flex-wrap gap-2 max-w-2xl">
@@ -392,45 +361,9 @@ export default function WebScoreView() {
                             </svg>
                             Scan another URL
                         </button>
-                        <button
-                            type="button"
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-base text-[12.5px] font-medium text-sec hover:text-sec hover:border-em hover:bg-tertiary transition-all cursor-pointer"
-                        >
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                <polyline points="7 10 12 15 17 10" />
-                                <line x1="12" y1="15" x2="12" y2="3" />
-                            </svg>
-                            Export report
-                        </button>
                     </div>
                 </div>
             )}
-
-            {state.status === "idle" && (
-                <div className="flex-1 flex items-center justify-center px-6 pb-10">
-                    <div className="flex flex-col items-center gap-4 text-center max-w-xs">
-                        <div className="w-16 h-16 rounded-3xl bg-tertiary border border-base flex items-center justify-center">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" className="text-mut">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                            </svg>
-                        </div>
-                        <div>
-                            <p className="text-sm font-semibold text-mut">Paste any URL above</p>
-                            <p className="text-xs text-mut mt-1 leading-relaxed">
-                                We'll analyze visual hierarchy, layout, typography, color system, UX patterns, and responsiveness.
-                            </p>
-                        </div>
-                        <div className="flex flex-wrap gap-1.5 justify-center">
-                            {["Visual Hierarchy", "Typography", "Color System", "UX Patterns", "Layout", "Responsiveness"].map((t) => (
-                                <span key={t} className="px-2.5 py-1 rounded-lg bg-tertiary text-[11px] text-mut font-medium">
-                                    {t}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
+        </AnalyzeShell>
     );
 }

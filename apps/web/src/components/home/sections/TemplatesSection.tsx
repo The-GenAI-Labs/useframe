@@ -12,14 +12,6 @@ export const TemplatesSection = memo(function TemplatesSection() {
   const reduced = useReducedMotion() ?? false;
 
   const handleSelect = useCallback((index: number) => setActive(index), []);
-  const handlePrev = useCallback(
-    () => setActive((i) => (i - 1 + CATEGORIES.length) % CATEGORIES.length),
-    []
-  );
-  const handleNext = useCallback(
-    () => setActive((i) => (i + 1) % CATEGORIES.length),
-    []
-  );
 
   const current = CATEGORIES[active];
 
@@ -52,12 +44,7 @@ export const TemplatesSection = memo(function TemplatesSection() {
           transition={{ duration: 0.55, ease: "easeOut" }}
           className="mt-8"
         >
-          <ShowcaseCard
-            category={current}
-            onPrev={handlePrev}
-            onNext={handleNext}
-            reduced={reduced}
-          />
+          <ShowcaseCard category={current} reduced={reduced} />
         </motion.div>
 
         <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">

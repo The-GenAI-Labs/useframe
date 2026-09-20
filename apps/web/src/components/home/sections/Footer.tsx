@@ -71,21 +71,20 @@ export const Footer = memo(function Footer() {
           }}
         />
 
-        <div className="relative mx-auto max-w-2xl">
-          <p className={`${serif.className} mb-4 text-center text-2xl font-semibold tracking-tight text-slate-900`}>
+        <div className="relative mx-auto flex max-w-2xl flex-col items-center text-center">
+          <div className="mb-5 flex items-center gap-3">
+            <span className="h-px w-6 bg-blue-600" aria-hidden />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-600">
+              About UseFrame
+            </span>
+          </div>
+          <p className={`${serif.className} mb-5 text-5xl tracking-tight text-slate-950 sm:text-6xl`}>
             UseFrame
           </p>
-          <p className="text-base leading-[1.9] text-slate-500">
+          <p className="text-[15px] leading-[1.85] text-slate-700">
             UseFrame is an AI-native platform built for founders, designers, and product teams who move fast.
             We combine intelligent research, competitor analysis, and production-ready templates into a single
             workspace — so you can go from idea to shipped product without switching between a dozen tools.
-            Every feature is designed around clarity: clean outputs, structured insights, and interfaces that
-            stay out of your way. Whether you&apos;re validating a new market, building a SaaS product, or
-            iterating on your brand, UseFrame gives you the research depth of an analyst and the design
-            speed of a seasoned team. We&apos;re obsessed with reducing the distance between a great idea and
-            a live product.
-          </p>
-          <p className="text-base mt-5 leading-[1.9] text-slate-500">
             Every feature is designed around clarity: clean outputs, structured insights, and interfaces that
             stay out of your way. Whether you&apos;re validating a new market, building a SaaS product, or
             iterating on your brand, UseFrame gives you the research depth of an analyst and the design

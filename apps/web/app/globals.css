@@ -32,8 +32,9 @@
 
 /* ── Design token system ── */
 :root {
-    /* outer shell + sidebar bg — visibly off-white */
-    --bg-shell:      #F9F7F3;
+    /* outer shell bg — cool light gray, matches --bg-sidebar so the
+       sidebar and the shell it sits on read as one continuous surface */
+    --bg-shell:      #F6F7F9;
     /* main content panel bg — near-white */
     --bg-surface:    #FDFDFC;
     /* card / input bg */
@@ -48,6 +49,20 @@
     --text-muted:    #9B9890;
     --border:        #E0DED8;
     --border-em:     #C8C7C0;
+
+    /* Sidebar-only palette — cooler/darker than --bg-surface, one blue
+       "brand moment" on the active nav item. Light mode only; dark mode
+       falls back to the existing shell/tertiary/border/muted tokens. */
+    --bg-sidebar:           #F6F7F9;
+    --bg-sidebar-active:    #EEF2FF;
+    --text-sidebar-active:  #3B6FF0;
+    --border-sidebar:       #EAECEF;
+    --text-sidebar-section: #9CA3AF;
+    /* Hover — a lighter preview of the active blue tint, not full strength */
+    --bg-sidebar-hover:     #F3F6FE;
+    --text-sidebar-hover:   #5B84E8;
+    /* Search / New Chat pills — near-white, standing off the cool-gray sidebar */
+    --bg-sidebar-pill:      #FFFFFF;
 
     /* shadcn semantic tokens — mapped onto the design token system above so
        radix-ui primitives (Select, Button, Dialog, Input, Textarea) render
@@ -73,8 +88,19 @@
 }
 
 .dark {
-    /* outer shell + sidebar bg — very dark */
+    /* outer shell bg — very dark */
     --bg-shell:      #0D0D0C;
+    /* Sidebar-only palette — dark mode keeps the existing look (no brand
+       tint requested there), so these fall back to the shell/tertiary
+       tokens rather than introducing a new dark palette. */
+    --bg-sidebar:           #0D0D0C;
+    --bg-sidebar-active:    #242320;
+    --text-sidebar-active:  #F5F4EF;
+    --border-sidebar:       #2E2D29;
+    --text-sidebar-section: #6B6860;
+    --bg-sidebar-hover:     #242320;
+    --text-sidebar-hover:   #F5F4EF;
+    --bg-sidebar-pill:      #242320;
     /* main content panel — slightly lighter than shell */
     --bg-surface:    #1A1915;
     /* card / input bg */
@@ -162,6 +188,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: var(--bg-shell);
 }
 
 @keyframes shine {
@@ -189,6 +216,14 @@ html, body {
 }
 .animate-modal-scale-in {
     animation: modal-scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Website Score / SEO toggle — icon bounce on activation */
+@keyframes mode-icon-bounce {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.35); }
+    70%  { transform: scale(0.95); }
+    100% { transform: scale(1.1); }
 }
 
 /* Streaming dots bounce */

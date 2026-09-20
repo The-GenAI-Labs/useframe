@@ -1,0 +1,82 @@
+[
+  {
+    "domain": "fitness",
+    "typicalSections": ["HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "PRICING", "CTA", "FOOTER"],
+    "toneRange": ["energetic", "motivational", "bold"],
+    "conversionPattern": "Lead with transformation outcome, prove with before/after or testimonial, remove friction with a free trial or class offer.",
+    "commonObjections": ["Will this actually work for me", "I don't have time", "It's too expensive", "I've failed at fitness before"],
+    "proofTypes": ["before/after photos", "member testimonials", "trainer credentials", "results timeline"]
+  },
+  {
+    "domain": "health_wellness",
+    "typicalSections": ["HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "FAQ", "CTA", "FOOTER"],
+    "toneRange": ["calm", "trustworthy", "warm"],
+    "conversionPattern": "Establish safety and credibility first, then explain the method, then offer a low-commitment next step.",
+    "commonObjections": ["Is this safe", "Is this backed by science", "Will my data be private", "Is this a scam"],
+    "proofTypes": ["clinical citations", "practitioner credentials", "third-party certifications", "user testimonials"]
+  },
+  {
+    "domain": "fintech",
+    "typicalSections": ["HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "PRICING", "FAQ", "CTA", "FOOTER"],
+    "toneRange": ["confident", "clinical", "trustworthy"],
+    "conversionPattern": "Lead with security/trust signal, quantify the value (save/earn X), address fees transparently, low-friction signup.",
+    "commonObjections": ["Is my money safe", "What are the hidden fees", "Is this regulated", "What happens if the company fails"],
+    "proofTypes": ["security badges", "regulatory compliance logos", "customer fund figures", "press mentions"]
+  },
+  {
+    "domain": "saas_b2b",
+    "typicalSections": ["HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "PRICING", "FAQ", "CTA", "FOOTER"],
+    "toneRange": ["clinical", "confident", "efficient"],
+    "conversionPattern": "Lead with the specific business outcome, show product screenshots as proof, offer a demo or free trial to the economic buyer.",
+    "commonObjections": ["Does this integrate with our stack", "Is it secure enough for our compliance needs", "What's the ROI", "How long is onboarding"],
+    "proofTypes": ["customer logos", "case study metrics", "integration badges", "G2/Capterra ratings"]
+  },
+  {
+    "domain": "ecommerce",
+    "typicalSections": ["HERO", "FEATURES", "TESTIMONIALS", "FAQ", "CTA", "FOOTER"],
+    "toneRange": ["warm", "energetic", "playful"],
+    "conversionPattern": "Lead with the product benefit and a strong visual, reduce purchase anxiety with reviews and guarantees, urgency at the CTA.",
+    "commonObjections": ["Is the quality good", "What if it doesn't fit/work", "Is shipping reliable", "Can I trust this store"],
+    "proofTypes": ["star ratings", "verified reviews", "return/refund guarantee", "unboxing/UGC imagery"]
+  },
+  {
+    "domain": "food_lifestyle",
+    "typicalSections": ["HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "CTA", "FOOTER"],
+    "toneRange": ["warm", "playful", "energetic"],
+    "conversionPattern": "Lead with sensory/lifestyle imagery, make the offer feel personal and low-risk, simple single CTA.",
+    "commonObjections": ["Will I actually like it", "Is it worth the price", "Can I cancel easily", "Is it convenient"],
+    "proofTypes": ["customer photos", "taste/quality testimonials", "press features", "satisfaction guarantee"]
+  },
+  {
+    "domain": "education",
+    "typicalSections": ["HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "PRICING", "FAQ", "CTA", "FOOTER"],
+    "toneRange": ["trustworthy", "warm", "confident"],
+    "conversionPattern": "Lead with the outcome/skill gained, prove credibility of instructors/curriculum, offer a low-risk first step (free lesson, trial).",
+    "commonObjections": ["Will I actually finish it", "Is the instructor credible", "Is it worth the time investment", "Can I get a refund"],
+    "proofTypes": ["completion rate stats", "instructor credentials", "student outcome testimonials", "accreditation logos"]
+  },
+  {
+    "domain": "gaming",
+    "typicalSections": ["HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "CTA", "FOOTER"],
+    "toneRange": ["bold", "playful", "energetic"],
+    "conversionPattern": "Lead with high-impact visuals/trailer, show social proof of an active community, single clear download/play CTA.",
+    "commonObjections": ["Is it actually fun", "Is the community active", "Will it run on my device", "Is it pay-to-win"],
+    "proofTypes": ["player count", "review scores", "gameplay screenshots/trailer", "community testimonials"]
+  },
+  {
+    "domain": "luxury",
+    "typicalSections": ["HERO", "FEATURES", "TESTIMONIALS", "CTA", "FOOTER"],
+    "toneRange": ["calm", "confident", "minimal"],
+    "conversionPattern": "Lead with restrained, high-quality imagery and minimal copy — let craftsmanship and exclusivity speak, low-pressure CTA.",
+    "commonObjections": ["Is this genuinely premium quality", "Is the price justified", "Is this authentic/exclusive", "What's the service experience"],
+    "proofTypes": ["craftsmanship detail shots", "heritage/provenance story", "press features", "understated client testimonials"]
+  },
+  {
+    "domain": "other",
+    "typicalSections": ["HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "CTA", "FOOTER"],
+    "toneRange": ["confident", "warm", "trustworthy"],
+    "conversionPattern": "Lead with the core value proposition, support with proof, single clear CTA.",
+    "commonObjections": ["Why should I trust this", "Is it worth the cost", "How is this different from alternatives"],
+    "proofTypes": ["testimonials", "usage statistics", "press mentions"]
+  }
+]

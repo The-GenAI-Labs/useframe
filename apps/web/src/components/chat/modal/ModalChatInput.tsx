@@ -91,25 +91,64 @@ export const ModalChatInput = memo(function ModalChatInput({
                     />
                 </div>
 
-                <div className="flex items-center justify-between px-3 pb-2.5">
-                    <div className="flex items-center gap-1.5">
-                        <button type="button" className="p-1.5 rounded-lg hover:bg-tertiary transition-colors text-mut hover:text-sec cursor-pointer">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <div className="flex items-center justify-between px-3 pb-2.5 flex-wrap gap-y-1.5">
+                    <div className="flex items-center gap-1 flex-wrap">
+                        <button
+                            type="button"
+                            disabled
+                            title="Coming soon"
+                            className="flex items-center gap-1 px-2 py-1 rounded-lg text-mut text-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                                 <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" />
                             </svg>
+                            Attach File
+                        </button>
+
+                        <button
+                            type="button"
+                            disabled
+                            title="Coming soon"
+                            className="flex items-center gap-1 px-2 py-1 rounded-lg text-mut text-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                                <path d="M9.5 2.5a4 4 0 014 4c0 1.2-.5 2-1.2 2.7-.5.5-.8 1-.8 1.8v.5h-4v-.5c0-.8-.3-1.3-.8-1.8-.7-.7-1.2-1.5-1.2-2.7a4 4 0 014-4z" />
+                                <line x1="8" y1="15" x2="11" y2="15" />
+                                <line x1="8" y1="17.5" x2="11" y2="17.5" />
+                            </svg>
+                            Reasoning
+                        </button>
+
+                        <button
+                            type="button"
+                            disabled
+                            title="Coming soon"
+                            className="flex items-center gap-1 px-2 py-1 rounded-lg text-mut text-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="3" y="3" width="14" height="14" rx="2" />
+                                <circle cx="7.5" cy="7.5" r="1.2" />
+                                <path d="M17 12l-4-4-9 9" />
+                            </svg>
+                            Create Image
+                        </button>
+
+                        <button
+                            type="button"
+                            disabled
+                            title="Coming soon"
+                            className="flex items-center gap-1 px-2 py-1 rounded-lg text-mut text-[11px] disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                                <circle cx="8.5" cy="8.5" r="6" />
+                                <line x1="17" y1="17" x2="13" y2="13" />
+                            </svg>
+                            Deep Research
                         </button>
 
                         <div className="w-px h-3.5 border-base" style={{ backgroundColor: "var(--border)" }} />
 
                         <ModelSelector />
-
-                        <button type="button" className="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-tertiary transition-colors text-mut hover:text-sec text-[11px] cursor-pointer">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                                <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" />
-                                <path d="M12 6v6l4 2" />
-                            </svg>
-                            Deep work
-                        </button>
                     </div>
 
                     <div className="flex items-center gap-1.5">

@@ -6,7 +6,6 @@ import { ArrowRight, Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Research", href: "#research" },
-  { label: "Templates", href: "#templates" },
   { label: "Pricing", href: "#pricing" },
 ];
 
@@ -50,17 +49,22 @@ export const Navbar = memo(function Navbar({ serifClassName }: { serifClassName:
           aria-label="Main"
           className={`relative flex items-center justify-between transition-all duration-500 ease-out ${
             scrolled
-              ? "mt-3 h-14 w-full rounded-2xl bg-white/25 px-5 shadow-[0_8px_40px_rgba(31,68,120,0.15)] backdrop-blur-[40px] sm:w-[64%] lg:w-[36%]"
+              ? "mt-3 h-14 w-full max-w-xl rounded-2xl bg-white/25 px-5 shadow-[0_8px_40px_rgba(31,68,120,0.15)] backdrop-blur-[40px] sm:w-[70%] lg:w-[42%]"
               : "mt-0 h-18 w-full max-w-7xl bg-transparent px-6"
           }`}
         >
-          <Link href="/" className={`${serifClassName} cursor-pointer text-2xl tracking-tight text-slate-950`}>
+          <Link
+            href="/"
+            className={`${serifClassName} cursor-pointer shrink-0 tracking-tight text-slate-950 transition-all duration-500 ease-out ${
+              scrolled ? "mr-6 text-[26px]" : "text-2xl"
+            }`}
+          >
             UseFrame
           </Link>
 
           <div className="flex-1" />
 
-          <div className="mr-4 hidden items-center gap-5 md:flex">
+          <div className={`hidden shrink-0 items-center md:flex ${scrolled ? "mr-5 gap-6" : "mr-4 gap-5"}`}>
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
@@ -73,10 +77,10 @@ export const Navbar = memo(function Navbar({ serifClassName }: { serifClassName:
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <Link
               href="/signin"
-              className="group hidden cursor-pointer items-center gap-2 rounded-xl bg-blue-600 py-1.5 pl-4 pr-1.5 text-sm font-medium text-white shadow-[0_8px_24px_rgba(37,99,235,0.4)] transition-all hover:bg-blue-500 hover:shadow-[0_8px_28px_rgba(37,99,235,0.55)] sm:inline-flex"
+              className="group hidden shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap rounded-xl bg-blue-600 py-1.5 pl-4 pr-1.5 text-sm font-medium text-white shadow-[0_8px_24px_rgba(37,99,235,0.4)] transition-all hover:bg-blue-500 hover:shadow-[0_8px_28px_rgba(37,99,235,0.55)] sm:inline-flex"
             >
               Get Started
               <span className="flex size-6 items-center justify-center rounded-lg bg-white/20 transition-transform group-hover:translate-x-0.5">

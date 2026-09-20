@@ -2,6 +2,7 @@
 
 import { useCallback } from "react"
 import type { ClarifyResponse } from "@repo/schemas"
+import { getCurrentAccessToken } from "@/lib/authContext"
 
 const ORCHESTRATOR_URL =
   process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001"
@@ -9,14 +10,13 @@ const ORCHESTRATOR_URL =
 export function useClarify() {
   const clarify = useCallback(
     async (startupIdea: string, answers?: Record<string, string>): Promise<ClarifyResponse> => {
-      const tokenRes = await fetch("/api/token")
-      const { accessToken } = (await tokenRes.json()) as { accessToken?: string }
+      const accessToken = getCurrentAccessToken() ?? ""
 
       const res = await fetch(`${ORCHESTRATOR_URL}/clarify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken ?? ""}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({ startupIdea, answers }),
       })

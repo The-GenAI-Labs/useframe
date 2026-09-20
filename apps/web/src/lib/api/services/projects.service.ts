@@ -11,6 +11,7 @@ export type CreateProjectResponse = {
   }
   version: { id: string; versionNumber: number }
   scanQueued: boolean
+  tier: "free" | "paid"
 }
 
 export type ProjectListItem = {
@@ -22,8 +23,8 @@ export type ProjectListItem = {
   niche: string
   inputType: string
   currentVersionId: string | null
-  startupIdea?: string
-  targetAudience?: string
+  startupIdea: string
+  targetAudience: string
   sourceUrl?: string | null
   createdAt: string
   updatedAt: string
@@ -33,6 +34,7 @@ export type ProjectDetail = ProjectListItem & {
   versions: {
     id: string
     versionNumber: number
+    label: string | null
     siteType: string
     snapshot: Record<string, unknown>
     createdAt: string
@@ -108,6 +110,43 @@ export const projectsApi = {
     const { data } = await api.get<{ success: true; data: Record<string, unknown> }>(
       `/projects/${slug}/versions/${versionId}`
     )
+    return data.data
+  },
+
+  sendMessage: async (
+    slug: string,
+    input: { conversationId?: string; content: string; versionId: string }
+  ) => {
+    const { data } = await api.post<{
+      success: true
+      data: {
+        message: {
+          id: string
+          role: string
+          content: string
+          producedVersionId: string | null
+        }
+        newVersion: { id: string; versionNumber: number } | null
+        changed: boolean
+        conversationId: string
+      }
+    }>(`/projects/${slug}/messages`, input)
+    return data.data
+  },
+
+  getVersionSnapshot: async (slug: string, versionId: string) => {
+    const { data } = await api.get<{
+      success: true
+      data: { snapshot: Record<string, unknown> }
+    }>(`/projects/${slug}/versions/${versionId}/snapshot`)
+    return data.data
+  },
+
+  restoreVersion: async (slug: string, versionId: string) => {
+    const { data } = await api.post<{
+      success: true
+      data: { currentVersionId: string }
+    }>(`/projects/${slug}/versions/${versionId}/restore`)
     return data.data
   },
 }

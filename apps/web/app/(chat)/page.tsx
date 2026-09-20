@@ -1,13 +1,24 @@
-import { auth } from "@/lib/auth";
+"use client";
+
+import { useAuth } from "@/lib/authContext";
 import { HomeView } from "@/components/home/HomeView";
 import ChatHomeView from "@/components/chat/ChatHomeView";
+import { PageFadeIn } from "@/components/shared/PageFadeIn";
 
-export default async function RootPage() {
-  const session = await auth();
+export default function RootPage() {
+  const { status } = useAuth();
 
-  if (!session?.user) {
+  if (status === "loading") {
+    return null;
+  }
+
+  if (status === "unauthenticated") {
     return <HomeView />;
   }
 
-  return <ChatHomeView />;
+  return (
+    <PageFadeIn>
+      <ChatHomeView />
+    </PageFadeIn>
+  );
 }

@@ -16,12 +16,27 @@ interface ClarifyState {
   inferredName: string | null
   inferredNiche: string | null
   inferredTargetAudience: string | null
+  inferredBrandPersonality: string | null
+  inferredPricePositioning: string | null
+  inferredBusinessModel: string | null
+  inferredDifferentiator: string | null
   inputType: ProjectInputType
   sourceUrl: string | null
   error: string | null
 
   startIdea: (idea: string) => void
-  setQuestions: (questions: ClarifyQuestion[], inferred: { name?: string; niche?: string; targetAudience?: string }) => void
+  setQuestions: (
+    questions: ClarifyQuestion[],
+    inferred: {
+      name?: string
+      niche?: string
+      targetAudience?: string
+      brandPersonality?: string
+      pricePositioning?: string
+      businessModel?: string
+      differentiator?: string
+    }
+  ) => void
   answerQuestion: (questionId: string, answer: string) => void
   setInputType: (inputType: ProjectInputType) => void
   setSourceUrl: (url: string | null) => void
@@ -39,6 +54,10 @@ const initial = {
   inferredName: null as string | null,
   inferredNiche: null as string | null,
   inferredTargetAudience: null as string | null,
+  inferredBrandPersonality: null as string | null,
+  inferredPricePositioning: null as string | null,
+  inferredBusinessModel: null as string | null,
+  inferredDifferentiator: null as string | null,
   inputType: "FROM_SCRATCH" as ProjectInputType,
   sourceUrl: null as string | null,
   error: null as string | null,
@@ -60,6 +79,10 @@ export const useClarifyStore = create<ClarifyState>()((set) => ({
       inferredName: inferred.name ?? s.inferredName,
       inferredNiche: inferred.niche ?? s.inferredNiche,
       inferredTargetAudience: inferred.targetAudience ?? s.inferredTargetAudience,
+      inferredBrandPersonality: inferred.brandPersonality ?? s.inferredBrandPersonality,
+      inferredPricePositioning: inferred.pricePositioning ?? s.inferredPricePositioning,
+      inferredBusinessModel: inferred.businessModel ?? s.inferredBusinessModel,
+      inferredDifferentiator: inferred.differentiator ?? s.inferredDifferentiator,
       turns:
         questions.length > 0
           ? [...s.turns, { role: "assistant", content: questions.map((q) => q.question).join(" ") }]

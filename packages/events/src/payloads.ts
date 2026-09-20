@@ -42,6 +42,7 @@ export type EmailJobPayload = {
     | "trial_ending"
     | "magic_link"
     | "welcome"
+    | "auto_reload_failed"
   data: Record<string, unknown>
 }
 
@@ -55,4 +56,20 @@ export type CreditResetJobPayload = {
   userId: string
   periodStart: string
   periodEnd: string
+}
+
+export type ScoreJobPayload = {
+  scoreId: string
+  url: string
+}
+
+export type SeoAuditJobPayload = {
+  seoAuditId: string
+  url: string
+  tier: "free" | "paid"
+}
+
+export type AutoReloadJobPayload = {
+  userId: string
+  topUpToCents: number
 }

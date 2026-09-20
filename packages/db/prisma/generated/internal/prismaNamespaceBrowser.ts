@@ -52,22 +52,20 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Account: 'Account',
+  Identity: 'Identity',
   Session: 'Session',
-  VerificationToken: 'VerificationToken',
-  UserCredential: 'UserCredential',
-  UserIdentity: 'UserIdentity',
   RefreshToken: 'RefreshToken',
-  UserSession: 'UserSession',
-  EmailVerificationToken: 'EmailVerificationToken',
-  PasswordResetToken: 'PasswordResetToken',
+  MagicLinkToken: 'MagicLinkToken',
+  TicketToken: 'TicketToken',
   PhoneOtp: 'PhoneOtp',
   Plan: 'Plan',
+  Order: 'Order',
   Subscription: 'Subscription',
   Payment: 'Payment',
   WebhookEvent: 'WebhookEvent',
   CreditBalance: 'CreditBalance',
   CreditTransaction: 'CreditTransaction',
+  AutoReloadSetting: 'AutoReloadSetting',
   Project: 'Project',
   ProjectVersion: 'ProjectVersion',
   Page: 'Page',
@@ -81,8 +79,17 @@ export const ModelName = {
   UsageLog: 'UsageLog',
   Waitlist: 'Waitlist',
   ResearchReport: 'ResearchReport',
+  ResearchFinding: 'ResearchFinding',
+  FindingRelation: 'FindingRelation',
+  DomainPattern: 'DomainPattern',
+  AudienceModifier: 'AudienceModifier',
+  GenerationOutcome: 'GenerationOutcome',
+  PipelineState: 'PipelineState',
   ResearchArticle: 'ResearchArticle',
-  CompetitorScan: 'CompetitorScan'
+  CompetitorScan: 'CompetitorScan',
+  ScoreResult: 'ScoreResult',
+  SearchQueryCache: 'SearchQueryCache',
+  SeoAuditResult: 'SeoAuditResult'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -103,102 +110,41 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  email: 'email',
-  phone: 'phone',
   name: 'name',
-  image: 'image',
-  emailVerified: 'emailVerified',
-  displayName: 'displayName',
   avatarUrl: 'avatarUrl',
   status: 'status',
-  emailVerifiedAt: 'emailVerifiedAt',
+  phone: 'phone',
   phoneVerifiedAt: 'phoneVerifiedAt',
   lastLoginAt: 'lastLoginAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  hasUsedFreeGeneration: 'hasUsedFreeGeneration',
+  stripeCustomerId: 'stripeCustomerId',
+  defaultPaymentMethodId: 'defaultPaymentMethodId'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const AccountScalarFieldEnum = {
+export const IdentityScalarFieldEnum = {
+  id: 'id',
   userId: 'userId',
   type: 'type',
-  provider: 'provider',
-  providerAccountId: 'providerAccountId',
-  refresh_token: 'refresh_token',
-  access_token: 'access_token',
-  expires_at: 'expires_at',
-  token_type: 'token_type',
-  scope: 'scope',
-  id_token: 'id_token',
-  session_state: 'session_state'
+  externalId: 'externalId',
+  email: 'email',
+  isPrimary: 'isPrimary',
+  verifiedAt: 'verifiedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
+export type IdentityScalarFieldEnum = (typeof IdentityScalarFieldEnum)[keyof typeof IdentityScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
-  sessionToken: 'sessionToken',
-  userId: 'userId',
-  expires: 'expires'
-} as const
-
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
-
-
-export const VerificationTokenScalarFieldEnum = {
-  identifier: 'identifier',
-  token: 'token',
-  expires: 'expires'
-} as const
-
-export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
-
-
-export const UserCredentialScalarFieldEnum = {
-  userId: 'userId',
-  passwordHash: 'passwordHash',
-  passwordChangedAt: 'passwordChangedAt',
-  requiresReset: 'requiresReset'
-} as const
-
-export type UserCredentialScalarFieldEnum = (typeof UserCredentialScalarFieldEnum)[keyof typeof UserCredentialScalarFieldEnum]
-
-
-export const UserIdentityScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  provider: 'provider',
-  providerUserId: 'providerUserId',
-  emailAtProvider: 'emailAtProvider',
-  createdAt: 'createdAt'
-} as const
-
-export type UserIdentityScalarFieldEnum = (typeof UserIdentityScalarFieldEnum)[keyof typeof UserIdentityScalarFieldEnum]
-
-
-export const RefreshTokenScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  tokenHash: 'tokenHash',
-  familyId: 'familyId',
-  parentId: 'parentId',
-  userAgent: 'userAgent',
-  ip: 'ip',
-  expiresAt: 'expiresAt',
-  revokedAt: 'revokedAt',
-  createdAt: 'createdAt'
-} as const
-
-export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
-
-
-export const UserSessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  refreshTokenId: 'refreshTokenId',
   deviceName: 'deviceName',
   userAgent: 'userAgent',
   ip: 'ip',
@@ -208,12 +154,26 @@ export const UserSessionScalarFieldEnum = {
   createdAt: 'createdAt'
 } as const
 
-export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
-export const EmailVerificationTokenScalarFieldEnum = {
+export const RefreshTokenScalarFieldEnum = {
   id: 'id',
+  sessionId: 'sessionId',
   userId: 'userId',
+  tokenHash: 'tokenHash',
+  familyId: 'familyId',
+  parentId: 'parentId',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
+
+
+export const MagicLinkTokenScalarFieldEnum = {
+  id: 'id',
   email: 'email',
   tokenHash: 'tokenHash',
   expiresAt: 'expiresAt',
@@ -221,19 +181,19 @@ export const EmailVerificationTokenScalarFieldEnum = {
   createdAt: 'createdAt'
 } as const
 
-export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
+export type MagicLinkTokenScalarFieldEnum = (typeof MagicLinkTokenScalarFieldEnum)[keyof typeof MagicLinkTokenScalarFieldEnum]
 
 
-export const PasswordResetTokenScalarFieldEnum = {
+export const TicketTokenScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   tokenHash: 'tokenHash',
   expiresAt: 'expiresAt',
-  consumedAt: 'consumedAt',
+  usedAt: 'usedAt',
   createdAt: 'createdAt'
 } as const
 
-export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+export type TicketTokenScalarFieldEnum = (typeof TicketTokenScalarFieldEnum)[keyof typeof TicketTokenScalarFieldEnum]
 
 
 export const PhoneOtpScalarFieldEnum = {
@@ -242,7 +202,6 @@ export const PhoneOtpScalarFieldEnum = {
   phone: 'phone',
   codeHash: 'codeHash',
   attempts: 'attempts',
-  maxAttempts: 'maxAttempts',
   expiresAt: 'expiresAt',
   consumedAt: 'consumedAt',
   createdAt: 'createdAt'
@@ -271,6 +230,22 @@ export const PlanScalarFieldEnum = {
 export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
 
 
+export const OrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  amount: 'amount',
+  currency: 'currency',
+  status: 'status',
+  provider: 'provider',
+  providerSessionId: 'providerSessionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
 export const SubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -290,6 +265,7 @@ export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[k
 
 export const PaymentScalarFieldEnum = {
   id: 'id',
+  orderId: 'orderId',
   userId: 'userId',
   purpose: 'purpose',
   subscriptionId: 'subscriptionId',
@@ -349,6 +325,17 @@ export const CreditTransactionScalarFieldEnum = {
 export type CreditTransactionScalarFieldEnum = (typeof CreditTransactionScalarFieldEnum)[keyof typeof CreditTransactionScalarFieldEnum]
 
 
+export const AutoReloadSettingScalarFieldEnum = {
+  userId: 'userId',
+  enabled: 'enabled',
+  thresholdCents: 'thresholdCents',
+  topUpToCents: 'topUpToCents',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AutoReloadSettingScalarFieldEnum = (typeof AutoReloadSettingScalarFieldEnum)[keyof typeof AutoReloadSettingScalarFieldEnum]
+
+
 export const ProjectScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -357,6 +344,10 @@ export const ProjectScalarFieldEnum = {
   startupIdea: 'startupIdea',
   niche: 'niche',
   targetAudience: 'targetAudience',
+  brandPersonality: 'brandPersonality',
+  pricePositioning: 'pricePositioning',
+  businessModel: 'businessModel',
+  differentiator: 'differentiator',
   status: 'status',
   inputType: 'inputType',
   sourceUrl: 'sourceUrl',
@@ -364,6 +355,7 @@ export const ProjectScalarFieldEnum = {
   description: 'description',
   logoUrl: 'logoUrl',
   currentVersionId: 'currentVersionId',
+  vercelProjectId: 'vercelProjectId',
   pinned: 'pinned',
   deletedAt: 'deletedAt',
   archivedAt: 'archivedAt',
@@ -381,6 +373,7 @@ export const ProjectVersionScalarFieldEnum = {
   label: 'label',
   siteType: 'siteType',
   seo: 'seo',
+  designBrief: 'designBrief',
   parentVersionId: 'parentVersionId',
   createdByMessageId: 'createdByMessageId',
   snapshot: 'snapshot',
@@ -609,6 +602,84 @@ export const ResearchReportScalarFieldEnum = {
 export type ResearchReportScalarFieldEnum = (typeof ResearchReportScalarFieldEnum)[keyof typeof ResearchReportScalarFieldEnum]
 
 
+export const ResearchFindingScalarFieldEnum = {
+  id: 'id',
+  claim: 'claim',
+  paper: 'paper',
+  field: 'field',
+  appliesTo: 'appliesTo',
+  audience: 'audience',
+  decision: 'decision',
+  options: 'options',
+  contextHeader: 'contextHeader',
+  verified: 'verified',
+  createdAt: 'createdAt'
+} as const
+
+export type ResearchFindingScalarFieldEnum = (typeof ResearchFindingScalarFieldEnum)[keyof typeof ResearchFindingScalarFieldEnum]
+
+
+export const FindingRelationScalarFieldEnum = {
+  fromId: 'fromId',
+  toId: 'toId',
+  relation: 'relation'
+} as const
+
+export type FindingRelationScalarFieldEnum = (typeof FindingRelationScalarFieldEnum)[keyof typeof FindingRelationScalarFieldEnum]
+
+
+export const DomainPatternScalarFieldEnum = {
+  domain: 'domain',
+  typicalSections: 'typicalSections',
+  toneRange: 'toneRange',
+  conversionPattern: 'conversionPattern',
+  commonObjections: 'commonObjections',
+  proofTypes: 'proofTypes'
+} as const
+
+export type DomainPatternScalarFieldEnum = (typeof DomainPatternScalarFieldEnum)[keyof typeof DomainPatternScalarFieldEnum]
+
+
+export const AudienceModifierScalarFieldEnum = {
+  audience: 'audience',
+  modifies: 'modifies'
+} as const
+
+export type AudienceModifierScalarFieldEnum = (typeof AudienceModifierScalarFieldEnum)[keyof typeof AudienceModifierScalarFieldEnum]
+
+
+export const GenerationOutcomeScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  versionId: 'versionId',
+  brief: 'brief',
+  inputs: 'inputs',
+  userEdits: 'userEdits',
+  score: 'score',
+  deployed: 'deployed',
+  createdAt: 'createdAt'
+} as const
+
+export type GenerationOutcomeScalarFieldEnum = (typeof GenerationOutcomeScalarFieldEnum)[keyof typeof GenerationOutcomeScalarFieldEnum]
+
+
+export const PipelineStateScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  mode: 'mode',
+  currentStep: 'currentStep',
+  researchStatus: 'researchStatus',
+  websiteStatus: 'websiteStatus',
+  seoStatus: 'seoStatus',
+  deployStatus: 'deployStatus',
+  feedbackHistory: 'feedbackHistory',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PipelineStateScalarFieldEnum = (typeof PipelineStateScalarFieldEnum)[keyof typeof PipelineStateScalarFieldEnum]
+
+
 export const ResearchArticleScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
@@ -636,6 +707,7 @@ export const CompetitorScanScalarFieldEnum = {
   userId: 'userId',
   projectId: 'projectId',
   sourceUrl: 'sourceUrl',
+  normalizedUrl: 'normalizedUrl',
   scanType: 'scanType',
   status: 'status',
   screenshotKey: 'screenshotKey',
@@ -643,11 +715,68 @@ export const CompetitorScanScalarFieldEnum = {
   designTokens: 'designTokens',
   extractedContent: 'extractedContent',
   failureReason: 'failureReason',
+  expiresAt: 'expiresAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CompetitorScanScalarFieldEnum = (typeof CompetitorScanScalarFieldEnum)[keyof typeof CompetitorScanScalarFieldEnum]
+
+
+export const ScoreResultScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  url: 'url',
+  normalizedUrl: 'normalizedUrl',
+  analysisType: 'analysisType',
+  scorerVersion: 'scorerVersion',
+  status: 'status',
+  screenshotBase64: 'screenshotBase64',
+  report: 'report',
+  failureReason: 'failureReason',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ScoreResultScalarFieldEnum = (typeof ScoreResultScalarFieldEnum)[keyof typeof ScoreResultScalarFieldEnum]
+
+
+export const SearchQueryCacheScalarFieldEnum = {
+  id: 'id',
+  queryHash: 'queryHash',
+  results: 'results',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type SearchQueryCacheScalarFieldEnum = (typeof SearchQueryCacheScalarFieldEnum)[keyof typeof SearchQueryCacheScalarFieldEnum]
+
+
+export const SeoAuditResultScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  url: 'url',
+  domain: 'domain',
+  tier: 'tier',
+  status: 'status',
+  performanceScore: 'performanceScore',
+  accessibilityScore: 'accessibilityScore',
+  seoScore: 'seoScore',
+  bestPracticesScore: 'bestPracticesScore',
+  pagesCrawled: 'pagesCrawled',
+  crawlResults: 'crawlResults',
+  keywords: 'keywords',
+  auditJson: 'auditJson',
+  computedScore: 'computedScore',
+  llmSummary: 'llmSummary',
+  expiresAt: 'expiresAt',
+  failureReason: 'failureReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SeoAuditResultScalarFieldEnum = (typeof SeoAuditResultScalarFieldEnum)[keyof typeof SeoAuditResultScalarFieldEnum]
 
 
 export const SortOrder = {

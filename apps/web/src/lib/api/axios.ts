@@ -1,19 +1,62 @@
 import axios from "axios";
+import { getCurrentAccessToken } from "@/lib/authContext";
+
+const API_SERVICE_URL = process.env.NEXT_PUBLIC_API_SERVICE_URL ?? "http://localhost:4000";
 
 export const api = axios.create({
-    baseURL: "/api",
+    baseURL: `${API_SERVICE_URL}/api`,
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
 });
 
+api.interceptors.request.use((config) => {
+    const token = getCurrentAccessToken();
+    if (token) {
+        config.headers = config.headers ?? {};
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
+let refreshPromise: Promise<string | null> | null = null;
+
+async function refreshAccessToken(): Promise<string | null> {
+    if (!refreshPromise) {
+        refreshPromise = fetch(`${API_SERVICE_URL}/api/auth/refresh`, {
+            method: "POST",
+            credentials: "include",
+        })
+            .then(async (res) => {
+                if (!res.ok) return null;
+                const body = await res.json();
+                return (body?.data?.accessToken as string | undefined) ?? null;
+            })
+            .catch(() => null)
+            .finally(() => {
+                refreshPromise = null;
+            });
+    }
+    return refreshPromise;
+}
+
 api.interceptors.response.use(
     (response) => response,
-    (error) => {
+    async (error) => {
+        const originalRequest = error?.config;
         const status = error?.response?.status;
 
-        if (status === 401) {
+        if (status === 401 && originalRequest && !originalRequest._retried) {
+            originalRequest._retried = true;
+            const newToken = await refreshAccessToken();
+
+            if (newToken) {
+                originalRequest.headers = originalRequest.headers ?? {};
+                originalRequest.headers.Authorization = `Bearer ${newToken}`;
+                return api(originalRequest);
+            }
+
             if (typeof window !== "undefined") {
-                window.location.href = "/login";
+                window.location.href = "/signin";
             }
         }
 

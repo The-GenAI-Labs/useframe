@@ -4,10 +4,9 @@ import { useState, useRef, useEffect, useCallback, memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useAuth } from "@/lib/authContext";
 import { useChatModalStore } from "@/store/chatModalStore";
 import { useSearchModalStore } from "@/store/searchModalStore";
-import { signOutUser } from "@/lib/auth-actions";
 
 interface SidebarProps {
     isOpen: boolean;
@@ -104,11 +103,15 @@ const H_BG2 = "hover:[background-color:var(--bg-bubble)]";
 const H_TXT = "hover:[color:var(--text-primary)]";
 const H_TXT2 = "hover:[color:var(--text-secondary)]";
 const H_BDR = "hover:[border-color:var(--border-em)]";
+// Sidebar hover — same blue tint as the active/focus state, used across every
+// hoverable row in the sidebar (nav links, section headers, chat/project items).
+const H_NAV_BG = "hover:[background-color:var(--bg-sidebar-active)]";
+const H_NAV_TXT = "hover:[color:var(--text-sidebar-active)]";
 
 const SYSTEM_FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif";
-const NAV_BTN = `group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sec ${H_BG} ${H_TXT} transition-all duration-150 text-[14px] font-medium cursor-pointer`;
-const SECTION_BTN = `w-full flex items-center justify-between px-3 py-2 rounded-xl text-mut ${H_BG} ${H_TXT2} transition-all duration-150 cursor-pointer`;
-const SECTION_LABEL = "flex items-center gap-2.5 text-[13.5px] font-bold tracking-widest uppercase whitespace-nowrap";
+const NAV_BTN = `group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sec ${H_NAV_BG} ${H_NAV_TXT} transition-all duration-150 text-[14px] font-medium cursor-pointer`;
+const SECTION_BTN = `group w-full flex items-center justify-between px-3 py-2 rounded-xl text-mut ${H_NAV_BG} ${H_NAV_TXT} transition-all duration-150 cursor-pointer`;
+const SECTION_LABEL = "flex items-center gap-2.5 text-[13.5px] font-bold tracking-widest uppercase whitespace-nowrap transition-colors duration-150 [color:var(--text-sidebar-section)] group-hover:[color:var(--text-sidebar-active)]";
 
 interface ItemDropdownProps {
     options: DropdownOption[];
@@ -183,7 +186,7 @@ const SidebarItem = memo(function SidebarItem({ label, icon, dropdownOptions }: 
             <div
                 className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] font-medium text-left transition-all duration-150 cursor-pointer"
                 style={{ color: "var(--text-secondary)" }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-tertiary)"; el.style.color = "var(--text-primary)"; }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-sidebar-active)"; el.style.color = "var(--text-sidebar-active)"; }}
                 onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ""; el.style.color = "var(--text-secondary)"; }}
             >
                 {icon && <span className="shrink-0" style={{ color: "var(--text-muted)" }}>{icon}</span>}
@@ -194,7 +197,7 @@ const SidebarItem = memo(function SidebarItem({ label, icon, dropdownOptions }: 
                         onClick={handleDotsClick}
                         className="w-5 h-5 flex items-center justify-center rounded-md transition-colors cursor-pointer"
                         style={{ color: "var(--text-muted)" }}
-                        onMouseEnter={e => { e.stopPropagation(); const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-bubble)"; el.style.color = "var(--text-secondary)"; }}
+                        onMouseEnter={e => { e.stopPropagation(); const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-sidebar-active)"; el.style.color = "var(--text-sidebar-active)"; }}
                         onMouseLeave={e => { e.stopPropagation(); const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ""; el.style.color = "var(--text-muted)"; }}
                         aria-label="More options"
                     >
@@ -213,11 +216,39 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     const [chatsOpen, setChatsOpen] = useState(false);
     const [loggingOut, setLoggingOut] = useState(false);
 
+    // The rail (collapsed) and full (expanded) layouts are structurally
+    // different trees, so React swaps them outright — there's nothing to
+    // width-animate between. To make that swap feel smooth instead of an
+    // instant snap, the swap itself is delayed until midway through the
+    // width transition and masked by a brief fade, so the width change is
+    // always visible first and the content underneath only changes once
+    // it's mostly hidden by the fade.
+    const [renderOpen, setRenderOpen] = useState(isOpen);
+    const [contentVisible, setContentVisible] = useState(true);
+    const swapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const fadeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    useEffect(() => {
+        if (isOpen === renderOpen) return;
+        setContentVisible(false);
+        if (swapTimerRef.current) clearTimeout(swapTimerRef.current);
+        if (fadeTimerRef.current) clearTimeout(fadeTimerRef.current);
+        swapTimerRef.current = setTimeout(() => {
+            setRenderOpen(isOpen);
+            fadeTimerRef.current = setTimeout(() => setContentVisible(true), 20);
+        }, 150);
+        return () => {
+            if (swapTimerRef.current) clearTimeout(swapTimerRef.current);
+            if (fadeTimerRef.current) clearTimeout(fadeTimerRef.current);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen]);
+
     const openChatModal = useChatModalStore((s) => s.open);
     const openSearch = useSearchModalStore((s) => s.open);
     const pathname = usePathname();
     const router = useRouter();
-    const { data: session } = useSession();
+    const { user, logout } = useAuth();
 
     const handleGenerateClick = useCallback(() => {
         router.push("/?focus=1");
@@ -227,28 +258,35 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         if (loggingOut) return;
         setLoggingOut(true);
         try {
-            await signOutUser();
+            await logout();
+            router.replace("/signin");
         } finally {
             setLoggingOut(false);
         }
-    }, [loggingOut]);
+    }, [loggingOut, logout, router]);
 
-    const userName = session?.user?.name ?? "Guest";
-    const userEmail = session?.user?.email ?? "";
+    const userName = user?.name ?? "Guest";
+    const userEmail = user?.email ?? "";
     const userInitial = userName.charAt(0).toUpperCase();
-    const userImage = session?.user?.image;
+    const userImage = user?.image ?? user?.avatarUrl;
 
     const navLinks = [
         { href: "/projects", label: "Projects", icon: <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /> },
         { href: "/web-score", label: "Web Score", icon: <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /> },
         { href: "/research", label: "Research", icon: <><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></> },
-        { href: "/templates", label: "Templates", icon: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></> },
+        // { href: "/templates", label: "Templates", icon: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></> },
         { href: "/board", label: "Board", icon: <><rect x="3" y="3" width="18" height="18" rx="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="9" y1="3" x2="9" y2="9" /><circle cx="15" cy="15" r="2.5" /><path d="M10 14l2 2 4-4" /></> },
+        { href: "/billing", label: "Billing", icon: <><rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /></> },
     ];
 
-    if (!isOpen) {
+    if (!renderOpen) {
         return (
-            <aside className="hidden md:flex flex-col items-center h-full w-14 bg-shell md:rounded-3xl shrink-0 py-5 gap-2">
+            <aside
+                className={`hidden md:flex flex-col items-center h-full w-14 md:rounded-3xl shrink-0 py-5 gap-2 transition-opacity duration-200 ease-out ${
+                    contentVisible ? "opacity-100" : "opacity-0"
+                }`}
+                style={{ backgroundColor: "var(--bg-sidebar)" }}
+            >
                 <RailTooltip label="Open sidebar">
                     <button
                         onClick={onToggle}
@@ -278,10 +316,22 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                     <button
                         onClick={handleGenerateClick}
                         aria-label="Generate"
-                        className="w-10 h-10 flex items-center justify-center rounded-xl text-white shadow-sm transition-all duration-150 cursor-pointer shrink-0 hover:opacity-90 hover:shadow-md"
-                        style={{ background: "linear-gradient(135deg, #818CF8 0%, #6366F1 100%)" }}
+                        className="relative w-10 h-10 flex items-center justify-center rounded-xl text-white shadow-sm transition-all duration-150 cursor-pointer shrink-0 hover:opacity-90 hover:shadow-md overflow-hidden"
+                        style={{ background: "linear-gradient(135deg, #60A5FA 0%, #818CF8 45%, #A78BFA 100%)" }}
                     >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <div
+                            className="absolute inset-0"
+                            style={{ background: "linear-gradient(115deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.2) 30%, transparent 55%)" }}
+                        />
+                        <div
+                            className="absolute inset-0 opacity-[0.55] mix-blend-overlay"
+                            style={{
+                                backgroundImage:
+                                    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0.6 0.75 0.85 0.95 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+                                backgroundSize: "60px 60px",
+                            }}
+                        />
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="relative">
                             <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                         </svg>
                     </button>
@@ -310,8 +360,9 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                                 href={href}
                                 aria-label={label}
                                 className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
-                                    active ? "bg-tertiary text-pri" : `text-mut ${H_BG} ${H_TXT}`
+                                    active ? "" : `text-mut ${H_NAV_BG} ${H_NAV_TXT}`
                                 }`}
+                                style={active ? { backgroundColor: "var(--bg-sidebar-active)", color: "var(--text-sidebar-active)" } : undefined}
                             >
                                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     {icon}
@@ -372,7 +423,12 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
     }
 
     return (
-        <aside className="flex flex-col h-full bg-shell md:rounded-l-3xl shrink-0 overflow-hidden w-64">
+        <aside
+            className={`flex flex-col h-full md:rounded-l-3xl shrink-0 overflow-hidden w-64 transition-opacity duration-200 ease-out ${
+                contentVisible ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ backgroundColor: "var(--bg-sidebar)" }}
+        >
             <div className="flex items-center justify-between px-4 pt-5 pb-4 shrink-0">
                 <div className="flex items-center gap-2.5 whitespace-nowrap">
                     <Image src="/useFrame.png" alt="useframe" width={36} height={36} className="shrink-0" />
@@ -389,16 +445,16 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
             <div className="px-3 pb-4 shrink-0">
                 <button
                     onClick={openSearch}
-                    className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl border transition-all duration-150 cursor-pointer text-left"
-                    style={{ backgroundColor: "var(--bg-tertiary)", borderColor: "var(--border)" }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "var(--border-em)"; el.style.backgroundColor = "var(--bg-bubble)"; }}
-                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "var(--border)"; el.style.backgroundColor = "var(--bg-tertiary)"; }}
+                    className="group w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl border transition-all duration-150 cursor-pointer text-left"
+                    style={{ backgroundColor: "var(--bg-sidebar-pill)", borderColor: "var(--border-sidebar)" }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "var(--text-sidebar-active)"; el.style.backgroundColor = "var(--bg-sidebar-active)"; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "var(--border-sidebar)"; el.style.backgroundColor = "var(--bg-sidebar-pill)"; }}
                 >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" style={{ color: "var(--text-muted)" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 transition-colors duration-150 group-hover:[color:var(--text-sidebar-active)]" style={{ color: "var(--text-muted)" }}>
                         <circle cx="11" cy="11" r="8" />
                         <line x1="21" y1="21" x2="16.65" y2="16.65" />
                     </svg>
-                    <span className="flex-1 text-[13px]" style={{ color: "var(--text-muted)" }}>Search</span>
+                    <span className="flex-1 text-[13px] transition-colors duration-150 group-hover:[color:var(--text-sidebar-active)]" style={{ color: "var(--text-muted)" }}>Search</span>
                     <div className="flex items-center gap-0.5 shrink-0">
                         <kbd className="text-[10px] font-medium px-1.5 py-0.5 rounded-md border" style={{ color: "var(--text-muted)", backgroundColor: "var(--bg-bubble)", borderColor: "var(--border)" }}>cmd</kbd>
                         <kbd className="text-[10px] font-medium px-1.5 py-0.5 rounded-md border" style={{ color: "var(--text-muted)", backgroundColor: "var(--bg-bubble)", borderColor: "var(--border)" }}>S</kbd>
@@ -409,27 +465,39 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
             <div className="px-3 pb-3 flex gap-2 shrink-0">
                 <button
                     onClick={handleGenerateClick}
-                    className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer text-white shadow-sm transition-all duration-200 hover:opacity-90 hover:shadow-md"
-                    style={{ background: "linear-gradient(135deg, #818CF8 0%, #6366F1 100%)" }}
+                    className="relative flex-1 flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl cursor-pointer text-white shadow-sm transition-all duration-200 hover:opacity-90 hover:shadow-md overflow-hidden"
+                    style={{ background: "linear-gradient(135deg, #60A5FA 0%, #818CF8 45%, #A78BFA 100%)" }}
                 >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+                    <div
+                        className="absolute inset-0"
+                        style={{ background: "linear-gradient(115deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.2) 30%, transparent 55%)" }}
+                    />
+                    <div
+                        className="absolute inset-0 opacity-[0.55] mix-blend-overlay"
+                        style={{
+                            backgroundImage:
+                                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0.6 0.75 0.85 0.95 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+                            backgroundSize: "60px 60px",
+                        }}
+                    />
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="relative shrink-0">
                         <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
                     </svg>
-                    <span className="text-[13.5px] font-semibold whitespace-nowrap" style={{ fontFamily: SYSTEM_FONT }}>Generate</span>
+                    <span className="relative text-[13.5px] font-semibold whitespace-nowrap" style={{ fontFamily: SYSTEM_FONT }}>Generate</span>
                 </button>
                 <button
                     onClick={openChatModal}
                     className="group flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl border transition-all duration-200 cursor-pointer"
-                    style={{ backgroundColor: "var(--bg-tertiary)", borderColor: "var(--border)" }}
-                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-bubble)"; el.style.borderColor = "var(--border-em)"; }}
-                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-tertiary)"; el.style.borderColor = "var(--border)"; }}
+                    style={{ backgroundColor: "var(--bg-sidebar-pill)", borderColor: "var(--border-sidebar)" }}
+                    onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-sidebar-active)"; el.style.borderColor = "var(--text-sidebar-active)"; }}
+                    onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "var(--bg-sidebar-pill)"; el.style.borderColor = "var(--border-sidebar)"; }}
                 >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" style={{ color: "var(--text-secondary)" }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 transition-colors duration-150 group-hover:[color:var(--text-sidebar-active)]" style={{ color: "var(--text-secondary)" }}>
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                         <line x1="12" y1="9" x2="12" y2="13" />
                         <line x1="10" y1="11" x2="14" y2="11" />
                     </svg>
-                    <span className="text-[13.5px] font-semibold whitespace-nowrap" style={{ color: "var(--text-secondary)", fontFamily: SYSTEM_FONT }}>New Chat</span>
+                    <span className="text-[13.5px] font-semibold whitespace-nowrap transition-colors duration-150 group-hover:[color:var(--text-sidebar-active)]" style={{ color: "var(--text-secondary)", fontFamily: SYSTEM_FONT }}>New Chat</span>
                 </button>
             </div>
 
@@ -437,8 +505,20 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 {navLinks.map(({ href, label, icon }) => {
                     const active = pathname === href;
                     return (
-                        <Link key={href} href={href} style={{ fontFamily: SYSTEM_FONT }} className={`${NAV_BTN} ${active ? "bg-tertiary text-pri font-semibold" : ""}`}>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-sec transition-colors duration-150">
+                        <Link
+                            key={href}
+                            href={href}
+                            style={{
+                                fontFamily: SYSTEM_FONT,
+                                ...(active ? { backgroundColor: "var(--bg-sidebar-active)", color: "var(--text-sidebar-active)" } : {}),
+                            }}
+                            className={`${NAV_BTN} ${active ? "font-semibold" : ""}`}
+                        >
+                            <svg
+                                width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                className={`shrink-0 transition-colors duration-150 ${active ? "" : "text-sec group-hover:[color:var(--text-sidebar-hover)]"}`}
+                                style={active ? { color: "var(--text-sidebar-active)" } : undefined}
+                            >
                                 {icon}
                             </svg>
                             {label}

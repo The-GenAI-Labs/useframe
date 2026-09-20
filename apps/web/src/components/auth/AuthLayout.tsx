@@ -63,9 +63,40 @@ const CarouselColumn = ({ images, direction }: ColumnProps) => {
     )
 }
 
+// Sign-in is a fixed light-only surface regardless of the app's dark mode
+// setting — redeclare the shadcn/design-token CSS variables at their light
+// values here so descendants (shadcn Button/Input, etc.) don't pick up the
+// global .dark class's overrides from <html>.
+const LIGHT_TOKENS: React.CSSProperties = {
+    ["--background" as string]: "#FDFDFC",
+    ["--foreground" as string]: "#1A1915",
+    ["--card" as string]: "#FFFFFF",
+    ["--card-foreground" as string]: "#1A1915",
+    ["--popover" as string]: "#FFFFFF",
+    ["--popover-foreground" as string]: "#1A1915",
+    ["--primary" as string]: "#1A1915",
+    ["--primary-foreground" as string]: "#FDFDFC",
+    ["--secondary" as string]: "#EEEDE8",
+    ["--secondary-foreground" as string]: "#1A1915",
+    ["--muted" as string]: "#EEEDE8",
+    ["--muted-foreground" as string]: "#9B9890",
+    ["--accent" as string]: "#E8E7E1",
+    ["--accent-foreground" as string]: "#1A1915",
+    ["--destructive" as string]: "#DC2626",
+    ["--destructive-foreground" as string]: "#FFFFFF",
+    ["--input" as string]: "#EEEDE8",
+    ["--border" as string]: "#E0DED8",
+    ["--border-em" as string]: "#C8C7C0",
+    ["--ring" as string]: "#C8C7C0",
+    ["--text-primary" as string]: "#1A1915",
+    ["--text-secondary" as string]: "#6B6860",
+    ["--text-muted" as string]: "#9B9890",
+};
+
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="min-h-screen flex items-center justify-center p-2 md:p-4" style={{
+            ...LIGHT_TOKENS,
             backgroundColor: "#dbeafe",
             backgroundImage: `linear-gradient(rgba(0,0,0,0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.15) 1px, transparent 1px)`,
             backgroundSize: "3px 3px",

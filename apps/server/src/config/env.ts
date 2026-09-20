@@ -14,6 +14,26 @@ const envSchema = z.object({
     CLIENT_URL: z.string().default("http://localhost:3000"),
     BCRYPT_ROUNDS: z.string().default("12"),
     REDIS_URL: z.string().default("redis://localhost:6379"),
+    ORCHESTRATOR_URL: z.string().default("http://localhost:4001"),
+    BILLING_SERVICE_URL: z.string().default("http://localhost:4002"),
+    SCORING_SERVICE_URL: z.string().default("http://localhost:4003"),
+    RESEARCH_SERVICE_URL: z.string().default("http://localhost:4004"),
+
+    VERCEL_TOKEN: z.string().default(""),
+    VERCEL_TEAM_ID: z.string().default(""),
+
+    FRONTEND_URL: z.string().default("http://localhost:3000"),
+
+    GOOGLE_CLIENT_ID: z.string().min(1, "GOOGLE_CLIENT_ID is required"),
+    GOOGLE_CLIENT_SECRET: z.string().min(1, "GOOGLE_CLIENT_SECRET is required"),
+    GOOGLE_REDIRECT_URI: z.string().default("http://localhost:4000/api/auth/google/callback"),
+
+    GITHUB_CLIENT_ID: z.string().min(1, "GITHUB_CLIENT_ID is required"),
+    GITHUB_CLIENT_SECRET: z.string().min(1, "GITHUB_CLIENT_SECRET is required"),
+    GITHUB_REDIRECT_URI: z.string().default("http://localhost:4000/api/auth/github/callback"),
+
+    RESEND_API_KEY: z.string().min(1, "RESEND_API_KEY is required"),
+    EMAIL_FROM: z.string().default("noreply@useframe.so"),
 })
 
 const parsed = envSchema.safeParse(process.env)

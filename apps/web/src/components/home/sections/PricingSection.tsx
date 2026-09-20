@@ -9,24 +9,41 @@ import { Parallax } from "../ui/Parallax";
 
 const PLANS = [
   {
-    name: "Free",
-    price: "$0",
-    tagline: "For trying things out",
-    features: ["3 projects", "Basic AI generations", "Community templates", "1 workspace"],
+    name: "Starter",
+    price: "$9",
+    tagline: "One real site, fully iterated",
+    features: [
+      "Unlimited generations & iterations",
+      "Full 4-step pipeline — Research, Build, SEO, Deploy",
+      "Web Score checking on any URL",
+      "Research-backed design citations",
+    ],
     highlighted: false,
   },
   {
-    name: "Pro",
-    price: "$19",
-    tagline: "For serious builders",
-    features: ["Unlimited projects", "Advanced AI models", "Competitor analysis", "Custom domains", "Priority support"],
+    name: "Studio",
+    price: "$49",
+    tagline: "For shipping pages regularly",
+    features: [
+      "Everything in Starter",
+      "Priority generation speed",
+      "Custom domains on deploy",
+      "Deeper research citation coverage",
+      "Priority support",
+    ],
     highlighted: true,
   },
   {
-    name: "Pro Max",
-    price: "$49",
-    tagline: "For growing teams",
-    features: ["Everything in Pro", "Unlimited members", "Shared workspaces", "Admin controls", "SSO & audit logs"],
+    name: "Agency",
+    price: "$99",
+    tagline: "Best rate, for heavy use",
+    features: [
+      "Everything in Studio",
+      "Full access to every research paper",
+      "Unlimited Web Score & SEO audits",
+      "Team workspaces",
+      "Priority support, front of the queue",
+    ],
     highlighted: false,
   },
 ];
@@ -122,7 +139,7 @@ export const PricingSection = memo(function PricingSection() {
                     <span className={`text-4xl font-bold tracking-tight ${plan.highlighted ? "text-white" : "text-slate-900"}`}>
                       {plan.price}
                     </span>
-                    <span className={`text-xs ${plan.highlighted ? "text-blue-200" : "text-slate-400"}`}>/month</span>
+                    <span className={`text-xs ${plan.highlighted ? "text-blue-200" : "text-slate-400"}`}>one-time credits</span>
                   </div>
                   <p className={`mt-1 text-xs ${plan.highlighted ? "text-blue-100" : "text-slate-500"}`}>{plan.tagline}</p>
 
@@ -150,6 +167,65 @@ export const PricingSection = memo(function PricingSection() {
               </motion.div>
             ))}
           </div>
+        </Parallax>
+
+        <Parallax offset={40} className="mt-6">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, delay: 0.3, ease: "easeOut" }}
+            className="relative mx-auto flex max-w-4xl flex-col items-center gap-6 overflow-hidden rounded-3xl border-[10px] border-white p-8 sm:flex-row sm:justify-between sm:p-10"
+            style={{
+              background: "linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 55%, #0A0A0A 100%)",
+              boxShadow: "0 24px 70px -20px rgba(0,0,0,0.45)",
+            }}
+          >
+            <svg
+              aria-hidden
+              className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.22]"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <filter id="freeGrain" x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.72 0.68"
+                  numOctaves="4"
+                  seed="7"
+                  stitchTiles="stitch"
+                  result="noise"
+                />
+                <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise" />
+                <feComponentTransfer in="grayNoise" result="contrastNoise">
+                  <feFuncR type="linear" slope="4" intercept="-1.5" />
+                  <feFuncG type="linear" slope="4" intercept="-1.5" />
+                  <feFuncB type="linear" slope="4" intercept="-1.5" />
+                </feComponentTransfer>
+              </filter>
+              <rect width="100%" height="100%" filter="url(#freeGrain)" />
+            </svg>
+
+            <div className="relative z-10 flex flex-col items-center gap-1.5 text-center sm:items-start sm:text-left">
+              <div className="flex items-center gap-2">
+                <span className="text-4xl font-bold tracking-tight text-white">$0</span>
+                <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white/80">
+                  Get started free
+                </span>
+              </div>
+              <p className="max-w-sm text-sm leading-relaxed text-white/60">
+                1 full generation on us — see the whole pipeline run, with read
+                access to the research papers behind every design decision.
+              </p>
+            </div>
+
+            <Link
+              href="/signin"
+              className="relative z-10 inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              Try it free
+              <ExternalLink className="size-3.5 shrink-0" strokeWidth={2} />
+            </Link>
+          </motion.div>
         </Parallax>
       </div>
     </section>

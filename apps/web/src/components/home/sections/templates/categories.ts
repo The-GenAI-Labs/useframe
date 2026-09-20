@@ -18,6 +18,7 @@ export type Category = {
   iconTone: string;
   badge: string;
   src: string;
+  grainColor: string;
 };
 
 export const CATEGORIES: Category[] = [
@@ -29,6 +30,7 @@ export const CATEGORIES: Category[] = [
     iconTone: "bg-sky-100 text-sky-600",
     badge: "AI-Powered Inspection Platform",
     src: "/auth/login14.png",
+    grainColor: "#0284c7",
   },
   {
     title: "Healthcare",
@@ -38,6 +40,7 @@ export const CATEGORIES: Category[] = [
     iconTone: "bg-rose-100 text-rose-600",
     badge: "Smart Health, Simplified",
     src: "/auth/login18.png",
+    grainColor: "#e11d48",
   },
   {
     title: "Fitness",
@@ -47,6 +50,7 @@ export const CATEGORIES: Category[] = [
     iconTone: "bg-orange-100 text-orange-600",
     badge: "The Fitness Journey Starts Here",
     src: "/auth/login16.png",
+    grainColor: "#ea580c",
   },
   {
     title: "SaaS",
@@ -56,6 +60,7 @@ export const CATEGORIES: Category[] = [
     iconTone: "bg-violet-100 text-violet-600",
     badge: "Ship faster with clean code",
     src: "/auth/login17.png",
+    grainColor: "#7c3aed",
   },
   {
     title: "E-Commerce",
@@ -65,6 +70,7 @@ export const CATEGORIES: Category[] = [
     iconTone: "bg-emerald-100 text-emerald-600",
     badge: "Shop the future of fashion",
     src: "/auth/login13.png",
+    grainColor: "#059669",
   },
   {
     title: "Education",
@@ -74,6 +80,7 @@ export const CATEGORIES: Category[] = [
     iconTone: "bg-amber-100 text-amber-600",
     badge: "Learn anything, anywhere",
     src: "/auth/landing1.png",
+    grainColor: "#d97706",
   },
   {
     title: "Finance",
@@ -83,6 +90,7 @@ export const CATEGORIES: Category[] = [
     iconTone: "bg-blue-100 text-blue-600",
     badge: "Manage your secret finance system",
     src: "/auth/login12.png",
+    grainColor: "#2563eb",
   },
   {
     title: "Sustainability",
@@ -92,5 +100,6 @@ export const CATEGORIES: Category[] = [
     iconTone: "bg-teal-100 text-teal-600",
     badge: "New Energy for the Future",
     src: "/auth/landing2.png",
+    grainColor: "#0d9488",
   },
 ];

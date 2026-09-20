@@ -7,11 +7,6 @@ export const NAV_ITEMS = [
     "Account",
     "Privacy",
     "Billing",
-    "Usage",
-    "Capabilities",
-    "Connectors",
-    "Claude Code",
-    "Claude in Chrome",
 ] as const;
 
 export type NavItem = (typeof NAV_ITEMS)[number];
@@ -39,9 +34,6 @@ export const SettingsNav = memo(function SettingsNav({ active, onChange }: Setti
                     }`}
                 >
                     <span>{item}</span>
-                    {item === "Claude in Chrome" && (
-                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-md bg-tertiary border border-base text-mut">Beta</span>
-                    )}
                 </button>
             ))}
         </aside>

@@ -7,15 +7,17 @@ export type CopyPromptVars = {
   pageType: string
   sectionType: string
   sectionIndex: number
+  brandTone?: string
+  frameworkRationale?: string
 }
 
 export const DEFAULT_COPY_PROMPT = (v: CopyPromptVars): string => `
 You are a conversion copywriter using the ${v.copyFramework} framework.
-
+${v.frameworkRationale ? `Why this framework was chosen: ${v.frameworkRationale}\n` : ""}
 Startup: ${v.startupIdea}
 Niche: ${v.niche}
 Target Audience: ${v.targetAudience}
-Page: ${v.pageTitle} (${v.pageType})
+${v.brandTone ? `Brand tone to match: ${v.brandTone}\n` : ""}Page: ${v.pageTitle} (${v.pageType})
 Section: ${v.sectionType} (position ${v.sectionIndex})
 
 Write compelling copy for this section. Respond ONLY with valid JSON:

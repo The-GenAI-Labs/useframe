@@ -1,0 +1,27 @@
+[
+  {
+    "from": "WCAG 2.1 requires a minimum contrast ratio of 4.5:1 between normal-size text and its background (3:1 for large text 18pt+/14pt bold+), below which text is considered inaccessible to users with low vision or color vision deficiencies.",
+    "to": "For senior-oriented interfaces, high color contrast between foreground and background (beyond WCAG AA minimums) measurably reduces task errors due to age-related decline in contrast sensitivity.",
+    "relation": "reinforces"
+  },
+  {
+    "from": "Contrast between primary and accent color drives visual hierarchy more than hue choice itself — users fixate on the highest-contrast element on a page first regardless of its color identity.",
+    "to": "Visual hierarchy created through size, weight, and whitespace differences (rather than color alone) allows users to correctly identify a page's primary action within milliseconds, and pages lacking clear hierarchy show measurably slower task completion.",
+    "relation": "reinforces"
+  },
+  {
+    "from": "Genuine scarcity (a real, limited quantity or time window) increases urgency and conversion rate, but users who detect fabricated or perpetually-resetting scarcity messaging show reduced trust and lower long-term conversion.",
+    "to": "Social proof (showing that other people have already taken the desired action) reduces perceived risk and increases conversion, and is most effective when the reference group is similar to the visitor (e.g. 'used by 10,000 marketers' for a marketing tool).",
+    "relation": "reinforces"
+  },
+  {
+    "from": "A single strong weight contrast between headline and body (e.g. 700 vs 400) creates clearer visual hierarchy than introducing an entirely second typeface, and is a lower-risk way to differentiate heading and body text.",
+    "to": "Using more than 2-3 distinct typefaces on a single page measurably increases perceived visual clutter and reduces perceived professionalism, regardless of how well each individual typeface performs in isolation.",
+    "relation": "supports"
+  },
+  {
+    "from": "Fitts's Law predicts that the time to acquire a target is a function of its distance and size — larger, closer interactive elements are selected faster and with fewer errors, which is why primary CTAs benefit from generous size and proximity to the user's likely focal point.",
+    "to": "WCAG 2.1 recommends touch targets be at least 44x44 CSS pixels (WCAG 2.2 formalizes 24x24px as the AA minimum, with 44x44px recommended), since smaller targets significantly increase mis-tap rates for users with motor impairments or larger fingers.",
+    "relation": "requires"
+  }
+]

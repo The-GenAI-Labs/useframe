@@ -1,14 +1,7 @@
 import { z } from "zod"
-
-export const CitationSchema = z.object({
-  id: z.string(),
-  articleId: z.string().optional(),
-  title: z.string(),
-  source: z.string(),
-  url: z.string().optional(),
-  relevance: z.string().optional(),
-  appliedTo: z.string().optional(),
-})
+import { CitationSchema } from "./citation.schema.js"
+import { DesignBriefSchema } from "./designBrief.schema.js"
+import { ResearchReportDataSchema } from "./research.schema.js"
 
 export const SeoSchema = z.object({
   title: z.string(),
@@ -99,12 +92,12 @@ export const SiteSpecSchema = z.object({
   }),
   copyFramework: z.enum(["AIDA", "PAS", "FAB", "PASTOR"]),
   citations: z.array(CitationSchema),
+  designBrief: DesignBriefSchema.optional(),
 })
 
 export type SiteSpec = z.infer<typeof SiteSpecSchema>
 export type Section = z.infer<typeof SectionSchema>
 export type SeoMeta = z.infer<typeof SeoSchema>
-export type Citation = z.infer<typeof CitationSchema>
 export type SitePage = SiteSpec["pages"][number]
 export type DesignSystem = SiteSpec["designSystem"]
 
@@ -160,6 +153,12 @@ export type SSEErrorEvent = {
   message: string
 }
 
+export type SSEBriefReadyEvent = {
+  type: "brief_ready"
+  brief: z.infer<typeof DesignBriefSchema>
+  competitorInsights?: z.infer<typeof ResearchReportDataSchema>["competitorInsights"]
+}
+
 export type SSEEvent =
   | SSEStageEvent
   | SSETokenEvent
@@ -167,3 +166,4 @@ export type SSEEvent =
   | SSEVersionReadyEvent
   | SSEProjectCreatedEvent
   | SSEErrorEvent
+  | SSEBriefReadyEvent

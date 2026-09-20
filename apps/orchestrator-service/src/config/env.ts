@@ -15,11 +15,23 @@ const envSchema = z.object({
   OPENAI_API_KEY: z.string().default(""),
   KIMI_API_KEY: z.string().default(""),
 
+  // Optional — competitor discovery (Brave Search) becomes a graceful no-op
+  // when unset, see tools/competitorSearch.ts.
+  BRAVE_API_KEY: z.string().default(""),
+
   JWT_ACCESS_SECRET: z
     .string()
     .min(32, "JWT_ACCESS_SECRET must be at least 32 chars"),
-  RESEARCH_SERVICE_URL: z.string().default("http://localhost:4002"),
+  RESEARCH_SERVICE_URL: z.string().default("http://localhost:4004"),
   CLIENT_URL: z.string().default("http://localhost:3000"),
+  REDIS_URL: z.string().default("redis://localhost:6379"),
+
+  // Langfuse tracing — no-op until real credentials are supplied. Wiring
+  // the SDK flags is Stage 3 scope; standing up self-hosted Langfuse
+  // infra (Helm/k8s) is a separate decision, not made here.
+  LANGFUSE_PUBLIC_KEY: z.string().default(""),
+  LANGFUSE_SECRET_KEY: z.string().default(""),
+  LANGFUSE_HOST: z.string().default(""),
 })
   .refine(
     (d) =>
