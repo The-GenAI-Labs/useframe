@@ -18,3 +18,15 @@ export const PlanRejectSchema = z.object({
 })
 
 export type PlanRejectInput = z.infer<typeof PlanRejectSchema>
+
+// The frontend already holds both candidates from the candidates_ready SSE
+// event, so it sends them back rather than forcing a re-fetch. "auto" means
+// the user deferred to the planner's own `recommended` pick.
+export const PlanSelectSchema = z.object({
+  choice: z.enum(["A", "B", "auto"]),
+  candidateA: DesignBriefSchema,
+  candidateB: DesignBriefSchema,
+  recommended: z.enum(["A", "B"]),
+})
+
+export type PlanSelectInput = z.infer<typeof PlanSelectSchema>

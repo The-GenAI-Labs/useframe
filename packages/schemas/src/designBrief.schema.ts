@@ -45,3 +45,15 @@ export const DesignBriefSchema = z.object({
 })
 
 export type DesignBrief = z.infer<typeof DesignBriefSchema>
+
+// The planner produces TWO genuinely distinct directions from the same
+// research findings, plus its own pick. The user chooses A, B, or defers to
+// `recommended` ("auto") — see PlanSelectSchema in project.schema.ts.
+export const DesignBriefCandidatesSchema = z.object({
+  candidateA: DesignBriefSchema,
+  candidateB: DesignBriefSchema,
+  recommended: z.enum(["A", "B"]),
+  recommendedReason: z.string(),
+})
+
+export type DesignBriefCandidates = z.infer<typeof DesignBriefCandidatesSchema>

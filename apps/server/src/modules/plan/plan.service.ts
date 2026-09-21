@@ -4,6 +4,7 @@ import { signAccessToken } from "@/lib/jwt.js"
 import { callPlan } from "@/lib/orchestrator.js"
 import { CreditsService } from "@/modules/credits/credits.service.js"
 import type { DesignBrief } from "@repo/schemas"
+import type { PlanSelectInput } from "./plan.schema.js"
 
 const RESEARCH_CREDIT_COST = 2
 
@@ -81,9 +82,9 @@ export const PlanService = {
       ? `${project.startupIdea}\n\n(Revision note from a rejected earlier brief: ${feedback})`
       : project.startupIdea
 
-    let brief: DesignBrief
+    let planResult: Awaited<ReturnType<typeof callPlan>>
     try {
-      brief = await callPlan(
+      planResult = await callPlan(
         {
           projectId: project.id,
           versionId: project.currentVersionId!,
@@ -105,10 +106,14 @@ export const PlanService = {
       throw err
     }
 
+    // The recommended candidate is stored so GET /research still returns a
+    // brief (the tab renders it while the user decides), but it is NOT the
+    // committed choice — select() overwrites it with whichever candidate the
+    // user actually picks.
     await prisma.$transaction([
       prisma.projectVersion.update({
         where: { id: project.currentVersionId! },
-        data: { designBrief: brief as unknown as Prisma.InputJsonValue },
+        data: { designBrief: planResult.brief as unknown as Prisma.InputJsonValue },
       }),
       prisma.pipelineState.update({
         where: { projectId: project.id },
@@ -116,7 +121,7 @@ export const PlanService = {
       }),
     ])
 
-    return { brief }
+    return { brief: planResult.brief, candidates: planResult.candidates }
   },
 
   async approve(user: { id: string; email: string; plan: string }, slug: string) {
@@ -174,6 +179,73 @@ export const PlanService = {
     }
 
     return { pipelineState: result.pipelineState }
+  },
+
+  // Two-candidate replacement for approve(): the user picks a direction
+  // rather than approving a single pre-chosen brief. Everything after the
+  // brief is resolved is identical to approve() — same outcome row, same
+  // 2-credit Research deduction, same pipeline advance to WEBSITE — so the
+  // two paths can't drift apart in what a "research complete" means.
+  async select(
+    user: { id: string; email: string; plan: string },
+    slug: string,
+    input: PlanSelectInput
+  ) {
+    const project = await loadProjectWithPipeline(user.id, slug)
+    const pipeline = project.pipelineState!
+
+    if (pipeline.currentStep !== "RESEARCH" || pipeline.researchStatus !== "AWAITING_APPROVAL") {
+      throw new AppError("Research is not awaiting approval", 409)
+    }
+
+    const resolved = input.choice === "auto" ? input.recommended : input.choice
+    const chosenBrief = resolved === "A" ? input.candidateA : input.candidateB
+
+    const result = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
+      await tx.projectVersion.update({
+        where: { id: project.currentVersionId! },
+        data: { designBrief: chosenBrief as unknown as Prisma.InputJsonValue },
+      })
+
+      await tx.generationOutcome.create({
+        data: {
+          projectId: project.id,
+          versionId: project.currentVersionId!,
+          brief: chosenBrief as unknown as Prisma.InputJsonValue,
+          inputs: {
+            startupIdea: project.startupIdea,
+            niche: project.niche,
+            targetAudience: project.targetAudience,
+          } as Prisma.InputJsonValue,
+          selectionMethod: input.choice,
+        },
+      })
+
+      const { autoReloadTopUpCents } = await CreditsService.deduct(
+        tx,
+        user.id,
+        RESEARCH_CREDIT_COST,
+        "Research (design direction) selection",
+        project.id
+      )
+
+      const updated = await tx.pipelineState.update({
+        where: { projectId: project.id },
+        data: {
+          researchStatus: "APPROVED",
+          currentStep: "WEBSITE",
+          websiteStatus: "PENDING",
+        },
+      })
+
+      return { pipelineState: updated, autoReloadTopUpCents }
+    })
+
+    if (result.autoReloadTopUpCents !== null) {
+      await CreditsService.triggerAutoReload(user.id, result.autoReloadTopUpCents)
+    }
+
+    return { pipelineState: result.pipelineState, brief: chosenBrief }
   },
 
   async reject(

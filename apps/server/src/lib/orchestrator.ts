@@ -74,10 +74,17 @@ export async function callResearch(
   return body.data
 }
 
+export type PlanCandidates = {
+  candidateA: { brief: DesignBrief; previewUrl: string }
+  candidateB: { brief: DesignBrief; previewUrl: string }
+  recommended: "A" | "B"
+  recommendedReason: string
+}
+
 export async function callPlan(
   payload: PlanRequest,
   userToken: string
-): Promise<DesignBrief> {
+): Promise<{ brief: DesignBrief; candidates?: PlanCandidates }> {
   // orchestrator-service's POST /plan was converted to an SSE endpoint for
   // the new tier-gated generation flow — this untouched DesignBrief-approval
   // workflow (apps/server/src/modules/plan) calls the plain-JSON /plan/sync
@@ -92,7 +99,7 @@ export async function callPlan(
   })
 
   const body = (await res.json()) as
-    | { success: true; data: { brief: DesignBrief } }
+    | { success: true; data: { brief: DesignBrief; candidates?: PlanCandidates } }
     | { success: false; message: string }
 
   if (!res.ok || !body.success) {
@@ -100,7 +107,7 @@ export async function callPlan(
     throw new AppError(message, res.status >= 400 && res.status < 500 ? res.status : 502)
   }
 
-  return body.data.brief
+  return { brief: body.data.brief, candidates: body.data.candidates }
 }
 
 export async function callSeoMaterialize(

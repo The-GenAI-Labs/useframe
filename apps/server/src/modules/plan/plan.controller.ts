@@ -2,7 +2,12 @@ import type { Response, NextFunction } from "express"
 import type { AuthenticatedRequest } from "@/types/index.js"
 import { PlanService } from "./plan.service.js"
 import { callGetFinding } from "@/lib/researchService.js"
-import type { PlanGenerateInput, PlanRejectInput, PlanUpdateInput } from "./plan.schema.js"
+import type {
+  PlanGenerateInput,
+  PlanRejectInput,
+  PlanSelectInput,
+  PlanUpdateInput,
+} from "./plan.schema.js"
 
 export const PlanController = {
   get: async (
@@ -53,6 +58,23 @@ export const PlanController = {
   ): Promise<void> => {
     try {
       const result = await PlanService.approve(req.user!, req.params.slug!)
+      res.status(200).json({ success: true, data: result })
+    } catch (err) {
+      next(err)
+    }
+  },
+
+  select: async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const result = await PlanService.select(
+        req.user!,
+        req.params.slug!,
+        req.body as PlanSelectInput
+      )
       res.status(200).json({ success: true, data: result })
     } catch (err) {
       next(err)

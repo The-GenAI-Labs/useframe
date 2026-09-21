@@ -41,6 +41,7 @@ export type GenerationOutcomeMinAggregateOutputType = {
   score: number | null
   deployed: boolean | null
   createdAt: Date | null
+  selectionMethod: string | null
 }
 
 export type GenerationOutcomeMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type GenerationOutcomeMaxAggregateOutputType = {
   score: number | null
   deployed: boolean | null
   createdAt: Date | null
+  selectionMethod: string | null
 }
 
 export type GenerationOutcomeCountAggregateOutputType = {
@@ -62,6 +64,7 @@ export type GenerationOutcomeCountAggregateOutputType = {
   score: number
   deployed: number
   createdAt: number
+  selectionMethod: number
   _all: number
 }
 
@@ -81,6 +84,7 @@ export type GenerationOutcomeMinAggregateInputType = {
   score?: true
   deployed?: true
   createdAt?: true
+  selectionMethod?: true
 }
 
 export type GenerationOutcomeMaxAggregateInputType = {
@@ -90,6 +94,7 @@ export type GenerationOutcomeMaxAggregateInputType = {
   score?: true
   deployed?: true
   createdAt?: true
+  selectionMethod?: true
 }
 
 export type GenerationOutcomeCountAggregateInputType = {
@@ -102,6 +107,7 @@ export type GenerationOutcomeCountAggregateInputType = {
   score?: true
   deployed?: true
   createdAt?: true
+  selectionMethod?: true
   _all?: true
 }
 
@@ -201,6 +207,7 @@ export type GenerationOutcomeGroupByOutputType = {
   score: number | null
   deployed: boolean
   createdAt: Date
+  selectionMethod: string | null
   _count: GenerationOutcomeCountAggregateOutputType | null
   _avg: GenerationOutcomeAvgAggregateOutputType | null
   _sum: GenerationOutcomeSumAggregateOutputType | null
@@ -236,6 +243,7 @@ export type GenerationOutcomeWhereInput = {
   score?: Prisma.IntNullableFilter<"GenerationOutcome"> | number | null
   deployed?: Prisma.BoolFilter<"GenerationOutcome"> | boolean
   createdAt?: Prisma.DateTimeFilter<"GenerationOutcome"> | Date | string
+  selectionMethod?: Prisma.StringNullableFilter<"GenerationOutcome"> | string | null
 }
 
 export type GenerationOutcomeOrderByWithRelationInput = {
@@ -248,6 +256,7 @@ export type GenerationOutcomeOrderByWithRelationInput = {
   score?: Prisma.SortOrderInput | Prisma.SortOrder
   deployed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  selectionMethod?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type GenerationOutcomeWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +272,7 @@ export type GenerationOutcomeWhereUniqueInput = Prisma.AtLeast<{
   score?: Prisma.IntNullableFilter<"GenerationOutcome"> | number | null
   deployed?: Prisma.BoolFilter<"GenerationOutcome"> | boolean
   createdAt?: Prisma.DateTimeFilter<"GenerationOutcome"> | Date | string
+  selectionMethod?: Prisma.StringNullableFilter<"GenerationOutcome"> | string | null
 }, "id">
 
 export type GenerationOutcomeOrderByWithAggregationInput = {
@@ -275,6 +285,7 @@ export type GenerationOutcomeOrderByWithAggregationInput = {
   score?: Prisma.SortOrderInput | Prisma.SortOrder
   deployed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  selectionMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.GenerationOutcomeCountOrderByAggregateInput
   _avg?: Prisma.GenerationOutcomeAvgOrderByAggregateInput
   _max?: Prisma.GenerationOutcomeMaxOrderByAggregateInput
@@ -295,6 +306,7 @@ export type GenerationOutcomeScalarWhereWithAggregatesInput = {
   score?: Prisma.IntNullableWithAggregatesFilter<"GenerationOutcome"> | number | null
   deployed?: Prisma.BoolWithAggregatesFilter<"GenerationOutcome"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"GenerationOutcome"> | Date | string
+  selectionMethod?: Prisma.StringNullableWithAggregatesFilter<"GenerationOutcome"> | string | null
 }
 
 export type GenerationOutcomeCreateInput = {
@@ -307,6 +319,7 @@ export type GenerationOutcomeCreateInput = {
   score?: number | null
   deployed?: boolean
   createdAt?: Date | string
+  selectionMethod?: string | null
 }
 
 export type GenerationOutcomeUncheckedCreateInput = {
@@ -319,6 +332,7 @@ export type GenerationOutcomeUncheckedCreateInput = {
   score?: number | null
   deployed?: boolean
   createdAt?: Date | string
+  selectionMethod?: string | null
 }
 
 export type GenerationOutcomeUpdateInput = {
@@ -331,6 +345,7 @@ export type GenerationOutcomeUpdateInput = {
   score?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deployed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  selectionMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type GenerationOutcomeUncheckedUpdateInput = {
@@ -343,6 +358,7 @@ export type GenerationOutcomeUncheckedUpdateInput = {
   score?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deployed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  selectionMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type GenerationOutcomeCreateManyInput = {
@@ -355,6 +371,7 @@ export type GenerationOutcomeCreateManyInput = {
   score?: number | null
   deployed?: boolean
   createdAt?: Date | string
+  selectionMethod?: string | null
 }
 
 export type GenerationOutcomeUpdateManyMutationInput = {
@@ -367,6 +384,7 @@ export type GenerationOutcomeUpdateManyMutationInput = {
   score?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deployed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  selectionMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type GenerationOutcomeUncheckedUpdateManyInput = {
@@ -379,6 +397,7 @@ export type GenerationOutcomeUncheckedUpdateManyInput = {
   score?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   deployed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  selectionMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type GenerationOutcomeCountOrderByAggregateInput = {
@@ -391,6 +410,7 @@ export type GenerationOutcomeCountOrderByAggregateInput = {
   score?: Prisma.SortOrder
   deployed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  selectionMethod?: Prisma.SortOrder
 }
 
 export type GenerationOutcomeAvgOrderByAggregateInput = {
@@ -404,6 +424,7 @@ export type GenerationOutcomeMaxOrderByAggregateInput = {
   score?: Prisma.SortOrder
   deployed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  selectionMethod?: Prisma.SortOrder
 }
 
 export type GenerationOutcomeMinOrderByAggregateInput = {
@@ -413,6 +434,7 @@ export type GenerationOutcomeMinOrderByAggregateInput = {
   score?: Prisma.SortOrder
   deployed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  selectionMethod?: Prisma.SortOrder
 }
 
 export type GenerationOutcomeSumOrderByAggregateInput = {
@@ -431,6 +453,7 @@ export type GenerationOutcomeSelect<ExtArgs extends runtime.Types.Extensions.Int
   score?: boolean
   deployed?: boolean
   createdAt?: boolean
+  selectionMethod?: boolean
 }, ExtArgs["result"]["generationOutcome"]>
 
 export type GenerationOutcomeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -443,6 +466,7 @@ export type GenerationOutcomeSelectCreateManyAndReturn<ExtArgs extends runtime.T
   score?: boolean
   deployed?: boolean
   createdAt?: boolean
+  selectionMethod?: boolean
 }, ExtArgs["result"]["generationOutcome"]>
 
 export type GenerationOutcomeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -455,6 +479,7 @@ export type GenerationOutcomeSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   score?: boolean
   deployed?: boolean
   createdAt?: boolean
+  selectionMethod?: boolean
 }, ExtArgs["result"]["generationOutcome"]>
 
 export type GenerationOutcomeSelectScalar = {
@@ -467,9 +492,10 @@ export type GenerationOutcomeSelectScalar = {
   score?: boolean
   deployed?: boolean
   createdAt?: boolean
+  selectionMethod?: boolean
 }
 
-export type GenerationOutcomeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionId" | "brief" | "inputs" | "userEdits" | "score" | "deployed" | "createdAt", ExtArgs["result"]["generationOutcome"]>
+export type GenerationOutcomeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionId" | "brief" | "inputs" | "userEdits" | "score" | "deployed" | "createdAt" | "selectionMethod", ExtArgs["result"]["generationOutcome"]>
 
 export type $GenerationOutcomePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "GenerationOutcome"
@@ -484,6 +510,7 @@ export type $GenerationOutcomePayload<ExtArgs extends runtime.Types.Extensions.I
     score: number | null
     deployed: boolean
     createdAt: Date
+    selectionMethod: string | null
   }, ExtArgs["result"]["generationOutcome"]>
   composites: {}
 }
@@ -916,6 +943,7 @@ export interface GenerationOutcomeFieldRefs {
   readonly score: Prisma.FieldRef<"GenerationOutcome", 'Int'>
   readonly deployed: Prisma.FieldRef<"GenerationOutcome", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"GenerationOutcome", 'DateTime'>
+  readonly selectionMethod: Prisma.FieldRef<"GenerationOutcome", 'String'>
 }
     
 

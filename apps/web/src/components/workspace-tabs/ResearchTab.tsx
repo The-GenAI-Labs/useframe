@@ -2,7 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react"
 import type { ProjectDetail } from "@/lib/api/services/projects.service"
-import { researchApi, type DesignBrief } from "@/lib/api/services/research.service"
+import {
+  researchApi,
+  type DesignBrief,
+  type PlanCandidates,
+} from "@/lib/api/services/research.service"
+import { CandidatePicker } from "./CandidatePicker"
 import { StepApprovalBar } from "./StepApprovalBar"
 import { BriefFieldEditor } from "./BriefFieldEditor"
 import type { PipelineStepStatus } from "@/lib/api/services/pipeline.service"
@@ -101,6 +106,9 @@ export function ResearchTab({ project, pipelineStatus, locked, onApproved }: Pro
   const [isApproving, setIsApproving] = useState(false)
   const [isRejecting, setIsRejecting] = useState(false)
   const [editingField, setEditingField] = useState<"colors" | "typography" | null>(null)
+  // Populated by generate(); the picker replaces the approve bar while the
+  // user still has a choice to make. Cleared once they select.
+  const [candidates, setCandidates] = useState<PlanCandidates | null>(null)
 
   const load = useCallback(() => {
     if (!project) {
@@ -128,8 +136,9 @@ export function ResearchTab({ project, pipelineStatus, locked, onApproved }: Pro
       setIsGenerating(true)
       researchApi
         .generate(project.slug, feedback)
-        .then(({ brief }) => {
+        .then(({ brief, candidates: next }) => {
           setState({ status: "ready", brief })
+          setCandidates(next ?? null)
         })
         .catch(() => {
           setState({ status: "error" })
@@ -157,6 +166,22 @@ export function ResearchTab({ project, pipelineStatus, locked, onApproved }: Pro
       .then(() => onApproved?.())
       .finally(() => setIsApproving(false))
   }, [project, onApproved])
+
+  const handleSelect = useCallback(
+    async (choice: "A" | "B" | "auto") => {
+      if (!project || !candidates) return
+      const { brief } = await researchApi.select(project.slug, {
+        choice,
+        candidateA: candidates.candidateA.brief,
+        candidateB: candidates.candidateB.brief,
+        recommended: candidates.recommended,
+      })
+      setState({ status: "ready", brief })
+      setCandidates(null)
+      onApproved?.()
+    },
+    [project, candidates, onApproved],
+  )
 
   const handleReject = useCallback(
     (feedback: string) => {
@@ -316,7 +341,19 @@ export function ResearchTab({ project, pipelineStatus, locked, onApproved }: Pro
               </svg>
               Approved
             </div>
+          ) : pipelineStatus === "AWAITING_APPROVAL" && candidates ? (
+            // Two directions available — the user picks one instead of
+            // approving a single pre-chosen brief.
+            <CandidatePicker
+              candidateA={candidates.candidateA}
+              candidateB={candidates.candidateB}
+              recommended={candidates.recommended}
+              recommendedReason={candidates.recommendedReason}
+              onSelect={handleSelect}
+            />
           ) : pipelineStatus === "AWAITING_APPROVAL" ? (
+            // No candidates (e.g. a brief generated before this flow shipped,
+            // or reloaded from the DB) — fall back to plain approve/reject.
             <StepApprovalBar
               onApprove={handleApprove}
               onReject={handleReject}

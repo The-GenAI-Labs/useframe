@@ -4022,7 +4022,8 @@ export const GenerationOutcomeScalarFieldEnum = {
   userEdits: 'userEdits',
   score: 'score',
   deployed: 'deployed',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  selectionMethod: 'selectionMethod'
 } as const
 
 export type GenerationOutcomeScalarFieldEnum = (typeof GenerationOutcomeScalarFieldEnum)[keyof typeof GenerationOutcomeScalarFieldEnum]

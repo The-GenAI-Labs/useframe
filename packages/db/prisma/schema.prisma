@@ -968,6 +968,12 @@ model GenerationOutcome {
   deployed  Boolean  @default(false)
   createdAt DateTime @default(now())
 
+  // Which of the two planner candidates produced `brief`: "A", "B", or
+  // "auto" when the user deferred to the planner's own recommendation.
+  // Tracked to tune the planner's `recommended` logic later — if people
+  // routinely override it, the recommendation heuristic is wrong.
+  selectionMethod String?
+
   @@index([projectId])
   @@map("generation_outcomes")
 }

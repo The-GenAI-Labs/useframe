@@ -1,10 +1,10 @@
 import { Router, type Request, type Response, type NextFunction } from "express"
 import { z } from "zod"
-import { PlanSSERequestSchema } from "@repo/schemas"
+import { PlanSSERequestSchema, buildHeroPreviewDataUrl } from "@repo/schemas"
 import { verifyToken } from "@/lib/auth.js"
 import { initSSE, sseWrite, sseError } from "@/llm/stream.js"
 import { getModelForTier } from "@/llm/router.js"
-import { runPlannerAgent } from "@/agents/planner.agent.js"
+import { runPlannerCandidatesAgent } from "@/agents/planner.agent.js"
 import { runResearchAgent } from "@/agents/research.agent.js"
 import { callRetrieve, callDomainPattern, callAudienceModifier } from "@/lib/researchService.js"
 import { findCompetitorUrls, enqueueCompetitorScans, waitForScans } from "@/tools/competitorSearch.js"
@@ -157,11 +157,11 @@ router.post("/plan", (req: Request, res: Response): void => {
       sseWrite(res, {
         type: "stage",
         stage: "RESEARCH",
-        message: "Compiling design brief...",
+        message: "Compiling two design directions...",
       })
 
-      const [brief, researchReport] = await Promise.all([
-        runPlannerAgent({ extracted: plannerExtracted, results, domainPattern, audienceModifier }, model),
+      const [candidates, researchReport] = await Promise.all([
+        runPlannerCandidatesAgent({ extracted: plannerExtracted, results, domainPattern, audienceModifier }, model),
         runResearchAgent(
           {
             startupIdea: ideaText,
@@ -173,16 +173,10 @@ router.post("/plan", (req: Request, res: Response): void => {
         ),
       ])
 
-      // Persist the brief onto the version (matches apps/server's plan.service.ts
-      // pattern for where a DesignBrief lives) and competitorInsights onto the
-      // project's ResearchReport — this is the real wiring point point 10 of the
-      // spec calls for: scan data in, structured competitorInsights out, actually
-      // written to the DB rather than left to LLM opportunism.
-      await prisma.projectVersion.update({
-        where: { id: versionId },
-        data: { designBrief: brief as unknown as Prisma.InputJsonValue },
-      })
-
+      // NOTE: ProjectVersion.designBrief is deliberately NOT written here any
+      // more. With two candidates there is no chosen brief yet — it is stored
+      // by POST /api/projects/:slug/plan/select once the user picks, so the
+      // version never holds a direction the user didn't choose.
       if (researchReport.competitorInsights) {
         await prisma.researchReport
           .upsert({
@@ -207,15 +201,32 @@ router.post("/plan", (req: Request, res: Response): void => {
       }
 
       sseWrite(res, {
-        type: "brief_ready",
-        brief,
+        type: "stage",
+        stage: "RESEARCH",
+        message: "Rendering previews...",
+      })
+
+      // Hero previews are inline SVG data URLs built synchronously from each
+      // brief's own colours/typography — no browser, no upload, nothing to
+      // clean up. See buildHeroPreviewDataUrl in @repo/schemas.
+      const previewA = buildHeroPreviewDataUrl(candidates.candidateA)
+      const previewB = buildHeroPreviewDataUrl(candidates.candidateB)
+
+      sseWrite(res, {
+        type: "candidates_ready",
+        candidateA: { brief: candidates.candidateA, previewUrl: previewA },
+        candidateB: { brief: candidates.candidateB, previewUrl: previewB },
+        recommended: candidates.recommended,
+        recommendedReason: candidates.recommendedReason,
         competitorInsights: researchReport.competitorInsights,
       })
 
+      // Stream ends here — it does not auto-proceed to /generate. The user
+      // picks a direction via POST /api/projects/:slug/plan/select first.
       sseWrite(res, {
         type: "stage",
         stage: "COMPLETE",
-        message: "Design brief ready.",
+        message: "Two design directions ready.",
       })
     } catch (err) {
       console.error("[plan] failed:", err instanceof Error ? err.message : err)
@@ -290,10 +301,33 @@ router.post("/plan/sync", (req: Request, res: Response, next: NextFunction): voi
       // dependency, not the new tier-gated generation flow, so it keeps its
       // original always-DeepSeek behavior rather than taking a tier param.
       const model = getModelForTier("free")
-      return runPlannerAgent({ extracted, results, domainPattern, audienceModifier }, model)
+      return runPlannerCandidatesAgent({ extracted, results, domainPattern, audienceModifier }, model)
     })
-    .then((brief) => {
-      res.status(200).json({ success: true, data: { brief } })
+    .then((candidates) => {
+      // `brief` is still returned (the recommended candidate) so any caller
+      // that hasn't moved to the picker keeps working unchanged; the
+      // candidates block is additive.
+      const recommendedBrief =
+        candidates.recommended === "A" ? candidates.candidateA : candidates.candidateB
+
+      res.status(200).json({
+        success: true,
+        data: {
+          brief: recommendedBrief,
+          candidates: {
+            candidateA: {
+              brief: candidates.candidateA,
+              previewUrl: buildHeroPreviewDataUrl(candidates.candidateA),
+            },
+            candidateB: {
+              brief: candidates.candidateB,
+              previewUrl: buildHeroPreviewDataUrl(candidates.candidateB),
+            },
+            recommended: candidates.recommended,
+            recommendedReason: candidates.recommendedReason,
+          },
+        },
+      })
     })
     .catch((err) => {
       console.error("[plan/sync] failed:", err instanceof Error ? err.message : err)

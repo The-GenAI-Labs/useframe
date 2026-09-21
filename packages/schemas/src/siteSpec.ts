@@ -159,6 +159,18 @@ export type SSEBriefReadyEvent = {
   competitorInsights?: z.infer<typeof ResearchReportDataSchema>["competitorInsights"]
 }
 
+// Terminal event of the two-candidate /plan flow. The stream ends here and
+// does NOT auto-proceed to /generate — the user picks a direction first via
+// POST /api/projects/:slug/plan/select.
+export type SSECandidatesReadyEvent = {
+  type: "candidates_ready"
+  candidateA: { brief: z.infer<typeof DesignBriefSchema>; previewUrl: string }
+  candidateB: { brief: z.infer<typeof DesignBriefSchema>; previewUrl: string }
+  recommended: "A" | "B"
+  recommendedReason: string
+  competitorInsights?: z.infer<typeof ResearchReportDataSchema>["competitorInsights"]
+}
+
 export type SSEEvent =
   | SSEStageEvent
   | SSETokenEvent
@@ -167,3 +179,4 @@ export type SSEEvent =
   | SSEProjectCreatedEvent
   | SSEErrorEvent
   | SSEBriefReadyEvent
+  | SSECandidatesReadyEvent

@@ -37,6 +37,13 @@ export type DesignBrief = {
   }[]
 }
 
+export type PlanCandidates = {
+  candidateA: { brief: DesignBrief; previewUrl: string }
+  candidateB: { brief: DesignBrief; previewUrl: string }
+  recommended: "A" | "B"
+  recommendedReason: string
+}
+
 export type ResearchFinding = {
   id: string
   claim: string
@@ -68,7 +75,7 @@ export const researchApi = {
   generate: async (slug: string, feedback?: string) => {
     const { data } = await api.post<{
       success: true
-      data: { brief: DesignBrief }
+      data: { brief: DesignBrief; candidates?: PlanCandidates }
     }>(`/projects/${slug}/research/generate`, { feedback })
     return data.data
   },
@@ -77,6 +84,25 @@ export const researchApi = {
     const { data } = await api.post<{ success: true; data: unknown }>(
       `/projects/${slug}/research/approve`
     )
+    return data.data
+  },
+
+  // Two-candidate picker's replacement for approve(). Both candidates are
+  // sent back from the client (it already has them from candidates_ready),
+  // so the server needs no re-fetch. choice "auto" defers to `recommended`.
+  select: async (
+    slug: string,
+    body: {
+      choice: "A" | "B" | "auto"
+      candidateA: DesignBrief
+      candidateB: DesignBrief
+      recommended: "A" | "B"
+    }
+  ) => {
+    const { data } = await api.post<{
+      success: true
+      data: { brief: DesignBrief }
+    }>(`/projects/${slug}/research/select`, body)
     return data.data
   },
 

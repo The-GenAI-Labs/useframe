@@ -27,7 +27,8 @@ type StartPlanOptions = {
 // open at the same time for a given project.
 export function usePlanStream() {
   const { connect, disconnect } = useSSE()
-  const { setStage, setBriefReady, setError, setStreaming, reset } = usePlanStore()
+  const { setStage, setBriefReady, setCandidatesReady, setError, setStreaming, reset } =
+    usePlanStore()
 
   const startPlan = useCallback(
     (orchestratorUrl: string, payload: PlanPayload, options?: StartPlanOptions) => {
@@ -44,6 +45,19 @@ export function usePlanStream() {
               setBriefReady(event.brief, event.competitorInsights as Record<string, unknown> | undefined)
               options?.onBriefReady?.(event.brief)
               break
+            case "candidates_ready":
+              // Terminal event of the two-candidate flow. Nothing auto-
+              // proceeds from here — the picker drives /research/select.
+              setCandidatesReady(
+                {
+                  candidateA: event.candidateA,
+                  candidateB: event.candidateB,
+                  recommended: event.recommended,
+                  recommendedReason: event.recommendedReason,
+                },
+                event.competitorInsights as Record<string, unknown> | undefined,
+              )
+              break
             case "error":
               setError(event.message)
               break
@@ -55,7 +69,7 @@ export function usePlanStream() {
         onDone: () => setStreaming(false),
       })
     },
-    [connect, reset, setStage, setBriefReady, setError, setStreaming],
+    [connect, reset, setStage, setBriefReady, setCandidatesReady, setError, setStreaming],
   )
 
   return { startPlan, stopPlan: disconnect }
