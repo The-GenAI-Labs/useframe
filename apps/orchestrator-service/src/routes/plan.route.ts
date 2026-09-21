@@ -99,6 +99,12 @@ router.post("/plan", (req: Request, res: Response): void => {
         })
       }
 
+      // Bounds the worst-case Playwright-scan + LLM cost of any single free
+      // generation, abuse or not — free tier gets at most 1 competitor scan,
+      // paid gets findCompetitorUrls' existing cap of up to 3.
+      const maxCompetitors = tier === "free" ? 1 : 3
+      competitorUrls = competitorUrls.slice(0, maxCompetitors)
+
       let scannedCompetitors: { sourceUrl: string; designTokens?: unknown; extractedContent?: unknown }[] = []
 
       if (competitorUrls.length > 0) {

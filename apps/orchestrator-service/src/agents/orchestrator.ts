@@ -49,7 +49,11 @@ async function ensureProject(
 
   await prisma.project.update({
     where: { id: project.id },
-    data: { currentVersionId: version.id },
+    // generationTier mirrors apps/server's projects.service.ts stamp — this
+    // is the OTHER path that creates a Project row directly (when the
+    // caller didn't already create one via POST /projects first), so the
+    // workspace's model-tier banner reads a correct value either way.
+    data: { currentVersionId: version.id, generationTier: request.tier === "free" ? "FREE" : "PAID" },
   })
 
   await prisma.pipelineState.create({

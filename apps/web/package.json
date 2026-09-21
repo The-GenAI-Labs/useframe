@@ -11,9 +11,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^5.2.0",
     "@hookform/resolvers": "^3.9.1",
     "@hugeicons/core-free-icons": "^4.1.4",
     "@hugeicons/react": "^1.1.6",
+    "@marsidev/react-turnstile": "^1.6.1",
     "@radix-ui/react-slot": "^1.2.4",
     "@repo/schemas": "workspace:*",
     "@repo/site-builder": "workspace:*",

@@ -8,8 +8,9 @@ export function useSendMagicLink() {
     const { setMagicLinkSent, setOAuthLoading } = useAuthStore();
 
     return useMutation({
-        mutationFn: (email: string) => sendMagicLink({ email }),
-        onSuccess: (_data, email) => {
+        mutationFn: ({ email, turnstileToken }: { email: string; turnstileToken: string }) =>
+            sendMagicLink({ email, turnstileToken }),
+        onSuccess: (_data, { email }) => {
             setMagicLinkSent(email);
             setOAuthLoading(null);
         },

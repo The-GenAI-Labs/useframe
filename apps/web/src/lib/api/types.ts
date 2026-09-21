@@ -5,6 +5,7 @@ export interface ApiError {
 
 export interface SendMagicLinkPayload {
     email: string;
+    turnstileToken: string;
 }
 
 export interface SendMagicLinkResponse {

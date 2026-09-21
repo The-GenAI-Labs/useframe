@@ -80,8 +80,11 @@ export const AuthController = {
 
     exchangeTicket: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const { ticket } = req.body as ExchangeTicketInput
-            const result = await AuthService.exchangeTicket(ticket, res)
+            const { ticket, attribution, deviceFingerprint } = req.body as ExchangeTicketInput
+            const result = await AuthService.exchangeTicket(ticket, res, attribution ?? undefined, {
+                ip: req.ip ?? "unknown",
+                deviceFingerprint,
+            })
             res.status(200).json({ success: true, message: "Signed in", data: result })
         } catch (err) {
             next(err)
@@ -90,8 +93,16 @@ export const AuthController = {
 
     magicLink: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const { email } = req.body as MagicLinkInput
-            await AuthService.sendMagicLink(email)
+            const { email, turnstileToken, acceptedTerms, attribution, deviceFingerprint } =
+                req.body as MagicLinkInput
+            await AuthService.sendMagicLink(
+                email,
+                turnstileToken,
+                acceptedTerms,
+                attribution ?? undefined,
+                req.ip,
+                deviceFingerprint
+            )
             res.status(200).json({ success: true, message: "Sign-in link sent" })
         } catch (err) {
             next(err)

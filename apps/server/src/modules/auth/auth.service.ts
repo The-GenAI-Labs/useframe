@@ -2,11 +2,13 @@ import crypto from "node:crypto"
 import { Google, GitHub, generateState, generateCodeVerifier, OAuth2RequestError } from "arctic"
 import type { Response } from "express"
 import { prisma } from "@useframe/db"
+import { verifyTurnstileToken } from "@repo/schemas"
 import { signAccessToken } from "@/lib/jwt.js"
 import { setRefreshTokenCookie, clearRefreshTokenCookie } from "@/lib/cookie.js"
 import { setOAuthStateCookies, clearOAuthStateCookies } from "./oauth.state.js"
 import { AppError } from "@/middleware/errorHandler.js"
 import { env } from "@/config/env.js"
+import { assessSignupRisk } from "@/security/assessSignupRisk.js"
 
 const google = new Google(env.GOOGLE_CLIENT_ID, env.GOOGLE_CLIENT_SECRET, env.GOOGLE_REDIRECT_URI)
 const github = new GitHub(env.GITHUB_CLIENT_ID, env.GITHUB_CLIENT_SECRET, env.GITHUB_REDIRECT_URI)
@@ -15,6 +17,18 @@ const TICKET_TTL_MS = 30 * 1000
 const REFRESH_TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000
 const SESSION_TTL_MS = REFRESH_TOKEN_TTL_MS
 const MAGIC_LINK_TTL_MS = 15 * 60 * 1000
+
+// Bump this string whenever the ToS/Privacy Policy is materially revised —
+// acceptedTermsVersion on each User row records which version they agreed
+// to, so we can tell who's on stale terms if it's ever disputed.
+export const TERMS_VERSION = "2026-09-v1"
+
+export type Attribution = {
+    referralSource?: string | null
+    utmSource?: string | null
+    utmMedium?: string | null
+    utmCampaign?: string | null
+}
 
 function hashToken(raw: string): string {
     return crypto.createHash("sha256").update(raw).digest("hex")
@@ -35,6 +49,14 @@ type SafeUser = {
  * Login = an Identity row. Same email across providers links to the
  * same User (Identity.email is the linking key), so a Google sign-in
  * from someone who first signed up via magic link lands on one account.
+ *
+ * This only creates the Identity/User rows — it does NOT stamp ToS consent
+ * or attribution. For magic-link the frontend never sees an intermediate
+ * redirect, so consent is known at this same call; for OAuth the browser
+ * bounces through Google/GitHub first and control only returns to us at
+ * exchangeTicket, well after the User row exists. To keep one consistent
+ * rule for both flows, consent/attribution is always applied afterward by
+ * recordConsentAndAttribution(), once we have a resolved userId.
  */
 async function findOrCreateUserByIdentity(
     type: "EMAIL" | "GOOGLE" | "GITHUB",
@@ -133,6 +155,73 @@ async function issueTokenPair(
     setRefreshTokenCookie(res, rawRefreshToken)
 
     return { accessToken }
+}
+
+/**
+ * Idempotently stamps ToS consent + attribution onto a user, AND runs the
+ * signup risk assessment exactly once per user. Both share the same
+ * "only on first creation, never re-run on later sign-ins" guard
+ * (acceptedTermsAt) — a returning user re-confirming the checkbox, or
+ * signing in again from a new IP/device, never overwrites their original
+ * consent timestamp, first-touch attribution, or their original risk score.
+ * Risk is about how the ACCOUNT was created, not how any later sign-in
+ * looks — re-scoring on every login would be both wrong (it's not what's
+ * being measured) and a second, redundant risk-check surface.
+ *
+ * Per the core principle this whole module follows: risk scoring never
+ * blocks or delays signup itself. It's computed here, after the account
+ * already exists, purely so GenerateService.authorize() has something to
+ * read later when it decides whether to grant the free generation.
+ */
+async function recordConsentAndAttribution(
+    userId: string,
+    attribution: Attribution | undefined,
+    signupContext: { email: string; ip: string; deviceFingerprint?: string }
+): Promise<void> {
+    const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { acceptedTermsAt: true },
+    })
+    if (user?.acceptedTermsAt) return
+
+    const risk = await assessSignupRisk({
+        email: signupContext.email,
+        ip: signupContext.ip,
+        deviceFingerprint: signupContext.deviceFingerprint,
+    }).catch((err) => {
+        // Risk scoring is enrichment, never a hard dependency of signup
+        // completing — if it throws for any reason, fall back to the most
+        // conservative real decision rather than leaving the user unscored.
+        console.error("[auth] assessSignupRisk failed, defaulting to SUSPICIOUS:", err)
+        return { decision: "SUSPICIOUS" as const, score: 40, reasons: ["risk_assessment_failed"] }
+    })
+
+    await prisma.$transaction([
+        prisma.user.update({
+            where: { id: userId },
+            data: {
+                acceptedTermsAt: new Date(),
+                acceptedTermsVersion: TERMS_VERSION,
+                referralSource: attribution?.referralSource ?? undefined,
+                utmSource: attribution?.utmSource ?? undefined,
+                utmMedium: attribution?.utmMedium ?? undefined,
+                utmCampaign: attribution?.utmCampaign ?? undefined,
+                signupRiskDecision: risk.decision,
+                signupRiskScore: risk.score,
+            },
+        }),
+        prisma.signupRiskEvent.create({
+            data: {
+                userId,
+                email: signupContext.email,
+                ipAddress: signupContext.ip,
+                deviceFingerprint: signupContext.deviceFingerprint,
+                riskScore: risk.score,
+                decision: risk.decision,
+                reasons: risk.reasons,
+            },
+        }),
+    ])
 }
 
 async function getPrimaryEmail(userId: string): Promise<string> {
@@ -283,7 +372,12 @@ export const AuthService = {
         return { ticket: rawTicket }
     },
 
-    async exchangeTicket(rawTicket: string, res: Response) {
+    async exchangeTicket(
+        rawTicket: string,
+        res: Response,
+        attribution: Attribution | undefined,
+        signupMeta: { ip: string; deviceFingerprint?: string }
+    ) {
         const tokenHash = hashToken(rawTicket)
         const ticket = await prisma.ticketToken.findUnique({ where: { tokenHash } })
 
@@ -303,17 +397,51 @@ export const AuthService = {
         if (!user) throw new AppError("User not found", 404)
 
         const email = await getPrimaryEmail(user.id)
+
+        // OAuth's consent checkbox lives on the signin page, before the
+        // redirect to Google/GitHub — by the time we're back here the User
+        // row already exists, so this is where that consent (and risk
+        // scoring) actually lands.
+        await recordConsentAndAttribution(user.id, attribution, {
+            email,
+            ip: signupMeta.ip,
+            deviceFingerprint: signupMeta.deviceFingerprint,
+        })
+
         const { accessToken } = await issueTokenPair({ ...user, email }, res)
         return { accessToken, user: { ...user, email } }
     },
 
-    async sendMagicLink(email: string): Promise<void> {
+    async sendMagicLink(
+        email: string,
+        turnstileToken: string,
+        acceptedTerms: boolean,
+        attribution: Attribution | undefined,
+        remoteIp: string | undefined,
+        deviceFingerprint?: string
+    ): Promise<void> {
+        const verification = await verifyTurnstileToken(turnstileToken, env.TURNSTILE_SECRET_KEY, remoteIp)
+        if (!verification.success) {
+            throw new AppError("Bot verification failed, please try again", 400)
+        }
+
+        if (!acceptedTerms) {
+            throw new AppError("You must accept the Terms of Service to continue", 400)
+        }
+
         const rawToken = generateRawToken()
         await prisma.magicLinkToken.create({
             data: {
                 email,
                 tokenHash: hashToken(rawToken),
                 expiresAt: new Date(Date.now() + MAGIC_LINK_TTL_MS),
+                acceptedTerms,
+                referralSource: attribution?.referralSource ?? undefined,
+                utmSource: attribution?.utmSource ?? undefined,
+                utmMedium: attribution?.utmMedium ?? undefined,
+                utmCampaign: attribution?.utmCampaign ?? undefined,
+                requestIp: remoteIp,
+                deviceFingerprint,
             },
         })
 
@@ -348,6 +476,14 @@ export const AuthService = {
             throw new AppError("Invalid or expired sign-in link", 401)
         }
 
+        // Consent/attribution were captured back when the link was requested
+        // (see sendMagicLink) and travel with the token — the link is often
+        // opened in a different tab/device than the one that requested it,
+        // so we never trust anything the verify request itself claims here.
+        if (!record.acceptedTerms) {
+            throw new AppError("This sign-in link was requested without accepting the Terms of Service", 400)
+        }
+
         await prisma.magicLinkToken.update({
             where: { id: record.id },
             data: { consumedAt: new Date() },
@@ -359,6 +495,21 @@ export const AuthService = {
             record.email,
             null,
             null
+        )
+
+        await recordConsentAndAttribution(
+            user.id,
+            {
+                referralSource: record.referralSource,
+                utmSource: record.utmSource,
+                utmMedium: record.utmMedium,
+                utmCampaign: record.utmCampaign,
+            },
+            {
+                email: record.email,
+                ip: record.requestIp ?? "unknown",
+                deviceFingerprint: record.deviceFingerprint ?? undefined,
+            }
         )
 
         const { accessToken } = await issueTokenPair(user, res)

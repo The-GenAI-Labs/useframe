@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  signupRiskScore: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  signupRiskScore: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -38,6 +48,14 @@ export type UserMinAggregateOutputType = {
   hasUsedFreeGeneration: boolean | null
   stripeCustomerId: string | null
   defaultPaymentMethodId: string | null
+  referralSource: string | null
+  utmSource: string | null
+  utmMedium: string | null
+  utmCampaign: string | null
+  acceptedTermsAt: Date | null
+  acceptedTermsVersion: string | null
+  signupRiskDecision: string | null
+  signupRiskScore: number | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -54,6 +72,14 @@ export type UserMaxAggregateOutputType = {
   hasUsedFreeGeneration: boolean | null
   stripeCustomerId: string | null
   defaultPaymentMethodId: string | null
+  referralSource: string | null
+  utmSource: string | null
+  utmMedium: string | null
+  utmCampaign: string | null
+  acceptedTermsAt: Date | null
+  acceptedTermsVersion: string | null
+  signupRiskDecision: string | null
+  signupRiskScore: number | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -70,9 +96,25 @@ export type UserCountAggregateOutputType = {
   hasUsedFreeGeneration: number
   stripeCustomerId: number
   defaultPaymentMethodId: number
+  referralSource: number
+  utmSource: number
+  utmMedium: number
+  utmCampaign: number
+  acceptedTermsAt: number
+  acceptedTermsVersion: number
+  signupRiskDecision: number
+  signupRiskScore: number
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  signupRiskScore?: true
+}
+
+export type UserSumAggregateInputType = {
+  signupRiskScore?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -88,6 +130,14 @@ export type UserMinAggregateInputType = {
   hasUsedFreeGeneration?: true
   stripeCustomerId?: true
   defaultPaymentMethodId?: true
+  referralSource?: true
+  utmSource?: true
+  utmMedium?: true
+  utmCampaign?: true
+  acceptedTermsAt?: true
+  acceptedTermsVersion?: true
+  signupRiskDecision?: true
+  signupRiskScore?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -104,6 +154,14 @@ export type UserMaxAggregateInputType = {
   hasUsedFreeGeneration?: true
   stripeCustomerId?: true
   defaultPaymentMethodId?: true
+  referralSource?: true
+  utmSource?: true
+  utmMedium?: true
+  utmCampaign?: true
+  acceptedTermsAt?: true
+  acceptedTermsVersion?: true
+  signupRiskDecision?: true
+  signupRiskScore?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -120,6 +178,14 @@ export type UserCountAggregateInputType = {
   hasUsedFreeGeneration?: true
   stripeCustomerId?: true
   defaultPaymentMethodId?: true
+  referralSource?: true
+  utmSource?: true
+  utmMedium?: true
+  utmCampaign?: true
+  acceptedTermsAt?: true
+  acceptedTermsVersion?: true
+  signupRiskDecision?: true
+  signupRiskScore?: true
   _all?: true
 }
 
@@ -161,6 +227,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -191,6 +269,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -209,7 +289,17 @@ export type UserGroupByOutputType = {
   hasUsedFreeGeneration: boolean
   stripeCustomerId: string | null
   defaultPaymentMethodId: string | null
+  referralSource: string | null
+  utmSource: string | null
+  utmMedium: string | null
+  utmCampaign: string | null
+  acceptedTermsAt: Date | null
+  acceptedTermsVersion: string | null
+  signupRiskDecision: string | null
+  signupRiskScore: number | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -246,11 +336,20 @@ export type UserWhereInput = {
   hasUsedFreeGeneration?: Prisma.BoolFilter<"User"> | boolean
   stripeCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
   defaultPaymentMethodId?: Prisma.StringNullableFilter<"User"> | string | null
+  referralSource?: Prisma.StringNullableFilter<"User"> | string | null
+  utmSource?: Prisma.StringNullableFilter<"User"> | string | null
+  utmMedium?: Prisma.StringNullableFilter<"User"> | string | null
+  utmCampaign?: Prisma.StringNullableFilter<"User"> | string | null
+  acceptedTermsAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  acceptedTermsVersion?: Prisma.StringNullableFilter<"User"> | string | null
+  signupRiskDecision?: Prisma.StringNullableFilter<"User"> | string | null
+  signupRiskScore?: Prisma.IntNullableFilter<"User"> | number | null
   identities?: Prisma.IdentityListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   phoneOtps?: Prisma.PhoneOtpListRelationFilter
   ticketTokens?: Prisma.TicketTokenListRelationFilter
+  signupRiskEvents?: Prisma.SignupRiskEventListRelationFilter
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   orders?: Prisma.OrderListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
@@ -280,11 +379,20 @@ export type UserOrderByWithRelationInput = {
   hasUsedFreeGeneration?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrderInput | Prisma.SortOrder
+  referralSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmMedium?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedTermsAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedTermsVersion?: Prisma.SortOrderInput | Prisma.SortOrder
+  signupRiskDecision?: Prisma.SortOrderInput | Prisma.SortOrder
+  signupRiskScore?: Prisma.SortOrderInput | Prisma.SortOrder
   identities?: Prisma.IdentityOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   refreshTokens?: Prisma.RefreshTokenOrderByRelationAggregateInput
   phoneOtps?: Prisma.PhoneOtpOrderByRelationAggregateInput
   ticketTokens?: Prisma.TicketTokenOrderByRelationAggregateInput
+  signupRiskEvents?: Prisma.SignupRiskEventOrderByRelationAggregateInput
   subscription?: Prisma.SubscriptionOrderByWithRelationInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
@@ -317,11 +425,20 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFilter<"User"> | boolean
   defaultPaymentMethodId?: Prisma.StringNullableFilter<"User"> | string | null
+  referralSource?: Prisma.StringNullableFilter<"User"> | string | null
+  utmSource?: Prisma.StringNullableFilter<"User"> | string | null
+  utmMedium?: Prisma.StringNullableFilter<"User"> | string | null
+  utmCampaign?: Prisma.StringNullableFilter<"User"> | string | null
+  acceptedTermsAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  acceptedTermsVersion?: Prisma.StringNullableFilter<"User"> | string | null
+  signupRiskDecision?: Prisma.StringNullableFilter<"User"> | string | null
+  signupRiskScore?: Prisma.IntNullableFilter<"User"> | number | null
   identities?: Prisma.IdentityListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   refreshTokens?: Prisma.RefreshTokenListRelationFilter
   phoneOtps?: Prisma.PhoneOtpListRelationFilter
   ticketTokens?: Prisma.TicketTokenListRelationFilter
+  signupRiskEvents?: Prisma.SignupRiskEventListRelationFilter
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   orders?: Prisma.OrderListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
@@ -351,9 +468,19 @@ export type UserOrderByWithAggregationInput = {
   hasUsedFreeGeneration?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrderInput | Prisma.SortOrder
+  referralSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmMedium?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedTermsAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedTermsVersion?: Prisma.SortOrderInput | Prisma.SortOrder
+  signupRiskDecision?: Prisma.SortOrderInput | Prisma.SortOrder
+  signupRiskScore?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -373,6 +500,14 @@ export type UserScalarWhereWithAggregatesInput = {
   hasUsedFreeGeneration?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   stripeCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   defaultPaymentMethodId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  referralSource?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  utmSource?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  utmMedium?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  utmCampaign?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  acceptedTermsAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  acceptedTermsVersion?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  signupRiskDecision?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  signupRiskScore?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
 }
 
 export type UserCreateInput = {
@@ -389,11 +524,20 @@ export type UserCreateInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -423,11 +567,20 @@ export type UserUncheckedCreateInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -457,11 +610,20 @@ export type UserUpdateInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -491,11 +653,20 @@ export type UserUncheckedUpdateInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -525,6 +696,14 @@ export type UserCreateManyInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -541,6 +720,14 @@ export type UserUpdateManyMutationInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -557,6 +744,14 @@ export type UserUncheckedUpdateManyInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -573,6 +768,18 @@ export type UserCountOrderByAggregateInput = {
   hasUsedFreeGeneration?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrder
+  referralSource?: Prisma.SortOrder
+  utmSource?: Prisma.SortOrder
+  utmMedium?: Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrder
+  acceptedTermsAt?: Prisma.SortOrder
+  acceptedTermsVersion?: Prisma.SortOrder
+  signupRiskDecision?: Prisma.SortOrder
+  signupRiskScore?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  signupRiskScore?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -589,6 +796,14 @@ export type UserMaxOrderByAggregateInput = {
   hasUsedFreeGeneration?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrder
+  referralSource?: Prisma.SortOrder
+  utmSource?: Prisma.SortOrder
+  utmMedium?: Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrder
+  acceptedTermsAt?: Prisma.SortOrder
+  acceptedTermsVersion?: Prisma.SortOrder
+  signupRiskDecision?: Prisma.SortOrder
+  signupRiskScore?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -605,6 +820,18 @@ export type UserMinOrderByAggregateInput = {
   hasUsedFreeGeneration?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrder
+  referralSource?: Prisma.SortOrder
+  utmSource?: Prisma.SortOrder
+  utmMedium?: Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrder
+  acceptedTermsAt?: Prisma.SortOrder
+  acceptedTermsVersion?: Prisma.SortOrder
+  signupRiskDecision?: Prisma.SortOrder
+  signupRiskScore?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  signupRiskScore?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -634,6 +861,14 @@ export type DateTimeFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type UserCreateNestedOneWithoutIdentitiesInput = {
@@ -690,6 +925,20 @@ export type UserUpdateOneRequiredWithoutTicketTokensNestedInput = {
   upsert?: Prisma.UserUpsertWithoutTicketTokensInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTicketTokensInput, Prisma.UserUpdateWithoutTicketTokensInput>, Prisma.UserUncheckedUpdateWithoutTicketTokensInput>
+}
+
+export type UserCreateNestedOneWithoutSignupRiskEventsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSignupRiskEventsInput, Prisma.UserUncheckedCreateWithoutSignupRiskEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSignupRiskEventsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSignupRiskEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSignupRiskEventsInput, Prisma.UserUncheckedCreateWithoutSignupRiskEventsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSignupRiskEventsInput
+  upsert?: Prisma.UserUpsertWithoutSignupRiskEventsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSignupRiskEventsInput, Prisma.UserUpdateWithoutSignupRiskEventsInput>, Prisma.UserUncheckedUpdateWithoutSignupRiskEventsInput>
 }
 
 export type UserCreateNestedOneWithoutPhoneOtpsInput = {
@@ -902,10 +1151,19 @@ export type UserCreateWithoutIdentitiesInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -935,10 +1193,19 @@ export type UserUncheckedCreateWithoutIdentitiesInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -984,10 +1251,19 @@ export type UserUpdateWithoutIdentitiesInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -1017,10 +1293,19 @@ export type UserUncheckedUpdateWithoutIdentitiesInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -1050,10 +1335,19 @@ export type UserCreateWithoutSessionsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -1083,10 +1377,19 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -1132,10 +1435,19 @@ export type UserUpdateWithoutSessionsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -1165,10 +1477,19 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -1198,10 +1519,19 @@ export type UserCreateWithoutRefreshTokensInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -1231,10 +1561,19 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -1280,10 +1619,19 @@ export type UserUpdateWithoutRefreshTokensInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -1313,10 +1661,19 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -1346,10 +1703,19 @@ export type UserCreateWithoutTicketTokensInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -1379,10 +1745,19 @@ export type UserUncheckedCreateWithoutTicketTokensInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -1428,10 +1803,19 @@ export type UserUpdateWithoutTicketTokensInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -1461,10 +1845,203 @@ export type UserUncheckedUpdateWithoutTicketTokensInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSignupRiskEventsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  stripeCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSignupRiskEventsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  stripeCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSignupRiskEventsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSignupRiskEventsInput, Prisma.UserUncheckedCreateWithoutSignupRiskEventsInput>
+}
+
+export type UserUpsertWithoutSignupRiskEventsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSignupRiskEventsInput, Prisma.UserUncheckedUpdateWithoutSignupRiskEventsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSignupRiskEventsInput, Prisma.UserUncheckedCreateWithoutSignupRiskEventsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSignupRiskEventsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSignupRiskEventsInput, Prisma.UserUncheckedUpdateWithoutSignupRiskEventsInput>
+}
+
+export type UserUpdateWithoutSignupRiskEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSignupRiskEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -1494,10 +2071,19 @@ export type UserCreateWithoutPhoneOtpsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -1527,10 +2113,19 @@ export type UserUncheckedCreateWithoutPhoneOtpsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -1576,10 +2171,19 @@ export type UserUpdateWithoutPhoneOtpsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -1609,10 +2213,19 @@ export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -1642,11 +2255,20 @@ export type UserCreateWithoutOrdersInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
   creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
@@ -1675,11 +2297,20 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
   creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
@@ -1724,11 +2355,20 @@ export type UserUpdateWithoutOrdersInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
   creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
@@ -1757,11 +2397,20 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
   creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
@@ -1790,11 +2439,20 @@ export type UserCreateWithoutSubscriptionInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
   creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
@@ -1823,11 +2481,20 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
   creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
@@ -1872,11 +2539,20 @@ export type UserUpdateWithoutSubscriptionInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
   creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
@@ -1905,11 +2581,20 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
   creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
@@ -1938,11 +2623,20 @@ export type UserCreateWithoutPaymentsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
@@ -1971,11 +2665,20 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
@@ -2020,11 +2723,20 @@ export type UserUpdateWithoutPaymentsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
@@ -2053,11 +2765,20 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
@@ -2086,11 +2807,20 @@ export type UserCreateWithoutCreditBalanceInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -2119,11 +2849,20 @@ export type UserUncheckedCreateWithoutCreditBalanceInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -2168,11 +2907,20 @@ export type UserUpdateWithoutCreditBalanceInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -2201,11 +2949,20 @@ export type UserUncheckedUpdateWithoutCreditBalanceInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -2234,11 +2991,20 @@ export type UserCreateWithoutCreditTransactionsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -2267,11 +3033,20 @@ export type UserUncheckedCreateWithoutCreditTransactionsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -2316,11 +3091,20 @@ export type UserUpdateWithoutCreditTransactionsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -2349,11 +3133,20 @@ export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -2382,11 +3175,20 @@ export type UserCreateWithoutAutoReloadSettingInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -2415,11 +3217,20 @@ export type UserUncheckedCreateWithoutAutoReloadSettingInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -2464,11 +3275,20 @@ export type UserUpdateWithoutAutoReloadSettingInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -2497,11 +3317,20 @@ export type UserUncheckedUpdateWithoutAutoReloadSettingInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -2530,11 +3359,20 @@ export type UserCreateWithoutProjectsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -2563,11 +3401,20 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -2612,11 +3459,20 @@ export type UserUpdateWithoutProjectsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -2645,11 +3501,20 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -2678,11 +3543,20 @@ export type UserCreateWithoutConversationsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -2711,11 +3585,20 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -2760,11 +3643,20 @@ export type UserUpdateWithoutConversationsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -2793,11 +3685,20 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -2826,11 +3727,20 @@ export type UserCreateWithoutDeploymentsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -2859,11 +3769,20 @@ export type UserUncheckedCreateWithoutDeploymentsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -2908,11 +3827,20 @@ export type UserUpdateWithoutDeploymentsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -2941,11 +3869,20 @@ export type UserUncheckedUpdateWithoutDeploymentsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -2974,11 +3911,20 @@ export type UserCreateWithoutUsageLogsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -3007,11 +3953,20 @@ export type UserUncheckedCreateWithoutUsageLogsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -3056,11 +4011,20 @@ export type UserUpdateWithoutUsageLogsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -3089,11 +4053,20 @@ export type UserUncheckedUpdateWithoutUsageLogsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -3122,11 +4095,20 @@ export type UserCreateWithoutCompetitorScansInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -3155,11 +4137,20 @@ export type UserUncheckedCreateWithoutCompetitorScansInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -3204,11 +4195,20 @@ export type UserUpdateWithoutCompetitorScansInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -3237,11 +4237,20 @@ export type UserUncheckedUpdateWithoutCompetitorScansInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -3270,11 +4279,20 @@ export type UserCreateWithoutScoreResultsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -3303,11 +4321,20 @@ export type UserUncheckedCreateWithoutScoreResultsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -3352,11 +4379,20 @@ export type UserUpdateWithoutScoreResultsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -3385,11 +4421,20 @@ export type UserUncheckedUpdateWithoutScoreResultsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -3418,11 +4463,20 @@ export type UserCreateWithoutSeoAuditResultsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
@@ -3451,11 +4505,20 @@ export type UserUncheckedCreateWithoutSeoAuditResultsInput = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: string | null
   defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
   identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
   ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
@@ -3500,11 +4563,20 @@ export type UserUpdateWithoutSeoAuditResultsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
@@ -3533,11 +4605,20 @@ export type UserUncheckedUpdateWithoutSeoAuditResultsInput = {
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
   ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
@@ -3563,6 +4644,7 @@ export type UserCountOutputType = {
   refreshTokens: number
   phoneOtps: number
   ticketTokens: number
+  signupRiskEvents: number
   orders: number
   payments: number
   creditTransactions: number
@@ -3581,6 +4663,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
   phoneOtps?: boolean | UserCountOutputTypeCountPhoneOtpsArgs
   ticketTokens?: boolean | UserCountOutputTypeCountTicketTokensArgs
+  signupRiskEvents?: boolean | UserCountOutputTypeCountSignupRiskEventsArgs
   orders?: boolean | UserCountOutputTypeCountOrdersArgs
   payments?: boolean | UserCountOutputTypeCountPaymentsArgs
   creditTransactions?: boolean | UserCountOutputTypeCountCreditTransactionsArgs
@@ -3636,6 +4719,13 @@ export type UserCountOutputTypeCountPhoneOtpsArgs<ExtArgs extends runtime.Types.
  */
 export type UserCountOutputTypeCountTicketTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TicketTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSignupRiskEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SignupRiskEventWhereInput
 }
 
 /**
@@ -3723,11 +4813,20 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: boolean
   defaultPaymentMethodId?: boolean
+  referralSource?: boolean
+  utmSource?: boolean
+  utmMedium?: boolean
+  utmCampaign?: boolean
+  acceptedTermsAt?: boolean
+  acceptedTermsVersion?: boolean
+  signupRiskDecision?: boolean
+  signupRiskScore?: boolean
   identities?: boolean | Prisma.User$identitiesArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   phoneOtps?: boolean | Prisma.User$phoneOtpsArgs<ExtArgs>
   ticketTokens?: boolean | Prisma.User$ticketTokensArgs<ExtArgs>
+  signupRiskEvents?: boolean | Prisma.User$signupRiskEventsArgs<ExtArgs>
   subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
@@ -3758,6 +4857,14 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: boolean
   defaultPaymentMethodId?: boolean
+  referralSource?: boolean
+  utmSource?: boolean
+  utmMedium?: boolean
+  utmCampaign?: boolean
+  acceptedTermsAt?: boolean
+  acceptedTermsVersion?: boolean
+  signupRiskDecision?: boolean
+  signupRiskScore?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -3774,6 +4881,14 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: boolean
   defaultPaymentMethodId?: boolean
+  referralSource?: boolean
+  utmSource?: boolean
+  utmMedium?: boolean
+  utmCampaign?: boolean
+  acceptedTermsAt?: boolean
+  acceptedTermsVersion?: boolean
+  signupRiskDecision?: boolean
+  signupRiskScore?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -3790,15 +4905,24 @@ export type UserSelectScalar = {
   hasUsedFreeGeneration?: boolean
   stripeCustomerId?: boolean
   defaultPaymentMethodId?: boolean
+  referralSource?: boolean
+  utmSource?: boolean
+  utmMedium?: boolean
+  utmCampaign?: boolean
+  acceptedTermsAt?: boolean
+  acceptedTermsVersion?: boolean
+  signupRiskDecision?: boolean
+  signupRiskScore?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "avatarUrl" | "status" | "phone" | "phoneVerifiedAt" | "lastLoginAt" | "createdAt" | "updatedAt" | "deletedAt" | "hasUsedFreeGeneration" | "stripeCustomerId" | "defaultPaymentMethodId", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "avatarUrl" | "status" | "phone" | "phoneVerifiedAt" | "lastLoginAt" | "createdAt" | "updatedAt" | "deletedAt" | "hasUsedFreeGeneration" | "stripeCustomerId" | "defaultPaymentMethodId" | "referralSource" | "utmSource" | "utmMedium" | "utmCampaign" | "acceptedTermsAt" | "acceptedTermsVersion" | "signupRiskDecision" | "signupRiskScore", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   identities?: boolean | Prisma.User$identitiesArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
   phoneOtps?: boolean | Prisma.User$phoneOtpsArgs<ExtArgs>
   ticketTokens?: boolean | Prisma.User$ticketTokensArgs<ExtArgs>
+  signupRiskEvents?: boolean | Prisma.User$signupRiskEventsArgs<ExtArgs>
   subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
@@ -3825,6 +4949,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
     phoneOtps: Prisma.$PhoneOtpPayload<ExtArgs>[]
     ticketTokens: Prisma.$TicketTokenPayload<ExtArgs>[]
+    signupRiskEvents: Prisma.$SignupRiskEventPayload<ExtArgs>[]
     subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
     orders: Prisma.$OrderPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
@@ -3853,6 +4978,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     hasUsedFreeGeneration: boolean
     stripeCustomerId: string | null
     defaultPaymentMethodId: string | null
+    referralSource: string | null
+    utmSource: string | null
+    utmMedium: string | null
+    utmCampaign: string | null
+    acceptedTermsAt: Date | null
+    acceptedTermsVersion: string | null
+    signupRiskDecision: string | null
+    signupRiskScore: number | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -4252,6 +5385,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   phoneOtps<T extends Prisma.User$phoneOtpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$phoneOtpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PhoneOtpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ticketTokens<T extends Prisma.User$ticketTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ticketTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  signupRiskEvents<T extends Prisma.User$signupRiskEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$signupRiskEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SignupRiskEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subscription<T extends Prisma.User$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.User$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4307,6 +5441,14 @@ export interface UserFieldRefs {
   readonly hasUsedFreeGeneration: Prisma.FieldRef<"User", 'Boolean'>
   readonly stripeCustomerId: Prisma.FieldRef<"User", 'String'>
   readonly defaultPaymentMethodId: Prisma.FieldRef<"User", 'String'>
+  readonly referralSource: Prisma.FieldRef<"User", 'String'>
+  readonly utmSource: Prisma.FieldRef<"User", 'String'>
+  readonly utmMedium: Prisma.FieldRef<"User", 'String'>
+  readonly utmCampaign: Prisma.FieldRef<"User", 'String'>
+  readonly acceptedTermsAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly acceptedTermsVersion: Prisma.FieldRef<"User", 'String'>
+  readonly signupRiskDecision: Prisma.FieldRef<"User", 'String'>
+  readonly signupRiskScore: Prisma.FieldRef<"User", 'Int'>
 }
     
 
@@ -4817,6 +5959,30 @@ export type User$ticketTokensArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.TicketTokenScalarFieldEnum | Prisma.TicketTokenScalarFieldEnum[]
+}
+
+/**
+ * User.signupRiskEvents
+ */
+export type User$signupRiskEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SignupRiskEvent
+   */
+  select?: Prisma.SignupRiskEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SignupRiskEvent
+   */
+  omit?: Prisma.SignupRiskEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SignupRiskEventInclude<ExtArgs> | null
+  where?: Prisma.SignupRiskEventWhereInput
+  orderBy?: Prisma.SignupRiskEventOrderByWithRelationInput | Prisma.SignupRiskEventOrderByWithRelationInput[]
+  cursor?: Prisma.SignupRiskEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SignupRiskEventScalarFieldEnum | Prisma.SignupRiskEventScalarFieldEnum[]
 }
 
 /**

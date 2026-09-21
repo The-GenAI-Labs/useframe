@@ -1,21 +1,25 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Mail, ArrowRight, Loader2 } from "lucide-react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { OAuthButton } from "@/components/auth/OAuthButton";
-import { checkUserExists, signInWithEmail } from "@/lib/auth-actions";
+import { checkUserExists, signInWithEmail, setOAuthConsent } from "@/lib/auth-actions";
 import { useAuthStore } from "@/store/authStore";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 const OAUTH_ERROR_MESSAGES: Record<string, string> = {
     oauth: "Something went wrong signing you in. Please try again.",
     oauth_not_configured: "sign-in isn't set up yet — use email instead, or try a different provider.",
+    terms_required: "Please accept the Terms of Service before continuing.",
 };
 
 function oauthErrorMessage(error: string, provider: string | null): string {
@@ -52,8 +56,19 @@ export default function AuthForm() {
     const [submittedEmail, setSubmittedEmail] = useState("");
     const [serverError, setServerError] = useState("");
     const [oauthError, setOauthError] = useState<string | null>(null);
+    const [agreedToTerms, setAgreedToTerms] = useState(false);
+    const [turnstileToken, setTurnstileToken] = useState("");
+    const turnstileRef = useRef<TurnstileInstance>(null);
     const [isPending, startTransition] = useTransition();
     const { magicLinkSent, setMagicLinkSent, resetMagicLink } = useAuthStore();
+
+    // The OAuth buttons redirect away immediately, with no chance to check
+    // consent again once that navigation starts — so we mirror the checkbox
+    // into sessionStorage on every change, and /auth/callback reads it back
+    // after the round trip to Google/GitHub completes.
+    useEffect(() => {
+        setOAuthConsent(agreedToTerms);
+    }, [agreedToTerms]);
 
     useEffect(() => {
         const error = searchParams.get("error");
@@ -84,12 +99,22 @@ export default function AuthForm() {
             return;
         }
 
+        if (!agreedToTerms) {
+            setServerError("Please accept the Terms of Service to continue.");
+            return;
+        }
+        if (!turnstileToken) {
+            setServerError("Verification is still loading — try again in a moment.");
+            return;
+        }
+
         startTransition(async () => {
-            const result = await signInWithEmail(data.email);
+            const result = await signInWithEmail(data.email, turnstileToken);
             if (result.success) {
                 setMagicLinkSent(data.email);
             } else {
                 setServerError(result.error ?? "Something went wrong");
+                turnstileRef.current?.reset();
             }
         });
     };
@@ -151,9 +176,28 @@ export default function AuthForm() {
                 </p>
             )}
 
+            <label className="flex items-start gap-2.5 text-xs text-zinc-500 select-none cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={agreedToTerms}
+                    onChange={(e) => setAgreedToTerms(e.target.checked)}
+                    className="mt-0.5 h-3.5 w-3.5 shrink-0 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                />
+                <span>
+                    I agree to the{" "}
+                    <Link href="/terms" target="_blank" className="underline hover:text-zinc-700 transition-colors">
+                        Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link href="/privacy" target="_blank" className="underline hover:text-zinc-700 transition-colors">
+                        Privacy Policy
+                    </Link>
+                </span>
+            </label>
+
             <div className="flex flex-col gap-3">
-                <OAuthButton provider="google" />
-                <OAuthButton provider="github" />
+                <OAuthButton provider="google" disabled={!agreedToTerms} />
+                <OAuthButton provider="github" disabled={!agreedToTerms} />
             </div>
 
             <InlineSeparator />
@@ -177,18 +221,30 @@ export default function AuthForm() {
                 )}
 
                 {step === "confirm" && (
-                    <button
-                        type="button"
-                        onClick={() => { setStep("email"); setServerError(""); }}
-                        className="text-xs text-blue-500 hover:text-blue-600 text-left cursor-pointer transition-colors"
-                    >
-                        Use a different email
-                    </button>
+                    <>
+                        <button
+                            type="button"
+                            onClick={() => { setStep("email"); setServerError(""); }}
+                            className="text-xs text-blue-500 hover:text-blue-600 text-left cursor-pointer transition-colors"
+                        >
+                            Use a different email
+                        </button>
+
+                        {TURNSTILE_SITE_KEY && (
+                            <Turnstile
+                                ref={turnstileRef}
+                                siteKey={TURNSTILE_SITE_KEY}
+                                onSuccess={setTurnstileToken}
+                                onExpire={() => setTurnstileToken("")}
+                                options={{ size: "flexible" }}
+                            />
+                        )}
+                    </>
                 )}
 
                 <Button
                     type="submit"
-                    disabled={isPending}
+                    disabled={isPending || (step === "confirm" && !agreedToTerms)}
                     className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-medium border-0 cursor-pointer focus-visible:ring-0 gap-2"
                 >
                     {isPending ? (
@@ -205,17 +261,6 @@ export default function AuthForm() {
                     )}
                 </Button>
             </form>
-
-            <p className="text-center text-xs text-zinc-400">
-                By continuing, you agree to our{" "}
-                <Link href="/terms" className="underline hover:text-zinc-600 transition-colors">
-                    Terms
-                </Link>{" "}
-                &{" "}
-                <Link href="/privacy" className="underline hover:text-zinc-600 transition-colors">
-                    Privacy Policy
-                </Link>
-            </p>
         </div>
     );
 }

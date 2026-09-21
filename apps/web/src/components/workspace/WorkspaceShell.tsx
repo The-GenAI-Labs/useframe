@@ -21,6 +21,7 @@ import { DeployStepView } from "@/components/workspace-tabs/DeployStepView"
 import { StepApprovalBar } from "@/components/workspace-tabs/StepApprovalBar"
 import { websiteApi } from "@/lib/api/services/website.service"
 import { LowBalanceBanner } from "@/components/billing/LowBalanceBanner"
+import { ModelTierBanner } from "./ModelTierBanner"
 import { creditsApi } from "@/lib/api/services/credits.service"
 
 // Mirrors the server's cost table (apps/server/src/modules/{seoStep,deploy}/*.service.ts) —
@@ -317,7 +318,8 @@ export function WorkspaceShell({ project }: Props) {
         </div>
       </div>
 
-      <div className="px-4 pt-2.5 shrink-0">
+      <div className="flex flex-col gap-2 px-4 pt-2.5 shrink-0">
+        <ModelTierBanner generationTier={project.generationTier} />
         <LowBalanceBanner />
       </div>
 

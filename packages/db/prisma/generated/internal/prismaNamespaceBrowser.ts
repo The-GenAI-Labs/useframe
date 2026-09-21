@@ -57,6 +57,7 @@ export const ModelName = {
   RefreshToken: 'RefreshToken',
   MagicLinkToken: 'MagicLinkToken',
   TicketToken: 'TicketToken',
+  SignupRiskEvent: 'SignupRiskEvent',
   PhoneOtp: 'PhoneOtp',
   Plan: 'Plan',
   Order: 'Order',
@@ -121,7 +122,15 @@ export const UserScalarFieldEnum = {
   deletedAt: 'deletedAt',
   hasUsedFreeGeneration: 'hasUsedFreeGeneration',
   stripeCustomerId: 'stripeCustomerId',
-  defaultPaymentMethodId: 'defaultPaymentMethodId'
+  defaultPaymentMethodId: 'defaultPaymentMethodId',
+  referralSource: 'referralSource',
+  utmSource: 'utmSource',
+  utmMedium: 'utmMedium',
+  utmCampaign: 'utmCampaign',
+  acceptedTermsAt: 'acceptedTermsAt',
+  acceptedTermsVersion: 'acceptedTermsVersion',
+  signupRiskDecision: 'signupRiskDecision',
+  signupRiskScore: 'signupRiskScore'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -178,7 +187,14 @@ export const MagicLinkTokenScalarFieldEnum = {
   tokenHash: 'tokenHash',
   expiresAt: 'expiresAt',
   consumedAt: 'consumedAt',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  acceptedTerms: 'acceptedTerms',
+  referralSource: 'referralSource',
+  utmSource: 'utmSource',
+  utmMedium: 'utmMedium',
+  utmCampaign: 'utmCampaign',
+  requestIp: 'requestIp',
+  deviceFingerprint: 'deviceFingerprint'
 } as const
 
 export type MagicLinkTokenScalarFieldEnum = (typeof MagicLinkTokenScalarFieldEnum)[keyof typeof MagicLinkTokenScalarFieldEnum]
@@ -194,6 +210,21 @@ export const TicketTokenScalarFieldEnum = {
 } as const
 
 export type TicketTokenScalarFieldEnum = (typeof TicketTokenScalarFieldEnum)[keyof typeof TicketTokenScalarFieldEnum]
+
+
+export const SignupRiskEventScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  email: 'email',
+  ipAddress: 'ipAddress',
+  deviceFingerprint: 'deviceFingerprint',
+  riskScore: 'riskScore',
+  decision: 'decision',
+  reasons: 'reasons',
+  createdAt: 'createdAt'
+} as const
+
+export type SignupRiskEventScalarFieldEnum = (typeof SignupRiskEventScalarFieldEnum)[keyof typeof SignupRiskEventScalarFieldEnum]
 
 
 export const PhoneOtpScalarFieldEnum = {
@@ -350,6 +381,7 @@ export const ProjectScalarFieldEnum = {
   differentiator: 'differentiator',
   status: 'status',
   inputType: 'inputType',
+  generationTier: 'generationTier',
   sourceUrl: 'sourceUrl',
   docsKey: 'docsKey',
   description: 'description',

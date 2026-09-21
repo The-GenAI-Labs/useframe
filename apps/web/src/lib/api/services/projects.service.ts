@@ -26,6 +26,7 @@ export type ProjectListItem = {
   startupIdea: string
   targetAudience: string
   sourceUrl?: string | null
+  generationTier: "FREE" | "PAID"
   createdAt: string
   updatedAt: string
 }

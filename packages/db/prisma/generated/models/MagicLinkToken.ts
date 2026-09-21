@@ -31,6 +31,13 @@ export type MagicLinkTokenMinAggregateOutputType = {
   expiresAt: Date | null
   consumedAt: Date | null
   createdAt: Date | null
+  acceptedTerms: boolean | null
+  referralSource: string | null
+  utmSource: string | null
+  utmMedium: string | null
+  utmCampaign: string | null
+  requestIp: string | null
+  deviceFingerprint: string | null
 }
 
 export type MagicLinkTokenMaxAggregateOutputType = {
@@ -40,6 +47,13 @@ export type MagicLinkTokenMaxAggregateOutputType = {
   expiresAt: Date | null
   consumedAt: Date | null
   createdAt: Date | null
+  acceptedTerms: boolean | null
+  referralSource: string | null
+  utmSource: string | null
+  utmMedium: string | null
+  utmCampaign: string | null
+  requestIp: string | null
+  deviceFingerprint: string | null
 }
 
 export type MagicLinkTokenCountAggregateOutputType = {
@@ -49,6 +63,13 @@ export type MagicLinkTokenCountAggregateOutputType = {
   expiresAt: number
   consumedAt: number
   createdAt: number
+  acceptedTerms: number
+  referralSource: number
+  utmSource: number
+  utmMedium: number
+  utmCampaign: number
+  requestIp: number
+  deviceFingerprint: number
   _all: number
 }
 
@@ -60,6 +81,13 @@ export type MagicLinkTokenMinAggregateInputType = {
   expiresAt?: true
   consumedAt?: true
   createdAt?: true
+  acceptedTerms?: true
+  referralSource?: true
+  utmSource?: true
+  utmMedium?: true
+  utmCampaign?: true
+  requestIp?: true
+  deviceFingerprint?: true
 }
 
 export type MagicLinkTokenMaxAggregateInputType = {
@@ -69,6 +97,13 @@ export type MagicLinkTokenMaxAggregateInputType = {
   expiresAt?: true
   consumedAt?: true
   createdAt?: true
+  acceptedTerms?: true
+  referralSource?: true
+  utmSource?: true
+  utmMedium?: true
+  utmCampaign?: true
+  requestIp?: true
+  deviceFingerprint?: true
 }
 
 export type MagicLinkTokenCountAggregateInputType = {
@@ -78,6 +113,13 @@ export type MagicLinkTokenCountAggregateInputType = {
   expiresAt?: true
   consumedAt?: true
   createdAt?: true
+  acceptedTerms?: true
+  referralSource?: true
+  utmSource?: true
+  utmMedium?: true
+  utmCampaign?: true
+  requestIp?: true
+  deviceFingerprint?: true
   _all?: true
 }
 
@@ -160,6 +202,13 @@ export type MagicLinkTokenGroupByOutputType = {
   expiresAt: Date
   consumedAt: Date | null
   createdAt: Date
+  acceptedTerms: boolean
+  referralSource: string | null
+  utmSource: string | null
+  utmMedium: string | null
+  utmCampaign: string | null
+  requestIp: string | null
+  deviceFingerprint: string | null
   _count: MagicLinkTokenCountAggregateOutputType | null
   _min: MagicLinkTokenMinAggregateOutputType | null
   _max: MagicLinkTokenMaxAggregateOutputType | null
@@ -190,6 +239,13 @@ export type MagicLinkTokenWhereInput = {
   expiresAt?: Prisma.DateTimeFilter<"MagicLinkToken"> | Date | string
   consumedAt?: Prisma.DateTimeNullableFilter<"MagicLinkToken"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"MagicLinkToken"> | Date | string
+  acceptedTerms?: Prisma.BoolFilter<"MagicLinkToken"> | boolean
+  referralSource?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  utmSource?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  utmMedium?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  utmCampaign?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  requestIp?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  deviceFingerprint?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
 }
 
 export type MagicLinkTokenOrderByWithRelationInput = {
@@ -199,6 +255,13 @@ export type MagicLinkTokenOrderByWithRelationInput = {
   expiresAt?: Prisma.SortOrder
   consumedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
+  referralSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmMedium?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestIp?: Prisma.SortOrderInput | Prisma.SortOrder
+  deviceFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type MagicLinkTokenWhereUniqueInput = Prisma.AtLeast<{
@@ -211,6 +274,13 @@ export type MagicLinkTokenWhereUniqueInput = Prisma.AtLeast<{
   expiresAt?: Prisma.DateTimeFilter<"MagicLinkToken"> | Date | string
   consumedAt?: Prisma.DateTimeNullableFilter<"MagicLinkToken"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"MagicLinkToken"> | Date | string
+  acceptedTerms?: Prisma.BoolFilter<"MagicLinkToken"> | boolean
+  referralSource?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  utmSource?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  utmMedium?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  utmCampaign?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  requestIp?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
+  deviceFingerprint?: Prisma.StringNullableFilter<"MagicLinkToken"> | string | null
 }, "id" | "tokenHash">
 
 export type MagicLinkTokenOrderByWithAggregationInput = {
@@ -220,6 +290,13 @@ export type MagicLinkTokenOrderByWithAggregationInput = {
   expiresAt?: Prisma.SortOrder
   consumedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
+  referralSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmMedium?: Prisma.SortOrderInput | Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestIp?: Prisma.SortOrderInput | Prisma.SortOrder
+  deviceFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MagicLinkTokenCountOrderByAggregateInput
   _max?: Prisma.MagicLinkTokenMaxOrderByAggregateInput
   _min?: Prisma.MagicLinkTokenMinOrderByAggregateInput
@@ -235,6 +312,13 @@ export type MagicLinkTokenScalarWhereWithAggregatesInput = {
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"MagicLinkToken"> | Date | string
   consumedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"MagicLinkToken"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MagicLinkToken"> | Date | string
+  acceptedTerms?: Prisma.BoolWithAggregatesFilter<"MagicLinkToken"> | boolean
+  referralSource?: Prisma.StringNullableWithAggregatesFilter<"MagicLinkToken"> | string | null
+  utmSource?: Prisma.StringNullableWithAggregatesFilter<"MagicLinkToken"> | string | null
+  utmMedium?: Prisma.StringNullableWithAggregatesFilter<"MagicLinkToken"> | string | null
+  utmCampaign?: Prisma.StringNullableWithAggregatesFilter<"MagicLinkToken"> | string | null
+  requestIp?: Prisma.StringNullableWithAggregatesFilter<"MagicLinkToken"> | string | null
+  deviceFingerprint?: Prisma.StringNullableWithAggregatesFilter<"MagicLinkToken"> | string | null
 }
 
 export type MagicLinkTokenCreateInput = {
@@ -244,6 +328,13 @@ export type MagicLinkTokenCreateInput = {
   expiresAt: Date | string
   consumedAt?: Date | string | null
   createdAt?: Date | string
+  acceptedTerms?: boolean
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  requestIp?: string | null
+  deviceFingerprint?: string | null
 }
 
 export type MagicLinkTokenUncheckedCreateInput = {
@@ -253,6 +344,13 @@ export type MagicLinkTokenUncheckedCreateInput = {
   expiresAt: Date | string
   consumedAt?: Date | string | null
   createdAt?: Date | string
+  acceptedTerms?: boolean
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  requestIp?: string | null
+  deviceFingerprint?: string | null
 }
 
 export type MagicLinkTokenUpdateInput = {
@@ -262,6 +360,13 @@ export type MagicLinkTokenUpdateInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deviceFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MagicLinkTokenUncheckedUpdateInput = {
@@ -271,6 +376,13 @@ export type MagicLinkTokenUncheckedUpdateInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deviceFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MagicLinkTokenCreateManyInput = {
@@ -280,6 +392,13 @@ export type MagicLinkTokenCreateManyInput = {
   expiresAt: Date | string
   consumedAt?: Date | string | null
   createdAt?: Date | string
+  acceptedTerms?: boolean
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  requestIp?: string | null
+  deviceFingerprint?: string | null
 }
 
 export type MagicLinkTokenUpdateManyMutationInput = {
@@ -289,6 +408,13 @@ export type MagicLinkTokenUpdateManyMutationInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deviceFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MagicLinkTokenUncheckedUpdateManyInput = {
@@ -298,6 +424,13 @@ export type MagicLinkTokenUncheckedUpdateManyInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   consumedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  acceptedTerms?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deviceFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MagicLinkTokenCountOrderByAggregateInput = {
@@ -307,6 +440,13 @@ export type MagicLinkTokenCountOrderByAggregateInput = {
   expiresAt?: Prisma.SortOrder
   consumedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
+  referralSource?: Prisma.SortOrder
+  utmSource?: Prisma.SortOrder
+  utmMedium?: Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrder
+  requestIp?: Prisma.SortOrder
+  deviceFingerprint?: Prisma.SortOrder
 }
 
 export type MagicLinkTokenMaxOrderByAggregateInput = {
@@ -316,6 +456,13 @@ export type MagicLinkTokenMaxOrderByAggregateInput = {
   expiresAt?: Prisma.SortOrder
   consumedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
+  referralSource?: Prisma.SortOrder
+  utmSource?: Prisma.SortOrder
+  utmMedium?: Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrder
+  requestIp?: Prisma.SortOrder
+  deviceFingerprint?: Prisma.SortOrder
 }
 
 export type MagicLinkTokenMinOrderByAggregateInput = {
@@ -325,6 +472,13 @@ export type MagicLinkTokenMinOrderByAggregateInput = {
   expiresAt?: Prisma.SortOrder
   consumedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  acceptedTerms?: Prisma.SortOrder
+  referralSource?: Prisma.SortOrder
+  utmSource?: Prisma.SortOrder
+  utmMedium?: Prisma.SortOrder
+  utmCampaign?: Prisma.SortOrder
+  requestIp?: Prisma.SortOrder
+  deviceFingerprint?: Prisma.SortOrder
 }
 
 
@@ -336,6 +490,13 @@ export type MagicLinkTokenSelect<ExtArgs extends runtime.Types.Extensions.Intern
   expiresAt?: boolean
   consumedAt?: boolean
   createdAt?: boolean
+  acceptedTerms?: boolean
+  referralSource?: boolean
+  utmSource?: boolean
+  utmMedium?: boolean
+  utmCampaign?: boolean
+  requestIp?: boolean
+  deviceFingerprint?: boolean
 }, ExtArgs["result"]["magicLinkToken"]>
 
 export type MagicLinkTokenSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -345,6 +506,13 @@ export type MagicLinkTokenSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   expiresAt?: boolean
   consumedAt?: boolean
   createdAt?: boolean
+  acceptedTerms?: boolean
+  referralSource?: boolean
+  utmSource?: boolean
+  utmMedium?: boolean
+  utmCampaign?: boolean
+  requestIp?: boolean
+  deviceFingerprint?: boolean
 }, ExtArgs["result"]["magicLinkToken"]>
 
 export type MagicLinkTokenSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -354,6 +522,13 @@ export type MagicLinkTokenSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   expiresAt?: boolean
   consumedAt?: boolean
   createdAt?: boolean
+  acceptedTerms?: boolean
+  referralSource?: boolean
+  utmSource?: boolean
+  utmMedium?: boolean
+  utmCampaign?: boolean
+  requestIp?: boolean
+  deviceFingerprint?: boolean
 }, ExtArgs["result"]["magicLinkToken"]>
 
 export type MagicLinkTokenSelectScalar = {
@@ -363,9 +538,16 @@ export type MagicLinkTokenSelectScalar = {
   expiresAt?: boolean
   consumedAt?: boolean
   createdAt?: boolean
+  acceptedTerms?: boolean
+  referralSource?: boolean
+  utmSource?: boolean
+  utmMedium?: boolean
+  utmCampaign?: boolean
+  requestIp?: boolean
+  deviceFingerprint?: boolean
 }
 
-export type MagicLinkTokenOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "tokenHash" | "expiresAt" | "consumedAt" | "createdAt", ExtArgs["result"]["magicLinkToken"]>
+export type MagicLinkTokenOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "tokenHash" | "expiresAt" | "consumedAt" | "createdAt" | "acceptedTerms" | "referralSource" | "utmSource" | "utmMedium" | "utmCampaign" | "requestIp" | "deviceFingerprint", ExtArgs["result"]["magicLinkToken"]>
 
 export type $MagicLinkTokenPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MagicLinkToken"
@@ -377,6 +559,13 @@ export type $MagicLinkTokenPayload<ExtArgs extends runtime.Types.Extensions.Inte
     expiresAt: Date
     consumedAt: Date | null
     createdAt: Date
+    acceptedTerms: boolean
+    referralSource: string | null
+    utmSource: string | null
+    utmMedium: string | null
+    utmCampaign: string | null
+    requestIp: string | null
+    deviceFingerprint: string | null
   }, ExtArgs["result"]["magicLinkToken"]>
   composites: {}
 }
@@ -806,6 +995,13 @@ export interface MagicLinkTokenFieldRefs {
   readonly expiresAt: Prisma.FieldRef<"MagicLinkToken", 'DateTime'>
   readonly consumedAt: Prisma.FieldRef<"MagicLinkToken", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"MagicLinkToken", 'DateTime'>
+  readonly acceptedTerms: Prisma.FieldRef<"MagicLinkToken", 'Boolean'>
+  readonly referralSource: Prisma.FieldRef<"MagicLinkToken", 'String'>
+  readonly utmSource: Prisma.FieldRef<"MagicLinkToken", 'String'>
+  readonly utmMedium: Prisma.FieldRef<"MagicLinkToken", 'String'>
+  readonly utmCampaign: Prisma.FieldRef<"MagicLinkToken", 'String'>
+  readonly requestIp: Prisma.FieldRef<"MagicLinkToken", 'String'>
+  readonly deviceFingerprint: Prisma.FieldRef<"MagicLinkToken", 'String'>
 }
     
 

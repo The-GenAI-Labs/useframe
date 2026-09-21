@@ -38,6 +38,7 @@ export type ProjectMinAggregateOutputType = {
   differentiator: string | null
   status: $Enums.ProjectStatus | null
   inputType: $Enums.ProjectInputType | null
+  generationTier: $Enums.GenerationTier | null
   sourceUrl: string | null
   docsKey: string | null
   description: string | null
@@ -65,6 +66,7 @@ export type ProjectMaxAggregateOutputType = {
   differentiator: string | null
   status: $Enums.ProjectStatus | null
   inputType: $Enums.ProjectInputType | null
+  generationTier: $Enums.GenerationTier | null
   sourceUrl: string | null
   docsKey: string | null
   description: string | null
@@ -92,6 +94,7 @@ export type ProjectCountAggregateOutputType = {
   differentiator: number
   status: number
   inputType: number
+  generationTier: number
   sourceUrl: number
   docsKey: number
   description: number
@@ -121,6 +124,7 @@ export type ProjectMinAggregateInputType = {
   differentiator?: true
   status?: true
   inputType?: true
+  generationTier?: true
   sourceUrl?: true
   docsKey?: true
   description?: true
@@ -148,6 +152,7 @@ export type ProjectMaxAggregateInputType = {
   differentiator?: true
   status?: true
   inputType?: true
+  generationTier?: true
   sourceUrl?: true
   docsKey?: true
   description?: true
@@ -175,6 +180,7 @@ export type ProjectCountAggregateInputType = {
   differentiator?: true
   status?: true
   inputType?: true
+  generationTier?: true
   sourceUrl?: true
   docsKey?: true
   description?: true
@@ -275,6 +281,7 @@ export type ProjectGroupByOutputType = {
   differentiator: string | null
   status: $Enums.ProjectStatus
   inputType: $Enums.ProjectInputType
+  generationTier: $Enums.GenerationTier
   sourceUrl: string | null
   docsKey: string | null
   description: string | null
@@ -323,6 +330,7 @@ export type ProjectWhereInput = {
   differentiator?: Prisma.StringNullableFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFilter<"Project"> | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFilter<"Project"> | $Enums.GenerationTier
   sourceUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   docsKey?: Prisma.StringNullableFilter<"Project"> | string | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
@@ -362,6 +370,7 @@ export type ProjectOrderByWithRelationInput = {
   differentiator?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   inputType?: Prisma.SortOrder
+  generationTier?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   docsKey?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -404,6 +413,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   differentiator?: Prisma.StringNullableFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFilter<"Project"> | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFilter<"Project"> | $Enums.GenerationTier
   sourceUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   docsKey?: Prisma.StringNullableFilter<"Project"> | string | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
@@ -443,6 +453,7 @@ export type ProjectOrderByWithAggregationInput = {
   differentiator?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   inputType?: Prisma.SortOrder
+  generationTier?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   docsKey?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -476,6 +487,7 @@ export type ProjectScalarWhereWithAggregatesInput = {
   differentiator?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusWithAggregatesFilter<"Project"> | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeWithAggregatesFilter<"Project"> | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierWithAggregatesFilter<"Project"> | $Enums.GenerationTier
   sourceUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   docsKey?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
@@ -502,6 +514,7 @@ export type ProjectCreateInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -541,6 +554,7 @@ export type ProjectUncheckedCreateInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -578,6 +592,7 @@ export type ProjectUpdateInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -617,6 +632,7 @@ export type ProjectUncheckedUpdateInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -655,6 +671,7 @@ export type ProjectCreateManyInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -681,6 +698,7 @@ export type ProjectUpdateManyMutationInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -708,6 +726,7 @@ export type ProjectUncheckedUpdateManyInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -745,6 +764,7 @@ export type ProjectCountOrderByAggregateInput = {
   differentiator?: Prisma.SortOrder
   status?: Prisma.SortOrder
   inputType?: Prisma.SortOrder
+  generationTier?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
   docsKey?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -772,6 +792,7 @@ export type ProjectMaxOrderByAggregateInput = {
   differentiator?: Prisma.SortOrder
   status?: Prisma.SortOrder
   inputType?: Prisma.SortOrder
+  generationTier?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
   docsKey?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -799,6 +820,7 @@ export type ProjectMinOrderByAggregateInput = {
   differentiator?: Prisma.SortOrder
   status?: Prisma.SortOrder
   inputType?: Prisma.SortOrder
+  generationTier?: Prisma.SortOrder
   sourceUrl?: Prisma.SortOrder
   docsKey?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -874,6 +896,10 @@ export type EnumProjectStatusFieldUpdateOperationsInput = {
 
 export type EnumProjectInputTypeFieldUpdateOperationsInput = {
   set?: $Enums.ProjectInputType
+}
+
+export type EnumGenerationTierFieldUpdateOperationsInput = {
+  set?: $Enums.GenerationTier
 }
 
 export type ProjectCreateNestedOneWithoutVersionsInput = {
@@ -1047,6 +1073,7 @@ export type ProjectCreateWithoutUserInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1084,6 +1111,7 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1151,6 +1179,7 @@ export type ProjectScalarWhereInput = {
   differentiator?: Prisma.StringNullableFilter<"Project"> | string | null
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFilter<"Project"> | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFilter<"Project"> | $Enums.GenerationTier
   sourceUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   docsKey?: Prisma.StringNullableFilter<"Project"> | string | null
   description?: Prisma.StringNullableFilter<"Project"> | string | null
@@ -1177,6 +1206,7 @@ export type ProjectCreateWithoutVersionsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1215,6 +1245,7 @@ export type ProjectUncheckedCreateWithoutVersionsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1267,6 +1298,7 @@ export type ProjectUpdateWithoutVersionsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1305,6 +1337,7 @@ export type ProjectUncheckedUpdateWithoutVersionsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1341,6 +1374,7 @@ export type ProjectCreateWithoutPagesInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1379,6 +1413,7 @@ export type ProjectUncheckedCreateWithoutPagesInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1431,6 +1466,7 @@ export type ProjectUpdateWithoutPagesInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1469,6 +1505,7 @@ export type ProjectUncheckedUpdateWithoutPagesInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1505,6 +1542,7 @@ export type ProjectCreateWithoutConversationsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1543,6 +1581,7 @@ export type ProjectUncheckedCreateWithoutConversationsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1595,6 +1634,7 @@ export type ProjectUpdateWithoutConversationsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1633,6 +1673,7 @@ export type ProjectUncheckedUpdateWithoutConversationsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1669,6 +1710,7 @@ export type ProjectCreateWithoutDeploymentsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1707,6 +1749,7 @@ export type ProjectUncheckedCreateWithoutDeploymentsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1759,6 +1802,7 @@ export type ProjectUpdateWithoutDeploymentsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1797,6 +1841,7 @@ export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1833,6 +1878,7 @@ export type ProjectCreateWithoutCustomDomainInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1871,6 +1917,7 @@ export type ProjectUncheckedCreateWithoutCustomDomainInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -1923,6 +1970,7 @@ export type ProjectUpdateWithoutCustomDomainInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1961,6 +2009,7 @@ export type ProjectUncheckedUpdateWithoutCustomDomainInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1997,6 +2046,7 @@ export type ProjectCreateWithoutPipelineLogsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2035,6 +2085,7 @@ export type ProjectUncheckedCreateWithoutPipelineLogsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2087,6 +2138,7 @@ export type ProjectUpdateWithoutPipelineLogsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2125,6 +2177,7 @@ export type ProjectUncheckedUpdateWithoutPipelineLogsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2161,6 +2214,7 @@ export type ProjectCreateWithoutAnalyticsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2199,6 +2253,7 @@ export type ProjectUncheckedCreateWithoutAnalyticsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2251,6 +2306,7 @@ export type ProjectUpdateWithoutAnalyticsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2289,6 +2345,7 @@ export type ProjectUncheckedUpdateWithoutAnalyticsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2325,6 +2382,7 @@ export type ProjectCreateWithoutPageAnalyticsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2363,6 +2421,7 @@ export type ProjectUncheckedCreateWithoutPageAnalyticsInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2415,6 +2474,7 @@ export type ProjectUpdateWithoutPageAnalyticsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2453,6 +2513,7 @@ export type ProjectUncheckedUpdateWithoutPageAnalyticsInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2489,6 +2550,7 @@ export type ProjectCreateWithoutResearchReportInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2527,6 +2589,7 @@ export type ProjectUncheckedCreateWithoutResearchReportInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2579,6 +2642,7 @@ export type ProjectUpdateWithoutResearchReportInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2617,6 +2681,7 @@ export type ProjectUncheckedUpdateWithoutResearchReportInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2653,6 +2718,7 @@ export type ProjectCreateWithoutPipelineStateInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2691,6 +2757,7 @@ export type ProjectUncheckedCreateWithoutPipelineStateInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2743,6 +2810,7 @@ export type ProjectUpdateWithoutPipelineStateInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2781,6 +2849,7 @@ export type ProjectUncheckedUpdateWithoutPipelineStateInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2817,6 +2886,7 @@ export type ProjectCreateWithoutCompetitorScansInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2855,6 +2925,7 @@ export type ProjectUncheckedCreateWithoutCompetitorScansInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -2907,6 +2978,7 @@ export type ProjectUpdateWithoutCompetitorScansInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2945,6 +3017,7 @@ export type ProjectUncheckedUpdateWithoutCompetitorScansInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2981,6 +3054,7 @@ export type ProjectCreateManyUserInput = {
   differentiator?: string | null
   status?: $Enums.ProjectStatus
   inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
   sourceUrl?: string | null
   docsKey?: string | null
   description?: string | null
@@ -3007,6 +3081,7 @@ export type ProjectUpdateWithoutUserInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3044,6 +3119,7 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3081,6 +3157,7 @@ export type ProjectUncheckedUpdateManyWithoutUserInput = {
   differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
   sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3193,6 +3270,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   differentiator?: boolean
   status?: boolean
   inputType?: boolean
+  generationTier?: boolean
   sourceUrl?: boolean
   docsKey?: boolean
   description?: boolean
@@ -3233,6 +3311,7 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   differentiator?: boolean
   status?: boolean
   inputType?: boolean
+  generationTier?: boolean
   sourceUrl?: boolean
   docsKey?: boolean
   description?: boolean
@@ -3261,6 +3340,7 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   differentiator?: boolean
   status?: boolean
   inputType?: boolean
+  generationTier?: boolean
   sourceUrl?: boolean
   docsKey?: boolean
   description?: boolean
@@ -3289,6 +3369,7 @@ export type ProjectSelectScalar = {
   differentiator?: boolean
   status?: boolean
   inputType?: boolean
+  generationTier?: boolean
   sourceUrl?: boolean
   docsKey?: boolean
   description?: boolean
@@ -3302,7 +3383,7 @@ export type ProjectSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "slug" | "startupIdea" | "niche" | "targetAudience" | "brandPersonality" | "pricePositioning" | "businessModel" | "differentiator" | "status" | "inputType" | "sourceUrl" | "docsKey" | "description" | "logoUrl" | "currentVersionId" | "vercelProjectId" | "pinned" | "deletedAt" | "archivedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "slug" | "startupIdea" | "niche" | "targetAudience" | "brandPersonality" | "pricePositioning" | "businessModel" | "differentiator" | "status" | "inputType" | "generationTier" | "sourceUrl" | "docsKey" | "description" | "logoUrl" | "currentVersionId" | "vercelProjectId" | "pinned" | "deletedAt" | "archivedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   versions?: boolean | Prisma.Project$versionsArgs<ExtArgs>
@@ -3355,6 +3436,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     differentiator: string | null
     status: $Enums.ProjectStatus
     inputType: $Enums.ProjectInputType
+    generationTier: $Enums.GenerationTier
     sourceUrl: string | null
     docsKey: string | null
     description: string | null
@@ -3814,6 +3896,7 @@ export interface ProjectFieldRefs {
   readonly differentiator: Prisma.FieldRef<"Project", 'String'>
   readonly status: Prisma.FieldRef<"Project", 'ProjectStatus'>
   readonly inputType: Prisma.FieldRef<"Project", 'ProjectInputType'>
+  readonly generationTier: Prisma.FieldRef<"Project", 'GenerationTier'>
   readonly sourceUrl: Prisma.FieldRef<"Project", 'String'>
   readonly docsKey: Prisma.FieldRef<"Project", 'String'>
   readonly description: Prisma.FieldRef<"Project", 'String'>

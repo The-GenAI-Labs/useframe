@@ -3,6 +3,9 @@
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/authContext";
+import { consumeOAuthConsent } from "@/lib/auth-actions";
+import { getStoredAttribution } from "@/lib/attribution";
+import { getDeviceFingerprint } from "@/lib/fingerprint";
 
 const API_SERVICE_URL = process.env.NEXT_PUBLIC_API_SERVICE_URL ?? "http://localhost:4000";
 
@@ -19,12 +22,25 @@ function OAuthCallbackInner() {
             return;
         }
 
-        fetch(`${API_SERVICE_URL}/api/auth/exchange-ticket`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({ ticket }),
-        })
+        if (!consumeOAuthConsent()) {
+            router.replace("/signin?error=terms_required");
+            return;
+        }
+
+        getDeviceFingerprint()
+            .then((deviceFingerprint) =>
+                fetch(`${API_SERVICE_URL}/api/auth/exchange-ticket`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({
+                        ticket,
+                        acceptedTerms: true,
+                        attribution: getStoredAttribution() ?? undefined,
+                        deviceFingerprint,
+                    }),
+                })
+            )
             .then(async (res) => {
                 const body = await res.json();
                 if (!res.ok || !body.success) {

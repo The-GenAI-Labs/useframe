@@ -18,6 +18,14 @@ export const UserStatus = {
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
 
 
+export const GenerationTier = {
+  FREE: 'FREE',
+  PAID: 'PAID'
+} as const
+
+export type GenerationTier = (typeof GenerationTier)[keyof typeof GenerationTier]
+
+
 export const SubscriptionStatus = {
   ACTIVE: 'ACTIVE',
   PAST_DUE: 'PAST_DUE',

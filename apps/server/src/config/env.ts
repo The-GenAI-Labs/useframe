@@ -34,6 +34,14 @@ const envSchema = z.object({
 
     RESEND_API_KEY: z.string().min(1, "RESEND_API_KEY is required"),
     EMAIL_FROM: z.string().default("noreply@useframe.so"),
+
+    TURNSTILE_SECRET_KEY: z.string().min(1, "TURNSTILE_SECRET_KEY is required"),
+
+    // Optional — IP reputation (VPN/datacenter/proxy) enrichment for signup
+    // risk scoring. Left empty, getIpRisk() no-ops to a neutral score rather
+    // than failing signup; this is a risk *signal*, never a hard gate on its
+    // own.
+    IPQS_API_KEY: z.string().default(""),
 })
 
 const parsed = envSchema.safeParse(process.env)

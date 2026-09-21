@@ -8,7 +8,6 @@ import {
   useTransform,
 } from "framer-motion";
 import { BackgroundClouds } from "./BackgroundClouds";
-import { FloatingCards } from "./FloatingCards";
 import { Navbar } from "./Navbar";
 import { Hero } from "./Hero";
 import { WorkspacePreview } from "./WorkspacePreview";
@@ -79,10 +78,12 @@ export const HomeView = memo(function HomeView() {
 
       <Navbar serifClassName={serif.className} />
 
-      <div className="relative min-h-screen w-full">
+      <div className="relative h-screen w-full">
         <BackgroundClouds />
-        <FloatingCards />
-        <main className="relative z-10 flex min-h-screen w-full flex-col items-center px-4 pt-24 sm:pt-28">
+        {/* Spacing between heading -> robot/box -> quick actions lives only
+            here (gap-*), so the three never drift apart. The robot is
+            absolutely positioned against the box, so it adds no flow height. */}
+        <main className="relative z-10 flex w-full flex-col items-center gap-10 px-4 pt-28 sm:pt-32">
           <Hero serifClassName={serif.className} />
           <WorkspacePreview />
           <QuickActions />

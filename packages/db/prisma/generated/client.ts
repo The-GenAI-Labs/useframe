@@ -72,6 +72,11 @@ export type MagicLinkToken = Prisma.MagicLinkTokenModel
  */
 export type TicketToken = Prisma.TicketTokenModel
 /**
+ * Model SignupRiskEvent
+ * 
+ */
+export type SignupRiskEvent = Prisma.SignupRiskEventModel
+/**
  * Model PhoneOtp
  * 
  */

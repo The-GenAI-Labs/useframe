@@ -15,6 +15,14 @@ enum UserStatus {
   BANNED
 }
 
+// Mirrors packages/schemas' TierEnum (z.enum(["free", "paid"])) — kept as
+// its own Prisma enum (rather than reusing a shared string) so Project rows
+// get DB-level validation on this field.
+enum GenerationTier {
+  FREE
+  PAID
+}
+
 enum SubscriptionStatus {
   ACTIVE
   PAST_DUE
@@ -201,11 +209,32 @@ model User {
   stripeCustomerId       String? @unique
   defaultPaymentMethodId String?
 
-  identities    Identity[]
-  sessions      Session[]
-  refreshTokens RefreshToken[]
-  phoneOtps     PhoneOtp[]
-  ticketTokens  TicketToken[]
+  // Attribution — captured client-side from ?ref / utm_* query params at
+  // signup time only, never overwritten afterward.
+  referralSource String?
+  utmSource      String?
+  utmMedium      String?
+  utmCampaign    String?
+
+  // Versioned ToS/Privacy consent — acceptedTermsVersion lets us tell who
+  // agreed to which revision if it's ever disputed. Bump the version string
+  // (see TERMS_VERSION in auth.service.ts) whenever the ToS materially changes.
+  acceptedTermsAt      DateTime?
+  acceptedTermsVersion String?
+
+  // Free-tier abuse risk, assessed once at signup completion (see
+  // assessSignupRisk() in apps/server/src/security). Gates ONLY the free
+  // generation grant in GenerateService.authorize() — never account
+  // creation, never a permanent ban. "ALLOW" | "SUSPICIOUS" | "BLOCK_FREE_TIER".
+  signupRiskDecision String?
+  signupRiskScore    Int?
+
+  identities       Identity[]
+  sessions         Session[]
+  refreshTokens    RefreshToken[]
+  phoneOtps        PhoneOtp[]
+  ticketTokens     TicketToken[]
+  signupRiskEvents SignupRiskEvent[]
 
   subscription       Subscription?
   orders             Order[]
@@ -303,6 +332,23 @@ model MagicLinkToken {
   consumedAt DateTime?
   createdAt  DateTime  @default(now())
 
+  // ToS consent is captured on the "confirm" step, before this token is
+  // sent by email — the link is frequently opened in a different tab/device
+  // than the one that requested it, so consent travels with the token
+  // itself rather than relying on sessionStorage still being present when
+  // the link is clicked.
+  acceptedTerms  Boolean @default(false)
+  referralSource String?
+  utmSource      String?
+  utmMedium      String?
+  utmCampaign    String?
+
+  // Signup risk inputs, captured at request time for the same reason as
+  // acceptedTerms above — the IP that matters for risk scoring is the one
+  // that actually asked for the link, not whatever IP later clicks it.
+  requestIp         String?
+  deviceFingerprint String?
+
   @@index([email])
   @@index([expiresAt])
   @@map("magic_link_tokens")
@@ -320,6 +366,28 @@ model TicketToken {
 
   @@index([expiresAt])
   @@map("ticket_tokens")
+}
+
+// One row per completed signup's risk assessment (see assessSignupRisk()).
+// Kept as an append-only log distinct from User.signupRiskDecision/Score
+// (which only ever holds the latest) so risk-scoring changes over time
+// stay auditable — e.g. if IPQS or the scoring weights change later.
+model SignupRiskEvent {
+  id                String   @id @default(cuid())
+  userId            String
+  email             String
+  ipAddress         String
+  deviceFingerprint String?
+  riskScore         Int
+  decision          String
+  reasons           String[]
+  createdAt         DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([ipAddress, createdAt])
+  @@index([deviceFingerprint, createdAt])
+  @@map("signup_risk_events")
 }
 
 model PhoneOtp {
@@ -499,6 +567,11 @@ model Project {
   differentiator   String?
   status           ProjectStatus    @default(DRAFT)
   inputType        ProjectInputType @default(FROM_SCRATCH)
+  // Which tier's generation actually built this project — resolved once by
+  // GenerateService.authorize() at creation and stamped here so the
+  // workspace UI (model-tier banner) can read it back reliably after a
+  // reload, not just from the one-shot create response.
+  generationTier   GenerationTier   @default(PAID)
   sourceUrl        String?
   docsKey          String?
   description      String?

@@ -2,7 +2,7 @@ import type { SendMagicLinkPayload, SendMagicLinkResponse } from "../types";
 import { signInWithEmail, signInWithGoogle, signInWithGitHub } from "@/lib/auth-actions";
 
 export async function sendMagicLink(payload: SendMagicLinkPayload): Promise<SendMagicLinkResponse> {
-    const result = await signInWithEmail(payload.email);
+    const result = await signInWithEmail(payload.email, payload.turnstileToken);
     if (!result.success) {
         throw new Error(result.error ?? "Failed to send magic link");
     }

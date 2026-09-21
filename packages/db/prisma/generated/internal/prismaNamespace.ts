@@ -390,6 +390,7 @@ export const ModelName = {
   RefreshToken: 'RefreshToken',
   MagicLinkToken: 'MagicLinkToken',
   TicketToken: 'TicketToken',
+  SignupRiskEvent: 'SignupRiskEvent',
   PhoneOtp: 'PhoneOtp',
   Plan: 'Plan',
   Order: 'Order',
@@ -438,7 +439,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchFinding" | "findingRelation" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "scoreResult" | "searchQueryCache" | "seoAuditResult"
+    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchFinding" | "findingRelation" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "scoreResult" | "searchQueryCache" | "seoAuditResult"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -883,6 +884,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.TicketTokenCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TicketTokenCountAggregateOutputType> | number
+        }
+      }
+    }
+    SignupRiskEvent: {
+      payload: Prisma.$SignupRiskEventPayload<ExtArgs>
+      fields: Prisma.SignupRiskEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SignupRiskEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SignupRiskEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload>
+        }
+        findFirst: {
+          args: Prisma.SignupRiskEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SignupRiskEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload>
+        }
+        findMany: {
+          args: Prisma.SignupRiskEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload>[]
+        }
+        create: {
+          args: Prisma.SignupRiskEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload>
+        }
+        createMany: {
+          args: Prisma.SignupRiskEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SignupRiskEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload>[]
+        }
+        delete: {
+          args: Prisma.SignupRiskEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload>
+        }
+        update: {
+          args: Prisma.SignupRiskEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.SignupRiskEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SignupRiskEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SignupRiskEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.SignupRiskEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SignupRiskEventPayload>
+        }
+        aggregate: {
+          args: Prisma.SignupRiskEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSignupRiskEvent>
+        }
+        groupBy: {
+          args: Prisma.SignupRiskEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SignupRiskEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SignupRiskEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SignupRiskEventCountAggregateOutputType> | number
         }
       }
     }
@@ -3380,7 +3455,15 @@ export const UserScalarFieldEnum = {
   deletedAt: 'deletedAt',
   hasUsedFreeGeneration: 'hasUsedFreeGeneration',
   stripeCustomerId: 'stripeCustomerId',
-  defaultPaymentMethodId: 'defaultPaymentMethodId'
+  defaultPaymentMethodId: 'defaultPaymentMethodId',
+  referralSource: 'referralSource',
+  utmSource: 'utmSource',
+  utmMedium: 'utmMedium',
+  utmCampaign: 'utmCampaign',
+  acceptedTermsAt: 'acceptedTermsAt',
+  acceptedTermsVersion: 'acceptedTermsVersion',
+  signupRiskDecision: 'signupRiskDecision',
+  signupRiskScore: 'signupRiskScore'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -3437,7 +3520,14 @@ export const MagicLinkTokenScalarFieldEnum = {
   tokenHash: 'tokenHash',
   expiresAt: 'expiresAt',
   consumedAt: 'consumedAt',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  acceptedTerms: 'acceptedTerms',
+  referralSource: 'referralSource',
+  utmSource: 'utmSource',
+  utmMedium: 'utmMedium',
+  utmCampaign: 'utmCampaign',
+  requestIp: 'requestIp',
+  deviceFingerprint: 'deviceFingerprint'
 } as const
 
 export type MagicLinkTokenScalarFieldEnum = (typeof MagicLinkTokenScalarFieldEnum)[keyof typeof MagicLinkTokenScalarFieldEnum]
@@ -3453,6 +3543,21 @@ export const TicketTokenScalarFieldEnum = {
 } as const
 
 export type TicketTokenScalarFieldEnum = (typeof TicketTokenScalarFieldEnum)[keyof typeof TicketTokenScalarFieldEnum]
+
+
+export const SignupRiskEventScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  email: 'email',
+  ipAddress: 'ipAddress',
+  deviceFingerprint: 'deviceFingerprint',
+  riskScore: 'riskScore',
+  decision: 'decision',
+  reasons: 'reasons',
+  createdAt: 'createdAt'
+} as const
+
+export type SignupRiskEventScalarFieldEnum = (typeof SignupRiskEventScalarFieldEnum)[keyof typeof SignupRiskEventScalarFieldEnum]
 
 
 export const PhoneOtpScalarFieldEnum = {
@@ -3609,6 +3714,7 @@ export const ProjectScalarFieldEnum = {
   differentiator: 'differentiator',
   status: 'status',
   inputType: 'inputType',
+  generationTier: 'generationTier',
   sourceUrl: 'sourceUrl',
   docsKey: 'docsKey',
   description: 'description',
@@ -4142,20 +4248,6 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'AuthProvider'
- */
-export type EnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider'>
-    
-
-
-/**
- * Reference to a field of type 'AuthProvider[]'
- */
-export type ListEnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider[]'>
-    
-
-
-/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -4166,6 +4258,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'AuthProvider'
+ */
+export type EnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider'>
+    
+
+
+/**
+ * Reference to a field of type 'AuthProvider[]'
+ */
+export type ListEnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider[]'>
     
 
 
@@ -4306,6 +4412,20 @@ export type EnumProjectInputTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'ProjectInputType[]'
  */
 export type ListEnumProjectInputTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectInputType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'GenerationTier'
+ */
+export type EnumGenerationTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenerationTier'>
+    
+
+
+/**
+ * Reference to a field of type 'GenerationTier[]'
+ */
+export type ListEnumGenerationTierFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GenerationTier[]'>
     
 
 
@@ -4662,6 +4782,7 @@ export type GlobalOmitConfig = {
   refreshToken?: Prisma.RefreshTokenOmit
   magicLinkToken?: Prisma.MagicLinkTokenOmit
   ticketToken?: Prisma.TicketTokenOmit
+  signupRiskEvent?: Prisma.SignupRiskEventOmit
   phoneOtp?: Prisma.PhoneOtpOmit
   plan?: Prisma.PlanOmit
   order?: Prisma.OrderOmit

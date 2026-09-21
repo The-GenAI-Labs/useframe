@@ -17,14 +17,26 @@ export const GenerateService = {
   // generation after the first must have sufficient credit balance and pays
   // GENERATE_CREDIT_COST, deducted transactionally exactly like
   // plan.service.ts does for RESEARCH_CREDIT_COST.
+  //
+  // Free-tier abuse gate: this is the ONLY place signupRiskDecision is ever
+  // read. A BLOCK_FREE_TIER user is never blocked from creating an account
+  // or from generating — they just don't get the free grant, and fall
+  // through to the normal paid/credits path like anyone who already used
+  // their free generation. If they also lack credits, the error is the
+  // exact same generic "Insufficient credits" 402 a legitimate out-of-
+  // credits user would see — nothing here ever reveals that a risk
+  // decision was involved, so there is nothing for an abuser to learn from
+  // the response and probe against.
   async authorize(userId: string): Promise<AuthorizeResult> {
     const user = await prisma.user.findUnique({
       where: { id: userId },
-      select: { hasUsedFreeGeneration: true },
+      select: { hasUsedFreeGeneration: true, signupRiskDecision: true },
     })
     if (!user) throw new AppError("User not found", 404)
 
-    if (!user.hasUsedFreeGeneration) {
+    const freeTierBlocked = user.signupRiskDecision === "BLOCK_FREE_TIER"
+
+    if (!user.hasUsedFreeGeneration && !freeTierBlocked) {
       const updated = await prisma.user.updateMany({
         where: { id: userId, hasUsedFreeGeneration: false },
         data: { hasUsedFreeGeneration: true },

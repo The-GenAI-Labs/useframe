@@ -469,14 +469,6 @@ export type PhoneOtpUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.PhoneOtpScalarWhereInput | Prisma.PhoneOtpScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type PhoneOtpCreateWithoutUserInput = {
   id?: string
   phone: string

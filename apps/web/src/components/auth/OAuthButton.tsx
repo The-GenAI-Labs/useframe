@@ -6,6 +6,7 @@ import { useAuthStore } from "@/store/authStore";
 
 interface OAuthButtonProps {
     provider: "google" | "github";
+    disabled?: boolean;
 }
 
 const GoogleIcon = () => (
@@ -23,7 +24,7 @@ const GitHubIcon = () => (
     </svg>
 );
 
-export const OAuthButton = ({ provider }: OAuthButtonProps) => {
+export const OAuthButton = ({ provider, disabled }: OAuthButtonProps) => {
     const googleMutation = useGoogleSignIn();
     const githubMutation = useGitHubSignIn();
     const oauthLoading = useAuthStore((s) => s.oauthLoading);
@@ -37,8 +38,8 @@ export const OAuthButton = ({ provider }: OAuthButtonProps) => {
             type="button"
             variant="outline"
             onClick={() => mutation.mutate()}
-            disabled={isThisLoading || isOtherLoading || mutation.isPending}
-            className="w-full h-11 hover:bg-blue-50 shadow-md text-gray-700 cursor-pointer focus-visible:ring-0 focus-visible:ring-offset-0"
+            disabled={disabled || isThisLoading || isOtherLoading || mutation.isPending}
+            className="w-full h-11 hover:bg-blue-50 shadow-md text-gray-700 cursor-pointer focus-visible:ring-0 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"
         >
             {provider === "google" ? <GoogleIcon /> : <GitHubIcon />}
             {isThisLoading

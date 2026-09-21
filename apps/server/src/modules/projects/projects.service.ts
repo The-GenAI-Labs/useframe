@@ -53,7 +53,10 @@ export const ProjectsService = {
 
     await prisma.project.update({
       where: { id: project.id },
-      data: { currentVersionId: version.id },
+      // generationTier is stamped here (not left to default) so the
+      // workspace's model-tier banner can read it back reliably after a
+      // reload rather than relying on this create response alone.
+      data: { currentVersionId: version.id, generationTier: tier === "free" ? "FREE" : "PAID" },
     })
 
     await prisma.pipelineState.create({
@@ -135,6 +138,7 @@ export const ProjectsService = {
         targetAudience: true,
         sourceUrl: true,
         currentVersionId: true,
+        generationTier: true,
         createdAt: true,
         updatedAt: true,
       },
