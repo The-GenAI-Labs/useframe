@@ -16,7 +16,7 @@ export const BackgroundClouds = memo(function BackgroundClouds() {
         preload="auto"
         poster="/chat/useframecloud.jpg"
         className="absolute inset-0 size-full object-cover"
-        src="/chat/useframe%20landing%20page%20vid.mp4"
+        src="/chat/useframe%20landing%20paint%20vid.mp4"
       />
       <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-white/80 to-transparent" />
     </div>
