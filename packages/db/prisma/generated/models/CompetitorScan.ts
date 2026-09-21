@@ -68,6 +68,7 @@ export type CompetitorScanCountAggregateOutputType = {
   rawHtmlKey: number
   designTokens: number
   extractedContent: number
+  videoAnalysis: number
   failureReason: number
   expiresAt: number
   createdAt: number
@@ -120,6 +121,7 @@ export type CompetitorScanCountAggregateInputType = {
   rawHtmlKey?: true
   designTokens?: true
   extractedContent?: true
+  videoAnalysis?: true
   failureReason?: true
   expiresAt?: true
   createdAt?: true
@@ -211,6 +213,7 @@ export type CompetitorScanGroupByOutputType = {
   rawHtmlKey: string | null
   designTokens: runtime.JsonValue | null
   extractedContent: runtime.JsonValue | null
+  videoAnalysis: runtime.JsonValue | null
   failureReason: string | null
   expiresAt: Date | null
   createdAt: Date
@@ -250,6 +253,7 @@ export type CompetitorScanWhereInput = {
   rawHtmlKey?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
   designTokens?: Prisma.JsonNullableFilter<"CompetitorScan">
   extractedContent?: Prisma.JsonNullableFilter<"CompetitorScan">
+  videoAnalysis?: Prisma.JsonNullableFilter<"CompetitorScan">
   failureReason?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"CompetitorScan"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CompetitorScan"> | Date | string
@@ -270,6 +274,7 @@ export type CompetitorScanOrderByWithRelationInput = {
   rawHtmlKey?: Prisma.SortOrderInput | Prisma.SortOrder
   designTokens?: Prisma.SortOrderInput | Prisma.SortOrder
   extractedContent?: Prisma.SortOrderInput | Prisma.SortOrder
+  videoAnalysis?: Prisma.SortOrderInput | Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -293,6 +298,7 @@ export type CompetitorScanWhereUniqueInput = Prisma.AtLeast<{
   rawHtmlKey?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
   designTokens?: Prisma.JsonNullableFilter<"CompetitorScan">
   extractedContent?: Prisma.JsonNullableFilter<"CompetitorScan">
+  videoAnalysis?: Prisma.JsonNullableFilter<"CompetitorScan">
   failureReason?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"CompetitorScan"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CompetitorScan"> | Date | string
@@ -313,6 +319,7 @@ export type CompetitorScanOrderByWithAggregationInput = {
   rawHtmlKey?: Prisma.SortOrderInput | Prisma.SortOrder
   designTokens?: Prisma.SortOrderInput | Prisma.SortOrder
   extractedContent?: Prisma.SortOrderInput | Prisma.SortOrder
+  videoAnalysis?: Prisma.SortOrderInput | Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -337,6 +344,7 @@ export type CompetitorScanScalarWhereWithAggregatesInput = {
   rawHtmlKey?: Prisma.StringNullableWithAggregatesFilter<"CompetitorScan"> | string | null
   designTokens?: Prisma.JsonNullableWithAggregatesFilter<"CompetitorScan">
   extractedContent?: Prisma.JsonNullableWithAggregatesFilter<"CompetitorScan">
+  videoAnalysis?: Prisma.JsonNullableWithAggregatesFilter<"CompetitorScan">
   failureReason?: Prisma.StringNullableWithAggregatesFilter<"CompetitorScan"> | string | null
   expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CompetitorScan"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CompetitorScan"> | Date | string
@@ -353,6 +361,7 @@ export type CompetitorScanCreateInput = {
   rawHtmlKey?: string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -373,6 +382,7 @@ export type CompetitorScanUncheckedCreateInput = {
   rawHtmlKey?: string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -389,6 +399,7 @@ export type CompetitorScanUpdateInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -409,6 +420,7 @@ export type CompetitorScanUncheckedUpdateInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -427,6 +439,7 @@ export type CompetitorScanCreateManyInput = {
   rawHtmlKey?: string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -443,6 +456,7 @@ export type CompetitorScanUpdateManyMutationInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -461,6 +475,7 @@ export type CompetitorScanUncheckedUpdateManyInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -489,6 +504,7 @@ export type CompetitorScanCountOrderByAggregateInput = {
   rawHtmlKey?: Prisma.SortOrder
   designTokens?: Prisma.SortOrder
   extractedContent?: Prisma.SortOrder
+  videoAnalysis?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -629,6 +645,7 @@ export type CompetitorScanCreateWithoutUserInput = {
   rawHtmlKey?: string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -647,6 +664,7 @@ export type CompetitorScanUncheckedCreateWithoutUserInput = {
   rawHtmlKey?: string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -694,6 +712,7 @@ export type CompetitorScanScalarWhereInput = {
   rawHtmlKey?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
   designTokens?: Prisma.JsonNullableFilter<"CompetitorScan">
   extractedContent?: Prisma.JsonNullableFilter<"CompetitorScan">
+  videoAnalysis?: Prisma.JsonNullableFilter<"CompetitorScan">
   failureReason?: Prisma.StringNullableFilter<"CompetitorScan"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"CompetitorScan"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CompetitorScan"> | Date | string
@@ -710,6 +729,7 @@ export type CompetitorScanCreateWithoutProjectInput = {
   rawHtmlKey?: string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -728,6 +748,7 @@ export type CompetitorScanUncheckedCreateWithoutProjectInput = {
   rawHtmlKey?: string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -771,6 +792,7 @@ export type CompetitorScanCreateManyUserInput = {
   rawHtmlKey?: string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -787,6 +809,7 @@ export type CompetitorScanUpdateWithoutUserInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -805,6 +828,7 @@ export type CompetitorScanUncheckedUpdateWithoutUserInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -822,6 +846,7 @@ export type CompetitorScanUncheckedUpdateManyWithoutUserInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -839,6 +864,7 @@ export type CompetitorScanCreateManyProjectInput = {
   rawHtmlKey?: string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -855,6 +881,7 @@ export type CompetitorScanUpdateWithoutProjectInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -873,6 +900,7 @@ export type CompetitorScanUncheckedUpdateWithoutProjectInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -890,6 +918,7 @@ export type CompetitorScanUncheckedUpdateManyWithoutProjectInput = {
   rawHtmlKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  videoAnalysis?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -910,6 +939,7 @@ export type CompetitorScanSelect<ExtArgs extends runtime.Types.Extensions.Intern
   rawHtmlKey?: boolean
   designTokens?: boolean
   extractedContent?: boolean
+  videoAnalysis?: boolean
   failureReason?: boolean
   expiresAt?: boolean
   createdAt?: boolean
@@ -930,6 +960,7 @@ export type CompetitorScanSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   rawHtmlKey?: boolean
   designTokens?: boolean
   extractedContent?: boolean
+  videoAnalysis?: boolean
   failureReason?: boolean
   expiresAt?: boolean
   createdAt?: boolean
@@ -950,6 +981,7 @@ export type CompetitorScanSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   rawHtmlKey?: boolean
   designTokens?: boolean
   extractedContent?: boolean
+  videoAnalysis?: boolean
   failureReason?: boolean
   expiresAt?: boolean
   createdAt?: boolean
@@ -970,13 +1002,14 @@ export type CompetitorScanSelectScalar = {
   rawHtmlKey?: boolean
   designTokens?: boolean
   extractedContent?: boolean
+  videoAnalysis?: boolean
   failureReason?: boolean
   expiresAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CompetitorScanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "projectId" | "sourceUrl" | "normalizedUrl" | "scanType" | "status" | "screenshotKey" | "rawHtmlKey" | "designTokens" | "extractedContent" | "failureReason" | "expiresAt" | "createdAt" | "updatedAt", ExtArgs["result"]["competitorScan"]>
+export type CompetitorScanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "projectId" | "sourceUrl" | "normalizedUrl" | "scanType" | "status" | "screenshotKey" | "rawHtmlKey" | "designTokens" | "extractedContent" | "videoAnalysis" | "failureReason" | "expiresAt" | "createdAt" | "updatedAt", ExtArgs["result"]["competitorScan"]>
 export type CompetitorScanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.CompetitorScan$projectArgs<ExtArgs>
@@ -1008,6 +1041,7 @@ export type $CompetitorScanPayload<ExtArgs extends runtime.Types.Extensions.Inte
     rawHtmlKey: string | null
     designTokens: runtime.JsonValue | null
     extractedContent: runtime.JsonValue | null
+    videoAnalysis: runtime.JsonValue | null
     failureReason: string | null
     expiresAt: Date | null
     createdAt: Date
@@ -1448,6 +1482,7 @@ export interface CompetitorScanFieldRefs {
   readonly rawHtmlKey: Prisma.FieldRef<"CompetitorScan", 'String'>
   readonly designTokens: Prisma.FieldRef<"CompetitorScan", 'Json'>
   readonly extractedContent: Prisma.FieldRef<"CompetitorScan", 'Json'>
+  readonly videoAnalysis: Prisma.FieldRef<"CompetitorScan", 'Json'>
   readonly failureReason: Prisma.FieldRef<"CompetitorScan", 'String'>
   readonly expiresAt: Prisma.FieldRef<"CompetitorScan", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CompetitorScan", 'DateTime'>

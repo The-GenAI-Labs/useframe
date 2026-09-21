@@ -39,11 +39,11 @@ async function billingFetch<T>(
 
 export function callCreateCheckout(
   user: { id: string; email: string },
-  amountCents: number
+  input: { packId?: number; amountCents?: number }
 ): Promise<CreateCheckoutResult> {
   return billingFetch<CreateCheckoutResult>(user, "/checkout/create-order", {
     method: "POST",
-    body: JSON.stringify({ amountCents }),
+    body: JSON.stringify(input),
   })
 }
 

@@ -190,7 +190,7 @@ export async function enqueueCompetitorScans(
 ): Promise<CreatedScan[]> {
   const created: CreatedScan[] = []
 
-  for (const sourceUrl of urls) {
+  for (const [rank, sourceUrl] of urls.entries()) {
     const scan = await prisma.competitorScan.create({
       data: {
         userId,
@@ -201,12 +201,15 @@ export async function enqueueCompetitorScans(
       },
     })
 
+    // rank 0 is the top-ranked competitor — the only one that gets the
+    // video-recording + vision-analysis path in scan.processor.ts.
     const payload: ScanJobPayload = {
       scanId: scan.id,
       userId,
       projectId,
       sourceUrl,
       scanType: "COMPETITOR",
+      rank,
     }
 
     await scanQueue.add("scan", payload, {
@@ -226,6 +229,9 @@ export type ScanOutcome = {
   status: string
   designTokens?: unknown
   extractedContent?: unknown
+  // Present only for the top-ranked competitor, and only when the video
+  // pipeline ran (see scan.processor.ts).
+  videoAnalysis?: unknown
 }
 
 // Polls the given scans until every one reaches a terminal state (DONE or
@@ -254,6 +260,7 @@ export async function waitForScans(
         status: true,
         designTokens: true,
         extractedContent: true,
+        videoAnalysis: true,
       },
     })
 
@@ -264,12 +271,14 @@ export async function waitForScans(
         status: string
         designTokens: unknown
         extractedContent: unknown
+        videoAnalysis: unknown
       }) => ({
         scanId: s.id,
         sourceUrl: s.sourceUrl,
         status: s.status,
         designTokens: s.designTokens ?? undefined,
         extractedContent: s.extractedContent ?? undefined,
+        videoAnalysis: s.videoAnalysis ?? undefined,
       }),
     )
 

@@ -1,10 +1,11 @@
 import { Router, type Request, type Response, type NextFunction } from "express"
 import { z } from "zod"
 import { PlanSSERequestSchema, buildHeroPreviewDataUrl } from "@repo/schemas"
+import type { DesignBrief, DesignBriefCandidates } from "@repo/schemas"
 import { verifyToken } from "@/lib/auth.js"
 import { initSSE, sseWrite, sseError } from "@/llm/stream.js"
 import { getModelForTier } from "@/llm/router.js"
-import { runPlannerCandidatesAgent } from "@/agents/planner.agent.js"
+import { runPlannerAgent, runPlannerCandidatesAgent } from "@/agents/planner.agent.js"
 import { runResearchAgent } from "@/agents/research.agent.js"
 import { callRetrieve, callDomainPattern, callAudienceModifier } from "@/lib/researchService.js"
 import { findCompetitorUrls, enqueueCompetitorScans, waitForScans } from "@/tools/competitorSearch.js"
@@ -83,29 +84,37 @@ router.post("/plan", (req: Request, res: Response): void => {
       const audience = inferAudienceKey(targetAudience)
       const model = getModelForTier(tier)
 
-      sseWrite(res, {
-        type: "stage",
-        stage: "SCAN",
-        message: "Discovering competitors...",
-      })
-
+      // Competitor research is paid-tier only. The DeepSeek-only model router
+      // protects the generation LLM call, but did nothing to gate the Brave
+      // search + Playwright scanning below — both are real external cost per
+      // request, so free tier skips them entirely and goes straight to corpus
+      // retrieval (DB-only, no external calls). An explicit sourceUrl (the
+      // user's own site) is still honoured, since that's their own input
+      // rather than discovery we paid for.
       let competitorUrls: string[] = []
+
       if (sourceUrl) {
         competitorUrls = [sourceUrl]
-      } else {
+      } else if (tier === "paid") {
+        sseWrite(res, {
+          type: "stage",
+          stage: "SCAN",
+          message: "Discovering competitors...",
+        })
+
         competitorUrls = await findCompetitorUrls(domain, ideaText, audience).catch((err) => {
           console.warn("[plan] competitor discovery failed, continuing without it:", err)
           return []
         })
+        competitorUrls = competitorUrls.slice(0, 3)
       }
 
-      // Bounds the worst-case Playwright-scan + LLM cost of any single free
-      // generation, abuse or not — free tier gets at most 1 competitor scan,
-      // paid gets findCompetitorUrls' existing cap of up to 3.
-      const maxCompetitors = tier === "free" ? 1 : 3
-      competitorUrls = competitorUrls.slice(0, maxCompetitors)
-
-      let scannedCompetitors: { sourceUrl: string; designTokens?: unknown; extractedContent?: unknown }[] = []
+      let scannedCompetitors: {
+        sourceUrl: string
+        designTokens?: unknown
+        extractedContent?: unknown
+        videoAnalysis?: unknown
+      }[] = []
 
       if (competitorUrls.length > 0) {
         const created = await enqueueCompetitorScans(competitorUrls, user.id, projectId)
@@ -129,6 +138,11 @@ router.post("/plan", (req: Request, res: Response): void => {
             sourceUrl: o.sourceUrl,
             designTokens: o.designTokens,
             extractedContent: o.extractedContent,
+            // Only the top-ranked competitor carries this, and only when the
+            // video pipeline ran — it's richer motion/pattern context than
+            // static design tokens, fed in as inspiration, never as content
+            // to reproduce.
+            videoAnalysis: o.videoAnalysis,
           }))
       }
 
@@ -154,14 +168,23 @@ router.post("/plan", (req: Request, res: Response): void => {
         differentiator: extracted?.differentiator,
       }
 
+      // Free tier resolves to ONE brief — no second candidate, no preview
+      // render. The A/B picker doubles the planner call and adds two renders,
+      // which is paid-tier value, not a free-tier default.
+      const isPaid = tier === "paid"
+
       sseWrite(res, {
         type: "stage",
         stage: "RESEARCH",
-        message: "Compiling two design directions...",
+        message: isPaid ? "Compiling two design directions..." : "Compiling design brief...",
       })
 
-      const [candidates, researchReport] = await Promise.all([
-        runPlannerCandidatesAgent({ extracted: plannerExtracted, results, domainPattern, audienceModifier }, model),
+      const plannerVars = { extracted: plannerExtracted, results, domainPattern, audienceModifier }
+
+      const [plannerOutput, researchReport] = await Promise.all([
+        isPaid
+          ? runPlannerCandidatesAgent(plannerVars, model)
+          : runPlannerAgent(plannerVars, model),
         runResearchAgent(
           {
             startupIdea: ideaText,
@@ -173,10 +196,21 @@ router.post("/plan", (req: Request, res: Response): void => {
         ),
       ])
 
-      // NOTE: ProjectVersion.designBrief is deliberately NOT written here any
-      // more. With two candidates there is no chosen brief yet — it is stored
-      // by POST /api/projects/:slug/plan/select once the user picks, so the
-      // version never holds a direction the user didn't choose.
+      const candidates = isPaid ? (plannerOutput as DesignBriefCandidates) : null
+      const singleBrief = isPaid ? null : (plannerOutput as DesignBrief)
+
+      // On the paid path ProjectVersion.designBrief is deliberately NOT
+      // written here — with two candidates there is no chosen brief yet, so
+      // it's stored by POST /api/projects/:slug/plan/select once the user
+      // picks. On the free path there's only one brief and no picker, so it
+      // is the chosen brief and is persisted immediately.
+      if (singleBrief) {
+        await prisma.projectVersion.update({
+          where: { id: versionId },
+          data: { designBrief: singleBrief as unknown as Prisma.InputJsonValue },
+        })
+      }
+
       if (researchReport.competitorInsights) {
         await prisma.researchReport
           .upsert({
@@ -200,33 +234,46 @@ router.post("/plan", (req: Request, res: Response): void => {
           })
       }
 
-      sseWrite(res, {
-        type: "stage",
-        stage: "RESEARCH",
-        message: "Rendering previews...",
-      })
+      if (candidates) {
+        sseWrite(res, {
+          type: "stage",
+          stage: "RESEARCH",
+          message: "Rendering previews...",
+        })
 
-      // Hero previews are inline SVG data URLs built synchronously from each
-      // brief's own colours/typography — no browser, no upload, nothing to
-      // clean up. See buildHeroPreviewDataUrl in @repo/schemas.
-      const previewA = buildHeroPreviewDataUrl(candidates.candidateA)
-      const previewB = buildHeroPreviewDataUrl(candidates.candidateB)
+        // Hero previews are inline SVG data URLs built synchronously from each
+        // brief's own colours/typography — no browser, no upload, nothing to
+        // clean up. See buildHeroPreviewDataUrl in @repo/schemas.
+        sseWrite(res, {
+          type: "candidates_ready",
+          candidateA: {
+            brief: candidates.candidateA,
+            previewUrl: buildHeroPreviewDataUrl(candidates.candidateA),
+          },
+          candidateB: {
+            brief: candidates.candidateB,
+            previewUrl: buildHeroPreviewDataUrl(candidates.candidateB),
+          },
+          recommended: candidates.recommended,
+          recommendedReason: candidates.recommendedReason,
+          competitorInsights: researchReport.competitorInsights,
+        })
+      } else {
+        // Free tier: one resolved brief, no picker to wait on.
+        sseWrite(res, {
+          type: "brief_ready",
+          brief: singleBrief!,
+          competitorInsights: researchReport.competitorInsights,
+        })
+      }
 
-      sseWrite(res, {
-        type: "candidates_ready",
-        candidateA: { brief: candidates.candidateA, previewUrl: previewA },
-        candidateB: { brief: candidates.candidateB, previewUrl: previewB },
-        recommended: candidates.recommended,
-        recommendedReason: candidates.recommendedReason,
-        competitorInsights: researchReport.competitorInsights,
-      })
-
-      // Stream ends here — it does not auto-proceed to /generate. The user
-      // picks a direction via POST /api/projects/:slug/plan/select first.
+      // Stream ends here — it does not auto-proceed to /generate. On the paid
+      // path the user picks a direction via /plan/select first; on the free
+      // path the brief is already resolved and stored.
       sseWrite(res, {
         type: "stage",
         stage: "COMPLETE",
-        message: "Two design directions ready.",
+        message: candidates ? "Two design directions ready." : "Design brief ready.",
       })
     } catch (err) {
       console.error("[plan] failed:", err instanceof Error ? err.message : err)

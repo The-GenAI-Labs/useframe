@@ -10,40 +10,20 @@ import { serif } from "@/components/home/fonts";
 import { CheckoutForm } from "./CheckoutForm";
 import { AddCardForm } from "./AddCardForm";
 import { CrossLineBackground } from "@/components/web-score/CrossLineBackground";
+import {
+    CREDIT_PACKS,
+    CUSTOM_MIN_AMOUNT_CENTS,
+    creditsForCustomAmount,
+    findCreditPack,
+} from "@repo/schemas";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "");
 
-// Tiered pricing — the effective rate improves at higher tiers. Mirrors
-// apps/billing-service/src/lib/pricing.ts's creditsForAmount exactly (same
-// anchor points) so what's shown here is what checkout actually grants.
-const PRICING_ANCHORS: { amountCents: number; credits: number }[] = [
-    { amountCents: 900, credits: 10 },
-    { amountCents: 1900, credits: 22 },
-    { amountCents: 4900, credits: 65 },
-    { amountCents: 9900, credits: 150 },
-];
-
-function creditsForAmount(amountCents: number): number {
-    const first = PRICING_ANCHORS[0]!;
-    const last = PRICING_ANCHORS[PRICING_ANCHORS.length - 1]!;
-
-    if (amountCents <= first.amountCents) {
-        return Math.max(1, Math.round((amountCents / first.amountCents) * first.credits));
-    }
-    if (amountCents >= last.amountCents) {
-        const prev = PRICING_ANCHORS[PRICING_ANCHORS.length - 2]!;
-        const rate = (last.credits - prev.credits) / (last.amountCents - prev.amountCents);
-        return Math.round(last.credits + (amountCents - last.amountCents) * rate);
-    }
-    for (let i = 0; i < PRICING_ANCHORS.length - 1; i++) {
-        const lo = PRICING_ANCHORS[i]!;
-        const hi = PRICING_ANCHORS[i + 1]!;
-        if (amountCents >= lo.amountCents && amountCents <= hi.amountCents) {
-            const t = (amountCents - lo.amountCents) / (hi.amountCents - lo.amountCents);
-            return Math.round(lo.credits + t * (hi.credits - lo.credits));
-        }
-    }
-    return Math.floor(amountCents / 90);
+// Fixed packs plus a custom-amount path. CREDIT_PACKS and the custom rate
+// are imported from @repo/schemas — the same source billing-service's
+// checkout validates against — so what's shown here is what checkout grants.
+function formatRate(amountCents: number, credits: number): string {
+    return `$${(amountCents / 100 / credits).toFixed(2)}/credit`;
 }
 
 type PackTier = {
@@ -56,41 +36,31 @@ type PackTier = {
     featured?: boolean;
 };
 
-const PACK_TIERS: PackTier[] = [
-    {
+const PACK_PRESENTATION: Record<number, { name: string; tagline: string; gradient: string; featured?: boolean }> = {
+    1900: {
         name: "Starter",
         tagline: "One real site, fully iterated",
-        amountCents: 900,
-        credits: 10,
-        rate: "$0.90/credit",
         gradient: "from-sky-400 via-blue-400 to-blue-600",
     },
-    {
+    4900: {
         name: "Builder",
         tagline: "A couple of sites, room to explore",
-        amountCents: 1900,
-        credits: 22,
-        rate: "$0.86/credit",
         gradient: "from-blue-500 via-blue-600 to-indigo-700",
+    },
+    9900: {
+        name: "Studio",
+        tagline: "Best rate, for shipping regularly",
+        gradient: "from-indigo-500 via-blue-700 to-slate-800",
         featured: true,
     },
-    {
-        name: "Studio",
-        tagline: "For shipping pages regularly",
-        amountCents: 4900,
-        credits: 65,
-        rate: "$0.75/credit",
-        gradient: "from-indigo-500 via-blue-700 to-slate-800",
-    },
-    {
-        name: "Agency",
-        tagline: "Best rate, for heavy use",
-        amountCents: 9900,
-        credits: 150,
-        rate: "$0.66/credit",
-        gradient: "from-slate-700 via-blue-900 to-slate-900",
-    },
-];
+};
+
+const PACK_TIERS: PackTier[] = CREDIT_PACKS.map((pack) => ({
+    ...PACK_PRESENTATION[pack.amountCents]!,
+    amountCents: pack.amountCents,
+    credits: pack.credits,
+    rate: formatRate(pack.amountCents, pack.credits),
+}));
 
 const THRESHOLD_OPTIONS_CENTS = [500, 1000, 1500, 2500];
 const TOPUP_OPTIONS_CENTS = [1000, 1500, 2500, 5000];
@@ -138,18 +108,28 @@ export default function BillingView() {
         setAutoReloadSynced(true);
     }, [summary, autoReloadSynced]);
 
-    const amountCents = customAmount ? Math.round(Number(customAmount) * 100) : selectedAmount;
-    const liveCredits = amountCents > 0 ? creditsForAmount(amountCents) : 0;
+    // A pack purchase is identified by packId; a typed custom amount always
+    // prices at the custom rate even if it happens to equal a pack's price,
+    // matching how checkout validates it server-side.
+    const isCustom = customAmount.length > 0;
+    const amountCents = isCustom ? Math.round(Number(customAmount) * 100) : selectedAmount;
+    const selectedPack = isCustom ? undefined : findCreditPack(selectedAmount);
+    const liveCredits =
+        amountCents > 0
+            ? (selectedPack?.credits ?? creditsForCustomAmount(amountCents))
+            : 0;
 
     const handleStartCheckout = useCallback(async () => {
-        if (amountCents < 500) {
-            setCheckoutError("Minimum top-up is $5");
+        if (isCustom && amountCents < CUSTOM_MIN_AMOUNT_CENTS) {
+            setCheckoutError("Minimum top-up is $10");
             return;
         }
         setStartingCheckout(true);
         setCheckoutError(null);
         try {
-            const { clientSecret, credits } = await billingApi.createCheckout(amountCents);
+            const { clientSecret, credits } = await billingApi.createCheckout(
+                isCustom ? { amountCents } : { packId: selectedAmount },
+            );
             setCheckoutSecret(clientSecret);
             setCheckoutCredits(credits);
         } catch (err) {
@@ -157,7 +137,7 @@ export default function BillingView() {
         } finally {
             setStartingCheckout(false);
         }
-    }, [amountCents]);
+    }, [amountCents, isCustom, selectedAmount]);
 
     const handleCheckoutSuccess = useCallback(() => {
         setCheckoutSecret(null);

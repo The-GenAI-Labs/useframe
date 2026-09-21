@@ -5,7 +5,11 @@ import { QUEUES } from "@repo/events"
 import type { AutoReloadJobPayload, EmailJobPayload } from "@repo/events"
 import { redis } from "../lib/redis.js"
 import { stripe } from "../lib/stripe.js"
-import { creditsForAmount } from "../lib/pricing.js"
+// Auto-reload is a custom-amount top-up (the user sets topUpToCents), so it
+// prices at the custom rate — the same rate a manual custom top-up gets.
+// Using the old lib/pricing.ts curve here would quietly grant ~2x the
+// credits of an equivalent manual purchase.
+import { creditsForCustomAmount } from "@repo/schemas"
 
 const emailQueue = new Queue<EmailJobPayload>(QUEUES.EMAIL, { connection: redis })
 
@@ -36,7 +40,7 @@ async function processAutoReload(job: Job<AutoReloadJobPayload>): Promise<void> 
       payment_method: user.defaultPaymentMethodId,
       off_session: true,
       confirm: true,
-      metadata: { userId, credits: String(creditsForAmount(topUpToCents)) },
+      metadata: { userId, credits: String(creditsForCustomAmount(topUpToCents)) },
     })
 
     await prisma.payment.create({

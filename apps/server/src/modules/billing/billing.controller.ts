@@ -10,8 +10,8 @@ export const BillingController = {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const { amountCents } = req.body as CheckoutInput
-      const result = await BillingService.createCheckout(req.user!, amountCents)
+      const { packId, amountCents } = req.body as CheckoutInput
+      const result = await BillingService.createCheckout(req.user!, { packId, amountCents })
       res.status(201).json({ success: true, data: result })
     } catch (err) {
       next(err)

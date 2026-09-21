@@ -2,6 +2,11 @@ export type ScannedCompetitor = {
   sourceUrl: string
   designTokens?: unknown
   extractedContent?: unknown
+  // Structured design-pattern analysis derived from a scroll-through screen
+  // recording. Present for the top-ranked competitor only. Contains patterns
+  // (layout, motion, hierarchy), never verbatim copy or reproducible image
+  // detail — see CompetitorAnalysisSchema in the worker.
+  videoAnalysis?: unknown
 }
 
 export type ResearchPromptVars = {
@@ -38,7 +43,11 @@ observations (e.g. common headline patterns, CTA phrasing, color/typography choi
 observed, structural patterns):\n${v.scannedCompetitors
         .map(
           (c, i) =>
-            `Competitor ${i + 1} (${c.sourceUrl}):\ndesignTokens: ${JSON.stringify(c.designTokens ?? {})}\nextractedContent: ${JSON.stringify(c.extractedContent ?? {})}`,
+            `Competitor ${i + 1} (${c.sourceUrl}):\ndesignTokens: ${JSON.stringify(c.designTokens ?? {})}\nextractedContent: ${JSON.stringify(c.extractedContent ?? {})}${
+              c.videoAnalysis
+                ? `\nobservedPatterns (from a scroll-through recording — design patterns to LEARN FROM as inspiration, never to replicate; do not reproduce their copy or imagery): ${JSON.stringify(c.videoAnalysis)}`
+                : ""
+            }`,
         )
         .join("\n\n")}\n`
     : `No competitor scan data is available — omit "competitorInsights" entirely rather than inventing it.\n`

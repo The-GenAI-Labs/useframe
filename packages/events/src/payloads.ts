@@ -4,6 +4,11 @@ export type ScanJobPayload = {
   projectId: string
   sourceUrl: string
   scanType: "COMPETITOR" | "OWN_SITE"
+  // Discovery order from findCompetitorUrls. Only rank 0 (the top-ranked
+  // competitor) gets the expensive video-recording + vision-analysis path;
+  // the rest keep the cheap screenshot + design-token path. Optional so
+  // existing enqueue call sites stay valid.
+  rank?: number
 }
 
 export type GenerateJobPayload = {

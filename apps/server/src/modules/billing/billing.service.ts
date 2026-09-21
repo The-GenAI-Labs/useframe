@@ -7,8 +7,8 @@ import {
 import type { AutoReloadInput } from "./billing.schema.js"
 
 export const BillingService = {
-  createCheckout(user: { id: string; email: string }, amountCents: number) {
-    return callCreateCheckout(user, amountCents)
+  createCheckout(user: { id: string; email: string }, input: { packId?: number; amountCents?: number }) {
+    return callCreateCheckout(user, input)
   },
 
   createSetupIntent(user: { id: string; email: string }) {

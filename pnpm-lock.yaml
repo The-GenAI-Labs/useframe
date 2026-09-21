@@ -23,6 +23,9 @@ importers:
       '@repo/events':
         specifier: workspace:*
         version: link:../../packages/events
+      '@repo/schemas':
+        specifier: workspace:*
+        version: link:../../packages/schemas
       '@useframe/db':
         specifier: workspace:*
         version: link:../../packages/db
