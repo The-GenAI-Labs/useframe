@@ -7,12 +7,26 @@ export type ScoreCriterionResult = {
   issues: string[]
 }
 
+export type PerformanceMetrics = {
+  ttfb: number
+  domContentLoaded: number
+  loadComplete: number
+  lcp: number
+}
+
+export type PerformanceCriterionResult = ScoreCriterionResult & {
+  metrics: PerformanceMetrics
+}
+
 export type ScoreReport = {
   visualHierarchy: ScoreCriterionResult
   typographyReadability: ScoreCriterionResult
   colorContrastA11y: ScoreCriterionResult
   copyPersuasion: ScoreCriterionResult
   seoTechnical: ScoreCriterionResult
+  // Optional: measured, and absent from reports cached before the
+  // Performance & Speed criterion existed (scorer v1).
+  performanceSpeed?: PerformanceCriterionResult
   overallScore: number
 }
 

@@ -2,6 +2,7 @@
 
 import { memo } from "react";
 import type { Message } from "@/store/chatModalStore";
+import { PdfAttachment } from "@/components/chat/PdfAttachment";
 
 interface MessageBubbleProps {
     message: Message;
@@ -41,6 +42,9 @@ export const MessageBubble = memo(function MessageBubble({ message, isStreaming 
                         </span>
                     </div>
                 )}
+                {message.attachments?.map((a) => (
+                    <PdfAttachment key={a.documentId} {...a} />
+                ))}
             </div>
         </div>
     );

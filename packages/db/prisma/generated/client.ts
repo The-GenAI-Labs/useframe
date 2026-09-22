@@ -122,6 +122,11 @@ export type CreditTransaction = Prisma.CreditTransactionModel
  */
 export type AutoReloadSetting = Prisma.AutoReloadSettingModel
 /**
+ * Model ResearchDocument
+ * 
+ */
+export type ResearchDocument = Prisma.ResearchDocumentModel
+/**
  * Model Project
  * 
  */

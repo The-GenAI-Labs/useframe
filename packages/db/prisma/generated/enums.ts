@@ -257,6 +257,14 @@ export const ProjectInputType = {
 export type ProjectInputType = (typeof ProjectInputType)[keyof typeof ProjectInputType]
 
 
+export const ResearchDocumentType = {
+  COMPETITOR_ANALYSIS: 'COMPETITOR_ANALYSIS',
+  RESEARCH_RATIONALE: 'RESEARCH_RATIONALE'
+} as const
+
+export type ResearchDocumentType = (typeof ResearchDocumentType)[keyof typeof ResearchDocumentType]
+
+
 export const PipelineStepId = {
   RESEARCH: 'RESEARCH',
   WEBSITE: 'WEBSITE',

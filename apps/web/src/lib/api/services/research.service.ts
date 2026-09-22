@@ -114,6 +114,20 @@ export const researchApi = {
     return data.data
   },
 
+  // Queues PDF generation on the worker; the finished reports arrive as an
+  // assistant message with attachments rather than in this response.
+  requestPdf: async (
+    slug: string,
+    sections: ("COMPETITOR_ANALYSIS" | "RESEARCH_RATIONALE")[],
+    conversationId?: string
+  ) => {
+    const { data } = await api.post<{
+      success: true
+      data: { queued: boolean; conversationId: string }
+    }>(`/projects/${slug}/research/pdf`, { sections, conversationId })
+    return data.data
+  },
+
   getFinding: async (slug: string, findingId: string) => {
     const { data } = await api.get<{ success: true; data: ResearchFinding }>(
       `/projects/${slug}/research/finding/${findingId}`

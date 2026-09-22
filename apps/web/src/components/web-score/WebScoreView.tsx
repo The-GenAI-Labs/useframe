@@ -61,6 +61,15 @@ const CRITERIA_META: Record<CriterionKey, { label: string; description: string; 
             </svg>
         ),
     },
+    performanceSpeed: {
+        label: "Performance & Speed",
+        description: "Measured LCP, TTFB and full load time vs Core Web Vitals",
+        icon: (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+        ),
+    },
 };
 
 const CRITERION_KEYS: CriterionKey[] = [
@@ -69,6 +78,7 @@ const CRITERION_KEYS: CriterionKey[] = [
     "colorContrastA11y",
     "copyPersuasion",
     "seoTechnical",
+    "performanceSpeed",
 ];
 
 type ViewState =
@@ -344,9 +354,14 @@ export default function WebScoreView({ initialUrl = "" }: { initialUrl?: string 
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl">
-                        {CRITERION_KEYS.map((key) => (
-                            <CriterionCard key={key} criterionKey={key} result={state.report[key]} />
-                        ))}
+                        {/* performanceSpeed is absent from reports cached before
+                            scorer v2, so skip any criterion the report lacks
+                            rather than rendering an empty card. */}
+                        {CRITERION_KEYS.map((key) => {
+                            const result = state.report![key];
+                            if (!result) return null;
+                            return <CriterionCard key={key} criterionKey={key} result={result} />;
+                        })}
                     </div>
 
                     <div className="flex flex-wrap gap-2 max-w-2xl">

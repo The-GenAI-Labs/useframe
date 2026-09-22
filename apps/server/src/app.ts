@@ -14,6 +14,7 @@ import billingRoutes from "@/modules/billing/billing.routes.js"
 import creditsRoutes from "@/modules/credits/credits.routes.js"
 import findingsRoutes from "@/modules/findings/findings.routes.js"
 import generateRoutes from "@/modules/generate/generate.routes.js"
+import researchDocumentRoutes from "@/modules/plan/researchDocument.routes.js"
 import { errorHandler } from "@/middleware/errorHandler.js"
 
 const app: Express = express()
@@ -45,6 +46,7 @@ app.use("/api/billing", billingRoutes)
 app.use("/api/credits", creditsRoutes)
 app.use("/api/findings", findingsRoutes)
 app.use("/api/generate", generateRoutes)
+app.use("/api/research-documents", researchDocumentRoutes)
 app.use("/{*splat}", (_req: Request, res: Response) => {
     res.status(404).json({ success: false, message: "Route not found" })
 })

@@ -30,3 +30,12 @@ export const PlanSelectSchema = z.object({
 })
 
 export type PlanSelectInput = z.infer<typeof PlanSelectSchema>
+
+export const PlanPdfSchema = z.object({
+  sections: z
+    .array(z.enum(["COMPETITOR_ANALYSIS", "RESEARCH_RATIONALE"]))
+    .min(1, "Pick at least one report"),
+  conversationId: z.string().cuid().optional(),
+})
+
+export type PlanPdfInput = z.infer<typeof PlanPdfSchema>

@@ -8,11 +8,6 @@ import { redis } from "../lib/redis.js"
 import { callAnalyze } from "../lib/scoringService.js"
 import { measurePerformance } from "../scraper/measurePerformance.js"
 
-// Cross-references apps/scoring-service/src/config/scoring.ts's
-// CURRENT_SCORER_VERSION as the source of truth — bump both together
-// whenever score.agent.ts's rubric/prompt changes. Kept as a literal here
-// (rather than an import) since worker and scoring-service are separate
-// deployable apps/packages.
 const CURRENT_SCORER_VERSION = "v2"
 
 async function processScore(job: Job<ScoreJobPayload>): Promise<void> {

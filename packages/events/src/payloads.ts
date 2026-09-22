@@ -11,6 +11,16 @@ export type ScanJobPayload = {
   rank?: number
 }
 
+export type ResearchPdfJobPayload = {
+  projectId: string
+  userId: string
+  // Which reports to render. COMPETITOR_ANALYSIS is only enqueued when the
+  // project actually has scans to report on.
+  sections: ("COMPETITOR_ANALYSIS" | "RESEARCH_RATIONALE")[]
+  // Where the resulting attachment message is posted.
+  conversationId: string
+}
+
 export type GenerateJobPayload = {
   projectId: string
   userId: string

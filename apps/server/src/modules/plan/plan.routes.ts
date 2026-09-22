@@ -4,6 +4,7 @@ import { validate } from "@/middleware/validator.js"
 import { PlanController } from "./plan.controller.js"
 import {
   PlanGenerateSchema,
+  PlanPdfSchema,
   PlanRejectSchema,
   PlanSelectSchema,
   PlanUpdateSchema,
@@ -18,6 +19,7 @@ router.put("/", validate(PlanUpdateSchema), PlanController.update)
 router.post("/generate", validate(PlanGenerateSchema), PlanController.generate)
 router.post("/approve", PlanController.approve)
 router.post("/select", validate(PlanSelectSchema), PlanController.select)
+router.post("/pdf", validate(PlanPdfSchema), PlanController.requestPdf)
 router.post("/reject", validate(PlanRejectSchema), PlanController.reject)
 router.get("/finding/:findingId", PlanController.getFinding)
 

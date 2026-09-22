@@ -4,6 +4,7 @@ import { PlanService } from "./plan.service.js"
 import { callGetFinding } from "@/lib/researchService.js"
 import type {
   PlanGenerateInput,
+  PlanPdfInput,
   PlanRejectInput,
   PlanSelectInput,
   PlanUpdateInput,
@@ -76,6 +77,23 @@ export const PlanController = {
         req.body as PlanSelectInput
       )
       res.status(200).json({ success: true, data: result })
+    } catch (err) {
+      next(err)
+    }
+  },
+
+  requestPdf: async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const result = await PlanService.requestPdf(
+        req.user!,
+        req.params.slug!,
+        req.body as PlanPdfInput
+      )
+      res.status(202).json({ success: true, data: result })
     } catch (err) {
       next(err)
     }

@@ -400,6 +400,7 @@ export const ModelName = {
   CreditBalance: 'CreditBalance',
   CreditTransaction: 'CreditTransaction',
   AutoReloadSetting: 'AutoReloadSetting',
+  ResearchDocument: 'ResearchDocument',
   Project: 'Project',
   ProjectVersion: 'ProjectVersion',
   Page: 'Page',
@@ -439,7 +440,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchFinding" | "findingRelation" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "scoreResult" | "searchQueryCache" | "seoAuditResult"
+    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "researchDocument" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchFinding" | "findingRelation" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "scoreResult" | "searchQueryCache" | "seoAuditResult"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1624,6 +1625,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.AutoReloadSettingCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AutoReloadSettingCountAggregateOutputType> | number
+        }
+      }
+    }
+    ResearchDocument: {
+      payload: Prisma.$ResearchDocumentPayload<ExtArgs>
+      fields: Prisma.ResearchDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ResearchDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ResearchDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.ResearchDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ResearchDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.ResearchDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.ResearchDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.ResearchDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ResearchDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.ResearchDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload>
+        }
+        update: {
+          args: Prisma.ResearchDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ResearchDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ResearchDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ResearchDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ResearchDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ResearchDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.ResearchDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateResearchDocument>
+        }
+        groupBy: {
+          args: Prisma.ResearchDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ResearchDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ResearchDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ResearchDocumentCountAggregateOutputType> | number
         }
       }
     }
@@ -3700,6 +3775,18 @@ export const AutoReloadSettingScalarFieldEnum = {
 export type AutoReloadSettingScalarFieldEnum = (typeof AutoReloadSettingScalarFieldEnum)[keyof typeof AutoReloadSettingScalarFieldEnum]
 
 
+export const ResearchDocumentScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  type: 'type',
+  title: 'title',
+  pdf: 'pdf',
+  generatedAt: 'generatedAt'
+} as const
+
+export type ResearchDocumentScalarFieldEnum = (typeof ResearchDocumentScalarFieldEnum)[keyof typeof ResearchDocumentScalarFieldEnum]
+
+
 export const ProjectScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -3790,6 +3877,7 @@ export const MessageScalarFieldEnum = {
   model: 'model',
   inputTokens: 'inputTokens',
   outputTokens: 'outputTokens',
+  attachments: 'attachments',
   createdAt: 'createdAt'
 } as const
 
@@ -4080,6 +4168,7 @@ export const CompetitorScanScalarFieldEnum = {
   rawHtmlKey: 'rawHtmlKey',
   designTokens: 'designTokens',
   extractedContent: 'extractedContent',
+  videoAnalysis: 'videoAnalysis',
   failureReason: 'failureReason',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',
@@ -4371,6 +4460,34 @@ export type EnumCreditTxnTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'CreditTxnType[]'
  */
 export type ListEnumCreditTxnTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CreditTxnType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ResearchDocumentType'
+ */
+export type EnumResearchDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ResearchDocumentType'>
+    
+
+
+/**
+ * Reference to a field of type 'ResearchDocumentType[]'
+ */
+export type ListEnumResearchDocumentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ResearchDocumentType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Bytes'
+ */
+export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+    
+
+
+/**
+ * Reference to a field of type 'Bytes[]'
+ */
+export type ListBytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes[]'>
     
 
 
@@ -4793,6 +4910,7 @@ export type GlobalOmitConfig = {
   creditBalance?: Prisma.CreditBalanceOmit
   creditTransaction?: Prisma.CreditTransactionOmit
   autoReloadSetting?: Prisma.AutoReloadSettingOmit
+  researchDocument?: Prisma.ResearchDocumentOmit
   project?: Prisma.ProjectOmit
   projectVersion?: Prisma.ProjectVersionOmit
   page?: Prisma.PageOmit

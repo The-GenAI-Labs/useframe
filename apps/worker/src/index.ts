@@ -7,6 +7,7 @@ import { startWebhookWorker } from "./processors/webhook.processor.js"
 import { startAutoReloadWorker } from "./processors/autoReload.processor.js"
 import { startDomainVerifyWorker } from "./processors/domainVerify.processor.js"
 import { startExpireCacheWorker } from "./processors/expireCache.processor.js"
+import { startResearchPdfWorker } from "./processors/researchPdf.processor.js"
 
 async function main() {
   await prisma.$connect()
@@ -36,6 +37,9 @@ async function main() {
   const expireCacheWorker = startExpireCacheWorker()
   console.log("[worker] Expire cache worker started")
 
+  const researchPdfWorker = startResearchPdfWorker()
+  console.log("[worker] Research PDF worker started")
+
   const shutdown = async () => {
     console.log("[worker] Shutting down...")
     await scanWorker.close()
@@ -46,6 +50,7 @@ async function main() {
     await autoReloadWorker.close()
     await domainVerifyWorker.close()
     await expireCacheWorker.close()
+    await researchPdfWorker.close()
     await prisma.$disconnect()
     process.exit(0)
   }

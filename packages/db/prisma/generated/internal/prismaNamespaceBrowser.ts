@@ -67,6 +67,7 @@ export const ModelName = {
   CreditBalance: 'CreditBalance',
   CreditTransaction: 'CreditTransaction',
   AutoReloadSetting: 'AutoReloadSetting',
+  ResearchDocument: 'ResearchDocument',
   Project: 'Project',
   ProjectVersion: 'ProjectVersion',
   Page: 'Page',
@@ -367,6 +368,18 @@ export const AutoReloadSettingScalarFieldEnum = {
 export type AutoReloadSettingScalarFieldEnum = (typeof AutoReloadSettingScalarFieldEnum)[keyof typeof AutoReloadSettingScalarFieldEnum]
 
 
+export const ResearchDocumentScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  type: 'type',
+  title: 'title',
+  pdf: 'pdf',
+  generatedAt: 'generatedAt'
+} as const
+
+export type ResearchDocumentScalarFieldEnum = (typeof ResearchDocumentScalarFieldEnum)[keyof typeof ResearchDocumentScalarFieldEnum]
+
+
 export const ProjectScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -457,6 +470,7 @@ export const MessageScalarFieldEnum = {
   model: 'model',
   inputTokens: 'inputTokens',
   outputTokens: 'outputTokens',
+  attachments: 'attachments',
   createdAt: 'createdAt'
 } as const
 
@@ -747,6 +761,7 @@ export const CompetitorScanScalarFieldEnum = {
   rawHtmlKey: 'rawHtmlKey',
   designTokens: 'designTokens',
   extractedContent: 'extractedContent',
+  videoAnalysis: 'videoAnalysis',
   failureReason: 'failureReason',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',

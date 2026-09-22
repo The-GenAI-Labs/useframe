@@ -389,6 +389,40 @@ export type EnumCreditTxnTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumCreditTxnTypeFilter<$PrismaModel>
 }
 
+export type EnumResearchDocumentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ResearchDocumentType | Prisma.EnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ResearchDocumentType[] | Prisma.ListEnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ResearchDocumentType[] | Prisma.ListEnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumResearchDocumentTypeFilter<$PrismaModel> | $Enums.ResearchDocumentType
+}
+
+export type BytesFilter<$PrismaModel = never> = {
+  equals?: runtime.Bytes | Prisma.BytesFieldRefInput<$PrismaModel>
+  in?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>
+  notIn?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBytesFilter<$PrismaModel> | runtime.Bytes
+}
+
+export type EnumResearchDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ResearchDocumentType | Prisma.EnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ResearchDocumentType[] | Prisma.ListEnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ResearchDocumentType[] | Prisma.ListEnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumResearchDocumentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ResearchDocumentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumResearchDocumentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumResearchDocumentTypeFilter<$PrismaModel>
+}
+
+export type BytesWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: runtime.Bytes | Prisma.BytesFieldRefInput<$PrismaModel>
+  in?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>
+  notIn?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBytesWithAggregatesFilter<$PrismaModel> | runtime.Bytes
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBytesFilter<$PrismaModel>
+  _max?: Prisma.NestedBytesFilter<$PrismaModel>
+}
+
 export type EnumNicheCategoryFilter<$PrismaModel = never> = {
   equals?: $Enums.NicheCategory | Prisma.EnumNicheCategoryFieldRefInput<$PrismaModel>
   in?: $Enums.NicheCategory[] | Prisma.ListEnumNicheCategoryFieldRefInput<$PrismaModel>
@@ -1166,6 +1200,40 @@ export type NestedEnumCreditTxnTypeWithAggregatesFilter<$PrismaModel = never> = 
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCreditTxnTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCreditTxnTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumResearchDocumentTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ResearchDocumentType | Prisma.EnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ResearchDocumentType[] | Prisma.ListEnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ResearchDocumentType[] | Prisma.ListEnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumResearchDocumentTypeFilter<$PrismaModel> | $Enums.ResearchDocumentType
+}
+
+export type NestedBytesFilter<$PrismaModel = never> = {
+  equals?: runtime.Bytes | Prisma.BytesFieldRefInput<$PrismaModel>
+  in?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>
+  notIn?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBytesFilter<$PrismaModel> | runtime.Bytes
+}
+
+export type NestedEnumResearchDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ResearchDocumentType | Prisma.EnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ResearchDocumentType[] | Prisma.ListEnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ResearchDocumentType[] | Prisma.ListEnumResearchDocumentTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumResearchDocumentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ResearchDocumentType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumResearchDocumentTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumResearchDocumentTypeFilter<$PrismaModel>
+}
+
+export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: runtime.Bytes | Prisma.BytesFieldRefInput<$PrismaModel>
+  in?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>
+  notIn?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedBytesWithAggregatesFilter<$PrismaModel> | runtime.Bytes
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedBytesFilter<$PrismaModel>
+  _max?: Prisma.NestedBytesFilter<$PrismaModel>
 }
 
 export type NestedEnumNicheCategoryFilter<$PrismaModel = never> = {

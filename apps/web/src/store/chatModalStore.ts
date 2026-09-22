@@ -4,6 +4,13 @@ import { chatApi } from "@/lib/api/services/chat.service";
 
 export type Role = "user" | "assistant";
 
+export interface PdfAttachmentData {
+    type: "pdf";
+    documentId: string;
+    title: string;
+    url: string;
+}
+
 export interface Message {
     id: string;
     role: Role;
@@ -11,6 +18,8 @@ export interface Message {
     createdAt: Date;
     producedVersion?: { id: string; versionNumber: number } | null;
     isError?: boolean;
+    // Generated research reports, rendered inline beneath the message text.
+    attachments?: PdfAttachmentData[] | null;
 }
 
 export type ModalStatus = "closed" | "open" | "minimized";

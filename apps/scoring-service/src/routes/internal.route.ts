@@ -20,6 +20,17 @@ const AnalyzeSchema = z.object({
   screenshotBase64: z.string().min(1),
   extractedContent: z.unknown(),
   designTokens: z.unknown(),
+  // Measured by the scanning browser (see measurePerformance in the worker).
+  // Optional: pages that don't expose navigation timing simply omit the
+  // Performance & Speed criterion rather than having it guessed.
+  performanceMetrics: z
+    .object({
+      ttfb: z.number(),
+      domContentLoaded: z.number(),
+      loadComplete: z.number(),
+      lcp: z.number(),
+    })
+    .optional(),
 })
 
 router.post(
@@ -45,6 +56,7 @@ router.post(
       screenshotBase64: parsed.data.screenshotBase64,
       extractedContent: parsed.data.extractedContent,
       designTokens: parsed.data.designTokens,
+      performanceMetrics: parsed.data.performanceMetrics,
     })
       .then((report) => {
         res.status(200).json({ success: true, data: { report } })

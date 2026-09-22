@@ -1,12 +1,20 @@
+import { Queue } from "bullmq"
 import { prisma, type Prisma } from "@useframe/db"
+import { QUEUES } from "@repo/events"
+import type { ResearchPdfJobPayload } from "@repo/events"
+import { redis } from "@/lib/redis.js"
 import { AppError } from "@/middleware/errorHandler.js"
 import { signAccessToken } from "@/lib/jwt.js"
 import { callPlan } from "@/lib/orchestrator.js"
 import { CreditsService } from "@/modules/credits/credits.service.js"
 import type { DesignBrief } from "@repo/schemas"
-import type { PlanSelectInput } from "./plan.schema.js"
+import type { PlanPdfInput, PlanSelectInput } from "./plan.schema.js"
 
 const RESEARCH_CREDIT_COST = 2
+
+const researchPdfQueue = new Queue<ResearchPdfJobPayload>(QUEUES.RESEARCH_PDF, {
+  connection: redis,
+})
 
 async function loadProjectWithPipeline(userId: string, slug: string) {
   const project = await prisma.project.findFirst({
@@ -246,6 +254,76 @@ export const PlanService = {
     }
 
     return { pipelineState: result.pipelineState, brief: chosenBrief }
+  },
+
+  // Enqueues PDF generation on the worker (which owns Playwright) rather
+  // than rendering inline — a browser launch per request would block the
+  // API. The finished PDFs arrive as an assistant message with attachments.
+  async requestPdf(
+    user: { id: string; email: string; plan: string },
+    slug: string,
+    input: PlanPdfInput
+  ) {
+    const project = await prisma.project.findFirst({
+      where: { slug, userId: user.id, deletedAt: null },
+      select: { id: true },
+    })
+    if (!project) throw new AppError("Project not found", 404)
+
+    // Competitor Analysis is only meaningful when scans exist — offering it
+    // otherwise would produce an empty report.
+    if (input.sections.includes("COMPETITOR_ANALYSIS")) {
+      const scanCount = await prisma.competitorScan.count({
+        where: { projectId: project.id, status: "DONE" },
+      })
+      if (scanCount === 0) {
+        throw new AppError("No competitor scans exist for this project", 409)
+      }
+    }
+
+    if (input.sections.includes("RESEARCH_RATIONALE")) {
+      const report = await prisma.researchReport.findUnique({
+        where: { projectId: project.id },
+        select: { id: true },
+      })
+      if (!report) throw new AppError("No research report exists for this project yet", 409)
+    }
+
+    // The attachment message needs a conversation to live in; reuse the
+    // project's existing one rather than creating a stray thread.
+    const conversationId =
+      input.conversationId ??
+      (
+        (await prisma.conversation.findFirst({
+          where: { projectId: project.id, userId: user.id },
+          orderBy: { createdAt: "asc" },
+          select: { id: true },
+        })) ??
+        (await prisma.conversation.create({
+          data: { projectId: project.id, userId: user.id },
+          select: { id: true },
+        }))
+      ).id
+
+    await researchPdfQueue.add("researchPdf", {
+      projectId: project.id,
+      userId: user.id,
+      sections: input.sections,
+      conversationId,
+    })
+
+    return { queued: true, conversationId }
+  },
+
+  async getDocument(user: { id: string }, documentId: string) {
+    const doc = await prisma.researchDocument.findUnique({
+      where: { id: documentId },
+      select: { pdf: true, title: true, project: { select: { userId: true } } },
+    })
+    if (!doc || doc.project.userId !== user.id) {
+      throw new AppError("Document not found", 404)
+    }
+    return { pdf: doc.pdf, title: doc.title }
   },
 
   async reject(

@@ -69,6 +69,7 @@ export type MessageCountAggregateOutputType = {
   model: number
   inputTokens: number
   outputTokens: number
+  attachments: number
   createdAt: number
   _all: number
 }
@@ -117,6 +118,7 @@ export type MessageCountAggregateInputType = {
   model?: true
   inputTokens?: true
   outputTokens?: true
+  attachments?: true
   createdAt?: true
   _all?: true
 }
@@ -216,6 +218,7 @@ export type MessageGroupByOutputType = {
   model: string | null
   inputTokens: number | null
   outputTokens: number | null
+  attachments: runtime.JsonValue | null
   createdAt: Date
   _count: MessageCountAggregateOutputType | null
   _avg: MessageAvgAggregateOutputType | null
@@ -251,6 +254,7 @@ export type MessageWhereInput = {
   model?: Prisma.StringNullableFilter<"Message"> | string | null
   inputTokens?: Prisma.IntNullableFilter<"Message"> | number | null
   outputTokens?: Prisma.IntNullableFilter<"Message"> | number | null
+  attachments?: Prisma.JsonNullableFilter<"Message">
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
   conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
 }
@@ -264,6 +268,7 @@ export type MessageOrderByWithRelationInput = {
   model?: Prisma.SortOrderInput | Prisma.SortOrder
   inputTokens?: Prisma.SortOrderInput | Prisma.SortOrder
   outputTokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   conversation?: Prisma.ConversationOrderByWithRelationInput
 }
@@ -280,6 +285,7 @@ export type MessageWhereUniqueInput = Prisma.AtLeast<{
   model?: Prisma.StringNullableFilter<"Message"> | string | null
   inputTokens?: Prisma.IntNullableFilter<"Message"> | number | null
   outputTokens?: Prisma.IntNullableFilter<"Message"> | number | null
+  attachments?: Prisma.JsonNullableFilter<"Message">
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
   conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
 }, "id">
@@ -293,6 +299,7 @@ export type MessageOrderByWithAggregationInput = {
   model?: Prisma.SortOrderInput | Prisma.SortOrder
   inputTokens?: Prisma.SortOrderInput | Prisma.SortOrder
   outputTokens?: Prisma.SortOrderInput | Prisma.SortOrder
+  attachments?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.MessageCountOrderByAggregateInput
   _avg?: Prisma.MessageAvgOrderByAggregateInput
@@ -313,6 +320,7 @@ export type MessageScalarWhereWithAggregatesInput = {
   model?: Prisma.StringNullableWithAggregatesFilter<"Message"> | string | null
   inputTokens?: Prisma.IntNullableWithAggregatesFilter<"Message"> | number | null
   outputTokens?: Prisma.IntNullableWithAggregatesFilter<"Message"> | number | null
+  attachments?: Prisma.JsonNullableWithAggregatesFilter<"Message">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Message"> | Date | string
 }
 
@@ -324,6 +332,7 @@ export type MessageCreateInput = {
   model?: string | null
   inputTokens?: number | null
   outputTokens?: number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   conversation: Prisma.ConversationCreateNestedOneWithoutMessagesInput
 }
@@ -337,6 +346,7 @@ export type MessageUncheckedCreateInput = {
   model?: string | null
   inputTokens?: number | null
   outputTokens?: number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -348,6 +358,7 @@ export type MessageUpdateInput = {
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversation?: Prisma.ConversationUpdateOneRequiredWithoutMessagesNestedInput
 }
@@ -361,6 +372,7 @@ export type MessageUncheckedUpdateInput = {
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -373,6 +385,7 @@ export type MessageCreateManyInput = {
   model?: string | null
   inputTokens?: number | null
   outputTokens?: number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -384,6 +397,7 @@ export type MessageUpdateManyMutationInput = {
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -396,6 +410,7 @@ export type MessageUncheckedUpdateManyInput = {
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -418,6 +433,7 @@ export type MessageCountOrderByAggregateInput = {
   model?: Prisma.SortOrder
   inputTokens?: Prisma.SortOrder
   outputTokens?: Prisma.SortOrder
+  attachments?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -509,6 +525,7 @@ export type MessageCreateWithoutConversationInput = {
   model?: string | null
   inputTokens?: number | null
   outputTokens?: number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -520,6 +537,7 @@ export type MessageUncheckedCreateWithoutConversationInput = {
   model?: string | null
   inputTokens?: number | null
   outputTokens?: number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -561,6 +579,7 @@ export type MessageScalarWhereInput = {
   model?: Prisma.StringNullableFilter<"Message"> | string | null
   inputTokens?: Prisma.IntNullableFilter<"Message"> | number | null
   outputTokens?: Prisma.IntNullableFilter<"Message"> | number | null
+  attachments?: Prisma.JsonNullableFilter<"Message">
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
 }
 
@@ -572,6 +591,7 @@ export type MessageCreateManyConversationInput = {
   model?: string | null
   inputTokens?: number | null
   outputTokens?: number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -583,6 +603,7 @@ export type MessageUpdateWithoutConversationInput = {
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -594,6 +615,7 @@ export type MessageUncheckedUpdateWithoutConversationInput = {
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -605,6 +627,7 @@ export type MessageUncheckedUpdateManyWithoutConversationInput = {
   model?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   outputTokens?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  attachments?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -619,6 +642,7 @@ export type MessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   model?: boolean
   inputTokens?: boolean
   outputTokens?: boolean
+  attachments?: boolean
   createdAt?: boolean
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["message"]>
@@ -632,6 +656,7 @@ export type MessageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   model?: boolean
   inputTokens?: boolean
   outputTokens?: boolean
+  attachments?: boolean
   createdAt?: boolean
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["message"]>
@@ -645,6 +670,7 @@ export type MessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   model?: boolean
   inputTokens?: boolean
   outputTokens?: boolean
+  attachments?: boolean
   createdAt?: boolean
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["message"]>
@@ -658,10 +684,11 @@ export type MessageSelectScalar = {
   model?: boolean
   inputTokens?: boolean
   outputTokens?: boolean
+  attachments?: boolean
   createdAt?: boolean
 }
 
-export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "conversationId" | "role" | "content" | "producedVersionId" | "model" | "inputTokens" | "outputTokens" | "createdAt", ExtArgs["result"]["message"]>
+export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "conversationId" | "role" | "content" | "producedVersionId" | "model" | "inputTokens" | "outputTokens" | "attachments" | "createdAt", ExtArgs["result"]["message"]>
 export type MessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
 }
@@ -686,6 +713,7 @@ export type $MessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     model: string | null
     inputTokens: number | null
     outputTokens: number | null
+    attachments: runtime.JsonValue | null
     createdAt: Date
   }, ExtArgs["result"]["message"]>
   composites: {}
@@ -1119,6 +1147,7 @@ export interface MessageFieldRefs {
   readonly model: Prisma.FieldRef<"Message", 'String'>
   readonly inputTokens: Prisma.FieldRef<"Message", 'Int'>
   readonly outputTokens: Prisma.FieldRef<"Message", 'Int'>
+  readonly attachments: Prisma.FieldRef<"Message", 'Json'>
   readonly createdAt: Prisma.FieldRef<"Message", 'DateTime'>
 }
     

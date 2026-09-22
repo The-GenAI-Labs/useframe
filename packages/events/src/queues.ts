@@ -10,6 +10,7 @@ export const QUEUES = {
   SEO_AUDIT: "seoAudit",
   AUTO_RELOAD: "autoReload",
   EXPIRE_CACHE: "expireCache",
+  RESEARCH_PDF: "researchPdf",
 } as const
 
 export type QueueName = (typeof QUEUES)[keyof typeof QUEUES]
