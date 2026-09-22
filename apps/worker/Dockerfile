@@ -3,14 +3,6 @@
 # onto a plain node image means tracking that dependency set by hand.
 FROM mcr.microsoft.com/playwright:v1.48.0-jammy
 
-# ffmpeg is required by src/scraper/extractFrames.ts to pull frames out of the
-# competitor scroll-recordings. Without it the worker still runs — video
-# analysis detects the missing binary and skips itself (isFfmpegAvailable) —
-# but the top-competitor motion analysis is silently unavailable.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 RUN corepack enable && corepack prepare pnpm@11.1.3 --activate
