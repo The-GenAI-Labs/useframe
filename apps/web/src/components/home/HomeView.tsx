@@ -17,6 +17,7 @@ import { HeroCarousel } from "./sections/HeroCarousel";
 import { TemplatesSection } from "./sections/TemplatesSection";
 import { PricingSection } from "./sections/PricingSection";
 import { ShowcaseCarousel } from "./sections/ShowcaseCarousel";
+import { FaqSection } from "./sections/FaqSection";
 import { Footer } from "./sections/Footer";
 import { serif } from "./fonts";
 
@@ -90,7 +91,7 @@ export const HomeView = memo(function HomeView() {
         </main>
       </div>
 
-      <div className="relative z-10 -mt-px bg-white">
+      <div className="relative z-10 -mt-px flex flex-col gap-16 bg-white sm:gap-24">
 
         <RevealSection depth={18} delay={0}    yOffset={50}>
           <CtaSection />
@@ -119,6 +120,10 @@ export const HomeView = memo(function HomeView() {
 
         <RevealSection depth={48} delay={0.04} yOffset={80}>
           <ShowcaseCarousel />
+        </RevealSection>
+
+        <RevealSection depth={30} delay={0.04} yOffset={70}>
+          <FaqSection />
         </RevealSection>
 
         <Footer />

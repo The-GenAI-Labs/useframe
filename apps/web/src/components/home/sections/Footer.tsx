@@ -72,28 +72,12 @@ export const Footer = memo(function Footer() {
         />
 
         <div className="relative mx-auto flex max-w-2xl flex-col items-center text-center">
-          <div className="mb-5 flex items-center gap-3">
-            <span className="h-px w-6 bg-blue-600" aria-hidden />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-600">
-              About UseFrame
-            </span>
-          </div>
-          <p className={`${serif.className} mb-5 text-5xl tracking-tight text-slate-950 sm:text-6xl`}>
+          <p className={`${serif.className} text-4xl tracking-tight text-slate-950 sm:text-5xl`}>
             UseFrame
-          </p>
-          <p className="text-[15px] leading-[1.85] text-slate-700">
-            UseFrame is an AI-native platform built for founders, designers, and product teams who move fast.
-            We combine intelligent research, competitor analysis, and production-ready templates into a single
-            workspace — so you can go from idea to shipped product without switching between a dozen tools.
-            Every feature is designed around clarity: clean outputs, structured insights, and interfaces that
-            stay out of your way. Whether you&apos;re validating a new market, building a SaaS product, or
-            iterating on your brand, UseFrame gives you the research depth of an analyst and the design
-            speed of a seasoned team. We&apos;re obsessed with reducing the distance between a great idea and
-            a live product.
           </p>
         </div>
 
-        <div className="relative mx-auto mt-10 max-w-2xl h-px bg-slate-200" />
+        <div className="relative mx-auto mt-8 max-w-2xl h-px bg-slate-200" />
 
         <div className="relative mx-auto mt-6 flex max-w-2xl flex-col items-center justify-between gap-4 sm:flex-row">
           <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-2">
