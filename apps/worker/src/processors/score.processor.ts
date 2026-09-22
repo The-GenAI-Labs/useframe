@@ -6,13 +6,14 @@ import { QUEUES } from "@repo/events"
 import type { ScoreJobPayload } from "@repo/events"
 import { redis } from "../lib/redis.js"
 import { callAnalyze } from "../lib/scoringService.js"
+import { measurePerformance } from "../scraper/measurePerformance.js"
 
 // Cross-references apps/scoring-service/src/config/scoring.ts's
 // CURRENT_SCORER_VERSION as the source of truth — bump both together
 // whenever score.agent.ts's rubric/prompt changes. Kept as a literal here
 // (rather than an import) since worker and scoring-service are separate
 // deployable apps/packages.
-const CURRENT_SCORER_VERSION = "v1"
+const CURRENT_SCORER_VERSION = "v2"
 
 async function processScore(job: Job<ScoreJobPayload>): Promise<void> {
   const { scoreId, url } = job.data
@@ -87,6 +88,10 @@ async function processScore(job: Job<ScoreJobPayload>): Promise<void> {
       return { title, metaDescription, ogTitle, ogDescription, ogImage, h1Count, headings, ctas, bodyText }
     })
 
+    // Measured from the page we already have open — no second load, and real
+    // navigation timing rather than an LLM's impression of "feels slow".
+    const performanceMetrics = await measurePerformance(page)
+
     await browser.close()
 
     await prisma.scoreResult.update({
@@ -100,6 +105,7 @@ async function processScore(job: Job<ScoreJobPayload>): Promise<void> {
       screenshotBase64,
       extractedContent,
       designTokens,
+      performanceMetrics: performanceMetrics ?? undefined,
     })
 
     await prisma.scoreResult.update({

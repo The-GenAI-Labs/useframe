@@ -6,6 +6,12 @@ export type AnalyzePayload = {
   screenshotBase64: string
   extractedContent: unknown
   designTokens: unknown
+  performanceMetrics?: {
+    ttfb: number
+    domContentLoaded: number
+    loadComplete: number
+    lcp: number
+  }
 }
 
 export type AnalyzeResult = {
