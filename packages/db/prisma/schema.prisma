@@ -206,7 +206,7 @@ model User {
 
   hasUsedFreeGeneration Boolean @default(false)
 
-  stripeCustomerId       String? @unique
+  razorpayCustomerId     String? @unique
   defaultPaymentMethodId String?
 
   // Attribution — captured client-side from ?ref / utm_* query params at
@@ -436,7 +436,7 @@ model Order {
   amount            Int
   currency          String      @default("USD")
   status            OrderStatus @default(PENDING)
-  provider          String      @default("stripe")
+  provider          String      @default("razorpay")
   providerSessionId String?     @unique
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
@@ -480,7 +480,7 @@ model Payment {
   amount            Int
   currency          String         @default("USD")
   status            PaymentStatus  @default(PENDING)
-  provider          String         @default("stripe")
+  provider          String         @default("razorpay")
   providerOrderId   String         @unique
   providerPaymentId String?
   paymentMethod     String?
@@ -501,7 +501,7 @@ model WebhookEvent {
   id          String    @id @default(cuid())
   eventId     String    @unique
   eventType   String
-  provider    String    @default("stripe")
+  provider    String    @default("razorpay")
   payload     Json
   processed   Boolean   @default(false)
   processedAt DateTime?
