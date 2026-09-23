@@ -1,4 +1,4 @@
-import { getCurrentAccessToken } from "@/lib/authContext"
+import { fetchWithAuthRetry } from "@/lib/authContext"
 import type {
   ExtractedFields,
   ExtractResponse,
@@ -10,14 +10,9 @@ const ORCHESTRATOR_URL =
   process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001"
 
 async function orchestratorPost<T>(path: string, body: unknown): Promise<T> {
-  const accessToken = getCurrentAccessToken() ?? ""
-
-  const res = await fetch(`${ORCHESTRATOR_URL}${path}`, {
+  const res = await fetchWithAuthRetry(`${ORCHESTRATOR_URL}${path}`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   })
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCurrentAccessToken } from "@/lib/authContext";
+import { getCurrentAccessToken, refreshAccessToken } from "@/lib/authContext";
 
 const API_SERVICE_URL = process.env.NEXT_PUBLIC_API_SERVICE_URL ?? "http://localhost:4000";
 
@@ -17,27 +17,6 @@ api.interceptors.request.use((config) => {
     }
     return config;
 });
-
-let refreshPromise: Promise<string | null> | null = null;
-
-async function refreshAccessToken(): Promise<string | null> {
-    if (!refreshPromise) {
-        refreshPromise = fetch(`${API_SERVICE_URL}/api/auth/refresh`, {
-            method: "POST",
-            credentials: "include",
-        })
-            .then(async (res) => {
-                if (!res.ok) return null;
-                const body = await res.json();
-                return (body?.data?.accessToken as string | undefined) ?? null;
-            })
-            .catch(() => null)
-            .finally(() => {
-                refreshPromise = null;
-            });
-    }
-    return refreshPromise;
-}
 
 api.interceptors.response.use(
     (response) => response,

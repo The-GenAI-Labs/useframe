@@ -2,7 +2,7 @@
 
 import { useCallback } from "react"
 import type { ClarifyResponse } from "@repo/schemas"
-import { getCurrentAccessToken } from "@/lib/authContext"
+import { fetchWithAuthRetry } from "@/lib/authContext"
 
 const ORCHESTRATOR_URL =
   process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001"
@@ -10,14 +10,9 @@ const ORCHESTRATOR_URL =
 export function useClarify() {
   const clarify = useCallback(
     async (startupIdea: string, answers?: Record<string, string>): Promise<ClarifyResponse> => {
-      const accessToken = getCurrentAccessToken() ?? ""
-
-      const res = await fetch(`${ORCHESTRATOR_URL}/clarify`, {
+      const res = await fetchWithAuthRetry(`${ORCHESTRATOR_URL}/clarify`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ startupIdea, answers }),
       })
 

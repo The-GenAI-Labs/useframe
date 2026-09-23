@@ -2,7 +2,7 @@
 
 import { useCallback, useRef } from "react"
 import type { SSEEvent } from "@repo/schemas"
-import { getCurrentAccessToken } from "@/lib/authContext"
+import { fetchWithAuthRetry } from "@/lib/authContext"
 
 type SSEOptions = {
   onEvent: (event: SSEEvent) => void
@@ -20,13 +20,9 @@ export function useSSE() {
       abortRef.current = controller
 
       try {
-        const accessToken = getCurrentAccessToken() ?? ""
-        const res = await fetch(url, {
+        const res = await fetchWithAuthRetry(url, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
           signal: controller.signal,
         })

@@ -18,9 +18,11 @@ export const errorHandler = (
     res: Response,
     next: NextFunction
 ): void => {
-    console.error(`[${new Date().toISOString()}] ${err.name}: ${err.message}`)
-
     if (err instanceof AppError) {
+        // only log real failures, not expected 401s
+        if (err.statusCode >= 500) {
+            console.error(`[${new Date().toISOString()}] ${err.name}: ${err.message}`)
+        }
         const response: ApiResponse = {
             success: false,
             message: err.message,
@@ -38,6 +40,8 @@ export const errorHandler = (
         res.status(401).json({ success: false, message: "Token expired" })
         return
     }
+
+    console.error(`[${new Date().toISOString()}] ${err.name}: ${err.message}`)
 
     if ((err as any).code === "P2002") {
         res.status(409).json({ success: false, message: "Already exists" })

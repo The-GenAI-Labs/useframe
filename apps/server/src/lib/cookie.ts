@@ -3,12 +3,15 @@ import { env } from "@/config/env.js"
 
 const isProd = env.NODE_ENV === "production"
 
+// must match REFRESH_TOKEN_TTL_MS in auth.service.ts
+export const REFRESH_TOKEN_COOKIE_MAX_AGE_MS = 60 * 24 * 60 * 60 * 1000
+
 export const setRefreshTokenCookie = (res: Response, token: string): void => {
     res.cookie("refresh_token", token, {
         httpOnly: true,
         secure: isProd,
         sameSite: isProd ? "strict" : "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: REFRESH_TOKEN_COOKIE_MAX_AGE_MS,
         path: "/api/auth",
     })
 }

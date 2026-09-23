@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const API_SERVICE_URL = process.env.NEXT_PUBLIC_API_SERVICE_URL ?? "http://localhost:4000";
 
@@ -33,9 +34,59 @@ export function getCurrentAccessToken(): string | null {
     return currentAccessToken;
 }
 
+let refreshInFlight: Promise<string | null> | null = null;
+
+export async function refreshAccessToken(): Promise<string | null> {
+    if (!refreshInFlight) {
+        refreshInFlight = fetch(`${API_SERVICE_URL}/api/auth/refresh`, {
+            method: "POST",
+            credentials: "include",
+        })
+            .then(async (res) => {
+                if (!res.ok) return null;
+                const body = await res.json();
+                const token: string | undefined = body?.data?.accessToken;
+                if (!token) return null;
+                currentAccessToken = token;
+                return token;
+            })
+            .catch(() => null)
+            .finally(() => {
+                refreshInFlight = null;
+            });
+    }
+    return refreshInFlight;
+}
+
+export async function fetchWithAuthRetry(
+    input: string,
+    init: RequestInit = {},
+): Promise<Response> {
+    const attempt = async (): Promise<Response> => {
+        const token = getCurrentAccessToken() ?? "";
+        return fetch(input, {
+            ...init,
+            headers: { ...init.headers, Authorization: `Bearer ${token}` },
+        });
+    };
+
+    const res = await attempt();
+    if (res.status !== 401) return res;
+
+    const newToken = await refreshAccessToken();
+    if (!newToken) return res;
+
+    return attempt();
+}
+
+const SKIP_MOUNT_REFRESH_PREFIXES = ["/auth/callback", "/auth/verify", "/signin"];
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname();
+    const skipMountRefresh = SKIP_MOUNT_REFRESH_PREFIXES.some((p) => pathname?.startsWith(p));
+
     const [user, setUser] = useState<AuthUser | null>(null);
-    const [status, setStatus] = useState<AuthStatus>("loading");
+    const [status, setStatus] = useState<AuthStatus>(skipMountRefresh ? "unauthenticated" : "loading");
     const accessTokenRef = useRef<string | null>(null);
     const [, forceRender] = useState(0);
 
@@ -55,20 +106,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
 
     const refresh = useCallback(async (): Promise<string | null> => {
-        try {
-            const res = await fetch(`${API_SERVICE_URL}/api/auth/refresh`, {
-                method: "POST",
-                credentials: "include",
-            });
-            if (!res.ok) return null;
-            const body = await res.json();
-            const token: string | undefined = body?.data?.accessToken;
-            if (!token) return null;
-            setAccessToken(token);
-            return token;
-        } catch {
-            return null;
-        }
+        const token = await refreshAccessToken();
+        if (token) setAccessToken(token);
+        return token;
     }, [setAccessToken]);
 
     const logout = useCallback(async () => {
@@ -86,6 +126,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, [setAccessToken]);
 
     useEffect(() => {
+        if (skipMountRefresh) return;
+
         let cancelled = false;
 
         (async () => {

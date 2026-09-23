@@ -4,7 +4,11 @@ import type { Response } from "express"
 import { prisma } from "@useframe/db"
 import { verifyTurnstileToken } from "@repo/schemas"
 import { signAccessToken } from "@/lib/jwt.js"
-import { setRefreshTokenCookie, clearRefreshTokenCookie } from "@/lib/cookie.js"
+import {
+    setRefreshTokenCookie,
+    clearRefreshTokenCookie,
+    REFRESH_TOKEN_COOKIE_MAX_AGE_MS,
+} from "@/lib/cookie.js"
 import { setOAuthStateCookies, clearOAuthStateCookies } from "./oauth.state.js"
 import { AppError } from "@/middleware/errorHandler.js"
 import { env } from "@/config/env.js"
@@ -13,8 +17,9 @@ import { assessSignupRisk } from "@/security/assessSignupRisk.js"
 const google = new Google(env.GOOGLE_CLIENT_ID, env.GOOGLE_CLIENT_SECRET, env.GOOGLE_REDIRECT_URI)
 const github = new GitHub(env.GITHUB_CLIENT_ID, env.GITHUB_CLIENT_SECRET, env.GITHUB_REDIRECT_URI)
 
-const TICKET_TTL_MS = 30 * 1000
-const REFRESH_TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000
+const TICKET_TTL_MS = 2 * 60 * 1000
+// sliding 60-day session, shared with REFRESH_TOKEN_COOKIE_MAX_AGE_MS
+const REFRESH_TOKEN_TTL_MS = REFRESH_TOKEN_COOKIE_MAX_AGE_MS
 const SESSION_TTL_MS = REFRESH_TOKEN_TTL_MS
 const MAGIC_LINK_TTL_MS = 15 * 60 * 1000
 
