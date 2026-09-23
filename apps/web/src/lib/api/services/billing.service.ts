@@ -12,15 +12,30 @@ export const billingApi = {
   createCheckout: async (body: { packId: number } | { amountCents: number }) => {
     const { data } = await api.post<{
       success: true
-      data: { clientSecret: string; credits: number }
+      data: {
+        orderId: string
+        keyId: string
+        amountCents: number
+        currency: string
+        credits: number
+      }
     }>("/billing/checkout", body)
     return data.data
   },
 
+  // Razorpay has no SetupIntent — saving a card runs a minimal authorization
+  // order, so this returns an order too.
   createSetupIntent: async () => {
-    const { data } = await api.post<{ success: true; data: { clientSecret: string } }>(
-      "/billing/payment-method"
-    )
+    const { data } = await api.post<{
+      success: true
+      data: {
+        orderId: string
+        keyId: string
+        customerId: string
+        amountCents: number
+        currency: string
+      }
+    }>("/billing/payment-method")
     return data.data
   },
 

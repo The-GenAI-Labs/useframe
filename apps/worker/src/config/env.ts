@@ -29,7 +29,8 @@ const envSchema = z.object({
   VERCEL_ORG_ID: z.string().optional(),
   VERCEL_PROJECT_NAME_PREFIX: z.string().default("useframe"),
 
-  STRIPE_SECRET_KEY: z.string().min(1, "STRIPE_SECRET_KEY is required"),
+  RAZORPAY_KEY_ID: z.string().min(1, "RAZORPAY_KEY_ID is required"),
+  RAZORPAY_KEY_SECRET: z.string().min(1, "RAZORPAY_KEY_SECRET is required"),
 })
 
 const parsed = envSchema.safeParse(process.env)
