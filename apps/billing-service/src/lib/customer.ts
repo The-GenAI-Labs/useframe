@@ -1,19 +1,25 @@
 import { prisma } from "@useframe/db"
-import { stripe } from "@/lib/stripe.js"
+import { razorpay } from "@/lib/razorpay.js"
 
-export async function getOrCreateStripeCustomer(userId: string, email: string): Promise<string> {
+export async function getOrCreateRazorpayCustomer(userId: string, email: string): Promise<string> {
   const user = await prisma.user.findUnique({
     where: { id: userId },
-    select: { stripeCustomerId: true },
+    select: { razorpayCustomerId: true },
   })
 
-  if (user?.stripeCustomerId) return user.stripeCustomerId
+  if (user?.razorpayCustomerId) return user.razorpayCustomerId
 
-  const customer = await stripe.customers.create({ email, metadata: { userId } })
+  // fail_existing: 0 returns the existing customer instead of erroring when
+  // the email is already registered.
+  const customer = await razorpay.customers.create({
+    email,
+    notes: { userId },
+    fail_existing: 0,
+  })
 
   await prisma.user.update({
     where: { id: userId },
-    data: { stripeCustomerId: customer.id },
+    data: { razorpayCustomerId: customer.id },
   })
 
   return customer.id

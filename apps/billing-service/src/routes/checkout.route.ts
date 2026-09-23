@@ -1,8 +1,9 @@
 import { Router, type Request, type Response } from "express"
 import { z } from "zod"
 import { prisma } from "@useframe/db"
-import { stripe } from "@/lib/stripe.js"
-import { getOrCreateStripeCustomer } from "@/lib/customer.js"
+import { env } from "@/config/env.js"
+import { razorpay } from "@/lib/razorpay.js"
+import { getOrCreateRazorpayCustomer } from "@/lib/customer.js"
 import {
   CUSTOM_MIN_AMOUNT_CENTS,
   creditsForCustomAmount,
@@ -10,6 +11,10 @@ import {
 } from "@repo/schemas"
 
 const router: Router = Router()
+
+// Must stay aligned with the dollar-priced packs in @repo/schemas.
+// Requires International Payments enabled on the Razorpay account.
+export const CHECKOUT_CURRENCY = "USD"
 
 // Either a fixed pack (packId is the pack's amountCents) or a custom amount.
 // Pack purchases ignore any amountCents sent alongside — the pack's own
@@ -69,32 +74,38 @@ router.post("/checkout/create-order", (req: Request, res: Response, next) => {
     credits = creditsForCustomAmount(amountCents)
   }
 
-  getOrCreateStripeCustomer(userId, userEmail)
+  getOrCreateRazorpayCustomer(userId, userEmail)
     .then((customerId) =>
-      stripe.paymentIntents.create({
+      razorpay.orders.create({
         amount: amountCents,
-        currency: "usd",
-        customer: customerId,
-        metadata: { userId, credits: String(credits) },
+        currency: CHECKOUT_CURRENCY,
+        customer_id: customerId,
+        notes: { userId, credits: String(credits) },
       })
     )
-    .then((paymentIntent) =>
+    .then((order) =>
       prisma.payment
         .create({
           data: {
             userId,
             purpose: "CREDIT_TOPUP",
             amount: amountCents,
-            currency: "USD",
+            currency: CHECKOUT_CURRENCY,
             status: "PENDING",
-            provider: "stripe",
-            providerOrderId: paymentIntent.id,
+            provider: "razorpay",
+            providerOrderId: order.id,
           },
         })
         .then(() => {
           res.status(201).json({
             success: true,
-            data: { clientSecret: paymentIntent.client_secret, credits },
+            data: {
+              orderId: order.id,
+              keyId: env.RAZORPAY_KEY_ID,
+              amountCents,
+              currency: CHECKOUT_CURRENCY,
+              credits,
+            },
           })
         })
     )

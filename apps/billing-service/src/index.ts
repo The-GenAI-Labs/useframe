@@ -31,7 +31,7 @@ app.get("/health", (_req, res) => {
   })
 })
 
-// Stripe signature verification needs the raw request body, so this route
+// Razorpay signature verification hashes the raw request body, so this route
 // must be mounted with express.raw() BEFORE the global express.json() below.
 app.use("/", express.raw({ type: "application/json" }), webhookRoute)
 

@@ -4,11 +4,8 @@ import { prisma } from "@useframe/db"
 import { QUEUES } from "@repo/events"
 import type { AutoReloadJobPayload, EmailJobPayload } from "@repo/events"
 import { redis } from "../lib/redis.js"
-import { stripe } from "../lib/stripe.js"
-// Auto-reload is a custom-amount top-up (the user sets topUpToCents), so it
-// prices at the custom rate — the same rate a manual custom top-up gets.
-// Using the old lib/pricing.ts curve here would quietly grant ~2x the
-// credits of an equivalent manual purchase.
+import { razorpay } from "../lib/razorpay.js"
+// Auto-reload is a custom-amount top-up, so it prices at the custom rate.
 import { creditsForCustomAmount } from "@repo/schemas"
 
 const emailQueue = new Queue<EmailJobPayload>(QUEUES.EMAIL, { connection: redis })
@@ -18,7 +15,7 @@ async function processAutoReload(job: Job<AutoReloadJobPayload>): Promise<void> 
 
   const user = await prisma.user.findUniqueOrThrow({
     where: { id: userId },
-    select: { stripeCustomerId: true, defaultPaymentMethodId: true },
+    select: { razorpayCustomerId: true, defaultPaymentMethodId: true },
   })
 
   const identity = await prisma.identity.findFirst({
@@ -26,21 +23,33 @@ async function processAutoReload(job: Job<AutoReloadJobPayload>): Promise<void> 
     select: { email: true },
   })
 
-  if (!user.stripeCustomerId || !user.defaultPaymentMethodId) {
+  if (!user.razorpayCustomerId || !user.defaultPaymentMethodId) {
     console.warn(`[autoReload] User ${userId} has no saved card, disabling auto-reload`)
     await prisma.autoReloadSetting.update({ where: { userId }, data: { enabled: false } })
     return
   }
 
   try {
-    const paymentIntent = await stripe.paymentIntents.create({
+    const credits = creditsForCustomAmount(topUpToCents)
+
+    // The credits note must be on the order — payment.captured reads it back.
+    const order = await razorpay.orders.create({
       amount: topUpToCents,
-      currency: "usd",
-      customer: user.stripeCustomerId,
-      payment_method: user.defaultPaymentMethodId,
-      off_session: true,
-      confirm: true,
-      metadata: { userId, credits: String(creditsForCustomAmount(topUpToCents)) },
+      currency: "USD",
+      customer_id: user.razorpayCustomerId,
+      notes: { userId, credits: String(credits) },
+    })
+
+    const payment = await razorpay.payments.createRecurringPayment({
+      email: identity?.email ?? "",
+      contact: "",
+      amount: topUpToCents,
+      currency: "USD",
+      order_id: order.id,
+      customer_id: user.razorpayCustomerId,
+      token: user.defaultPaymentMethodId,
+      recurring: "1",
+      notes: { userId, credits: String(credits) },
     })
 
     await prisma.payment.create({
@@ -50,12 +59,15 @@ async function processAutoReload(job: Job<AutoReloadJobPayload>): Promise<void> 
         amount: topUpToCents,
         currency: "USD",
         status: "PENDING",
-        provider: "stripe",
-        providerOrderId: paymentIntent.id,
+        provider: "razorpay",
+        providerOrderId: order.id,
       },
     })
 
-    console.log(`[autoReload] Charged user ${userId} for ${topUpToCents} cents (PaymentIntent ${paymentIntent.id})`)
+    console.log(
+      `[autoReload] Charged user ${userId} for ${topUpToCents} cents ` +
+        `(order ${order.id}, payment ${(payment as { razorpay_payment_id?: string }).razorpay_payment_id ?? "pending"})`,
+    )
   } catch (err) {
     console.error(`[autoReload] Off-session charge failed for user ${userId}:`, err)
 

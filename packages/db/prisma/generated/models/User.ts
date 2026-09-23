@@ -46,7 +46,7 @@ export type UserMinAggregateOutputType = {
   updatedAt: Date | null
   deletedAt: Date | null
   hasUsedFreeGeneration: boolean | null
-  stripeCustomerId: string | null
+  razorpayCustomerId: string | null
   defaultPaymentMethodId: string | null
   referralSource: string | null
   utmSource: string | null
@@ -70,7 +70,7 @@ export type UserMaxAggregateOutputType = {
   updatedAt: Date | null
   deletedAt: Date | null
   hasUsedFreeGeneration: boolean | null
-  stripeCustomerId: string | null
+  razorpayCustomerId: string | null
   defaultPaymentMethodId: string | null
   referralSource: string | null
   utmSource: string | null
@@ -94,7 +94,7 @@ export type UserCountAggregateOutputType = {
   updatedAt: number
   deletedAt: number
   hasUsedFreeGeneration: number
-  stripeCustomerId: number
+  razorpayCustomerId: number
   defaultPaymentMethodId: number
   referralSource: number
   utmSource: number
@@ -128,7 +128,7 @@ export type UserMinAggregateInputType = {
   updatedAt?: true
   deletedAt?: true
   hasUsedFreeGeneration?: true
-  stripeCustomerId?: true
+  razorpayCustomerId?: true
   defaultPaymentMethodId?: true
   referralSource?: true
   utmSource?: true
@@ -152,7 +152,7 @@ export type UserMaxAggregateInputType = {
   updatedAt?: true
   deletedAt?: true
   hasUsedFreeGeneration?: true
-  stripeCustomerId?: true
+  razorpayCustomerId?: true
   defaultPaymentMethodId?: true
   referralSource?: true
   utmSource?: true
@@ -176,7 +176,7 @@ export type UserCountAggregateInputType = {
   updatedAt?: true
   deletedAt?: true
   hasUsedFreeGeneration?: true
-  stripeCustomerId?: true
+  razorpayCustomerId?: true
   defaultPaymentMethodId?: true
   referralSource?: true
   utmSource?: true
@@ -287,7 +287,7 @@ export type UserGroupByOutputType = {
   updatedAt: Date
   deletedAt: Date | null
   hasUsedFreeGeneration: boolean
-  stripeCustomerId: string | null
+  razorpayCustomerId: string | null
   defaultPaymentMethodId: string | null
   referralSource: string | null
   utmSource: string | null
@@ -334,7 +334,7 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFilter<"User"> | boolean
-  stripeCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
+  razorpayCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
   defaultPaymentMethodId?: Prisma.StringNullableFilter<"User"> | string | null
   referralSource?: Prisma.StringNullableFilter<"User"> | string | null
   utmSource?: Prisma.StringNullableFilter<"User"> | string | null
@@ -377,7 +377,7 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrderInput | Prisma.SortOrder
   referralSource?: Prisma.SortOrderInput | Prisma.SortOrder
   utmSource?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -411,7 +411,7 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   phone?: string
-  stripeCustomerId?: string
+  razorpayCustomerId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -452,7 +452,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   competitorScans?: Prisma.CompetitorScanListRelationFilter
   scoreResults?: Prisma.ScoreResultListRelationFilter
   seoAuditResults?: Prisma.SeoAuditResultListRelationFilter
-}, "id" | "phone" | "stripeCustomerId">
+}, "id" | "phone" | "razorpayCustomerId">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -466,7 +466,7 @@ export type UserOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrderInput | Prisma.SortOrder
   referralSource?: Prisma.SortOrderInput | Prisma.SortOrder
   utmSource?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -498,7 +498,7 @@ export type UserScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
-  stripeCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  razorpayCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   defaultPaymentMethodId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   referralSource?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   utmSource?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -522,7 +522,7 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -565,7 +565,7 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -608,7 +608,7 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -651,7 +651,7 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -694,7 +694,7 @@ export type UserCreateManyInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -718,7 +718,7 @@ export type UserUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -742,7 +742,7 @@ export type UserUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -766,7 +766,7 @@ export type UserCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrder
   referralSource?: Prisma.SortOrder
   utmSource?: Prisma.SortOrder
@@ -794,7 +794,7 @@ export type UserMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrder
   referralSource?: Prisma.SortOrder
   utmSource?: Prisma.SortOrder
@@ -818,7 +818,7 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
-  stripeCustomerId?: Prisma.SortOrder
+  razorpayCustomerId?: Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrder
   referralSource?: Prisma.SortOrder
   utmSource?: Prisma.SortOrder
@@ -1149,7 +1149,7 @@ export type UserCreateWithoutIdentitiesInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1191,7 +1191,7 @@ export type UserUncheckedCreateWithoutIdentitiesInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1249,7 +1249,7 @@ export type UserUpdateWithoutIdentitiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1291,7 +1291,7 @@ export type UserUncheckedUpdateWithoutIdentitiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1333,7 +1333,7 @@ export type UserCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1375,7 +1375,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1433,7 +1433,7 @@ export type UserUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1475,7 +1475,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1517,7 +1517,7 @@ export type UserCreateWithoutRefreshTokensInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1559,7 +1559,7 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1617,7 +1617,7 @@ export type UserUpdateWithoutRefreshTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1659,7 +1659,7 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1701,7 +1701,7 @@ export type UserCreateWithoutTicketTokensInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1743,7 +1743,7 @@ export type UserUncheckedCreateWithoutTicketTokensInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1801,7 +1801,7 @@ export type UserUpdateWithoutTicketTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1843,7 +1843,7 @@ export type UserUncheckedUpdateWithoutTicketTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1885,7 +1885,7 @@ export type UserCreateWithoutSignupRiskEventsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1927,7 +1927,7 @@ export type UserUncheckedCreateWithoutSignupRiskEventsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -1985,7 +1985,7 @@ export type UserUpdateWithoutSignupRiskEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2027,7 +2027,7 @@ export type UserUncheckedUpdateWithoutSignupRiskEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2069,7 +2069,7 @@ export type UserCreateWithoutPhoneOtpsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2111,7 +2111,7 @@ export type UserUncheckedCreateWithoutPhoneOtpsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2169,7 +2169,7 @@ export type UserUpdateWithoutPhoneOtpsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2211,7 +2211,7 @@ export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2253,7 +2253,7 @@ export type UserCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2295,7 +2295,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2353,7 +2353,7 @@ export type UserUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2395,7 +2395,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2437,7 +2437,7 @@ export type UserCreateWithoutSubscriptionInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2479,7 +2479,7 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2537,7 +2537,7 @@ export type UserUpdateWithoutSubscriptionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2579,7 +2579,7 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2621,7 +2621,7 @@ export type UserCreateWithoutPaymentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2663,7 +2663,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2721,7 +2721,7 @@ export type UserUpdateWithoutPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2763,7 +2763,7 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2805,7 +2805,7 @@ export type UserCreateWithoutCreditBalanceInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2847,7 +2847,7 @@ export type UserUncheckedCreateWithoutCreditBalanceInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -2905,7 +2905,7 @@ export type UserUpdateWithoutCreditBalanceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2947,7 +2947,7 @@ export type UserUncheckedUpdateWithoutCreditBalanceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2989,7 +2989,7 @@ export type UserCreateWithoutCreditTransactionsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3031,7 +3031,7 @@ export type UserUncheckedCreateWithoutCreditTransactionsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3089,7 +3089,7 @@ export type UserUpdateWithoutCreditTransactionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3131,7 +3131,7 @@ export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3173,7 +3173,7 @@ export type UserCreateWithoutAutoReloadSettingInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3215,7 +3215,7 @@ export type UserUncheckedCreateWithoutAutoReloadSettingInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3273,7 +3273,7 @@ export type UserUpdateWithoutAutoReloadSettingInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3315,7 +3315,7 @@ export type UserUncheckedUpdateWithoutAutoReloadSettingInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3357,7 +3357,7 @@ export type UserCreateWithoutProjectsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3399,7 +3399,7 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3457,7 +3457,7 @@ export type UserUpdateWithoutProjectsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3499,7 +3499,7 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3541,7 +3541,7 @@ export type UserCreateWithoutConversationsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3583,7 +3583,7 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3641,7 +3641,7 @@ export type UserUpdateWithoutConversationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3683,7 +3683,7 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3725,7 +3725,7 @@ export type UserCreateWithoutDeploymentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3767,7 +3767,7 @@ export type UserUncheckedCreateWithoutDeploymentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3825,7 +3825,7 @@ export type UserUpdateWithoutDeploymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3867,7 +3867,7 @@ export type UserUncheckedUpdateWithoutDeploymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3909,7 +3909,7 @@ export type UserCreateWithoutUsageLogsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -3951,7 +3951,7 @@ export type UserUncheckedCreateWithoutUsageLogsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -4009,7 +4009,7 @@ export type UserUpdateWithoutUsageLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4051,7 +4051,7 @@ export type UserUncheckedUpdateWithoutUsageLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4093,7 +4093,7 @@ export type UserCreateWithoutCompetitorScansInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -4135,7 +4135,7 @@ export type UserUncheckedCreateWithoutCompetitorScansInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -4193,7 +4193,7 @@ export type UserUpdateWithoutCompetitorScansInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4235,7 +4235,7 @@ export type UserUncheckedUpdateWithoutCompetitorScansInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4277,7 +4277,7 @@ export type UserCreateWithoutScoreResultsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -4319,7 +4319,7 @@ export type UserUncheckedCreateWithoutScoreResultsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -4377,7 +4377,7 @@ export type UserUpdateWithoutScoreResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4419,7 +4419,7 @@ export type UserUncheckedUpdateWithoutScoreResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4461,7 +4461,7 @@ export type UserCreateWithoutSeoAuditResultsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -4503,7 +4503,7 @@ export type UserUncheckedCreateWithoutSeoAuditResultsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: string | null
+  razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
   utmSource?: string | null
@@ -4561,7 +4561,7 @@ export type UserUpdateWithoutSeoAuditResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4603,7 +4603,7 @@ export type UserUncheckedUpdateWithoutSeoAuditResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4811,7 +4811,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   deletedAt?: boolean
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: boolean
+  razorpayCustomerId?: boolean
   defaultPaymentMethodId?: boolean
   referralSource?: boolean
   utmSource?: boolean
@@ -4855,7 +4855,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   deletedAt?: boolean
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: boolean
+  razorpayCustomerId?: boolean
   defaultPaymentMethodId?: boolean
   referralSource?: boolean
   utmSource?: boolean
@@ -4879,7 +4879,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   deletedAt?: boolean
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: boolean
+  razorpayCustomerId?: boolean
   defaultPaymentMethodId?: boolean
   referralSource?: boolean
   utmSource?: boolean
@@ -4903,7 +4903,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
   deletedAt?: boolean
   hasUsedFreeGeneration?: boolean
-  stripeCustomerId?: boolean
+  razorpayCustomerId?: boolean
   defaultPaymentMethodId?: boolean
   referralSource?: boolean
   utmSource?: boolean
@@ -4915,7 +4915,7 @@ export type UserSelectScalar = {
   signupRiskScore?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "avatarUrl" | "status" | "phone" | "phoneVerifiedAt" | "lastLoginAt" | "createdAt" | "updatedAt" | "deletedAt" | "hasUsedFreeGeneration" | "stripeCustomerId" | "defaultPaymentMethodId" | "referralSource" | "utmSource" | "utmMedium" | "utmCampaign" | "acceptedTermsAt" | "acceptedTermsVersion" | "signupRiskDecision" | "signupRiskScore", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "avatarUrl" | "status" | "phone" | "phoneVerifiedAt" | "lastLoginAt" | "createdAt" | "updatedAt" | "deletedAt" | "hasUsedFreeGeneration" | "razorpayCustomerId" | "defaultPaymentMethodId" | "referralSource" | "utmSource" | "utmMedium" | "utmCampaign" | "acceptedTermsAt" | "acceptedTermsVersion" | "signupRiskDecision" | "signupRiskScore", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   identities?: boolean | Prisma.User$identitiesArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -4976,7 +4976,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedAt: Date
     deletedAt: Date | null
     hasUsedFreeGeneration: boolean
-    stripeCustomerId: string | null
+    razorpayCustomerId: string | null
     defaultPaymentMethodId: string | null
     referralSource: string | null
     utmSource: string | null
@@ -5439,7 +5439,7 @@ export interface UserFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly hasUsedFreeGeneration: Prisma.FieldRef<"User", 'Boolean'>
-  readonly stripeCustomerId: Prisma.FieldRef<"User", 'String'>
+  readonly razorpayCustomerId: Prisma.FieldRef<"User", 'String'>
   readonly defaultPaymentMethodId: Prisma.FieldRef<"User", 'String'>
   readonly referralSource: Prisma.FieldRef<"User", 'String'>
   readonly utmSource: Prisma.FieldRef<"User", 'String'>

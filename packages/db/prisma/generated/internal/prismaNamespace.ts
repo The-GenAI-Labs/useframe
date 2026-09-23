@@ -3529,7 +3529,7 @@ export const UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
   hasUsedFreeGeneration: 'hasUsedFreeGeneration',
-  stripeCustomerId: 'stripeCustomerId',
+  razorpayCustomerId: 'razorpayCustomerId',
   defaultPaymentMethodId: 'defaultPaymentMethodId',
   referralSource: 'referralSource',
   utmSource: 'utmSource',

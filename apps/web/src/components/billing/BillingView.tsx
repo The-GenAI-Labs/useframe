@@ -2,13 +2,10 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
+import { openRazorpayCheckout } from "@/lib/razorpay";
 import { creditsApi } from "@/lib/api/services/credits.service";
 import { billingApi } from "@/lib/api/services/billing.service";
 import { serif } from "@/components/home/fonts";
-import { CheckoutForm } from "./CheckoutForm";
-import { AddCardForm } from "./AddCardForm";
 import { CrossLineBackground } from "@/components/web-score/CrossLineBackground";
 import {
     CREDIT_PACKS,
@@ -16,8 +13,6 @@ import {
     creditsForCustomAmount,
     findCreditPack,
 } from "@repo/schemas";
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "");
 
 // Fixed packs plus a custom-amount path. CREDIT_PACKS and the custom rate
 // are imported from @repo/schemas — the same source billing-service's
@@ -83,12 +78,11 @@ export default function BillingView() {
 
     const [selectedAmount, setSelectedAmount] = useState<number>(1900);
     const [customAmount, setCustomAmount] = useState("");
-    const [checkoutSecret, setCheckoutSecret] = useState<string | null>(null);
     const [checkoutCredits, setCheckoutCredits] = useState(0);
+    const [checkoutSuccess, setCheckoutSuccess] = useState(false);
     const [checkoutError, setCheckoutError] = useState<string | null>(null);
     const [startingCheckout, setStartingCheckout] = useState(false);
 
-    const [addCardSecret, setAddCardSecret] = useState<string | null>(null);
     const [addCardError, setAddCardError] = useState<string | null>(null);
     const [startingAddCard, setStartingAddCard] = useState(false);
 
@@ -126,41 +120,65 @@ export default function BillingView() {
         }
         setStartingCheckout(true);
         setCheckoutError(null);
+        setCheckoutSuccess(false);
         try {
-            const { clientSecret, credits } = await billingApi.createCheckout(
+            const order = await billingApi.createCheckout(
                 isCustom ? { amountCents } : { packId: selectedAmount },
             );
-            setCheckoutSecret(clientSecret);
-            setCheckoutCredits(credits);
+            setCheckoutCredits(order.credits);
+
+            const result = await openRazorpayCheckout({
+                keyId: order.keyId,
+                orderId: order.orderId,
+                amountCents: order.amountCents,
+                currency: order.currency,
+                description: `${order.credits} credits`,
+            });
+
+            if (result.status === "failed") {
+                setCheckoutError(result.message);
+                return;
+            }
+            if (result.status === "dismissed") return;
+
+            // Granted by the webhook, so the balance may briefly lag.
+            setCheckoutSuccess(true);
+            setCustomAmount("");
+            invalidateSummary();
         } catch (err) {
             setCheckoutError(err instanceof Error ? err.message : "Couldn't start checkout");
         } finally {
             setStartingCheckout(false);
         }
-    }, [amountCents, isCustom, selectedAmount]);
-
-    const handleCheckoutSuccess = useCallback(() => {
-        setCheckoutSecret(null);
-        setCustomAmount("");
-        invalidateSummary();
-    }, [invalidateSummary]);
+    }, [amountCents, isCustom, selectedAmount, invalidateSummary]);
 
     const handleStartAddCard = useCallback(async () => {
         setStartingAddCard(true);
         setAddCardError(null);
         try {
-            const { clientSecret } = await billingApi.createSetupIntent();
-            setAddCardSecret(clientSecret);
+            const setup = await billingApi.createSetupIntent();
+
+            const result = await openRazorpayCheckout({
+                keyId: setup.keyId,
+                orderId: setup.orderId,
+                amountCents: setup.amountCents,
+                currency: setup.currency,
+                description: "Save card for auto-reload",
+                saveCard: true,
+            });
+
+            if (result.status === "failed") {
+                setAddCardError(result.message);
+                return;
+            }
+            if (result.status === "dismissed") return;
+
+            invalidateSummary();
         } catch (err) {
             setAddCardError(err instanceof Error ? err.message : "Couldn't start card setup");
         } finally {
             setStartingAddCard(false);
         }
-    }, []);
-
-    const handleAddCardSuccess = useCallback(() => {
-        setAddCardSecret(null);
-        invalidateSummary();
     }, [invalidateSummary]);
 
     const handleToggleAutoReload = useCallback(
@@ -226,23 +244,14 @@ export default function BillingView() {
                         <p className="text-[12.5px] text-mut mt-0.5">The more you buy, the further each dollar goes.</p>
                     </div> */}
 
-                    {checkoutSecret ? (
-                        <div className="p-5 rounded-3xl border border-base bg-surface shadow-sm max-w-md w-full mx-auto">
-                            <Elements
-                                stripe={stripePromise}
-                                options={{ clientSecret: checkoutSecret, appearance: { theme: "stripe" } }}
-                            >
-                                <p className="text-[12.5px] text-sec mb-3">
-                                    Paying {formatDollars(amountCents)} for{" "}
-                                    <span className="font-semibold text-pri">{checkoutCredits} credits</span>
-                                </p>
-                                <CheckoutForm
-                                    onSuccess={handleCheckoutSuccess}
-                                    onCancel={() => setCheckoutSecret(null)}
-                                />
-                            </Elements>
+                    {checkoutSuccess && (
+                        <div className="max-w-md w-full mx-auto px-4 py-3 rounded-2xl border border-emerald-200 bg-emerald-50 text-[12.5px] text-emerald-700 dark:bg-emerald-950/30 dark:border-emerald-900 dark:text-emerald-400">
+                            Payment received — {checkoutCredits} credits will appear in your balance
+                            momentarily.
                         </div>
-                    ) : (
+                    )}
+
+                    {(
                         <>
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                                 {PACK_TIERS.map((tier) => {
@@ -453,32 +462,18 @@ export default function BillingView() {
                     {autoReloadError && <p className="text-[12.5px] text-red-500 pl-12">{autoReloadError}</p>}
 
                     <div className="pl-12">
-                        {addCardSecret ? (
-                            <div className="p-4 rounded-2xl border border-base bg-tertiary max-w-sm">
-                                <Elements
-                                    stripe={stripePromise}
-                                    options={{ clientSecret: addCardSecret, appearance: { theme: "stripe" } }}
-                                >
-                                    <AddCardForm
-                                        onSuccess={handleAddCardSuccess}
-                                        onCancel={() => setAddCardSecret(null)}
-                                    />
-                                </Elements>
-                            </div>
-                        ) : (
-                            <button
-                                type="button"
-                                onClick={handleStartAddCard}
-                                disabled={startingAddCard}
-                                className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-base text-[12.5px] font-medium text-sec hover:border-em hover:bg-tertiary transition-all cursor-pointer disabled:opacity-50 w-fit"
-                            >
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-                                    <rect x="2" y="5" width="20" height="14" rx="2" />
-                                    <line x1="2" y1="10" x2="22" y2="10" />
-                                </svg>
-                                {startingAddCard ? "Loading…" : "Add / replace card"}
-                            </button>
-                        )}
+                        <button
+                            type="button"
+                            onClick={handleStartAddCard}
+                            disabled={startingAddCard}
+                            className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-base text-[12.5px] font-medium text-sec hover:border-em hover:bg-tertiary transition-all cursor-pointer disabled:opacity-50 w-fit"
+                        >
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                                <rect x="2" y="5" width="20" height="14" rx="2" />
+                                <line x1="2" y1="10" x2="22" y2="10" />
+                            </svg>
+                            {startingAddCard ? "Loading…" : "Add / replace card"}
+                        </button>
                         {addCardError && <p className="text-[12.5px] text-red-500 mt-2">{addCardError}</p>}
                     </div>
                 </section>
