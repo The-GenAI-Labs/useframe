@@ -1,4 +1,5 @@
 import { prisma } from "@useframe/db"
+import { normalizeUrl } from "@repo/schemas"
 import { Queue } from "bullmq"
 import { QUEUES } from "@repo/events"
 import type { ScanJobPayload } from "@repo/events"
@@ -69,6 +70,7 @@ export const ProjectsService = {
           userId,
           projectId: project.id,
           sourceUrl: input.sourceUrl!,
+          normalizedUrl: normalizeUrl(input.sourceUrl!),
           scanType:
             input.inputType === "FROM_COMPETITOR" ? "COMPETITOR" : "OWN_SITE",
           status: "QUEUED",

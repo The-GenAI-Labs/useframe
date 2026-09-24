@@ -104,22 +104,25 @@ export const MessagesService = {
       }
     }
 
-    const creditCost = iterateResult.editSize === "major" ? 2 : 1
+    const isFreeReplicationCorrection =
+      !!project.replicationSourceUrl && !project.replicationFreeCorrectionUsed
+    const creditCost = isFreeReplicationCorrection
+      ? 0
+      : iterateResult.editSize === "major" ? 2 : 1
 
     try {
       const result = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
         await tx.project.update({
           where: { id: project.id },
-          data: { status: "GENERATING" },
+          data: {
+            status: "GENERATING",
+            ...(isFreeReplicationCorrection ? { replicationFreeCorrectionUsed: true } : {}),
+          },
         })
 
-        const { autoReloadTopUpCents } = await CreditsService.deduct(
-          tx,
-          user.id,
-          creditCost,
-          "Iteration edit",
-          undefined
-        )
+        const { autoReloadTopUpCents } = creditCost > 0
+          ? await CreditsService.deduct(tx, user.id, creditCost, "Iteration edit", undefined)
+          : { autoReloadTopUpCents: null }
 
         const latest = await tx.projectVersion.findFirst({
           where: { projectId: project.id },

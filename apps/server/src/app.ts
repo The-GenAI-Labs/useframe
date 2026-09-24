@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser"
 import { env } from "@/config/env.js"
 import authRoutes from "@/modules/auth/auth.routes.js"
 import projectRoutes from "@/modules/projects/projects.routes.js"
+import replicateRoutes from "@/modules/replicate/replicate.routes.js"
 import chatRoutes from "@/modules/chat/chat.routes.js"
 import scoreRoutes from "@/modules/score/score.routes.js"
 import seoRoutes from "@/modules/seo/seo.routes.js"
@@ -46,6 +47,7 @@ app.use("/api/billing", billingRoutes)
 app.use("/api/credits", creditsRoutes)
 app.use("/api/findings", findingsRoutes)
 app.use("/api/generate", generateRoutes)
+app.use("/api/replicate", replicateRoutes)
 app.use("/api/research-documents", researchDocumentRoutes)
 app.use("/{*splat}", (_req: Request, res: Response) => {
     res.status(404).json({ success: false, message: "Route not found" })
