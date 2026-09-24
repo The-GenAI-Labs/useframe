@@ -32,6 +32,7 @@ const PROVIDER_MODEL_MAP: Record<ModelId, { provider: ModelProvider; apiModel: s
   "claude-haiku-4-5-20251001": { provider: "anthropic", apiModel: "claude-haiku-4-5-20251001" },
   "deepseek-v4-flash":         { provider: "deepseek",  apiModel: "deepseek-chat" },
   "deepseek-v4-pro":           { provider: "deepseek",  apiModel: "deepseek-reasoner" },
+  "deepseek-flash":            { provider: "deepseek",  apiModel: "deepseek-flash" },
   "gpt-4o":                    { provider: "openai",    apiModel: "gpt-4o" },
   "gpt-4o-mini":               { provider: "openai",    apiModel: "gpt-4o-mini" },
   "kimi-k2-6":                 { provider: "kimi",      apiModel: "moonshot-v1-8k" },

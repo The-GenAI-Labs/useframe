@@ -276,6 +276,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         { href: "/research", label: "Research", icon: <><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></> },
         // { href: "/templates", label: "Templates", icon: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></> },
         { href: "/board", label: "Board", icon: <><rect x="3" y="3" width="18" height="18" rx="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="9" y1="3" x2="9" y2="9" /><circle cx="15" cy="15" r="2.5" /><path d="M10 14l2 2 4-4" /></> },
+        { href: "/replicate", label: "Replicate", icon: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><path d="M10 6h5a2 2 0 0 1 2 2v5" /><path d="M14 18H9a2 2 0 0 1-2-2v-5" /></> },
         { href: "/billing", label: "Billing", icon: <><rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" /></> },
     ];
 
