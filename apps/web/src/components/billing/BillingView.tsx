@@ -253,7 +253,7 @@ export default function BillingView() {
 
                     {(
                         <>
-                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto w-full">
                                 {PACK_TIERS.map((tier) => {
                                     const isSelected = !customAmount && selectedAmount === tier.amountCents;
                                     return (
@@ -264,7 +264,7 @@ export default function BillingView() {
                                                 setSelectedAmount(tier.amountCents);
                                                 setCustomAmount("");
                                             }}
-                                            className={`relative flex flex-col text-left rounded-3xl border overflow-hidden transition-all cursor-pointer ${
+                                            className={`relative flex h-full flex-col text-left rounded-3xl border overflow-hidden transition-all cursor-pointer ${
                                                 isSelected
                                                     ? "border-blue-400 shadow-lg ring-2 ring-blue-100 dark:ring-blue-900/40"
                                                     : "border-base shadow-sm hover:border-em"
@@ -275,7 +275,7 @@ export default function BillingView() {
                                                     Most popular
                                                 </span>
                                             )}
-                                            <div className={`relative px-4 pt-4 pb-5 bg-gradient-to-br overflow-hidden ${tier.gradient}`}>
+                                            <div className={`relative px-4 pt-4 pb-5 bg-gradient-to-br overflow-hidden shrink-0 min-h-[86px] flex flex-col justify-center ${tier.gradient}`}>
                                                 <div
                                                     className="absolute inset-0"
                                                     style={{ background: "linear-gradient(115deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.08) 35%, transparent 60%)" }}
