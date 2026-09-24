@@ -26,6 +26,7 @@ export const errorHandler = (
         const response: ApiResponse = {
             success: false,
             message: err.message,
+            code: err.code,
         }
         res.status(err.statusCode).json(response)
         return

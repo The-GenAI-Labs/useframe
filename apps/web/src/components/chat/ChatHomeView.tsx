@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/authContext";
+import { isFreeTierExhausted } from "@/lib/freeTierError";
 import GridBackground from "@/components/chat/GridBackground";
 import WelcomeCards, { type WelcomeTab } from "@/components/chat/WelcomeCards";
 import ChatInput from "@/components/chat/ChatInput";
@@ -57,6 +58,7 @@ function ChatHomeSkeleton() {
 }
 
 export default function ChatHomeView() {
+    const router = useRouter();
     const searchParams = useSearchParams();
     const shouldAutoFocus = searchParams.get("focus") === "1";
     const { clarify } = useClarify();
@@ -170,12 +172,17 @@ export default function ChatHomeView() {
                 reset();
                 setActiveProject(project);
             } catch (err) {
+                if (isFreeTierExhausted(err)) {
+                    router.push("/billing");
+                    return;
+                }
                 setError(err instanceof Error ? err.message : "Couldn't create the project");
             } finally {
                 setIsCreatingProject(false);
             }
         },
         [
+            router,
             setGenerating,
             startupIdea,
             inputType,

@@ -4,7 +4,24 @@ import { CreditsService } from "@/modules/credits/credits.service.js"
 
 export const GENERATE_CREDIT_COST = 5
 
+// message must be identical whether the free grant was never available
+// (risk-blocked) or already spent — no tell for either case
+export const FREE_TIER_EXHAUSTED_MESSAGE =
+  "You've used your free generation. Upgrade to keep building."
+
 export type AuthorizeResult = { tier: "free" | "paid" }
+
+// Source of truth for "has this user ever used their free generation" —
+// independent of the cached hasUsedFreeGeneration flag on User, the same
+// way CreditBalance relates to CreditTransaction. Not called on the normal
+// authorize() path (that's the fast cached check); this is for anywhere the
+// flag needs verifying against reality.
+export async function hasUsedFreeGeneration(userId: string): Promise<boolean> {
+  const existing = await prisma.project.findFirst({
+    where: { userId, generationTier: "FREE" },
+  })
+  return existing !== null
+}
 
 export const GenerateService = {
   // Pre-flight check-and-reserve called by apps/web BEFORE it opens the SSE
@@ -53,6 +70,13 @@ export const GenerateService = {
 
     const hasBalance = await CreditsService.hasSufficientBalance(userId, GENERATE_CREDIT_COST)
     if (!hasBalance) {
+      // same 403 + message whether the free grant was already used or was
+      // never available (risk-blocked) — a genuinely paid user with a low
+      // balance still gets the normal "Insufficient credits" 402, since
+      // they have no free-tier restriction to speak of
+      if (user.hasUsedFreeGeneration || freeTierBlocked) {
+        throw new AppError(FREE_TIER_EXHAUSTED_MESSAGE, 403, "FREE_TIER_EXHAUSTED")
+      }
       throw new AppError("Insufficient credits", 402)
     }
 

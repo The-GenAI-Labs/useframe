@@ -15,6 +15,10 @@ export const ProjectsService = {
     const slug = uniqueSlug(input.name)
     const extracted = input.extracted
 
+    // checked before the project row exists — an exhausted/uncredited user
+    // must never end up with an orphaned DRAFT project
+    const { tier } = await GenerateService.authorize(userId)
+
     const project = await prisma.project.create({
       data: {
         userId,
@@ -32,15 +36,6 @@ export const ProjectsService = {
         status: "DRAFT",
       },
     })
-
-    // Tier determination happens as a side effect of project creation so the
-    // frontend gets it back in the same response and can immediately open
-    // the /plan SSE connection with the resolved tier — mirrors
-    // orchestrator.ts's ensureProject() pattern of doing side-effecting work
-    // inline with the primary create rather than requiring a second round
-    // trip. Reuses GenerateService.authorize() rather than duplicating its
-    // free-flag/credit-deduction logic.
-    const { tier } = await GenerateService.authorize(userId)
 
     const version = await prisma.projectVersion.create({
       data: {

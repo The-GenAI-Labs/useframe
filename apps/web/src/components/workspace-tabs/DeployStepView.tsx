@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useRef, useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import type { ProjectDetail } from "@/lib/api/services/projects.service"
 import { deployApi, type DeploymentResult, type DeploymentStatus } from "@/lib/api/services/deploy.service"
 import { DomainSection } from "./DomainSection"
@@ -28,6 +29,7 @@ type Props = {
 }
 
 export function DeployStepView({ project, locked, creditLocked, creditLockedReason, onApproved }: Props) {
+  const router = useRouter()
   const [state, setState] = useState<ViewState>({ status: "idle" })
   const [isApproving, setIsApproving] = useState(false)
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -40,7 +42,11 @@ export function DeployStepView({ project, locked, creditLocked, creditLockedReas
 
   if (creditLocked) {
     return (
-      <div className="flex h-full w-full flex-col items-center justify-center gap-3 px-6 text-center">
+      <button
+        type="button"
+        onClick={() => router.push("/billing")}
+        className="flex h-full w-full cursor-pointer flex-col items-center justify-center gap-3 px-6 text-center"
+      >
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-tertiary text-mut">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2" />
@@ -49,7 +55,8 @@ export function DeployStepView({ project, locked, creditLocked, creditLockedReas
         </div>
         <p className="text-sm font-semibold text-pri">Deploy is locked</p>
         <p className="max-w-xs text-xs text-mut">{creditLockedReason ?? "Add credits to unlock this step."}</p>
-      </div>
+        <p className="text-xs font-medium text-blue-500">Upgrade to unlock &rarr;</p>
+      </button>
     )
   }
 

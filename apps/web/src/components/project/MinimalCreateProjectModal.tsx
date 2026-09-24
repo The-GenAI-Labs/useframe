@@ -23,6 +23,7 @@ import {
 import { projectsApi } from "@/lib/api/services/projects.service"
 import { useExtractStore } from "@/stores/extractStore"
 import { usePlanStream } from "@/hooks/usePlanStream"
+import { isFreeTierExhausted } from "@/lib/freeTierError"
 import type { NicheCategory } from "@repo/schemas"
 
 const ORCHESTRATOR_URL =
@@ -102,6 +103,12 @@ export function MinimalCreateProjectModal({ open, onOpenChange }: Props) {
       })
 
       router.push(`/project/${result.project.slug}?status=planning`)
+    },
+    onError: (err) => {
+      if (isFreeTierExhausted(err)) {
+        onOpenChange(false)
+        router.push("/billing")
+      }
     },
   })
 
