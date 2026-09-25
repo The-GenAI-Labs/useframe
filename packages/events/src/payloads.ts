@@ -1,14 +1,22 @@
 export type ScanJobPayload = {
   scanId: string
   userId: string
-  projectId: string
+  // COMPETITOR/OWN_SITE scans belong to a Project; REPLICATION_TARGET scans
+  // belong to a standalone Replication row instead — exactly one of the two
+  // is set, matching scanType.
+  projectId?: string
+  replicationId?: string
   sourceUrl: string
-  scanType: "COMPETITOR" | "OWN_SITE"
+  scanType: "COMPETITOR" | "OWN_SITE" | "REPLICATION_TARGET"
   // Discovery order from findCompetitorUrls. Only rank 0 (the top-ranked
   // competitor) gets the expensive video-recording + vision-analysis path;
   // the rest keep the cheap screenshot + design-token path. Optional so
   // existing enqueue call sites stay valid.
   rank?: number
+  // REPLICATION_TARGET only — runs the deep-capture path instead of the
+  // normal competitor scan.
+  mode?: "DEEP"
+  tier?: "free" | "paid"
 }
 
 export type ResearchPdfJobPayload = {

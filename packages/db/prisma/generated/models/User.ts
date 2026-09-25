@@ -46,6 +46,8 @@ export type UserMinAggregateOutputType = {
   updatedAt: Date | null
   deletedAt: Date | null
   hasUsedFreeGeneration: boolean | null
+  freeReplicationUsed: boolean | null
+  freeReplicationUsedAt: Date | null
   razorpayCustomerId: string | null
   defaultPaymentMethodId: string | null
   referralSource: string | null
@@ -70,6 +72,8 @@ export type UserMaxAggregateOutputType = {
   updatedAt: Date | null
   deletedAt: Date | null
   hasUsedFreeGeneration: boolean | null
+  freeReplicationUsed: boolean | null
+  freeReplicationUsedAt: Date | null
   razorpayCustomerId: string | null
   defaultPaymentMethodId: string | null
   referralSource: string | null
@@ -94,6 +98,8 @@ export type UserCountAggregateOutputType = {
   updatedAt: number
   deletedAt: number
   hasUsedFreeGeneration: number
+  freeReplicationUsed: number
+  freeReplicationUsedAt: number
   razorpayCustomerId: number
   defaultPaymentMethodId: number
   referralSource: number
@@ -128,6 +134,8 @@ export type UserMinAggregateInputType = {
   updatedAt?: true
   deletedAt?: true
   hasUsedFreeGeneration?: true
+  freeReplicationUsed?: true
+  freeReplicationUsedAt?: true
   razorpayCustomerId?: true
   defaultPaymentMethodId?: true
   referralSource?: true
@@ -152,6 +160,8 @@ export type UserMaxAggregateInputType = {
   updatedAt?: true
   deletedAt?: true
   hasUsedFreeGeneration?: true
+  freeReplicationUsed?: true
+  freeReplicationUsedAt?: true
   razorpayCustomerId?: true
   defaultPaymentMethodId?: true
   referralSource?: true
@@ -176,6 +186,8 @@ export type UserCountAggregateInputType = {
   updatedAt?: true
   deletedAt?: true
   hasUsedFreeGeneration?: true
+  freeReplicationUsed?: true
+  freeReplicationUsedAt?: true
   razorpayCustomerId?: true
   defaultPaymentMethodId?: true
   referralSource?: true
@@ -287,6 +299,8 @@ export type UserGroupByOutputType = {
   updatedAt: Date
   deletedAt: Date | null
   hasUsedFreeGeneration: boolean
+  freeReplicationUsed: boolean
+  freeReplicationUsedAt: Date | null
   razorpayCustomerId: string | null
   defaultPaymentMethodId: string | null
   referralSource: string | null
@@ -334,6 +348,8 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFilter<"User"> | boolean
+  freeReplicationUsed?: Prisma.BoolFilter<"User"> | boolean
+  freeReplicationUsedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   razorpayCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
   defaultPaymentMethodId?: Prisma.StringNullableFilter<"User"> | string | null
   referralSource?: Prisma.StringNullableFilter<"User"> | string | null
@@ -363,6 +379,7 @@ export type UserWhereInput = {
   competitorScans?: Prisma.CompetitorScanListRelationFilter
   scoreResults?: Prisma.ScoreResultListRelationFilter
   seoAuditResults?: Prisma.SeoAuditResultListRelationFilter
+  replications?: Prisma.ReplicationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -377,6 +394,8 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
+  freeReplicationUsed?: Prisma.SortOrder
+  freeReplicationUsedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   razorpayCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrderInput | Prisma.SortOrder
   referralSource?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -406,6 +425,7 @@ export type UserOrderByWithRelationInput = {
   competitorScans?: Prisma.CompetitorScanOrderByRelationAggregateInput
   scoreResults?: Prisma.ScoreResultOrderByRelationAggregateInput
   seoAuditResults?: Prisma.SeoAuditResultOrderByRelationAggregateInput
+  replications?: Prisma.ReplicationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -424,6 +444,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFilter<"User"> | boolean
+  freeReplicationUsed?: Prisma.BoolFilter<"User"> | boolean
+  freeReplicationUsedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   defaultPaymentMethodId?: Prisma.StringNullableFilter<"User"> | string | null
   referralSource?: Prisma.StringNullableFilter<"User"> | string | null
   utmSource?: Prisma.StringNullableFilter<"User"> | string | null
@@ -452,6 +474,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   competitorScans?: Prisma.CompetitorScanListRelationFilter
   scoreResults?: Prisma.ScoreResultListRelationFilter
   seoAuditResults?: Prisma.SeoAuditResultListRelationFilter
+  replications?: Prisma.ReplicationListRelationFilter
 }, "id" | "phone" | "razorpayCustomerId">
 
 export type UserOrderByWithAggregationInput = {
@@ -466,6 +489,8 @@ export type UserOrderByWithAggregationInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
+  freeReplicationUsed?: Prisma.SortOrder
+  freeReplicationUsedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   razorpayCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrderInput | Prisma.SortOrder
   referralSource?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -498,6 +523,8 @@ export type UserScalarWhereWithAggregatesInput = {
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  freeReplicationUsed?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  freeReplicationUsedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   razorpayCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   defaultPaymentMethodId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   referralSource?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -522,6 +549,8 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -551,6 +580,7 @@ export type UserCreateInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -565,6 +595,8 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -594,6 +626,7 @@ export type UserUncheckedCreateInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -608,6 +641,8 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -637,6 +672,7 @@ export type UserUpdateInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -651,6 +687,8 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -680,6 +718,7 @@ export type UserUncheckedUpdateInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -694,6 +733,8 @@ export type UserCreateManyInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -718,6 +759,8 @@ export type UserUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -742,6 +785,8 @@ export type UserUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -766,6 +811,8 @@ export type UserCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
+  freeReplicationUsed?: Prisma.SortOrder
+  freeReplicationUsedAt?: Prisma.SortOrder
   razorpayCustomerId?: Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrder
   referralSource?: Prisma.SortOrder
@@ -794,6 +841,8 @@ export type UserMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
+  freeReplicationUsed?: Prisma.SortOrder
+  freeReplicationUsedAt?: Prisma.SortOrder
   razorpayCustomerId?: Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrder
   referralSource?: Prisma.SortOrder
@@ -818,6 +867,8 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   hasUsedFreeGeneration?: Prisma.SortOrder
+  freeReplicationUsed?: Prisma.SortOrder
+  freeReplicationUsedAt?: Prisma.SortOrder
   razorpayCustomerId?: Prisma.SortOrder
   defaultPaymentMethodId?: Prisma.SortOrder
   referralSource?: Prisma.SortOrder
@@ -1109,6 +1160,20 @@ export type UserUpdateOneRequiredWithoutCompetitorScansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCompetitorScansInput, Prisma.UserUpdateWithoutCompetitorScansInput>, Prisma.UserUncheckedUpdateWithoutCompetitorScansInput>
 }
 
+export type UserCreateNestedOneWithoutReplicationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReplicationsInput, Prisma.UserUncheckedCreateWithoutReplicationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReplicationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReplicationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReplicationsInput, Prisma.UserUncheckedCreateWithoutReplicationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReplicationsInput
+  upsert?: Prisma.UserUpsertWithoutReplicationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReplicationsInput, Prisma.UserUpdateWithoutReplicationsInput>, Prisma.UserUncheckedUpdateWithoutReplicationsInput>
+}
+
 export type UserCreateNestedOneWithoutScoreResultsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutScoreResultsInput, Prisma.UserUncheckedCreateWithoutScoreResultsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutScoreResultsInput
@@ -1149,6 +1214,8 @@ export type UserCreateWithoutIdentitiesInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1177,6 +1244,7 @@ export type UserCreateWithoutIdentitiesInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIdentitiesInput = {
@@ -1191,6 +1259,8 @@ export type UserUncheckedCreateWithoutIdentitiesInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1219,6 +1289,7 @@ export type UserUncheckedCreateWithoutIdentitiesInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIdentitiesInput = {
@@ -1249,6 +1320,8 @@ export type UserUpdateWithoutIdentitiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1277,6 +1350,7 @@ export type UserUpdateWithoutIdentitiesInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIdentitiesInput = {
@@ -1291,6 +1365,8 @@ export type UserUncheckedUpdateWithoutIdentitiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1319,6 +1395,7 @@ export type UserUncheckedUpdateWithoutIdentitiesInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1333,6 +1410,8 @@ export type UserCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1361,6 +1440,7 @@ export type UserCreateWithoutSessionsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1375,6 +1455,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1403,6 +1485,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1433,6 +1516,8 @@ export type UserUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1461,6 +1546,7 @@ export type UserUpdateWithoutSessionsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1475,6 +1561,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1503,6 +1591,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRefreshTokensInput = {
@@ -1517,6 +1606,8 @@ export type UserCreateWithoutRefreshTokensInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1545,6 +1636,7 @@ export type UserCreateWithoutRefreshTokensInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -1559,6 +1651,8 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1587,6 +1681,7 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -1617,6 +1712,8 @@ export type UserUpdateWithoutRefreshTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1645,6 +1742,7 @@ export type UserUpdateWithoutRefreshTokensInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -1659,6 +1757,8 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1687,6 +1787,7 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTicketTokensInput = {
@@ -1701,6 +1802,8 @@ export type UserCreateWithoutTicketTokensInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1729,6 +1832,7 @@ export type UserCreateWithoutTicketTokensInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTicketTokensInput = {
@@ -1743,6 +1847,8 @@ export type UserUncheckedCreateWithoutTicketTokensInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1771,6 +1877,7 @@ export type UserUncheckedCreateWithoutTicketTokensInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTicketTokensInput = {
@@ -1801,6 +1908,8 @@ export type UserUpdateWithoutTicketTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1829,6 +1938,7 @@ export type UserUpdateWithoutTicketTokensInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTicketTokensInput = {
@@ -1843,6 +1953,8 @@ export type UserUncheckedUpdateWithoutTicketTokensInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1871,6 +1983,7 @@ export type UserUncheckedUpdateWithoutTicketTokensInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSignupRiskEventsInput = {
@@ -1885,6 +1998,8 @@ export type UserCreateWithoutSignupRiskEventsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1913,6 +2028,7 @@ export type UserCreateWithoutSignupRiskEventsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSignupRiskEventsInput = {
@@ -1927,6 +2043,8 @@ export type UserUncheckedCreateWithoutSignupRiskEventsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -1955,6 +2073,7 @@ export type UserUncheckedCreateWithoutSignupRiskEventsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSignupRiskEventsInput = {
@@ -1985,6 +2104,8 @@ export type UserUpdateWithoutSignupRiskEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2013,6 +2134,7 @@ export type UserUpdateWithoutSignupRiskEventsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSignupRiskEventsInput = {
@@ -2027,6 +2149,8 @@ export type UserUncheckedUpdateWithoutSignupRiskEventsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2055,6 +2179,7 @@ export type UserUncheckedUpdateWithoutSignupRiskEventsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPhoneOtpsInput = {
@@ -2069,6 +2194,8 @@ export type UserCreateWithoutPhoneOtpsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2097,6 +2224,7 @@ export type UserCreateWithoutPhoneOtpsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPhoneOtpsInput = {
@@ -2111,6 +2239,8 @@ export type UserUncheckedCreateWithoutPhoneOtpsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2139,6 +2269,7 @@ export type UserUncheckedCreateWithoutPhoneOtpsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPhoneOtpsInput = {
@@ -2169,6 +2300,8 @@ export type UserUpdateWithoutPhoneOtpsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2197,6 +2330,7 @@ export type UserUpdateWithoutPhoneOtpsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
@@ -2211,6 +2345,8 @@ export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2239,6 +2375,7 @@ export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOrdersInput = {
@@ -2253,6 +2390,8 @@ export type UserCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2281,6 +2420,7 @@ export type UserCreateWithoutOrdersInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -2295,6 +2435,8 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2323,6 +2465,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -2353,6 +2496,8 @@ export type UserUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2381,6 +2526,7 @@ export type UserUpdateWithoutOrdersInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -2395,6 +2541,8 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2423,6 +2571,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionInput = {
@@ -2437,6 +2586,8 @@ export type UserCreateWithoutSubscriptionInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2465,6 +2616,7 @@ export type UserCreateWithoutSubscriptionInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionInput = {
@@ -2479,6 +2631,8 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2507,6 +2661,7 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionInput = {
@@ -2537,6 +2692,8 @@ export type UserUpdateWithoutSubscriptionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2565,6 +2722,7 @@ export type UserUpdateWithoutSubscriptionInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionInput = {
@@ -2579,6 +2737,8 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2607,6 +2767,7 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -2621,6 +2782,8 @@ export type UserCreateWithoutPaymentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2649,6 +2812,7 @@ export type UserCreateWithoutPaymentsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2663,6 +2827,8 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2691,6 +2857,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2721,6 +2888,8 @@ export type UserUpdateWithoutPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2749,6 +2918,7 @@ export type UserUpdateWithoutPaymentsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2763,6 +2933,8 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2791,6 +2963,7 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreditBalanceInput = {
@@ -2805,6 +2978,8 @@ export type UserCreateWithoutCreditBalanceInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2833,6 +3008,7 @@ export type UserCreateWithoutCreditBalanceInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreditBalanceInput = {
@@ -2847,6 +3023,8 @@ export type UserUncheckedCreateWithoutCreditBalanceInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -2875,6 +3053,7 @@ export type UserUncheckedCreateWithoutCreditBalanceInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreditBalanceInput = {
@@ -2905,6 +3084,8 @@ export type UserUpdateWithoutCreditBalanceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2933,6 +3114,7 @@ export type UserUpdateWithoutCreditBalanceInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreditBalanceInput = {
@@ -2947,6 +3129,8 @@ export type UserUncheckedUpdateWithoutCreditBalanceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2975,6 +3159,7 @@ export type UserUncheckedUpdateWithoutCreditBalanceInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreditTransactionsInput = {
@@ -2989,6 +3174,8 @@ export type UserCreateWithoutCreditTransactionsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3017,6 +3204,7 @@ export type UserCreateWithoutCreditTransactionsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreditTransactionsInput = {
@@ -3031,6 +3219,8 @@ export type UserUncheckedCreateWithoutCreditTransactionsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3059,6 +3249,7 @@ export type UserUncheckedCreateWithoutCreditTransactionsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreditTransactionsInput = {
@@ -3089,6 +3280,8 @@ export type UserUpdateWithoutCreditTransactionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3117,6 +3310,7 @@ export type UserUpdateWithoutCreditTransactionsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
@@ -3131,6 +3325,8 @@ export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3159,6 +3355,7 @@ export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAutoReloadSettingInput = {
@@ -3173,6 +3370,8 @@ export type UserCreateWithoutAutoReloadSettingInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3201,6 +3400,7 @@ export type UserCreateWithoutAutoReloadSettingInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAutoReloadSettingInput = {
@@ -3215,6 +3415,8 @@ export type UserUncheckedCreateWithoutAutoReloadSettingInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3243,6 +3445,7 @@ export type UserUncheckedCreateWithoutAutoReloadSettingInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAutoReloadSettingInput = {
@@ -3273,6 +3476,8 @@ export type UserUpdateWithoutAutoReloadSettingInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3301,6 +3506,7 @@ export type UserUpdateWithoutAutoReloadSettingInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAutoReloadSettingInput = {
@@ -3315,6 +3521,8 @@ export type UserUncheckedUpdateWithoutAutoReloadSettingInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3343,6 +3551,7 @@ export type UserUncheckedUpdateWithoutAutoReloadSettingInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
@@ -3357,6 +3566,8 @@ export type UserCreateWithoutProjectsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3385,6 +3596,7 @@ export type UserCreateWithoutProjectsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
@@ -3399,6 +3611,8 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3427,6 +3641,7 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -3457,6 +3672,8 @@ export type UserUpdateWithoutProjectsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3485,6 +3702,7 @@ export type UserUpdateWithoutProjectsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -3499,6 +3717,8 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3527,6 +3747,7 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationsInput = {
@@ -3541,6 +3762,8 @@ export type UserCreateWithoutConversationsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3569,6 +3792,7 @@ export type UserCreateWithoutConversationsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationsInput = {
@@ -3583,6 +3807,8 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3611,6 +3837,7 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationsInput = {
@@ -3641,6 +3868,8 @@ export type UserUpdateWithoutConversationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3669,6 +3898,7 @@ export type UserUpdateWithoutConversationsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -3683,6 +3913,8 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3711,6 +3943,7 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeploymentsInput = {
@@ -3725,6 +3958,8 @@ export type UserCreateWithoutDeploymentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3753,6 +3988,7 @@ export type UserCreateWithoutDeploymentsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeploymentsInput = {
@@ -3767,6 +4003,8 @@ export type UserUncheckedCreateWithoutDeploymentsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3795,6 +4033,7 @@ export type UserUncheckedCreateWithoutDeploymentsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeploymentsInput = {
@@ -3825,6 +4064,8 @@ export type UserUpdateWithoutDeploymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3853,6 +4094,7 @@ export type UserUpdateWithoutDeploymentsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeploymentsInput = {
@@ -3867,6 +4109,8 @@ export type UserUncheckedUpdateWithoutDeploymentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3895,6 +4139,7 @@ export type UserUncheckedUpdateWithoutDeploymentsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUsageLogsInput = {
@@ -3909,6 +4154,8 @@ export type UserCreateWithoutUsageLogsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3937,6 +4184,7 @@ export type UserCreateWithoutUsageLogsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUsageLogsInput = {
@@ -3951,6 +4199,8 @@ export type UserUncheckedCreateWithoutUsageLogsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -3979,6 +4229,7 @@ export type UserUncheckedCreateWithoutUsageLogsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUsageLogsInput = {
@@ -4009,6 +4260,8 @@ export type UserUpdateWithoutUsageLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4037,6 +4290,7 @@ export type UserUpdateWithoutUsageLogsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUsageLogsInput = {
@@ -4051,6 +4305,8 @@ export type UserUncheckedUpdateWithoutUsageLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4079,6 +4335,7 @@ export type UserUncheckedUpdateWithoutUsageLogsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCompetitorScansInput = {
@@ -4093,6 +4350,8 @@ export type UserCreateWithoutCompetitorScansInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -4121,6 +4380,7 @@ export type UserCreateWithoutCompetitorScansInput = {
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCompetitorScansInput = {
@@ -4135,6 +4395,8 @@ export type UserUncheckedCreateWithoutCompetitorScansInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -4163,6 +4425,7 @@ export type UserUncheckedCreateWithoutCompetitorScansInput = {
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCompetitorScansInput = {
@@ -4193,6 +4456,8 @@ export type UserUpdateWithoutCompetitorScansInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4221,6 +4486,7 @@ export type UserUpdateWithoutCompetitorScansInput = {
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCompetitorScansInput = {
@@ -4235,6 +4501,8 @@ export type UserUncheckedUpdateWithoutCompetitorScansInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4263,6 +4531,203 @@ export type UserUncheckedUpdateWithoutCompetitorScansInput = {
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutReplicationsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
+  razorpayCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReplicationsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
+  razorpayCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReplicationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReplicationsInput, Prisma.UserUncheckedCreateWithoutReplicationsInput>
+}
+
+export type UserUpsertWithoutReplicationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReplicationsInput, Prisma.UserUncheckedUpdateWithoutReplicationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReplicationsInput, Prisma.UserUncheckedCreateWithoutReplicationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReplicationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReplicationsInput, Prisma.UserUncheckedUpdateWithoutReplicationsInput>
+}
+
+export type UserUpdateWithoutReplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReplicationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutScoreResultsInput = {
@@ -4277,6 +4742,8 @@ export type UserCreateWithoutScoreResultsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -4305,6 +4772,7 @@ export type UserCreateWithoutScoreResultsInput = {
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutScoreResultsInput = {
@@ -4319,6 +4787,8 @@ export type UserUncheckedCreateWithoutScoreResultsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -4347,6 +4817,7 @@ export type UserUncheckedCreateWithoutScoreResultsInput = {
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutScoreResultsInput = {
@@ -4377,6 +4848,8 @@ export type UserUpdateWithoutScoreResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4405,6 +4878,7 @@ export type UserUpdateWithoutScoreResultsInput = {
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutScoreResultsInput = {
@@ -4419,6 +4893,8 @@ export type UserUncheckedUpdateWithoutScoreResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4447,6 +4923,7 @@ export type UserUncheckedUpdateWithoutScoreResultsInput = {
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSeoAuditResultsInput = {
@@ -4461,6 +4938,8 @@ export type UserCreateWithoutSeoAuditResultsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -4489,6 +4968,7 @@ export type UserCreateWithoutSeoAuditResultsInput = {
   usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSeoAuditResultsInput = {
@@ -4503,6 +4983,8 @@ export type UserUncheckedCreateWithoutSeoAuditResultsInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
   razorpayCustomerId?: string | null
   defaultPaymentMethodId?: string | null
   referralSource?: string | null
@@ -4531,6 +5013,7 @@ export type UserUncheckedCreateWithoutSeoAuditResultsInput = {
   usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSeoAuditResultsInput = {
@@ -4561,6 +5044,8 @@ export type UserUpdateWithoutSeoAuditResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4589,6 +5074,7 @@ export type UserUpdateWithoutSeoAuditResultsInput = {
   usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSeoAuditResultsInput = {
@@ -4603,6 +5089,8 @@ export type UserUncheckedUpdateWithoutSeoAuditResultsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4631,6 +5119,7 @@ export type UserUncheckedUpdateWithoutSeoAuditResultsInput = {
   usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -4655,6 +5144,7 @@ export type UserCountOutputType = {
   competitorScans: number
   scoreResults: number
   seoAuditResults: number
+  replications: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4674,6 +5164,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   competitorScans?: boolean | UserCountOutputTypeCountCompetitorScansArgs
   scoreResults?: boolean | UserCountOutputTypeCountScoreResultsArgs
   seoAuditResults?: boolean | UserCountOutputTypeCountSeoAuditResultsArgs
+  replications?: boolean | UserCountOutputTypeCountReplicationsArgs
 }
 
 /**
@@ -4798,6 +5289,13 @@ export type UserCountOutputTypeCountSeoAuditResultsArgs<ExtArgs extends runtime.
   where?: Prisma.SeoAuditResultWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReplicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReplicationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4811,6 +5309,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   deletedAt?: boolean
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: boolean
   razorpayCustomerId?: boolean
   defaultPaymentMethodId?: boolean
   referralSource?: boolean
@@ -4840,6 +5340,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   competitorScans?: boolean | Prisma.User$competitorScansArgs<ExtArgs>
   scoreResults?: boolean | Prisma.User$scoreResultsArgs<ExtArgs>
   seoAuditResults?: boolean | Prisma.User$seoAuditResultsArgs<ExtArgs>
+  replications?: boolean | Prisma.User$replicationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -4855,6 +5356,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   deletedAt?: boolean
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: boolean
   razorpayCustomerId?: boolean
   defaultPaymentMethodId?: boolean
   referralSource?: boolean
@@ -4879,6 +5382,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   updatedAt?: boolean
   deletedAt?: boolean
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: boolean
   razorpayCustomerId?: boolean
   defaultPaymentMethodId?: boolean
   referralSource?: boolean
@@ -4903,6 +5408,8 @@ export type UserSelectScalar = {
   updatedAt?: boolean
   deletedAt?: boolean
   hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: boolean
   razorpayCustomerId?: boolean
   defaultPaymentMethodId?: boolean
   referralSource?: boolean
@@ -4915,7 +5422,7 @@ export type UserSelectScalar = {
   signupRiskScore?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "avatarUrl" | "status" | "phone" | "phoneVerifiedAt" | "lastLoginAt" | "createdAt" | "updatedAt" | "deletedAt" | "hasUsedFreeGeneration" | "razorpayCustomerId" | "defaultPaymentMethodId" | "referralSource" | "utmSource" | "utmMedium" | "utmCampaign" | "acceptedTermsAt" | "acceptedTermsVersion" | "signupRiskDecision" | "signupRiskScore", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "avatarUrl" | "status" | "phone" | "phoneVerifiedAt" | "lastLoginAt" | "createdAt" | "updatedAt" | "deletedAt" | "hasUsedFreeGeneration" | "freeReplicationUsed" | "freeReplicationUsedAt" | "razorpayCustomerId" | "defaultPaymentMethodId" | "referralSource" | "utmSource" | "utmMedium" | "utmCampaign" | "acceptedTermsAt" | "acceptedTermsVersion" | "signupRiskDecision" | "signupRiskScore", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   identities?: boolean | Prisma.User$identitiesArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -4936,6 +5443,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   competitorScans?: boolean | Prisma.User$competitorScansArgs<ExtArgs>
   scoreResults?: boolean | Prisma.User$scoreResultsArgs<ExtArgs>
   seoAuditResults?: boolean | Prisma.User$seoAuditResultsArgs<ExtArgs>
+  replications?: boolean | Prisma.User$replicationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -4963,6 +5471,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     competitorScans: Prisma.$CompetitorScanPayload<ExtArgs>[]
     scoreResults: Prisma.$ScoreResultPayload<ExtArgs>[]
     seoAuditResults: Prisma.$SeoAuditResultPayload<ExtArgs>[]
+    replications: Prisma.$ReplicationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4976,6 +5485,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     updatedAt: Date
     deletedAt: Date | null
     hasUsedFreeGeneration: boolean
+    freeReplicationUsed: boolean
+    freeReplicationUsedAt: Date | null
     razorpayCustomerId: string | null
     defaultPaymentMethodId: string | null
     referralSource: string | null
@@ -5399,6 +5910,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   competitorScans<T extends Prisma.User$competitorScansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$competitorScansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompetitorScanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   scoreResults<T extends Prisma.User$scoreResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$scoreResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScoreResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   seoAuditResults<T extends Prisma.User$seoAuditResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$seoAuditResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeoAuditResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  replications<T extends Prisma.User$replicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$replicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5439,6 +5951,8 @@ export interface UserFieldRefs {
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly hasUsedFreeGeneration: Prisma.FieldRef<"User", 'Boolean'>
+  readonly freeReplicationUsed: Prisma.FieldRef<"User", 'Boolean'>
+  readonly freeReplicationUsedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly razorpayCustomerId: Prisma.FieldRef<"User", 'String'>
   readonly defaultPaymentMethodId: Prisma.FieldRef<"User", 'String'>
   readonly referralSource: Prisma.FieldRef<"User", 'String'>
@@ -6280,6 +6794,30 @@ export type User$seoAuditResultsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.SeoAuditResultScalarFieldEnum | Prisma.SeoAuditResultScalarFieldEnum[]
+}
+
+/**
+ * User.replications
+ */
+export type User$replicationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Replication
+   */
+  select?: Prisma.ReplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Replication
+   */
+  omit?: Prisma.ReplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReplicationInclude<ExtArgs> | null
+  where?: Prisma.ReplicationWhereInput
+  orderBy?: Prisma.ReplicationOrderByWithRelationInput | Prisma.ReplicationOrderByWithRelationInput[]
+  cursor?: Prisma.ReplicationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReplicationScalarFieldEnum | Prisma.ReplicationScalarFieldEnum[]
 }
 
 /**

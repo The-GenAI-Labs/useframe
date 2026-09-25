@@ -89,6 +89,7 @@ export const ModelName = {
   PipelineState: 'PipelineState',
   ResearchArticle: 'ResearchArticle',
   CompetitorScan: 'CompetitorScan',
+  Replication: 'Replication',
   ScoreResult: 'ScoreResult',
   SearchQueryCache: 'SearchQueryCache',
   SeoAuditResult: 'SeoAuditResult'
@@ -122,6 +123,8 @@ export const UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
   hasUsedFreeGeneration: 'hasUsedFreeGeneration',
+  freeReplicationUsed: 'freeReplicationUsed',
+  freeReplicationUsedAt: 'freeReplicationUsedAt',
   razorpayCustomerId: 'razorpayCustomerId',
   defaultPaymentMethodId: 'defaultPaymentMethodId',
   referralSource: 'referralSource',
@@ -452,6 +455,7 @@ export const ConversationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   projectId: 'projectId',
+  replicationId: 'replicationId',
   title: 'title',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -769,6 +773,27 @@ export const CompetitorScanScalarFieldEnum = {
 } as const
 
 export type CompetitorScanScalarFieldEnum = (typeof CompetitorScanScalarFieldEnum)[keyof typeof CompetitorScanScalarFieldEnum]
+
+
+export const ReplicationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  slug: 'slug',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  tier: 'tier',
+  screenshotKey: 'screenshotKey',
+  designTokens: 'designTokens',
+  extractedContent: 'extractedContent',
+  designBrief: 'designBrief',
+  snapshot: 'snapshot',
+  freeCorrectionUsed: 'freeCorrectionUsed',
+  failureReason: 'failureReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReplicationScalarFieldEnum = (typeof ReplicationScalarFieldEnum)[keyof typeof ReplicationScalarFieldEnum]
 
 
 export const ScoreResultScalarFieldEnum = {

@@ -6,6 +6,7 @@ export const ModelIdSchema = z.enum([
   "claude-haiku-4-5-20251001",
   "deepseek-v4-flash",
   "deepseek-v4-pro",
+  "deepseek-flash",
   "gpt-4o",
   "gpt-4o-mini",
   "kimi-k2-6",
@@ -46,6 +47,12 @@ export const MODELS: ModelMeta[] = [
     label: "DeepSeek V4 Flash",
     provider: "deepseek",
     description: "Lightweight DeepSeek — rapid responses",
+  },
+  {
+    id: "deepseek-flash",
+    label: "DeepSeek V4.1 Flash",
+    provider: "deepseek",
+    description: "Natively multimodal — vision-capable, used for free-tier replication",
   },
   {
     id: "deepseek-v4-pro",

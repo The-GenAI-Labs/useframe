@@ -422,6 +422,7 @@ export const ModelName = {
   PipelineState: 'PipelineState',
   ResearchArticle: 'ResearchArticle',
   CompetitorScan: 'CompetitorScan',
+  Replication: 'Replication',
   ScoreResult: 'ScoreResult',
   SearchQueryCache: 'SearchQueryCache',
   SeoAuditResult: 'SeoAuditResult'
@@ -440,7 +441,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "researchDocument" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchFinding" | "findingRelation" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "scoreResult" | "searchQueryCache" | "seoAuditResult"
+    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "researchDocument" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchFinding" | "findingRelation" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "replication" | "scoreResult" | "searchQueryCache" | "seoAuditResult"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3256,6 +3257,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Replication: {
+      payload: Prisma.$ReplicationPayload<ExtArgs>
+      fields: Prisma.ReplicationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReplicationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReplicationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload>
+        }
+        findFirst: {
+          args: Prisma.ReplicationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReplicationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload>
+        }
+        findMany: {
+          args: Prisma.ReplicationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload>[]
+        }
+        create: {
+          args: Prisma.ReplicationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload>
+        }
+        createMany: {
+          args: Prisma.ReplicationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReplicationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload>[]
+        }
+        delete: {
+          args: Prisma.ReplicationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload>
+        }
+        update: {
+          args: Prisma.ReplicationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReplicationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReplicationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReplicationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReplicationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplicationPayload>
+        }
+        aggregate: {
+          args: Prisma.ReplicationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReplication>
+        }
+        groupBy: {
+          args: Prisma.ReplicationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplicationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReplicationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplicationCountAggregateOutputType> | number
+        }
+      }
+    }
     ScoreResult: {
       payload: Prisma.$ScoreResultPayload<ExtArgs>
       fields: Prisma.ScoreResultFieldRefs
@@ -3529,6 +3604,8 @@ export const UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
   hasUsedFreeGeneration: 'hasUsedFreeGeneration',
+  freeReplicationUsed: 'freeReplicationUsed',
+  freeReplicationUsedAt: 'freeReplicationUsedAt',
   razorpayCustomerId: 'razorpayCustomerId',
   defaultPaymentMethodId: 'defaultPaymentMethodId',
   referralSource: 'referralSource',
@@ -3859,6 +3936,7 @@ export const ConversationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   projectId: 'projectId',
+  replicationId: 'replicationId',
   title: 'title',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -4176,6 +4254,27 @@ export const CompetitorScanScalarFieldEnum = {
 } as const
 
 export type CompetitorScanScalarFieldEnum = (typeof CompetitorScanScalarFieldEnum)[keyof typeof CompetitorScanScalarFieldEnum]
+
+
+export const ReplicationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  slug: 'slug',
+  sourceUrl: 'sourceUrl',
+  status: 'status',
+  tier: 'tier',
+  screenshotKey: 'screenshotKey',
+  designTokens: 'designTokens',
+  extractedContent: 'extractedContent',
+  designBrief: 'designBrief',
+  snapshot: 'snapshot',
+  freeCorrectionUsed: 'freeCorrectionUsed',
+  failureReason: 'failureReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReplicationScalarFieldEnum = (typeof ReplicationScalarFieldEnum)[keyof typeof ReplicationScalarFieldEnum]
 
 
 export const ScoreResultScalarFieldEnum = {
@@ -4744,6 +4843,20 @@ export type ListEnumScanStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'ReplicationStatus'
+ */
+export type EnumReplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReplicationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ReplicationStatus[]'
+ */
+export type ListEnumReplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReplicationStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ScoreStatus'
  */
 export type EnumScoreStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScoreStatus'>
@@ -4932,6 +5045,7 @@ export type GlobalOmitConfig = {
   pipelineState?: Prisma.PipelineStateOmit
   researchArticle?: Prisma.ResearchArticleOmit
   competitorScan?: Prisma.CompetitorScanOmit
+  replication?: Prisma.ReplicationOmit
   scoreResult?: Prisma.ScoreResultOmit
   searchQueryCache?: Prisma.SearchQueryCacheOmit
   seoAuditResult?: Prisma.SeoAuditResultOmit

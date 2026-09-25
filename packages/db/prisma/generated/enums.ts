@@ -230,7 +230,8 @@ export type ResearchCategory = (typeof ResearchCategory)[keyof typeof ResearchCa
 
 export const ScanType = {
   COMPETITOR: 'COMPETITOR',
-  OWN_SITE: 'OWN_SITE'
+  OWN_SITE: 'OWN_SITE',
+  REPLICATION_TARGET: 'REPLICATION_TARGET'
 } as const
 
 export type ScanType = (typeof ScanType)[keyof typeof ScanType]
@@ -293,6 +294,19 @@ export const PipelineMode = {
 } as const
 
 export type PipelineMode = (typeof PipelineMode)[keyof typeof PipelineMode]
+
+
+export const ReplicationStatus = {
+  QUEUED: 'QUEUED',
+  RENDERING: 'RENDERING',
+  EXTRACTING: 'EXTRACTING',
+  ANALYZING: 'ANALYZING',
+  GENERATING: 'GENERATING',
+  READY: 'READY',
+  FAILED: 'FAILED'
+} as const
+
+export type ReplicationStatus = (typeof ReplicationStatus)[keyof typeof ReplicationStatus]
 
 
 export const ScoreStatus = {

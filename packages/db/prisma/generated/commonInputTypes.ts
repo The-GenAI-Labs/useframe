@@ -790,6 +790,23 @@ export type EnumScanStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumScanStatusFilter<$PrismaModel>
 }
 
+export type EnumReplicationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReplicationStatus | Prisma.EnumReplicationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ReplicationStatus[] | Prisma.ListEnumReplicationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReplicationStatus[] | Prisma.ListEnumReplicationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReplicationStatusFilter<$PrismaModel> | $Enums.ReplicationStatus
+}
+
+export type EnumReplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReplicationStatus | Prisma.EnumReplicationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ReplicationStatus[] | Prisma.ListEnumReplicationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReplicationStatus[] | Prisma.ListEnumReplicationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReplicationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ReplicationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReplicationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReplicationStatusFilter<$PrismaModel>
+}
+
 export type EnumScoreStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.ScoreStatus | Prisma.EnumScoreStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ScoreStatus[] | Prisma.ListEnumScoreStatusFieldRefInput<$PrismaModel>
@@ -1563,6 +1580,23 @@ export type NestedEnumScanStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumScanStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumScanStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumReplicationStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReplicationStatus | Prisma.EnumReplicationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ReplicationStatus[] | Prisma.ListEnumReplicationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReplicationStatus[] | Prisma.ListEnumReplicationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReplicationStatusFilter<$PrismaModel> | $Enums.ReplicationStatus
+}
+
+export type NestedEnumReplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReplicationStatus | Prisma.EnumReplicationStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ReplicationStatus[] | Prisma.ListEnumReplicationStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReplicationStatus[] | Prisma.ListEnumReplicationStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReplicationStatusWithAggregatesFilter<$PrismaModel> | $Enums.ReplicationStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReplicationStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReplicationStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumScoreStatusFilter<$PrismaModel = never> = {

@@ -208,6 +208,11 @@ export type ResearchArticle = Prisma.ResearchArticleModel
  */
 export type CompetitorScan = Prisma.CompetitorScanModel
 /**
+ * Model Replication
+ * 
+ */
+export type Replication = Prisma.ReplicationModel
+/**
  * Model ScoreResult
  * 
  */
