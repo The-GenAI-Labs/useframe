@@ -13,7 +13,9 @@ export async function runReplicationOrchestrator(
   try {
     sseWrite(res, { type: "stage", stage: "GENERATE", message: "Writing Next.js code..." })
 
-    const files = await generateReplicationNextFiles(buildSpec, tier)
+    const files = await generateReplicationNextFiles(buildSpec, tier, (message) => {
+      sseWrite(res, { type: "stage", stage: "GENERATE", message })
+    })
 
     await prisma.replication.update({
       where: { id: replicationId },
