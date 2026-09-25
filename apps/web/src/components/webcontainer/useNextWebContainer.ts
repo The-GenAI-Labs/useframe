@@ -67,13 +67,17 @@ export function useNextWebContainer() {
         currentDevProcess = null
       }
 
+      await wc.fs.rm("node_modules", { recursive: true, force: true }).catch(() => {})
+      await wc.fs.rm("package-lock.json", { force: true }).catch(() => {})
+      await wc.fs.rm(".next", { recursive: true, force: true }).catch(() => {})
+
       const tree = buildFsTree(withScaffold(files))
       await wc.mount(tree)
       if (!stillCurrent()) return
 
       setState({ status: "installing" })
 
-      const installProcess = await wc.spawn("npm", ["install"])
+      const installProcess = await wc.spawn("npm", ["install", "--legacy-peer-deps"])
       let installLog = ""
       installProcess.output.pipeTo(
         new WritableStream({
