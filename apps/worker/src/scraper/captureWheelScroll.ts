@@ -1,5 +1,4 @@
 import type { Page } from "playwright"
-import { evaluateSafe } from "./evaluateSafe.js"
 
 const WHEEL_DELTA = 120
 const FRAME_INTERVAL_MS = 120
@@ -15,10 +14,10 @@ export type WheelFrame = { scrollY: number; image: Buffer }
 // a video after the fact.
 export async function captureWheelScroll(page: Page): Promise<WheelFrame[]> {
   const pageHeight = Math.min(
-    await evaluateSafe(page, () => document.body.scrollHeight),
+    await page.evaluate(() => document.body.scrollHeight),
     MAX_PAGE_HEIGHT,
   )
-  await evaluateSafe(page, () => window.scrollTo(0, 0))
+  await page.evaluate(() => window.scrollTo(0, 0))
   await page.waitForTimeout(200)
 
   const frames: WheelFrame[] = []
@@ -28,7 +27,7 @@ export async function captureWheelScroll(page: Page): Promise<WheelFrame[]> {
     await page.mouse.wheel(0, WHEEL_DELTA)
     await page.waitForTimeout(FRAME_INTERVAL_MS)
 
-    const scrollY = await evaluateSafe(page, () => window.scrollY).catch(() => lastY)
+    const scrollY = await page.evaluate(() => window.scrollY).catch(() => lastY)
     if (scrollY === lastY) break
     lastY = scrollY
 

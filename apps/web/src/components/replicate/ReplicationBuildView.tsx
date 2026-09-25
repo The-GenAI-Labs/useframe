@@ -40,7 +40,7 @@ export default function ReplicationBuildView({ replication }: Props) {
   const startedAt = useRef(Date.now())
   const consecutiveFailures = useRef(0)
 
-  const alreadyReady = hasSnapshot(current.snapshot)
+  const alreadyReady = hasSnapshot(current.snapshot) || !!siteSpec
 
   const { data: polled } = useQuery({
     queryKey: ["replication", replication.slug],
@@ -61,7 +61,7 @@ export default function ReplicationBuildView({ replication }: Props) {
     refetchInterval: (query) => {
       const status = query.state.data?.status
       if (status === "READY" || status === "FAILED") return false
-      if (timedOut || pollError) return false
+      if (timedOut || pollError || error) return false
       if (Date.now() - startedAt.current > POLL_TIMEOUT_MS) {
         setTimedOut(true)
         return false
@@ -85,7 +85,7 @@ export default function ReplicationBuildView({ replication }: Props) {
     startGeneration(ORCHESTRATOR_URL, {
       replicationId: current.id,
       sourceUrl: current.sourceUrl,
-      designBrief: current.designBrief as unknown as DesignBrief,
+      designBrief: { ...current.designBrief, citations: [] } as unknown as DesignBrief,
       tier: current.tier === "FREE" ? "free" : "paid",
     })
   }, [current, alreadyReady, startGeneration])

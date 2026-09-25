@@ -76,7 +76,8 @@ async function processReplicationScan(job: Job<ScanJobPayload>): Promise<void> {
   const { manifest: assetManifest, detach } = attachAssetListener(page)
 
   try {
-    await page.goto(sourceUrl, { waitUntil: "networkidle", timeout: 30_000 })
+    await page.goto(sourceUrl, { waitUntil: "domcontentloaded", timeout: 30_000 })
+    await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {})
     await page.waitForTimeout(1000)
 
     await prisma.replication.update({
@@ -126,9 +127,6 @@ async function processReplicationScan(job: Job<ScanJobPayload>): Promise<void> {
 
     await browser.close()
 
-    // Capture pipeline IS the research for a replication — as soon as the
-    // brief is written the frontend's build page opens the generate SSE
-    // stream itself, no human approval step in between.
     await prisma.replication.update({
       where: { id: replicationId },
       data: {

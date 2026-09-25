@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { replicateApi, type ReplicationStatus } from "@/lib/api/services/replicate.service";
+import { replicateApi, type ReplicationListItem, type ReplicationStatus } from "@/lib/api/services/replicate.service";
 import { isFreeReplicationExhausted } from "@/lib/freeTierError";
 import { CrossLineBackground } from "@/components/web-score/CrossLineBackground";
 import { serif } from "@/components/home/fonts";
@@ -24,6 +24,13 @@ function hostnameOf(url: string): string {
     } catch {
         return url;
     }
+}
+
+const LIST_POLL_INTERVAL_MS = 5000;
+const LIST_POLL_TIMEOUT_MS = 30 * 60 * 1000;
+
+function hasInFlight(replications: ReplicationListItem[] | undefined): boolean {
+    return !!replications?.some((r) => r.status !== "READY" && r.status !== "FAILED");
 }
 
 export default function ReplicateView() {
@@ -55,11 +62,16 @@ export default function ReplicateView() {
     );
 
     const isBusy = status === "queued";
+    const listStartedAt = useRef(Date.now());
 
     const { data: replications } = useQuery({
         queryKey: ["replications"],
         queryFn: () => replicateApi.list(),
-        refetchInterval: 5000,
+        refetchInterval: (query) => {
+            if (!hasInFlight(query.state.data)) return false;
+            if (Date.now() - listStartedAt.current > LIST_POLL_TIMEOUT_MS) return false;
+            return LIST_POLL_INTERVAL_MS;
+        },
     });
 
     return (

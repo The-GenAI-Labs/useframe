@@ -10,7 +10,7 @@ const router: Router = Router()
 const ReplicateGenerateSchema = z.object({
   replicationId: z.string(),
   sourceUrl: z.string(),
-  designBrief: DesignBriefSchema,
+  designBrief: DesignBriefSchema.extend({ citations: DesignBriefSchema.shape.citations.default([]) }),
   tier: z.enum(["free", "paid"]),
 })
 

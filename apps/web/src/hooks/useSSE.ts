@@ -28,7 +28,8 @@ export function useSSE() {
         })
 
         if (!res.ok || !res.body) {
-          throw new Error(`HTTP ${res.status}`)
+          const body = await res.clone().json().catch(() => null)
+          throw new Error(body?.message ?? `HTTP ${res.status}`)
         }
 
         const reader = res.body.getReader()
