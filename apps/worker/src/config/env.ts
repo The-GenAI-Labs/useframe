@@ -22,6 +22,7 @@ const envSchema = z.object({
   SEO_AUDIT_MAX_PAGES: z.coerce.number().int().positive().default(8),
   SEO_AUDIT_CONCURRENCY: z.coerce.number().int().positive().default(2),
   ANTHROPIC_API_KEY: z.string().optional(),
+  DEEPSEEK_API_KEY: z.string().optional(),
   OPENAI_API_KEY: z.string().optional(),
 
   VERCEL_TOKEN: z.string().min(1, "VERCEL_TOKEN is required"),

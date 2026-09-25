@@ -2,10 +2,29 @@
 
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
-import { replicateApi } from "@/lib/api/services/replicate.service";
+import { useQuery } from "@tanstack/react-query";
+import { replicateApi, type ReplicationStatus } from "@/lib/api/services/replicate.service";
 import { isFreeReplicationExhausted } from "@/lib/freeTierError";
 import { CrossLineBackground } from "@/components/web-score/CrossLineBackground";
 import { serif } from "@/components/home/fonts";
+
+const STATUS_META: Record<ReplicationStatus, { label: string; color: string }> = {
+    QUEUED: { label: "Queued", color: "text-amber-600 dark:text-amber-400" },
+    RENDERING: { label: "Loading page", color: "text-amber-600 dark:text-amber-400" },
+    EXTRACTING: { label: "Capturing", color: "text-amber-600 dark:text-amber-400" },
+    ANALYZING: { label: "Analysing", color: "text-amber-600 dark:text-amber-400" },
+    GENERATING: { label: "Generating", color: "text-amber-600 dark:text-amber-400" },
+    READY: { label: "Ready", color: "text-emerald-600 dark:text-emerald-400" },
+    FAILED: { label: "Failed", color: "text-red-600 dark:text-red-400" },
+};
+
+function hostnameOf(url: string): string {
+    try {
+        return new URL(url).hostname;
+    } catch {
+        return url;
+    }
+}
 
 export default function ReplicateView() {
     const router = useRouter();
@@ -22,7 +41,7 @@ export default function ReplicateView() {
             setError("");
             try {
                 const result = await replicateApi.create(url.trim());
-                router.push(`/build/${result.slug}`);
+                router.push(`/replicate/${result.slug}`);
             } catch (err) {
                 if (isFreeReplicationExhausted(err)) {
                     router.push("/billing");
@@ -36,6 +55,12 @@ export default function ReplicateView() {
     );
 
     const isBusy = status === "queued";
+
+    const { data: replications } = useQuery({
+        queryKey: ["replications"],
+        queryFn: () => replicateApi.list(),
+        refetchInterval: 5000,
+    });
 
     return (
         <div className="relative flex h-full w-full flex-col overflow-y-auto" style={{ scrollbarWidth: "none" }}>
@@ -120,6 +145,46 @@ export default function ReplicateView() {
                     <p className="text-xs text-red-600 dark:text-red-400 mt-4">{error}</p>
                 )}
             </div>
+
+            {replications && replications.length > 0 && (
+                <div className="relative px-6 md:px-10 pb-16">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-mut mb-4 max-w-5xl mx-auto">
+                        Your replications
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+                        {replications.map((r) => {
+                            const meta = STATUS_META[r.status];
+                            return (
+                                <button
+                                    key={r.id}
+                                    type="button"
+                                    onClick={() => router.push(`/replicate/${r.slug}`)}
+                                    className="flex flex-col text-left gap-3 p-4 rounded-2xl border border-base bg-surface shadow-sm hover:border-em hover:shadow-md transition-all cursor-pointer"
+                                >
+                                    <div className="flex items-center justify-between gap-2">
+                                        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-tertiary text-mut shrink-0">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                                                <circle cx="12" cy="12" r="10" />
+                                                <line x1="2" y1="12" x2="22" y2="12" />
+                                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                            </svg>
+                                        </div>
+                                        <span className={`text-[10px] font-semibold uppercase tracking-wide ${meta.color}`}>
+                                            {meta.label}
+                                        </span>
+                                    </div>
+                                    <div className="min-w-0">
+                                        <p className="text-[13px] font-semibold text-pri truncate">{hostnameOf(r.sourceUrl)}</p>
+                                        <p className="text-[11px] text-mut mt-0.5">
+                                            {new Date(r.createdAt).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
+                                        </p>
+                                    </div>
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

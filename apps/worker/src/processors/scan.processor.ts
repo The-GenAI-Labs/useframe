@@ -8,6 +8,15 @@ import type { ScanJobPayload } from "@repo/events"
 import { redis } from "../lib/redis.js"
 import { captureTallSegments } from "../scraper/captureSegments.js"
 import { captureMotionMoments } from "../scraper/captureMotionMoments.js"
+import { detectPageRecon } from "../scraper/detectPinnedSections.js"
+import { captureFullPageShot, captureDenseFrames } from "../scraper/captureDenseFrames.js"
+import { captureWheelScroll } from "../scraper/captureWheelScroll.js"
+import { attachAssetListener } from "../scraper/collectNetworkAssets.js"
+import { uploadFramesToR2, isR2Configured } from "../lib/r2.js"
+import {
+  generateReplicationBrief,
+  isReplicationModelAvailable,
+} from "../analysis/generateReplicationBrief.js"
 import {
   analyzeFramesForPatterns,
   isVisionAnalysisAvailable,
@@ -49,6 +58,119 @@ async function runPatternAnalysis(page: Page, scanId: string, sourceUrl: string)
       `[scan] Pattern analysis failed scanId=${scanId} (continuing without it):`,
       err instanceof Error ? err.message : err,
     )
+  }
+}
+
+async function processReplicationScan(job: Job<ScanJobPayload>): Promise<void> {
+  const { replicationId, sourceUrl, tier } = job.data
+  if (!replicationId) throw new Error("processReplicationScan requires replicationId")
+
+  await prisma.replication.update({
+    where: { id: replicationId },
+    data: { status: "RENDERING" },
+  })
+
+  const browser = await chromium.launch({ headless: true })
+  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } })
+  const { manifest: assetManifest, detach } = attachAssetListener(page)
+
+  try {
+    await page.goto(sourceUrl, { waitUntil: "networkidle", timeout: 30_000 })
+    await page.waitForTimeout(1000)
+
+    await prisma.replication.update({
+      where: { id: replicationId },
+      data: { status: "EXTRACTING" },
+    })
+
+    const recon = await detectPageRecon(page)
+    const fullPageShot = await captureFullPageShot(page)
+    const denseFrames = await captureDenseFrames(page, recon.pinnedRanges)
+    const wheelFrames = await captureWheelScroll(page)
+
+    const rawHtml = await page.content()
+    const cleanedHtml = rawHtml
+      .replace(/<script[\s\S]*?<\/script>/gi, "")
+      .replace(/<style[\s\S]*?<\/style>/gi, "")
+      .replace(/src="data:[^"]+"/gi, 'src="[base64-removed]"')
+      .slice(0, 50_000)
+
+    const designTokens = await page.evaluate(() => {
+      const getTokens = (selector: string) => {
+        const el = document.querySelector(selector)
+        if (!el) return null
+        const style = window.getComputedStyle(el)
+        return {
+          color: style.color,
+          backgroundColor: style.backgroundColor,
+          fontFamily: style.fontFamily,
+          fontSize: style.fontSize,
+        }
+      }
+      return {
+        body: getTokens("body"),
+        h1: getTokens("h1"),
+        h2: getTokens("h2"),
+        p: getTokens("p"),
+        btn: getTokens("button, .btn, [class*='btn']"),
+      }
+    })
+
+    detach()
+
+    await prisma.replication.update({
+      where: { id: replicationId },
+      data: { status: "ANALYZING" },
+    })
+
+    const replicationTier = tier ?? "paid"
+    if (!isReplicationModelAvailable(replicationTier)) {
+      throw new Error(`No API key configured for ${replicationTier}-tier replication model`)
+    }
+
+    const brief = await generateReplicationBrief(
+      { fullPageShot, denseFrames, wheelFrames, assetManifest, cleanedHtml, designTokens, recon },
+      sourceUrl,
+      replicationTier,
+    )
+
+    if (isR2Configured()) {
+      await uploadFramesToR2(`replication/${replicationId}`, [
+        { label: "full-page", image: fullPageShot },
+        ...denseFrames.map((f, i) => ({ label: `dense-${i}-${f.scrollY}`, image: f.image })),
+        ...wheelFrames.map((f, i) => ({ label: `wheel-${i}-${f.scrollY}`, image: f.image })),
+      ])
+    }
+
+    await browser.close()
+
+    // Capture pipeline IS the research for a replication — as soon as the
+    // brief is written the frontend's build page opens the generate SSE
+    // stream itself, no human approval step in between.
+    await prisma.replication.update({
+      where: { id: replicationId },
+      data: {
+        status: "GENERATING",
+        designBrief: brief as unknown as object,
+        designTokens: designTokens as object,
+        extractedContent: { rawHtml: cleanedHtml.slice(0, 5000), assetManifest } as object,
+      },
+    })
+
+    console.log(`[scan] Replication capture complete replicationId=${replicationId} tier=${replicationTier}`)
+  } catch (err) {
+    detach()
+    await browser.close().catch(() => {})
+
+    const reason = err instanceof Error ? err.message : String(err)
+    console.error(`[scan] Replication scan failed replicationId=${replicationId}:`, reason)
+
+    await prisma.replication.update({
+      where: { id: replicationId },
+      data: { status: "FAILED", failureReason: reason },
+    })
+
+    throw err
   }
 }
 
@@ -210,8 +332,13 @@ async function processScan(job: Job<ScanJobPayload>): Promise<void> {
   }
 }
 
+function dispatchScan(job: Job<ScanJobPayload>): Promise<void> {
+  if (job.data.scanType === "REPLICATION_TARGET") return processReplicationScan(job)
+  return processScan(job)
+}
+
 export function startScanWorker(): Worker<ScanJobPayload> {
-  const worker = new Worker<ScanJobPayload>(QUEUES.SCAN, processScan, {
+  const worker = new Worker<ScanJobPayload>(QUEUES.SCAN, dispatchScan, {
     connection: redis,
     concurrency: 2,
   })

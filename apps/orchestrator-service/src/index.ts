@@ -4,6 +4,7 @@ import helmet from "helmet"
 import morgan from "morgan"
 import { env, CONFIGURED_PROVIDERS } from "@/config/env.js"
 import generateRoute from "@/routes/generate.route.js"
+import replicateRoute from "@/routes/replicate.route.js"
 import clarifyRoute from "@/routes/clarify.route.js"
 import iterateRoute from "@/routes/iterate.route.js"
 import chatRoute from "@/routes/chat.route.js"
@@ -43,6 +44,7 @@ app.get("/health", (_req, res) => {
 })
 
 app.use("/", generateRoute)
+app.use("/", replicateRoute)
 app.use("/", clarifyRoute)
 app.use("/", iterateRoute)
 app.use("/", chatRoute)

@@ -19,4 +19,30 @@ export const ReplicateController = {
       next(err)
     }
   },
+
+  list: async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const replications = await ReplicateService.list(req.user!.id)
+      res.json({ success: true, data: replications })
+    } catch (err) {
+      next(err)
+    }
+  },
+
+  getBySlug: async (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      const replication = await ReplicateService.getBySlug(req.user!.id, req.params.slug as string)
+      res.json({ success: true, data: replication })
+    } catch (err) {
+      next(err)
+    }
+  },
 }
