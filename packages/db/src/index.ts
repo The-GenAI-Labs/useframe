@@ -1,5 +1,12 @@
+import dotenv from "dotenv"
 import { PrismaClient, Prisma } from "../prisma/generated/client"
 import { PrismaPg } from "@prisma/adapter-pg"
+
+// This module builds its Postgres adapter from process.env.DATABASE_URL at
+// import time, and it's a workspace package other services import as their
+// very first line (before their own dotenv.config() call runs) — so it
+// must load its own env here rather than assume a consumer already has.
+dotenv.config()
 
 export type { Prisma }
 

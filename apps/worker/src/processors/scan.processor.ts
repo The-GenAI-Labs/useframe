@@ -12,6 +12,7 @@ import { detectPageRecon } from "../scraper/detectPinnedSections.js"
 import { captureFullPageShot, captureDenseFrames } from "../scraper/captureDenseFrames.js"
 import { captureWheelScroll } from "../scraper/captureWheelScroll.js"
 import { attachAssetListener } from "../scraper/collectNetworkAssets.js"
+import { extractDesignTokens } from "../scraper/extractDesignTokens.js"
 import { uploadFramesToR2, isR2Configured } from "../lib/r2.js"
 import {
   generateReplicationBrief,
@@ -95,26 +96,7 @@ async function processReplicationScan(job: Job<ScanJobPayload>): Promise<void> {
       .replace(/src="data:[^"]+"/gi, 'src="[base64-removed]"')
       .slice(0, 50_000)
 
-    const designTokens = await page.evaluate(() => {
-      const getTokens = (selector: string) => {
-        const el = document.querySelector(selector)
-        if (!el) return null
-        const style = window.getComputedStyle(el)
-        return {
-          color: style.color,
-          backgroundColor: style.backgroundColor,
-          fontFamily: style.fontFamily,
-          fontSize: style.fontSize,
-        }
-      }
-      return {
-        body: getTokens("body"),
-        h1: getTokens("h1"),
-        h2: getTokens("h2"),
-        p: getTokens("p"),
-        btn: getTokens("button, .btn, [class*='btn']"),
-      }
-    })
+    const designTokens = await extractDesignTokens(page)
 
     detach()
 
@@ -241,26 +223,7 @@ async function processScan(job: Job<ScanJobPayload>): Promise<void> {
       data: { status: "ANALYZING" },
     })
 
-    const designTokens = await page.evaluate(() => {
-      const getTokens = (selector: string) => {
-        const el = document.querySelector(selector)
-        if (!el) return null
-        const style = window.getComputedStyle(el)
-        return {
-          color: style.color,
-          backgroundColor: style.backgroundColor,
-          fontFamily: style.fontFamily,
-          fontSize: style.fontSize,
-        }
-      }
-      return {
-        body: getTokens("body"),
-        h1: getTokens("h1"),
-        h2: getTokens("h2"),
-        p: getTokens("p"),
-        btn: getTokens("button, .btn, [class*='btn']"),
-      }
-    })
+    const designTokens = await extractDesignTokens(page)
 
     const extractedContent = await page.evaluate(() => {
       const title = document.title
@@ -331,6 +294,8 @@ async function processScan(job: Job<ScanJobPayload>): Promise<void> {
     throw err
   }
 }
+
+export { processReplicationScan as __debugProcessReplicationScan }
 
 function dispatchScan(job: Job<ScanJobPayload>): Promise<void> {
   if (job.data.scanType === "REPLICATION_TARGET") return processReplicationScan(job)

@@ -11,6 +11,10 @@ import { BuildChatBar } from "./BuildChatBar"
 const ORCHESTRATOR_URL =
   process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001"
 
+const POLL_INTERVAL_MS = 10_000
+const POLL_TIMEOUT_MS = 30 * 60 * 1000
+const POLL_FAILURE_LIMIT = 5
+
 const STATUS_LABELS: Record<string, string> = {
   QUEUED: "Queuing replication…",
   RENDERING: "Loading the page…",
@@ -30,17 +34,41 @@ type Props = {
 export default function ReplicationBuildView({ replication }: Props) {
   const { startGeneration, isStreaming, stageMessage, siteSpec, error, setSiteSpec } = useReplicationStream()
   const [current, setCurrent] = useState(replication)
+  const [timedOut, setTimedOut] = useState(false)
+  const [pollError, setPollError] = useState<string | null>(null)
   const generationStarted = useRef(false)
+  const startedAt = useRef(Date.now())
+  const consecutiveFailures = useRef(0)
 
   const alreadyReady = hasSnapshot(current.snapshot)
 
   const { data: polled } = useQuery({
     queryKey: ["replication", replication.slug],
-    queryFn: () => replicateApi.getBySlug(replication.slug),
+    queryFn: async () => {
+      try {
+        const result = await replicateApi.getBySlug(replication.slug)
+        consecutiveFailures.current = 0
+        setPollError(null)
+        return result
+      } catch (err) {
+        consecutiveFailures.current += 1
+        if (consecutiveFailures.current >= POLL_FAILURE_LIMIT) {
+          setPollError("Lost connection while checking status. Please try again in a few minutes.")
+        }
+        throw err
+      }
+    },
     refetchInterval: (query) => {
       const status = query.state.data?.status
-      return status === "READY" || status === "FAILED" ? false : 2000
+      if (status === "READY" || status === "FAILED") return false
+      if (timedOut || pollError) return false
+      if (Date.now() - startedAt.current > POLL_TIMEOUT_MS) {
+        setTimedOut(true)
+        return false
+      }
+      return POLL_INTERVAL_MS
     },
+    retry: POLL_FAILURE_LIMIT,
     enabled: !alreadyReady,
     initialData: replication,
   })
@@ -62,9 +90,20 @@ export default function ReplicationBuildView({ replication }: Props) {
     })
   }, [current, alreadyReady, startGeneration])
 
+  useEffect(() => {
+    if (isStreaming) startedAt.current = Date.now()
+  }, [isStreaming])
+
   const activeSpec: SiteSpec | null = siteSpec ?? (hasSnapshot(current.snapshot) ? current.snapshot : null)
-  const isBuilding = !activeSpec && (isStreaming || current.status !== "FAILED")
   const failed = current.status === "FAILED" || !!error
+  const isBuilding = !activeSpec && !failed && !timedOut && !pollError
+
+  const handleRetry = useCallback(() => {
+    startedAt.current = Date.now()
+    consecutiveFailures.current = 0
+    setTimedOut(false)
+    setPollError(null)
+  }, [])
 
   const handleIterate = useCallback(
     async (content: string) => {
@@ -86,6 +125,32 @@ export default function ReplicationBuildView({ replication }: Props) {
           <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
             <p className="text-sm font-semibold text-pri">Replication failed</p>
             <p className="text-xs text-mut max-w-sm">{error ?? current.failureReason ?? "Something went wrong."}</p>
+          </div>
+        ) : timedOut ? (
+          <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
+            <p className="text-sm font-semibold text-pri">This is taking longer than expected</p>
+            <p className="text-xs text-mut max-w-sm">
+              We stopped checking after 30 minutes. Please try again in a little while.
+            </p>
+            <button
+              type="button"
+              onClick={handleRetry}
+              className="mt-1 px-4 py-2 rounded-xl border border-base text-[12.5px] font-medium text-sec hover:border-em hover:bg-tertiary transition-all cursor-pointer"
+            >
+              Check again
+            </button>
+          </div>
+        ) : pollError ? (
+          <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
+            <p className="text-sm font-semibold text-pri">Something went wrong</p>
+            <p className="text-xs text-mut max-w-sm">{pollError}</p>
+            <button
+              type="button"
+              onClick={handleRetry}
+              className="mt-1 px-4 py-2 rounded-xl border border-base text-[12.5px] font-medium text-sec hover:border-em hover:bg-tertiary transition-all cursor-pointer"
+            >
+              Try again
+            </button>
           </div>
         ) : isBuilding ? (
           <div className="flex h-full flex-col items-center justify-center gap-4 px-6 text-center">

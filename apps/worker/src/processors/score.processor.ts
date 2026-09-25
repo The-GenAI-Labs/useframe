@@ -36,27 +36,23 @@ async function processScore(job: Job<ScoreJobPayload>): Promise<void> {
     const screenshotBuffer = await page.screenshot({ type: "png", fullPage: true })
     const screenshotBase64 = screenshotBuffer.toString("base64")
 
-    const designTokens = await page.evaluate(() => {
-      const getTokens = (selector: string) => {
-        const el = document.querySelector(selector)
-        if (!el) return null
-        const style = window.getComputedStyle(el)
-        return {
-          color: style.color,
-          backgroundColor: style.backgroundColor,
-          fontFamily: style.fontFamily,
-          fontSize: style.fontSize,
-          lineHeight: style.lineHeight,
-        }
-      }
-      return {
-        body: getTokens("body"),
-        h1: getTokens("h1"),
-        h2: getTokens("h2"),
-        p: getTokens("p"),
-        btn: getTokens("button, .btn, [class*='btn']"),
-      }
-    })
+    const [scoreBody, scoreH1, scoreH2, scoreP, scoreBtn] = await page.evaluate(
+      (selectors: string[]) =>
+        selectors.map((selector) => {
+          const el = document.querySelector(selector)
+          if (!el) return null
+          const style = window.getComputedStyle(el)
+          return {
+            color: style.color,
+            backgroundColor: style.backgroundColor,
+            fontFamily: style.fontFamily,
+            fontSize: style.fontSize,
+            lineHeight: style.lineHeight,
+          }
+        }),
+      ["body", "h1", "h2", "p", "button, .btn, [class*='btn']"],
+    )
+    const designTokens = { body: scoreBody, h1: scoreH1, h2: scoreH2, p: scoreP, btn: scoreBtn }
 
     const extractedContent = await page.evaluate(() => {
       const title = document.title
