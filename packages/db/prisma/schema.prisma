@@ -1130,6 +1130,8 @@ model Replication {
   extractedContent   Json?
   designBrief        Json?
   snapshot           Json?
+  buildSpec          String?
+  nextFiles          Json?
   freeCorrectionUsed Boolean           @default(false)
   failureReason      String?
   createdAt          DateTime          @default(now())

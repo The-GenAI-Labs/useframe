@@ -1,56 +1,11 @@
-import { generateObject } from "ai"
+import { generateText } from "ai"
 import { createAnthropic } from "@ai-sdk/anthropic"
 import { createOpenAI } from "@ai-sdk/openai"
-import { z } from "zod"
 import { env } from "../config/env.js"
 import type { AssetManifest } from "../scraper/collectNetworkAssets.js"
 import type { DenseFrame } from "../scraper/captureDenseFrames.js"
 import type { WheelFrame } from "../scraper/captureWheelScroll.js"
 import type { PageRecon } from "../scraper/detectPinnedSections.js"
-
-const ReplicationBriefSchema = z.object({
-  product: z.string(),
-  audience: z.object({
-    primary: z.string(),
-    secondary: z.string().optional(),
-  }),
-  goal: z.string(),
-  brand: z.object({
-    personality: z.string(),
-    positioning: z.string(),
-    tone: z.string(),
-  }),
-  colors: z.object({
-    primary: z.string(),
-    secondary: z.string(),
-    accent: z.string(),
-    rationale: z.string(),
-    citation: z.string(),
-  }),
-  typography: z.object({
-    primary: z.string(),
-    secondary: z.string(),
-    minSize: z.string(),
-    rationale: z.string(),
-    citation: z.string(),
-  }),
-  layout: z.object({
-    sections: z.array(z.string()),
-    rationale: z.string(),
-    citation: z.string(),
-  }),
-  copyFramework: z.enum(["AIDA", "PAS", "FAB", "PASTOR"]),
-  frameworkRationale: z.string(),
-  density: z.string(),
-  motion: z.string(),
-  accessibility: z.object({
-    minContrast: z.string(),
-    touchTarget: z.string(),
-  }),
-  avoid: z.array(z.string()),
-})
-
-export type ReplicationBrief = z.infer<typeof ReplicationBriefSchema>
 
 export type ReplicationCapture = {
   fullPageShot: Buffer
@@ -62,20 +17,14 @@ export type ReplicationCapture = {
   recon: PageRecon
 }
 
-const SYSTEM_PROMPT = `You are reconstructing an EXACT replica of the website at the provided source URL.
-
-You have: a full-page screenshot, dense scroll-position frames (denser around any
-sticky/pinned sections), wheel-scroll frames captured with real scroll deltas,
-the real network asset URLs, cleaned HTML/DOM, and computed style tokens.
-
-Reproduce the layout, copy, structure, colors, typography, spacing, and
-scroll-linked motion as closely as the evidence allows. Reference the real
-asset URLs when describing images used - never invent substitutes.
-
-Output a design brief in the exact same shape used for research-backed
-generation. This is a reconstruction of observed reality, not a researched
-recommendation, so keep rationale fields short and descriptive of what was
-observed rather than persuasive reasoning.`
+const SYSTEM_PROMPT = `You will be shown screenshots, scroll frames, video-transition frames, and
+a list of real network assets (images/video/font URLs) from a permitted
+website. Write a complete build specification for a developer to follow.
+Rules: use EXACT hex codes from computed styles, never color names. Use the
+REAL asset URLs given, never invent placeholders. Use EXACT pixel values
+for spacing/sizing from bounding boxes. List sections in the exact order
+seen. Only describe in words what can't be a number: animation feel, pinned
+scroll behavior, overall mood. Output one detailed spec, nothing else.`
 
 const deepseekProvider = createOpenAI({
   apiKey: env.DEEPSEEK_API_KEY,
@@ -95,18 +44,17 @@ function isValidPng(buf: Buffer): boolean {
   return buf.length > PNG_SIGNATURE.length && buf.subarray(0, 8).equals(PNG_SIGNATURE) && buf.length <= MAX_IMAGE_BYTES
 }
 
-export async function generateReplicationBrief(
+export async function generateReplicationBuildSpec(
   capture: ReplicationCapture,
   sourceUrl: string,
   tier: "free" | "paid",
-): Promise<ReplicationBrief> {
+): Promise<string> {
   const model = tier === "free" ? deepseekProvider("deepseek-flash") : anthropicProvider("claude-sonnet-4-6")
 
   const pinnedFrames = capture.denseFrames.filter((f) =>
     capture.recon.pinnedRanges.some((r) => f.scrollY >= r.startY && f.scrollY <= r.endY),
   )
   const otherFrames = capture.denseFrames.filter((f) => !pinnedFrames.includes(f))
-
   const frameBudget = tier === "free" ? { other: 6, wheel: 4 } : { other: 12, wheel: 8 }
 
   const images = [
@@ -117,21 +65,18 @@ export async function generateReplicationBrief(
   ].filter(isValidPng)
 
   const textContext = [
-    `Reconstruct a design brief for ${sourceUrl}.`,
+    `Source URL: ${sourceUrl}`,
     `Scroll library detected: ${capture.recon.scrollLibrary ?? "none"}.`,
     `Virtualized content: ${capture.recon.usesVirtualization}.`,
     `Pinned/sticky sections detected: ${capture.recon.pinnedRanges.length}.`,
-    `Network assets (use these real URLs, do not invent): ${JSON.stringify(capture.assetManifest).slice(0, 4000)}`,
+    `Network assets (real URLs, use exactly these): ${JSON.stringify(capture.assetManifest).slice(0, 4000)}`,
     `Computed style tokens: ${JSON.stringify(capture.designTokens).slice(0, 2000)}`,
     `Cleaned HTML (structure reference): ${capture.cleanedHtml.slice(0, 8000)}`,
   ].join("\n\n")
 
   const runWithImages = (imgs: Buffer[]) =>
-    generateObject({
+    generateText({
       model,
-      schema: ReplicationBriefSchema,
-      // DeepSeek thinking mode rejects the forced tool_choice "tool" mode uses.
-      ...(tier === "free" ? { mode: "json" as const } : {}),
       system: SYSTEM_PROMPT,
       messages: [
         {
@@ -142,16 +87,16 @@ export async function generateReplicationBrief(
           ],
         },
       ],
-      experimental_telemetry: { isEnabled: true, functionId: "replication-brief" },
+      experimental_telemetry: { isEnabled: true, functionId: "replication-build-spec" },
     })
 
   try {
-    const { object } = await runWithImages(images)
-    return object
+    const { text } = await runWithImages(images)
+    return text
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err)
     if (!message.toLowerCase().includes("image")) throw err
-    const { object } = await runWithImages(isValidPng(capture.fullPageShot) ? [capture.fullPageShot] : [])
-    return object
+    const { text } = await runWithImages(isValidPng(capture.fullPageShot) ? [capture.fullPageShot] : [])
+    return text
   }
 }

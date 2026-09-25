@@ -1,6 +1,5 @@
 import { Router, type Request, type Response, type NextFunction } from "express"
 import { z } from "zod"
-import { DesignBriefSchema } from "@repo/schemas"
 import { initSSE } from "@/llm/stream.js"
 import { runReplicationOrchestrator } from "@/agents/replicationOrchestrator.js"
 import { verifyToken } from "@/lib/auth.js"
@@ -9,8 +8,7 @@ const router: Router = Router()
 
 const ReplicateGenerateSchema = z.object({
   replicationId: z.string(),
-  sourceUrl: z.string(),
-  designBrief: DesignBriefSchema.extend({ citations: DesignBriefSchema.shape.citations.default([]) }),
+  buildSpec: z.string().min(1),
   tier: z.enum(["free", "paid"]),
 })
 
@@ -37,8 +35,8 @@ router.post(
 
     initSSE(res)
 
-    const { replicationId, sourceUrl, designBrief, tier } = parsed.data
-    runReplicationOrchestrator(res, replicationId, sourceUrl, designBrief, tier).catch(next)
+    const { replicationId, buildSpec, tier } = parsed.data
+    runReplicationOrchestrator(res, replicationId, buildSpec, tier).catch(next)
   }
 )
 

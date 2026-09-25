@@ -153,6 +153,12 @@ export type SSEErrorEvent = {
   message: string
 }
 
+export type SSENextFilesReadyEvent = {
+  type: "next_files_ready"
+  versionId: string
+  files: { path: string; content: string }[]
+}
+
 export type SSEBriefReadyEvent = {
   type: "brief_ready"
   brief: z.infer<typeof DesignBriefSchema>
@@ -180,3 +186,4 @@ export type SSEEvent =
   | SSEErrorEvent
   | SSEBriefReadyEvent
   | SSECandidatesReadyEvent
+  | SSENextFilesReadyEvent

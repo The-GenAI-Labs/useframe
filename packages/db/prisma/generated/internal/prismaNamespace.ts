@@ -4268,6 +4268,8 @@ export const ReplicationScalarFieldEnum = {
   extractedContent: 'extractedContent',
   designBrief: 'designBrief',
   snapshot: 'snapshot',
+  buildSpec: 'buildSpec',
+  nextFiles: 'nextFiles',
   freeCorrectionUsed: 'freeCorrectionUsed',
   failureReason: 'failureReason',
   createdAt: 'createdAt',

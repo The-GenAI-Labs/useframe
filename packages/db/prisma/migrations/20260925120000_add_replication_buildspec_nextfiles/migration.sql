@@ -1,0 +1,2 @@
+ALTER TABLE "replications" ADD COLUMN IF NOT EXISTS "buildSpec" TEXT;
+ALTER TABLE "replications" ADD COLUMN IF NOT EXISTS "nextFiles" JSONB;

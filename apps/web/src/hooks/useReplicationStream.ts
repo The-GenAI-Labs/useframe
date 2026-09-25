@@ -2,21 +2,22 @@
 
 import { useCallback, useRef, useState } from "react"
 import { useSSE } from "./useSSE"
-import type { SSEEvent, SiteSpec } from "@repo/schemas"
+import type { SSEEvent } from "@repo/schemas"
+import type { ReplicationNextFile } from "@/components/webcontainer/nextScaffold"
 
 const STREAM_TIMEOUT_MS = 30 * 60 * 1000
 
 type ReplicationStreamState = {
   isStreaming: boolean
   stageMessage: string
-  siteSpec: SiteSpec | null
+  nextFiles: ReplicationNextFile[] | null
   error: string | null
 }
 
 const initial: ReplicationStreamState = {
   isStreaming: false,
   stageMessage: "",
-  siteSpec: null,
+  nextFiles: null,
   error: null,
 }
 
@@ -50,9 +51,9 @@ export function useReplicationStream() {
         onEvent: (event: SSEEvent) => {
           if (event.type === "stage") {
             setState((s) => ({ ...s, stageMessage: event.message }))
-          } else if (event.type === "version_ready") {
+          } else if (event.type === "next_files_ready") {
             clearStreamTimeout()
-            setState((s) => ({ ...s, siteSpec: event.snapshot as SiteSpec, isStreaming: false }))
+            setState((s) => ({ ...s, nextFiles: event.files, isStreaming: false }))
           } else if (event.type === "error") {
             clearStreamTimeout()
             setState((s) => ({ ...s, error: event.message, isStreaming: false }))
@@ -71,14 +72,10 @@ export function useReplicationStream() {
     [connect, disconnect, clearStreamTimeout]
   )
 
-  const setSiteSpec = useCallback((spec: SiteSpec) => {
-    setState((s) => ({ ...s, siteSpec: spec }))
-  }, [])
-
   const stopGeneration = useCallback(() => {
     clearStreamTimeout()
     disconnect()
   }, [disconnect, clearStreamTimeout])
 
-  return { ...state, startGeneration, stopGeneration, setSiteSpec }
+  return { ...state, startGeneration, stopGeneration }
 }

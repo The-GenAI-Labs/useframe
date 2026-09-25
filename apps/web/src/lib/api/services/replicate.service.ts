@@ -25,9 +25,11 @@ export type ReplicationListItem = {
   createdAt: string
 }
 
+export type ReplicationNextFile = { path: string; content: string }
+
 export type ReplicationDetail = ReplicationListItem & {
-  designBrief: Record<string, unknown> | null
-  snapshot: Record<string, unknown> | null
+  buildSpec: string | null
+  nextFiles: ReplicationNextFile[] | null
   freeCorrectionUsed: boolean
   failureReason: string | null
 }
@@ -51,14 +53,7 @@ export const replicateApi = {
     return data.data
   },
 
-  sendMessage: async (
-    slug: string,
-    content: string
-  ): Promise<{ snapshot: Record<string, unknown>; changed: boolean; summary: string }> => {
-    const { data } = await api.post<{
-      success: true
-      data: { snapshot: Record<string, unknown>; changed: boolean; summary: string }
-    }>(`/replicate/${slug}/messages`, { content })
-    return data.data
+  sendMessage: async (slug: string, content: string): Promise<void> => {
+    await api.post(`/replicate/${slug}/messages`, { content })
   },
 }

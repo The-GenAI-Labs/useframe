@@ -32,6 +32,7 @@ export type ReplicationMinAggregateOutputType = {
   status: $Enums.ReplicationStatus | null
   tier: $Enums.GenerationTier | null
   screenshotKey: string | null
+  buildSpec: string | null
   freeCorrectionUsed: boolean | null
   failureReason: string | null
   createdAt: Date | null
@@ -46,6 +47,7 @@ export type ReplicationMaxAggregateOutputType = {
   status: $Enums.ReplicationStatus | null
   tier: $Enums.GenerationTier | null
   screenshotKey: string | null
+  buildSpec: string | null
   freeCorrectionUsed: boolean | null
   failureReason: string | null
   createdAt: Date | null
@@ -64,6 +66,8 @@ export type ReplicationCountAggregateOutputType = {
   extractedContent: number
   designBrief: number
   snapshot: number
+  buildSpec: number
+  nextFiles: number
   freeCorrectionUsed: number
   failureReason: number
   createdAt: number
@@ -80,6 +84,7 @@ export type ReplicationMinAggregateInputType = {
   status?: true
   tier?: true
   screenshotKey?: true
+  buildSpec?: true
   freeCorrectionUsed?: true
   failureReason?: true
   createdAt?: true
@@ -94,6 +99,7 @@ export type ReplicationMaxAggregateInputType = {
   status?: true
   tier?: true
   screenshotKey?: true
+  buildSpec?: true
   freeCorrectionUsed?: true
   failureReason?: true
   createdAt?: true
@@ -112,6 +118,8 @@ export type ReplicationCountAggregateInputType = {
   extractedContent?: true
   designBrief?: true
   snapshot?: true
+  buildSpec?: true
+  nextFiles?: true
   freeCorrectionUsed?: true
   failureReason?: true
   createdAt?: true
@@ -203,6 +211,8 @@ export type ReplicationGroupByOutputType = {
   extractedContent: runtime.JsonValue | null
   designBrief: runtime.JsonValue | null
   snapshot: runtime.JsonValue | null
+  buildSpec: string | null
+  nextFiles: runtime.JsonValue | null
   freeCorrectionUsed: boolean
   failureReason: string | null
   createdAt: Date
@@ -242,6 +252,8 @@ export type ReplicationWhereInput = {
   extractedContent?: Prisma.JsonNullableFilter<"Replication">
   designBrief?: Prisma.JsonNullableFilter<"Replication">
   snapshot?: Prisma.JsonNullableFilter<"Replication">
+  buildSpec?: Prisma.StringNullableFilter<"Replication"> | string | null
+  nextFiles?: Prisma.JsonNullableFilter<"Replication">
   freeCorrectionUsed?: Prisma.BoolFilter<"Replication"> | boolean
   failureReason?: Prisma.StringNullableFilter<"Replication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Replication"> | Date | string
@@ -262,6 +274,8 @@ export type ReplicationOrderByWithRelationInput = {
   extractedContent?: Prisma.SortOrderInput | Prisma.SortOrder
   designBrief?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshot?: Prisma.SortOrderInput | Prisma.SortOrder
+  buildSpec?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextFiles?: Prisma.SortOrderInput | Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -285,6 +299,8 @@ export type ReplicationWhereUniqueInput = Prisma.AtLeast<{
   extractedContent?: Prisma.JsonNullableFilter<"Replication">
   designBrief?: Prisma.JsonNullableFilter<"Replication">
   snapshot?: Prisma.JsonNullableFilter<"Replication">
+  buildSpec?: Prisma.StringNullableFilter<"Replication"> | string | null
+  nextFiles?: Prisma.JsonNullableFilter<"Replication">
   freeCorrectionUsed?: Prisma.BoolFilter<"Replication"> | boolean
   failureReason?: Prisma.StringNullableFilter<"Replication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Replication"> | Date | string
@@ -305,6 +321,8 @@ export type ReplicationOrderByWithAggregationInput = {
   extractedContent?: Prisma.SortOrderInput | Prisma.SortOrder
   designBrief?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshot?: Prisma.SortOrderInput | Prisma.SortOrder
+  buildSpec?: Prisma.SortOrderInput | Prisma.SortOrder
+  nextFiles?: Prisma.SortOrderInput | Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -329,6 +347,8 @@ export type ReplicationScalarWhereWithAggregatesInput = {
   extractedContent?: Prisma.JsonNullableWithAggregatesFilter<"Replication">
   designBrief?: Prisma.JsonNullableWithAggregatesFilter<"Replication">
   snapshot?: Prisma.JsonNullableWithAggregatesFilter<"Replication">
+  buildSpec?: Prisma.StringNullableWithAggregatesFilter<"Replication"> | string | null
+  nextFiles?: Prisma.JsonNullableWithAggregatesFilter<"Replication">
   freeCorrectionUsed?: Prisma.BoolWithAggregatesFilter<"Replication"> | boolean
   failureReason?: Prisma.StringNullableWithAggregatesFilter<"Replication"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Replication"> | Date | string
@@ -346,6 +366,8 @@ export type ReplicationCreateInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
   createdAt?: Date | string
@@ -366,6 +388,8 @@ export type ReplicationUncheckedCreateInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
   createdAt?: Date | string
@@ -384,6 +408,8 @@ export type ReplicationUpdateInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -404,6 +430,8 @@ export type ReplicationUncheckedUpdateInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -423,6 +451,8 @@ export type ReplicationCreateManyInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
   createdAt?: Date | string
@@ -440,6 +470,8 @@ export type ReplicationUpdateManyMutationInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -458,6 +490,8 @@ export type ReplicationUncheckedUpdateManyInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -491,6 +525,8 @@ export type ReplicationCountOrderByAggregateInput = {
   extractedContent?: Prisma.SortOrder
   designBrief?: Prisma.SortOrder
   snapshot?: Prisma.SortOrder
+  buildSpec?: Prisma.SortOrder
+  nextFiles?: Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -505,6 +541,7 @@ export type ReplicationMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   tier?: Prisma.SortOrder
   screenshotKey?: Prisma.SortOrder
+  buildSpec?: Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -519,6 +556,7 @@ export type ReplicationMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   tier?: Prisma.SortOrder
   screenshotKey?: Prisma.SortOrder
+  buildSpec?: Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -598,6 +636,8 @@ export type ReplicationCreateWithoutUserInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
   createdAt?: Date | string
@@ -616,6 +656,8 @@ export type ReplicationUncheckedCreateWithoutUserInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
   createdAt?: Date | string
@@ -664,6 +706,8 @@ export type ReplicationScalarWhereInput = {
   extractedContent?: Prisma.JsonNullableFilter<"Replication">
   designBrief?: Prisma.JsonNullableFilter<"Replication">
   snapshot?: Prisma.JsonNullableFilter<"Replication">
+  buildSpec?: Prisma.StringNullableFilter<"Replication"> | string | null
+  nextFiles?: Prisma.JsonNullableFilter<"Replication">
   freeCorrectionUsed?: Prisma.BoolFilter<"Replication"> | boolean
   failureReason?: Prisma.StringNullableFilter<"Replication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Replication"> | Date | string
@@ -681,6 +725,8 @@ export type ReplicationCreateWithoutConversationsInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
   createdAt?: Date | string
@@ -700,6 +746,8 @@ export type ReplicationUncheckedCreateWithoutConversationsInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
   createdAt?: Date | string
@@ -733,6 +781,8 @@ export type ReplicationUpdateWithoutConversationsInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -752,6 +802,8 @@ export type ReplicationUncheckedUpdateWithoutConversationsInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -769,6 +821,8 @@ export type ReplicationCreateManyUserInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
   createdAt?: Date | string
@@ -786,6 +840,8 @@ export type ReplicationUpdateWithoutUserInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -804,6 +860,8 @@ export type ReplicationUncheckedUpdateWithoutUserInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -822,6 +880,8 @@ export type ReplicationUncheckedUpdateManyWithoutUserInput = {
   extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -871,6 +931,8 @@ export type ReplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   extractedContent?: boolean
   designBrief?: boolean
   snapshot?: boolean
+  buildSpec?: boolean
+  nextFiles?: boolean
   freeCorrectionUsed?: boolean
   failureReason?: boolean
   createdAt?: boolean
@@ -892,6 +954,8 @@ export type ReplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   extractedContent?: boolean
   designBrief?: boolean
   snapshot?: boolean
+  buildSpec?: boolean
+  nextFiles?: boolean
   freeCorrectionUsed?: boolean
   failureReason?: boolean
   createdAt?: boolean
@@ -911,6 +975,8 @@ export type ReplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   extractedContent?: boolean
   designBrief?: boolean
   snapshot?: boolean
+  buildSpec?: boolean
+  nextFiles?: boolean
   freeCorrectionUsed?: boolean
   failureReason?: boolean
   createdAt?: boolean
@@ -930,13 +996,15 @@ export type ReplicationSelectScalar = {
   extractedContent?: boolean
   designBrief?: boolean
   snapshot?: boolean
+  buildSpec?: boolean
+  nextFiles?: boolean
   freeCorrectionUsed?: boolean
   failureReason?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ReplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "slug" | "sourceUrl" | "status" | "tier" | "screenshotKey" | "designTokens" | "extractedContent" | "designBrief" | "snapshot" | "freeCorrectionUsed" | "failureReason" | "createdAt" | "updatedAt", ExtArgs["result"]["replication"]>
+export type ReplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "slug" | "sourceUrl" | "status" | "tier" | "screenshotKey" | "designTokens" | "extractedContent" | "designBrief" | "snapshot" | "buildSpec" | "nextFiles" | "freeCorrectionUsed" | "failureReason" | "createdAt" | "updatedAt", ExtArgs["result"]["replication"]>
 export type ReplicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   conversations?: boolean | Prisma.Replication$conversationsArgs<ExtArgs>
@@ -967,6 +1035,8 @@ export type $ReplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     extractedContent: runtime.JsonValue | null
     designBrief: runtime.JsonValue | null
     snapshot: runtime.JsonValue | null
+    buildSpec: string | null
+    nextFiles: runtime.JsonValue | null
     freeCorrectionUsed: boolean
     failureReason: string | null
     createdAt: Date
@@ -1407,6 +1477,8 @@ export interface ReplicationFieldRefs {
   readonly extractedContent: Prisma.FieldRef<"Replication", 'Json'>
   readonly designBrief: Prisma.FieldRef<"Replication", 'Json'>
   readonly snapshot: Prisma.FieldRef<"Replication", 'Json'>
+  readonly buildSpec: Prisma.FieldRef<"Replication", 'String'>
+  readonly nextFiles: Prisma.FieldRef<"Replication", 'Json'>
   readonly freeCorrectionUsed: Prisma.FieldRef<"Replication", 'Boolean'>
   readonly failureReason: Prisma.FieldRef<"Replication", 'String'>
   readonly createdAt: Prisma.FieldRef<"Replication", 'DateTime'>

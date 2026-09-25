@@ -15,9 +15,9 @@ import { attachAssetListener } from "../scraper/collectNetworkAssets.js"
 import { extractDesignTokens } from "../scraper/extractDesignTokens.js"
 import { uploadFramesToR2, isR2Configured } from "../lib/r2.js"
 import {
-  generateReplicationBrief,
+  generateReplicationBuildSpec,
   isReplicationModelAvailable,
-} from "../analysis/generateReplicationBrief.js"
+} from "../analysis/generateReplicationBuildSpec.js"
 import {
   analyzeFramesForPatterns,
   isVisionAnalysisAvailable,
@@ -111,7 +111,7 @@ async function processReplicationScan(job: Job<ScanJobPayload>): Promise<void> {
       throw new Error(`No API key configured for ${replicationTier}-tier replication model`)
     }
 
-    const brief = await generateReplicationBrief(
+    const buildSpec = await generateReplicationBuildSpec(
       { fullPageShot, denseFrames, wheelFrames, assetManifest, cleanedHtml, designTokens, recon },
       sourceUrl,
       replicationTier,
@@ -131,7 +131,7 @@ async function processReplicationScan(job: Job<ScanJobPayload>): Promise<void> {
       where: { id: replicationId },
       data: {
         status: "GENERATING",
-        designBrief: brief as unknown as object,
+        buildSpec,
         designTokens: designTokens as object,
         extractedContent: { rawHtml: cleanedHtml.slice(0, 5000), assetManifest } as object,
       },
