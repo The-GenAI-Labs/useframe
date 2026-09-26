@@ -12,7 +12,14 @@ import { detectPageRecon } from "../scraper/detectPinnedSections.js"
 import { captureFullPageShot, captureDenseFrames } from "../scraper/captureDenseFrames.js"
 import { captureWheelScroll } from "../scraper/captureWheelScroll.js"
 import { attachAssetListener } from "../scraper/collectNetworkAssets.js"
-import { extractDesignTokens } from "../scraper/extractDesignTokens.js"
+import {
+  extractDesignTokens,
+  extractPreciseStyling,
+  detectNoiseTexture,
+  detectDarkModeToggle,
+  captureDualMode,
+} from "../scraper/extractDesignTokens.js"
+import { extractAssetsWithPosition, detectIconFonts } from "../scraper/extractAssetPositions.js"
 import { uploadFramesToR2, isR2Configured } from "../lib/r2.js"
 import {
   generateReplicationBuildSpec,
@@ -98,6 +105,26 @@ async function processReplicationScan(job: Job<ScanJobPayload>): Promise<void> {
       .slice(0, 50_000)
 
     const designTokens = await extractDesignTokens(page)
+    const positionedAssets = await extractAssetsWithPosition(page)
+    const iconFonts = await detectIconFonts(page)
+
+    const SECTION_STYLE_SELECTORS: Record<string, string> = {
+      hero: "header, [class*='hero']",
+      body: "body",
+      button: "button, .btn, [class*='btn']",
+      footer: "footer",
+    }
+    const sectionStyling: Record<string, Awaited<ReturnType<typeof extractPreciseStyling>>> = {}
+    for (const [key, selector] of Object.entries(SECTION_STYLE_SELECTORS)) {
+      sectionStyling[key] = await extractPreciseStyling(page, selector)
+    }
+
+    const noiseTexture = await detectNoiseTexture(page, "body")
+
+    const hasDarkModeToggle = await detectDarkModeToggle(page)
+    const dualMode = hasDarkModeToggle
+      ? await captureDualMode(page, hasDarkModeToggle, () => extractPreciseStyling(page, "body"))
+      : null
 
     detach()
 
@@ -112,7 +139,20 @@ async function processReplicationScan(job: Job<ScanJobPayload>): Promise<void> {
     }
 
     const buildSpec = await generateReplicationBuildSpec(
-      { fullPageShot, denseFrames, wheelFrames, assetManifest, cleanedHtml, designTokens, recon },
+      {
+        fullPageShot,
+        denseFrames,
+        wheelFrames,
+        assetManifest,
+        cleanedHtml,
+        designTokens,
+        recon,
+        positionedAssets,
+        iconFonts,
+        sectionStyling,
+        noiseTexture,
+        dualMode,
+      },
       sourceUrl,
       replicationTier,
     )

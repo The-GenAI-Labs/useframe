@@ -6,6 +6,8 @@ import type { AssetManifest } from "../scraper/collectNetworkAssets.js"
 import type { DenseFrame } from "../scraper/captureDenseFrames.js"
 import type { WheelFrame } from "../scraper/captureWheelScroll.js"
 import type { PageRecon } from "../scraper/detectPinnedSections.js"
+import type { PositionedAsset, IconFontUsage } from "../scraper/extractAssetPositions.js"
+import type { PreciseStyling, NoiseTexture } from "../scraper/extractDesignTokens.js"
 
 export type ReplicationCapture = {
   fullPageShot: Buffer
@@ -15,6 +17,11 @@ export type ReplicationCapture = {
   cleanedHtml: string
   designTokens: unknown
   recon: PageRecon
+  positionedAssets: PositionedAsset[]
+  iconFonts: IconFontUsage[]
+  sectionStyling: Record<string, PreciseStyling>
+  noiseTexture: NoiseTexture
+  dualMode: { light: PreciseStyling; dark: PreciseStyling } | null
 }
 
 const SYSTEM_PROMPT = `You will be shown screenshots, scroll frames, video-transition frames, and
@@ -24,7 +31,24 @@ Rules: use EXACT hex codes from computed styles, never color names. Use the
 REAL asset URLs given, never invent placeholders. Use EXACT pixel values
 for spacing/sizing from bounding boxes. List sections in the exact order
 seen. Only describe in words what can't be a number: animation feel, pinned
-scroll behavior, overall mood. Output one detailed spec, nothing else.`
+scroll behavior, overall mood.
+
+Every asset given is mapped to its exact section and position - place it
+there, don't just list it. Use the REAL asset URLs directly in the generated
+code (hotlinked, not re-uploaded); never invent placeholder URLs.
+
+For every colour, ALWAYS use the exact computed value given (including full
+gradient strings, box-shadow, backdrop-filter) - never approximate a
+gradient as a flat colour. If dual-mode data is present, produce distinct
+light and dark token sets, not one set applied to both. If a noise/grain
+texture is present, note its exact implementation (data-URI overlay vs SVG
+filter) so the developer can reproduce the same technique, not just "a
+grainy look." Icon-font glyphs cannot be reproduced exactly - note the
+font-family and character, and approximate with a similar inline icon.
+Sprite-sheet icons are flagged only, not pixel-cropped - approximate with a
+standalone icon.
+
+Output one detailed spec, nothing else.`
 
 const deepseekProvider = createOpenAI({
   apiKey: env.DEEPSEEK_API_KEY,
@@ -88,7 +112,12 @@ export async function generateReplicationBuildSpec(
     `Virtualized content: ${capture.recon.usesVirtualization}.`,
     `Pinned/sticky sections detected: ${capture.recon.pinnedRanges.length}.`,
     `Network assets (real URLs, use exactly these): ${JSON.stringify(capture.assetManifest).slice(0, 4000)}`,
+    `Assets mapped to exact section and position (use these positions, not the flat list above): ${JSON.stringify(capture.positionedAssets).slice(0, 6000)}`,
+    `Icon fonts in use (font-family + glyph, approximate visually): ${JSON.stringify(capture.iconFonts).slice(0, 1000)}`,
     `Computed style tokens: ${JSON.stringify(capture.designTokens).slice(0, 2000)}`,
+    `Precise per-section styling (exact gradients/shadows/blur, never approximate): ${JSON.stringify(capture.sectionStyling).slice(0, 3000)}`,
+    `Noise/grain texture: ${JSON.stringify(capture.noiseTexture)}`,
+    `Dual colour mode: ${capture.dualMode ? JSON.stringify(capture.dualMode).slice(0, 2000) : "none detected - site has no dark mode, produce a single token set"}`,
     `Cleaned HTML (structure reference): ${capture.cleanedHtml.slice(0, 8000)}`,
   ].join("\n\n")
 

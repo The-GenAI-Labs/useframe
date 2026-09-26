@@ -43,6 +43,12 @@ Only import installed packages: next, react, and react-dom. Use inline SVG
 for icons. Components using hooks, event handlers or browser APIs must start
 with "use client". Use CSS font stacks instead of next/font/google downloads.
 
+Use the real asset URLs given directly in the generated code (hotlinked, not
+re-uploaded) - never invent placeholder URLs. Give every hotlinked <img> an
+onError fallback in case a cross-origin host blocks hotlinking, e.g.:
+<img src={realUrl} onError={(e) => { e.currentTarget.style.display = "none"; e.currentTarget.parentElement!.style.background = "<the section's exact background colour>" }} />
+so a broken-image icon never shows.
+
 Output each file as a fenced code block preceded by a line of the exact form:
 FILE: <path>
 For example:
