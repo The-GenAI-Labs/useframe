@@ -3,11 +3,14 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { useReplicationStream } from "@/hooks/useReplicationStream"
-import { replicateApi, type ReplicationDetail, type ReplicationNextFile } from "@/lib/api/services/replicate.service"
+import {
+  replicateApi,
+  type ReplicationDetail,
+  type ReplicationNextFile,
+} from "@/lib/api/services/replicate.service"
 import { NextPreviewPane } from "@/components/webcontainer/NextPreviewPane"
 
-const ORCHESTRATOR_URL =
-  process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001"
+const ORCHESTRATOR_URL = process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001"
 
 const POLL_INTERVAL_MS = 10_000
 const POLL_TIMEOUT_MS = 30 * 60 * 1000
@@ -41,7 +44,7 @@ export default function ReplicationBuildView({ replication }: Props) {
   const alreadyReady = hasFiles(current.nextFiles) || hasFiles(nextFiles)
   const isTerminal = alreadyReady || current.status === "FAILED"
 
-  const { data: polled } = useQuery({
+  const { data: polled, refetch } = useQuery({
     queryKey: ["replication", replication.slug],
     queryFn: async () => {
       try {
@@ -59,7 +62,7 @@ export default function ReplicationBuildView({ replication }: Props) {
     },
     refetchInterval: (query) => {
       const status = query.state.data?.status
-      if (status === "READY" || status === "FAILED") return false
+      if (status === "READY" || (status === "FAILED" && !isStreaming)) return false
       if (timedOut || pollError || error) return false
       if (Date.now() - startedAt.current > POLL_TIMEOUT_MS) {
         setTimedOut(true)
@@ -68,11 +71,7 @@ export default function ReplicationBuildView({ replication }: Props) {
       return POLL_INTERVAL_MS
     },
     retry: POLL_FAILURE_LIMIT,
-    // enabled must also turn off for a FAILED status, not just READY —
-    // otherwise TanStack Query's default refetchOnWindowFocus/refetchOnMount
-    // keep re-hitting GET /replicate/:slug on every tab focus or remount
-    // even though refetchInterval has already stopped the timer.
-    enabled: !isTerminal,
+    enabled: !isTerminal || isStreaming,
     initialData: replication,
   })
 
@@ -94,14 +93,15 @@ export default function ReplicationBuildView({ replication }: Props) {
 
   useEffect(() => {
     if (isStreaming) startedAt.current = Date.now()
-  }, [isStreaming])
+    else if (generationStarted.current) void refetch()
+  }, [isStreaming, refetch])
 
   const activeFiles: ReplicationNextFile[] | null = hasFiles(nextFiles)
     ? nextFiles
     : hasFiles(current.nextFiles)
       ? current.nextFiles
       : null
-  const failed = current.status === "FAILED" || !!error
+  const failed = (current.status === "FAILED" && !isStreaming) || !!error
   const isBuilding = !activeFiles && !failed && !timedOut && !pollError
 
   const handleRetry = useCallback(() => {
@@ -111,6 +111,22 @@ export default function ReplicationBuildView({ replication }: Props) {
     setPollError(null)
   }, [])
 
+  const handleGenerationRetry = useCallback(() => {
+    if (!current.buildSpec || isStreaming) return
+    handleRetry()
+    generationStarted.current = true
+    setCurrent((value) => ({
+      ...value,
+      status: "GENERATING",
+      failureReason: null,
+    }))
+    startGeneration(ORCHESTRATOR_URL, {
+      replicationId: current.id,
+      buildSpec: current.buildSpec,
+      tier: current.tier === "FREE" ? "free" : "paid",
+    })
+  }, [current, handleRetry, isStreaming, startGeneration])
+
   return (
     <div className="flex h-full w-full flex-col bg-surface">
       <div className="flex-1 min-h-0 relative">
@@ -119,7 +135,19 @@ export default function ReplicationBuildView({ replication }: Props) {
         ) : failed ? (
           <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
             <p className="text-sm font-semibold text-pri">Replication failed</p>
-            <p className="text-xs text-mut max-w-sm">{error ?? current.failureReason ?? "Something went wrong."}</p>
+            <p className="text-xs text-mut max-w-sm">
+              {error ?? current.failureReason ?? "Something went wrong."}
+            </p>
+            {current.buildSpec && (
+              <button
+                type="button"
+                disabled={isStreaming}
+                onClick={handleGenerationRetry}
+                className="mt-1 rounded-xl border border-base px-4 py-2 text-[12.5px] font-medium text-sec hover:border-em hover:bg-tertiary focus-visible:outline focus-visible:outline-2 disabled:opacity-50"
+              >
+                Retry generation
+              </button>
+            )}
           </div>
         ) : timedOut ? (
           <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
@@ -152,7 +180,9 @@ export default function ReplicationBuildView({ replication }: Props) {
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-indigo-500 border-t-transparent" />
             <div>
               <p className="text-sm font-semibold text-pri">
-                {isStreaming ? stageMessage || "Writing Next.js code…" : STATUS_LABELS[current.status] ?? "Please wait…"}
+                {isStreaming
+                  ? stageMessage || "Writing Next.js code…"
+                  : (STATUS_LABELS[current.status] ?? "Please wait…")}
               </p>
               <p className="mt-1 text-xs text-mut">{current.sourceUrl}</p>
             </div>

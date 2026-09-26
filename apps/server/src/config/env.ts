@@ -1,7 +1,13 @@
 import { z } from "zod"
 import dotenv from "dotenv"
+import type { SignOptions } from "jsonwebtoken"
 
 dotenv.config()
+
+const tokenExpiry = z.custom<NonNullable<SignOptions["expiresIn"]>>(
+    (value) => typeof value === "string" && /^\d+(?:\.\d+)?\s*(?:ms|s|m|h|d|w|y|milliseconds?|seconds?|minutes?|hours?|days?|weeks?|years?)?$/i.test(value),
+    "Token expiry must be a valid duration, such as 15m or 7d"
+)
 
 const envSchema = z.object({
     NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
@@ -9,8 +15,8 @@ const envSchema = z.object({
     DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
     JWT_ACCESS_SECRET: z.string().min(32, "JWT_ACCESS_SECRET must be at least 32 chars"),
     JWT_REFRESH_SECRET: z.string().min(32, "JWT_REFRESH_SECRET must be at least 32 chars"),
-    JWT_ACCESS_EXPIRY: z.string().default("15m"),
-    JWT_REFRESH_EXPIRY: z.string().default("7d"),
+    JWT_ACCESS_EXPIRY: tokenExpiry.default("15m"),
+    JWT_REFRESH_EXPIRY: tokenExpiry.default("7d"),
     CLIENT_URL: z.string().default("http://localhost:3000"),
     BCRYPT_ROUNDS: z.string().default("12"),
     REDIS_URL: z.string().default("redis://localhost:6379"),

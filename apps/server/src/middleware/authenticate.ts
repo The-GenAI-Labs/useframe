@@ -14,7 +14,7 @@ export const authenticate = (
         throw new AppError("No token provided", 401)
     }
 
-    const token = authHeader.split(" ")[1]
+    const token = authHeader.slice("Bearer ".length).trim()
 
     try {
         const payload = verifyAccessToken(token)

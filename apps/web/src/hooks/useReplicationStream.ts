@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useSSE } from "./useSSE"
 import type { SSEEvent } from "@repo/schemas"
 import type { ReplicationNextFile } from "@/components/webcontainer/nextScaffold"
@@ -53,10 +53,18 @@ export function useReplicationStream() {
             setState((s) => ({ ...s, stageMessage: event.message }))
           } else if (event.type === "next_files_ready") {
             clearStreamTimeout()
-            setState((s) => ({ ...s, nextFiles: event.files, isStreaming: false }))
+            setState((s) => ({
+              ...s,
+              nextFiles: event.files,
+              isStreaming: false,
+            }))
           } else if (event.type === "error") {
             clearStreamTimeout()
-            setState((s) => ({ ...s, error: event.message, isStreaming: false }))
+            setState((s) => ({
+              ...s,
+              error: event.message,
+              isStreaming: false,
+            }))
           }
         },
         onError: (err) => {
@@ -69,13 +77,15 @@ export function useReplicationStream() {
         },
       })
     },
-    [connect, disconnect, clearStreamTimeout]
+    [connect, disconnect, clearStreamTimeout],
   )
 
   const stopGeneration = useCallback(() => {
     clearStreamTimeout()
     disconnect()
   }, [disconnect, clearStreamTimeout])
+
+  useEffect(() => stopGeneration, [stopGeneration])
 
   return { ...state, startGeneration, stopGeneration }
 }

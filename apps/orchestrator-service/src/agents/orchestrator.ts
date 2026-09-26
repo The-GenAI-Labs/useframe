@@ -8,7 +8,7 @@ import { runSeoAgent } from "./seo.agent.js"
 import { runCritiqueAgent } from "./critique.agent.js"
 import { toSnapshot } from "@/spec/toSnapshot.js"
 import { uniqueSlug } from "@/lib/slug.js"
-import { prisma } from "@useframe/db"
+import { prisma, type Prisma } from "@useframe/db"
 import type { GenerateRequest, SiteSpec } from "@repo/schemas"
 
 async function ensureProject(
@@ -150,7 +150,7 @@ export async function runOrchestrator(
 
     await prisma.projectVersion.update({
       where: { id: versionId },
-      data: { snapshot },
+      data: { snapshot: JSON.parse(JSON.stringify(snapshot)) as Prisma.InputJsonObject },
     })
 
     await prisma.project.update({

@@ -2,6 +2,7 @@ import type { Response } from "express"
 import type { SSEEvent } from "@repo/schemas"
 
 export function sseWrite(res: Response, event: SSEEvent): void {
+  if (res.destroyed || res.writableEnded) return
   const eventName = event.type
   const data = JSON.stringify(event)
   res.write(`event: ${eventName}\ndata: ${data}\n\n`)
@@ -11,10 +12,7 @@ export function sseError(res: Response, message: string): void {
   sseWrite(res, { type: "error", message })
 }
 
-export function sseStage(
-  res: Response,
-  stage: SSEEvent & { type: "stage" },
-): void {
+export function sseStage(res: Response, stage: SSEEvent & { type: "stage" }): void {
   sseWrite(res, stage)
 }
 

@@ -1,6 +1,6 @@
 import type { Request } from "express"
 
-export interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request<Record<string, string>> {
     user?: {
         id: string
         email: string

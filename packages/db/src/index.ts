@@ -1,5 +1,5 @@
 import dotenv from "dotenv"
-import { PrismaClient, Prisma } from "../prisma/generated/client"
+import { PrismaClient, Prisma } from "../prisma/generated/client.js"
 import { PrismaPg } from "@prisma/adapter-pg"
 
 // This module builds its Postgres adapter from process.env.DATABASE_URL at

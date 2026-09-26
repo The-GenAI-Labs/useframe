@@ -5,6 +5,7 @@ import { Queue } from "bullmq"
 import { QUEUES } from "@repo/events"
 import type { ScanJobPayload } from "@repo/events"
 import { prisma } from "@useframe/db"
+import { normalizeUrl } from "@repo/schemas"
 import { getClaudeModel } from "@/llm/providers.js"
 import { env } from "@/config/env.js"
 import { redis } from "@/lib/redis.js"
@@ -196,6 +197,7 @@ export async function enqueueCompetitorScans(
         userId,
         projectId,
         sourceUrl,
+        normalizedUrl: normalizeUrl(sourceUrl),
         scanType: "COMPETITOR",
         status: "QUEUED",
       },

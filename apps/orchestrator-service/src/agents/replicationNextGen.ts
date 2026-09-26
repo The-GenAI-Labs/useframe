@@ -34,6 +34,10 @@ NEVER generate:
   generateStaticParams() in the same file listing every slug explicitly
 Client-side interactivity (useState, useEffect, onClick, CSS animations,
 scroll listeners) is fine - none of that requires a server.
+Every file containing a JSX event handler (including img onError) or React
+hooks must begin with "use client". Importing a client component does NOT make
+its parent a client component. Keep metadata exports in a server layout and
+put interactive elements in separate client components.
 
 Output every file needed: app/page.tsx, app/layout.tsx, every component,
 app/globals.css. Every component you import in a file must also be output
@@ -58,11 +62,14 @@ FILE: app/page.tsx
 \`\`\`
 Output nothing else outside these FILE blocks.`;
 
-const CONTINUE_PROMPT = `Continue exactly where you left off. Do not repeat any FILE block you already
-sent. Resume mid-file if the last one was cut off, then continue with any
-remaining files, in the same FILE: <path> + fenced code block format.`;
+const CONTINUE_PROMPT = `Finish the application. The complete files listed below have been saved.
+Output only missing files, or complete replacements for files that were cut off.
+Restart an unfinished file from its first line; never resume a raw fragment.
+Use the same FILE: <path> + fenced code block format. Do not repeat saved files
+unless they need a correction. If every file is already complete, output DONE.`;
 
-const MAX_OUTPUT_TOKENS = 16_000;
+const MAX_OUTPUT_TOKENS = { free: 65_536, paid: 16_384 };
+const MAX_REASONING_RETRY_TOKENS = 131_072;
 const MAX_CONTINUATIONS = 5;
 const MAX_REPAIR_ATTEMPTS = 2;
 
@@ -78,9 +85,12 @@ const FORBIDDEN_FILES = new Set([
 
 function parseFiles(text: string): ReplicationNextFile[] {
   const files: ReplicationNextFile[] = [];
-  const pattern = /FILE:\s*(\S+)\s*\n```[a-zA-Z]*\n([\s\S]*?)```/g;
-  let match: RegExpExecArray | null;
-  while ((match = pattern.exec(text)) !== null) {
+  for (const block of text.split(/(?=^FILE:[ \t]*\S+)/m)) {
+    const match =
+      /^FILE:[ \t]*(\S+)[ \t]*\r?\n```[\w-]*[ \t]*\r?\n([\s\S]*?)^```[ \t]*\r?$/m.exec(
+        block,
+      );
+    if (!match) continue;
     const path = match[1]?.trim();
     const content = match[2];
     if (path && content !== undefined)
@@ -202,6 +212,31 @@ function validate(files: ReplicationNextFile[]): string[] {
   }
   const seen = new Set<string>();
   for (const file of files) {
+    if (/\.[jt]sx?$/.test(file.path)) {
+      const isClient =
+        /^\s*(?:(?:\/\/[^\n]*\n|\/\*[\s\S]*?\*\/)\s*)*["']use client["']/.test(
+          file.content,
+        );
+      const hasInteraction =
+        /\bon[A-Z]\w*\s*=\s*\{|\b(?:useState|useEffect|useLayoutEffect|useReducer|useRef|useContext)\s*(?:<[^>]*>)?\s*\(/.test(
+          file.content,
+        );
+      if (hasInteraction && !isClient) {
+        problems.push(
+          `${file.path}: JSX event handlers and React hooks require a "use client" directive at the top of this file; move interactive JSX to a client component if this file exports server metadata`,
+        );
+      }
+      if (
+        isClient &&
+        /\bexport\s+(?:const|let|var|(?:async\s+)?function)\s+(?:metadata|generateMetadata|generateStaticParams)\b/.test(
+          file.content,
+        )
+      ) {
+        problems.push(
+          `${file.path}: client components cannot export server metadata or generateStaticParams; keep those exports in a server page/layout and move interactive JSX into a separate client component`,
+        );
+      }
+    }
     const parts = file.path.split("/");
     if (
       file.path.includes("\\") ||
@@ -238,40 +273,82 @@ async function runGeneration(
   model: ReturnType<typeof getModelForTier>,
   providerOptions: ReturnType<typeof getProviderOptionsForTier>,
   messages: { role: "system" | "user" | "assistant"; content: string }[],
+  tier: Tier,
+  signal: AbortSignal,
+  onProgress?: (message: string) => void,
 ): Promise<ReplicationNextFile[]> {
-  let fullText = "";
-  let round = 0;
+  const completed = new Map<string, ReplicationNextFile>();
+  const unfinished = new Set<string>();
+  let maxTokens = MAX_OUTPUT_TOKENS[tier];
 
-  while (round <= MAX_CONTINUATIONS) {
-    const { text, finishReason } = await generateText({
+  for (let round = 0; round <= MAX_CONTINUATIONS; round += 1) {
+    signal.throwIfAborted();
+    const { text, finishReason, usage } = await generateText({
       model,
       messages,
-      maxTokens: MAX_OUTPUT_TOKENS,
+      maxTokens,
       providerOptions,
+      abortSignal: signal,
       experimental_telemetry: {
         isEnabled: true,
         functionId: "replication-nextjs-codegen",
       },
     });
 
-    fullText += text;
-    messages.push({ role: "assistant", content: text });
-
-    if (finishReason !== "length") break;
-
-    round += 1;
-    if (round > MAX_CONTINUATIONS)
+    console.info("[replication-codegen] response", {
+      round: round + 1,
+      finishReason,
+      outputCharacters: text.length,
+      completionTokens: usage?.completionTokens,
+      maxTokens,
+    });
+    if (!text.trim()) {
+      if (
+        finishReason === "length" &&
+        tier === "free" &&
+        maxTokens < MAX_REASONING_RETRY_TOKENS
+      ) {
+        maxTokens = MAX_REASONING_RETRY_TOKENS;
+        onProgress?.(
+          "Allowing more time for the model to finish its response...",
+        );
+        continue;
+      }
       throw new Error(
-        "Next.js code generation was truncated. Please retry with a smaller page.",
+        "The model returned no website code. Please retry generation.",
       );
-
-    messages.push({ role: "user", content: CONTINUE_PROMPT });
+    }
+    messages.push({ role: "assistant", content: text });
+    const parsed = parseFiles(text);
+    const closedPaths = new Set(parsed.map((file) => file.path));
+    for (const match of text.matchAll(/(?:^|\n)FILE:\s*([^\s]+)\s*\r?\n/g)) {
+      const filePath = match[1]!.replace(/^\.\//, "");
+      if (!FORBIDDEN_FILES.has(filePath) && !closedPaths.has(filePath))
+        unfinished.add(filePath);
+    }
+    for (const file of parsed) {
+      completed.set(file.path, file);
+      unfinished.delete(file.path);
+    }
+    if (finishReason === "stop" && unfinished.size === 0) {
+      if (completed.size === 0)
+        throw new Error("No files parsed from Next.js codegen output");
+      return [...completed.values()];
+    }
+    if (finishReason !== "length" && finishReason !== "stop") {
+      throw new Error(
+        `Website generation stopped unexpectedly (${finishReason}). Please retry generation.`,
+      );
+    }
+    onProgress?.(`Finishing website files (${completed.size} complete)...`);
+    messages.push({
+      role: "user",
+      content: `${CONTINUE_PROMPT}\nSaved files: ${[...completed.keys()].join(", ") || "none"}\nUnfinished files to resend: ${[...unfinished].join(", ") || "none identified"}`,
+    });
   }
-
-  const files = parseFiles(fullText);
-  if (files.length === 0)
-    throw new Error("No files parsed from Next.js codegen output");
-  return files;
+  throw new Error(
+    "The model did not finish all website files within the generation limit. Please retry generation.",
+  );
 }
 
 export async function generateReplicationNextFiles(
@@ -281,6 +358,7 @@ export async function generateReplicationNextFiles(
 ): Promise<ReplicationNextFile[]> {
   const model = getModelForTier(tier);
   const providerOptions = getProviderOptionsForTier(tier);
+  const signal = AbortSignal.timeout(25 * 60_000);
 
   const messages: { role: "system" | "user" | "assistant"; content: string }[] =
     [
@@ -288,7 +366,14 @@ export async function generateReplicationNextFiles(
       { role: "user", content: buildSpec },
     ];
 
-  let files = await runGeneration(model, providerOptions, messages);
+  let files = await runGeneration(
+    model,
+    providerOptions,
+    messages,
+    tier,
+    signal,
+    onProgress,
+  );
   let problems = validate(files);
 
   let attempt = 0;
@@ -299,7 +384,14 @@ export async function generateReplicationNextFiles(
       role: "user",
       content: `The code you produced has these problems - fix them and resend every FILE block (not just the broken ones):\n${problems.map((p) => `- ${p}`).join("\n")}`,
     });
-    files = await runGeneration(model, providerOptions, messages);
+    files = await runGeneration(
+      model,
+      providerOptions,
+      messages,
+      tier,
+      signal,
+      onProgress,
+    );
     problems = validate(files);
   }
 

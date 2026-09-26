@@ -172,6 +172,18 @@ pnpm dev
 
 This starts the workspace development tasks through Turborepo. Open **http://localhost:3000**.
 
+If Node reports `unable to verify the first certificate` while browsers can
+reach the same provider, use Node 24 and enable the operating system's trusted
+certificate store before starting services. In PowerShell:
+
+```powershell
+$env:NODE_USE_SYSTEM_CA = "1"
+pnpm dev
+```
+
+This is a process-launch setting, not an app `.env` value. Keep certificate
+verification enabled.
+
 For focused work, start individual services in separate terminals:
 
 ```sh

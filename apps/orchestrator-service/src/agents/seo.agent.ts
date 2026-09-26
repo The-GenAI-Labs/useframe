@@ -1,6 +1,7 @@
 import { generateText } from "ai"
 import type { LanguageModelV1 } from "ai"
 import type { SiteSpec } from "@repo/schemas"
+import { SeoSchema } from "@repo/schemas"
 import type { GenerateRequest } from "@repo/schemas"
 import {
   DEFAULT_SEO_PROMPT,
@@ -36,10 +37,16 @@ export async function runSeoAgent(
       experimental_telemetry: { isEnabled: true, functionId: "seo-agent" },
     })
 
-    let seo = {}
+    let seo = {
+      title: `${page.title} | ${request.startupIdea.slice(0, 30)}`,
+      description: request.startupIdea.slice(0, 155),
+    }
     try {
       const jsonMatch = text.match(/\{[\s\S]*\}/)
-      if (jsonMatch) seo = JSON.parse(jsonMatch[0])
+      if (jsonMatch) {
+        const parsed = SeoSchema.safeParse(JSON.parse(jsonMatch[0]))
+        if (parsed.success) seo = parsed.data
+      }
     } catch {
       seo = {
         title: `${page.title} | ${request.startupIdea.slice(0, 30)}`,
