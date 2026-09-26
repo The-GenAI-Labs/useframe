@@ -193,6 +193,42 @@ Also start billing, scoring, or research when your feature needs them. Starting 
 
 ## Everyday development commands
 
+### Replication WebContainer snapshot
+
+Run `pnpm --filter @useframe/worker build:snapshots`, then
+`pnpm --filter @useframe/worker verify:snapshots` before publishing the Next artifact.
+On Windows the builder uses Ubuntu-22.04 in WSL with Node 20+ (it prefers
+`~/.local/node20/bin`). Installs and builds run in a fresh native Linux home
+directory, never in `/mnt/c`; only source templates and completed artifacts
+cross the Windows filesystem boundary. Commit the Next template's package lock.
+
+The builder runs `npm ci`, checks the installed launchers, validates production
+builds, and packages Next's WASM compiler for the browser runtime. The installed
+`@webcontainer/snapshot` 0.1 format cannot retain symlinks or executable modes:
+Node launchers are materialized during the build, and template npm scripts call
+the packaged CLI using `node`. Do not delete `.bin` links without replacements
+or add post-mount permission fixes.
+
+The browser verification mounts the Next artifact in a throwaway WebContainer and
+checks the launcher, `npm run dev`, `server-ready`, and rendered iframe. It uses
+the worker's existing Playwright Chromium installation and requires access to
+WebContainer's servers. Packaging regression tests run with
+`pnpm --filter @useframe/worker test:snapshots`.
+
+The artifact is `apps/worker/snapshots/base-nextjs-v2.snapshot`.
+The API serves it from the existing optional
+`WEBCONTAINER_SNAPSHOTS_DIR` setting in `apps/server/.env` (use an absolute path).
+This installation serves local files, not R2. Restart the API after changing
+that setting. Snapshot requests use `?v=2` to bypass the old immutable cache;
+the endpoint now requires cache revalidation. Missing or invalid Next snapshots
+fall back to a bounded clean dependency install.
+
+These commands target the replication pipeline. The separate Vite preview still
+uses its legacy artifact; native Rollup dependencies in that template require
+their own WebContainer compatibility work before enabling a replacement snapshot.
+
+### Workspace commands
+
 | Command                                          | Purpose                                     |
 | ------------------------------------------------ | ------------------------------------------- |
 | `pnpm dev`                                       | Run workspace development tasks             |
