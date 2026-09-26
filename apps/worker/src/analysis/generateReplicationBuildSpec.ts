@@ -38,11 +38,28 @@ export function isReplicationModelAvailable(tier: "free" | "paid"): boolean {
 }
 
 const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])
+const PNG_IEND = Buffer.from([0x49, 0x45, 0x4e, 0x44])
 const MAX_IMAGE_BYTES = 4 * 1024 * 1024
 
+// Signature + size alone pass a PNG that Playwright's full-page screenshot
+// truncated mid-capture (seen on canvas/WebGL-heavy pages) - the file starts
+// correctly but is missing its IEND terminator chunk, which Anthropic's
+// image decoder then rejects as "unsupported image" while our own check
+// stayed green. Checking for IEND in the tail catches that class of
+// corruption without pulling in an image-decoding dependency.
 function isValidPng(buf: Buffer): boolean {
-  return buf.length > PNG_SIGNATURE.length && buf.subarray(0, 8).equals(PNG_SIGNATURE) && buf.length <= MAX_IMAGE_BYTES
+  return (
+    buf.length > PNG_SIGNATURE.length &&
+    buf.subarray(0, 8).equals(PNG_SIGNATURE) &&
+    buf.length <= MAX_IMAGE_BYTES &&
+    buf.subarray(-12, -8).equals(PNG_IEND)
+  )
 }
+
+// @ai-sdk/openai's chat-completions class always reads reasoning_effort from
+// providerOptions.openai regardless of the provider instance's own name, so
+// this key is correct even though the model itself is DeepSeek, not OpenAI.
+const DEEPSEEK_HIGH_REASONING_OPTIONS = { openai: { reasoningEffort: "high" } } as const
 
 export async function generateReplicationBuildSpec(
   capture: ReplicationCapture,
@@ -50,6 +67,7 @@ export async function generateReplicationBuildSpec(
   tier: "free" | "paid",
 ): Promise<string> {
   const model = tier === "free" ? deepseekProvider("deepseek-flash") : anthropicProvider("claude-sonnet-4-6")
+  const providerOptions = tier === "free" ? DEEPSEEK_HIGH_REASONING_OPTIONS : undefined
 
   const pinnedFrames = capture.denseFrames.filter((f) =>
     capture.recon.pinnedRanges.some((r) => f.scrollY >= r.startY && f.scrollY <= r.endY),
@@ -87,6 +105,7 @@ export async function generateReplicationBuildSpec(
           ],
         },
       ],
+      providerOptions,
       experimental_telemetry: { isEnabled: true, functionId: "replication-build-spec" },
     })
 

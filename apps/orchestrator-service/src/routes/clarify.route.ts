@@ -2,7 +2,7 @@ import { Router, type Request, type Response } from "express"
 import jwt from "jsonwebtoken"
 import { ClarifyRequestSchema } from "@repo/schemas"
 import { runClarifyAgent } from "@/agents/clarify.agent.js"
-import { getDeepseekModel } from "@/llm/providers.js"
+import { getDeepseekModel, DEEPSEEK_HIGH_REASONING_OPTIONS } from "@/llm/providers.js"
 import { env } from "@/config/env.js"
 
 const router: Router = Router()
@@ -44,7 +44,7 @@ router.post("/clarify", async (req: Request, res: Response): Promise<void> => {
 
   try {
     const model = getDeepseekModel()
-    const result = await runClarifyAgent(parsed.data, model)
+    const result = await runClarifyAgent(parsed.data, model, DEEPSEEK_HIGH_REASONING_OPTIONS)
     res.json({ success: true, data: result })
   } catch (err) {
     res.status(500).json({

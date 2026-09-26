@@ -12,6 +12,9 @@ type WCState =
   | { status: "ready"; url: string }
   | { status: "error"; message: string }
 
+const API_SERVICE_URL = process.env.NEXT_PUBLIC_API_SERVICE_URL ?? "http://localhost:4000"
+const SNAPSHOT_URL = `${API_SERVICE_URL}/api/webcontainer-snapshot/base-vite`
+
 let wcInstance: import("@webcontainer/api").WebContainer | null = null
 let wcBootPromise: Promise<import("@webcontainer/api").WebContainer> | null = null
 let currentDevProcess: import("@webcontainer/api").WebContainerProcess | null = null
@@ -27,6 +30,21 @@ async function getWebContainer() {
   if (!wcBootPromise) wcBootPromise = WebContainer.boot()
   wcInstance = await wcBootPromise
   return wcInstance
+}
+
+// Best-effort: any failure (network, 404 because the build script hasn't
+// run yet, corrupt response) falls back to a normal npm install rather than
+// failing the whole preview — this is purely a speed optimization.
+async function fetchBaseSnapshot(): Promise<ArrayBuffer | null> {
+  try {
+    const res = await fetch(SNAPSHOT_URL)
+    if (!res.ok) return null
+    const buf = await res.arrayBuffer()
+    if (buf.byteLength === 0) return null
+    return buf
+  } catch {
+    return null
+  }
 }
 
 export function useWebContainer() {
@@ -47,28 +65,38 @@ export function useWebContainer() {
         currentDevProcess = null
       }
 
+      const snapshotBuf = await fetchBaseSnapshot()
+      if (!stillCurrent()) return
+
+      if (snapshotBuf) {
+        await wc.mount(snapshotBuf)
+        if (!stillCurrent()) return
+      }
+
       const tree = buildFsTree(spec)
       await wc.mount(tree)
       if (!stillCurrent()) return
 
-      setState({ status: "installing" })
+      if (!snapshotBuf) {
+        setState({ status: "installing" })
 
-      const installProcess = await wc.spawn("npm", ["install"])
-      let installLog = ""
-      installProcess.output.pipeTo(
-        new WritableStream({
-          write(chunk) {
-            installLog += chunk
-          },
-        })
-      )
-      const installExitCode = await installProcess.exit
-      if (!stillCurrent()) return
-
-      if (installExitCode !== 0) {
-        throw new Error(
-          `npm install failed (code ${installExitCode}): ${installLog.slice(-500) || "no output"}`
+        const installProcess = await wc.spawn("npm", ["install"])
+        let installLog = ""
+        installProcess.output.pipeTo(
+          new WritableStream({
+            write(chunk) {
+              installLog += chunk
+            },
+          })
         )
+        const installExitCode = await installProcess.exit
+        if (!stillCurrent()) return
+
+        if (installExitCode !== 0) {
+          throw new Error(
+            `npm install failed (code ${installExitCode}): ${installLog.slice(-500) || "no output"}`
+          )
+        }
       }
 
       setState({ status: "starting" })

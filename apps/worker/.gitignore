@@ -1,3 +1,8 @@
 .env
 node_modules
 dist
+snapshots
+templates/*/package-lock.json
+templates/*/.next
+templates/*/out
+templates/*/next-env.d.ts

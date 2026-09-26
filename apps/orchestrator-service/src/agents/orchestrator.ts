@@ -1,6 +1,6 @@
 import type { Response } from "express"
 import { sseWrite, sseError } from "@/llm/stream.js"
-import { getModelForTier } from "@/llm/router.js"
+import { getModelForTier, getProviderOptionsForTier } from "@/llm/router.js"
 import { runStructureAgent } from "./structure.agent.js"
 import { runCopyAgent } from "./copy.agent.js"
 import { runDesignAgent } from "./design.agent.js"
@@ -69,6 +69,7 @@ export async function runOrchestrator(
   userId: string,
 ): Promise<void> {
   const model = getModelForTier(request.tier)
+  const providerOptions = getProviderOptionsForTier(request.tier)
 
   console.log(`[orchestrator] Using tier: ${request.tier}`)
 
@@ -115,35 +116,35 @@ export async function runOrchestrator(
       stage: "GENERATE",
       message: "Building page structure...",
     })
-    spec = await runStructureAgent(res, spec, request, model)
+    spec = await runStructureAgent(res, spec, request, model, providerOptions)
 
     sseWrite(res, {
       type: "stage",
       stage: "COPY",
       message: "Writing conversion copy...",
     })
-    spec = await runCopyAgent(res, spec, request, model)
+    spec = await runCopyAgent(res, spec, request, model, providerOptions)
 
     sseWrite(res, {
       type: "stage",
       stage: "GENERATE",
       message: "Applying design system...",
     })
-    spec = await runDesignAgent(res, spec, request, model)
+    spec = await runDesignAgent(res, spec, request, model, providerOptions)
 
     sseWrite(res, {
       type: "stage",
       stage: "SEO",
       message: "Optimising for search...",
     })
-    spec = await runSeoAgent(spec, request, model)
+    spec = await runSeoAgent(spec, request, model, providerOptions)
 
     sseWrite(res, {
       type: "stage",
       stage: "CRITIQUE",
       message: "Running critique pass...",
     })
-    spec = await runCritiqueAgent(spec, request, model)
+    spec = await runCritiqueAgent(spec, request, model, providerOptions)
 
     const snapshot = toSnapshot(spec as SiteSpec)
 

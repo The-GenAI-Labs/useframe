@@ -42,9 +42,18 @@ export function getClaudeModel(): LanguageModelV1 {
   return anthropicProvider("claude-sonnet-4-6") as LanguageModelV1
 }
 
+// DeepSeek-V4.1-Flash ("deepseek-flash") natively supports vision input and
+// a high-effort reasoning mode (reasoning_effort), unlike deepseek-chat.
+// providerOptions.openai is not a typo — @ai-sdk/openai's chat-completions
+// class always reads reasoning_effort from that fixed bucket regardless of
+// the provider instance's own name (verified against its compiled source).
 export function getDeepseekModel(): LanguageModelV1 {
-  return deepseekProvider("deepseek-chat") as LanguageModelV1
+  return deepseekProvider("deepseek-flash") as LanguageModelV1
 }
+
+export const DEEPSEEK_HIGH_REASONING_OPTIONS = {
+  openai: { reasoningEffort: "high" },
+} as const
 
 export function getModel(modelId: ModelId = DEFAULT_MODEL_ID): LanguageModelV1 {
   const entry = PROVIDER_MODEL_MAP[modelId]

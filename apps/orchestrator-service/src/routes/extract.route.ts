@@ -6,7 +6,7 @@ import {
   type ClarifyQuestion,
 } from "@repo/schemas"
 import { verifyToken } from "@/lib/auth.js"
-import { getModelForTier } from "@/llm/router.js"
+import { getModelForTier, getProviderOptionsForTier } from "@/llm/router.js"
 import { runClarifyAgent } from "@/agents/clarify.agent.js"
 
 const router: Router = Router()
@@ -97,8 +97,9 @@ router.post(
 
     const { ideaText, tier } = parsed.data
     const model = getModelForTier(tier)
+    const providerOptions = getProviderOptionsForTier(tier)
 
-    runClarifyAgent({ startupIdea: ideaText }, model)
+    runClarifyAgent({ startupIdea: ideaText }, model, providerOptions)
       .then((result) => {
         const extracted: ExtractedFields = {
           niche: result.niche,

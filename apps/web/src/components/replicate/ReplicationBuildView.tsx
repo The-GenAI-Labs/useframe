@@ -39,6 +39,7 @@ export default function ReplicationBuildView({ replication }: Props) {
   const consecutiveFailures = useRef(0)
 
   const alreadyReady = hasFiles(current.nextFiles) || hasFiles(nextFiles)
+  const isTerminal = alreadyReady || current.status === "FAILED"
 
   const { data: polled } = useQuery({
     queryKey: ["replication", replication.slug],
@@ -67,7 +68,11 @@ export default function ReplicationBuildView({ replication }: Props) {
       return POLL_INTERVAL_MS
     },
     retry: POLL_FAILURE_LIMIT,
-    enabled: !alreadyReady,
+    // enabled must also turn off for a FAILED status, not just READY —
+    // otherwise TanStack Query's default refetchOnWindowFocus/refetchOnMount
+    // keep re-hitting GET /replicate/:slug on every tab focus or remount
+    // even though refetchInterval has already stopped the timer.
+    enabled: !isTerminal,
     initialData: replication,
   })
 

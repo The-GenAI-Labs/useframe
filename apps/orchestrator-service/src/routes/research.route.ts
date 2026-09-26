@@ -2,7 +2,7 @@ import { Router, type Request, type Response, type NextFunction } from "express"
 import { ResearchAgentRequestSchema } from "@repo/schemas"
 import { verifyToken } from "@/lib/auth.js"
 import { runResearchAgent } from "@/agents/research.agent.js"
-import { getDeepseekModel } from "@/llm/providers.js"
+import { getDeepseekModel, DEEPSEEK_HIGH_REASONING_OPTIONS } from "@/llm/providers.js"
 
 const router: Router = Router()
 
@@ -29,7 +29,7 @@ router.post(
 
     const model = getDeepseekModel()
 
-    runResearchAgent(parsed.data, model)
+    runResearchAgent(parsed.data, model, DEEPSEEK_HIGH_REASONING_OPTIONS)
       .then((result) => {
         res.status(200).json({ success: true, data: result })
       })

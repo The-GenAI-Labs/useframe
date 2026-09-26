@@ -42,6 +42,11 @@ const envSchema = z.object({
     // than failing signup; this is a risk *signal*, never a hard gate on its
     // own.
     IPQS_API_KEY: z.string().default(""),
+
+    // Where apps/worker/scripts/buildSnapshots.ts writes its output. Not R2
+    // — those credentials aren't provisioned yet, so this reads the built
+    // .snapshot files straight off disk until that's wired up.
+    WEBCONTAINER_SNAPSHOTS_DIR: z.string().default(""),
 })
 
 const parsed = envSchema.safeParse(process.env)

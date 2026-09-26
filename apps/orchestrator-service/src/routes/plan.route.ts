@@ -4,7 +4,7 @@ import { PlanSSERequestSchema, buildHeroPreviewDataUrl } from "@repo/schemas"
 import type { DesignBrief, DesignBriefCandidates } from "@repo/schemas"
 import { verifyToken } from "@/lib/auth.js"
 import { initSSE, sseWrite, sseError } from "@/llm/stream.js"
-import { getModelForTier } from "@/llm/router.js"
+import { getModelForTier, getProviderOptionsForTier } from "@/llm/router.js"
 import { runPlannerAgent, runPlannerCandidatesAgent } from "@/agents/planner.agent.js"
 import { runResearchAgent } from "@/agents/research.agent.js"
 import { callRetrieve, callDomainPattern, callAudienceModifier } from "@/lib/researchService.js"
@@ -83,6 +83,7 @@ router.post("/plan", (req: Request, res: Response): void => {
       const domain = NICHE_TO_DOMAIN[niche] ?? "other"
       const audience = inferAudienceKey(targetAudience)
       const model = getModelForTier(tier)
+      const providerOptions = getProviderOptionsForTier(tier)
 
       // Competitor research is paid-tier only. The DeepSeek-only model router
       // protects the generation LLM call, but did nothing to gate the Brave
@@ -183,8 +184,8 @@ router.post("/plan", (req: Request, res: Response): void => {
 
       const [plannerOutput, researchReport] = await Promise.all([
         isPaid
-          ? runPlannerCandidatesAgent(plannerVars, model)
-          : runPlannerAgent(plannerVars, model),
+          ? runPlannerCandidatesAgent(plannerVars, model, providerOptions)
+          : runPlannerAgent(plannerVars, model, providerOptions),
         runResearchAgent(
           {
             startupIdea: ideaText,
@@ -193,6 +194,7 @@ router.post("/plan", (req: Request, res: Response): void => {
             scannedCompetitors: scannedCompetitors.length > 0 ? scannedCompetitors : undefined,
           },
           model,
+          providerOptions,
         ),
       ])
 
@@ -348,7 +350,8 @@ router.post("/plan/sync", (req: Request, res: Response, next: NextFunction): voi
       // dependency, not the new tier-gated generation flow, so it keeps its
       // original always-DeepSeek behavior rather than taking a tier param.
       const model = getModelForTier("free")
-      return runPlannerCandidatesAgent({ extracted, results, domainPattern, audienceModifier }, model)
+      const providerOptions = getProviderOptionsForTier("free")
+      return runPlannerCandidatesAgent({ extracted, results, domainPattern, audienceModifier }, model, providerOptions)
     })
     .then((candidates) => {
       // `brief` is still returned (the recommended candidate) so any caller

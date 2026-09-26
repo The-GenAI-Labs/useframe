@@ -2,6 +2,7 @@ import type { LanguageModelV1 } from "ai"
 import type { SeoMaterializeRequest, SeoMaterializeResponse, SiteSpec } from "@repo/schemas"
 import { runSeoAgent } from "./seo.agent.js"
 import { buildRobotsTxt, buildSitemapXml, validateKeywords } from "@/spec/seoFiles.js"
+import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 function hasSeo(page: SiteSpec["pages"][number]): boolean {
   return !!page.seo?.title && !!page.seo?.description
@@ -10,6 +11,7 @@ function hasSeo(page: SiteSpec["pages"][number]): boolean {
 export async function runSeoMaterializeAgent(
   request: SeoMaterializeRequest,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
 ): Promise<SeoMaterializeResponse> {
   const spec = structuredClone(request.spec) as SiteSpec
 
@@ -27,6 +29,7 @@ export async function runSeoMaterializeAgent(
         tier: "paid",
       },
       model,
+      providerOptions,
     )
 
     const bySlug = new Map((partial.pages ?? []).map((p) => [p.slug, p]))

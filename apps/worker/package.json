@@ -7,7 +7,10 @@
     "dev": "tsx --watch src/index.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "build:snapshots": "tsx scripts/buildSnapshots.ts",
+    "test:snapshots": "tsx scripts/buildSnapshots.ts --test",
+    "verify:snapshots": "node scripts/verifySnapshots.mjs"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.0.0",
@@ -37,6 +40,7 @@
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@useframe/typescript-config": "workspace:*",
+    "@webcontainer/snapshot": "^0.1.0",
     "tsx": "^4.22.1",
     "typescript": "5.9.2"
   }
