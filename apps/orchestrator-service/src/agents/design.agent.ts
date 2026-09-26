@@ -8,6 +8,7 @@ import {
   DEFAULT_DESIGN_PROMPT,
   type DesignPromptVars,
 } from "@/prompts/design.prompt.js"
+import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 const FALLBACK_DESIGN_SYSTEM: SiteSpec["designSystem"] = {
   primaryColor: "#6366f1",
@@ -25,6 +26,7 @@ export async function runDesignAgent(
   spec: Partial<SiteSpec>,
   request: GenerateRequest,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
   promptFn: (vars: DesignPromptVars) => string = DEFAULT_DESIGN_PROMPT,
 ): Promise<Partial<SiteSpec>> {
   sseWrite(res, {
@@ -65,6 +67,7 @@ export async function runDesignAgent(
     model,
     prompt,
     maxTokens: 500,
+    providerOptions,
     experimental_telemetry: { isEnabled: true, functionId: "design-agent" },
   })
 

@@ -2,10 +2,12 @@ import { generateText } from "ai"
 import type { LanguageModelV1 } from "ai"
 import type { ClarifyRequest, ClarifyResponse } from "@repo/schemas"
 import { DEFAULT_CLARIFY_PROMPT } from "@/prompts/clarify.prompt.js"
+import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 export async function runClarifyAgent(
   request: ClarifyRequest,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
 ): Promise<ClarifyResponse> {
   const prompt = DEFAULT_CLARIFY_PROMPT({
     startupIdea: request.startupIdea,
@@ -16,6 +18,7 @@ export async function runClarifyAgent(
     model,
     prompt,
     maxTokens: 500,
+    providerOptions,
     experimental_telemetry: { isEnabled: true, functionId: "clarify-agent" },
   })
 

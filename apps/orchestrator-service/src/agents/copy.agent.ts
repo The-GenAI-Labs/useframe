@@ -8,12 +8,14 @@ import {
   DEFAULT_COPY_PROMPT,
   type CopyPromptVars,
 } from "@/prompts/copy.prompt.js"
+import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 export async function runCopyAgent(
   res: Response,
   spec: Partial<SiteSpec>,
   request: GenerateRequest,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
   promptFn: (vars: CopyPromptVars) => string = DEFAULT_COPY_PROMPT,
 ): Promise<Partial<SiteSpec>> {
   if (!spec.pages) return spec
@@ -41,6 +43,7 @@ export async function runCopyAgent(
         model,
         prompt,
         maxTokens: 1000,
+        providerOptions,
         experimental_telemetry: { isEnabled: true, functionId: "copy-agent" },
       })
 

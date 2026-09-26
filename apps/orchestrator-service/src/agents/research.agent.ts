@@ -2,6 +2,7 @@ import { generateText } from "ai"
 import type { LanguageModelV1 } from "ai"
 import type { ResearchAgentRequest, ResearchReportData } from "@repo/schemas"
 import { DEFAULT_RESEARCH_PROMPT } from "@/prompts/research.prompt.js"
+import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 function extractJson(text: string): unknown {
   const match = text.match(/\{[\s\S]*\}/)
@@ -33,6 +34,7 @@ function fallbackReport(request: ResearchAgentRequest): ResearchReportData {
 export async function runResearchAgent(
   request: ResearchAgentRequest,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
 ): Promise<ResearchReportData> {
   const prompt = DEFAULT_RESEARCH_PROMPT({
     startupIdea: request.startupIdea,
@@ -47,6 +49,7 @@ export async function runResearchAgent(
     model,
     prompt,
     maxTokens: 1800,
+    providerOptions,
     experimental_telemetry: { isEnabled: true, functionId: "research-agent" },
   })
 

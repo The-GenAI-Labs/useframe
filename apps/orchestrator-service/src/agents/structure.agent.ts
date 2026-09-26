@@ -8,6 +8,7 @@ import {
   DEFAULT_STRUCTURE_PROMPT,
   type StructurePromptVars,
 } from "@/prompts/structure.prompt.js"
+import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 const VALID_SECTION_TYPES = new Set<string>([
   "HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "PRICING",
@@ -42,6 +43,7 @@ export async function runStructureAgent(
   spec: Partial<SiteSpec>,
   request: GenerateRequest,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
   promptFn: (vars: StructurePromptVars) => string = DEFAULT_STRUCTURE_PROMPT,
 ): Promise<Partial<SiteSpec>> {
   // When a DesignBrief was approved via the Research step, its layout and
@@ -82,6 +84,7 @@ export async function runStructureAgent(
     model,
     prompt,
     maxTokens: 2000,
+    providerOptions,
     experimental_telemetry: { isEnabled: true, functionId: "structure-agent" },
   })
 

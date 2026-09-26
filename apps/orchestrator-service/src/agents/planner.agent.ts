@@ -10,6 +10,7 @@ import {
   DEFAULT_PLANNER_PROMPT,
   type PlannerPromptVars,
 } from "@/prompts/planner.prompt.js"
+import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 const CANDIDATES_SYSTEM_PROMPT = `You are a design decision engine. Produce TWO genuinely distinct design directions from the research findings provided — not two near-identical variants. Vary at least color, typography, and tone between them.
 
@@ -96,6 +97,7 @@ function fallbackCandidates(v: PlannerPromptVars): DesignBriefCandidates {
 export async function runPlannerCandidatesAgent(
   vars: PlannerPromptVars,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
 ): Promise<DesignBriefCandidates> {
   const prompt = DEFAULT_PLANNER_PROMPT(vars)
 
@@ -105,6 +107,7 @@ export async function runPlannerCandidatesAgent(
       schema: DesignBriefCandidatesSchema,
       system: CANDIDATES_SYSTEM_PROMPT,
       prompt,
+      providerOptions,
       experimental_telemetry: { isEnabled: true, functionId: "planner-candidates-agent" },
     })
     return object
@@ -117,6 +120,7 @@ export async function runPlannerCandidatesAgent(
 export async function runPlannerAgent(
   vars: PlannerPromptVars,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
 ): Promise<DesignBrief> {
   const prompt = DEFAULT_PLANNER_PROMPT(vars)
 
@@ -125,6 +129,7 @@ export async function runPlannerAgent(
       model,
       schema: DesignBriefSchema,
       prompt,
+      providerOptions,
       experimental_telemetry: { isEnabled: true, functionId: "planner-agent" },
     })
     return object

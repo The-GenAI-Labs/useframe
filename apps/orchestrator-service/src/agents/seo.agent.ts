@@ -6,11 +6,13 @@ import {
   DEFAULT_SEO_PROMPT,
   type SeoPromptVars,
 } from "@/prompts/seo.prompt.js"
+import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 export async function runSeoAgent(
   spec: Partial<SiteSpec>,
   request: GenerateRequest,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
   promptFn: (vars: SeoPromptVars) => string = DEFAULT_SEO_PROMPT,
 ): Promise<Partial<SiteSpec>> {
   if (!spec.pages) return spec
@@ -30,6 +32,7 @@ export async function runSeoAgent(
       model,
       prompt,
       maxTokens: 400,
+      providerOptions,
       experimental_telemetry: { isEnabled: true, functionId: "seo-agent" },
     })
 

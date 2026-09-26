@@ -7,6 +7,7 @@ import {
   DEFAULT_CRITIQUE_PROMPT,
   type CritiquePromptVars,
 } from "@/prompts/critique.prompt.js"
+import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 type CritiqueIssue = {
   pageSlug: string
@@ -20,6 +21,7 @@ export async function runCritiqueAgent(
   spec: Partial<SiteSpec>,
   request: GenerateRequest,
   model: LanguageModelV1,
+  providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
   promptFn: (vars: CritiquePromptVars) => string = DEFAULT_CRITIQUE_PROMPT,
 ): Promise<Partial<SiteSpec>> {
   const specSummary = JSON.stringify({
@@ -58,6 +60,7 @@ After checking, respond ONLY with valid JSON: { "issues": [{ "pageSlug": "string
 "fix": "string (the replacement value for that field)" }] }.
 Use an empty array if there are no real problems. Do not invent issues to seem thorough.`,
     prompt,
+    providerOptions,
     experimental_telemetry: { isEnabled: true, functionId: "critique-agent" },
   })
 
