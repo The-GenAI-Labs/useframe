@@ -109,6 +109,15 @@ function normalizeToTailwindV3(css: string): string {
     .replace(/@theme\s*\{[^}]*\}/g, "");
 }
 
+// crossOrigin turns a hotlinked <img>/<video> into a CORS request, which
+// fails on asset CDNs that only allow their own site's origin.
+function stripCrossOrigin(source: string): string {
+  return source.replace(
+    /\s+crossOrigin(?:=(?:"[^"]*"|'[^']*'|\{[^}]*\}))?(?=[\s/>])/g,
+    "",
+  );
+}
+
 export function withScaffold(
   llmFiles: ReplicationNextFile[],
 ): ReplicationNextFile[] {
@@ -141,7 +150,9 @@ export function withScaffold(
       f.path.replace(/^\.?\//, ""),
       f.path.endsWith(".css")
         ? { ...f, content: normalizeToTailwindV3(f.content) }
-        : f,
+        : /\.(tsx|jsx|ts|js)$/.test(f.path)
+          ? { ...f, content: stripCrossOrigin(f.content) }
+          : f,
     ]),
   );
 

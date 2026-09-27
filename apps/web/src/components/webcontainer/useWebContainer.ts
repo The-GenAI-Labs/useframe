@@ -27,7 +27,7 @@ let activeToken = 0
 async function getWebContainer() {
   const { WebContainer } = await import("@webcontainer/api")
   if (wcInstance) return wcInstance
-  if (!wcBootPromise) wcBootPromise = WebContainer.boot()
+  if (!wcBootPromise) wcBootPromise = WebContainer.boot({ coep: "credentialless" })
   wcInstance = await wcBootPromise
   return wcInstance
 }

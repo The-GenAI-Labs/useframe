@@ -51,7 +51,8 @@ Use the real asset URLs given directly in the generated code (hotlinked, not
 re-uploaded) - never invent placeholder URLs. Give every hotlinked <img> an
 onError fallback in case a cross-origin host blocks hotlinking, e.g.:
 <img src={realUrl} onError={(e) => { e.currentTarget.style.display = "none"; e.currentTarget.parentElement!.style.background = "<the section's exact background colour>" }} />
-so a broken-image icon never shows.
+so a broken-image icon never shows. Never add a crossOrigin attribute to
+<img> or <video> - it forces a CORS request that most asset CDNs reject.
 
 Output each file as a fenced code block preceded by a line of the exact form:
 FILE: <path>

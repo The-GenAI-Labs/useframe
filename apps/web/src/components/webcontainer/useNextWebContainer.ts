@@ -27,7 +27,7 @@ let runningProcess: WebContainerProcess | null = null;
 async function getWebContainer() {
   if (!wcBootPromise) {
     wcBootPromise = import("@webcontainer/api")
-      .then(({ WebContainer }) => WebContainer.boot())
+      .then(({ WebContainer }) => WebContainer.boot({ coep: "credentialless" }))
       .catch((error: unknown) => {
         wcBootPromise = null;
         throw error;

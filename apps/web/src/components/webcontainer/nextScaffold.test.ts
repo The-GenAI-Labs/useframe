@@ -42,4 +42,18 @@ describe("replication scaffold", () => {
   it("rejects a missing home page rather than displaying the template placeholder", () => {
     expect(() => withScaffold([])).toThrow("missing its home page");
   });
+
+  it("strips crossOrigin from hotlinked media so CDNs without CORS still load", () => {
+    const files = withScaffold([
+      {
+        path: "app/page.tsx",
+        content:
+          '<img src="https://cdn.example.com/a.png" crossOrigin="anonymous" alt="a" /><video crossOrigin={"anonymous"} src="https://cdn.example.com/v.mp4" /><img crossOrigin src="x.png"/>',
+      },
+    ]);
+    const content = files.find((file) => file.path === "app/page.tsx")!.content;
+    expect(content).not.toMatch(/crossOrigin/);
+    expect(content).toContain('<img src="https://cdn.example.com/a.png" alt="a" />');
+    expect(content).toContain('<img src="x.png"/>');
+  });
 });
