@@ -1,0 +1,25 @@
+{
+  "name": "@repo/validation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./storage": "./dist/storage.js",
+    "./localPreview": "./dist/localPreview.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.19.0",
+    "get-port": "^7.1.0",
+    "playwright": "^1.48.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "5.9.2"
+  }
+}

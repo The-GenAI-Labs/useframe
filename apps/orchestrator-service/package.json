@@ -24,7 +24,9 @@
     "ioredis": "^5.4.1",
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.10.1",
-    "zod": "^3.25.76"
+    "zod": "^3.25.76",
+    "@repo/validation": "workspace:*",
+    "sharp": "^0.34.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
