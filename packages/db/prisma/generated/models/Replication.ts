@@ -35,6 +35,7 @@ export type ReplicationMinAggregateOutputType = {
   buildSpec: string | null
   freeCorrectionUsed: boolean | null
   failureReason: string | null
+  projectId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,6 +51,7 @@ export type ReplicationMaxAggregateOutputType = {
   buildSpec: string | null
   freeCorrectionUsed: boolean | null
   failureReason: string | null
+  projectId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -70,6 +72,7 @@ export type ReplicationCountAggregateOutputType = {
   nextFiles: number
   freeCorrectionUsed: number
   failureReason: number
+  projectId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -87,6 +90,7 @@ export type ReplicationMinAggregateInputType = {
   buildSpec?: true
   freeCorrectionUsed?: true
   failureReason?: true
+  projectId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -102,6 +106,7 @@ export type ReplicationMaxAggregateInputType = {
   buildSpec?: true
   freeCorrectionUsed?: true
   failureReason?: true
+  projectId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -122,6 +127,7 @@ export type ReplicationCountAggregateInputType = {
   nextFiles?: true
   freeCorrectionUsed?: true
   failureReason?: true
+  projectId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -215,6 +221,7 @@ export type ReplicationGroupByOutputType = {
   nextFiles: runtime.JsonValue | null
   freeCorrectionUsed: boolean
   failureReason: string | null
+  projectId: string | null
   createdAt: Date
   updatedAt: Date
   _count: ReplicationCountAggregateOutputType | null
@@ -256,8 +263,10 @@ export type ReplicationWhereInput = {
   nextFiles?: Prisma.JsonNullableFilter<"Replication">
   freeCorrectionUsed?: Prisma.BoolFilter<"Replication"> | boolean
   failureReason?: Prisma.StringNullableFilter<"Replication"> | string | null
+  projectId?: Prisma.StringNullableFilter<"Replication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Replication"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Replication"> | Date | string
+  project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   conversations?: Prisma.ConversationListRelationFilter
 }
@@ -278,8 +287,10 @@ export type ReplicationOrderByWithRelationInput = {
   nextFiles?: Prisma.SortOrderInput | Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  project?: Prisma.ProjectOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
 }
@@ -287,6 +298,7 @@ export type ReplicationOrderByWithRelationInput = {
 export type ReplicationWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   slug?: string
+  projectId?: string
   AND?: Prisma.ReplicationWhereInput | Prisma.ReplicationWhereInput[]
   OR?: Prisma.ReplicationWhereInput[]
   NOT?: Prisma.ReplicationWhereInput | Prisma.ReplicationWhereInput[]
@@ -305,9 +317,10 @@ export type ReplicationWhereUniqueInput = Prisma.AtLeast<{
   failureReason?: Prisma.StringNullableFilter<"Replication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Replication"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Replication"> | Date | string
+  project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   conversations?: Prisma.ConversationListRelationFilter
-}, "id" | "slug">
+}, "id" | "slug" | "projectId">
 
 export type ReplicationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -325,6 +338,7 @@ export type ReplicationOrderByWithAggregationInput = {
   nextFiles?: Prisma.SortOrderInput | Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ReplicationCountOrderByAggregateInput
@@ -351,6 +365,7 @@ export type ReplicationScalarWhereWithAggregatesInput = {
   nextFiles?: Prisma.JsonNullableWithAggregatesFilter<"Replication">
   freeCorrectionUsed?: Prisma.BoolWithAggregatesFilter<"Replication"> | boolean
   failureReason?: Prisma.StringNullableWithAggregatesFilter<"Replication"> | string | null
+  projectId?: Prisma.StringNullableWithAggregatesFilter<"Replication"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Replication"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Replication"> | Date | string
 }
@@ -372,6 +387,7 @@ export type ReplicationCreateInput = {
   failureReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  project?: Prisma.ProjectCreateNestedOneWithoutReplicationInput
   user: Prisma.UserCreateNestedOneWithoutReplicationsInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutReplicationInput
 }
@@ -392,6 +408,7 @@ export type ReplicationUncheckedCreateInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutReplicationInput
@@ -414,6 +431,7 @@ export type ReplicationUpdateInput = {
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneWithoutReplicationNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutReplicationsNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutReplicationNestedInput
 }
@@ -434,6 +452,7 @@ export type ReplicationUncheckedUpdateInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutReplicationNestedInput
@@ -455,6 +474,7 @@ export type ReplicationCreateManyInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -494,6 +514,7 @@ export type ReplicationUncheckedUpdateManyInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -529,6 +550,7 @@ export type ReplicationCountOrderByAggregateInput = {
   nextFiles?: Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -544,6 +566,7 @@ export type ReplicationMaxOrderByAggregateInput = {
   buildSpec?: Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -559,6 +582,7 @@ export type ReplicationMinOrderByAggregateInput = {
   buildSpec?: Prisma.SortOrder
   freeCorrectionUsed?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -605,6 +629,38 @@ export type ReplicationUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.ReplicationScalarWhereInput | Prisma.ReplicationScalarWhereInput[]
 }
 
+export type ReplicationCreateNestedOneWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.ReplicationCreateWithoutProjectInput, Prisma.ReplicationUncheckedCreateWithoutProjectInput>
+  connectOrCreate?: Prisma.ReplicationCreateOrConnectWithoutProjectInput
+  connect?: Prisma.ReplicationWhereUniqueInput
+}
+
+export type ReplicationUncheckedCreateNestedOneWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.ReplicationCreateWithoutProjectInput, Prisma.ReplicationUncheckedCreateWithoutProjectInput>
+  connectOrCreate?: Prisma.ReplicationCreateOrConnectWithoutProjectInput
+  connect?: Prisma.ReplicationWhereUniqueInput
+}
+
+export type ReplicationUpdateOneWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.ReplicationCreateWithoutProjectInput, Prisma.ReplicationUncheckedCreateWithoutProjectInput>
+  connectOrCreate?: Prisma.ReplicationCreateOrConnectWithoutProjectInput
+  upsert?: Prisma.ReplicationUpsertWithoutProjectInput
+  disconnect?: Prisma.ReplicationWhereInput | boolean
+  delete?: Prisma.ReplicationWhereInput | boolean
+  connect?: Prisma.ReplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ReplicationUpdateToOneWithWhereWithoutProjectInput, Prisma.ReplicationUpdateWithoutProjectInput>, Prisma.ReplicationUncheckedUpdateWithoutProjectInput>
+}
+
+export type ReplicationUncheckedUpdateOneWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.ReplicationCreateWithoutProjectInput, Prisma.ReplicationUncheckedCreateWithoutProjectInput>
+  connectOrCreate?: Prisma.ReplicationCreateOrConnectWithoutProjectInput
+  upsert?: Prisma.ReplicationUpsertWithoutProjectInput
+  disconnect?: Prisma.ReplicationWhereInput | boolean
+  delete?: Prisma.ReplicationWhereInput | boolean
+  connect?: Prisma.ReplicationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ReplicationUpdateToOneWithWhereWithoutProjectInput, Prisma.ReplicationUpdateWithoutProjectInput>, Prisma.ReplicationUncheckedUpdateWithoutProjectInput>
+}
+
 export type ReplicationCreateNestedOneWithoutConversationsInput = {
   create?: Prisma.XOR<Prisma.ReplicationCreateWithoutConversationsInput, Prisma.ReplicationUncheckedCreateWithoutConversationsInput>
   connectOrCreate?: Prisma.ReplicationCreateOrConnectWithoutConversationsInput
@@ -642,6 +698,7 @@ export type ReplicationCreateWithoutUserInput = {
   failureReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  project?: Prisma.ProjectCreateNestedOneWithoutReplicationInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutReplicationInput
 }
 
@@ -660,6 +717,7 @@ export type ReplicationUncheckedCreateWithoutUserInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutReplicationInput
@@ -710,8 +768,109 @@ export type ReplicationScalarWhereInput = {
   nextFiles?: Prisma.JsonNullableFilter<"Replication">
   freeCorrectionUsed?: Prisma.BoolFilter<"Replication"> | boolean
   failureReason?: Prisma.StringNullableFilter<"Replication"> | string | null
+  projectId?: Prisma.StringNullableFilter<"Replication"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Replication"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Replication"> | Date | string
+}
+
+export type ReplicationCreateWithoutProjectInput = {
+  id?: string
+  slug: string
+  sourceUrl: string
+  status?: $Enums.ReplicationStatus
+  tier?: $Enums.GenerationTier
+  screenshotKey?: string | null
+  designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  freeCorrectionUsed?: boolean
+  failureReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutReplicationsInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutReplicationInput
+}
+
+export type ReplicationUncheckedCreateWithoutProjectInput = {
+  id?: string
+  userId: string
+  slug: string
+  sourceUrl: string
+  status?: $Enums.ReplicationStatus
+  tier?: $Enums.GenerationTier
+  screenshotKey?: string | null
+  designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  freeCorrectionUsed?: boolean
+  failureReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutReplicationInput
+}
+
+export type ReplicationCreateOrConnectWithoutProjectInput = {
+  where: Prisma.ReplicationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReplicationCreateWithoutProjectInput, Prisma.ReplicationUncheckedCreateWithoutProjectInput>
+}
+
+export type ReplicationUpsertWithoutProjectInput = {
+  update: Prisma.XOR<Prisma.ReplicationUpdateWithoutProjectInput, Prisma.ReplicationUncheckedUpdateWithoutProjectInput>
+  create: Prisma.XOR<Prisma.ReplicationCreateWithoutProjectInput, Prisma.ReplicationUncheckedCreateWithoutProjectInput>
+  where?: Prisma.ReplicationWhereInput
+}
+
+export type ReplicationUpdateToOneWithWhereWithoutProjectInput = {
+  where?: Prisma.ReplicationWhereInput
+  data: Prisma.XOR<Prisma.ReplicationUpdateWithoutProjectInput, Prisma.ReplicationUncheckedUpdateWithoutProjectInput>
+}
+
+export type ReplicationUpdateWithoutProjectInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumReplicationStatusFieldUpdateOperationsInput | $Enums.ReplicationStatus
+  tier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutReplicationsNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutReplicationNestedInput
+}
+
+export type ReplicationUncheckedUpdateWithoutProjectInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  sourceUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumReplicationStatusFieldUpdateOperationsInput | $Enums.ReplicationStatus
+  tier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  screenshotKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designTokens?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  extractedContent?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  buildSpec?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutReplicationNestedInput
 }
 
 export type ReplicationCreateWithoutConversationsInput = {
@@ -731,6 +890,7 @@ export type ReplicationCreateWithoutConversationsInput = {
   failureReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  project?: Prisma.ProjectCreateNestedOneWithoutReplicationInput
   user: Prisma.UserCreateNestedOneWithoutReplicationsInput
 }
 
@@ -750,6 +910,7 @@ export type ReplicationUncheckedCreateWithoutConversationsInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -787,6 +948,7 @@ export type ReplicationUpdateWithoutConversationsInput = {
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneWithoutReplicationNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutReplicationsNestedInput
 }
 
@@ -806,6 +968,7 @@ export type ReplicationUncheckedUpdateWithoutConversationsInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -825,6 +988,7 @@ export type ReplicationCreateManyUserInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: boolean
   failureReason?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -846,6 +1010,7 @@ export type ReplicationUpdateWithoutUserInput = {
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneWithoutReplicationNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutReplicationNestedInput
 }
 
@@ -864,6 +1029,7 @@ export type ReplicationUncheckedUpdateWithoutUserInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutReplicationNestedInput
@@ -884,6 +1050,7 @@ export type ReplicationUncheckedUpdateManyWithoutUserInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   freeCorrectionUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -935,8 +1102,10 @@ export type ReplicationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   nextFiles?: boolean
   freeCorrectionUsed?: boolean
   failureReason?: boolean
+  projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  project?: boolean | Prisma.Replication$projectArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   conversations?: boolean | Prisma.Replication$conversationsArgs<ExtArgs>
   _count?: boolean | Prisma.ReplicationCountOutputTypeDefaultArgs<ExtArgs>
@@ -958,8 +1127,10 @@ export type ReplicationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   nextFiles?: boolean
   freeCorrectionUsed?: boolean
   failureReason?: boolean
+  projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  project?: boolean | Prisma.Replication$projectArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["replication"]>
 
@@ -979,8 +1150,10 @@ export type ReplicationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   nextFiles?: boolean
   freeCorrectionUsed?: boolean
   failureReason?: boolean
+  projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  project?: boolean | Prisma.Replication$projectArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["replication"]>
 
@@ -1000,26 +1173,31 @@ export type ReplicationSelectScalar = {
   nextFiles?: boolean
   freeCorrectionUsed?: boolean
   failureReason?: boolean
+  projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ReplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "slug" | "sourceUrl" | "status" | "tier" | "screenshotKey" | "designTokens" | "extractedContent" | "designBrief" | "snapshot" | "buildSpec" | "nextFiles" | "freeCorrectionUsed" | "failureReason" | "createdAt" | "updatedAt", ExtArgs["result"]["replication"]>
+export type ReplicationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "slug" | "sourceUrl" | "status" | "tier" | "screenshotKey" | "designTokens" | "extractedContent" | "designBrief" | "snapshot" | "buildSpec" | "nextFiles" | "freeCorrectionUsed" | "failureReason" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["replication"]>
 export type ReplicationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  project?: boolean | Prisma.Replication$projectArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   conversations?: boolean | Prisma.Replication$conversationsArgs<ExtArgs>
   _count?: boolean | Prisma.ReplicationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ReplicationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  project?: boolean | Prisma.Replication$projectArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type ReplicationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  project?: boolean | Prisma.Replication$projectArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $ReplicationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Replication"
   objects: {
+    project: Prisma.$ProjectPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
     conversations: Prisma.$ConversationPayload<ExtArgs>[]
   }
@@ -1039,6 +1217,7 @@ export type $ReplicationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     nextFiles: runtime.JsonValue | null
     freeCorrectionUsed: boolean
     failureReason: string | null
+    projectId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["replication"]>
@@ -1435,6 +1614,7 @@ readonly fields: ReplicationFieldRefs;
  */
 export interface Prisma__ReplicationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  project<T extends Prisma.Replication$projectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Replication$projectArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   conversations<T extends Prisma.Replication$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Replication$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1481,6 +1661,7 @@ export interface ReplicationFieldRefs {
   readonly nextFiles: Prisma.FieldRef<"Replication", 'Json'>
   readonly freeCorrectionUsed: Prisma.FieldRef<"Replication", 'Boolean'>
   readonly failureReason: Prisma.FieldRef<"Replication", 'String'>
+  readonly projectId: Prisma.FieldRef<"Replication", 'String'>
   readonly createdAt: Prisma.FieldRef<"Replication", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Replication", 'DateTime'>
 }
@@ -1881,6 +2062,25 @@ export type ReplicationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many Replications to delete.
    */
   limit?: number
+}
+
+/**
+ * Replication.project
+ */
+export type Replication$projectArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Project
+   */
+  select?: Prisma.ProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Project
+   */
+  omit?: Prisma.ProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectInclude<ExtArgs> | null
+  where?: Prisma.ProjectWhereInput
 }
 
 /**

@@ -90,6 +90,8 @@ export const ModelName = {
   ResearchArticle: 'ResearchArticle',
   CompetitorScan: 'CompetitorScan',
   Replication: 'Replication',
+  ValidationRun: 'ValidationRun',
+  ValidationIteration: 'ValidationIteration',
   ScoreResult: 'ScoreResult',
   SearchQueryCache: 'SearchQueryCache',
   SeoAuditResult: 'SeoAuditResult'
@@ -424,6 +426,9 @@ export const ProjectVersionScalarFieldEnum = {
   designBrief: 'designBrief',
   parentVersionId: 'parentVersionId',
   createdByMessageId: 'createdByMessageId',
+  triggeredBy: 'triggeredBy',
+  validationFixKey: 'validationFixKey',
+  nextFiles: 'nextFiles',
   snapshot: 'snapshot',
   createdAt: 'createdAt'
 } as const
@@ -791,11 +796,50 @@ export const ReplicationScalarFieldEnum = {
   nextFiles: 'nextFiles',
   freeCorrectionUsed: 'freeCorrectionUsed',
   failureReason: 'failureReason',
+  projectId: 'projectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ReplicationScalarFieldEnum = (typeof ReplicationScalarFieldEnum)[keyof typeof ReplicationScalarFieldEnum]
+
+
+export const ValidationRunScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  startVersionId: 'startVersionId',
+  pipeline: 'pipeline',
+  tier: 'tier',
+  status: 'status',
+  isFreeTier: 'isFreeTier',
+  threshold: 'threshold',
+  maxIterations: 'maxIterations',
+  iterationCount: 'iterationCount',
+  finalScore: 'finalScore',
+  discrepancies: 'discrepancies',
+  originalScreenshotKeys: 'originalScreenshotKeys',
+  renderedScreenshotKeys: 'renderedScreenshotKeys',
+  signals: 'signals',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  errorMessage: 'errorMessage'
+} as const
+
+export type ValidationRunScalarFieldEnum = (typeof ValidationRunScalarFieldEnum)[keyof typeof ValidationRunScalarFieldEnum]
+
+
+export const ValidationIterationScalarFieldEnum = {
+  id: 'id',
+  validationRunId: 'validationRunId',
+  iterationNumber: 'iterationNumber',
+  resultingVersionId: 'resultingVersionId',
+  score: 'score',
+  discrepancies: 'discrepancies',
+  passed: 'passed',
+  createdAt: 'createdAt'
+} as const
+
+export type ValidationIterationScalarFieldEnum = (typeof ValidationIterationScalarFieldEnum)[keyof typeof ValidationIterationScalarFieldEnum]
 
 
 export const ScoreResultScalarFieldEnum = {

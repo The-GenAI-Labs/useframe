@@ -205,7 +205,9 @@ function findStaticExportViolations(files: ReplicationNextFile[]): string[] {
   return problems;
 }
 
-function validate(files: ReplicationNextFile[]): string[] {
+export function validateReplicationFiles(
+  files: ReplicationNextFile[],
+): string[] {
   const problems: string[] = [];
 
   if (!files.some((file) => /^app\/page\.(tsx|jsx|js|ts)$/.test(file.path))) {
@@ -375,7 +377,7 @@ export async function generateReplicationNextFiles(
     signal,
     onProgress,
   );
-  let problems = validate(files);
+  let problems = validateReplicationFiles(files);
 
   let attempt = 0;
   while (problems.length > 0 && attempt < MAX_REPAIR_ATTEMPTS) {
@@ -393,7 +395,7 @@ export async function generateReplicationNextFiles(
       signal,
       onProgress,
     );
-    problems = validate(files);
+    problems = validateReplicationFiles(files);
   }
 
   if (problems.length > 0) {

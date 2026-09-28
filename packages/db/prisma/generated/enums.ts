@@ -309,6 +309,25 @@ export const ReplicationStatus = {
 export type ReplicationStatus = (typeof ReplicationStatus)[keyof typeof ReplicationStatus]
 
 
+export const ValidationPipeline = {
+  MAIN: 'MAIN',
+  REPLICATE: 'REPLICATE'
+} as const
+
+export type ValidationPipeline = (typeof ValidationPipeline)[keyof typeof ValidationPipeline]
+
+
+export const ValidationStatus = {
+  QUEUED: 'QUEUED',
+  RUNNING: 'RUNNING',
+  PASSED: 'PASSED',
+  FAILED_MAX_ITERATIONS: 'FAILED_MAX_ITERATIONS',
+  ERROR: 'ERROR'
+} as const
+
+export type ValidationStatus = (typeof ValidationStatus)[keyof typeof ValidationStatus]
+
+
 export const ScoreStatus = {
   PENDING: 'PENDING',
   SCANNING: 'SCANNING',

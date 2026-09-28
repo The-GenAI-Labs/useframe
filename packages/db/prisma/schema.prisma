@@ -205,7 +205,7 @@ model User {
   updatedAt       DateTime  @updatedAt
   deletedAt       DateTime?
 
-  hasUsedFreeGeneration Boolean @default(false)
+  hasUsedFreeGeneration Boolean   @default(false)
   freeReplicationUsed   Boolean   @default(false)
   freeReplicationUsedAt DateTime?
 
@@ -611,7 +611,7 @@ model Project {
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
 
-  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   versions        ProjectVersion[]
   pages           Page[]
   conversations   Conversation[]
@@ -624,6 +624,8 @@ model Project {
   pipelineState   PipelineState?
   competitorScans CompetitorScan[]
   researchDocs    ResearchDocument[]
+  validationRuns  ValidationRun[]
+  replication     Replication?
 
   @@index([userId])
   @@index([status])
@@ -643,12 +645,17 @@ model ProjectVersion {
   designBrief        Json?
   parentVersionId    String?
   createdByMessageId String?
+  triggeredBy        String?
+  validationFixKey   String?  @unique
+  nextFiles          Json?
   snapshot           Json
   createdAt          DateTime @default(now())
 
   project     Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
   pages       Page[]
   deployments Deployment[]
+
+  validationRuns ValidationRun[]
 
   @@unique([projectId, versionNumber])
   @@index([projectId])
@@ -1134,6 +1141,8 @@ model Replication {
   nextFiles          Json?
   freeCorrectionUsed Boolean           @default(false)
   failureReason      String?
+  projectId          String?           @unique
+  project            Project?          @relation(fields: [projectId], references: [id], onDelete: SetNull)
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
 
@@ -1143,6 +1152,61 @@ model Replication {
   @@index([userId])
   @@index([status])
   @@map("replications")
+}
+
+enum ValidationPipeline {
+  MAIN
+  REPLICATE
+}
+
+enum ValidationStatus {
+  QUEUED
+  RUNNING
+  PASSED
+  FAILED_MAX_ITERATIONS
+  ERROR
+}
+
+model ValidationRun {
+  id                     String                @id @default(cuid())
+  projectId              String
+  project                Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  startVersionId         String
+  startVersion           ProjectVersion        @relation(fields: [startVersionId], references: [id], onDelete: Cascade)
+  pipeline               ValidationPipeline
+  tier                   Int
+  status                 ValidationStatus      @default(QUEUED)
+  isFreeTier             Boolean
+  threshold              Int
+  maxIterations          Int
+  iterationCount         Int                   @default(0)
+  finalScore             Int?
+  discrepancies          Json?
+  originalScreenshotKeys Json?
+  renderedScreenshotKeys Json?
+  signals                Json?
+  startedAt              DateTime              @default(now())
+  finishedAt             DateTime?
+  errorMessage           String?
+  iterations             ValidationIteration[]
+
+  @@unique([startVersionId, pipeline])
+  @@index([projectId])
+  @@index([status])
+}
+
+model ValidationIteration {
+  id                 String        @id @default(cuid())
+  validationRunId    String
+  validationRun      ValidationRun @relation(fields: [validationRunId], references: [id], onDelete: Cascade)
+  iterationNumber    Int
+  resultingVersionId String?
+  score              Int
+  discrepancies      Json
+  passed             Boolean
+  createdAt          DateTime      @default(now())
+
+  @@unique([validationRunId, iterationNumber])
 }
 
 enum ScoreStatus {

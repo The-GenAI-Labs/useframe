@@ -1,7 +1,7 @@
-import { z } from "zod"
-import dotenv from "dotenv"
+import { z } from "zod";
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
 const envSchema = z.object({
   NODE_ENV: z
@@ -9,11 +9,12 @@ const envSchema = z.object({
     .default("development"),
   DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
   REDIS_URL: z.string().default("redis://localhost:6379"),
-  R2_BUCKET: z.string().optional(),
-  R2_ENDPOINT: z.string().optional(),
-  R2_ACCESS_KEY_ID: z.string().optional(),
-  R2_SECRET_ACCESS_KEY: z.string().optional(),
 
+  GCS_BUCKET: z.string().min(1).optional(),
+  VALIDATION_PREVIEW_NAMESPACE: z.string().default("useframe-validation"),
+  VALIDATION_RUNTIME_CLASS: z.string().default("gvisor"),
+  VALIDATION_PREVIEW_IMAGE: z.string().default("useframe-validation:local"),
+  ORCHESTRATOR_URL: z.string().url().default("http://localhost:4001"),
   SCORING_SERVICE_URL: z.string().default("http://localhost:4003"),
   INTERNAL_SERVICE_SECRET: z
     .string()
@@ -32,14 +33,14 @@ const envSchema = z.object({
 
   RAZORPAY_KEY_ID: z.string().min(1, "RAZORPAY_KEY_ID is required"),
   RAZORPAY_KEY_SECRET: z.string().min(1, "RAZORPAY_KEY_SECRET is required"),
-})
+});
 
-const parsed = envSchema.safeParse(process.env)
+const parsed = envSchema.safeParse(process.env);
 
 if (!parsed.success) {
-  console.error("Invalid environment variables:")
-  console.error(parsed.error.flatten().fieldErrors)
-  process.exit(1)
+  console.error("Invalid environment variables:");
+  console.error(parsed.error.flatten().fieldErrors);
+  process.exit(1);
 }
 
-export const env = parsed.data
+export const env = parsed.data;

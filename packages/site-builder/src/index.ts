@@ -1,11 +1,11 @@
-import type { SiteSpec } from "@repo/schemas"
+import type { SiteSpec } from "@repo/schemas";
 
 export type SeoFiles = {
-  robotsTxt?: string
-  sitemapXml?: string
-}
+  robotsTxt?: string;
+  sitemapXml?: string;
+};
 
-export type GeneratedFile = { path: string; content: string }
+export type GeneratedFile = { path: string; content: string };
 
 export function cssVars(ds: SiteSpec["designSystem"]): string {
   return `:root {
@@ -24,16 +24,18 @@ body {
   background: #fff;
   line-height: 1.6;
 }
-`
+`;
 }
 
-export function sectionToJsx(section: SiteSpec["pages"][number]["sections"][number]): string {
-  const c = section.content ?? {}
-  const headline = c.headline ?? section.type
-  const subheadline = c.subheadline ?? ""
-  const body = c.body ?? ""
-  const ctaPrimary = c.cta?.primary ?? ""
-  const items = c.items ?? []
+export function sectionToJsx(
+  section: SiteSpec["pages"][number]["sections"][number],
+): string {
+  const c = section.content ?? {};
+  const headline = c.headline ?? section.type;
+  const subheadline = c.subheadline ?? "";
+  const body = c.body ?? "";
+  const ctaPrimary = c.cta?.primary ?? "";
+  const items = c.items ?? [];
 
   // Only emitted when a section actually carries citations, so generated
   // markup stays clean for the common case. Consumed by the citationHover.js
@@ -43,7 +45,7 @@ export function sectionToJsx(section: SiteSpec["pages"][number]["sections"][numb
   const citationAttr =
     section.citationIds && section.citationIds.length > 0
       ? ` data-citation-ids={${JSON.stringify(JSON.stringify(section.citationIds))}}`
-      : ""
+      : "";
 
   switch (section.type) {
     case "HERO":
@@ -52,19 +54,25 @@ export function sectionToJsx(section: SiteSpec["pages"][number]["sections"][numb
   <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, marginBottom: "1rem" }}>${headline}</h1>
   ${subheadline ? `<p style={{ fontSize: "1.25rem", opacity: 0.85, marginBottom: "2rem" }}>${subheadline}</p>` : ""}
   ${ctaPrimary ? `<a href="#" style={{ display: "inline-block", padding: "14px 32px", background: "#fff", color: "var(--primary)", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${ctaPrimary}</a>` : ""}
-</section>`
+</section>`;
 
     case "FEATURES":
       return `
 <section${citationAttr} style={{ padding: "80px 24px", maxWidth: "1100px", margin: "0 auto" }}>
   <h2 style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center", marginBottom: "3rem" }}>${headline}</h2>
   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "2rem" }}>
-    ${items.map(item => `<div style={{ padding: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "var(--radius)" }}>
+    ${items
+      .map(
+        (
+          item,
+        ) => `<div style={{ padding: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "var(--radius)" }}>
       <h3 style={{ fontWeight: 600, marginBottom: ".5rem" }}>${item.title}</h3>
       <p style={{ color: "#6b7280", fontSize: ".9rem" }}>${item.description}</p>
-    </div>`).join("\n    ")}
+    </div>`,
+      )
+      .join("\n    ")}
   </div>
-</section>`
+</section>`;
 
     case "CTA":
       return `
@@ -72,25 +80,28 @@ export function sectionToJsx(section: SiteSpec["pages"][number]["sections"][numb
   <h2 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "1rem" }}>${headline}</h2>
   ${body ? `<p style={{ marginBottom: "2rem", color: "#374151" }}>${body}</p>` : ""}
   ${ctaPrimary ? `<a href="#" style={{ display: "inline-block", padding: "14px 32px", background: "var(--primary)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${ctaPrimary}</a>` : ""}
-</section>`
+</section>`;
 
     case "FOOTER":
       return `
 <footer${citationAttr} style={{ padding: "2rem 24px", borderTop: "1px solid #e5e7eb", textAlign: "center", color: "#9ca3af", fontSize: ".85rem" }}>
   <p>${headline || "© 2025 All rights reserved."}</p>
-</footer>`
+</footer>`;
 
     default:
       return `
 <section${citationAttr} style={{ padding: "60px 24px", maxWidth: "900px", margin: "0 auto" }}>
   <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1rem" }}>${headline}</h2>
   ${body ? `<p style={{ color: "#374151" }}>${body}</p>` : ""}
-</section>`
+</section>`;
   }
 }
 
-export function pageToComponent(page: SiteSpec["pages"][number], componentName: string): string {
-  const sections = page.sections.map(sectionToJsx).join("\n")
+export function pageToComponent(
+  page: SiteSpec["pages"][number],
+  componentName: string,
+): string {
+  const sections = page.sections.map(sectionToJsx).join("\n");
   return `export default function ${componentName}() {
   return (
     <main>
@@ -98,30 +109,31 @@ export function pageToComponent(page: SiteSpec["pages"][number], componentName: 
     </main>
   )
 }
-`
+`;
 }
 
 export function toRoutePath(slug: string): string {
-  if (slug === "/" || slug === "" || slug === "home" || slug === "index") return "/"
-  return `/${slug.replace(/^\/+/, "")}`
+  if (slug === "/" || slug === "" || slug === "home" || slug === "index")
+    return "/";
+  return `/${slug.replace(/^\/+/, "")}`;
 }
 
 export function toComponentName(slug: string, index: number): string {
-  const cleaned = slug.replace(/[^a-zA-Z0-9]+/g, " ").trim()
+  const cleaned = slug.replace(/[^a-zA-Z0-9]+/g, " ").trim();
   const pascal = cleaned
     .split(" ")
     .filter(Boolean)
     .map((w) => w[0]!.toUpperCase() + w.slice(1))
-    .join("")
-  return pascal || `Page${index}`
+    .join("");
+  return pascal || `Page${index}`;
 }
 
 export type PageMeta = {
-  page: SiteSpec["pages"][number]
-  componentName: string
-  routePath: string
-  fileName: string
-}
+  page: SiteSpec["pages"][number];
+  componentName: string;
+  routePath: string;
+  fileName: string;
+};
 
 export function buildPageMeta(spec: SiteSpec): PageMeta[] {
   return spec.pages.map((page, i) => ({
@@ -129,7 +141,7 @@ export function buildPageMeta(spec: SiteSpec): PageMeta[] {
     componentName: toComponentName(page.slug, i) + "Page",
     routePath: toRoutePath(page.slug),
     fileName: `${toComponentName(page.slug, i)}.jsx`,
-  }))
+  }));
 }
 
 /**
@@ -139,10 +151,13 @@ export function buildPageMeta(spec: SiteSpec): PageMeta[] {
  * Keeping this one shared implementation is what guarantees the deployed
  * site matches what the user approved in preview.
  */
-export function buildSiteFiles(spec: SiteSpec, seoFiles?: SeoFiles): GeneratedFile[] {
-  const homePage = spec.pages.find((p) => p.type === "HOME") ?? spec.pages[0]!
-  const pageMeta = buildPageMeta(spec)
-  const isMultiPage = pageMeta.length > 1
+export function buildSiteFiles(
+  spec: SiteSpec,
+  seoFiles?: SeoFiles,
+): GeneratedFile[] {
+  const homePage = spec.pages.find((p) => p.type === "HOME") ?? spec.pages[0]!;
+  const pageMeta = buildPageMeta(spec);
+  const isMultiPage = pageMeta.length > 1;
 
   const indexHtml = `<!doctype html>
 <html lang="en">
@@ -158,7 +173,7 @@ export function buildSiteFiles(spec: SiteSpec, seoFiles?: SeoFiles): GeneratedFi
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-`
+`;
 
   const mainJsxSinglePage = `import { createRoot } from "react-dom/client"
 import App from "./App"
@@ -166,7 +181,7 @@ import "./index.css"
 import "./citationHover.js"
 
 createRoot(document.getElementById("root")).render(<App />)
-`
+`;
 
   const mainJsxMultiPage = `import { createRoot } from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
@@ -179,7 +194,7 @@ createRoot(document.getElementById("root")).render(
     <App />
   </BrowserRouter>
 )
-`
+`;
 
   // Plain vanilla JS (no React dep) so it works identically regardless of
   // which page/route is mounted. Delegated listeners on document.body pick
@@ -215,9 +230,9 @@ document.body.addEventListener("mouseout", (e) => {
   activeEl = null
   window.parent.postMessage({ type: "citation-hover-end" }, "*")
 })
-`
+`;
 
-  const appJsxSinglePage = pageToComponent(homePage, "App")
+  const appJsxSinglePage = pageToComponent(homePage, "App");
 
   const appJsxMultiPage = `import { Routes, Route } from "react-router-dom"
 ${pageMeta.map((m) => `import ${m.componentName} from "./pages/${m.fileName.replace(".jsx", "")}"`).join("\n")}
@@ -229,7 +244,7 @@ export default function App() {
     </Routes>
   )
 }
-`
+`;
 
   const packageJson = JSON.stringify(
     {
@@ -245,8 +260,8 @@ export default function App() {
       devDependencies: { vite: "5.4.0", "@vitejs/plugin-react": "4.3.1" },
     },
     null,
-    2
-  )
+    2,
+  );
 
   const viteConfig = `import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
@@ -255,30 +270,41 @@ export default defineConfig({
   plugins: [react()],
   server: { host: true, strictPort: false },
 })
-`
+`;
 
   const files: GeneratedFile[] = [
     { path: "package.json", content: packageJson },
     { path: "vite.config.js", content: viteConfig },
     { path: "index.html", content: indexHtml },
-    { path: "src/main.jsx", content: isMultiPage ? mainJsxMultiPage : mainJsxSinglePage },
-    { path: "src/App.jsx", content: isMultiPage ? appJsxMultiPage : appJsxSinglePage },
+    {
+      path: "src/main.jsx",
+      content: isMultiPage ? mainJsxMultiPage : mainJsxSinglePage,
+    },
+    {
+      path: "src/App.jsx",
+      content: isMultiPage ? appJsxMultiPage : appJsxSinglePage,
+    },
     { path: "src/index.css", content: cssVars(spec.designSystem) },
     { path: "src/citationHover.js", content: citationHoverJs },
-  ]
+  ];
 
   if (isMultiPage) {
     for (const m of pageMeta) {
-      files.push({ path: `src/pages/${m.fileName}`, content: pageToComponent(m.page, m.componentName) })
+      files.push({
+        path: `src/pages/${m.fileName}`,
+        content: pageToComponent(m.page, m.componentName),
+      });
     }
   }
 
   if (seoFiles?.robotsTxt) {
-    files.push({ path: "public/robots.txt", content: seoFiles.robotsTxt })
+    files.push({ path: "public/robots.txt", content: seoFiles.robotsTxt });
   }
   if (seoFiles?.sitemapXml) {
-    files.push({ path: "public/sitemap.xml", content: seoFiles.sitemapXml })
+    files.push({ path: "public/sitemap.xml", content: seoFiles.sitemapXml });
   }
 
-  return files
+  return files;
 }
+
+export { withScaffold, type ReplicationNextFile } from "./nextScaffold.js";

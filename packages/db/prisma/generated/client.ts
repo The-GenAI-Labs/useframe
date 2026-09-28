@@ -237,6 +237,16 @@ export type CompetitorScan = Prisma.CompetitorScanModel
  */
 export type Replication = Prisma.ReplicationModel
 /**
+ * Model ValidationRun
+ * 
+ */
+export type ValidationRun = Prisma.ValidationRunModel
+/**
+ * Model ValidationIteration
+ * 
+ */
+export type ValidationIteration = Prisma.ValidationIterationModel
+/**
  * Model ScoreResult
  * 
  */

@@ -1,7 +1,7 @@
-import { z } from "zod"
-import { CitationSchema } from "./citation.schema.js"
-import { DesignBriefSchema } from "./designBrief.schema.js"
-import { ResearchReportDataSchema } from "./research.schema.js"
+import { z } from "zod";
+import { CitationSchema } from "./citation.schema.js";
+import { DesignBriefSchema } from "./designBrief.schema.js";
+import { ResearchReportDataSchema } from "./research.schema.js";
 
 export const SeoSchema = z.object({
   title: z.string(),
@@ -12,7 +12,7 @@ export const SeoSchema = z.object({
   canonicalUrl: z.string().optional(),
   keywords: z.array(z.string()).optional(),
   structuredData: z.record(z.unknown()).optional(),
-})
+});
 
 export const SectionSchema = z.object({
   type: z.enum([
@@ -49,7 +49,7 @@ export const SectionSchema = z.object({
             title: z.string(),
             description: z.string(),
             icon: z.string().optional(),
-          })
+          }),
         )
         .optional(),
       mediaUrl: z.string().optional(),
@@ -57,7 +57,7 @@ export const SectionSchema = z.object({
     })
     .optional(),
   citationIds: z.array(z.string()).optional(),
-})
+});
 
 export const SiteSpecSchema = z.object({
   projectId: z.string().optional(),
@@ -78,7 +78,7 @@ export const SiteSpecSchema = z.object({
       title: z.string(),
       sections: z.array(SectionSchema),
       seo: SeoSchema.optional(),
-    })
+    }),
   ),
   designSystem: z.object({
     primaryColor: z.string(),
@@ -93,18 +93,18 @@ export const SiteSpecSchema = z.object({
   copyFramework: z.enum(["AIDA", "PAS", "FAB", "PASTOR"]),
   citations: z.array(CitationSchema),
   designBrief: DesignBriefSchema.optional(),
-})
+});
 
-export type SiteSpec = z.infer<typeof SiteSpecSchema>
-export type Section = z.infer<typeof SectionSchema>
-export type SeoMeta = z.infer<typeof SeoSchema>
-export type SitePage = SiteSpec["pages"][number]
-export type DesignSystem = SiteSpec["designSystem"]
+export type SiteSpec = z.infer<typeof SiteSpecSchema>;
+export type Section = z.infer<typeof SectionSchema>;
+export type SeoMeta = z.infer<typeof SeoSchema>;
+export type SitePage = SiteSpec["pages"][number];
+export type DesignSystem = SiteSpec["designSystem"];
 
-export type SectionType = Section["type"]
-export type PageType = SitePage["type"]
-export type SiteType = SiteSpec["siteType"]
-export type CopyFramework = SiteSpec["copyFramework"]
+export type SectionType = Section["type"];
+export type PageType = SitePage["type"];
+export type SiteType = SiteSpec["siteType"];
+export type CopyFramework = SiteSpec["copyFramework"];
 
 export type PipelineStage =
   | "RESEARCH"
@@ -115,69 +115,86 @@ export type PipelineStage =
   | "CRITIQUE"
   | "COMPLETE"
   | "FAILED"
-  | "SCAN"
+  | "SCAN";
 
 export type SSEStageEvent = {
-  type: "stage"
-  stage: PipelineStage
-  message: string
-}
+  type: "stage";
+  stage: PipelineStage;
+  message: string;
+};
 
 export type SSETokenEvent = {
-  type: "token"
-  delta: string
-}
+  type: "token";
+  delta: string;
+};
 
 export type SSESectionCompleteEvent = {
-  type: "section_complete"
-  pageSlug: string
-  sectionType: string
-  sectionIndex: number
-}
+  type: "section_complete";
+  pageSlug: string;
+  sectionType: string;
+  sectionIndex: number;
+};
 
 export type SSEVersionReadyEvent = {
-  type: "version_ready"
-  versionId: string
-  snapshot: SiteSpec
-}
+  type: "version_ready";
+  versionId: string;
+  snapshot: SiteSpec;
+};
 
 export type SSEProjectCreatedEvent = {
-  type: "project_created"
-  projectId: string
-  versionId: string
-  slug: string
-}
+  type: "project_created";
+  projectId: string;
+  versionId: string;
+  slug: string;
+};
 
 export type SSEErrorEvent = {
-  type: "error"
-  message: string
-}
+  type: "error";
+  message: string;
+};
 
 export type SSENextFilesReadyEvent = {
-  type: "next_files_ready"
-  versionId: string
-  files: { path: string; content: string }[]
-}
+  type: "next_files_ready";
+  versionId: string;
+  files: { path: string; content: string }[];
+};
 
 export type SSEBriefReadyEvent = {
-  type: "brief_ready"
-  brief: z.infer<typeof DesignBriefSchema>
-  competitorInsights?: z.infer<typeof ResearchReportDataSchema>["competitorInsights"]
-}
+  type: "brief_ready";
+  brief: z.infer<typeof DesignBriefSchema>;
+  competitorInsights?: z.infer<
+    typeof ResearchReportDataSchema
+  >["competitorInsights"];
+};
 
 // Terminal event of the two-candidate /plan flow. The stream ends here and
 // does NOT auto-proceed to /generate — the user picks a direction first via
 // POST /api/projects/:slug/plan/select.
 export type SSECandidatesReadyEvent = {
-  type: "candidates_ready"
-  candidateA: { brief: z.infer<typeof DesignBriefSchema>; previewUrl: string }
-  candidateB: { brief: z.infer<typeof DesignBriefSchema>; previewUrl: string }
-  recommended: "A" | "B"
-  recommendedReason: string
-  competitorInsights?: z.infer<typeof ResearchReportDataSchema>["competitorInsights"]
-}
+  type: "candidates_ready";
+  candidateA: { brief: z.infer<typeof DesignBriefSchema>; previewUrl: string };
+  candidateB: { brief: z.infer<typeof DesignBriefSchema>; previewUrl: string };
+  recommended: "A" | "B";
+  recommendedReason: string;
+  competitorInsights?: z.infer<
+    typeof ResearchReportDataSchema
+  >["competitorInsights"];
+};
+
+export type SSEValidationStatusEvent = {
+  type: "validation_status";
+  run: {
+    id: string;
+    status: "QUEUED" | "RUNNING" | "PASSED" | "FAILED_MAX_ITERATIONS" | "ERROR";
+    finalScore: number | null;
+    startVersionId: string;
+    iterationCount: number;
+  } | null;
+  versionIds: string[];
+};
 
 export type SSEEvent =
+  | SSEValidationStatusEvent
   | SSEStageEvent
   | SSETokenEvent
   | SSESectionCompleteEvent
@@ -186,4 +203,4 @@ export type SSEEvent =
   | SSEErrorEvent
   | SSEBriefReadyEvent
   | SSECandidatesReadyEvent
-  | SSENextFilesReadyEvent
+  | SSENextFilesReadyEvent;

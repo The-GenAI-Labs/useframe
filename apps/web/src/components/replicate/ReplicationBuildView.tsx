@@ -1,20 +1,24 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useRef, useState } from "react"
-import { useQuery } from "@tanstack/react-query"
-import { useReplicationStream } from "@/hooks/useReplicationStream"
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useReplicationStream } from "@/hooks/useReplicationStream";
 import {
   replicateApi,
   type ReplicationDetail,
   type ReplicationNextFile,
-} from "@/lib/api/services/replicate.service"
-import { NextPreviewPane } from "@/components/webcontainer/NextPreviewPane"
+} from "@/lib/api/services/replicate.service";
+import { useValidationStatus } from "@/hooks/useValidationStatus";
+import { ValidationBadge } from "@/components/workspace/ValidationBadge";
+import { ModelTierBanner } from "@/components/workspace/ModelTierBanner";
+import { NextPreviewPane } from "@/components/webcontainer/NextPreviewPane";
 
-const ORCHESTRATOR_URL = process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001"
+const ORCHESTRATOR_URL =
+  process.env.NEXT_PUBLIC_ORCHESTRATOR_URL ?? "http://localhost:4001";
 
-const POLL_INTERVAL_MS = 10_000
-const POLL_TIMEOUT_MS = 30 * 60 * 1000
-const POLL_FAILURE_LIMIT = 5
+const POLL_INTERVAL_MS = 10_000;
+const POLL_TIMEOUT_MS = 30 * 60 * 1000;
+const POLL_FAILURE_LIMIT = 5;
 
 const STATUS_LABELS: Record<string, string> = {
   QUEUED: "Queuing replication…",
@@ -22,113 +26,164 @@ const STATUS_LABELS: Record<string, string> = {
   EXTRACTING: "Capturing scroll behaviour…",
   ANALYZING: "Analysing design and layout…",
   GENERATING: "Writing Next.js code…",
-}
+};
 
 function hasFiles(files: unknown): files is ReplicationNextFile[] {
-  return Array.isArray(files) && files.length > 0
+  return Array.isArray(files) && files.length > 0;
 }
 
 type Props = {
-  replication: ReplicationDetail
-}
+  replication: ReplicationDetail;
+};
 
 export default function ReplicationBuildView({ replication }: Props) {
-  const { startGeneration, isStreaming, stageMessage, nextFiles, error } = useReplicationStream()
-  const [current, setCurrent] = useState(replication)
-  const [timedOut, setTimedOut] = useState(false)
-  const [pollError, setPollError] = useState<string | null>(null)
-  const generationStarted = useRef(false)
-  const startedAt = useRef(Date.now())
-  const consecutiveFailures = useRef(0)
+  const { startGeneration, isStreaming, stageMessage, nextFiles, error } =
+    useReplicationStream();
+  const [current, setCurrent] = useState(replication);
+  const [timedOut, setTimedOut] = useState(false);
+  const [pollError, setPollError] = useState<string | null>(null);
+  const generationStarted = useRef(false);
+  const startedAt = useRef(Date.now());
+  const consecutiveFailures = useRef(0);
 
-  const alreadyReady = hasFiles(current.nextFiles) || hasFiles(nextFiles)
-  const isTerminal = alreadyReady || current.status === "FAILED"
+  const validation = useValidationStatus("REPLICATE", replication.slug);
+  const [selectedVersionId, setSelectedVersionId] = useState<string | null>(
+    null,
+  );
+  const validationRevision = validation?.versionIds.join(",") ?? "";
+  useEffect(() => {
+    if (!validationRevision) return;
+    let cancelled = false;
+    void replicateApi
+      .getBySlug(replication.slug)
+      .then((value) => {
+        if (!cancelled) setCurrent(value);
+      })
+      .catch(console.warn);
+    return () => {
+      cancelled = true;
+    };
+  }, [validationRevision, replication.slug]);
+  const history =
+    current.project?.versions.filter((v) => hasFiles(v.nextFiles)) ?? [];
+  const selectedFiles = history.find(
+    (v) => v.id === selectedVersionId,
+  )?.nextFiles;
+  const alreadyReady = hasFiles(current.nextFiles) || hasFiles(nextFiles);
+  const isTerminal = alreadyReady || current.status === "FAILED";
 
   const { data: polled, refetch } = useQuery({
     queryKey: ["replication", replication.slug],
     queryFn: async () => {
       try {
-        const result = await replicateApi.getBySlug(replication.slug)
-        consecutiveFailures.current = 0
-        setPollError(null)
-        return result
+        const result = await replicateApi.getBySlug(replication.slug);
+        consecutiveFailures.current = 0;
+        setPollError(null);
+        return result;
       } catch (err) {
-        consecutiveFailures.current += 1
+        consecutiveFailures.current += 1;
         if (consecutiveFailures.current >= POLL_FAILURE_LIMIT) {
-          setPollError("Lost connection while checking status. Please try again in a few minutes.")
+          setPollError(
+            "Lost connection while checking status. Please try again in a few minutes.",
+          );
         }
-        throw err
+        throw err;
       }
     },
     refetchInterval: (query) => {
-      const status = query.state.data?.status
-      if (status === "READY" || (status === "FAILED" && !isStreaming)) return false
-      if (timedOut || pollError || error) return false
+      const status = query.state.data?.status;
+      if (status === "READY" || (status === "FAILED" && !isStreaming))
+        return false;
+      if (timedOut || pollError || error) return false;
       if (Date.now() - startedAt.current > POLL_TIMEOUT_MS) {
-        setTimedOut(true)
-        return false
+        setTimedOut(true);
+        return false;
       }
-      return POLL_INTERVAL_MS
+      return POLL_INTERVAL_MS;
     },
     retry: POLL_FAILURE_LIMIT,
     enabled: !isTerminal || isStreaming,
     initialData: replication,
-  })
+  });
 
   useEffect(() => {
-    if (polled) setCurrent(polled)
-  }, [polled])
+    if (polled) setCurrent(polled);
+  }, [polled]);
 
   useEffect(() => {
-    if (generationStarted.current || alreadyReady) return
-    if (current.status !== "GENERATING" || !current.buildSpec) return
+    if (generationStarted.current || alreadyReady) return;
+    if (current.status !== "GENERATING" || !current.buildSpec) return;
 
-    generationStarted.current = true
+    generationStarted.current = true;
     startGeneration(ORCHESTRATOR_URL, {
       replicationId: current.id,
       buildSpec: current.buildSpec,
       tier: current.tier === "FREE" ? "free" : "paid",
-    })
-  }, [current, alreadyReady, startGeneration])
+    });
+  }, [current, alreadyReady, startGeneration]);
 
   useEffect(() => {
-    if (isStreaming) startedAt.current = Date.now()
-    else if (generationStarted.current) void refetch()
-  }, [isStreaming, refetch])
+    if (isStreaming) startedAt.current = Date.now();
+    else if (generationStarted.current) void refetch();
+  }, [isStreaming, refetch]);
 
-  const activeFiles: ReplicationNextFile[] | null = hasFiles(nextFiles)
-    ? nextFiles
-    : hasFiles(current.nextFiles)
-      ? current.nextFiles
-      : null
-  const failed = (current.status === "FAILED" && !isStreaming) || !!error
-  const isBuilding = !activeFiles && !failed && !timedOut && !pollError
+  const activeFiles: ReplicationNextFile[] | null =
+    selectedFiles ??
+    (hasFiles(nextFiles)
+      ? nextFiles
+      : hasFiles(current.nextFiles)
+        ? current.nextFiles
+        : null);
+  const failed = (current.status === "FAILED" && !isStreaming) || !!error;
+  const isBuilding = !activeFiles && !failed && !timedOut && !pollError;
 
   const handleRetry = useCallback(() => {
-    startedAt.current = Date.now()
-    consecutiveFailures.current = 0
-    setTimedOut(false)
-    setPollError(null)
-  }, [])
+    startedAt.current = Date.now();
+    consecutiveFailures.current = 0;
+    setTimedOut(false);
+    setPollError(null);
+  }, []);
 
   const handleGenerationRetry = useCallback(() => {
-    if (!current.buildSpec || isStreaming) return
-    handleRetry()
-    generationStarted.current = true
+    if (!current.buildSpec || isStreaming) return;
+    handleRetry();
+    generationStarted.current = true;
     setCurrent((value) => ({
       ...value,
       status: "GENERATING",
       failureReason: null,
-    }))
+    }));
     startGeneration(ORCHESTRATOR_URL, {
       replicationId: current.id,
       buildSpec: current.buildSpec,
       tier: current.tier === "FREE" ? "free" : "paid",
-    })
-  }, [current, handleRetry, isStreaming, startGeneration])
+    });
+  }, [current, handleRetry, isStreaming, startGeneration]);
 
   return (
     <div className="flex h-full w-full flex-col bg-surface">
+      <div className="flex items-center gap-3 px-4 py-2">
+        <ValidationBadge run={validation?.run} />
+        {history.length > 1 && (
+          <label className="text-xs text-mut">
+            Version{" "}
+            <select
+              aria-label="Preview version"
+              value={selectedVersionId ?? history[0]?.id}
+              onChange={(event) => setSelectedVersionId(event.target.value)}
+              className="bg-surface text-pri"
+            >
+              {history.map((version) => (
+                <option key={version.id} value={version.id}>
+                  Version {version.versionNumber}
+                  {version.label ? ` · ${version.label}` : ""}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
+      </div>
+      <ModelTierBanner generationTier={current.tier} />
       <div className="flex-1 min-h-0 relative">
         {activeFiles ? (
           <NextPreviewPane files={activeFiles} active />
@@ -151,9 +206,12 @@ export default function ReplicationBuildView({ replication }: Props) {
           </div>
         ) : timedOut ? (
           <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
-            <p className="text-sm font-semibold text-pri">This is taking longer than expected</p>
+            <p className="text-sm font-semibold text-pri">
+              This is taking longer than expected
+            </p>
             <p className="text-xs text-mut max-w-sm">
-              We stopped checking after 30 minutes. Please try again in a little while.
+              We stopped checking after 30 minutes. Please try again in a little
+              while.
             </p>
             <button
               type="button"
@@ -165,7 +223,9 @@ export default function ReplicationBuildView({ replication }: Props) {
           </div>
         ) : pollError ? (
           <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
-            <p className="text-sm font-semibold text-pri">Something went wrong</p>
+            <p className="text-sm font-semibold text-pri">
+              Something went wrong
+            </p>
             <p className="text-xs text-mut max-w-sm">{pollError}</p>
             <button
               type="button"
@@ -195,5 +255,5 @@ export default function ReplicationBuildView({ replication }: Props) {
         )}
       </div>
     </div>
-  )
+  );
 }

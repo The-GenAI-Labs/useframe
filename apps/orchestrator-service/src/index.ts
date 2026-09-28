@@ -1,73 +1,72 @@
-import express from "express"
-import cors from "cors"
-import helmet from "helmet"
-import morgan from "morgan"
-import { env, CONFIGURED_PROVIDERS } from "@/config/env.js"
-import generateRoute from "@/routes/generate.route.js"
-import replicateRoute from "@/routes/replicate.route.js"
-import clarifyRoute from "@/routes/clarify.route.js"
-import iterateRoute from "@/routes/iterate.route.js"
-import chatRoute from "@/routes/chat.route.js"
-import researchRoute from "@/routes/research.route.js"
-import seoMaterializeRoute from "@/routes/seoMaterialize.route.js"
-import planRoute from "@/routes/plan.route.js"
-import extractRoute from "@/routes/extract.route.js"
-import { MODELS } from "@/llm/providers.js"
-import { prisma } from "@useframe/db"
+import validationRoute from "./routes/validation.route.js";
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
+import { env, CONFIGURED_PROVIDERS } from "@/config/env.js";
+import generateRoute from "@/routes/generate.route.js";
+import replicateRoute from "@/routes/replicate.route.js";
+import clarifyRoute from "@/routes/clarify.route.js";
+import iterateRoute from "@/routes/iterate.route.js";
+import chatRoute from "@/routes/chat.route.js";
+import researchRoute from "@/routes/research.route.js";
+import seoMaterializeRoute from "@/routes/seoMaterialize.route.js";
+import planRoute from "@/routes/plan.route.js";
+import extractRoute from "@/routes/extract.route.js";
+import { MODELS } from "@/llm/providers.js";
+import { prisma } from "@useframe/db";
 
-const app = express()
+const app = express();
 
-app.use(helmet())
+app.use(helmet());
 app.use(
   cors({
     origin: env.CLIENT_URL,
     credentials: true,
-  })
-)
-app.use(express.json({ limit: "1mb" }))
+  }),
+);
+app.use(express.json({ limit: "1mb" }));
 
 if (env.NODE_ENV === "development") {
-  app.use(morgan("dev"))
+  app.use(morgan("dev"));
 }
 
 app.get("/health", (_req, res) => {
   const availableModels = MODELS.filter(
     (m) => CONFIGURED_PROVIDERS[m.provider],
-  )
+  );
   res.json({
     status: "ok",
     service: "orchestrator",
     timestamp: new Date().toISOString(),
     providers: CONFIGURED_PROVIDERS,
     availableModels: availableModels.map((m) => m.id),
-  })
-})
+  });
+});
 
-app.use("/", generateRoute)
-app.use("/", replicateRoute)
-app.use("/", clarifyRoute)
-app.use("/", iterateRoute)
-app.use("/", chatRoute)
-app.use("/", researchRoute)
-app.use("/", seoMaterializeRoute)
-app.use("/", planRoute)
-app.use("/", extractRoute)
+app.use("/", generateRoute);
+app.use("/", replicateRoute);
+app.use("/", clarifyRoute);
+app.use("/", iterateRoute);
+app.use("/", validationRoute);
+app.use("/", chatRoute);
+app.use("/", researchRoute);
+app.use("/", seoMaterializeRoute);
+app.use("/", planRoute);
+app.use("/", extractRoute);
 
-app.use(
-  "/{*splat}",
-  (_req: express.Request, res: express.Response) => {
-    res.status(404).json({ success: false, message: "Not found" })
-  }
-)
+app.use("/{*splat}", (_req: express.Request, res: express.Response) => {
+  res.status(404).json({ success: false, message: "Not found" });
+});
 
 const start = async () => {
-  await prisma.$connect()
+  await prisma.$connect();
   app.listen(env.PORT, () => {
-    console.log(`Orchestrator service running on port ${env.PORT}`)
-  })
-}
+    console.log(`Orchestrator service running on port ${env.PORT}`);
+  });
+};
 
 start().catch((err) => {
-  console.error("Failed to start orchestrator:", err)
-  process.exit(1)
-})
+  console.error("Failed to start orchestrator:", err);
+  process.exit(1);
+});

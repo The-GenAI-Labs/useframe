@@ -355,6 +355,8 @@ export type ProjectWhereInput = {
   pipelineState?: Prisma.XOR<Prisma.PipelineStateNullableScalarRelationFilter, Prisma.PipelineStateWhereInput> | null
   competitorScans?: Prisma.CompetitorScanListRelationFilter
   researchDocs?: Prisma.ResearchDocumentListRelationFilter
+  validationRuns?: Prisma.ValidationRunListRelationFilter
+  replication?: Prisma.XOR<Prisma.ReplicationNullableScalarRelationFilter, Prisma.ReplicationWhereInput> | null
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -396,6 +398,8 @@ export type ProjectOrderByWithRelationInput = {
   pipelineState?: Prisma.PipelineStateOrderByWithRelationInput
   competitorScans?: Prisma.CompetitorScanOrderByRelationAggregateInput
   researchDocs?: Prisma.ResearchDocumentOrderByRelationAggregateInput
+  validationRuns?: Prisma.ValidationRunOrderByRelationAggregateInput
+  replication?: Prisma.ReplicationOrderByWithRelationInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -440,6 +444,8 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   pipelineState?: Prisma.XOR<Prisma.PipelineStateNullableScalarRelationFilter, Prisma.PipelineStateWhereInput> | null
   competitorScans?: Prisma.CompetitorScanListRelationFilter
   researchDocs?: Prisma.ResearchDocumentListRelationFilter
+  validationRuns?: Prisma.ValidationRunListRelationFilter
+  replication?: Prisma.XOR<Prisma.ReplicationNullableScalarRelationFilter, Prisma.ReplicationWhereInput> | null
 }, "id" | "slug">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -542,6 +548,8 @@ export type ProjectCreateInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -582,6 +590,8 @@ export type ProjectUncheckedCreateInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -622,6 +632,8 @@ export type ProjectUpdateInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -662,6 +674,8 @@ export type ProjectUncheckedUpdateInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -1081,6 +1095,36 @@ export type ProjectUpdateOneWithoutCompetitorScansNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutCompetitorScansInput, Prisma.ProjectUpdateWithoutCompetitorScansInput>, Prisma.ProjectUncheckedUpdateWithoutCompetitorScansInput>
 }
 
+export type ProjectCreateNestedOneWithoutReplicationInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutReplicationInput, Prisma.ProjectUncheckedCreateWithoutReplicationInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutReplicationInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneWithoutReplicationNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutReplicationInput, Prisma.ProjectUncheckedCreateWithoutReplicationInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutReplicationInput
+  upsert?: Prisma.ProjectUpsertWithoutReplicationInput
+  disconnect?: Prisma.ProjectWhereInput | boolean
+  delete?: Prisma.ProjectWhereInput | boolean
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutReplicationInput, Prisma.ProjectUpdateWithoutReplicationInput>, Prisma.ProjectUncheckedUpdateWithoutReplicationInput>
+}
+
+export type ProjectCreateNestedOneWithoutValidationRunsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutValidationRunsInput, Prisma.ProjectUncheckedCreateWithoutValidationRunsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutValidationRunsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutValidationRunsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutValidationRunsInput, Prisma.ProjectUncheckedCreateWithoutValidationRunsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutValidationRunsInput
+  upsert?: Prisma.ProjectUpsertWithoutValidationRunsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutValidationRunsInput, Prisma.ProjectUpdateWithoutValidationRunsInput>, Prisma.ProjectUncheckedUpdateWithoutValidationRunsInput>
+}
+
 export type ProjectCreateWithoutUserInput = {
   id?: string
   name: string
@@ -1118,6 +1162,8 @@ export type ProjectCreateWithoutUserInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutUserInput = {
@@ -1157,6 +1203,8 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutUserInput = {
@@ -1253,6 +1301,8 @@ export type ProjectCreateWithoutResearchDocsInput = {
   researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutResearchDocsInput = {
@@ -1292,6 +1342,8 @@ export type ProjectUncheckedCreateWithoutResearchDocsInput = {
   researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutResearchDocsInput = {
@@ -1347,6 +1399,8 @@ export type ProjectUpdateWithoutResearchDocsInput = {
   researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutResearchDocsInput = {
@@ -1386,6 +1440,8 @@ export type ProjectUncheckedUpdateWithoutResearchDocsInput = {
   researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutVersionsInput = {
@@ -1425,6 +1481,8 @@ export type ProjectCreateWithoutVersionsInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutVersionsInput = {
@@ -1464,6 +1522,8 @@ export type ProjectUncheckedCreateWithoutVersionsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutVersionsInput = {
@@ -1519,6 +1579,8 @@ export type ProjectUpdateWithoutVersionsInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutVersionsInput = {
@@ -1558,6 +1620,8 @@ export type ProjectUncheckedUpdateWithoutVersionsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPagesInput = {
@@ -1597,6 +1661,8 @@ export type ProjectCreateWithoutPagesInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPagesInput = {
@@ -1636,6 +1702,8 @@ export type ProjectUncheckedCreateWithoutPagesInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPagesInput = {
@@ -1691,6 +1759,8 @@ export type ProjectUpdateWithoutPagesInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPagesInput = {
@@ -1730,6 +1800,8 @@ export type ProjectUncheckedUpdateWithoutPagesInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutConversationsInput = {
@@ -1769,6 +1841,8 @@ export type ProjectCreateWithoutConversationsInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutConversationsInput = {
@@ -1808,6 +1882,8 @@ export type ProjectUncheckedCreateWithoutConversationsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutConversationsInput = {
@@ -1863,6 +1939,8 @@ export type ProjectUpdateWithoutConversationsInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutConversationsInput = {
@@ -1902,6 +1980,8 @@ export type ProjectUncheckedUpdateWithoutConversationsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutDeploymentsInput = {
@@ -1941,6 +2021,8 @@ export type ProjectCreateWithoutDeploymentsInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutDeploymentsInput = {
@@ -1980,6 +2062,8 @@ export type ProjectUncheckedCreateWithoutDeploymentsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutDeploymentsInput = {
@@ -2035,6 +2119,8 @@ export type ProjectUpdateWithoutDeploymentsInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
@@ -2074,6 +2160,8 @@ export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutCustomDomainInput = {
@@ -2113,6 +2201,8 @@ export type ProjectCreateWithoutCustomDomainInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutCustomDomainInput = {
@@ -2152,6 +2242,8 @@ export type ProjectUncheckedCreateWithoutCustomDomainInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutCustomDomainInput = {
@@ -2207,6 +2299,8 @@ export type ProjectUpdateWithoutCustomDomainInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutCustomDomainInput = {
@@ -2246,6 +2340,8 @@ export type ProjectUncheckedUpdateWithoutCustomDomainInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPipelineLogsInput = {
@@ -2285,6 +2381,8 @@ export type ProjectCreateWithoutPipelineLogsInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPipelineLogsInput = {
@@ -2324,6 +2422,8 @@ export type ProjectUncheckedCreateWithoutPipelineLogsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPipelineLogsInput = {
@@ -2379,6 +2479,8 @@ export type ProjectUpdateWithoutPipelineLogsInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPipelineLogsInput = {
@@ -2418,6 +2520,8 @@ export type ProjectUncheckedUpdateWithoutPipelineLogsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutAnalyticsInput = {
@@ -2457,6 +2561,8 @@ export type ProjectCreateWithoutAnalyticsInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutAnalyticsInput = {
@@ -2496,6 +2602,8 @@ export type ProjectUncheckedCreateWithoutAnalyticsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutAnalyticsInput = {
@@ -2551,6 +2659,8 @@ export type ProjectUpdateWithoutAnalyticsInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutAnalyticsInput = {
@@ -2590,6 +2700,8 @@ export type ProjectUncheckedUpdateWithoutAnalyticsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPageAnalyticsInput = {
@@ -2629,6 +2741,8 @@ export type ProjectCreateWithoutPageAnalyticsInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPageAnalyticsInput = {
@@ -2668,6 +2782,8 @@ export type ProjectUncheckedCreateWithoutPageAnalyticsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPageAnalyticsInput = {
@@ -2723,6 +2839,8 @@ export type ProjectUpdateWithoutPageAnalyticsInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPageAnalyticsInput = {
@@ -2762,6 +2880,8 @@ export type ProjectUncheckedUpdateWithoutPageAnalyticsInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutResearchReportInput = {
@@ -2801,6 +2921,8 @@ export type ProjectCreateWithoutResearchReportInput = {
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutResearchReportInput = {
@@ -2840,6 +2962,8 @@ export type ProjectUncheckedCreateWithoutResearchReportInput = {
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutResearchReportInput = {
@@ -2895,6 +3019,8 @@ export type ProjectUpdateWithoutResearchReportInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutResearchReportInput = {
@@ -2934,6 +3060,8 @@ export type ProjectUncheckedUpdateWithoutResearchReportInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPipelineStateInput = {
@@ -2973,6 +3101,8 @@ export type ProjectCreateWithoutPipelineStateInput = {
   researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPipelineStateInput = {
@@ -3012,6 +3142,8 @@ export type ProjectUncheckedCreateWithoutPipelineStateInput = {
   researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPipelineStateInput = {
@@ -3067,6 +3199,8 @@ export type ProjectUpdateWithoutPipelineStateInput = {
   researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPipelineStateInput = {
@@ -3106,6 +3240,8 @@ export type ProjectUncheckedUpdateWithoutPipelineStateInput = {
   researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutCompetitorScansInput = {
@@ -3145,6 +3281,8 @@ export type ProjectCreateWithoutCompetitorScansInput = {
   researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
   pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutCompetitorScansInput = {
@@ -3184,6 +3322,8 @@ export type ProjectUncheckedCreateWithoutCompetitorScansInput = {
   researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
   pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutCompetitorScansInput = {
@@ -3239,6 +3379,8 @@ export type ProjectUpdateWithoutCompetitorScansInput = {
   researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutCompetitorScansInput = {
@@ -3278,6 +3420,368 @@ export type ProjectUncheckedUpdateWithoutCompetitorScansInput = {
   researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutReplicationInput = {
+  id?: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  brandPersonality?: string | null
+  pricePositioning?: string | null
+  businessModel?: string | null
+  differentiator?: string | null
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  vercelProjectId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
+  researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutReplicationInput = {
+  id?: string
+  userId: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  brandPersonality?: string | null
+  pricePositioning?: string | null
+  businessModel?: string | null
+  differentiator?: string | null
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  vercelProjectId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
+  researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutReplicationInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutReplicationInput, Prisma.ProjectUncheckedCreateWithoutReplicationInput>
+}
+
+export type ProjectUpsertWithoutReplicationInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutReplicationInput, Prisma.ProjectUncheckedUpdateWithoutReplicationInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutReplicationInput, Prisma.ProjectUncheckedCreateWithoutReplicationInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutReplicationInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutReplicationInput, Prisma.ProjectUncheckedUpdateWithoutReplicationInput>
+}
+
+export type ProjectUpdateWithoutReplicationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  brandPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePositioning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vercelProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
+  researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutReplicationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  brandPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePositioning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vercelProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
+  researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutValidationRunsInput = {
+  id?: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  brandPersonality?: string | null
+  pricePositioning?: string | null
+  businessModel?: string | null
+  differentiator?: string | null
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  vercelProjectId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
+  researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutValidationRunsInput = {
+  id?: string
+  userId: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  brandPersonality?: string | null
+  pricePositioning?: string | null
+  businessModel?: string | null
+  differentiator?: string | null
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  vercelProjectId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
+  researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutValidationRunsInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutValidationRunsInput, Prisma.ProjectUncheckedCreateWithoutValidationRunsInput>
+}
+
+export type ProjectUpsertWithoutValidationRunsInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutValidationRunsInput, Prisma.ProjectUncheckedUpdateWithoutValidationRunsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutValidationRunsInput, Prisma.ProjectUncheckedCreateWithoutValidationRunsInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutValidationRunsInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutValidationRunsInput, Prisma.ProjectUncheckedUpdateWithoutValidationRunsInput>
+}
+
+export type ProjectUpdateWithoutValidationRunsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  brandPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePositioning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vercelProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
+  researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutValidationRunsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  brandPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePositioning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vercelProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
+  researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyUserInput = {
@@ -3344,6 +3848,8 @@ export type ProjectUpdateWithoutUserInput = {
   pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutUserInput = {
@@ -3383,6 +3889,8 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutUserInput = {
@@ -3426,6 +3934,7 @@ export type ProjectCountOutputType = {
   pageAnalytics: number
   competitorScans: number
   researchDocs: number
+  validationRuns: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3437,6 +3946,7 @@ export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   pageAnalytics?: boolean | ProjectCountOutputTypeCountPageAnalyticsArgs
   competitorScans?: boolean | ProjectCountOutputTypeCountCompetitorScansArgs
   researchDocs?: boolean | ProjectCountOutputTypeCountResearchDocsArgs
+  validationRuns?: boolean | ProjectCountOutputTypeCountValidationRunsArgs
 }
 
 /**
@@ -3505,6 +4015,13 @@ export type ProjectCountOutputTypeCountResearchDocsArgs<ExtArgs extends runtime.
   where?: Prisma.ResearchDocumentWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountValidationRunsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ValidationRunWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -3545,6 +4062,8 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   pipelineState?: boolean | Prisma.Project$pipelineStateArgs<ExtArgs>
   competitorScans?: boolean | Prisma.Project$competitorScansArgs<ExtArgs>
   researchDocs?: boolean | Prisma.Project$researchDocsArgs<ExtArgs>
+  validationRuns?: boolean | Prisma.Project$validationRunsArgs<ExtArgs>
+  replication?: boolean | Prisma.Project$replicationArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -3649,6 +4168,8 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   pipelineState?: boolean | Prisma.Project$pipelineStateArgs<ExtArgs>
   competitorScans?: boolean | Prisma.Project$competitorScansArgs<ExtArgs>
   researchDocs?: boolean | Prisma.Project$researchDocsArgs<ExtArgs>
+  validationRuns?: boolean | Prisma.Project$validationRunsArgs<ExtArgs>
+  replication?: boolean | Prisma.Project$replicationArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3674,6 +4195,8 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     pipelineState: Prisma.$PipelineStatePayload<ExtArgs> | null
     competitorScans: Prisma.$CompetitorScanPayload<ExtArgs>[]
     researchDocs: Prisma.$ResearchDocumentPayload<ExtArgs>[]
+    validationRuns: Prisma.$ValidationRunPayload<ExtArgs>[]
+    replication: Prisma.$ReplicationPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -4108,6 +4631,8 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   pipelineState<T extends Prisma.Project$pipelineStateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$pipelineStateArgs<ExtArgs>>): Prisma.Prisma__PipelineStateClient<runtime.Types.Result.GetResult<Prisma.$PipelineStatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   competitorScans<T extends Prisma.Project$competitorScansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$competitorScansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompetitorScanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   researchDocs<T extends Prisma.Project$researchDocsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$researchDocsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResearchDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  validationRuns<T extends Prisma.Project$validationRunsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$validationRunsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ValidationRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  replication<T extends Prisma.Project$replicationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$replicationArgs<ExtArgs>>): Prisma.Prisma__ReplicationClient<runtime.Types.Result.GetResult<Prisma.$ReplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4828,6 +5353,49 @@ export type Project$researchDocsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.ResearchDocumentScalarFieldEnum | Prisma.ResearchDocumentScalarFieldEnum[]
+}
+
+/**
+ * Project.validationRuns
+ */
+export type Project$validationRunsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ValidationRun
+   */
+  select?: Prisma.ValidationRunSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ValidationRun
+   */
+  omit?: Prisma.ValidationRunOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ValidationRunInclude<ExtArgs> | null
+  where?: Prisma.ValidationRunWhereInput
+  orderBy?: Prisma.ValidationRunOrderByWithRelationInput | Prisma.ValidationRunOrderByWithRelationInput[]
+  cursor?: Prisma.ValidationRunWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ValidationRunScalarFieldEnum | Prisma.ValidationRunScalarFieldEnum[]
+}
+
+/**
+ * Project.replication
+ */
+export type Project$replicationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Replication
+   */
+  select?: Prisma.ReplicationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Replication
+   */
+  omit?: Prisma.ReplicationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReplicationInclude<ExtArgs> | null
+  where?: Prisma.ReplicationWhereInput
 }
 
 /**

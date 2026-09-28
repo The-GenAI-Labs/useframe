@@ -1,24 +1,27 @@
-import { prisma } from "@useframe/db"
-import { normalizeUrl } from "@repo/schemas"
-import { Queue } from "bullmq"
-import { QUEUES } from "@repo/events"
-import type { ScanJobPayload } from "@repo/events"
-import { redis } from "@/lib/redis.js"
-import { uniqueSlug } from "@/lib/slug.js"
-import { AppError } from "@/middleware/errorHandler.js"
-import { GenerateService } from "@/modules/generate/generate.service.js"
-import type { CreateProjectInput, UpdateProjectInput } from "./projects.schema.js"
+import { prisma } from "@useframe/db";
+import { normalizeUrl } from "@repo/schemas";
+import { Queue } from "bullmq";
+import { QUEUES } from "@repo/events";
+import type { ScanJobPayload } from "@repo/events";
+import { redis } from "@/lib/redis.js";
+import { uniqueSlug } from "@/lib/slug.js";
+import { AppError } from "@/middleware/errorHandler.js";
+import { GenerateService } from "@/modules/generate/generate.service.js";
+import type {
+  CreateProjectInput,
+  UpdateProjectInput,
+} from "./projects.schema.js";
 
-const scanQueue = new Queue(QUEUES.SCAN, { connection: redis })
+const scanQueue = new Queue(QUEUES.SCAN, { connection: redis });
 
 export const ProjectsService = {
   async createProject(userId: string, input: CreateProjectInput) {
-    const slug = uniqueSlug(input.name)
-    const extracted = input.extracted
+    const slug = uniqueSlug(input.name);
+    const extracted = input.extracted;
 
     // checked before the project row exists — an exhausted/uncredited user
     // must never end up with an orphaned DRAFT project
-    const { tier } = await GenerateService.authorize(userId)
+    const { tier } = await GenerateService.authorize(userId);
 
     const project = await prisma.project.create({
       data: {
@@ -36,7 +39,7 @@ export const ProjectsService = {
         sourceUrl: input.sourceUrl,
         status: "DRAFT",
       },
-    })
+    });
 
     const version = await prisma.projectVersion.create({
       data: {
@@ -45,21 +48,24 @@ export const ProjectsService = {
         snapshot: {},
         siteType: input.siteType ?? "SINGLE_PAGE",
       },
-    })
+    });
 
     await prisma.project.update({
       where: { id: project.id },
       // generationTier is stamped here (not left to default) so the
       // workspace's model-tier banner can read it back reliably after a
       // reload rather than relying on this create response alone.
-      data: { currentVersionId: version.id, generationTier: tier === "free" ? "FREE" : "PAID" },
-    })
+      data: {
+        currentVersionId: version.id,
+        generationTier: tier === "free" ? "FREE" : "PAID",
+      },
+    });
 
     await prisma.pipelineState.create({
       data: { projectId: project.id },
-    })
+    });
 
-    let scanQueued = false
+    let scanQueued = false;
 
     if (
       input.inputType === "FROM_COMPETITOR" ||
@@ -75,12 +81,12 @@ export const ProjectsService = {
             input.inputType === "FROM_COMPETITOR" ? "COMPETITOR" : "OWN_SITE",
           status: "QUEUED",
         },
-      })
+      });
 
       await prisma.project.update({
         where: { id: project.id },
         data: { status: "GENERATING" },
-      })
+      });
 
       const payload: ScanJobPayload = {
         scanId: scan.id,
@@ -89,14 +95,14 @@ export const ProjectsService = {
         sourceUrl: input.sourceUrl!,
         scanType:
           input.inputType === "FROM_COMPETITOR" ? "COMPETITOR" : "OWN_SITE",
-      }
+      };
 
       await scanQueue.add("scan", payload, {
         attempts: 3,
         backoff: { type: "exponential", delay: 5000 },
-      })
+      });
 
-      scanQueued = true
+      scanQueued = true;
     }
 
     return {
@@ -110,15 +116,16 @@ export const ProjectsService = {
       version: { id: version.id, versionNumber: version.versionNumber },
       scanQueued,
       tier,
-    }
+    };
   },
 
   async listProjects(userId: string, pinned?: boolean) {
     const where: Record<string, unknown> = {
       userId,
       deletedAt: null,
-    }
-    if (pinned !== undefined) where.pinned = pinned
+      replication: null,
+    };
+    if (pinned !== undefined) where.pinned = pinned;
 
     return prisma.project.findMany({
       where,
@@ -139,7 +146,7 @@ export const ProjectsService = {
         createdAt: true,
         updatedAt: true,
       },
-    })
+    });
   },
 
   async getProjectBySlug(userId: string, slug: string) {
@@ -158,7 +165,11 @@ export const ProjectsService = {
           },
         },
         competitorScans: {
-          where: { status: { in: ["QUEUED", "RENDERING", "EXTRACTING", "ANALYZING", "DONE"] } },
+          where: {
+            status: {
+              in: ["QUEUED", "RENDERING", "EXTRACTING", "ANALYZING", "DONE"],
+            },
+          },
           orderBy: { createdAt: "desc" },
           take: 1,
           select: {
@@ -169,21 +180,17 @@ export const ProjectsService = {
           },
         },
       },
-    })
+    });
 
-    if (!project) throw new AppError("Project not found", 404)
-    return project
+    if (!project) throw new AppError("Project not found", 404);
+    return project;
   },
 
-  async updateProject(
-    userId: string,
-    slug: string,
-    input: UpdateProjectInput
-  ) {
+  async updateProject(userId: string, slug: string, input: UpdateProjectInput) {
     const project = await prisma.project.findFirst({
       where: { slug, userId, deletedAt: null },
-    })
-    if (!project) throw new AppError("Project not found", 404)
+    });
+    if (!project) throw new AppError("Project not found", 404);
 
     return prisma.project.update({
       where: { id: project.id },
@@ -196,15 +203,15 @@ export const ProjectsService = {
         pinned: true,
         updatedAt: true,
       },
-    })
+    });
   },
 
   async listVersions(userId: string, slug: string) {
     const project = await prisma.project.findFirst({
       where: { slug, userId, deletedAt: null },
       select: { id: true },
-    })
-    if (!project) throw new AppError("Project not found", 404)
+    });
+    if (!project) throw new AppError("Project not found", 404);
 
     return prisma.projectVersion.findMany({
       where: { projectId: project.id },
@@ -217,99 +224,105 @@ export const ProjectsService = {
         snapshot: true,
         createdAt: true,
       },
-    })
+    });
   },
 
   async createVersion(userId: string, slug: string) {
     const project = await prisma.project.findFirst({
       where: { slug, userId, deletedAt: null },
-    })
-    if (!project) throw new AppError("Project not found", 404)
+    });
+    if (!project) throw new AppError("Project not found", 404);
 
-    const latest = await prisma.projectVersion.findFirst({
-      where: { projectId: project.id },
-      orderBy: { versionNumber: "desc" },
-      select: { versionNumber: true, siteType: true },
-    })
-
-    const version = await prisma.projectVersion.create({
-      data: {
-        projectId: project.id,
-        versionNumber: (latest?.versionNumber ?? 0) + 1,
-        siteType: latest?.siteType ?? "SINGLE_PAGE",
-        snapshot: {},
+    const version = await prisma.$transaction(
+      async (tx) => {
+        await tx.$queryRaw`SELECT id FROM projects WHERE id = ${project.id} FOR UPDATE`;
+        const latest = await tx.projectVersion.findFirst({
+          where: { projectId: project.id },
+          orderBy: { versionNumber: "desc" },
+          select: { versionNumber: true, siteType: true },
+        });
+        const created = await tx.projectVersion.create({
+          data: {
+            projectId: project.id,
+            versionNumber: (latest?.versionNumber ?? 0) + 1,
+            siteType: latest?.siteType ?? "SINGLE_PAGE",
+            snapshot: {},
+          },
+        });
+        await tx.project.update({
+          where: { id: project.id },
+          data: { currentVersionId: created.id, status: "GENERATING" },
+        });
+        return created;
       },
-    })
-
-    await prisma.project.update({
-      where: { id: project.id },
-      data: { currentVersionId: version.id, status: "GENERATING" },
-    })
-
-    return { version: { id: version.id, versionNumber: version.versionNumber } }
+      { timeout: 30000 },
+    );
+    return {
+      version: { id: version.id, versionNumber: version.versionNumber },
+    };
   },
 
   async getVersion(userId: string, slug: string, versionId: string) {
     const project = await prisma.project.findFirst({
       where: { slug, userId, deletedAt: null },
       select: { id: true },
-    })
-    if (!project) throw new AppError("Project not found", 404)
+    });
+    if (!project) throw new AppError("Project not found", 404);
 
     const version = await prisma.projectVersion.findFirst({
       where: { id: versionId, projectId: project.id },
-    })
-    if (!version) throw new AppError("Version not found", 404)
-    return version
+    });
+    if (!version) throw new AppError("Version not found", 404);
+    return version;
   },
 
   async getVersionSnapshot(userId: string, slug: string, versionId: string) {
     const project = await prisma.project.findFirst({
       where: { slug, userId, deletedAt: null },
       select: { id: true },
-    })
-    if (!project) throw new AppError("Project not found", 404)
+    });
+    if (!project) throw new AppError("Project not found", 404);
 
     const version = await prisma.projectVersion.findFirst({
       where: { id: versionId, projectId: project.id },
       select: { snapshot: true },
-    })
-    if (!version) throw new AppError("Version not found", 404)
-    return { snapshot: version.snapshot }
+    });
+    if (!version) throw new AppError("Version not found", 404);
+    return { snapshot: version.snapshot };
   },
 
   async restoreVersion(userId: string, slug: string, versionId: string) {
     const project = await prisma.project.findFirst({
       where: { slug, userId, deletedAt: null },
       select: { id: true },
-    })
-    if (!project) throw new AppError("Project not found", 404)
+    });
+    if (!project) throw new AppError("Project not found", 404);
 
     const version = await prisma.projectVersion.findFirst({
       where: { id: versionId, projectId: project.id },
       select: { id: true },
-    })
-    if (!version) throw new AppError("Version not found", 404)
+    });
+    if (!version) throw new AppError("Version not found", 404);
 
     await prisma.project.update({
       where: { id: project.id },
       data: { currentVersionId: version.id },
-    })
+    });
 
-    return { currentVersionId: version.id }
+    return { currentVersionId: version.id };
   },
 
   async getResearchReport(userId: string, slug: string) {
     const project = await prisma.project.findFirst({
       where: { slug, userId, deletedAt: null },
       select: { id: true },
-    })
-    if (!project) throw new AppError("Project not found", 404)
+    });
+    if (!project) throw new AppError("Project not found", 404);
 
     const report = await prisma.researchReport.findUnique({
       where: { projectId: project.id },
-    })
+    });
 
-    return { report: report ?? null }
+    return { report: report ?? null };
   },
-}
+};

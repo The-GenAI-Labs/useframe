@@ -1,4 +1,6 @@
 export const QUEUES = {
+  VALIDATE: "validate",
+  VALIDATION_CLEANUP: "validationCleanup",
   SCAN: "scan",
   GENERATE: "generate",
   DEPLOY: "deploy",
@@ -11,6 +13,6 @@ export const QUEUES = {
   AUTO_RELOAD: "autoReload",
   EXPIRE_CACHE: "expireCache",
   RESEARCH_PDF: "researchPdf",
-} as const
+} as const;
 
-export type QueueName = (typeof QUEUES)[keyof typeof QUEUES]
+export type QueueName = (typeof QUEUES)[keyof typeof QUEUES];

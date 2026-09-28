@@ -423,6 +423,8 @@ export const ModelName = {
   ResearchArticle: 'ResearchArticle',
   CompetitorScan: 'CompetitorScan',
   Replication: 'Replication',
+  ValidationRun: 'ValidationRun',
+  ValidationIteration: 'ValidationIteration',
   ScoreResult: 'ScoreResult',
   SearchQueryCache: 'SearchQueryCache',
   SeoAuditResult: 'SeoAuditResult'
@@ -441,7 +443,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "researchDocument" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchFinding" | "findingRelation" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "replication" | "scoreResult" | "searchQueryCache" | "seoAuditResult"
+    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "researchDocument" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchFinding" | "findingRelation" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "replication" | "validationRun" | "validationIteration" | "scoreResult" | "searchQueryCache" | "seoAuditResult"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3331,6 +3333,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ValidationRun: {
+      payload: Prisma.$ValidationRunPayload<ExtArgs>
+      fields: Prisma.ValidationRunFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ValidationRunFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ValidationRunFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload>
+        }
+        findFirst: {
+          args: Prisma.ValidationRunFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ValidationRunFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload>
+        }
+        findMany: {
+          args: Prisma.ValidationRunFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload>[]
+        }
+        create: {
+          args: Prisma.ValidationRunCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload>
+        }
+        createMany: {
+          args: Prisma.ValidationRunCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ValidationRunCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload>[]
+        }
+        delete: {
+          args: Prisma.ValidationRunDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload>
+        }
+        update: {
+          args: Prisma.ValidationRunUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload>
+        }
+        deleteMany: {
+          args: Prisma.ValidationRunDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ValidationRunUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ValidationRunUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload>[]
+        }
+        upsert: {
+          args: Prisma.ValidationRunUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationRunPayload>
+        }
+        aggregate: {
+          args: Prisma.ValidationRunAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateValidationRun>
+        }
+        groupBy: {
+          args: Prisma.ValidationRunGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ValidationRunGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ValidationRunCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ValidationRunCountAggregateOutputType> | number
+        }
+      }
+    }
+    ValidationIteration: {
+      payload: Prisma.$ValidationIterationPayload<ExtArgs>
+      fields: Prisma.ValidationIterationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ValidationIterationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ValidationIterationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload>
+        }
+        findFirst: {
+          args: Prisma.ValidationIterationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ValidationIterationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload>
+        }
+        findMany: {
+          args: Prisma.ValidationIterationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload>[]
+        }
+        create: {
+          args: Prisma.ValidationIterationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload>
+        }
+        createMany: {
+          args: Prisma.ValidationIterationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ValidationIterationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload>[]
+        }
+        delete: {
+          args: Prisma.ValidationIterationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload>
+        }
+        update: {
+          args: Prisma.ValidationIterationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload>
+        }
+        deleteMany: {
+          args: Prisma.ValidationIterationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ValidationIterationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ValidationIterationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload>[]
+        }
+        upsert: {
+          args: Prisma.ValidationIterationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ValidationIterationPayload>
+        }
+        aggregate: {
+          args: Prisma.ValidationIterationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateValidationIteration>
+        }
+        groupBy: {
+          args: Prisma.ValidationIterationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ValidationIterationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ValidationIterationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ValidationIterationCountAggregateOutputType> | number
+        }
+      }
+    }
     ScoreResult: {
       payload: Prisma.$ScoreResultPayload<ExtArgs>
       fields: Prisma.ScoreResultFieldRefs
@@ -3905,6 +4055,9 @@ export const ProjectVersionScalarFieldEnum = {
   designBrief: 'designBrief',
   parentVersionId: 'parentVersionId',
   createdByMessageId: 'createdByMessageId',
+  triggeredBy: 'triggeredBy',
+  validationFixKey: 'validationFixKey',
+  nextFiles: 'nextFiles',
   snapshot: 'snapshot',
   createdAt: 'createdAt'
 } as const
@@ -4272,11 +4425,50 @@ export const ReplicationScalarFieldEnum = {
   nextFiles: 'nextFiles',
   freeCorrectionUsed: 'freeCorrectionUsed',
   failureReason: 'failureReason',
+  projectId: 'projectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ReplicationScalarFieldEnum = (typeof ReplicationScalarFieldEnum)[keyof typeof ReplicationScalarFieldEnum]
+
+
+export const ValidationRunScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  startVersionId: 'startVersionId',
+  pipeline: 'pipeline',
+  tier: 'tier',
+  status: 'status',
+  isFreeTier: 'isFreeTier',
+  threshold: 'threshold',
+  maxIterations: 'maxIterations',
+  iterationCount: 'iterationCount',
+  finalScore: 'finalScore',
+  discrepancies: 'discrepancies',
+  originalScreenshotKeys: 'originalScreenshotKeys',
+  renderedScreenshotKeys: 'renderedScreenshotKeys',
+  signals: 'signals',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  errorMessage: 'errorMessage'
+} as const
+
+export type ValidationRunScalarFieldEnum = (typeof ValidationRunScalarFieldEnum)[keyof typeof ValidationRunScalarFieldEnum]
+
+
+export const ValidationIterationScalarFieldEnum = {
+  id: 'id',
+  validationRunId: 'validationRunId',
+  iterationNumber: 'iterationNumber',
+  resultingVersionId: 'resultingVersionId',
+  score: 'score',
+  discrepancies: 'discrepancies',
+  passed: 'passed',
+  createdAt: 'createdAt'
+} as const
+
+export type ValidationIterationScalarFieldEnum = (typeof ValidationIterationScalarFieldEnum)[keyof typeof ValidationIterationScalarFieldEnum]
 
 
 export const ScoreResultScalarFieldEnum = {
@@ -4859,6 +5051,34 @@ export type ListEnumReplicationStatusFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
+ * Reference to a field of type 'ValidationPipeline'
+ */
+export type EnumValidationPipelineFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ValidationPipeline'>
+    
+
+
+/**
+ * Reference to a field of type 'ValidationPipeline[]'
+ */
+export type ListEnumValidationPipelineFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ValidationPipeline[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ValidationStatus'
+ */
+export type EnumValidationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ValidationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ValidationStatus[]'
+ */
+export type ListEnumValidationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ValidationStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ScoreStatus'
  */
 export type EnumScoreStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScoreStatus'>
@@ -5048,6 +5268,8 @@ export type GlobalOmitConfig = {
   researchArticle?: Prisma.ResearchArticleOmit
   competitorScan?: Prisma.CompetitorScanOmit
   replication?: Prisma.ReplicationOmit
+  validationRun?: Prisma.ValidationRunOmit
+  validationIteration?: Prisma.ValidationIterationOmit
   scoreResult?: Prisma.ScoreResultOmit
   searchQueryCache?: Prisma.SearchQueryCacheOmit
   seoAuditResult?: Prisma.SeoAuditResultOmit

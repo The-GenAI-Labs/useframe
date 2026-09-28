@@ -1,30 +1,32 @@
-import { Worker } from "bullmq"
-import type { Job } from "bullmq"
-import { prisma } from "@useframe/db"
-import { QUEUES } from "@repo/events"
-import type { ResearchPdfJobPayload } from "@repo/events"
-import { redis } from "../lib/redis.js"
+import { Worker } from "bullmq";
+import type { Job } from "bullmq";
+import { prisma } from "@useframe/db";
+import { QUEUES } from "@repo/events";
+import type { ResearchPdfJobPayload } from "@repo/events";
+import { redis } from "../lib/redis.js";
 import {
   renderResearchPdf,
   type Citation,
   type ResearchDocumentType,
-} from "../pdf/renderResearchPdf.js"
+} from "../pdf/renderResearchPdf.js";
 
 const TITLES: Record<ResearchDocumentType, string> = {
   RESEARCH_RATIONALE: "Research Rationale",
   COMPETITOR_ANALYSIS: "Competitor Analysis",
-}
+};
 
 type Attachment = {
-  type: "pdf"
-  documentId: string
-  title: string
-  url: string
-}
+  type: "pdf";
+  documentId: string;
+  title: string;
+  url: string;
+};
 
 async function buildRationale(projectId: string, projectName: string) {
-  const report = await prisma.researchReport.findUnique({ where: { projectId } })
-  if (!report) return null
+  const report = await prisma.researchReport.findUnique({
+    where: { projectId },
+  });
+  if (!report) return null;
 
   return {
     projectName,
@@ -40,8 +42,10 @@ async function buildRationale(projectId: string, projectName: string) {
     layoutRationale: report.layoutRationale,
     imageStyle: report.imageStyle,
     imageRationale: report.imageRationale,
-    citations: Array.isArray(report.citations) ? (report.citations as Citation[]) : [],
-  }
+    citations: Array.isArray(report.citations)
+      ? (report.citations as Citation[])
+      : [],
+  };
 }
 
 async function buildCompetitorAnalysis(projectId: string, projectName: string) {
@@ -49,66 +53,74 @@ async function buildCompetitorAnalysis(projectId: string, projectName: string) {
     where: { projectId, status: "DONE" },
     select: { sourceUrl: true, videoAnalysis: true, extractedContent: true },
     orderBy: { createdAt: "asc" },
-  })
+  });
 
-  if (scans.length === 0) return null
+  if (scans.length === 0) return null;
 
   return {
     projectName,
-    competitors: scans.map((s: {
-      sourceUrl: string
-      videoAnalysis: unknown
-      extractedContent: unknown
-    }) => ({
-      sourceUrl: s.sourceUrl,
-      videoAnalysis: s.videoAnalysis as Record<string, unknown> | null,
-      extractedContent: s.extractedContent as Record<string, unknown> | null,
-    })),
-  }
+    competitors: scans.map(
+      (s: {
+        sourceUrl: string;
+        videoAnalysis: unknown;
+        extractedContent: unknown;
+      }) => ({
+        sourceUrl: s.sourceUrl,
+        videoAnalysis: s.videoAnalysis as Record<string, unknown> | null,
+        extractedContent: s.extractedContent as Record<string, unknown> | null,
+      }),
+    ),
+  };
 }
 
-async function processResearchPdf(job: Job<ResearchPdfJobPayload>): Promise<void> {
-  const { projectId, sections, conversationId } = job.data
+async function processResearchPdf(
+  job: Job<ResearchPdfJobPayload>,
+): Promise<void> {
+  const { projectId, sections, conversationId } = job.data;
 
   const project = await prisma.project.findUnique({
     where: { id: projectId },
     select: { name: true },
-  })
-  if (!project) throw new Error(`Project ${projectId} not found`)
+  });
+  if (!project) throw new Error(`Project ${projectId} not found`);
 
-  const attachments: Attachment[] = []
+  const attachments: Attachment[] = [];
 
   for (const type of sections) {
     const data =
       type === "RESEARCH_RATIONALE"
         ? await buildRationale(projectId, project.name)
-        : await buildCompetitorAnalysis(projectId, project.name)
+        : await buildCompetitorAnalysis(projectId, project.name);
 
     // Nothing to report on (no research report yet, or no completed scans) —
     // skip that section rather than emitting an empty PDF.
     if (!data) {
-      console.warn(`[researchPdf] Skipping ${type} for project=${projectId} — no source data`)
-      continue
+      console.warn(
+        `[researchPdf] Skipping ${type} for project=${projectId} — no source data`,
+      );
+      continue;
     }
 
-    const pdf = await renderResearchPdf(type, data)
+    const pdf = await renderResearchPdf(type, data);
 
     const doc = await prisma.researchDocument.create({
-      data: { projectId, type, title: TITLES[type], pdf },
+      data: { projectId, type, title: TITLES[type], pdf: new Uint8Array(pdf) },
       select: { id: true },
-    })
+    });
 
     attachments.push({
       type: "pdf",
       documentId: doc.id,
       title: TITLES[type],
       url: `/api/research-documents/${doc.id}`,
-    })
+    });
   }
 
   if (attachments.length === 0) {
-    console.warn(`[researchPdf] No documents generated for project=${projectId}`)
-    return
+    console.warn(
+      `[researchPdf] No documents generated for project=${projectId}`,
+    );
+    return;
   }
 
   await prisma.message.create({
@@ -121,22 +133,28 @@ async function processResearchPdf(job: Job<ResearchPdfJobPayload>): Promise<void
           : `Here are your research reports: ${attachments.map((a) => a.title).join(", ")}.`,
       attachments: attachments as unknown as object,
     },
-  })
+  });
 
-  console.log(`[researchPdf] Generated ${attachments.length} document(s) for project=${projectId}`)
+  console.log(
+    `[researchPdf] Generated ${attachments.length} document(s) for project=${projectId}`,
+  );
 }
 
 export function startResearchPdfWorker(): Worker<ResearchPdfJobPayload> {
-  const worker = new Worker<ResearchPdfJobPayload>(QUEUES.RESEARCH_PDF, processResearchPdf, {
-    connection: redis,
-    // PDF rendering launches a browser per job — keep it to one at a time so
-    // it can't starve the scan/score workers of memory.
-    concurrency: 1,
-  })
+  const worker = new Worker<ResearchPdfJobPayload>(
+    QUEUES.RESEARCH_PDF,
+    processResearchPdf,
+    {
+      connection: redis,
+      // PDF rendering launches a browser per job — keep it to one at a time so
+      // it can't starve the scan/score workers of memory.
+      concurrency: 1,
+    },
+  );
 
   worker.on("failed", (job, err) => {
-    console.error(`[researchPdf] Job ${job?.id} failed:`, err.message)
-  })
+    console.error(`[researchPdf] Job ${job?.id} failed:`, err.message);
+  });
 
-  return worker
+  return worker;
 }
