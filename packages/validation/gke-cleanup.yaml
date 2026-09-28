@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: validation-cleanup
+  namespace: useframe
+spec:
+  schedule: "*/10 * * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 540
+      ttlSecondsAfterFinished: 3600
+      template:
+        metadata:
+          labels:
+            app: useframe-worker
+        spec:
+          serviceAccountName: useframe-worker
+          restartPolicy: OnFailure
+          containers:
+            - name: cleanup
+              image: REPLACE_WITH_WORKER_IMAGE
+              workingDir: /app/apps/worker
+              command: [pnpm, exec, tsx, scripts/cleanupValidation.ts]
+              env:
+                - name: GCS_BUCKET
+                  valueFrom:
+                    configMapKeyRef:
+                      name: useframe-validation
+                      key: GCS_BUCKET
+                - name: VALIDATION_PREVIEW_NAMESPACE
+                  value: useframe-validation
+              resources:
+                requests: { cpu: 50m, memory: 128Mi }
+                limits: { cpu: 500m, memory: 512Mi }
