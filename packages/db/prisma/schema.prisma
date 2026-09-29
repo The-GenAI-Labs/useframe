@@ -152,6 +152,15 @@ enum PageType {
   PRODUCT
   RESEARCH
   DEMO
+  BLOG
+  FAQ
+  CHANGELOG
+}
+
+enum CatalogStatus {
+  DRAFT
+  ACTIVE
+  RETIRED
 }
 
 enum ResearchKind {
@@ -175,6 +184,7 @@ enum ScanType {
   COMPETITOR
   OWN_SITE
   REPLICATION_TARGET
+  STYLE_REFERENCE
 }
 
 enum ScanStatus {
@@ -621,6 +631,7 @@ model Project {
   analytics       ProjectAnalytics?
   pageAnalytics   PageAnalytics[]
   researchReport  ResearchReport?
+  researchIntake  ResearchIntake?
   pipelineState   PipelineState?
   competitorScans CompetitorScan[]
   researchDocs    ResearchDocument[]
@@ -945,40 +956,261 @@ model ResearchReport {
   competitorInsights  Json?
   citations           Json
   confidenceScore     Float?
+  generationSpec      Json?
+  masterPrompt        String?
+  specVersion         Int              @default(1)
+  styleTagKeys        String[]
+  intakeId            String?
   createdAt           DateTime         @default(now())
   updatedAt           DateTime         @updatedAt
 
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project      Project                  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  citationRows ResearchReportCitation[]
 
   @@map("research_reports")
 }
 
-model ResearchFinding {
-  id            String                       @id @default(cuid())
-  claim         String
-  paper         String
-  field         String
-  appliesTo     String[]
-  audience      String[]
-  decision      String
-  options       Json
-  contextHeader String
-  verified      Boolean                      @default(true)
-  embedding     Unsupported("vector(1536)")?
-  createdAt     DateTime                     @default(now())
+model ResearchIntake {
+  id                       String         @id @default(cuid())
+  projectId                String         @unique
+  rawIdea                  String
+  questions                Json
+  answers                  Json?
+  skipped                  Boolean        @default(false)
+  classifiedNiche          NicheCategory?
+  classificationConfidence Float?
+  createdAt                DateTime       @default(now())
+  updatedAt                DateTime       @updatedAt
 
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("research_intakes")
+}
+
+model StyleTag {
+  id                 String        @id @default(cuid())
+  key                String        @unique
+  label              String
+  description        String
+  designTokens       Json
+  exemplarScanIds    String[]
+  exemplarUrls       String[]
+  requiresCapability String?
+  compatibleWith     String[]
+  avoidPatterns      String[]
+  status             CatalogStatus @default(DRAFT)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  @@map("style_tags")
+}
+
+model StyleDirective {
+  id                String        @id @default(cuid())
+  niche             NicheCategory
+  modelTarget       String
+  promptText        String
+  referenceProducts String[]
+  avoidPatterns     String[]
+  status            CatalogStatus @default(DRAFT)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@unique([niche, modelTarget])
+  @@map("style_directives")
+}
+
+model ComponentExemplar {
+  id               String   @id @default(cuid())
+  sectionType      String
+  styleTagCombo    String[]
+  templatePath     String
+  templateVersion  String
+  designTokens     Json
+  screenshotKey    String
+  linkedFindingIds String[]
+  createdAt        DateTime @default(now())
+
+  @@index([sectionType])
+  @@map("component_exemplars")
+}
+
+model ResearchFinding {
+  id               String                       @id @default(cuid())
+  claim            String                       @default("")
+  paper            String                       @default("")
+  field            String                       @default("")
+  appliesTo        String[]
+  audience         String[]
+  decision         String                       @default("")
+  options          Json                         @default("[]")
+  contextHeader    String                       @default("")
+  verified         Boolean                      @default(true)
+  embedding        Unsupported("vector(1536)")?
+  createdAt        DateTime                     @default(now())
+  slug             String                       @unique
+  status           FindingStatus                @default(DRAFT)
+  category         ResearchCategory             @default(OTHER)
+  title            String
+  statement        String
+  appliesWhen      String?
+  tags             String[]
+  confidenceScore  Float?
+  effectSize       String?
+  sourceDocumentId String?
+  sourceExcerpt    String?
+  sourceLocator    String?
+  reuseCount       Int                          @default(0)
+  contentHash      String
+  embeddingHash    String
+  gcsObjectKey     String                       @unique
+  gcsGeneration    String
+  searchVector     Unsupported("tsvector")?
+  verifiedAt       DateTime?
+  updatedAt        DateTime                     @updatedAt
+  source           SourceDocument?              @relation(fields: [sourceDocumentId], references: [id])
+  chunks           FindingChunk[]
+  relationsFrom    FindingRelation[]            @relation("RelationFrom")
+  relationsTo      FindingRelation[]            @relation("RelationTo")
+  citations        ResearchReportCitation[]
+
+  @@index([status])
+  @@index([category])
   @@index([field])
   @@index([decision])
   @@map("research_findings")
 }
 
 model FindingRelation {
-  fromId   String
-  toId     String
-  relation String
+  id               String              @id @default(cuid())
+  findingId        String              @map("fromId")
+  relatedFindingId String              @map("toId")
+  relationType     FindingRelationType
+  legacyRelation   String              @default("") @map("relation")
+  note             String?
+  createdAt        DateTime            @default(now())
+  finding          ResearchFinding     @relation("RelationFrom", fields: [findingId], references: [id], onDelete: Cascade)
+  relatedFinding   ResearchFinding     @relation("RelationTo", fields: [relatedFindingId], references: [id], onDelete: Cascade)
 
-  @@id([fromId, toId])
+  @@unique([findingId, relatedFindingId, relationType])
+  @@index([relatedFindingId])
   @@map("finding_relations")
+}
+
+enum FindingStatus {
+  DRAFT
+  VERIFIED
+  RETIRED
+}
+
+enum FindingRelationType {
+  SUPPORTS
+  CONFLICTS
+  REFINES
+  OFTEN_CITED_TOGETHER
+}
+
+enum DecisionArea {
+  COLOR
+  TYPOGRAPHY
+  LAYOUT
+  CONVERSION
+  TRUST_SOCIAL_PROOF
+  ACCESSIBILITY
+  MOTION
+  COPY_TONE
+  IMAGERY
+}
+
+enum IngestionOutcome {
+  SUCCESS
+  SKIPPED_UNCHANGED
+  SKIPPED_STALE_GENERATION
+  SKIPPED_OVERWRITTEN
+  INVALID
+  RETIRED
+  FAILED
+}
+
+model SourceDocument {
+  id         String            @id @default(cuid())
+  title      String
+  authors    String?
+  year       Int?
+  venue      String?
+  url        String?           @unique
+  doi        String?           @unique
+  rawTextKey String?
+  tokenCount Int?
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  findings   ResearchFinding[]
+
+  @@map("source_documents")
+}
+
+model FindingChunk {
+  id             String                      @id @default(cuid())
+  findingId      String
+  chunkIndex     Int
+  chunkText      String
+  embeddingText  String
+  wordCount      Int
+  embeddingModel String
+  embedding      Unsupported("vector(1024)")
+  createdAt      DateTime                    @default(now())
+  finding        ResearchFinding             @relation(fields: [findingId], references: [id], onDelete: Cascade)
+
+  @@unique([findingId, chunkIndex])
+  @@map("finding_chunks")
+}
+
+model PendingFindingRelation {
+  id              String              @id @default(cuid())
+  sourceFindingId String
+  targetSlug      String
+  relationType    FindingRelationType
+  note            String?
+  createdAt       DateTime            @default(now())
+
+  @@unique([sourceFindingId, targetSlug, relationType])
+  @@index([targetSlug])
+  @@map("pending_finding_relations")
+}
+
+model ResearchReportCitation {
+  id               String          @id @default(cuid())
+  researchReportId String
+  findingId        String
+  decisionArea     DecisionArea
+  rank             Int
+  rrfScore         Float
+  rerankScore      Float?
+  viaRelation      Boolean         @default(false)
+  reasoning        String
+  createdAt        DateTime        @default(now())
+  researchReport   ResearchReport  @relation(fields: [researchReportId], references: [id], onDelete: Cascade)
+  finding          ResearchFinding @relation(fields: [findingId], references: [id], onDelete: Restrict)
+
+  @@unique([researchReportId, findingId, decisionArea])
+  @@index([findingId])
+  @@map("research_report_citations")
+}
+
+model CorpusIngestionLog {
+  id         String           @id @default(cuid())
+  objectKey  String
+  generation String
+  eventType  String
+  outcome    IngestionOutcome
+  findingId  String?
+  chunkCount Int?
+  errors     Json?
+  durationMs Int?
+  createdAt  DateTime         @default(now())
+
+  @@index([objectKey])
+  @@map("corpus_ingestion_logs")
 }
 
 model DomainPattern {
