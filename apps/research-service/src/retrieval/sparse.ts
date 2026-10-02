@@ -1,10 +1,12 @@
 import okapibm25 from "okapibm25"
 import type { RankedId } from "./fuse.js"
 
-const BM25 = okapibm25 as unknown as (
-  documents: string[],
-  keywords: string[],
-) => number[]
+type BM25Fn = (documents: string[], keywords: string[]) => number[]
+
+// okapibm25 is CommonJS with `exports.default = fn`: under Node's ESM loader
+// the default import is the whole module object, not the function.
+const okapiModule = okapibm25 as unknown as BM25Fn | { default: BM25Fn }
+const BM25: BM25Fn = typeof okapiModule === "function" ? okapiModule : okapiModule.default
 
 export type SparseCandidate = { id: string; claim: string; paper: string }
 

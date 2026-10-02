@@ -7,10 +7,13 @@
     "dev": "tsx --watch src/index.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
+    "ioredis": "^5.4.1",
     "@ai-sdk/openai": "^1.0.0",
+    "@repo/schemas": "workspace:*",
     "@useframe/db": "workspace:*",
     "ai": "^4.0.0",
     "cohere-ai": "^8.1.0",
@@ -20,7 +23,9 @@
     "helmet": "^8.1.0",
     "morgan": "^1.10.1",
     "okapibm25": "^1.4.1",
-    "zod": "^3.25.76"
+    "zod": "^3.25.76",
+    "@repo/rag": "workspace:*",
+    "@repo/jev": "workspace:*"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
@@ -29,6 +34,7 @@
     "@types/node": "^22.0.0",
     "@useframe/typescript-config": "workspace:*",
     "tsx": "^4.22.1",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "^2.1.9"
   }
 }
