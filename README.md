@@ -282,3 +282,7 @@ For a deliberate schema change in your development database:
 7. List required environment-variable changes at the end of your change summary.
 
 Project-specific assistant instructions are maintained in [AGENTS.md](AGENTS.md), [CLAUDE.md](CLAUDE.md), and [GEMINI.md](GEMINI.md). Keep all three synchronized.
+
+## Research corpus
+
+See [Research corpus operations](docs/rag-corpus.md) for GCS/PubSub setup, finding-file validation, ingestion and recovery commands, retrieval configuration, and evaluation.
