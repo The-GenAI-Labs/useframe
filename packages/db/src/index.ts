@@ -9,6 +9,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 dotenv.config();
 
 export type { Prisma };
+export * from "../prisma/generated/enums.js";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;

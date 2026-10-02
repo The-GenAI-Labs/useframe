@@ -1524,3 +1524,43 @@ model SeoAuditResult {
   @@index([domain, tier])
   @@map("seo_audit_results")
 }
+
+model RetrievalCacheEntry {
+  id             String @id @default(cuid())
+  decisionArea   DecisionArea
+  niche          NicheCategory
+  hydePassage    String
+  embedding      Unsupported("vector(1024)")
+  embeddingModel String
+  fingerprint    String
+  findings       Json
+  corpusVersion  Int
+  hitCount       Int @default(0)
+  createdAt      DateTime @default(now())
+  lastHitAt      DateTime?
+
+  @@index([decisionArea, niche, corpusVersion, embeddingModel, fingerprint], map: "retrieval_cache_metadata_idx")
+  @@map("retrieval_cache_entries")
+}
+
+model CorpusVersion {
+  id      Int @id @default(1)
+  version Int @default(1)
+
+  @@map("corpus_version")
+}
+model JevDecisionLog {
+  id         String @id @default(cuid())
+  feature    String
+  mode       String
+  policyKey  String
+  accepted   Boolean
+  agreement  Boolean?
+  confidence Float?
+  durationMs Int
+  input      Json
+  createdAt  DateTime @default(now())
+
+  @@index([feature, policyKey, mode, createdAt])
+  @@map("jev_decision_logs")
+}

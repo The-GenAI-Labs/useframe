@@ -8,6 +8,11 @@ export async function ensureValidationRun(
   const project = await prisma.project.findUniqueOrThrow({
     where: { id: projectId },
   });
+  if (
+    pipeline === "MAIN" &&
+    (project.generationTier !== "PAID" || project.deletedAt)
+  )
+    return null;
   const version = await prisma.projectVersion.findFirstOrThrow({
     where: { id: startVersionId, projectId },
   });
