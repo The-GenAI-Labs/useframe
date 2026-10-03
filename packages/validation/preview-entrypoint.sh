@@ -9,6 +9,12 @@ fi
 ln -s "/opt/$1/node_modules" /tmp/site/node_modules
 cd /tmp/site
 export HOME=/tmp NEXT_TELEMETRY_DISABLED=1
+if [ "${2:-}" = script ]; then
+  if [ "$1" = next ]; then
+    exec npm run dev -- --hostname 0.0.0.0 --port 3000
+  fi
+  exec npm run dev -- --host 0.0.0.0 --port 3000 --strictPort
+fi
 if [ "$1" = next ]; then
   exec node node_modules/next/dist/bin/next dev --hostname 0.0.0.0 --port 3000
 fi
