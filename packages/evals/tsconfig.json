@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "./dist",
     "target": "ES2022",
     "module": "NodeNext",
@@ -13,6 +13,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src"],
+  "include": ["src", "retrieval"],
   "exclude": ["node_modules", "dist"]
 }

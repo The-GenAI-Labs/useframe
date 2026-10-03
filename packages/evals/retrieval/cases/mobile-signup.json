@@ -1,0 +1,16 @@
+{
+  "name": "Mobile signup target size",
+  "input": {
+    "projectId": "eval-mobile-signup",
+    "rawIdea": "A mobile-first appointment booking site with a short signup flow for adults using a phone with one hand.",
+    "niche": "HEALTH_WELLNESS",
+    "intakeAnswers": {
+      "goal": "Book an appointment",
+      "audience": "Adults using phones"
+    }
+  },
+  "expected": {
+    "LAYOUT": ["fitts-law-cta-target-size"],
+    "CONVERSION": ["fitts-law-cta-target-size"]
+  }
+}

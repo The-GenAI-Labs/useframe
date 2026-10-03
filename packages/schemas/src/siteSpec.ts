@@ -194,6 +194,7 @@ export type SSEValidationStatusEvent = {
 };
 
 export type SSEEvent =
+  | import("./project-chat.schema.js").SSEChatMessageEvent
   | SSEValidationStatusEvent
   | SSEStageEvent
   | SSETokenEvent

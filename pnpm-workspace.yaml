@@ -2,11 +2,12 @@ packages:
   - "apps/*"
   - "packages/*"
 allowBuilds:
-  '@prisma/engines': true
+  "@prisma/engines": true
   esbuild: true
   msgpackr-extract: true
   msw: true
   playwright: true
   prisma: true
+  protobufjs: false
   sharp: true
   unrs-resolver: true

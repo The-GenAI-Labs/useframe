@@ -1,5 +1,6 @@
 import { startValidationWorkers } from "./processors/validation.processor.js";
 import { env } from "./config/env.js";
+import { startCorpusWorker } from "./processors/corpus.processor.js";
 import { prisma } from "@useframe/db";
 import { startScanWorker } from "./processors/scan.processor.js";
 import { startScoreWorker } from "./processors/score.processor.js";
@@ -14,6 +15,9 @@ import { startResearchPdfWorker } from "./processors/researchPdf.processor.js";
 async function main() {
   await prisma.$connect();
   console.log("[worker] Database connected");
+  const corpusWorker = env.GCS_RESEARCH_CORPUS_BUCKET
+    ? await startCorpusWorker()
+    : undefined;
 
   const validationWorkers = env.GCS_BUCKET
     ? startValidationWorkers()
@@ -47,6 +51,7 @@ async function main() {
 
   const shutdown = async () => {
     console.log("[worker] Shutting down...");
+    await corpusWorker?.close();
     await validationWorkers?.close();
     await scanWorker.close();
     await scoreWorker.close();

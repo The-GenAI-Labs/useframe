@@ -6,6 +6,7 @@ type ValidationStatus = Extract<SSEEvent, { type: "validation_status" }>;
 export function useValidationStatus(
   pipeline: "MAIN" | "REPLICATE",
   slug: string,
+  enabled = true,
 ) {
   const { connect, disconnect } = useSSE();
   const [state, setState] = useState<ValidationStatus | null>(null);
@@ -14,6 +15,7 @@ export function useValidationStatus(
     let timer: ReturnType<typeof setTimeout>;
     let failures = 0;
     setState(null);
+    if (!enabled) return;
     const start = () => {
       if (stopped) return;
       void connect(
@@ -43,6 +45,6 @@ export function useValidationStatus(
       clearTimeout(timer);
       disconnect();
     };
-  }, [pipeline, slug, connect, disconnect]);
+  }, [pipeline, slug, enabled, connect, disconnect]);
   return state;
 }

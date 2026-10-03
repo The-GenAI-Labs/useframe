@@ -185,9 +185,10 @@ export async function runOrchestrator(
       stage: "COMPLETE",
       message: "Generation complete.",
     });
-    void enqueueValidation(projectId!, versionId!, "MAIN").catch((error) =>
-      console.error("[validation] enqueue failed", error),
-    );
+    if (request.tier === "paid")
+      void enqueueValidation(projectId!, versionId!, "MAIN").catch((error) =>
+        console.error("[validation] enqueue failed", error),
+      );
   } catch (err) {
     const message = err instanceof Error ? err.message : "Generation failed";
     sseError(res, message);

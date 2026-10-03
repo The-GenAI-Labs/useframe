@@ -4,14 +4,18 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "eval:chat-scope": "tsx src/chatScope.ts",
     "runEvals": "tsx src/runEvals.ts",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "eval:retrieval": "tsx retrieval/run.ts"
   },
   "dependencies": {
     "@repo/schemas": "workspace:*",
     "@useframe/db": "workspace:*",
     "jsonwebtoken": "^9.0.2",
-    "zod": "^3.25.76"
+    "zod": "^3.25.76",
+    "@repo/rag": "workspace:*",
+    "@repo/jev": "workspace:*"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.7",

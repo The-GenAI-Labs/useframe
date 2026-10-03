@@ -581,10 +581,6 @@ export type EnumResearchKindFieldUpdateOperationsInput = {
   set?: $Enums.ResearchKind
 }
 
-export type EnumResearchCategoryFieldUpdateOperationsInput = {
-  set?: $Enums.ResearchCategory
-}
-
 export type ResearchArticleUpdatetagsInput = {
   set?: string[]
   push?: string | string[]

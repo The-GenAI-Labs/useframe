@@ -1,19 +1,26 @@
-import { Router, type Request, type Response } from "express"
-import { prisma } from "@useframe/db"
+import { Router, type Request, type Response } from "express";
+import { prisma } from "@useframe/db";
 
-const router: Router = Router()
+const router: Router = Router();
 
 router.get("/domain-pattern/:domain", (req: Request, res: Response, next) => {
   prisma.domainPattern
-    .findUnique({ where: { domain: req.params.domain } })
+    .findUnique({
+      where: {
+        domain:
+          typeof req.params.domain === "string" ? req.params.domain : undefined,
+      },
+    })
     .then((pattern: unknown) => {
       if (!pattern) {
-        res.status(404).json({ success: false, message: "Domain pattern not found" })
-        return
+        res
+          .status(404)
+          .json({ success: false, message: "Domain pattern not found" });
+        return;
       }
-      res.json({ success: true, data: pattern })
+      res.json({ success: true, data: pattern });
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
-export default router
+export default router;

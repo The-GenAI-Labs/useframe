@@ -10,7 +10,8 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.19.0",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "^2.1.9"
   }
 }

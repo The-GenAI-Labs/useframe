@@ -16,9 +16,15 @@ export async function denseRank(
   query: string,
   candidateIds: string[],
 ): Promise<RankedId[]> {
-  if (candidateIds.length === 0) return []
+  if (candidateIds.length === 0 || !env.OPENAI_API_KEY) return []
 
-  const queryEmbedding = await embedQuery(query)
+  let queryEmbedding: number[]
+  try {
+    queryEmbedding = await embedQuery(query)
+  } catch (err) {
+    console.warn("[dense] embedding failed, sparse-only ranking:", err instanceof Error ? err.message : err)
+    return []
+  }
   const vectorLiteral = `[${queryEmbedding.join(",")}]`
 
   const rows = await prisma.$queryRawUnsafe<{ id: string }[]>(

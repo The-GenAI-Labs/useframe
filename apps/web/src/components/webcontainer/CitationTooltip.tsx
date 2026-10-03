@@ -64,7 +64,7 @@ export function CitationTooltip({ citationIds, citations, rect }: Props) {
                                     : "bg-tertiary text-mut"
                             }`}
                         >
-                            {verified ? "Science-proved" : "AI-inferred"}
+                            {verified === null ? "Research citation" : verified ? "Science-proved" : "AI-inferred"}
                         </span>
                         {citationIds.length > 1 && (
                             <span className="text-[10px] text-mut">+{citationIds.length - 1} more</span>

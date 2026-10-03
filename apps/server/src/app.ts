@@ -1,3 +1,4 @@
+import researchCitationsRoutes from "./modules/plan/researchCitations.routes.js";
 import validationRoutes from "./modules/validation/validation.routes.js";
 import express, { Request, Response, NextFunction } from "express";
 import type { Express } from "express";
@@ -43,6 +44,7 @@ app.get("/health", (_req: Request, res: Response) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/projects", researchCitationsRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/score", scoreRoutes);

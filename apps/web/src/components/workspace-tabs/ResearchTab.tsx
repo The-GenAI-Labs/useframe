@@ -7,6 +7,7 @@ import {
   type DesignBrief,
   type PlanCandidates,
 } from "@/lib/api/services/research.service"
+import { FindingCitations } from "@/components/webcontainer/FindingCitations"
 import { CandidatePicker } from "./CandidatePicker"
 import { StepApprovalBar } from "./StepApprovalBar"
 import { BriefFieldEditor } from "./BriefFieldEditor"
@@ -323,14 +324,7 @@ export function ResearchTab({ project, pipelineStatus, locked, onApproved }: Pro
 
           {state.brief.citations.length > 0 && (
             <Section title="Citations">
-              <ul className="flex flex-col gap-2">
-                {state.brief.citations.map((c, i) => (
-                  <li key={c.id ?? i} className="text-[11.5px] text-sec leading-relaxed">
-                    <span className="font-medium">[{i + 1}]</span> {c.title}
-                    {c.source && <span className="text-mut italic"> — {c.source}</span>}
-                  </li>
-                ))}
-              </ul>
+              <FindingCitations citations={state.brief.citations} />
             </Section>
           )}
 

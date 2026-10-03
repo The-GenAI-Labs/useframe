@@ -25,41 +25,65 @@ export type AggregateFindingRelation = {
 }
 
 export type FindingRelationMinAggregateOutputType = {
-  fromId: string | null
-  toId: string | null
-  relation: string | null
+  id: string | null
+  findingId: string | null
+  relatedFindingId: string | null
+  relationType: $Enums.FindingRelationType | null
+  legacyRelation: string | null
+  note: string | null
+  createdAt: Date | null
 }
 
 export type FindingRelationMaxAggregateOutputType = {
-  fromId: string | null
-  toId: string | null
-  relation: string | null
+  id: string | null
+  findingId: string | null
+  relatedFindingId: string | null
+  relationType: $Enums.FindingRelationType | null
+  legacyRelation: string | null
+  note: string | null
+  createdAt: Date | null
 }
 
 export type FindingRelationCountAggregateOutputType = {
-  fromId: number
-  toId: number
-  relation: number
+  id: number
+  findingId: number
+  relatedFindingId: number
+  relationType: number
+  legacyRelation: number
+  note: number
+  createdAt: number
   _all: number
 }
 
 
 export type FindingRelationMinAggregateInputType = {
-  fromId?: true
-  toId?: true
-  relation?: true
+  id?: true
+  findingId?: true
+  relatedFindingId?: true
+  relationType?: true
+  legacyRelation?: true
+  note?: true
+  createdAt?: true
 }
 
 export type FindingRelationMaxAggregateInputType = {
-  fromId?: true
-  toId?: true
-  relation?: true
+  id?: true
+  findingId?: true
+  relatedFindingId?: true
+  relationType?: true
+  legacyRelation?: true
+  note?: true
+  createdAt?: true
 }
 
 export type FindingRelationCountAggregateInputType = {
-  fromId?: true
-  toId?: true
-  relation?: true
+  id?: true
+  findingId?: true
+  relatedFindingId?: true
+  relationType?: true
+  legacyRelation?: true
+  note?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -136,9 +160,13 @@ export type FindingRelationGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 export type FindingRelationGroupByOutputType = {
-  fromId: string
-  toId: string
-  relation: string
+  id: string
+  findingId: string
+  relatedFindingId: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation: string
+  note: string | null
+  createdAt: Date
   _count: FindingRelationCountAggregateOutputType | null
   _min: FindingRelationMinAggregateOutputType | null
   _max: FindingRelationMaxAggregateOutputType | null
@@ -163,31 +191,53 @@ export type FindingRelationWhereInput = {
   AND?: Prisma.FindingRelationWhereInput | Prisma.FindingRelationWhereInput[]
   OR?: Prisma.FindingRelationWhereInput[]
   NOT?: Prisma.FindingRelationWhereInput | Prisma.FindingRelationWhereInput[]
-  fromId?: Prisma.StringFilter<"FindingRelation"> | string
-  toId?: Prisma.StringFilter<"FindingRelation"> | string
-  relation?: Prisma.StringFilter<"FindingRelation"> | string
+  id?: Prisma.StringFilter<"FindingRelation"> | string
+  findingId?: Prisma.StringFilter<"FindingRelation"> | string
+  relatedFindingId?: Prisma.StringFilter<"FindingRelation"> | string
+  relationType?: Prisma.EnumFindingRelationTypeFilter<"FindingRelation"> | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFilter<"FindingRelation"> | string
+  note?: Prisma.StringNullableFilter<"FindingRelation"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"FindingRelation"> | Date | string
+  finding?: Prisma.XOR<Prisma.ResearchFindingScalarRelationFilter, Prisma.ResearchFindingWhereInput>
+  relatedFinding?: Prisma.XOR<Prisma.ResearchFindingScalarRelationFilter, Prisma.ResearchFindingWhereInput>
 }
 
 export type FindingRelationOrderByWithRelationInput = {
-  fromId?: Prisma.SortOrder
-  toId?: Prisma.SortOrder
-  relation?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  findingId?: Prisma.SortOrder
+  relatedFindingId?: Prisma.SortOrder
+  relationType?: Prisma.SortOrder
+  legacyRelation?: Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  finding?: Prisma.ResearchFindingOrderByWithRelationInput
+  relatedFinding?: Prisma.ResearchFindingOrderByWithRelationInput
 }
 
 export type FindingRelationWhereUniqueInput = Prisma.AtLeast<{
-  fromId_toId?: Prisma.FindingRelationFromIdToIdCompoundUniqueInput
+  id?: string
+  findingId_relatedFindingId_relationType?: Prisma.FindingRelationFindingIdRelatedFindingIdRelationTypeCompoundUniqueInput
   AND?: Prisma.FindingRelationWhereInput | Prisma.FindingRelationWhereInput[]
   OR?: Prisma.FindingRelationWhereInput[]
   NOT?: Prisma.FindingRelationWhereInput | Prisma.FindingRelationWhereInput[]
-  fromId?: Prisma.StringFilter<"FindingRelation"> | string
-  toId?: Prisma.StringFilter<"FindingRelation"> | string
-  relation?: Prisma.StringFilter<"FindingRelation"> | string
-}, "fromId_toId">
+  findingId?: Prisma.StringFilter<"FindingRelation"> | string
+  relatedFindingId?: Prisma.StringFilter<"FindingRelation"> | string
+  relationType?: Prisma.EnumFindingRelationTypeFilter<"FindingRelation"> | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFilter<"FindingRelation"> | string
+  note?: Prisma.StringNullableFilter<"FindingRelation"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"FindingRelation"> | Date | string
+  finding?: Prisma.XOR<Prisma.ResearchFindingScalarRelationFilter, Prisma.ResearchFindingWhereInput>
+  relatedFinding?: Prisma.XOR<Prisma.ResearchFindingScalarRelationFilter, Prisma.ResearchFindingWhereInput>
+}, "id" | "findingId_relatedFindingId_relationType">
 
 export type FindingRelationOrderByWithAggregationInput = {
-  fromId?: Prisma.SortOrder
-  toId?: Prisma.SortOrder
-  relation?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  findingId?: Prisma.SortOrder
+  relatedFindingId?: Prisma.SortOrder
+  relationType?: Prisma.SortOrder
+  legacyRelation?: Prisma.SortOrder
+  note?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.FindingRelationCountOrderByAggregateInput
   _max?: Prisma.FindingRelationMaxOrderByAggregateInput
   _min?: Prisma.FindingRelationMinOrderByAggregateInput
@@ -197,111 +247,466 @@ export type FindingRelationScalarWhereWithAggregatesInput = {
   AND?: Prisma.FindingRelationScalarWhereWithAggregatesInput | Prisma.FindingRelationScalarWhereWithAggregatesInput[]
   OR?: Prisma.FindingRelationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FindingRelationScalarWhereWithAggregatesInput | Prisma.FindingRelationScalarWhereWithAggregatesInput[]
-  fromId?: Prisma.StringWithAggregatesFilter<"FindingRelation"> | string
-  toId?: Prisma.StringWithAggregatesFilter<"FindingRelation"> | string
-  relation?: Prisma.StringWithAggregatesFilter<"FindingRelation"> | string
+  id?: Prisma.StringWithAggregatesFilter<"FindingRelation"> | string
+  findingId?: Prisma.StringWithAggregatesFilter<"FindingRelation"> | string
+  relatedFindingId?: Prisma.StringWithAggregatesFilter<"FindingRelation"> | string
+  relationType?: Prisma.EnumFindingRelationTypeWithAggregatesFilter<"FindingRelation"> | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringWithAggregatesFilter<"FindingRelation"> | string
+  note?: Prisma.StringNullableWithAggregatesFilter<"FindingRelation"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"FindingRelation"> | Date | string
 }
 
 export type FindingRelationCreateInput = {
-  fromId: string
-  toId: string
-  relation: string
+  id?: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation?: string
+  note?: string | null
+  createdAt?: Date | string
+  finding: Prisma.ResearchFindingCreateNestedOneWithoutRelationsFromInput
+  relatedFinding: Prisma.ResearchFindingCreateNestedOneWithoutRelationsToInput
 }
 
 export type FindingRelationUncheckedCreateInput = {
-  fromId: string
-  toId: string
-  relation: string
+  id?: string
+  findingId: string
+  relatedFindingId: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation?: string
+  note?: string | null
+  createdAt?: Date | string
 }
 
 export type FindingRelationUpdateInput = {
-  fromId?: Prisma.StringFieldUpdateOperationsInput | string
-  toId?: Prisma.StringFieldUpdateOperationsInput | string
-  relation?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  finding?: Prisma.ResearchFindingUpdateOneRequiredWithoutRelationsFromNestedInput
+  relatedFinding?: Prisma.ResearchFindingUpdateOneRequiredWithoutRelationsToNestedInput
 }
 
 export type FindingRelationUncheckedUpdateInput = {
-  fromId?: Prisma.StringFieldUpdateOperationsInput | string
-  toId?: Prisma.StringFieldUpdateOperationsInput | string
-  relation?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  findingId?: Prisma.StringFieldUpdateOperationsInput | string
+  relatedFindingId?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FindingRelationCreateManyInput = {
-  fromId: string
-  toId: string
-  relation: string
+  id?: string
+  findingId: string
+  relatedFindingId: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation?: string
+  note?: string | null
+  createdAt?: Date | string
 }
 
 export type FindingRelationUpdateManyMutationInput = {
-  fromId?: Prisma.StringFieldUpdateOperationsInput | string
-  toId?: Prisma.StringFieldUpdateOperationsInput | string
-  relation?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type FindingRelationUncheckedUpdateManyInput = {
-  fromId?: Prisma.StringFieldUpdateOperationsInput | string
-  toId?: Prisma.StringFieldUpdateOperationsInput | string
-  relation?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  findingId?: Prisma.StringFieldUpdateOperationsInput | string
+  relatedFindingId?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type FindingRelationFromIdToIdCompoundUniqueInput = {
-  fromId: string
-  toId: string
+export type FindingRelationListRelationFilter = {
+  every?: Prisma.FindingRelationWhereInput
+  some?: Prisma.FindingRelationWhereInput
+  none?: Prisma.FindingRelationWhereInput
+}
+
+export type FindingRelationOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type FindingRelationFindingIdRelatedFindingIdRelationTypeCompoundUniqueInput = {
+  findingId: string
+  relatedFindingId: string
+  relationType: $Enums.FindingRelationType
 }
 
 export type FindingRelationCountOrderByAggregateInput = {
-  fromId?: Prisma.SortOrder
-  toId?: Prisma.SortOrder
-  relation?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  findingId?: Prisma.SortOrder
+  relatedFindingId?: Prisma.SortOrder
+  relationType?: Prisma.SortOrder
+  legacyRelation?: Prisma.SortOrder
+  note?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type FindingRelationMaxOrderByAggregateInput = {
-  fromId?: Prisma.SortOrder
-  toId?: Prisma.SortOrder
-  relation?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  findingId?: Prisma.SortOrder
+  relatedFindingId?: Prisma.SortOrder
+  relationType?: Prisma.SortOrder
+  legacyRelation?: Prisma.SortOrder
+  note?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type FindingRelationMinOrderByAggregateInput = {
-  fromId?: Prisma.SortOrder
-  toId?: Prisma.SortOrder
-  relation?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  findingId?: Prisma.SortOrder
+  relatedFindingId?: Prisma.SortOrder
+  relationType?: Prisma.SortOrder
+  legacyRelation?: Prisma.SortOrder
+  note?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+}
+
+export type FindingRelationCreateNestedManyWithoutFindingInput = {
+  create?: Prisma.XOR<Prisma.FindingRelationCreateWithoutFindingInput, Prisma.FindingRelationUncheckedCreateWithoutFindingInput> | Prisma.FindingRelationCreateWithoutFindingInput[] | Prisma.FindingRelationUncheckedCreateWithoutFindingInput[]
+  connectOrCreate?: Prisma.FindingRelationCreateOrConnectWithoutFindingInput | Prisma.FindingRelationCreateOrConnectWithoutFindingInput[]
+  createMany?: Prisma.FindingRelationCreateManyFindingInputEnvelope
+  connect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+}
+
+export type FindingRelationCreateNestedManyWithoutRelatedFindingInput = {
+  create?: Prisma.XOR<Prisma.FindingRelationCreateWithoutRelatedFindingInput, Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput> | Prisma.FindingRelationCreateWithoutRelatedFindingInput[] | Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput[]
+  connectOrCreate?: Prisma.FindingRelationCreateOrConnectWithoutRelatedFindingInput | Prisma.FindingRelationCreateOrConnectWithoutRelatedFindingInput[]
+  createMany?: Prisma.FindingRelationCreateManyRelatedFindingInputEnvelope
+  connect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+}
+
+export type FindingRelationUncheckedCreateNestedManyWithoutFindingInput = {
+  create?: Prisma.XOR<Prisma.FindingRelationCreateWithoutFindingInput, Prisma.FindingRelationUncheckedCreateWithoutFindingInput> | Prisma.FindingRelationCreateWithoutFindingInput[] | Prisma.FindingRelationUncheckedCreateWithoutFindingInput[]
+  connectOrCreate?: Prisma.FindingRelationCreateOrConnectWithoutFindingInput | Prisma.FindingRelationCreateOrConnectWithoutFindingInput[]
+  createMany?: Prisma.FindingRelationCreateManyFindingInputEnvelope
+  connect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+}
+
+export type FindingRelationUncheckedCreateNestedManyWithoutRelatedFindingInput = {
+  create?: Prisma.XOR<Prisma.FindingRelationCreateWithoutRelatedFindingInput, Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput> | Prisma.FindingRelationCreateWithoutRelatedFindingInput[] | Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput[]
+  connectOrCreate?: Prisma.FindingRelationCreateOrConnectWithoutRelatedFindingInput | Prisma.FindingRelationCreateOrConnectWithoutRelatedFindingInput[]
+  createMany?: Prisma.FindingRelationCreateManyRelatedFindingInputEnvelope
+  connect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+}
+
+export type FindingRelationUpdateManyWithoutFindingNestedInput = {
+  create?: Prisma.XOR<Prisma.FindingRelationCreateWithoutFindingInput, Prisma.FindingRelationUncheckedCreateWithoutFindingInput> | Prisma.FindingRelationCreateWithoutFindingInput[] | Prisma.FindingRelationUncheckedCreateWithoutFindingInput[]
+  connectOrCreate?: Prisma.FindingRelationCreateOrConnectWithoutFindingInput | Prisma.FindingRelationCreateOrConnectWithoutFindingInput[]
+  upsert?: Prisma.FindingRelationUpsertWithWhereUniqueWithoutFindingInput | Prisma.FindingRelationUpsertWithWhereUniqueWithoutFindingInput[]
+  createMany?: Prisma.FindingRelationCreateManyFindingInputEnvelope
+  set?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  disconnect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  delete?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  connect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  update?: Prisma.FindingRelationUpdateWithWhereUniqueWithoutFindingInput | Prisma.FindingRelationUpdateWithWhereUniqueWithoutFindingInput[]
+  updateMany?: Prisma.FindingRelationUpdateManyWithWhereWithoutFindingInput | Prisma.FindingRelationUpdateManyWithWhereWithoutFindingInput[]
+  deleteMany?: Prisma.FindingRelationScalarWhereInput | Prisma.FindingRelationScalarWhereInput[]
+}
+
+export type FindingRelationUpdateManyWithoutRelatedFindingNestedInput = {
+  create?: Prisma.XOR<Prisma.FindingRelationCreateWithoutRelatedFindingInput, Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput> | Prisma.FindingRelationCreateWithoutRelatedFindingInput[] | Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput[]
+  connectOrCreate?: Prisma.FindingRelationCreateOrConnectWithoutRelatedFindingInput | Prisma.FindingRelationCreateOrConnectWithoutRelatedFindingInput[]
+  upsert?: Prisma.FindingRelationUpsertWithWhereUniqueWithoutRelatedFindingInput | Prisma.FindingRelationUpsertWithWhereUniqueWithoutRelatedFindingInput[]
+  createMany?: Prisma.FindingRelationCreateManyRelatedFindingInputEnvelope
+  set?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  disconnect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  delete?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  connect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  update?: Prisma.FindingRelationUpdateWithWhereUniqueWithoutRelatedFindingInput | Prisma.FindingRelationUpdateWithWhereUniqueWithoutRelatedFindingInput[]
+  updateMany?: Prisma.FindingRelationUpdateManyWithWhereWithoutRelatedFindingInput | Prisma.FindingRelationUpdateManyWithWhereWithoutRelatedFindingInput[]
+  deleteMany?: Prisma.FindingRelationScalarWhereInput | Prisma.FindingRelationScalarWhereInput[]
+}
+
+export type FindingRelationUncheckedUpdateManyWithoutFindingNestedInput = {
+  create?: Prisma.XOR<Prisma.FindingRelationCreateWithoutFindingInput, Prisma.FindingRelationUncheckedCreateWithoutFindingInput> | Prisma.FindingRelationCreateWithoutFindingInput[] | Prisma.FindingRelationUncheckedCreateWithoutFindingInput[]
+  connectOrCreate?: Prisma.FindingRelationCreateOrConnectWithoutFindingInput | Prisma.FindingRelationCreateOrConnectWithoutFindingInput[]
+  upsert?: Prisma.FindingRelationUpsertWithWhereUniqueWithoutFindingInput | Prisma.FindingRelationUpsertWithWhereUniqueWithoutFindingInput[]
+  createMany?: Prisma.FindingRelationCreateManyFindingInputEnvelope
+  set?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  disconnect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  delete?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  connect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  update?: Prisma.FindingRelationUpdateWithWhereUniqueWithoutFindingInput | Prisma.FindingRelationUpdateWithWhereUniqueWithoutFindingInput[]
+  updateMany?: Prisma.FindingRelationUpdateManyWithWhereWithoutFindingInput | Prisma.FindingRelationUpdateManyWithWhereWithoutFindingInput[]
+  deleteMany?: Prisma.FindingRelationScalarWhereInput | Prisma.FindingRelationScalarWhereInput[]
+}
+
+export type FindingRelationUncheckedUpdateManyWithoutRelatedFindingNestedInput = {
+  create?: Prisma.XOR<Prisma.FindingRelationCreateWithoutRelatedFindingInput, Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput> | Prisma.FindingRelationCreateWithoutRelatedFindingInput[] | Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput[]
+  connectOrCreate?: Prisma.FindingRelationCreateOrConnectWithoutRelatedFindingInput | Prisma.FindingRelationCreateOrConnectWithoutRelatedFindingInput[]
+  upsert?: Prisma.FindingRelationUpsertWithWhereUniqueWithoutRelatedFindingInput | Prisma.FindingRelationUpsertWithWhereUniqueWithoutRelatedFindingInput[]
+  createMany?: Prisma.FindingRelationCreateManyRelatedFindingInputEnvelope
+  set?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  disconnect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  delete?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  connect?: Prisma.FindingRelationWhereUniqueInput | Prisma.FindingRelationWhereUniqueInput[]
+  update?: Prisma.FindingRelationUpdateWithWhereUniqueWithoutRelatedFindingInput | Prisma.FindingRelationUpdateWithWhereUniqueWithoutRelatedFindingInput[]
+  updateMany?: Prisma.FindingRelationUpdateManyWithWhereWithoutRelatedFindingInput | Prisma.FindingRelationUpdateManyWithWhereWithoutRelatedFindingInput[]
+  deleteMany?: Prisma.FindingRelationScalarWhereInput | Prisma.FindingRelationScalarWhereInput[]
+}
+
+export type EnumFindingRelationTypeFieldUpdateOperationsInput = {
+  set?: $Enums.FindingRelationType
+}
+
+export type FindingRelationCreateWithoutFindingInput = {
+  id?: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation?: string
+  note?: string | null
+  createdAt?: Date | string
+  relatedFinding: Prisma.ResearchFindingCreateNestedOneWithoutRelationsToInput
+}
+
+export type FindingRelationUncheckedCreateWithoutFindingInput = {
+  id?: string
+  relatedFindingId: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation?: string
+  note?: string | null
+  createdAt?: Date | string
+}
+
+export type FindingRelationCreateOrConnectWithoutFindingInput = {
+  where: Prisma.FindingRelationWhereUniqueInput
+  create: Prisma.XOR<Prisma.FindingRelationCreateWithoutFindingInput, Prisma.FindingRelationUncheckedCreateWithoutFindingInput>
+}
+
+export type FindingRelationCreateManyFindingInputEnvelope = {
+  data: Prisma.FindingRelationCreateManyFindingInput | Prisma.FindingRelationCreateManyFindingInput[]
+  skipDuplicates?: boolean
+}
+
+export type FindingRelationCreateWithoutRelatedFindingInput = {
+  id?: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation?: string
+  note?: string | null
+  createdAt?: Date | string
+  finding: Prisma.ResearchFindingCreateNestedOneWithoutRelationsFromInput
+}
+
+export type FindingRelationUncheckedCreateWithoutRelatedFindingInput = {
+  id?: string
+  findingId: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation?: string
+  note?: string | null
+  createdAt?: Date | string
+}
+
+export type FindingRelationCreateOrConnectWithoutRelatedFindingInput = {
+  where: Prisma.FindingRelationWhereUniqueInput
+  create: Prisma.XOR<Prisma.FindingRelationCreateWithoutRelatedFindingInput, Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput>
+}
+
+export type FindingRelationCreateManyRelatedFindingInputEnvelope = {
+  data: Prisma.FindingRelationCreateManyRelatedFindingInput | Prisma.FindingRelationCreateManyRelatedFindingInput[]
+  skipDuplicates?: boolean
+}
+
+export type FindingRelationUpsertWithWhereUniqueWithoutFindingInput = {
+  where: Prisma.FindingRelationWhereUniqueInput
+  update: Prisma.XOR<Prisma.FindingRelationUpdateWithoutFindingInput, Prisma.FindingRelationUncheckedUpdateWithoutFindingInput>
+  create: Prisma.XOR<Prisma.FindingRelationCreateWithoutFindingInput, Prisma.FindingRelationUncheckedCreateWithoutFindingInput>
+}
+
+export type FindingRelationUpdateWithWhereUniqueWithoutFindingInput = {
+  where: Prisma.FindingRelationWhereUniqueInput
+  data: Prisma.XOR<Prisma.FindingRelationUpdateWithoutFindingInput, Prisma.FindingRelationUncheckedUpdateWithoutFindingInput>
+}
+
+export type FindingRelationUpdateManyWithWhereWithoutFindingInput = {
+  where: Prisma.FindingRelationScalarWhereInput
+  data: Prisma.XOR<Prisma.FindingRelationUpdateManyMutationInput, Prisma.FindingRelationUncheckedUpdateManyWithoutFindingInput>
+}
+
+export type FindingRelationScalarWhereInput = {
+  AND?: Prisma.FindingRelationScalarWhereInput | Prisma.FindingRelationScalarWhereInput[]
+  OR?: Prisma.FindingRelationScalarWhereInput[]
+  NOT?: Prisma.FindingRelationScalarWhereInput | Prisma.FindingRelationScalarWhereInput[]
+  id?: Prisma.StringFilter<"FindingRelation"> | string
+  findingId?: Prisma.StringFilter<"FindingRelation"> | string
+  relatedFindingId?: Prisma.StringFilter<"FindingRelation"> | string
+  relationType?: Prisma.EnumFindingRelationTypeFilter<"FindingRelation"> | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFilter<"FindingRelation"> | string
+  note?: Prisma.StringNullableFilter<"FindingRelation"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"FindingRelation"> | Date | string
+}
+
+export type FindingRelationUpsertWithWhereUniqueWithoutRelatedFindingInput = {
+  where: Prisma.FindingRelationWhereUniqueInput
+  update: Prisma.XOR<Prisma.FindingRelationUpdateWithoutRelatedFindingInput, Prisma.FindingRelationUncheckedUpdateWithoutRelatedFindingInput>
+  create: Prisma.XOR<Prisma.FindingRelationCreateWithoutRelatedFindingInput, Prisma.FindingRelationUncheckedCreateWithoutRelatedFindingInput>
+}
+
+export type FindingRelationUpdateWithWhereUniqueWithoutRelatedFindingInput = {
+  where: Prisma.FindingRelationWhereUniqueInput
+  data: Prisma.XOR<Prisma.FindingRelationUpdateWithoutRelatedFindingInput, Prisma.FindingRelationUncheckedUpdateWithoutRelatedFindingInput>
+}
+
+export type FindingRelationUpdateManyWithWhereWithoutRelatedFindingInput = {
+  where: Prisma.FindingRelationScalarWhereInput
+  data: Prisma.XOR<Prisma.FindingRelationUpdateManyMutationInput, Prisma.FindingRelationUncheckedUpdateManyWithoutRelatedFindingInput>
+}
+
+export type FindingRelationCreateManyFindingInput = {
+  id?: string
+  relatedFindingId: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation?: string
+  note?: string | null
+  createdAt?: Date | string
+}
+
+export type FindingRelationCreateManyRelatedFindingInput = {
+  id?: string
+  findingId: string
+  relationType: $Enums.FindingRelationType
+  legacyRelation?: string
+  note?: string | null
+  createdAt?: Date | string
+}
+
+export type FindingRelationUpdateWithoutFindingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  relatedFinding?: Prisma.ResearchFindingUpdateOneRequiredWithoutRelationsToNestedInput
+}
+
+export type FindingRelationUncheckedUpdateWithoutFindingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  relatedFindingId?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type FindingRelationUncheckedUpdateManyWithoutFindingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  relatedFindingId?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type FindingRelationUpdateWithoutRelatedFindingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  finding?: Prisma.ResearchFindingUpdateOneRequiredWithoutRelationsFromNestedInput
+}
+
+export type FindingRelationUncheckedUpdateWithoutRelatedFindingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  findingId?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type FindingRelationUncheckedUpdateManyWithoutRelatedFindingInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  findingId?: Prisma.StringFieldUpdateOperationsInput | string
+  relationType?: Prisma.EnumFindingRelationTypeFieldUpdateOperationsInput | $Enums.FindingRelationType
+  legacyRelation?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type FindingRelationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  fromId?: boolean
-  toId?: boolean
-  relation?: boolean
+  id?: boolean
+  findingId?: boolean
+  relatedFindingId?: boolean
+  relationType?: boolean
+  legacyRelation?: boolean
+  note?: boolean
+  createdAt?: boolean
+  finding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
+  relatedFinding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["findingRelation"]>
 
 export type FindingRelationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  fromId?: boolean
-  toId?: boolean
-  relation?: boolean
+  id?: boolean
+  findingId?: boolean
+  relatedFindingId?: boolean
+  relationType?: boolean
+  legacyRelation?: boolean
+  note?: boolean
+  createdAt?: boolean
+  finding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
+  relatedFinding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["findingRelation"]>
 
 export type FindingRelationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  fromId?: boolean
-  toId?: boolean
-  relation?: boolean
+  id?: boolean
+  findingId?: boolean
+  relatedFindingId?: boolean
+  relationType?: boolean
+  legacyRelation?: boolean
+  note?: boolean
+  createdAt?: boolean
+  finding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
+  relatedFinding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["findingRelation"]>
 
 export type FindingRelationSelectScalar = {
-  fromId?: boolean
-  toId?: boolean
-  relation?: boolean
+  id?: boolean
+  findingId?: boolean
+  relatedFindingId?: boolean
+  relationType?: boolean
+  legacyRelation?: boolean
+  note?: boolean
+  createdAt?: boolean
 }
 
-export type FindingRelationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"fromId" | "toId" | "relation", ExtArgs["result"]["findingRelation"]>
+export type FindingRelationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "findingId" | "relatedFindingId" | "relationType" | "legacyRelation" | "note" | "createdAt", ExtArgs["result"]["findingRelation"]>
+export type FindingRelationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  finding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
+  relatedFinding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
+}
+export type FindingRelationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  finding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
+  relatedFinding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
+}
+export type FindingRelationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  finding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
+  relatedFinding?: boolean | Prisma.ResearchFindingDefaultArgs<ExtArgs>
+}
 
 export type $FindingRelationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FindingRelation"
-  objects: {}
+  objects: {
+    finding: Prisma.$ResearchFindingPayload<ExtArgs>
+    relatedFinding: Prisma.$ResearchFindingPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    fromId: string
-    toId: string
-    relation: string
+    id: string
+    findingId: string
+    relatedFindingId: string
+    relationType: $Enums.FindingRelationType
+    legacyRelation: string
+    note: string | null
+    createdAt: Date
   }, ExtArgs["result"]["findingRelation"]>
   composites: {}
 }
@@ -385,8 +790,8 @@ export interface FindingRelationDelegate<ExtArgs extends runtime.Types.Extension
    * // Get first 10 FindingRelations
    * const findingRelations = await prisma.findingRelation.findMany({ take: 10 })
    * 
-   * // Only select the `fromId`
-   * const findingRelationWithFromIdOnly = await prisma.findingRelation.findMany({ select: { fromId: true } })
+   * // Only select the `id`
+   * const findingRelationWithIdOnly = await prisma.findingRelation.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends FindingRelationFindManyArgs>(args?: Prisma.SelectSubset<T, FindingRelationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FindingRelationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -430,9 +835,9 @@ export interface FindingRelationDelegate<ExtArgs extends runtime.Types.Extension
    *   ]
    * })
    * 
-   * // Create many FindingRelations and only return the `fromId`
-   * const findingRelationWithFromIdOnly = await prisma.findingRelation.createManyAndReturn({
-   *   select: { fromId: true },
+   * // Create many FindingRelations and only return the `id`
+   * const findingRelationWithIdOnly = await prisma.findingRelation.createManyAndReturn({
+   *   select: { id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -521,9 +926,9 @@ export interface FindingRelationDelegate<ExtArgs extends runtime.Types.Extension
    *   ]
    * })
    * 
-   * // Update zero or more FindingRelations and only return the `fromId`
-   * const findingRelationWithFromIdOnly = await prisma.findingRelation.updateManyAndReturn({
-   *   select: { fromId: true },
+   * // Update zero or more FindingRelations and only return the `id`
+   * const findingRelationWithIdOnly = await prisma.findingRelation.updateManyAndReturn({
+   *   select: { id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -696,6 +1101,8 @@ readonly fields: FindingRelationFieldRefs;
  */
 export interface Prisma__FindingRelationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  finding<T extends Prisma.ResearchFindingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResearchFindingDefaultArgs<ExtArgs>>): Prisma.Prisma__ResearchFindingClient<runtime.Types.Result.GetResult<Prisma.$ResearchFindingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  relatedFinding<T extends Prisma.ResearchFindingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResearchFindingDefaultArgs<ExtArgs>>): Prisma.Prisma__ResearchFindingClient<runtime.Types.Result.GetResult<Prisma.$ResearchFindingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -725,9 +1132,13 @@ export interface Prisma__FindingRelationClient<T, Null = never, ExtArgs extends 
  * Fields of the FindingRelation model
  */
 export interface FindingRelationFieldRefs {
-  readonly fromId: Prisma.FieldRef<"FindingRelation", 'String'>
-  readonly toId: Prisma.FieldRef<"FindingRelation", 'String'>
-  readonly relation: Prisma.FieldRef<"FindingRelation", 'String'>
+  readonly id: Prisma.FieldRef<"FindingRelation", 'String'>
+  readonly findingId: Prisma.FieldRef<"FindingRelation", 'String'>
+  readonly relatedFindingId: Prisma.FieldRef<"FindingRelation", 'String'>
+  readonly relationType: Prisma.FieldRef<"FindingRelation", 'FindingRelationType'>
+  readonly legacyRelation: Prisma.FieldRef<"FindingRelation", 'String'>
+  readonly note: Prisma.FieldRef<"FindingRelation", 'String'>
+  readonly createdAt: Prisma.FieldRef<"FindingRelation", 'DateTime'>
 }
     
 
@@ -744,6 +1155,10 @@ export type FindingRelationFindUniqueArgs<ExtArgs extends runtime.Types.Extensio
    * Omit specific fields from the FindingRelation
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
   /**
    * Filter, which FindingRelation to fetch.
    */
@@ -763,6 +1178,10 @@ export type FindingRelationFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.E
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
+  /**
    * Filter, which FindingRelation to fetch.
    */
   where: Prisma.FindingRelationWhereUniqueInput
@@ -780,6 +1199,10 @@ export type FindingRelationFindFirstArgs<ExtArgs extends runtime.Types.Extension
    * Omit specific fields from the FindingRelation
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
   /**
    * Filter, which FindingRelation to fetch.
    */
@@ -829,6 +1252,10 @@ export type FindingRelationFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Ex
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
+  /**
    * Filter, which FindingRelation to fetch.
    */
   where?: Prisma.FindingRelationWhereInput
@@ -876,6 +1303,10 @@ export type FindingRelationFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the FindingRelation
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
   /**
    * Filter, which FindingRelations to fetch.
    */
@@ -925,6 +1356,10 @@ export type FindingRelationCreateArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
+  /**
    * The data needed to create a FindingRelation.
    */
   data: Prisma.XOR<Prisma.FindingRelationCreateInput, Prisma.FindingRelationUncheckedCreateInput>
@@ -958,6 +1393,10 @@ export type FindingRelationCreateManyAndReturnArgs<ExtArgs extends runtime.Types
    */
   data: Prisma.FindingRelationCreateManyInput | Prisma.FindingRelationCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -972,6 +1411,10 @@ export type FindingRelationUpdateArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the FindingRelation
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
   /**
    * The data needed to update a FindingRelation.
    */
@@ -1024,6 +1467,10 @@ export type FindingRelationUpdateManyAndReturnArgs<ExtArgs extends runtime.Types
    * Limit how many FindingRelations to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1038,6 +1485,10 @@ export type FindingRelationUpsertArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the FindingRelation
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
   /**
    * The filter to search for the FindingRelation to update in case it exists.
    */
@@ -1064,6 +1515,10 @@ export type FindingRelationDeleteArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the FindingRelation
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
   /**
    * Filter which FindingRelation to delete.
    */
@@ -1096,4 +1551,8 @@ export type FindingRelationDefaultArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the FindingRelation
    */
   omit?: Prisma.FindingRelationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
 }

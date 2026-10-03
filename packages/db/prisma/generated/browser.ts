@@ -168,6 +168,26 @@ export type Waitlist = Prisma.WaitlistModel
  */
 export type ResearchReport = Prisma.ResearchReportModel
 /**
+ * Model ResearchIntake
+ * 
+ */
+export type ResearchIntake = Prisma.ResearchIntakeModel
+/**
+ * Model StyleTag
+ * 
+ */
+export type StyleTag = Prisma.StyleTagModel
+/**
+ * Model StyleDirective
+ * 
+ */
+export type StyleDirective = Prisma.StyleDirectiveModel
+/**
+ * Model ComponentExemplar
+ * 
+ */
+export type ComponentExemplar = Prisma.ComponentExemplarModel
+/**
  * Model ResearchFinding
  * 
  */
@@ -177,6 +197,31 @@ export type ResearchFinding = Prisma.ResearchFindingModel
  * 
  */
 export type FindingRelation = Prisma.FindingRelationModel
+/**
+ * Model SourceDocument
+ * 
+ */
+export type SourceDocument = Prisma.SourceDocumentModel
+/**
+ * Model FindingChunk
+ * 
+ */
+export type FindingChunk = Prisma.FindingChunkModel
+/**
+ * Model PendingFindingRelation
+ * 
+ */
+export type PendingFindingRelation = Prisma.PendingFindingRelationModel
+/**
+ * Model ResearchReportCitation
+ * 
+ */
+export type ResearchReportCitation = Prisma.ResearchReportCitationModel
+/**
+ * Model CorpusIngestionLog
+ * 
+ */
+export type CorpusIngestionLog = Prisma.CorpusIngestionLogModel
 /**
  * Model DomainPattern
  * 
@@ -237,3 +282,23 @@ export type SearchQueryCache = Prisma.SearchQueryCacheModel
  * 
  */
 export type SeoAuditResult = Prisma.SeoAuditResultModel
+/**
+ * Model RetrievalCacheEntry
+ * 
+ */
+export type RetrievalCacheEntry = Prisma.RetrievalCacheEntryModel
+/**
+ * Model CorpusVersion
+ * 
+ */
+export type CorpusVersion = Prisma.CorpusVersionModel
+/**
+ * Model JevDecisionLog
+ * 
+ */
+export type JevDecisionLog = Prisma.JevDecisionLogModel
+/**
+ * Model ProjectChatMessage
+ * 
+ */
+export type ProjectChatMessage = Prisma.ProjectChatMessageModel

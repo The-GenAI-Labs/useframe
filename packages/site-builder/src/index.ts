@@ -308,3 +308,5 @@ export default defineConfig({
 }
 
 export { withScaffold, type ReplicationNextFile } from "./nextScaffold.js";
+export * from "./theme/tokens.js";
+export * from "./capabilities.js";

@@ -1,0 +1,350 @@
+[
+  {
+    "key": "illustrative",
+    "label": "Illustrative",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "scroll_effects",
+    "label": "Scroll Effects",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "minimal",
+    "label": "Minimal",
+    "description": "Restrained and quiet: generous whitespace, a small neutral palette with a single accent, hairline dividers instead of boxed cards, flat surfaces with no shadows, and typography where hierarchy comes from size and weight rather than decoration. Content sits on a centered column and every element earns its place.",
+    "designTokens": {
+      "radius": "soft",
+      "shadow": "none",
+      "surface": "flat",
+      "texture": "none",
+      "borderWeight": "hairline",
+      "colorContrast": "balanced",
+      "density": "airy",
+      "typeScale": "restrained",
+      "layoutGrid": "centered",
+      "motionIntensity": "subtle"
+    },
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "corporate",
+      "editorial",
+      "glassmorphism",
+      "grid_layout",
+      "typographic"
+    ],
+    "avoidPatterns": [
+      "decorative gradient or blob backgrounds",
+      "more than one accent color",
+      "drop shadows on cards",
+      "dense icon grids"
+    ],
+    "status": "ACTIVE"
+  },
+  {
+    "key": "flat_design",
+    "label": "Flat Design",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "typographic",
+    "label": "Typographic",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "brutalism",
+      "editorial",
+      "minimal"
+    ],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "fun",
+    "label": "Fun",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "horizontal_layout",
+    "label": "Horizontal Layout",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": "horizontal_scroll",
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "retro_vintage",
+    "label": "Retro / Vintage",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "three_d",
+    "label": "3D",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": "three_js",
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "gradients",
+    "label": "Gradients",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "glassmorphism"
+    ],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "brutalism",
+    "label": "Brutalism",
+    "description": "Raw and deliberate: sharp corners, heavy borders, high-contrast flat color blocks, oversized dramatic type, and a visible grid structure with no soft shadows or gradients. Feels confident and unpolished on purpose.",
+    "designTokens": {
+      "radius": "sharp",
+      "shadow": "none",
+      "borderWeight": "heavy",
+      "colorContrast": "high",
+      "typeScale": "dramatic",
+      "surface": "flat"
+    },
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "bold",
+      "grid_layout",
+      "typographic"
+    ],
+    "avoidPatterns": [
+      "soft rounded corners",
+      "subtle gradients or soft shadows",
+      "low-contrast pastel palettes",
+      "polished stock photography"
+    ],
+    "status": "ACTIVE"
+  },
+  {
+    "key": "narrow_layout",
+    "label": "Narrow Layout",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "grunge",
+    "label": "Grunge",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "modular_layout",
+    "label": "Modular Layout",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "glassmorphism",
+    "label": "Glassmorphism",
+    "description": "Frosted translucent panels with backdrop blur over a vivid or gradient background, rounded corners, layered soft shadows and thin light borders that catch the edge. Depth comes from translucency, used sparingly on a few focal surfaces.",
+    "designTokens": {
+      "surface": "glass",
+      "radius": "rounded",
+      "shadow": "layered",
+      "colorContrast": "balanced"
+    },
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "futuristic",
+      "gradients",
+      "minimal"
+    ],
+    "avoidPatterns": [
+      "glass on every surface; limit to nav and 1-2 cards",
+      "body text over busy imagery without enough contrast",
+      "blur behind long text blocks"
+    ],
+    "status": "ACTIVE"
+  },
+  {
+    "key": "futuristic",
+    "label": "Futuristic",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "glassmorphism"
+    ],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "pixel_art",
+    "label": "Pixel Art",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "glitch",
+    "label": "Glitch",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "editorial",
+    "label": "Editorial",
+    "description": "Magazine-like: strong contrast between a large display face and a readable body face, asymmetric grids with intentional white space, pull quotes and captions, and hairline rules separating content. Reads like a considered publication rather than a product page.",
+    "designTokens": {
+      "typeScale": "editorial",
+      "layoutGrid": "asymmetric",
+      "density": "airy",
+      "borderWeight": "hairline"
+    },
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "grid_layout",
+      "luxury",
+      "minimal",
+      "typographic"
+    ],
+    "avoidPatterns": [
+      "centered symmetrical layout for every section",
+      "uniform card grids",
+      "small timid headlines",
+      "busy backgrounds behind long-form text"
+    ],
+    "status": "ACTIVE"
+  },
+  {
+    "key": "luxury",
+    "label": "Luxury",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "editorial"
+    ],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "bold",
+    "label": "Bold",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "brutalism"
+    ],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "skeuomorphism",
+    "label": "Skeuomorphism",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "grid_layout",
+    "label": "Grid Layout",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "brutalism",
+      "editorial",
+      "minimal"
+    ],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "key": "corporate",
+    "label": "Corporate",
+    "description": "",
+    "designTokens": {},
+    "exemplarUrls": [],
+    "requiresCapability": null,
+    "compatibleWith": [
+      "minimal"
+    ],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  }
+]

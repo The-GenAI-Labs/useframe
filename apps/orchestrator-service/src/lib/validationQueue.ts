@@ -9,6 +9,7 @@ import {
 import { redis } from "./redis.js";
 import { env } from "../config/env.js";
 const queue = new Queue(QUEUES.VALIDATE, { connection: redis });
+const mainQueue = new Queue(QUEUES.VALIDATE_MAIN, { connection: redis });
 
 export async function enqueueValidation(
   projectId: string,
@@ -18,7 +19,7 @@ export async function enqueueValidation(
   if (!env.GCS_BUCKET) return;
   const run = await ensureValidationRun(projectId, versionId, pipeline);
   if (run?.status === "QUEUED")
-    await queue.add(
+    await (pipeline === "MAIN" ? mainQueue : queue).add(
       "validate",
       { runId: run.id },
       { jobId: run.id, attempts: 1, removeOnComplete: 100, removeOnFail: 100 },

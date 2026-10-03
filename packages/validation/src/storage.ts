@@ -2,13 +2,15 @@ import { Storage } from "@google-cloud/storage";
 
 export const SCREENSHOT_TTL_MS = 2 * 60 * 60 * 1000;
 let storage: Storage | undefined;
+export function getGcsStorage(): Storage {
+  return (storage ??= new Storage({
+    retryOptions: { maxRetries: 2, totalTimeout: 30 },
+  }));
+}
 function bucket() {
   const name = process.env.GCS_BUCKET;
   if (!name) throw new Error("GCS_BUCKET is required for validation");
-  storage ??= new Storage({
-    retryOptions: { maxRetries: 2, totalTimeout: 30 },
-  });
-  return storage.bucket(name);
+  return getGcsStorage().bucket(name);
 }
 export function validationPrefix(
   pipeline: "MAIN" | "REPLICATE",

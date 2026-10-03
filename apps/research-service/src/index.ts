@@ -1,27 +1,31 @@
-import express from "express"
-import cors from "cors"
-import helmet from "helmet"
-import morgan from "morgan"
-import { env } from "@/config/env.js"
-import retrieveRoute from "@/routes/retrieve.route.js"
-import domainPatternRoute from "@/routes/domainPattern.route.js"
-import audienceModifierRoute from "@/routes/audienceModifier.route.js"
-import findingRoute from "@/routes/finding.route.js"
-import { prisma } from "@useframe/db"
+import { flushJev } from "@repo/jev";
+import { closeRedis } from "./lib/redis.js";
+import { assertEmbeddingDimensions } from "@repo/rag";
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
+import { env } from "@/config/env.js";
+import retrieveRoute from "@/routes/retrieve.route.js";
+import domainPatternRoute from "@/routes/domainPattern.route.js";
+import audienceModifierRoute from "@/routes/audienceModifier.route.js";
+import findingRoute from "@/routes/finding.route.js";
+import projectRoute from "@/routes/project.route.js";
+import { prisma } from "@useframe/db";
 
-const app = express()
+const app = express();
 
-app.use(helmet())
+app.use(helmet());
 app.use(
   cors({
     origin: env.CLIENT_URL,
     credentials: true,
-  })
-)
-app.use(express.json({ limit: "1mb" }))
+  }),
+);
+app.use(express.json({ limit: "1mb" }));
 
 if (env.NODE_ENV === "development") {
-  app.use(morgan("dev"))
+  app.use(morgan("dev"));
 }
 
 app.get("/health", (_req, res) => {
@@ -30,29 +34,41 @@ app.get("/health", (_req, res) => {
     service: "research",
     mock: env.RESEARCH_MOCK,
     timestamp: new Date().toISOString(),
-  })
-})
+  });
+});
 
-app.use("/", retrieveRoute)
-app.use("/", domainPatternRoute)
-app.use("/", audienceModifierRoute)
-app.use("/", findingRoute)
+app.use("/", retrieveRoute);
+app.use("/", domainPatternRoute);
+app.use("/", audienceModifierRoute);
+app.use("/", findingRoute);
+app.use("/", projectRoute);
 
-app.use(
-  "/{*splat}",
-  (_req: express.Request, res: express.Response) => {
-    res.status(404).json({ success: false, message: "Not found" })
-  }
-)
+app.use("/{*splat}", (_req: express.Request, res: express.Response) => {
+  res.status(404).json({ success: false, message: "Not found" });
+});
 
 const start = async () => {
-  await prisma.$connect()
-  app.listen(env.PORT, () => {
-    console.log(`Research service running on port ${env.PORT} (mock=${env.RESEARCH_MOCK})`)
-  })
-}
+  await prisma.$connect();
+  if (!env.RESEARCH_MOCK) await assertEmbeddingDimensions(env.EMBEDDING_DIMS);
+  const server = app.listen(env.PORT, () => {
+    console.log(
+      `Research service running on port ${env.PORT} (mock=${env.RESEARCH_MOCK})`,
+    );
+  });
+  const shutdown = () => {
+    server.close(() => {
+      void flushJev().finally(async () => {
+        closeRedis();
+        await prisma.$disconnect();
+        process.exit(0);
+      });
+    });
+  };
+  process.once("SIGTERM", shutdown);
+  process.once("SIGINT", shutdown);
+};
 
 start().catch((err) => {
-  console.error("Failed to start research service:", err)
-  process.exit(1)
-})
+  console.error("Failed to start research service:", err);
+  process.exit(1);
+});

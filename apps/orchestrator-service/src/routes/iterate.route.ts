@@ -1,3 +1,4 @@
+import { UnsupportedValidationCorrection } from "@repo/validation";
 import { isValidationWorker } from "../lib/internalValidationAuth.js";
 import {
   AutoIterateSchema,
@@ -30,7 +31,18 @@ router.post(
       }
       void iterateValidationVersion(input.data)
         .then((version) => res.json({ id: version.id }))
-        .catch(next);
+        .catch((error: unknown) => {
+          if (error instanceof UnsupportedValidationCorrection) {
+            res
+              .status(422)
+              .json({
+                code: "UNSUPPORTED_VALIDATION_CORRECTION",
+                message: error.message,
+              });
+            return;
+          }
+          next(error);
+        });
       return;
     }
     try {

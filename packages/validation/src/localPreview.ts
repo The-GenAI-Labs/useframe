@@ -1,3 +1,4 @@
+import { detectPreviewCommand } from "./previewCommand.js";
 import { startKubernetesPreview } from "./kubernetesPreview.js";
 import { spawn } from "node:child_process";
 import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
@@ -9,10 +10,12 @@ import getPort from "get-port";
 export async function startLocalPreview(
   files: { path: string; content: string }[],
   projectId: string,
-  framework: "vite" | "next",
+  framework?: "vite" | "next",
 ) {
+  const runDevScript = framework === undefined;
+  framework ??= detectPreviewCommand(files).framework;
   if (process.env.KUBERNETES_SERVICE_HOST)
-    return startKubernetesPreview(files, framework);
+    return startKubernetesPreview(files, framework, runDevScript);
   const dir = await mkdtemp(path.join(tmpdir(), "useframe-validation-"));
   const port = await getPort({ host: "127.0.0.1" });
   const name = `validation-${randomUUID()}`;
@@ -87,6 +90,7 @@ export async function startLocalPreview(
         `type=bind,source=${dir},target=/input,readonly`,
         process.env.VALIDATION_PREVIEW_IMAGE ?? "useframe-validation:local",
         framework,
+        ...(runDevScript ? ["script"] : []),
       ],
       { windowsHide: true, stdio: ["ignore", "pipe", "pipe"] },
     );

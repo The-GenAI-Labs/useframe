@@ -1,0 +1,28 @@
+{
+  "name": "@repo/research-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "seed:styles": "tsx --env-file=../db/.env src/seedStyles.ts"
+  },
+  "dependencies": {
+    "@repo/site-builder": "workspace:*",
+    "@useframe/db": "workspace:*",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "tsx": "^4.22.1",
+    "typescript": "5.9.2",
+    "vitest": "^2.1.8"
+  }
+}

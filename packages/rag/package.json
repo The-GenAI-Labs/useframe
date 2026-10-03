@@ -1,0 +1,38 @@
+{
+  "name": "@repo/rag",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./contract": "./dist/contract.js",
+    "./ingestion": "./dist/ingestion.js",
+    "./storage": "./dist/storage.js",
+    "./config": "./dist/config.js",
+    "./hyde": "./dist/hyde.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "cli": "tsx src/cli.ts",
+    "check:migrations": "node scripts/check-migrations.mjs",
+    "test:integration": "node --env-file=../db/.env ./node_modules/vitest/vitest.mjs run src/integration.test.ts"
+  },
+  "dependencies": {
+    "@repo/schemas": "workspace:*",
+    "@repo/validation": "workspace:*",
+    "@useframe/db": "workspace:*",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "zod": "^3.25.76",
+    "@repo/events": "workspace:*",
+    "bullmq": "^5.28.0",
+    "ioredis": "^5.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.22.1",
+    "typescript": "5.9.2",
+    "vitest": "^2.1.9"
+  }
+}

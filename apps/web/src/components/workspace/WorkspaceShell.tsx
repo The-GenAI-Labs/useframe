@@ -24,6 +24,7 @@ import {
   type PipelineToggleStep,
 } from "@/components/workspace-tabs/PipelineToggle";
 import { PipelineModeToggle } from "@/components/workspace-tabs/PipelineModeToggle";
+import { ProjectChatPanel } from "@/components/chat/ProjectChatPanel";
 import { ResearchTab } from "@/components/workspace-tabs/ResearchTab";
 import { SeoStepView } from "@/components/workspace-tabs/SeoStepView";
 import { DeployStepView } from "@/components/workspace-tabs/DeployStepView";
@@ -65,6 +66,7 @@ function hasSnapshot(snapshot: unknown): boolean {
 }
 
 export function WorkspaceShell({ project }: Props) {
+  const [showProjectChat, setShowProjectChat] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -98,7 +100,11 @@ export function WorkspaceShell({ project }: Props) {
     project.currentVersionId ?? project.versions[0]?.id ?? null,
   );
 
-  const validation = useValidationStatus("MAIN", project.slug);
+  const validation = useValidationStatus(
+    "MAIN",
+    project.slug,
+    project.generationTier === "PAID",
+  );
   const visibleVersion = useRef<string | undefined>(undefined);
   visibleVersion.current = versions[activeIndex]?.id;
   const validationRevision = validation?.versionIds.join(",") ?? "";
@@ -400,7 +406,9 @@ export function WorkspaceShell({ project }: Props) {
 
       <div className="flex flex-col gap-2 px-4 pt-2.5 shrink-0">
         <ModelTierBanner generationTier={project.generationTier} />
-        <ValidationBadge run={validation?.run} />
+        {project.generationTier === "PAID" && (
+          <ValidationBadge pipeline="MAIN" run={validation?.run} />
+        )}
         <LowBalanceBanner />
       </div>
 
@@ -449,6 +457,22 @@ export function WorkspaceShell({ project }: Props) {
           })()}
       </div>
 
+      <div className="shrink-0 px-4 py-2">
+        <button
+          type="button"
+          onClick={() => setShowProjectChat(true)}
+          className="rounded-lg border border-base px-3 py-2 text-sm text-sec focus-visible:outline-2"
+        >
+          Ask about this project
+        </button>
+      </div>
+      {showProjectChat && (
+        <ProjectChatPanel
+          key={project.id}
+          projectId={project.id}
+          onClose={() => setShowProjectChat(false)}
+        />
+      )}
       <div className="flex-1 overflow-hidden">
         {currentStep === "RESEARCH" && (
           <ResearchTab

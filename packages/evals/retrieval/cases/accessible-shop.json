@@ -1,0 +1,16 @@
+{
+  "name": "Accessible primary CTA",
+  "input": {
+    "projectId": "eval-accessible-shop",
+    "rawIdea": "An accessible online shop for older adults who need readable product details and clear checkout buttons on tablets.",
+    "niche": "ECOMMERCE",
+    "intakeAnswers": {
+      "audience": "Older adults",
+      "goal": "Complete checkout with fewer target-selection errors"
+    }
+  },
+  "expected": {
+    "LAYOUT": ["fitts-law-cta-target-size"],
+    "ACCESSIBILITY": ["fitts-law-cta-target-size"]
+  }
+}

@@ -1,4 +1,6 @@
+import { flushJev } from "@repo/jev";
 import validationRoute from "./routes/validation.route.js";
+import hydeRoute from "./routes/hyde.route.js";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -49,6 +51,7 @@ app.use("/", replicateRoute);
 app.use("/", clarifyRoute);
 app.use("/", iterateRoute);
 app.use("/", validationRoute);
+app.use("/", hydeRoute);
 app.use("/", chatRoute);
 app.use("/", researchRoute);
 app.use("/", seoMaterializeRoute);
@@ -61,9 +64,18 @@ app.use("/{*splat}", (_req: express.Request, res: express.Response) => {
 
 const start = async () => {
   await prisma.$connect();
-  app.listen(env.PORT, () => {
+  const server = app.listen(env.PORT, () => {
     console.log(`Orchestrator service running on port ${env.PORT}`);
   });
+  for (const signal of ["SIGTERM", "SIGINT"] as const) {
+    process.once(signal, () => {
+      server.close(() => {
+        void flushJev()
+          .then(() => prisma.$disconnect())
+          .finally(() => process.exit(0));
+      });
+    });
+  }
 };
 
 start().catch((err) => {

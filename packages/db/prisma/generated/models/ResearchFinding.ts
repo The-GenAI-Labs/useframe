@@ -20,8 +20,20 @@ export type ResearchFindingModel = runtime.Types.Result.DefaultSelection<Prisma.
 
 export type AggregateResearchFinding = {
   _count: ResearchFindingCountAggregateOutputType | null
+  _avg: ResearchFindingAvgAggregateOutputType | null
+  _sum: ResearchFindingSumAggregateOutputType | null
   _min: ResearchFindingMinAggregateOutputType | null
   _max: ResearchFindingMaxAggregateOutputType | null
+}
+
+export type ResearchFindingAvgAggregateOutputType = {
+  confidenceScore: number | null
+  reuseCount: number | null
+}
+
+export type ResearchFindingSumAggregateOutputType = {
+  confidenceScore: number | null
+  reuseCount: number | null
 }
 
 export type ResearchFindingMinAggregateOutputType = {
@@ -33,6 +45,24 @@ export type ResearchFindingMinAggregateOutputType = {
   contextHeader: string | null
   verified: boolean | null
   createdAt: Date | null
+  slug: string | null
+  status: $Enums.FindingStatus | null
+  category: $Enums.ResearchCategory | null
+  title: string | null
+  statement: string | null
+  appliesWhen: string | null
+  confidenceScore: number | null
+  effectSize: string | null
+  sourceDocumentId: string | null
+  sourceExcerpt: string | null
+  sourceLocator: string | null
+  reuseCount: number | null
+  contentHash: string | null
+  embeddingHash: string | null
+  gcsObjectKey: string | null
+  gcsGeneration: string | null
+  verifiedAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ResearchFindingMaxAggregateOutputType = {
@@ -44,6 +74,24 @@ export type ResearchFindingMaxAggregateOutputType = {
   contextHeader: string | null
   verified: boolean | null
   createdAt: Date | null
+  slug: string | null
+  status: $Enums.FindingStatus | null
+  category: $Enums.ResearchCategory | null
+  title: string | null
+  statement: string | null
+  appliesWhen: string | null
+  confidenceScore: number | null
+  effectSize: string | null
+  sourceDocumentId: string | null
+  sourceExcerpt: string | null
+  sourceLocator: string | null
+  reuseCount: number | null
+  contentHash: string | null
+  embeddingHash: string | null
+  gcsObjectKey: string | null
+  gcsGeneration: string | null
+  verifiedAt: Date | null
+  updatedAt: Date | null
 }
 
 export type ResearchFindingCountAggregateOutputType = {
@@ -58,9 +106,38 @@ export type ResearchFindingCountAggregateOutputType = {
   contextHeader: number
   verified: number
   createdAt: number
+  slug: number
+  status: number
+  category: number
+  title: number
+  statement: number
+  appliesWhen: number
+  tags: number
+  confidenceScore: number
+  effectSize: number
+  sourceDocumentId: number
+  sourceExcerpt: number
+  sourceLocator: number
+  reuseCount: number
+  contentHash: number
+  embeddingHash: number
+  gcsObjectKey: number
+  gcsGeneration: number
+  verifiedAt: number
+  updatedAt: number
   _all: number
 }
 
+
+export type ResearchFindingAvgAggregateInputType = {
+  confidenceScore?: true
+  reuseCount?: true
+}
+
+export type ResearchFindingSumAggregateInputType = {
+  confidenceScore?: true
+  reuseCount?: true
+}
 
 export type ResearchFindingMinAggregateInputType = {
   id?: true
@@ -71,6 +148,24 @@ export type ResearchFindingMinAggregateInputType = {
   contextHeader?: true
   verified?: true
   createdAt?: true
+  slug?: true
+  status?: true
+  category?: true
+  title?: true
+  statement?: true
+  appliesWhen?: true
+  confidenceScore?: true
+  effectSize?: true
+  sourceDocumentId?: true
+  sourceExcerpt?: true
+  sourceLocator?: true
+  reuseCount?: true
+  contentHash?: true
+  embeddingHash?: true
+  gcsObjectKey?: true
+  gcsGeneration?: true
+  verifiedAt?: true
+  updatedAt?: true
 }
 
 export type ResearchFindingMaxAggregateInputType = {
@@ -82,6 +177,24 @@ export type ResearchFindingMaxAggregateInputType = {
   contextHeader?: true
   verified?: true
   createdAt?: true
+  slug?: true
+  status?: true
+  category?: true
+  title?: true
+  statement?: true
+  appliesWhen?: true
+  confidenceScore?: true
+  effectSize?: true
+  sourceDocumentId?: true
+  sourceExcerpt?: true
+  sourceLocator?: true
+  reuseCount?: true
+  contentHash?: true
+  embeddingHash?: true
+  gcsObjectKey?: true
+  gcsGeneration?: true
+  verifiedAt?: true
+  updatedAt?: true
 }
 
 export type ResearchFindingCountAggregateInputType = {
@@ -96,6 +209,25 @@ export type ResearchFindingCountAggregateInputType = {
   contextHeader?: true
   verified?: true
   createdAt?: true
+  slug?: true
+  status?: true
+  category?: true
+  title?: true
+  statement?: true
+  appliesWhen?: true
+  tags?: true
+  confidenceScore?: true
+  effectSize?: true
+  sourceDocumentId?: true
+  sourceExcerpt?: true
+  sourceLocator?: true
+  reuseCount?: true
+  contentHash?: true
+  embeddingHash?: true
+  gcsObjectKey?: true
+  gcsGeneration?: true
+  verifiedAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -137,6 +269,18 @@ export type ResearchFindingAggregateArgs<ExtArgs extends runtime.Types.Extension
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ResearchFindingAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ResearchFindingSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ResearchFindingMinAggregateInputType
@@ -167,6 +311,8 @@ export type ResearchFindingGroupByArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   _count?: ResearchFindingCountAggregateInputType | true
+  _avg?: ResearchFindingAvgAggregateInputType
+  _sum?: ResearchFindingSumAggregateInputType
   _min?: ResearchFindingMinAggregateInputType
   _max?: ResearchFindingMaxAggregateInputType
 }
@@ -183,7 +329,28 @@ export type ResearchFindingGroupByOutputType = {
   contextHeader: string
   verified: boolean
   createdAt: Date
+  slug: string
+  status: $Enums.FindingStatus
+  category: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen: string | null
+  tags: string[]
+  confidenceScore: number | null
+  effectSize: string | null
+  sourceDocumentId: string | null
+  sourceExcerpt: string | null
+  sourceLocator: string | null
+  reuseCount: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt: Date | null
+  updatedAt: Date
   _count: ResearchFindingCountAggregateOutputType | null
+  _avg: ResearchFindingAvgAggregateOutputType | null
+  _sum: ResearchFindingSumAggregateOutputType | null
   _min: ResearchFindingMinAggregateOutputType | null
   _max: ResearchFindingMaxAggregateOutputType | null
 }
@@ -218,6 +385,30 @@ export type ResearchFindingWhereInput = {
   contextHeader?: Prisma.StringFilter<"ResearchFinding"> | string
   verified?: Prisma.BoolFilter<"ResearchFinding"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ResearchFinding"> | Date | string
+  slug?: Prisma.StringFilter<"ResearchFinding"> | string
+  status?: Prisma.EnumFindingStatusFilter<"ResearchFinding"> | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFilter<"ResearchFinding"> | $Enums.ResearchCategory
+  title?: Prisma.StringFilter<"ResearchFinding"> | string
+  statement?: Prisma.StringFilter<"ResearchFinding"> | string
+  appliesWhen?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  tags?: Prisma.StringNullableListFilter<"ResearchFinding">
+  confidenceScore?: Prisma.FloatNullableFilter<"ResearchFinding"> | number | null
+  effectSize?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  sourceDocumentId?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  sourceExcerpt?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  sourceLocator?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  reuseCount?: Prisma.IntFilter<"ResearchFinding"> | number
+  contentHash?: Prisma.StringFilter<"ResearchFinding"> | string
+  embeddingHash?: Prisma.StringFilter<"ResearchFinding"> | string
+  gcsObjectKey?: Prisma.StringFilter<"ResearchFinding"> | string
+  gcsGeneration?: Prisma.StringFilter<"ResearchFinding"> | string
+  verifiedAt?: Prisma.DateTimeNullableFilter<"ResearchFinding"> | Date | string | null
+  updatedAt?: Prisma.DateTimeFilter<"ResearchFinding"> | Date | string
+  source?: Prisma.XOR<Prisma.SourceDocumentNullableScalarRelationFilter, Prisma.SourceDocumentWhereInput> | null
+  chunks?: Prisma.FindingChunkListRelationFilter
+  relationsFrom?: Prisma.FindingRelationListRelationFilter
+  relationsTo?: Prisma.FindingRelationListRelationFilter
+  citations?: Prisma.ResearchReportCitationListRelationFilter
 }
 
 export type ResearchFindingOrderByWithRelationInput = {
@@ -232,10 +423,36 @@ export type ResearchFindingOrderByWithRelationInput = {
   contextHeader?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  title?: Prisma.SortOrder
+  statement?: Prisma.SortOrder
+  appliesWhen?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  confidenceScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  effectSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceDocumentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceExcerpt?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceLocator?: Prisma.SortOrderInput | Prisma.SortOrder
+  reuseCount?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  embeddingHash?: Prisma.SortOrder
+  gcsObjectKey?: Prisma.SortOrder
+  gcsGeneration?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  source?: Prisma.SourceDocumentOrderByWithRelationInput
+  chunks?: Prisma.FindingChunkOrderByRelationAggregateInput
+  relationsFrom?: Prisma.FindingRelationOrderByRelationAggregateInput
+  relationsTo?: Prisma.FindingRelationOrderByRelationAggregateInput
+  citations?: Prisma.ResearchReportCitationOrderByRelationAggregateInput
 }
 
 export type ResearchFindingWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
+  gcsObjectKey?: string
   AND?: Prisma.ResearchFindingWhereInput | Prisma.ResearchFindingWhereInput[]
   OR?: Prisma.ResearchFindingWhereInput[]
   NOT?: Prisma.ResearchFindingWhereInput | Prisma.ResearchFindingWhereInput[]
@@ -249,7 +466,29 @@ export type ResearchFindingWhereUniqueInput = Prisma.AtLeast<{
   contextHeader?: Prisma.StringFilter<"ResearchFinding"> | string
   verified?: Prisma.BoolFilter<"ResearchFinding"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ResearchFinding"> | Date | string
-}, "id">
+  status?: Prisma.EnumFindingStatusFilter<"ResearchFinding"> | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFilter<"ResearchFinding"> | $Enums.ResearchCategory
+  title?: Prisma.StringFilter<"ResearchFinding"> | string
+  statement?: Prisma.StringFilter<"ResearchFinding"> | string
+  appliesWhen?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  tags?: Prisma.StringNullableListFilter<"ResearchFinding">
+  confidenceScore?: Prisma.FloatNullableFilter<"ResearchFinding"> | number | null
+  effectSize?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  sourceDocumentId?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  sourceExcerpt?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  sourceLocator?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  reuseCount?: Prisma.IntFilter<"ResearchFinding"> | number
+  contentHash?: Prisma.StringFilter<"ResearchFinding"> | string
+  embeddingHash?: Prisma.StringFilter<"ResearchFinding"> | string
+  gcsGeneration?: Prisma.StringFilter<"ResearchFinding"> | string
+  verifiedAt?: Prisma.DateTimeNullableFilter<"ResearchFinding"> | Date | string | null
+  updatedAt?: Prisma.DateTimeFilter<"ResearchFinding"> | Date | string
+  source?: Prisma.XOR<Prisma.SourceDocumentNullableScalarRelationFilter, Prisma.SourceDocumentWhereInput> | null
+  chunks?: Prisma.FindingChunkListRelationFilter
+  relationsFrom?: Prisma.FindingRelationListRelationFilter
+  relationsTo?: Prisma.FindingRelationListRelationFilter
+  citations?: Prisma.ResearchReportCitationListRelationFilter
+}, "id" | "slug" | "gcsObjectKey">
 
 export type ResearchFindingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -263,9 +502,30 @@ export type ResearchFindingOrderByWithAggregationInput = {
   contextHeader?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  title?: Prisma.SortOrder
+  statement?: Prisma.SortOrder
+  appliesWhen?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  confidenceScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  effectSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceDocumentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceExcerpt?: Prisma.SortOrderInput | Prisma.SortOrder
+  sourceLocator?: Prisma.SortOrderInput | Prisma.SortOrder
+  reuseCount?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  embeddingHash?: Prisma.SortOrder
+  gcsObjectKey?: Prisma.SortOrder
+  gcsGeneration?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.ResearchFindingCountOrderByAggregateInput
+  _avg?: Prisma.ResearchFindingAvgOrderByAggregateInput
   _max?: Prisma.ResearchFindingMaxOrderByAggregateInput
   _min?: Prisma.ResearchFindingMinOrderByAggregateInput
+  _sum?: Prisma.ResearchFindingSumOrderByAggregateInput
 }
 
 export type ResearchFindingScalarWhereWithAggregatesInput = {
@@ -283,34 +543,99 @@ export type ResearchFindingScalarWhereWithAggregatesInput = {
   contextHeader?: Prisma.StringWithAggregatesFilter<"ResearchFinding"> | string
   verified?: Prisma.BoolWithAggregatesFilter<"ResearchFinding"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ResearchFinding"> | Date | string
+  slug?: Prisma.StringWithAggregatesFilter<"ResearchFinding"> | string
+  status?: Prisma.EnumFindingStatusWithAggregatesFilter<"ResearchFinding"> | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryWithAggregatesFilter<"ResearchFinding"> | $Enums.ResearchCategory
+  title?: Prisma.StringWithAggregatesFilter<"ResearchFinding"> | string
+  statement?: Prisma.StringWithAggregatesFilter<"ResearchFinding"> | string
+  appliesWhen?: Prisma.StringNullableWithAggregatesFilter<"ResearchFinding"> | string | null
+  tags?: Prisma.StringNullableListFilter<"ResearchFinding">
+  confidenceScore?: Prisma.FloatNullableWithAggregatesFilter<"ResearchFinding"> | number | null
+  effectSize?: Prisma.StringNullableWithAggregatesFilter<"ResearchFinding"> | string | null
+  sourceDocumentId?: Prisma.StringNullableWithAggregatesFilter<"ResearchFinding"> | string | null
+  sourceExcerpt?: Prisma.StringNullableWithAggregatesFilter<"ResearchFinding"> | string | null
+  sourceLocator?: Prisma.StringNullableWithAggregatesFilter<"ResearchFinding"> | string | null
+  reuseCount?: Prisma.IntWithAggregatesFilter<"ResearchFinding"> | number
+  contentHash?: Prisma.StringWithAggregatesFilter<"ResearchFinding"> | string
+  embeddingHash?: Prisma.StringWithAggregatesFilter<"ResearchFinding"> | string
+  gcsObjectKey?: Prisma.StringWithAggregatesFilter<"ResearchFinding"> | string
+  gcsGeneration?: Prisma.StringWithAggregatesFilter<"ResearchFinding"> | string
+  verifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ResearchFinding"> | Date | string | null
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ResearchFinding"> | Date | string
 }
 
 export type ResearchFindingCreateInput = {
   id?: string
-  claim: string
-  paper: string
-  field: string
+  claim?: string
+  paper?: string
+  field?: string
   appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
   audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
-  decision: string
-  options: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  contextHeader: string
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
   verified?: boolean
   createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  source?: Prisma.SourceDocumentCreateNestedOneWithoutFindingsInput
+  chunks?: Prisma.FindingChunkCreateNestedManyWithoutFindingInput
+  relationsFrom?: Prisma.FindingRelationCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationCreateNestedManyWithoutRelatedFindingInput
+  citations?: Prisma.ResearchReportCitationCreateNestedManyWithoutFindingInput
 }
 
 export type ResearchFindingUncheckedCreateInput = {
   id?: string
-  claim: string
-  paper: string
-  field: string
+  claim?: string
+  paper?: string
+  field?: string
   appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
   audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
-  decision: string
-  options: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  contextHeader: string
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
   verified?: boolean
   createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceDocumentId?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  chunks?: Prisma.FindingChunkUncheckedCreateNestedManyWithoutFindingInput
+  relationsFrom?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutRelatedFindingInput
+  citations?: Prisma.ResearchReportCitationUncheckedCreateNestedManyWithoutFindingInput
 }
 
 export type ResearchFindingUpdateInput = {
@@ -325,6 +650,29 @@ export type ResearchFindingUpdateInput = {
   contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.SourceDocumentUpdateOneWithoutFindingsNestedInput
+  chunks?: Prisma.FindingChunkUpdateManyWithoutFindingNestedInput
+  relationsFrom?: Prisma.FindingRelationUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUpdateManyWithoutRelatedFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUpdateManyWithoutFindingNestedInput
 }
 
 export type ResearchFindingUncheckedUpdateInput = {
@@ -339,20 +687,62 @@ export type ResearchFindingUncheckedUpdateInput = {
   contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceDocumentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.FindingChunkUncheckedUpdateManyWithoutFindingNestedInput
+  relationsFrom?: Prisma.FindingRelationUncheckedUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUncheckedUpdateManyWithoutRelatedFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUncheckedUpdateManyWithoutFindingNestedInput
 }
 
 export type ResearchFindingCreateManyInput = {
   id?: string
-  claim: string
-  paper: string
-  field: string
+  claim?: string
+  paper?: string
+  field?: string
   appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
   audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
-  decision: string
-  options: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  contextHeader: string
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
   verified?: boolean
   createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceDocumentId?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
 }
 
 export type ResearchFindingUpdateManyMutationInput = {
@@ -367,6 +757,24 @@ export type ResearchFindingUpdateManyMutationInput = {
   contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ResearchFindingUncheckedUpdateManyInput = {
@@ -381,6 +789,25 @@ export type ResearchFindingUncheckedUpdateManyInput = {
   contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
   verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceDocumentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ResearchFindingCountOrderByAggregateInput = {
@@ -395,6 +822,30 @@ export type ResearchFindingCountOrderByAggregateInput = {
   contextHeader?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  title?: Prisma.SortOrder
+  statement?: Prisma.SortOrder
+  appliesWhen?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  confidenceScore?: Prisma.SortOrder
+  effectSize?: Prisma.SortOrder
+  sourceDocumentId?: Prisma.SortOrder
+  sourceExcerpt?: Prisma.SortOrder
+  sourceLocator?: Prisma.SortOrder
+  reuseCount?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  embeddingHash?: Prisma.SortOrder
+  gcsObjectKey?: Prisma.SortOrder
+  gcsGeneration?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type ResearchFindingAvgOrderByAggregateInput = {
+  confidenceScore?: Prisma.SortOrder
+  reuseCount?: Prisma.SortOrder
 }
 
 export type ResearchFindingMaxOrderByAggregateInput = {
@@ -406,6 +857,24 @@ export type ResearchFindingMaxOrderByAggregateInput = {
   contextHeader?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  title?: Prisma.SortOrder
+  statement?: Prisma.SortOrder
+  appliesWhen?: Prisma.SortOrder
+  confidenceScore?: Prisma.SortOrder
+  effectSize?: Prisma.SortOrder
+  sourceDocumentId?: Prisma.SortOrder
+  sourceExcerpt?: Prisma.SortOrder
+  sourceLocator?: Prisma.SortOrder
+  reuseCount?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  embeddingHash?: Prisma.SortOrder
+  gcsObjectKey?: Prisma.SortOrder
+  gcsGeneration?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type ResearchFindingMinOrderByAggregateInput = {
@@ -417,6 +886,44 @@ export type ResearchFindingMinOrderByAggregateInput = {
   contextHeader?: Prisma.SortOrder
   verified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  title?: Prisma.SortOrder
+  statement?: Prisma.SortOrder
+  appliesWhen?: Prisma.SortOrder
+  confidenceScore?: Prisma.SortOrder
+  effectSize?: Prisma.SortOrder
+  sourceDocumentId?: Prisma.SortOrder
+  sourceExcerpt?: Prisma.SortOrder
+  sourceLocator?: Prisma.SortOrder
+  reuseCount?: Prisma.SortOrder
+  contentHash?: Prisma.SortOrder
+  embeddingHash?: Prisma.SortOrder
+  gcsObjectKey?: Prisma.SortOrder
+  gcsGeneration?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type ResearchFindingSumOrderByAggregateInput = {
+  confidenceScore?: Prisma.SortOrder
+  reuseCount?: Prisma.SortOrder
+}
+
+export type ResearchFindingScalarRelationFilter = {
+  is?: Prisma.ResearchFindingWhereInput
+  isNot?: Prisma.ResearchFindingWhereInput
+}
+
+export type ResearchFindingListRelationFilter = {
+  every?: Prisma.ResearchFindingWhereInput
+  some?: Prisma.ResearchFindingWhereInput
+  none?: Prisma.ResearchFindingWhereInput
+}
+
+export type ResearchFindingOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type ResearchFindingCreateappliesToInput = {
@@ -424,6 +931,10 @@ export type ResearchFindingCreateappliesToInput = {
 }
 
 export type ResearchFindingCreateaudienceInput = {
+  set: string[]
+}
+
+export type ResearchFindingCreatetagsInput = {
   set: string[]
 }
 
@@ -437,6 +948,1077 @@ export type ResearchFindingUpdateaudienceInput = {
   push?: string | string[]
 }
 
+export type EnumFindingStatusFieldUpdateOperationsInput = {
+  set?: $Enums.FindingStatus
+}
+
+export type EnumResearchCategoryFieldUpdateOperationsInput = {
+  set?: $Enums.ResearchCategory
+}
+
+export type ResearchFindingUpdatetagsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type ResearchFindingCreateNestedOneWithoutRelationsFromInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutRelationsFromInput, Prisma.ResearchFindingUncheckedCreateWithoutRelationsFromInput>
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutRelationsFromInput
+  connect?: Prisma.ResearchFindingWhereUniqueInput
+}
+
+export type ResearchFindingCreateNestedOneWithoutRelationsToInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutRelationsToInput, Prisma.ResearchFindingUncheckedCreateWithoutRelationsToInput>
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutRelationsToInput
+  connect?: Prisma.ResearchFindingWhereUniqueInput
+}
+
+export type ResearchFindingUpdateOneRequiredWithoutRelationsFromNestedInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutRelationsFromInput, Prisma.ResearchFindingUncheckedCreateWithoutRelationsFromInput>
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutRelationsFromInput
+  upsert?: Prisma.ResearchFindingUpsertWithoutRelationsFromInput
+  connect?: Prisma.ResearchFindingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ResearchFindingUpdateToOneWithWhereWithoutRelationsFromInput, Prisma.ResearchFindingUpdateWithoutRelationsFromInput>, Prisma.ResearchFindingUncheckedUpdateWithoutRelationsFromInput>
+}
+
+export type ResearchFindingUpdateOneRequiredWithoutRelationsToNestedInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutRelationsToInput, Prisma.ResearchFindingUncheckedCreateWithoutRelationsToInput>
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutRelationsToInput
+  upsert?: Prisma.ResearchFindingUpsertWithoutRelationsToInput
+  connect?: Prisma.ResearchFindingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ResearchFindingUpdateToOneWithWhereWithoutRelationsToInput, Prisma.ResearchFindingUpdateWithoutRelationsToInput>, Prisma.ResearchFindingUncheckedUpdateWithoutRelationsToInput>
+}
+
+export type ResearchFindingCreateNestedManyWithoutSourceInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutSourceInput, Prisma.ResearchFindingUncheckedCreateWithoutSourceInput> | Prisma.ResearchFindingCreateWithoutSourceInput[] | Prisma.ResearchFindingUncheckedCreateWithoutSourceInput[]
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutSourceInput | Prisma.ResearchFindingCreateOrConnectWithoutSourceInput[]
+  createMany?: Prisma.ResearchFindingCreateManySourceInputEnvelope
+  connect?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+}
+
+export type ResearchFindingUncheckedCreateNestedManyWithoutSourceInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutSourceInput, Prisma.ResearchFindingUncheckedCreateWithoutSourceInput> | Prisma.ResearchFindingCreateWithoutSourceInput[] | Prisma.ResearchFindingUncheckedCreateWithoutSourceInput[]
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutSourceInput | Prisma.ResearchFindingCreateOrConnectWithoutSourceInput[]
+  createMany?: Prisma.ResearchFindingCreateManySourceInputEnvelope
+  connect?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+}
+
+export type ResearchFindingUpdateManyWithoutSourceNestedInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutSourceInput, Prisma.ResearchFindingUncheckedCreateWithoutSourceInput> | Prisma.ResearchFindingCreateWithoutSourceInput[] | Prisma.ResearchFindingUncheckedCreateWithoutSourceInput[]
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutSourceInput | Prisma.ResearchFindingCreateOrConnectWithoutSourceInput[]
+  upsert?: Prisma.ResearchFindingUpsertWithWhereUniqueWithoutSourceInput | Prisma.ResearchFindingUpsertWithWhereUniqueWithoutSourceInput[]
+  createMany?: Prisma.ResearchFindingCreateManySourceInputEnvelope
+  set?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+  disconnect?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+  delete?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+  connect?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+  update?: Prisma.ResearchFindingUpdateWithWhereUniqueWithoutSourceInput | Prisma.ResearchFindingUpdateWithWhereUniqueWithoutSourceInput[]
+  updateMany?: Prisma.ResearchFindingUpdateManyWithWhereWithoutSourceInput | Prisma.ResearchFindingUpdateManyWithWhereWithoutSourceInput[]
+  deleteMany?: Prisma.ResearchFindingScalarWhereInput | Prisma.ResearchFindingScalarWhereInput[]
+}
+
+export type ResearchFindingUncheckedUpdateManyWithoutSourceNestedInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutSourceInput, Prisma.ResearchFindingUncheckedCreateWithoutSourceInput> | Prisma.ResearchFindingCreateWithoutSourceInput[] | Prisma.ResearchFindingUncheckedCreateWithoutSourceInput[]
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutSourceInput | Prisma.ResearchFindingCreateOrConnectWithoutSourceInput[]
+  upsert?: Prisma.ResearchFindingUpsertWithWhereUniqueWithoutSourceInput | Prisma.ResearchFindingUpsertWithWhereUniqueWithoutSourceInput[]
+  createMany?: Prisma.ResearchFindingCreateManySourceInputEnvelope
+  set?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+  disconnect?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+  delete?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+  connect?: Prisma.ResearchFindingWhereUniqueInput | Prisma.ResearchFindingWhereUniqueInput[]
+  update?: Prisma.ResearchFindingUpdateWithWhereUniqueWithoutSourceInput | Prisma.ResearchFindingUpdateWithWhereUniqueWithoutSourceInput[]
+  updateMany?: Prisma.ResearchFindingUpdateManyWithWhereWithoutSourceInput | Prisma.ResearchFindingUpdateManyWithWhereWithoutSourceInput[]
+  deleteMany?: Prisma.ResearchFindingScalarWhereInput | Prisma.ResearchFindingScalarWhereInput[]
+}
+
+export type ResearchFindingUpdateOneRequiredWithoutChunksNestedInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutChunksInput, Prisma.ResearchFindingUncheckedCreateWithoutChunksInput>
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutChunksInput
+  upsert?: Prisma.ResearchFindingUpsertWithoutChunksInput
+  connect?: Prisma.ResearchFindingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ResearchFindingUpdateToOneWithWhereWithoutChunksInput, Prisma.ResearchFindingUpdateWithoutChunksInput>, Prisma.ResearchFindingUncheckedUpdateWithoutChunksInput>
+}
+
+export type ResearchFindingCreateNestedOneWithoutCitationsInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutCitationsInput, Prisma.ResearchFindingUncheckedCreateWithoutCitationsInput>
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutCitationsInput
+  connect?: Prisma.ResearchFindingWhereUniqueInput
+}
+
+export type ResearchFindingUpdateOneRequiredWithoutCitationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ResearchFindingCreateWithoutCitationsInput, Prisma.ResearchFindingUncheckedCreateWithoutCitationsInput>
+  connectOrCreate?: Prisma.ResearchFindingCreateOrConnectWithoutCitationsInput
+  upsert?: Prisma.ResearchFindingUpsertWithoutCitationsInput
+  connect?: Prisma.ResearchFindingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ResearchFindingUpdateToOneWithWhereWithoutCitationsInput, Prisma.ResearchFindingUpdateWithoutCitationsInput>, Prisma.ResearchFindingUncheckedUpdateWithoutCitationsInput>
+}
+
+export type ResearchFindingCreateWithoutRelationsFromInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  source?: Prisma.SourceDocumentCreateNestedOneWithoutFindingsInput
+  chunks?: Prisma.FindingChunkCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationCreateNestedManyWithoutRelatedFindingInput
+  citations?: Prisma.ResearchReportCitationCreateNestedManyWithoutFindingInput
+}
+
+export type ResearchFindingUncheckedCreateWithoutRelationsFromInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceDocumentId?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  chunks?: Prisma.FindingChunkUncheckedCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutRelatedFindingInput
+  citations?: Prisma.ResearchReportCitationUncheckedCreateNestedManyWithoutFindingInput
+}
+
+export type ResearchFindingCreateOrConnectWithoutRelationsFromInput = {
+  where: Prisma.ResearchFindingWhereUniqueInput
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutRelationsFromInput, Prisma.ResearchFindingUncheckedCreateWithoutRelationsFromInput>
+}
+
+export type ResearchFindingCreateWithoutRelationsToInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  source?: Prisma.SourceDocumentCreateNestedOneWithoutFindingsInput
+  chunks?: Prisma.FindingChunkCreateNestedManyWithoutFindingInput
+  relationsFrom?: Prisma.FindingRelationCreateNestedManyWithoutFindingInput
+  citations?: Prisma.ResearchReportCitationCreateNestedManyWithoutFindingInput
+}
+
+export type ResearchFindingUncheckedCreateWithoutRelationsToInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceDocumentId?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  chunks?: Prisma.FindingChunkUncheckedCreateNestedManyWithoutFindingInput
+  relationsFrom?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutFindingInput
+  citations?: Prisma.ResearchReportCitationUncheckedCreateNestedManyWithoutFindingInput
+}
+
+export type ResearchFindingCreateOrConnectWithoutRelationsToInput = {
+  where: Prisma.ResearchFindingWhereUniqueInput
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutRelationsToInput, Prisma.ResearchFindingUncheckedCreateWithoutRelationsToInput>
+}
+
+export type ResearchFindingUpsertWithoutRelationsFromInput = {
+  update: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutRelationsFromInput, Prisma.ResearchFindingUncheckedUpdateWithoutRelationsFromInput>
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutRelationsFromInput, Prisma.ResearchFindingUncheckedCreateWithoutRelationsFromInput>
+  where?: Prisma.ResearchFindingWhereInput
+}
+
+export type ResearchFindingUpdateToOneWithWhereWithoutRelationsFromInput = {
+  where?: Prisma.ResearchFindingWhereInput
+  data: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutRelationsFromInput, Prisma.ResearchFindingUncheckedUpdateWithoutRelationsFromInput>
+}
+
+export type ResearchFindingUpdateWithoutRelationsFromInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.SourceDocumentUpdateOneWithoutFindingsNestedInput
+  chunks?: Prisma.FindingChunkUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUpdateManyWithoutRelatedFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUpdateManyWithoutFindingNestedInput
+}
+
+export type ResearchFindingUncheckedUpdateWithoutRelationsFromInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceDocumentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.FindingChunkUncheckedUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUncheckedUpdateManyWithoutRelatedFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUncheckedUpdateManyWithoutFindingNestedInput
+}
+
+export type ResearchFindingUpsertWithoutRelationsToInput = {
+  update: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutRelationsToInput, Prisma.ResearchFindingUncheckedUpdateWithoutRelationsToInput>
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutRelationsToInput, Prisma.ResearchFindingUncheckedCreateWithoutRelationsToInput>
+  where?: Prisma.ResearchFindingWhereInput
+}
+
+export type ResearchFindingUpdateToOneWithWhereWithoutRelationsToInput = {
+  where?: Prisma.ResearchFindingWhereInput
+  data: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutRelationsToInput, Prisma.ResearchFindingUncheckedUpdateWithoutRelationsToInput>
+}
+
+export type ResearchFindingUpdateWithoutRelationsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.SourceDocumentUpdateOneWithoutFindingsNestedInput
+  chunks?: Prisma.FindingChunkUpdateManyWithoutFindingNestedInput
+  relationsFrom?: Prisma.FindingRelationUpdateManyWithoutFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUpdateManyWithoutFindingNestedInput
+}
+
+export type ResearchFindingUncheckedUpdateWithoutRelationsToInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceDocumentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.FindingChunkUncheckedUpdateManyWithoutFindingNestedInput
+  relationsFrom?: Prisma.FindingRelationUncheckedUpdateManyWithoutFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUncheckedUpdateManyWithoutFindingNestedInput
+}
+
+export type ResearchFindingCreateWithoutSourceInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  chunks?: Prisma.FindingChunkCreateNestedManyWithoutFindingInput
+  relationsFrom?: Prisma.FindingRelationCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationCreateNestedManyWithoutRelatedFindingInput
+  citations?: Prisma.ResearchReportCitationCreateNestedManyWithoutFindingInput
+}
+
+export type ResearchFindingUncheckedCreateWithoutSourceInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  chunks?: Prisma.FindingChunkUncheckedCreateNestedManyWithoutFindingInput
+  relationsFrom?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutRelatedFindingInput
+  citations?: Prisma.ResearchReportCitationUncheckedCreateNestedManyWithoutFindingInput
+}
+
+export type ResearchFindingCreateOrConnectWithoutSourceInput = {
+  where: Prisma.ResearchFindingWhereUniqueInput
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutSourceInput, Prisma.ResearchFindingUncheckedCreateWithoutSourceInput>
+}
+
+export type ResearchFindingCreateManySourceInputEnvelope = {
+  data: Prisma.ResearchFindingCreateManySourceInput | Prisma.ResearchFindingCreateManySourceInput[]
+  skipDuplicates?: boolean
+}
+
+export type ResearchFindingUpsertWithWhereUniqueWithoutSourceInput = {
+  where: Prisma.ResearchFindingWhereUniqueInput
+  update: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutSourceInput, Prisma.ResearchFindingUncheckedUpdateWithoutSourceInput>
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutSourceInput, Prisma.ResearchFindingUncheckedCreateWithoutSourceInput>
+}
+
+export type ResearchFindingUpdateWithWhereUniqueWithoutSourceInput = {
+  where: Prisma.ResearchFindingWhereUniqueInput
+  data: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutSourceInput, Prisma.ResearchFindingUncheckedUpdateWithoutSourceInput>
+}
+
+export type ResearchFindingUpdateManyWithWhereWithoutSourceInput = {
+  where: Prisma.ResearchFindingScalarWhereInput
+  data: Prisma.XOR<Prisma.ResearchFindingUpdateManyMutationInput, Prisma.ResearchFindingUncheckedUpdateManyWithoutSourceInput>
+}
+
+export type ResearchFindingScalarWhereInput = {
+  AND?: Prisma.ResearchFindingScalarWhereInput | Prisma.ResearchFindingScalarWhereInput[]
+  OR?: Prisma.ResearchFindingScalarWhereInput[]
+  NOT?: Prisma.ResearchFindingScalarWhereInput | Prisma.ResearchFindingScalarWhereInput[]
+  id?: Prisma.StringFilter<"ResearchFinding"> | string
+  claim?: Prisma.StringFilter<"ResearchFinding"> | string
+  paper?: Prisma.StringFilter<"ResearchFinding"> | string
+  field?: Prisma.StringFilter<"ResearchFinding"> | string
+  appliesTo?: Prisma.StringNullableListFilter<"ResearchFinding">
+  audience?: Prisma.StringNullableListFilter<"ResearchFinding">
+  decision?: Prisma.StringFilter<"ResearchFinding"> | string
+  options?: Prisma.JsonFilter<"ResearchFinding">
+  contextHeader?: Prisma.StringFilter<"ResearchFinding"> | string
+  verified?: Prisma.BoolFilter<"ResearchFinding"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"ResearchFinding"> | Date | string
+  slug?: Prisma.StringFilter<"ResearchFinding"> | string
+  status?: Prisma.EnumFindingStatusFilter<"ResearchFinding"> | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFilter<"ResearchFinding"> | $Enums.ResearchCategory
+  title?: Prisma.StringFilter<"ResearchFinding"> | string
+  statement?: Prisma.StringFilter<"ResearchFinding"> | string
+  appliesWhen?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  tags?: Prisma.StringNullableListFilter<"ResearchFinding">
+  confidenceScore?: Prisma.FloatNullableFilter<"ResearchFinding"> | number | null
+  effectSize?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  sourceDocumentId?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  sourceExcerpt?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  sourceLocator?: Prisma.StringNullableFilter<"ResearchFinding"> | string | null
+  reuseCount?: Prisma.IntFilter<"ResearchFinding"> | number
+  contentHash?: Prisma.StringFilter<"ResearchFinding"> | string
+  embeddingHash?: Prisma.StringFilter<"ResearchFinding"> | string
+  gcsObjectKey?: Prisma.StringFilter<"ResearchFinding"> | string
+  gcsGeneration?: Prisma.StringFilter<"ResearchFinding"> | string
+  verifiedAt?: Prisma.DateTimeNullableFilter<"ResearchFinding"> | Date | string | null
+  updatedAt?: Prisma.DateTimeFilter<"ResearchFinding"> | Date | string
+}
+
+export type ResearchFindingCreateWithoutChunksInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  source?: Prisma.SourceDocumentCreateNestedOneWithoutFindingsInput
+  relationsFrom?: Prisma.FindingRelationCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationCreateNestedManyWithoutRelatedFindingInput
+  citations?: Prisma.ResearchReportCitationCreateNestedManyWithoutFindingInput
+}
+
+export type ResearchFindingUncheckedCreateWithoutChunksInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceDocumentId?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  relationsFrom?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutRelatedFindingInput
+  citations?: Prisma.ResearchReportCitationUncheckedCreateNestedManyWithoutFindingInput
+}
+
+export type ResearchFindingCreateOrConnectWithoutChunksInput = {
+  where: Prisma.ResearchFindingWhereUniqueInput
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutChunksInput, Prisma.ResearchFindingUncheckedCreateWithoutChunksInput>
+}
+
+export type ResearchFindingUpsertWithoutChunksInput = {
+  update: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutChunksInput, Prisma.ResearchFindingUncheckedUpdateWithoutChunksInput>
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutChunksInput, Prisma.ResearchFindingUncheckedCreateWithoutChunksInput>
+  where?: Prisma.ResearchFindingWhereInput
+}
+
+export type ResearchFindingUpdateToOneWithWhereWithoutChunksInput = {
+  where?: Prisma.ResearchFindingWhereInput
+  data: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutChunksInput, Prisma.ResearchFindingUncheckedUpdateWithoutChunksInput>
+}
+
+export type ResearchFindingUpdateWithoutChunksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.SourceDocumentUpdateOneWithoutFindingsNestedInput
+  relationsFrom?: Prisma.FindingRelationUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUpdateManyWithoutRelatedFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUpdateManyWithoutFindingNestedInput
+}
+
+export type ResearchFindingUncheckedUpdateWithoutChunksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceDocumentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  relationsFrom?: Prisma.FindingRelationUncheckedUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUncheckedUpdateManyWithoutRelatedFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUncheckedUpdateManyWithoutFindingNestedInput
+}
+
+export type ResearchFindingCreateWithoutCitationsInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  source?: Prisma.SourceDocumentCreateNestedOneWithoutFindingsInput
+  chunks?: Prisma.FindingChunkCreateNestedManyWithoutFindingInput
+  relationsFrom?: Prisma.FindingRelationCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationCreateNestedManyWithoutRelatedFindingInput
+}
+
+export type ResearchFindingUncheckedCreateWithoutCitationsInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceDocumentId?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+  chunks?: Prisma.FindingChunkUncheckedCreateNestedManyWithoutFindingInput
+  relationsFrom?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutFindingInput
+  relationsTo?: Prisma.FindingRelationUncheckedCreateNestedManyWithoutRelatedFindingInput
+}
+
+export type ResearchFindingCreateOrConnectWithoutCitationsInput = {
+  where: Prisma.ResearchFindingWhereUniqueInput
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutCitationsInput, Prisma.ResearchFindingUncheckedCreateWithoutCitationsInput>
+}
+
+export type ResearchFindingUpsertWithoutCitationsInput = {
+  update: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutCitationsInput, Prisma.ResearchFindingUncheckedUpdateWithoutCitationsInput>
+  create: Prisma.XOR<Prisma.ResearchFindingCreateWithoutCitationsInput, Prisma.ResearchFindingUncheckedCreateWithoutCitationsInput>
+  where?: Prisma.ResearchFindingWhereInput
+}
+
+export type ResearchFindingUpdateToOneWithWhereWithoutCitationsInput = {
+  where?: Prisma.ResearchFindingWhereInput
+  data: Prisma.XOR<Prisma.ResearchFindingUpdateWithoutCitationsInput, Prisma.ResearchFindingUncheckedUpdateWithoutCitationsInput>
+}
+
+export type ResearchFindingUpdateWithoutCitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.SourceDocumentUpdateOneWithoutFindingsNestedInput
+  chunks?: Prisma.FindingChunkUpdateManyWithoutFindingNestedInput
+  relationsFrom?: Prisma.FindingRelationUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUpdateManyWithoutRelatedFindingNestedInput
+}
+
+export type ResearchFindingUncheckedUpdateWithoutCitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceDocumentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.FindingChunkUncheckedUpdateManyWithoutFindingNestedInput
+  relationsFrom?: Prisma.FindingRelationUncheckedUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUncheckedUpdateManyWithoutRelatedFindingNestedInput
+}
+
+export type ResearchFindingCreateManySourceInput = {
+  id?: string
+  claim?: string
+  paper?: string
+  field?: string
+  appliesTo?: Prisma.ResearchFindingCreateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingCreateaudienceInput | string[]
+  decision?: string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: string
+  verified?: boolean
+  createdAt?: Date | string
+  slug: string
+  status?: $Enums.FindingStatus
+  category?: $Enums.ResearchCategory
+  title: string
+  statement: string
+  appliesWhen?: string | null
+  tags?: Prisma.ResearchFindingCreatetagsInput | string[]
+  confidenceScore?: number | null
+  effectSize?: string | null
+  sourceExcerpt?: string | null
+  sourceLocator?: string | null
+  reuseCount?: number
+  contentHash: string
+  embeddingHash: string
+  gcsObjectKey: string
+  gcsGeneration: string
+  verifiedAt?: Date | string | null
+  updatedAt?: Date | string
+}
+
+export type ResearchFindingUpdateWithoutSourceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.FindingChunkUpdateManyWithoutFindingNestedInput
+  relationsFrom?: Prisma.FindingRelationUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUpdateManyWithoutRelatedFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUpdateManyWithoutFindingNestedInput
+}
+
+export type ResearchFindingUncheckedUpdateWithoutSourceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chunks?: Prisma.FindingChunkUncheckedUpdateManyWithoutFindingNestedInput
+  relationsFrom?: Prisma.FindingRelationUncheckedUpdateManyWithoutFindingNestedInput
+  relationsTo?: Prisma.FindingRelationUncheckedUpdateManyWithoutRelatedFindingNestedInput
+  citations?: Prisma.ResearchReportCitationUncheckedUpdateManyWithoutFindingNestedInput
+}
+
+export type ResearchFindingUncheckedUpdateManyWithoutSourceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  claim?: Prisma.StringFieldUpdateOperationsInput | string
+  paper?: Prisma.StringFieldUpdateOperationsInput | string
+  field?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesTo?: Prisma.ResearchFindingUpdateappliesToInput | string[]
+  audience?: Prisma.ResearchFindingUpdateaudienceInput | string[]
+  decision?: Prisma.StringFieldUpdateOperationsInput | string
+  options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  contextHeader?: Prisma.StringFieldUpdateOperationsInput | string
+  verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumFindingStatusFieldUpdateOperationsInput | $Enums.FindingStatus
+  category?: Prisma.EnumResearchCategoryFieldUpdateOperationsInput | $Enums.ResearchCategory
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  statement?: Prisma.StringFieldUpdateOperationsInput | string
+  appliesWhen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ResearchFindingUpdatetagsInput | string[]
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  effectSize?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceExcerpt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sourceLocator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  reuseCount?: Prisma.IntFieldUpdateOperationsInput | number
+  contentHash?: Prisma.StringFieldUpdateOperationsInput | string
+  embeddingHash?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsObjectKey?: Prisma.StringFieldUpdateOperationsInput | string
+  gcsGeneration?: Prisma.StringFieldUpdateOperationsInput | string
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type ResearchFindingCountOutputType
+ */
+
+export type ResearchFindingCountOutputType = {
+  chunks: number
+  relationsFrom: number
+  relationsTo: number
+  citations: number
+}
+
+export type ResearchFindingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  chunks?: boolean | ResearchFindingCountOutputTypeCountChunksArgs
+  relationsFrom?: boolean | ResearchFindingCountOutputTypeCountRelationsFromArgs
+  relationsTo?: boolean | ResearchFindingCountOutputTypeCountRelationsToArgs
+  citations?: boolean | ResearchFindingCountOutputTypeCountCitationsArgs
+}
+
+/**
+ * ResearchFindingCountOutputType without action
+ */
+export type ResearchFindingCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResearchFindingCountOutputType
+   */
+  select?: Prisma.ResearchFindingCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ResearchFindingCountOutputType without action
+ */
+export type ResearchFindingCountOutputTypeCountChunksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FindingChunkWhereInput
+}
+
+/**
+ * ResearchFindingCountOutputType without action
+ */
+export type ResearchFindingCountOutputTypeCountRelationsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FindingRelationWhereInput
+}
+
+/**
+ * ResearchFindingCountOutputType without action
+ */
+export type ResearchFindingCountOutputTypeCountRelationsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FindingRelationWhereInput
+}
+
+/**
+ * ResearchFindingCountOutputType without action
+ */
+export type ResearchFindingCountOutputTypeCountCitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResearchReportCitationWhereInput
+}
 
 
 export type ResearchFindingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -451,6 +2033,31 @@ export type ResearchFindingSelect<ExtArgs extends runtime.Types.Extensions.Inter
   contextHeader?: boolean
   verified?: boolean
   createdAt?: boolean
+  slug?: boolean
+  status?: boolean
+  category?: boolean
+  title?: boolean
+  statement?: boolean
+  appliesWhen?: boolean
+  tags?: boolean
+  confidenceScore?: boolean
+  effectSize?: boolean
+  sourceDocumentId?: boolean
+  sourceExcerpt?: boolean
+  sourceLocator?: boolean
+  reuseCount?: boolean
+  contentHash?: boolean
+  embeddingHash?: boolean
+  gcsObjectKey?: boolean
+  gcsGeneration?: boolean
+  verifiedAt?: boolean
+  updatedAt?: boolean
+  source?: boolean | Prisma.ResearchFinding$sourceArgs<ExtArgs>
+  chunks?: boolean | Prisma.ResearchFinding$chunksArgs<ExtArgs>
+  relationsFrom?: boolean | Prisma.ResearchFinding$relationsFromArgs<ExtArgs>
+  relationsTo?: boolean | Prisma.ResearchFinding$relationsToArgs<ExtArgs>
+  citations?: boolean | Prisma.ResearchFinding$citationsArgs<ExtArgs>
+  _count?: boolean | Prisma.ResearchFindingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["researchFinding"]>
 
 export type ResearchFindingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -465,6 +2072,26 @@ export type ResearchFindingSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   contextHeader?: boolean
   verified?: boolean
   createdAt?: boolean
+  slug?: boolean
+  status?: boolean
+  category?: boolean
+  title?: boolean
+  statement?: boolean
+  appliesWhen?: boolean
+  tags?: boolean
+  confidenceScore?: boolean
+  effectSize?: boolean
+  sourceDocumentId?: boolean
+  sourceExcerpt?: boolean
+  sourceLocator?: boolean
+  reuseCount?: boolean
+  contentHash?: boolean
+  embeddingHash?: boolean
+  gcsObjectKey?: boolean
+  gcsGeneration?: boolean
+  verifiedAt?: boolean
+  updatedAt?: boolean
+  source?: boolean | Prisma.ResearchFinding$sourceArgs<ExtArgs>
 }, ExtArgs["result"]["researchFinding"]>
 
 export type ResearchFindingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -479,6 +2106,26 @@ export type ResearchFindingSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   contextHeader?: boolean
   verified?: boolean
   createdAt?: boolean
+  slug?: boolean
+  status?: boolean
+  category?: boolean
+  title?: boolean
+  statement?: boolean
+  appliesWhen?: boolean
+  tags?: boolean
+  confidenceScore?: boolean
+  effectSize?: boolean
+  sourceDocumentId?: boolean
+  sourceExcerpt?: boolean
+  sourceLocator?: boolean
+  reuseCount?: boolean
+  contentHash?: boolean
+  embeddingHash?: boolean
+  gcsObjectKey?: boolean
+  gcsGeneration?: boolean
+  verifiedAt?: boolean
+  updatedAt?: boolean
+  source?: boolean | Prisma.ResearchFinding$sourceArgs<ExtArgs>
 }, ExtArgs["result"]["researchFinding"]>
 
 export type ResearchFindingSelectScalar = {
@@ -493,13 +2140,52 @@ export type ResearchFindingSelectScalar = {
   contextHeader?: boolean
   verified?: boolean
   createdAt?: boolean
+  slug?: boolean
+  status?: boolean
+  category?: boolean
+  title?: boolean
+  statement?: boolean
+  appliesWhen?: boolean
+  tags?: boolean
+  confidenceScore?: boolean
+  effectSize?: boolean
+  sourceDocumentId?: boolean
+  sourceExcerpt?: boolean
+  sourceLocator?: boolean
+  reuseCount?: boolean
+  contentHash?: boolean
+  embeddingHash?: boolean
+  gcsObjectKey?: boolean
+  gcsGeneration?: boolean
+  verifiedAt?: boolean
+  updatedAt?: boolean
 }
 
-export type ResearchFindingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "claim" | "paper" | "field" | "appliesTo" | "audience" | "decision" | "options" | "contextHeader" | "verified" | "createdAt", ExtArgs["result"]["researchFinding"]>
+export type ResearchFindingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "claim" | "paper" | "field" | "appliesTo" | "audience" | "decision" | "options" | "contextHeader" | "verified" | "createdAt" | "slug" | "status" | "category" | "title" | "statement" | "appliesWhen" | "tags" | "confidenceScore" | "effectSize" | "sourceDocumentId" | "sourceExcerpt" | "sourceLocator" | "reuseCount" | "contentHash" | "embeddingHash" | "gcsObjectKey" | "gcsGeneration" | "verifiedAt" | "updatedAt", ExtArgs["result"]["researchFinding"]>
+export type ResearchFindingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  source?: boolean | Prisma.ResearchFinding$sourceArgs<ExtArgs>
+  chunks?: boolean | Prisma.ResearchFinding$chunksArgs<ExtArgs>
+  relationsFrom?: boolean | Prisma.ResearchFinding$relationsFromArgs<ExtArgs>
+  relationsTo?: boolean | Prisma.ResearchFinding$relationsToArgs<ExtArgs>
+  citations?: boolean | Prisma.ResearchFinding$citationsArgs<ExtArgs>
+  _count?: boolean | Prisma.ResearchFindingCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type ResearchFindingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  source?: boolean | Prisma.ResearchFinding$sourceArgs<ExtArgs>
+}
+export type ResearchFindingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  source?: boolean | Prisma.ResearchFinding$sourceArgs<ExtArgs>
+}
 
 export type $ResearchFindingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ResearchFinding"
-  objects: {}
+  objects: {
+    source: Prisma.$SourceDocumentPayload<ExtArgs> | null
+    chunks: Prisma.$FindingChunkPayload<ExtArgs>[]
+    relationsFrom: Prisma.$FindingRelationPayload<ExtArgs>[]
+    relationsTo: Prisma.$FindingRelationPayload<ExtArgs>[]
+    citations: Prisma.$ResearchReportCitationPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     claim: string
@@ -512,6 +2198,25 @@ export type $ResearchFindingPayload<ExtArgs extends runtime.Types.Extensions.Int
     contextHeader: string
     verified: boolean
     createdAt: Date
+    slug: string
+    status: $Enums.FindingStatus
+    category: $Enums.ResearchCategory
+    title: string
+    statement: string
+    appliesWhen: string | null
+    tags: string[]
+    confidenceScore: number | null
+    effectSize: string | null
+    sourceDocumentId: string | null
+    sourceExcerpt: string | null
+    sourceLocator: string | null
+    reuseCount: number
+    contentHash: string
+    embeddingHash: string
+    gcsObjectKey: string
+    gcsGeneration: string
+    verifiedAt: Date | null
+    updatedAt: Date
   }, ExtArgs["result"]["researchFinding"]>
   composites: {}
 }
@@ -906,6 +2611,11 @@ readonly fields: ResearchFindingFieldRefs;
  */
 export interface Prisma__ResearchFindingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  source<T extends Prisma.ResearchFinding$sourceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResearchFinding$sourceArgs<ExtArgs>>): Prisma.Prisma__SourceDocumentClient<runtime.Types.Result.GetResult<Prisma.$SourceDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  chunks<T extends Prisma.ResearchFinding$chunksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResearchFinding$chunksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FindingChunkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relationsFrom<T extends Prisma.ResearchFinding$relationsFromArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResearchFinding$relationsFromArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FindingRelationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relationsTo<T extends Prisma.ResearchFinding$relationsToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResearchFinding$relationsToArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FindingRelationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  citations<T extends Prisma.ResearchFinding$citationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResearchFinding$citationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResearchReportCitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -946,6 +2656,25 @@ export interface ResearchFindingFieldRefs {
   readonly contextHeader: Prisma.FieldRef<"ResearchFinding", 'String'>
   readonly verified: Prisma.FieldRef<"ResearchFinding", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"ResearchFinding", 'DateTime'>
+  readonly slug: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly status: Prisma.FieldRef<"ResearchFinding", 'FindingStatus'>
+  readonly category: Prisma.FieldRef<"ResearchFinding", 'ResearchCategory'>
+  readonly title: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly statement: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly appliesWhen: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly tags: Prisma.FieldRef<"ResearchFinding", 'String[]'>
+  readonly confidenceScore: Prisma.FieldRef<"ResearchFinding", 'Float'>
+  readonly effectSize: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly sourceDocumentId: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly sourceExcerpt: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly sourceLocator: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly reuseCount: Prisma.FieldRef<"ResearchFinding", 'Int'>
+  readonly contentHash: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly embeddingHash: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly gcsObjectKey: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly gcsGeneration: Prisma.FieldRef<"ResearchFinding", 'String'>
+  readonly verifiedAt: Prisma.FieldRef<"ResearchFinding", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"ResearchFinding", 'DateTime'>
 }
     
 
@@ -962,6 +2691,10 @@ export type ResearchFindingFindUniqueArgs<ExtArgs extends runtime.Types.Extensio
    * Omit specific fields from the ResearchFinding
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
   /**
    * Filter, which ResearchFinding to fetch.
    */
@@ -981,6 +2714,10 @@ export type ResearchFindingFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.E
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
+  /**
    * Filter, which ResearchFinding to fetch.
    */
   where: Prisma.ResearchFindingWhereUniqueInput
@@ -998,6 +2735,10 @@ export type ResearchFindingFindFirstArgs<ExtArgs extends runtime.Types.Extension
    * Omit specific fields from the ResearchFinding
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
   /**
    * Filter, which ResearchFinding to fetch.
    */
@@ -1047,6 +2788,10 @@ export type ResearchFindingFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Ex
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
+  /**
    * Filter, which ResearchFinding to fetch.
    */
   where?: Prisma.ResearchFindingWhereInput
@@ -1094,6 +2839,10 @@ export type ResearchFindingFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the ResearchFinding
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
   /**
    * Filter, which ResearchFindings to fetch.
    */
@@ -1143,6 +2892,10 @@ export type ResearchFindingCreateArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
+  /**
    * The data needed to create a ResearchFinding.
    */
   data: Prisma.XOR<Prisma.ResearchFindingCreateInput, Prisma.ResearchFindingUncheckedCreateInput>
@@ -1176,6 +2929,10 @@ export type ResearchFindingCreateManyAndReturnArgs<ExtArgs extends runtime.Types
    */
   data: Prisma.ResearchFindingCreateManyInput | Prisma.ResearchFindingCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1190,6 +2947,10 @@ export type ResearchFindingUpdateArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the ResearchFinding
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
   /**
    * The data needed to update a ResearchFinding.
    */
@@ -1242,6 +3003,10 @@ export type ResearchFindingUpdateManyAndReturnArgs<ExtArgs extends runtime.Types
    * Limit how many ResearchFindings to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1256,6 +3021,10 @@ export type ResearchFindingUpsertArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the ResearchFinding
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
   /**
    * The filter to search for the ResearchFinding to update in case it exists.
    */
@@ -1283,6 +3052,10 @@ export type ResearchFindingDeleteArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
+  /**
    * Filter which ResearchFinding to delete.
    */
   where: Prisma.ResearchFindingWhereUniqueInput
@@ -1303,6 +3076,121 @@ export type ResearchFindingDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * ResearchFinding.source
+ */
+export type ResearchFinding$sourceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SourceDocument
+   */
+  select?: Prisma.SourceDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SourceDocument
+   */
+  omit?: Prisma.SourceDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SourceDocumentInclude<ExtArgs> | null
+  where?: Prisma.SourceDocumentWhereInput
+}
+
+/**
+ * ResearchFinding.chunks
+ */
+export type ResearchFinding$chunksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FindingChunk
+   */
+  select?: Prisma.FindingChunkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FindingChunk
+   */
+  omit?: Prisma.FindingChunkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingChunkInclude<ExtArgs> | null
+  where?: Prisma.FindingChunkWhereInput
+  orderBy?: Prisma.FindingChunkOrderByWithRelationInput | Prisma.FindingChunkOrderByWithRelationInput[]
+  cursor?: Prisma.FindingChunkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FindingChunkScalarFieldEnum | Prisma.FindingChunkScalarFieldEnum[]
+}
+
+/**
+ * ResearchFinding.relationsFrom
+ */
+export type ResearchFinding$relationsFromArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FindingRelation
+   */
+  select?: Prisma.FindingRelationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FindingRelation
+   */
+  omit?: Prisma.FindingRelationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
+  where?: Prisma.FindingRelationWhereInput
+  orderBy?: Prisma.FindingRelationOrderByWithRelationInput | Prisma.FindingRelationOrderByWithRelationInput[]
+  cursor?: Prisma.FindingRelationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FindingRelationScalarFieldEnum | Prisma.FindingRelationScalarFieldEnum[]
+}
+
+/**
+ * ResearchFinding.relationsTo
+ */
+export type ResearchFinding$relationsToArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FindingRelation
+   */
+  select?: Prisma.FindingRelationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FindingRelation
+   */
+  omit?: Prisma.FindingRelationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FindingRelationInclude<ExtArgs> | null
+  where?: Prisma.FindingRelationWhereInput
+  orderBy?: Prisma.FindingRelationOrderByWithRelationInput | Prisma.FindingRelationOrderByWithRelationInput[]
+  cursor?: Prisma.FindingRelationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FindingRelationScalarFieldEnum | Prisma.FindingRelationScalarFieldEnum[]
+}
+
+/**
+ * ResearchFinding.citations
+ */
+export type ResearchFinding$citationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResearchReportCitation
+   */
+  select?: Prisma.ResearchReportCitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ResearchReportCitation
+   */
+  omit?: Prisma.ResearchReportCitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchReportCitationInclude<ExtArgs> | null
+  where?: Prisma.ResearchReportCitationWhereInput
+  orderBy?: Prisma.ResearchReportCitationOrderByWithRelationInput | Prisma.ResearchReportCitationOrderByWithRelationInput[]
+  cursor?: Prisma.ResearchReportCitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResearchReportCitationScalarFieldEnum | Prisma.ResearchReportCitationScalarFieldEnum[]
+}
+
+/**
  * ResearchFinding without action
  */
 export type ResearchFindingDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1314,4 +3202,8 @@ export type ResearchFindingDefaultArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the ResearchFinding
    */
   omit?: Prisma.ResearchFindingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchFindingInclude<ExtArgs> | null
 }

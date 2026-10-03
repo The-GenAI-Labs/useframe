@@ -26,7 +26,31 @@ router.post("/validation/compare", async (req, res, next) => {
   try {
     const run = await prisma.validationRun.findUniqueOrThrow({
       where: { id: input.data.runId },
-      include: { startVersion: true },
+      include: {
+        startVersion: true,
+        project: {
+          select: {
+            generationTier: true,
+            deletedAt: true,
+            researchReport: {
+              select: {
+                generationSpec: true,
+                summary: true,
+                colorPalette: true,
+                colorRationale: true,
+                layoutStyle: true,
+                layoutRationale: true,
+                fontPrimary: true,
+                fontSecondary: true,
+                typographyRationale: true,
+                imageStyle: true,
+                imageRationale: true,
+                toneOfVoice: true,
+              },
+            },
+          },
+        },
+      },
     });
     if (run.status !== "RUNNING")
       throw new Error("Validation run is not active");
@@ -53,6 +77,36 @@ router.post("/validation/compare", async (req, res, next) => {
         })
         .png()
         .toBuffer();
+    if (run.pipeline === "MAIN") {
+      if (
+        run.isFreeTier ||
+        run.project.generationTier !== "PAID" ||
+        run.project.deletedAt
+      ) {
+        res
+          .status(403)
+          .json({ message: "MAIN validation requires a paid generation" });
+        return;
+      }
+      const report = run.project.researchReport;
+      const brief =
+        run.startVersion.designBrief ?? report?.generationSpec ?? report;
+      const screenshots = [];
+      for (let start = 0; start < rendered.length; start += 4) {
+        screenshots.push(
+          ...(await Promise.all(
+            rendered
+              .slice(start, start + 4)
+              .map(async (capture) => ({
+                section: capture.section,
+                image: await image(capture.key),
+              })),
+          )),
+        );
+      }
+      res.json(await compareMain(brief, screenshots));
+      return;
+    }
     const results = [];
     for (let start = 0; start < selected.length; start += 4) {
       const batch = selected.slice(start, start + 4);
@@ -69,18 +123,6 @@ router.post("/validation/compare", async (req, res, next) => {
           });
         }
         results.push(await compareReplicate(pairs));
-      } else {
-        results.push(
-          await compareMain(
-            run.startVersion.designBrief,
-            await Promise.all(
-              batch.map(async (s) => ({
-                section: s.section,
-                image: await image(s.key),
-              })),
-            ),
-          ),
-        );
       }
     }
     // A poor section cannot be hidden by averaging many near-identical scroll frames.

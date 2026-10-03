@@ -50,7 +50,12 @@ router.post("/stream", async (req: AuthenticatedRequest, res, next) => {
         const project =
           pipeline === "MAIN"
             ? await prisma.project.findFirst({
-                where: { id: owner.id, userId: req.user!.id, deletedAt: null },
+                where: {
+                  id: owner.id,
+                  userId: req.user!.id,
+                  deletedAt: null,
+                  generationTier: "PAID",
+                },
                 select: { id: true },
               })
             : (
@@ -61,7 +66,11 @@ router.post("/stream", async (req: AuthenticatedRequest, res, next) => {
               )?.project;
         const run = project
           ? await prisma.validationRun.findFirst({
-              where: { projectId: project.id, pipeline },
+              where: {
+                projectId: project.id,
+                pipeline,
+                ...(pipeline === "MAIN" ? { isFreeTier: false } : {}),
+              },
               orderBy: { startedAt: "desc" },
               select: {
                 id: true,

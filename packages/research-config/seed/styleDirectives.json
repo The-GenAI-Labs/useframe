@@ -1,0 +1,90 @@
+[
+  {
+    "niche": "EDTECH",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "HEALTH_WELLNESS",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "FINTECH",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "SAAS_B2B",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "ECOMMERCE",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "FOOD_LIFESTYLE",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "FITNESS",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "LUXURY",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "MEDITATION",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "KIDS",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  },
+  {
+    "niche": "OTHER",
+    "modelTarget": "all",
+    "promptText": "",
+    "referenceProducts": [],
+    "avoidPatterns": [],
+    "status": "DRAFT"
+  }
+]

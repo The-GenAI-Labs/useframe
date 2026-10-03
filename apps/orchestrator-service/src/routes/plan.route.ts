@@ -1,6 +1,6 @@
 import { Router, type Request, type Response, type NextFunction } from "express"
 import { z } from "zod"
-import { PlanSSERequestSchema, buildHeroPreviewDataUrl } from "@repo/schemas"
+import { PlanSSERequestSchema, buildHeroPreviewDataUrl, nicheToDomain, inferAudienceKey } from "@repo/schemas"
 import type { DesignBrief, DesignBriefCandidates } from "@repo/schemas"
 import { verifyToken } from "@/lib/auth.js"
 import { initSSE, sseWrite, sseError } from "@/llm/stream.js"
@@ -13,37 +13,6 @@ import type { PlannerExtracted } from "@/prompts/planner.prompt.js"
 import { prisma, type Prisma } from "@useframe/db"
 
 const router: Router = Router()
-
-// NicheCategory enum values (SCREAMING_SNAKE) -> DomainPattern/ResearchFinding.appliesTo keys (snake_case)
-const NICHE_TO_DOMAIN: Record<string, string> = {
-  EDTECH: "education",
-  HEALTH_WELLNESS: "health_wellness",
-  FINTECH: "fintech",
-  SAAS_B2B: "saas_b2b",
-  ECOMMERCE: "ecommerce",
-  FOOD_LIFESTYLE: "food_lifestyle",
-  FITNESS: "fitness",
-  LUXURY: "luxury",
-  MEDITATION: "health_wellness",
-  KIDS: "education",
-  OTHER: "other",
-}
-
-// A generic, plain-language target audience string is mapped to the closest
-// AudienceModifier bucket. Falls back to "general" when nothing matches —
-// the planner still works fine without a modifier, just without its extra
-// density/motion/contrast guidance.
-function inferAudienceKey(targetAudience: string): string {
-  const t = targetAudience.toLowerCase()
-  if (t.includes("child") || t.includes("kid")) return "children_under_10"
-  if (t.includes("teen")) return "teens"
-  if (t.includes("senior") || t.includes("elder")) return "seniors"
-  if (t.includes("parent")) return "parents"
-  if (t.includes("b2b") || t.includes("business") || t.includes("enterprise")) return "b2b_buyers"
-  if (t.includes("developer") || t.includes("engineer")) return "developers"
-  if (t.includes("adult")) return "adults"
-  return "general"
-}
 
 const DECISION_QUERIES = (domain: string, audience: string) => [
   { decision: "primary_color", query: `color psychology trust ${domain} ${audience}` },
@@ -80,7 +49,7 @@ router.post("/plan", (req: Request, res: Response): void => {
 
   void (async () => {
     try {
-      const domain = NICHE_TO_DOMAIN[niche] ?? "other"
+      const domain = nicheToDomain(niche)
       const audience = inferAudienceKey(targetAudience)
       const model = getModelForTier(tier)
       const providerOptions = getProviderOptionsForTier(tier)
@@ -327,7 +296,7 @@ router.post("/plan/sync", (req: Request, res: Response, next: NextFunction): voi
   const { startupIdea, niche, targetAudience, brandPersonality, pricePositioning, businessModel, differentiator } =
     parsed.data
 
-  const domain = NICHE_TO_DOMAIN[niche] ?? "other"
+  const domain = nicheToDomain(niche)
   const audience = inferAudienceKey(targetAudience)
 
   const extracted: PlannerExtracted = {

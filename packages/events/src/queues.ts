@@ -1,4 +1,6 @@
 export const QUEUES = {
+  CORPUS_INGEST: "corpus.ingest",
+  VALIDATE_MAIN: "validateMain",
   VALIDATE: "validate",
   VALIDATION_CLEANUP: "validationCleanup",
   SCAN: "scan",

@@ -1,0 +1,61 @@
+name: Corpus migrations
+on:
+  pull_request:
+    paths:
+      [
+        "packages/db/prisma/migrations/**",
+        "packages/db/prisma/schema.prisma",
+        "packages/rag/scripts/**",
+        ".github/workflows/corpus-migrations.yml",
+      ]
+  push:
+    branches: [main]
+jobs:
+  protect-search-indexes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node packages/rag/scripts/check-migrations.mjs
+
+  preserve-search-objects:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_PASSWORD: fixture
+          POSTGRES_DB: corpus_fixture
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:fixture@localhost:5432/corpus_fixture
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --dir packages/db exec prisma generate
+      - run: pnpm --dir packages/db exec prisma migrate deploy
+      - run: pnpm --filter @repo/rag exec tsx scripts/check-search-objects.ts
+      - name: Guard the proposed schema push before it can drop search objects
+        shell: bash
+        run: |
+          pnpm --dir packages/db exec prisma migrate diff --from-config-datasource --to-schema prisma/schema.prisma --script > "$RUNNER_TEMP/schema-push.sql"
+          set +e
+          node packages/rag/scripts/check-migrations.mjs --diff "$RUNNER_TEMP/schema-push.sql"
+          result=$?
+          set -e
+          if [ "$result" = 0 ]; then
+            pnpm --dir packages/db exec prisma db push --accept-data-loss
+          elif [ "$result" != 2 ]; then
+            exit "$result"
+          fi
+      - run: pnpm --filter @repo/rag exec tsx scripts/check-search-objects.ts

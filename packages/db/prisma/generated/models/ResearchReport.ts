@@ -28,10 +28,12 @@ export type AggregateResearchReport = {
 
 export type ResearchReportAvgAggregateOutputType = {
   confidenceScore: number | null
+  specVersion: number | null
 }
 
 export type ResearchReportSumAggregateOutputType = {
   confidenceScore: number | null
+  specVersion: number | null
 }
 
 export type ResearchReportMinAggregateOutputType = {
@@ -55,6 +57,9 @@ export type ResearchReportMinAggregateOutputType = {
   targetAgeGroup: string | null
   toneOfVoice: string | null
   confidenceScore: number | null
+  masterPrompt: string | null
+  specVersion: number | null
+  intakeId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -80,6 +85,9 @@ export type ResearchReportMaxAggregateOutputType = {
   targetAgeGroup: string | null
   toneOfVoice: string | null
   confidenceScore: number | null
+  masterPrompt: string | null
+  specVersion: number | null
+  intakeId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -110,6 +118,11 @@ export type ResearchReportCountAggregateOutputType = {
   competitorInsights: number
   citations: number
   confidenceScore: number
+  generationSpec: number
+  masterPrompt: number
+  specVersion: number
+  styleTagKeys: number
+  intakeId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -118,10 +131,12 @@ export type ResearchReportCountAggregateOutputType = {
 
 export type ResearchReportAvgAggregateInputType = {
   confidenceScore?: true
+  specVersion?: true
 }
 
 export type ResearchReportSumAggregateInputType = {
   confidenceScore?: true
+  specVersion?: true
 }
 
 export type ResearchReportMinAggregateInputType = {
@@ -145,6 +160,9 @@ export type ResearchReportMinAggregateInputType = {
   targetAgeGroup?: true
   toneOfVoice?: true
   confidenceScore?: true
+  masterPrompt?: true
+  specVersion?: true
+  intakeId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -170,6 +188,9 @@ export type ResearchReportMaxAggregateInputType = {
   targetAgeGroup?: true
   toneOfVoice?: true
   confidenceScore?: true
+  masterPrompt?: true
+  specVersion?: true
+  intakeId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -200,6 +221,11 @@ export type ResearchReportCountAggregateInputType = {
   competitorInsights?: true
   citations?: true
   confidenceScore?: true
+  generationSpec?: true
+  masterPrompt?: true
+  specVersion?: true
+  styleTagKeys?: true
+  intakeId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -317,6 +343,11 @@ export type ResearchReportGroupByOutputType = {
   competitorInsights: runtime.JsonValue | null
   citations: runtime.JsonValue
   confidenceScore: number | null
+  generationSpec: runtime.JsonValue | null
+  masterPrompt: string | null
+  specVersion: number
+  styleTagKeys: string[]
+  intakeId: string | null
   createdAt: Date
   updatedAt: Date
   _count: ResearchReportCountAggregateOutputType | null
@@ -370,9 +401,15 @@ export type ResearchReportWhereInput = {
   competitorInsights?: Prisma.JsonNullableFilter<"ResearchReport">
   citations?: Prisma.JsonFilter<"ResearchReport">
   confidenceScore?: Prisma.FloatNullableFilter<"ResearchReport"> | number | null
+  generationSpec?: Prisma.JsonNullableFilter<"ResearchReport">
+  masterPrompt?: Prisma.StringNullableFilter<"ResearchReport"> | string | null
+  specVersion?: Prisma.IntFilter<"ResearchReport"> | number
+  styleTagKeys?: Prisma.StringNullableListFilter<"ResearchReport">
+  intakeId?: Prisma.StringNullableFilter<"ResearchReport"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ResearchReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ResearchReport"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  citationRows?: Prisma.ResearchReportCitationListRelationFilter
 }
 
 export type ResearchReportOrderByWithRelationInput = {
@@ -401,9 +438,15 @@ export type ResearchReportOrderByWithRelationInput = {
   competitorInsights?: Prisma.SortOrderInput | Prisma.SortOrder
   citations?: Prisma.SortOrder
   confidenceScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationSpec?: Prisma.SortOrderInput | Prisma.SortOrder
+  masterPrompt?: Prisma.SortOrderInput | Prisma.SortOrder
+  specVersion?: Prisma.SortOrder
+  styleTagKeys?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
+  citationRows?: Prisma.ResearchReportCitationOrderByRelationAggregateInput
 }
 
 export type ResearchReportWhereUniqueInput = Prisma.AtLeast<{
@@ -435,9 +478,15 @@ export type ResearchReportWhereUniqueInput = Prisma.AtLeast<{
   competitorInsights?: Prisma.JsonNullableFilter<"ResearchReport">
   citations?: Prisma.JsonFilter<"ResearchReport">
   confidenceScore?: Prisma.FloatNullableFilter<"ResearchReport"> | number | null
+  generationSpec?: Prisma.JsonNullableFilter<"ResearchReport">
+  masterPrompt?: Prisma.StringNullableFilter<"ResearchReport"> | string | null
+  specVersion?: Prisma.IntFilter<"ResearchReport"> | number
+  styleTagKeys?: Prisma.StringNullableListFilter<"ResearchReport">
+  intakeId?: Prisma.StringNullableFilter<"ResearchReport"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ResearchReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ResearchReport"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  citationRows?: Prisma.ResearchReportCitationListRelationFilter
 }, "id" | "projectId">
 
 export type ResearchReportOrderByWithAggregationInput = {
@@ -466,6 +515,11 @@ export type ResearchReportOrderByWithAggregationInput = {
   competitorInsights?: Prisma.SortOrderInput | Prisma.SortOrder
   citations?: Prisma.SortOrder
   confidenceScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  generationSpec?: Prisma.SortOrderInput | Prisma.SortOrder
+  masterPrompt?: Prisma.SortOrderInput | Prisma.SortOrder
+  specVersion?: Prisma.SortOrder
+  styleTagKeys?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ResearchReportCountOrderByAggregateInput
@@ -504,6 +558,11 @@ export type ResearchReportScalarWhereWithAggregatesInput = {
   competitorInsights?: Prisma.JsonNullableWithAggregatesFilter<"ResearchReport">
   citations?: Prisma.JsonWithAggregatesFilter<"ResearchReport">
   confidenceScore?: Prisma.FloatNullableWithAggregatesFilter<"ResearchReport"> | number | null
+  generationSpec?: Prisma.JsonNullableWithAggregatesFilter<"ResearchReport">
+  masterPrompt?: Prisma.StringNullableWithAggregatesFilter<"ResearchReport"> | string | null
+  specVersion?: Prisma.IntWithAggregatesFilter<"ResearchReport"> | number
+  styleTagKeys?: Prisma.StringNullableListFilter<"ResearchReport">
+  intakeId?: Prisma.StringNullableWithAggregatesFilter<"ResearchReport"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ResearchReport"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ResearchReport"> | Date | string
 }
@@ -533,9 +592,15 @@ export type ResearchReportCreateInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: string | null
+  specVersion?: number
+  styleTagKeys?: Prisma.ResearchReportCreatestyleTagKeysInput | string[]
+  intakeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutResearchReportInput
+  citationRows?: Prisma.ResearchReportCitationCreateNestedManyWithoutResearchReportInput
 }
 
 export type ResearchReportUncheckedCreateInput = {
@@ -564,8 +629,14 @@ export type ResearchReportUncheckedCreateInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: string | null
+  specVersion?: number
+  styleTagKeys?: Prisma.ResearchReportCreatestyleTagKeysInput | string[]
+  intakeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  citationRows?: Prisma.ResearchReportCitationUncheckedCreateNestedManyWithoutResearchReportInput
 }
 
 export type ResearchReportUpdateInput = {
@@ -593,9 +664,15 @@ export type ResearchReportUpdateInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  styleTagKeys?: Prisma.ResearchReportUpdatestyleTagKeysInput | string[]
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutResearchReportNestedInput
+  citationRows?: Prisma.ResearchReportCitationUpdateManyWithoutResearchReportNestedInput
 }
 
 export type ResearchReportUncheckedUpdateInput = {
@@ -624,8 +701,14 @@ export type ResearchReportUncheckedUpdateInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  styleTagKeys?: Prisma.ResearchReportUpdatestyleTagKeysInput | string[]
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  citationRows?: Prisma.ResearchReportCitationUncheckedUpdateManyWithoutResearchReportNestedInput
 }
 
 export type ResearchReportCreateManyInput = {
@@ -654,6 +737,11 @@ export type ResearchReportCreateManyInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: string | null
+  specVersion?: number
+  styleTagKeys?: Prisma.ResearchReportCreatestyleTagKeysInput | string[]
+  intakeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -683,6 +771,11 @@ export type ResearchReportUpdateManyMutationInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  styleTagKeys?: Prisma.ResearchReportUpdatestyleTagKeysInput | string[]
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -713,6 +806,11 @@ export type ResearchReportUncheckedUpdateManyInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  styleTagKeys?: Prisma.ResearchReportUpdatestyleTagKeysInput | string[]
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -748,12 +846,18 @@ export type ResearchReportCountOrderByAggregateInput = {
   competitorInsights?: Prisma.SortOrder
   citations?: Prisma.SortOrder
   confidenceScore?: Prisma.SortOrder
+  generationSpec?: Prisma.SortOrder
+  masterPrompt?: Prisma.SortOrder
+  specVersion?: Prisma.SortOrder
+  styleTagKeys?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ResearchReportAvgOrderByAggregateInput = {
   confidenceScore?: Prisma.SortOrder
+  specVersion?: Prisma.SortOrder
 }
 
 export type ResearchReportMaxOrderByAggregateInput = {
@@ -777,6 +881,9 @@ export type ResearchReportMaxOrderByAggregateInput = {
   targetAgeGroup?: Prisma.SortOrder
   toneOfVoice?: Prisma.SortOrder
   confidenceScore?: Prisma.SortOrder
+  masterPrompt?: Prisma.SortOrder
+  specVersion?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -802,12 +909,21 @@ export type ResearchReportMinOrderByAggregateInput = {
   targetAgeGroup?: Prisma.SortOrder
   toneOfVoice?: Prisma.SortOrder
   confidenceScore?: Prisma.SortOrder
+  masterPrompt?: Prisma.SortOrder
+  specVersion?: Prisma.SortOrder
+  intakeId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ResearchReportSumOrderByAggregateInput = {
   confidenceScore?: Prisma.SortOrder
+  specVersion?: Prisma.SortOrder
+}
+
+export type ResearchReportScalarRelationFilter = {
+  is?: Prisma.ResearchReportWhereInput
+  isNot?: Prisma.ResearchReportWhereInput
 }
 
 export type ResearchReportCreateNestedOneWithoutProjectInput = {
@@ -842,6 +958,29 @@ export type ResearchReportUncheckedUpdateOneWithoutProjectNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ResearchReportUpdateToOneWithWhereWithoutProjectInput, Prisma.ResearchReportUpdateWithoutProjectInput>, Prisma.ResearchReportUncheckedUpdateWithoutProjectInput>
 }
 
+export type ResearchReportCreatestyleTagKeysInput = {
+  set: string[]
+}
+
+export type ResearchReportUpdatestyleTagKeysInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type ResearchReportCreateNestedOneWithoutCitationRowsInput = {
+  create?: Prisma.XOR<Prisma.ResearchReportCreateWithoutCitationRowsInput, Prisma.ResearchReportUncheckedCreateWithoutCitationRowsInput>
+  connectOrCreate?: Prisma.ResearchReportCreateOrConnectWithoutCitationRowsInput
+  connect?: Prisma.ResearchReportWhereUniqueInput
+}
+
+export type ResearchReportUpdateOneRequiredWithoutCitationRowsNestedInput = {
+  create?: Prisma.XOR<Prisma.ResearchReportCreateWithoutCitationRowsInput, Prisma.ResearchReportUncheckedCreateWithoutCitationRowsInput>
+  connectOrCreate?: Prisma.ResearchReportCreateOrConnectWithoutCitationRowsInput
+  upsert?: Prisma.ResearchReportUpsertWithoutCitationRowsInput
+  connect?: Prisma.ResearchReportWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ResearchReportUpdateToOneWithWhereWithoutCitationRowsInput, Prisma.ResearchReportUpdateWithoutCitationRowsInput>, Prisma.ResearchReportUncheckedUpdateWithoutCitationRowsInput>
+}
+
 export type ResearchReportCreateWithoutProjectInput = {
   id?: string
   inputType?: $Enums.ProjectInputType
@@ -867,8 +1006,14 @@ export type ResearchReportCreateWithoutProjectInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: string | null
+  specVersion?: number
+  styleTagKeys?: Prisma.ResearchReportCreatestyleTagKeysInput | string[]
+  intakeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  citationRows?: Prisma.ResearchReportCitationCreateNestedManyWithoutResearchReportInput
 }
 
 export type ResearchReportUncheckedCreateWithoutProjectInput = {
@@ -896,8 +1041,14 @@ export type ResearchReportUncheckedCreateWithoutProjectInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: string | null
+  specVersion?: number
+  styleTagKeys?: Prisma.ResearchReportCreatestyleTagKeysInput | string[]
+  intakeId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  citationRows?: Prisma.ResearchReportCitationUncheckedCreateNestedManyWithoutResearchReportInput
 }
 
 export type ResearchReportCreateOrConnectWithoutProjectInput = {
@@ -941,8 +1092,14 @@ export type ResearchReportUpdateWithoutProjectInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  styleTagKeys?: Prisma.ResearchReportUpdatestyleTagKeysInput | string[]
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  citationRows?: Prisma.ResearchReportCitationUpdateManyWithoutResearchReportNestedInput
 }
 
 export type ResearchReportUncheckedUpdateWithoutProjectInput = {
@@ -970,10 +1127,201 @@ export type ResearchReportUncheckedUpdateWithoutProjectInput = {
   competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   citations?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  styleTagKeys?: Prisma.ResearchReportUpdatestyleTagKeysInput | string[]
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  citationRows?: Prisma.ResearchReportCitationUncheckedUpdateManyWithoutResearchReportNestedInput
+}
+
+export type ResearchReportCreateWithoutCitationRowsInput = {
+  id?: string
+  inputType?: $Enums.ProjectInputType
+  sourceScanId?: string | null
+  summary: string
+  primaryColor: string
+  secondaryColor: string
+  accentColor: string
+  colorPalette: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colorRationale: string
+  fontPrimary: string
+  fontSecondary: string
+  typographyRationale: string
+  layoutStyle: string
+  layoutRationale: string
+  imageStyle: string
+  imageDirection: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  imageRationale: string
+  animationStyle?: string | null
+  targetAgeGroup?: string | null
+  toneOfVoice?: string | null
+  seoKeywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  citations: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confidenceScore?: number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: string | null
+  specVersion?: number
+  styleTagKeys?: Prisma.ResearchReportCreatestyleTagKeysInput | string[]
+  intakeId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutResearchReportInput
+}
+
+export type ResearchReportUncheckedCreateWithoutCitationRowsInput = {
+  id?: string
+  projectId: string
+  inputType?: $Enums.ProjectInputType
+  sourceScanId?: string | null
+  summary: string
+  primaryColor: string
+  secondaryColor: string
+  accentColor: string
+  colorPalette: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colorRationale: string
+  fontPrimary: string
+  fontSecondary: string
+  typographyRationale: string
+  layoutStyle: string
+  layoutRationale: string
+  imageStyle: string
+  imageDirection: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  imageRationale: string
+  animationStyle?: string | null
+  targetAgeGroup?: string | null
+  toneOfVoice?: string | null
+  seoKeywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  citations: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confidenceScore?: number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: string | null
+  specVersion?: number
+  styleTagKeys?: Prisma.ResearchReportCreatestyleTagKeysInput | string[]
+  intakeId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ResearchReportCreateOrConnectWithoutCitationRowsInput = {
+  where: Prisma.ResearchReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.ResearchReportCreateWithoutCitationRowsInput, Prisma.ResearchReportUncheckedCreateWithoutCitationRowsInput>
+}
+
+export type ResearchReportUpsertWithoutCitationRowsInput = {
+  update: Prisma.XOR<Prisma.ResearchReportUpdateWithoutCitationRowsInput, Prisma.ResearchReportUncheckedUpdateWithoutCitationRowsInput>
+  create: Prisma.XOR<Prisma.ResearchReportCreateWithoutCitationRowsInput, Prisma.ResearchReportUncheckedCreateWithoutCitationRowsInput>
+  where?: Prisma.ResearchReportWhereInput
+}
+
+export type ResearchReportUpdateToOneWithWhereWithoutCitationRowsInput = {
+  where?: Prisma.ResearchReportWhereInput
+  data: Prisma.XOR<Prisma.ResearchReportUpdateWithoutCitationRowsInput, Prisma.ResearchReportUncheckedUpdateWithoutCitationRowsInput>
+}
+
+export type ResearchReportUpdateWithoutCitationRowsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceScanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
+  secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
+  accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  colorPalette?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colorRationale?: Prisma.StringFieldUpdateOperationsInput | string
+  fontPrimary?: Prisma.StringFieldUpdateOperationsInput | string
+  fontSecondary?: Prisma.StringFieldUpdateOperationsInput | string
+  typographyRationale?: Prisma.StringFieldUpdateOperationsInput | string
+  layoutStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  layoutRationale?: Prisma.StringFieldUpdateOperationsInput | string
+  imageStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  imageDirection?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  imageRationale?: Prisma.StringFieldUpdateOperationsInput | string
+  animationStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetAgeGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toneOfVoice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  citations?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  styleTagKeys?: Prisma.ResearchReportUpdatestyleTagKeysInput | string[]
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutResearchReportNestedInput
+}
+
+export type ResearchReportUncheckedUpdateWithoutCitationRowsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  sourceScanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  primaryColor?: Prisma.StringFieldUpdateOperationsInput | string
+  secondaryColor?: Prisma.StringFieldUpdateOperationsInput | string
+  accentColor?: Prisma.StringFieldUpdateOperationsInput | string
+  colorPalette?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  colorRationale?: Prisma.StringFieldUpdateOperationsInput | string
+  fontPrimary?: Prisma.StringFieldUpdateOperationsInput | string
+  fontSecondary?: Prisma.StringFieldUpdateOperationsInput | string
+  typographyRationale?: Prisma.StringFieldUpdateOperationsInput | string
+  layoutStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  layoutRationale?: Prisma.StringFieldUpdateOperationsInput | string
+  imageStyle?: Prisma.StringFieldUpdateOperationsInput | string
+  imageDirection?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  imageRationale?: Prisma.StringFieldUpdateOperationsInput | string
+  animationStyle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  targetAgeGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toneOfVoice?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoKeywords?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  competitorInsights?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  citations?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  confidenceScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  generationSpec?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  masterPrompt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  specVersion?: Prisma.IntFieldUpdateOperationsInput | number
+  styleTagKeys?: Prisma.ResearchReportUpdatestyleTagKeysInput | string[]
+  intakeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type ResearchReportCountOutputType
+ */
+
+export type ResearchReportCountOutputType = {
+  citationRows: number
+}
+
+export type ResearchReportCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  citationRows?: boolean | ResearchReportCountOutputTypeCountCitationRowsArgs
+}
+
+/**
+ * ResearchReportCountOutputType without action
+ */
+export type ResearchReportCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResearchReportCountOutputType
+   */
+  select?: Prisma.ResearchReportCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ResearchReportCountOutputType without action
+ */
+export type ResearchReportCountOutputTypeCountCitationRowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ResearchReportCitationWhereInput
+}
 
 
 export type ResearchReportSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1002,9 +1350,16 @@ export type ResearchReportSelect<ExtArgs extends runtime.Types.Extensions.Intern
   competitorInsights?: boolean
   citations?: boolean
   confidenceScore?: boolean
+  generationSpec?: boolean
+  masterPrompt?: boolean
+  specVersion?: boolean
+  styleTagKeys?: boolean
+  intakeId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  citationRows?: boolean | Prisma.ResearchReport$citationRowsArgs<ExtArgs>
+  _count?: boolean | Prisma.ResearchReportCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["researchReport"]>
 
 export type ResearchReportSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1033,6 +1388,11 @@ export type ResearchReportSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   competitorInsights?: boolean
   citations?: boolean
   confidenceScore?: boolean
+  generationSpec?: boolean
+  masterPrompt?: boolean
+  specVersion?: boolean
+  styleTagKeys?: boolean
+  intakeId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
@@ -1064,6 +1424,11 @@ export type ResearchReportSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   competitorInsights?: boolean
   citations?: boolean
   confidenceScore?: boolean
+  generationSpec?: boolean
+  masterPrompt?: boolean
+  specVersion?: boolean
+  styleTagKeys?: boolean
+  intakeId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
@@ -1095,13 +1460,20 @@ export type ResearchReportSelectScalar = {
   competitorInsights?: boolean
   citations?: boolean
   confidenceScore?: boolean
+  generationSpec?: boolean
+  masterPrompt?: boolean
+  specVersion?: boolean
+  styleTagKeys?: boolean
+  intakeId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ResearchReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "inputType" | "sourceScanId" | "summary" | "primaryColor" | "secondaryColor" | "accentColor" | "colorPalette" | "colorRationale" | "fontPrimary" | "fontSecondary" | "typographyRationale" | "layoutStyle" | "layoutRationale" | "imageStyle" | "imageDirection" | "imageRationale" | "animationStyle" | "targetAgeGroup" | "toneOfVoice" | "seoKeywords" | "competitorInsights" | "citations" | "confidenceScore" | "createdAt" | "updatedAt", ExtArgs["result"]["researchReport"]>
+export type ResearchReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "inputType" | "sourceScanId" | "summary" | "primaryColor" | "secondaryColor" | "accentColor" | "colorPalette" | "colorRationale" | "fontPrimary" | "fontSecondary" | "typographyRationale" | "layoutStyle" | "layoutRationale" | "imageStyle" | "imageDirection" | "imageRationale" | "animationStyle" | "targetAgeGroup" | "toneOfVoice" | "seoKeywords" | "competitorInsights" | "citations" | "confidenceScore" | "generationSpec" | "masterPrompt" | "specVersion" | "styleTagKeys" | "intakeId" | "createdAt" | "updatedAt", ExtArgs["result"]["researchReport"]>
 export type ResearchReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  citationRows?: boolean | Prisma.ResearchReport$citationRowsArgs<ExtArgs>
+  _count?: boolean | Prisma.ResearchReportCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ResearchReportIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
@@ -1114,6 +1486,7 @@ export type $ResearchReportPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "ResearchReport"
   objects: {
     project: Prisma.$ProjectPayload<ExtArgs>
+    citationRows: Prisma.$ResearchReportCitationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1141,6 +1514,11 @@ export type $ResearchReportPayload<ExtArgs extends runtime.Types.Extensions.Inte
     competitorInsights: runtime.JsonValue | null
     citations: runtime.JsonValue
     confidenceScore: number | null
+    generationSpec: runtime.JsonValue | null
+    masterPrompt: string | null
+    specVersion: number
+    styleTagKeys: string[]
+    intakeId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["researchReport"]>
@@ -1538,6 +1916,7 @@ readonly fields: ResearchReportFieldRefs;
 export interface Prisma__ResearchReportClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  citationRows<T extends Prisma.ResearchReport$citationRowsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ResearchReport$citationRowsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ResearchReportCitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1592,6 +1971,11 @@ export interface ResearchReportFieldRefs {
   readonly competitorInsights: Prisma.FieldRef<"ResearchReport", 'Json'>
   readonly citations: Prisma.FieldRef<"ResearchReport", 'Json'>
   readonly confidenceScore: Prisma.FieldRef<"ResearchReport", 'Float'>
+  readonly generationSpec: Prisma.FieldRef<"ResearchReport", 'Json'>
+  readonly masterPrompt: Prisma.FieldRef<"ResearchReport", 'String'>
+  readonly specVersion: Prisma.FieldRef<"ResearchReport", 'Int'>
+  readonly styleTagKeys: Prisma.FieldRef<"ResearchReport", 'String[]'>
+  readonly intakeId: Prisma.FieldRef<"ResearchReport", 'String'>
   readonly createdAt: Prisma.FieldRef<"ResearchReport", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ResearchReport", 'DateTime'>
 }
@@ -1992,6 +2376,30 @@ export type ResearchReportDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many ResearchReports to delete.
    */
   limit?: number
+}
+
+/**
+ * ResearchReport.citationRows
+ */
+export type ResearchReport$citationRowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ResearchReportCitation
+   */
+  select?: Prisma.ResearchReportCitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ResearchReportCitation
+   */
+  omit?: Prisma.ResearchReportCitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ResearchReportCitationInclude<ExtArgs> | null
+  where?: Prisma.ResearchReportCitationWhereInput
+  orderBy?: Prisma.ResearchReportCitationOrderByWithRelationInput | Prisma.ResearchReportCitationOrderByWithRelationInput[]
+  cursor?: Prisma.ResearchReportCitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ResearchReportCitationScalarFieldEnum | Prisma.ResearchReportCitationScalarFieldEnum[]
 }
 
 /**

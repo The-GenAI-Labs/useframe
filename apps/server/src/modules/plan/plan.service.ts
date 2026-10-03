@@ -1,3 +1,4 @@
+import { callGetProjectResearch } from "@/lib/researchService.js"
 import { Queue } from "bullmq"
 import { prisma, type Prisma } from "@useframe/db"
 import { QUEUES } from "@repo/events"
@@ -28,6 +29,14 @@ async function loadProjectWithPipeline(userId: string, slug: string) {
 }
 
 export const PlanService = {
+  async getResearchCitations(user: { id: string }, projectId: string) {
+    const project = await prisma.project.findFirst({
+      where: { id: projectId, userId: user.id, deletedAt: null },
+      select: { id: true },
+    })
+    if (!project) throw new AppError("Project not found", 404)
+    return callGetProjectResearch(project.id)
+  },
   async get(user: { id: string; email: string; plan: string }, slug: string) {
     const project = await prisma.project.findFirst({
       where: { slug, userId: user.id, deletedAt: null },

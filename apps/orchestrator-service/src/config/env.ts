@@ -1,10 +1,15 @@
 import { z } from "zod";
 import dotenv from "dotenv";
+import { JevEnvSchema } from "@repo/jev/config";
 
 dotenv.config();
 
 const envSchema = z
   .object({
+    ...JevEnvSchema.shape,
+    OFF_TOPIC_THRESHOLD: z.coerce.number().min(0).max(1).default(0.65),
+    MAX_HISTORY_MESSAGES: z.coerce.number().int().min(1).max(30).default(10),
+    CHAT_MODEL: z.literal("deepseek-v4-flash").default("deepseek-v4-flash"),
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),

@@ -67,6 +67,7 @@ async function api(
 export async function startKubernetesPreview(
   files: { path: string; content: string }[],
   framework: "next" | "vite",
+  runDevScript = false,
 ) {
   const name = `validation-${randomUUID()}`;
   const namespace =
@@ -120,7 +121,7 @@ export async function startKubernetesPreview(
           {
             name: "preview",
             image,
-            args: [framework],
+            args: [framework, ...(runDevScript ? ["script"] : [])],
             ports: [{ containerPort: 3000 }],
             resources: {
               requests: { cpu: "250m", memory: "512Mi" },

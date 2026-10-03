@@ -199,10 +199,22 @@ export const PageType = {
   PRICING: 'PRICING',
   PRODUCT: 'PRODUCT',
   RESEARCH: 'RESEARCH',
-  DEMO: 'DEMO'
+  DEMO: 'DEMO',
+  BLOG: 'BLOG',
+  FAQ: 'FAQ',
+  CHANGELOG: 'CHANGELOG'
 } as const
 
 export type PageType = (typeof PageType)[keyof typeof PageType]
+
+
+export const CatalogStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  RETIRED: 'RETIRED'
+} as const
+
+export type CatalogStatus = (typeof CatalogStatus)[keyof typeof CatalogStatus]
 
 
 export const ResearchKind = {
@@ -231,7 +243,8 @@ export type ResearchCategory = (typeof ResearchCategory)[keyof typeof ResearchCa
 export const ScanType = {
   COMPETITOR: 'COMPETITOR',
   OWN_SITE: 'OWN_SITE',
-  REPLICATION_TARGET: 'REPLICATION_TARGET'
+  REPLICATION_TARGET: 'REPLICATION_TARGET',
+  STYLE_REFERENCE: 'STYLE_REFERENCE'
 } as const
 
 export type ScanType = (typeof ScanType)[keyof typeof ScanType]
@@ -264,6 +277,53 @@ export const ResearchDocumentType = {
 } as const
 
 export type ResearchDocumentType = (typeof ResearchDocumentType)[keyof typeof ResearchDocumentType]
+
+
+export const FindingStatus = {
+  DRAFT: 'DRAFT',
+  VERIFIED: 'VERIFIED',
+  RETIRED: 'RETIRED'
+} as const
+
+export type FindingStatus = (typeof FindingStatus)[keyof typeof FindingStatus]
+
+
+export const FindingRelationType = {
+  SUPPORTS: 'SUPPORTS',
+  CONFLICTS: 'CONFLICTS',
+  REFINES: 'REFINES',
+  OFTEN_CITED_TOGETHER: 'OFTEN_CITED_TOGETHER'
+} as const
+
+export type FindingRelationType = (typeof FindingRelationType)[keyof typeof FindingRelationType]
+
+
+export const DecisionArea = {
+  COLOR: 'COLOR',
+  TYPOGRAPHY: 'TYPOGRAPHY',
+  LAYOUT: 'LAYOUT',
+  CONVERSION: 'CONVERSION',
+  TRUST_SOCIAL_PROOF: 'TRUST_SOCIAL_PROOF',
+  ACCESSIBILITY: 'ACCESSIBILITY',
+  MOTION: 'MOTION',
+  COPY_TONE: 'COPY_TONE',
+  IMAGERY: 'IMAGERY'
+} as const
+
+export type DecisionArea = (typeof DecisionArea)[keyof typeof DecisionArea]
+
+
+export const IngestionOutcome = {
+  SUCCESS: 'SUCCESS',
+  SKIPPED_UNCHANGED: 'SKIPPED_UNCHANGED',
+  SKIPPED_STALE_GENERATION: 'SKIPPED_STALE_GENERATION',
+  SKIPPED_OVERWRITTEN: 'SKIPPED_OVERWRITTEN',
+  INVALID: 'INVALID',
+  RETIRED: 'RETIRED',
+  FAILED: 'FAILED'
+} as const
+
+export type IngestionOutcome = (typeof IngestionOutcome)[keyof typeof IngestionOutcome]
 
 
 export const PipelineStepId = {
@@ -356,3 +416,30 @@ export const SeoAuditTier = {
 } as const
 
 export type SeoAuditTier = (typeof SeoAuditTier)[keyof typeof SeoAuditTier]
+
+
+export const ChatMessageRole = {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT'
+} as const
+
+export type ChatMessageRole = (typeof ChatMessageRole)[keyof typeof ChatMessageRole]
+
+
+export const ChatTopic = {
+  COLOR: 'COLOR',
+  TYPOGRAPHY: 'TYPOGRAPHY',
+  LAYOUT: 'LAYOUT',
+  CONVERSION: 'CONVERSION',
+  TRUST_SOCIAL_PROOF: 'TRUST_SOCIAL_PROOF',
+  ACCESSIBILITY: 'ACCESSIBILITY',
+  MOTION: 'MOTION',
+  COPY_TONE: 'COPY_TONE',
+  IMAGERY: 'IMAGERY',
+  SEO: 'SEO',
+  PROJECT_OVERVIEW: 'PROJECT_OVERVIEW',
+  COMPETITOR: 'COMPETITOR',
+  OFF_TOPIC: 'OFF_TOPIC'
+} as const
+
+export type ChatTopic = (typeof ChatTopic)[keyof typeof ChatTopic]

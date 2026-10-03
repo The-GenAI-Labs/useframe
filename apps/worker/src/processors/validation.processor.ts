@@ -1,15 +1,14 @@
+import { processMainValidation } from "./mainValidation.processor.js";
+import { validationRequest as orchestrator } from "../lib/validationRequest.js";
 import { Queue, Worker } from "bullmq";
 import { chromium } from "playwright";
 import { z } from "zod";
 import { prisma, ensureValidationRun } from "@useframe/db";
 import { QUEUES, type ValidationJobPayload } from "@repo/events";
-import { SiteSpecSchema } from "@repo/schemas";
-import { buildSiteFiles, withScaffold, toRoutePath } from "@repo/site-builder";
+import { withScaffold } from "@repo/site-builder";
 import {
   CaptureSchema,
   ComparisonResultSchema,
-  FULL_PAGE_THRESHOLD,
-  decideValidationTier,
   formatDiscrepanciesAsIterateInstruction,
   runTier0Checks,
   runValidationLoop,
@@ -29,6 +28,7 @@ import { env } from "../config/env.js";
 import { redis } from "../lib/redis.js";
 
 const queue = new Queue(QUEUES.VALIDATE, { connection: redis });
+const mainQueue = new Queue(QUEUES.VALIDATE_MAIN, { connection: redis });
 const cleanupQueue = new Queue(QUEUES.VALIDATION_CLEANUP, {
   connection: redis,
 });
@@ -39,30 +39,17 @@ export async function enqueueDeployedValidation(
   if (!env.GCS_BUCKET) return;
   const run = await ensureValidationRun(projectId, versionId, "MAIN");
   if (run?.status === "QUEUED")
-    await queue.add(
+    await mainQueue.add(
       "validate",
       { runId: run.id },
       { jobId: run.id, attempts: 1, removeOnComplete: 100, removeOnFail: 100 },
     );
 }
-async function orchestrator(path: string, body: object) {
-  const response = await fetch(`${env.ORCHESTRATOR_URL}${path}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-internal-secret": env.INTERNAL_SERVICE_SECRET,
-    },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(path === "/iterate" ? 240000 : 1800000),
-  });
-  if (!response.ok)
-    throw new Error(`Validation ${path} failed (HTTP ${response.status})`);
-  return response.json() as Promise<unknown>;
-}
 export async function processValidation(runId: string) {
   const run = await prisma.validationRun.findUniqueOrThrow({
     where: { id: runId },
   });
+  if (run.pipeline === "MAIN") return processMainValidation(runId);
   const prefix = validationPrefix(run.pipeline, run.projectId, run.id);
   if (!["QUEUED", "RUNNING"].includes(run.status)) {
     await deleteGcsPrefix(prefix);
@@ -92,24 +79,12 @@ export async function processValidation(runId: string) {
     const version = await prisma.projectVersion.findFirstOrThrow({
       where: { id: versionId, projectId: run.projectId },
     });
-    const files =
-      run.pipeline === "REPLICATE"
-        ? withScaffold(
-            z
-              .array(z.object({ path: z.string(), content: z.string() }))
-              .parse(version.nextFiles),
-          )
-        : buildSiteFiles(
-            SiteSpecSchema.parse({
-              ...(version.snapshot as object),
-              siteType: version.siteType,
-            }),
-          );
-    const preview = await startLocalPreview(
-      files,
-      run.projectId,
-      run.pipeline === "REPLICATE" ? "next" : "vite",
+    const files = withScaffold(
+      z
+        .array(z.object({ path: z.string(), content: z.string() }))
+        .parse(version.nextFiles),
     );
+    const preview = await startLocalPreview(files, run.projectId, "next");
     try {
       const browser = await chromium.launch({ headless: true });
       try {
@@ -131,38 +106,12 @@ export async function processValidation(runId: string) {
   try {
     if (Date.now() >= expiresAt.getTime())
       throw new Error("Original capture expired before validation started");
-    const original =
-      run.pipeline === "REPLICATE"
-        ? z.array(CaptureSchema).min(1).parse(run.originalScreenshotKeys)
-        : [];
+    const original = z
+      .array(CaptureSchema)
+      .min(1)
+      .parse(run.originalScreenshotKeys);
     first = await prepare(run.startVersionId);
-    const height = await first.page.evaluate(
-      () => document.documentElement.scrollHeight,
-    );
-    let tier = run.tier;
-    if (run.pipeline === "MAIN") {
-      if (!first.version.designBrief)
-        throw new Error("Approved DesignBrief is unavailable");
-      tier = decideValidationTier({
-        pageHeightPx: height,
-        fullPageThresholdPx: FULL_PAGE_THRESHOLD,
-        usesAnimationLibrary: false,
-        usesVirtualization: false,
-        hasPinnedElements: false,
-        capturedFrameCount: Math.max(
-          Math.ceil(height / 800),
-          SiteSpecSchema.parse({
-            ...(first.version.snapshot as object),
-            siteType: first.version.siteType,
-          }).pages.length,
-        ),
-        aiSelfReportedConfidence: "uncertain",
-      });
-      await prisma.validationRun.update({
-        where: { id: run.id },
-        data: { tier },
-      });
-    }
+    const tier = run.tier;
     if (tier !== 1 && tier !== 2) throw new Error("Missing capture tier");
     const renderedKeys: z.infer<typeof CaptureSchema>[] = [];
     await runValidationLoop({
@@ -175,18 +124,7 @@ export async function processValidation(runId: string) {
         first = undefined;
         const { preview, browser, page, checks } = context;
         try {
-          const routes =
-            run.pipeline === "MAIN"
-              ? [
-                  ...new Set([
-                    "/",
-                    ...SiteSpecSchema.parse({
-                      ...(context.version.snapshot as object),
-                      siteType: context.version.siteType,
-                    }).pages.map((p) => toRoutePath(p.slug)),
-                  ]),
-                ]
-              : ["/"];
+          const routes = ["/"];
           for (const [routeIndex, route] of routes.entries()) {
             if (routeIndex > 0) {
               const routeChecks = await runTier0Checks(
@@ -207,27 +145,9 @@ export async function processValidation(runId: string) {
             if (pageHeight > 30000)
               throw new Error("Rendered page exceeds safe capture limit");
             const positions =
-              run.pipeline === "REPLICATE"
-                ? tier === 1
-                  ? original.filter((s) => s.section === "hero")
-                  : original
-                : Array.from(
-                    {
-                      length:
-                        tier === 1
-                          ? 1
-                          : Math.max(1, Math.ceil(pageHeight / 800)),
-                    },
-                    (_, i) => ({
-                      section:
-                        routeIndex === 0 && i === 0
-                          ? "hero"
-                          : `page-${routeIndex}-section-${i}`,
-                      scrollY: i * 800,
-                      fullPage: false,
-                      wheel: false,
-                    }),
-                  );
+              tier === 1
+                ? original.filter((s) => s.section === "hero")
+                : original;
             for (const capture of positions) {
               if (capture.wheel) {
                 await page.evaluate(() => window.scrollTo(0, 0));
@@ -366,6 +286,11 @@ export async function processValidation(runId: string) {
 }
 
 export function startValidationWorkers() {
+  const mainWorker = new Worker<ValidationJobPayload>(
+    QUEUES.VALIDATE_MAIN,
+    (job) => processMainValidation(job.data.runId),
+    { connection: redis, concurrency: 1, lockDuration: 120000 },
+  );
   const worker = new Worker<ValidationJobPayload>(
     QUEUES.VALIDATE,
     (job) => processValidation(job.data.runId),
@@ -394,7 +319,12 @@ export function startValidationWorkers() {
           createdAt: { gt: new Date(Date.now() - SCREENSHOT_TTL_MS) },
           triggeredBy: null,
           validationRuns: { none: {} },
-          project: { status: "READY", replication: null, deletedAt: null },
+          project: {
+            status: "READY",
+            replication: null,
+            deletedAt: null,
+            generationTier: "PAID",
+          },
         },
         select: { id: true, projectId: true },
         take: 100,
@@ -403,12 +333,23 @@ export function startValidationWorkers() {
         await ensureValidationRun(version.projectId, version.id, "MAIN");
       // Recover the database/queue gap without re-running completed assessments.
       const queued = await prisma.validationRun.findMany({
-        where: { status: "QUEUED", project: { status: "READY" } },
+        where: {
+          status: "QUEUED",
+          project: { status: "READY" },
+          OR: [
+            { pipeline: "REPLICATE" },
+            {
+              pipeline: "MAIN",
+              isFreeTier: false,
+              project: { generationTier: "PAID", deletedAt: null },
+            },
+          ],
+        },
         take: 100,
         orderBy: { startedAt: "asc" },
       });
       for (const run of queued)
-        await queue.add(
+        await (run.pipeline === "MAIN" ? mainQueue : queue).add(
           "validate",
           { runId: run.id },
           {
@@ -421,7 +362,7 @@ export function startValidationWorkers() {
     },
     { connection: redis, concurrency: 1 },
   );
-  for (const w of [worker, cleanup])
+  for (const w of [worker, mainWorker, cleanup])
     w.on("failed", (job, error) =>
       console.error(`[validation] Job ${job?.id} failed`, error),
     );
@@ -438,8 +379,12 @@ export function startValidationWorkers() {
     .catch(console.error);
   return {
     close: async () => {
-      await Promise.all([worker.close(), cleanup.close()]);
-      await Promise.all([queue.close(), cleanupQueue.close()]);
+      await Promise.all([worker.close(), mainWorker.close(), cleanup.close()]);
+      await Promise.all([
+        queue.close(),
+        mainQueue.close(),
+        cleanupQueue.close(),
+      ]);
     },
   };
 }

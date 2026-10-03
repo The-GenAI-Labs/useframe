@@ -100,3 +100,11 @@ export type AutoReloadJobPayload = {
 export interface ValidationJobPayload {
   runId: string;
 }
+
+export interface CorpusIngestJobPayload {
+  bucketId: string;
+  objectId: string;
+  objectGeneration: string;
+  eventType: "OBJECT_FINALIZE" | "OBJECT_DELETE" | "OBJECT_ARCHIVE" | "CLI";
+  overwrittenByGeneration?: string;
+}

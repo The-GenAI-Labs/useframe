@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { prisma, type Prisma } from "@useframe/db";
-import { SiteSpecSchema } from "@repo/schemas";
-import { runIteration, runFileIteration } from "../agents/iterate.agent.js";
+import { iterateMainValidation } from "./mainIteration.js";
+import { runFileIteration } from "../agents/iterate.agent.js";
 export const AutoIterateSchema = z.object({
   triggeredBy: z.literal("auto_validation"),
   runId: z.string().cuid(),
@@ -17,6 +17,14 @@ export async function iterateValidationVersion(
   });
   if (run.status !== "RUNNING" || input.iteration >= run.maxIterations)
     throw new Error("Validation correction is not permitted");
+  if (run.pipeline === "MAIN") {
+    if (run.isFreeTier)
+      throw new Error("MAIN validation requires a paid generation");
+    await prisma.project.findFirstOrThrow({
+      where: { id: run.projectId, generationTier: "PAID", deletedAt: null },
+      select: { id: true },
+    });
+  }
   const key = `${run.id}-${input.iteration}`;
   const existing = await prisma.projectVersion.findUnique({
     where: { validationFixKey: key },
@@ -49,20 +57,7 @@ export async function iterateValidationVersion(
       : null;
   const snapshot =
     run.pipeline === "MAIN"
-      ? (
-          await runIteration(
-            {
-              projectId: run.projectId,
-              versionId: base.id,
-              currentSpec: SiteSpecSchema.parse({
-                ...(base.snapshot as object),
-                siteType: base.siteType,
-              }),
-              instruction: input.instruction,
-            },
-            true,
-          )
-        ).updatedSpec
+      ? await iterateMainValidation(run.projectId, base, input.instruction)
       : base.snapshot;
   return prisma.$transaction(
     async (tx) => {

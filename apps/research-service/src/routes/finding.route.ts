@@ -1,12 +1,14 @@
-import { Router, type Request, type Response } from "express"
-import { prisma } from "@useframe/db"
+import { Router, type Request, type Response } from "express";
+import { prisma } from "@useframe/db";
 
-const router: Router = Router()
+const router: Router = Router();
 
 router.get("/finding/:id", (req: Request, res: Response, next) => {
   prisma.researchFinding
     .findUnique({
-      where: { id: req.params.id },
+      where: {
+        id: typeof req.params.id === "string" ? req.params.id : undefined,
+      },
       select: {
         id: true,
         claim: true,
@@ -20,12 +22,12 @@ router.get("/finding/:id", (req: Request, res: Response, next) => {
     })
     .then((finding: unknown) => {
       if (!finding) {
-        res.status(404).json({ success: false, message: "Finding not found" })
-        return
+        res.status(404).json({ success: false, message: "Finding not found" });
+        return;
       }
-      res.json({ success: true, data: finding })
+      res.json({ success: true, data: finding });
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
-export default router
+export default router;

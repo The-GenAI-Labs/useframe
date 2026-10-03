@@ -81,8 +81,17 @@ export const ModelName = {
   UsageLog: 'UsageLog',
   Waitlist: 'Waitlist',
   ResearchReport: 'ResearchReport',
+  ResearchIntake: 'ResearchIntake',
+  StyleTag: 'StyleTag',
+  StyleDirective: 'StyleDirective',
+  ComponentExemplar: 'ComponentExemplar',
   ResearchFinding: 'ResearchFinding',
   FindingRelation: 'FindingRelation',
+  SourceDocument: 'SourceDocument',
+  FindingChunk: 'FindingChunk',
+  PendingFindingRelation: 'PendingFindingRelation',
+  ResearchReportCitation: 'ResearchReportCitation',
+  CorpusIngestionLog: 'CorpusIngestionLog',
   DomainPattern: 'DomainPattern',
   AudienceModifier: 'AudienceModifier',
   GenerationOutcome: 'GenerationOutcome',
@@ -94,7 +103,11 @@ export const ModelName = {
   ValidationIteration: 'ValidationIteration',
   ScoreResult: 'ScoreResult',
   SearchQueryCache: 'SearchQueryCache',
-  SeoAuditResult: 'SeoAuditResult'
+  SeoAuditResult: 'SeoAuditResult',
+  RetrievalCacheEntry: 'RetrievalCacheEntry',
+  CorpusVersion: 'CorpusVersion',
+  JevDecisionLog: 'JevDecisionLog',
+  ProjectChatMessage: 'ProjectChatMessage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -650,11 +663,81 @@ export const ResearchReportScalarFieldEnum = {
   competitorInsights: 'competitorInsights',
   citations: 'citations',
   confidenceScore: 'confidenceScore',
+  generationSpec: 'generationSpec',
+  masterPrompt: 'masterPrompt',
+  specVersion: 'specVersion',
+  styleTagKeys: 'styleTagKeys',
+  intakeId: 'intakeId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ResearchReportScalarFieldEnum = (typeof ResearchReportScalarFieldEnum)[keyof typeof ResearchReportScalarFieldEnum]
+
+
+export const ResearchIntakeScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  rawIdea: 'rawIdea',
+  questions: 'questions',
+  answers: 'answers',
+  skipped: 'skipped',
+  classifiedNiche: 'classifiedNiche',
+  classificationConfidence: 'classificationConfidence',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ResearchIntakeScalarFieldEnum = (typeof ResearchIntakeScalarFieldEnum)[keyof typeof ResearchIntakeScalarFieldEnum]
+
+
+export const StyleTagScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  label: 'label',
+  description: 'description',
+  designTokens: 'designTokens',
+  exemplarScanIds: 'exemplarScanIds',
+  exemplarUrls: 'exemplarUrls',
+  requiresCapability: 'requiresCapability',
+  compatibleWith: 'compatibleWith',
+  avoidPatterns: 'avoidPatterns',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StyleTagScalarFieldEnum = (typeof StyleTagScalarFieldEnum)[keyof typeof StyleTagScalarFieldEnum]
+
+
+export const StyleDirectiveScalarFieldEnum = {
+  id: 'id',
+  niche: 'niche',
+  modelTarget: 'modelTarget',
+  promptText: 'promptText',
+  referenceProducts: 'referenceProducts',
+  avoidPatterns: 'avoidPatterns',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StyleDirectiveScalarFieldEnum = (typeof StyleDirectiveScalarFieldEnum)[keyof typeof StyleDirectiveScalarFieldEnum]
+
+
+export const ComponentExemplarScalarFieldEnum = {
+  id: 'id',
+  sectionType: 'sectionType',
+  styleTagCombo: 'styleTagCombo',
+  templatePath: 'templatePath',
+  templateVersion: 'templateVersion',
+  designTokens: 'designTokens',
+  screenshotKey: 'screenshotKey',
+  linkedFindingIds: 'linkedFindingIds',
+  createdAt: 'createdAt'
+} as const
+
+export type ComponentExemplarScalarFieldEnum = (typeof ComponentExemplarScalarFieldEnum)[keyof typeof ComponentExemplarScalarFieldEnum]
 
 
 export const ResearchFindingScalarFieldEnum = {
@@ -668,19 +751,117 @@ export const ResearchFindingScalarFieldEnum = {
   options: 'options',
   contextHeader: 'contextHeader',
   verified: 'verified',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  slug: 'slug',
+  status: 'status',
+  category: 'category',
+  title: 'title',
+  statement: 'statement',
+  appliesWhen: 'appliesWhen',
+  tags: 'tags',
+  confidenceScore: 'confidenceScore',
+  effectSize: 'effectSize',
+  sourceDocumentId: 'sourceDocumentId',
+  sourceExcerpt: 'sourceExcerpt',
+  sourceLocator: 'sourceLocator',
+  reuseCount: 'reuseCount',
+  contentHash: 'contentHash',
+  embeddingHash: 'embeddingHash',
+  gcsObjectKey: 'gcsObjectKey',
+  gcsGeneration: 'gcsGeneration',
+  verifiedAt: 'verifiedAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ResearchFindingScalarFieldEnum = (typeof ResearchFindingScalarFieldEnum)[keyof typeof ResearchFindingScalarFieldEnum]
 
 
 export const FindingRelationScalarFieldEnum = {
-  fromId: 'fromId',
-  toId: 'toId',
-  relation: 'relation'
+  id: 'id',
+  findingId: 'findingId',
+  relatedFindingId: 'relatedFindingId',
+  relationType: 'relationType',
+  legacyRelation: 'legacyRelation',
+  note: 'note',
+  createdAt: 'createdAt'
 } as const
 
 export type FindingRelationScalarFieldEnum = (typeof FindingRelationScalarFieldEnum)[keyof typeof FindingRelationScalarFieldEnum]
+
+
+export const SourceDocumentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  authors: 'authors',
+  year: 'year',
+  venue: 'venue',
+  url: 'url',
+  doi: 'doi',
+  rawTextKey: 'rawTextKey',
+  tokenCount: 'tokenCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SourceDocumentScalarFieldEnum = (typeof SourceDocumentScalarFieldEnum)[keyof typeof SourceDocumentScalarFieldEnum]
+
+
+export const FindingChunkScalarFieldEnum = {
+  id: 'id',
+  findingId: 'findingId',
+  chunkIndex: 'chunkIndex',
+  chunkText: 'chunkText',
+  embeddingText: 'embeddingText',
+  wordCount: 'wordCount',
+  embeddingModel: 'embeddingModel',
+  createdAt: 'createdAt'
+} as const
+
+export type FindingChunkScalarFieldEnum = (typeof FindingChunkScalarFieldEnum)[keyof typeof FindingChunkScalarFieldEnum]
+
+
+export const PendingFindingRelationScalarFieldEnum = {
+  id: 'id',
+  sourceFindingId: 'sourceFindingId',
+  targetSlug: 'targetSlug',
+  relationType: 'relationType',
+  note: 'note',
+  createdAt: 'createdAt'
+} as const
+
+export type PendingFindingRelationScalarFieldEnum = (typeof PendingFindingRelationScalarFieldEnum)[keyof typeof PendingFindingRelationScalarFieldEnum]
+
+
+export const ResearchReportCitationScalarFieldEnum = {
+  id: 'id',
+  researchReportId: 'researchReportId',
+  findingId: 'findingId',
+  decisionArea: 'decisionArea',
+  rank: 'rank',
+  rrfScore: 'rrfScore',
+  rerankScore: 'rerankScore',
+  viaRelation: 'viaRelation',
+  reasoning: 'reasoning',
+  createdAt: 'createdAt'
+} as const
+
+export type ResearchReportCitationScalarFieldEnum = (typeof ResearchReportCitationScalarFieldEnum)[keyof typeof ResearchReportCitationScalarFieldEnum]
+
+
+export const CorpusIngestionLogScalarFieldEnum = {
+  id: 'id',
+  objectKey: 'objectKey',
+  generation: 'generation',
+  eventType: 'eventType',
+  outcome: 'outcome',
+  findingId: 'findingId',
+  chunkCount: 'chunkCount',
+  errors: 'errors',
+  durationMs: 'durationMs',
+  createdAt: 'createdAt'
+} as const
+
+export type CorpusIngestionLogScalarFieldEnum = (typeof CorpusIngestionLogScalarFieldEnum)[keyof typeof CorpusIngestionLogScalarFieldEnum]
 
 
 export const DomainPatternScalarFieldEnum = {
@@ -896,6 +1077,61 @@ export const SeoAuditResultScalarFieldEnum = {
 } as const
 
 export type SeoAuditResultScalarFieldEnum = (typeof SeoAuditResultScalarFieldEnum)[keyof typeof SeoAuditResultScalarFieldEnum]
+
+
+export const RetrievalCacheEntryScalarFieldEnum = {
+  id: 'id',
+  decisionArea: 'decisionArea',
+  niche: 'niche',
+  hydePassage: 'hydePassage',
+  embeddingModel: 'embeddingModel',
+  fingerprint: 'fingerprint',
+  findings: 'findings',
+  corpusVersion: 'corpusVersion',
+  hitCount: 'hitCount',
+  createdAt: 'createdAt',
+  lastHitAt: 'lastHitAt'
+} as const
+
+export type RetrievalCacheEntryScalarFieldEnum = (typeof RetrievalCacheEntryScalarFieldEnum)[keyof typeof RetrievalCacheEntryScalarFieldEnum]
+
+
+export const CorpusVersionScalarFieldEnum = {
+  id: 'id',
+  version: 'version'
+} as const
+
+export type CorpusVersionScalarFieldEnum = (typeof CorpusVersionScalarFieldEnum)[keyof typeof CorpusVersionScalarFieldEnum]
+
+
+export const JevDecisionLogScalarFieldEnum = {
+  id: 'id',
+  feature: 'feature',
+  mode: 'mode',
+  policyKey: 'policyKey',
+  accepted: 'accepted',
+  agreement: 'agreement',
+  confidence: 'confidence',
+  durationMs: 'durationMs',
+  input: 'input',
+  createdAt: 'createdAt'
+} as const
+
+export type JevDecisionLogScalarFieldEnum = (typeof JevDecisionLogScalarFieldEnum)[keyof typeof JevDecisionLogScalarFieldEnum]
+
+
+export const ProjectChatMessageScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  role: 'role',
+  content: 'content',
+  topic: 'topic',
+  citedFindingIds: 'citedFindingIds',
+  jevConfidence: 'jevConfidence',
+  createdAt: 'createdAt'
+} as const
+
+export type ProjectChatMessageScalarFieldEnum = (typeof ProjectChatMessageScalarFieldEnum)[keyof typeof ProjectChatMessageScalarFieldEnum]
 
 
 export const SortOrder = {
