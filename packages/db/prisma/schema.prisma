@@ -624,6 +624,7 @@ model Project {
   user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   versions        ProjectVersion[]
   pages           Page[]
+  chatMessages    ProjectChatMessage[]
   conversations   Conversation[]
   deployments     Deployment[]
   customDomain    CustomDomain?
@@ -1563,4 +1564,40 @@ model JevDecisionLog {
 
   @@index([feature, policyKey, mode, createdAt])
   @@map("jev_decision_logs")
+}
+
+enum ChatMessageRole {
+  USER
+  ASSISTANT
+}
+
+enum ChatTopic {
+  COLOR
+  TYPOGRAPHY
+  LAYOUT
+  CONVERSION
+  TRUST_SOCIAL_PROOF
+  ACCESSIBILITY
+  MOTION
+  COPY_TONE
+  IMAGERY
+  SEO
+  PROJECT_OVERVIEW
+  COMPETITOR
+  OFF_TOPIC
+}
+
+model ProjectChatMessage {
+  id              String          @id @default(cuid())
+  projectId       String
+  project         Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  role            ChatMessageRole
+  content         String
+  topic           ChatTopic?
+  citedFindingIds Json?
+  jevConfidence   Float?
+  createdAt       DateTime        @default(now())
+
+  @@index([projectId, createdAt])
+  @@map("project_chat_messages")
 }
