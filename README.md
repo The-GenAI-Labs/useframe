@@ -286,3 +286,5 @@ Project-specific assistant instructions are maintained in [AGENTS.md](AGENTS.md)
 ## Research corpus
 
 See [Research corpus operations](docs/rag-corpus.md) for GCS/PubSub setup, finding-file validation, ingestion and recovery commands, retrieval configuration, and evaluation.
+
+See [Project-scoped chat](docs/project-chat.md) for Q&A, grounding, Jev rollout, and configuration.
