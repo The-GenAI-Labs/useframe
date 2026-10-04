@@ -114,7 +114,7 @@ The frontend currently has both `src/store` and `src/stores`. Follow the relevan
 - Use parameterized queries for specialized vector/raw SQL operations; never concatenate untrusted input into SQL.
 - Preserve ownership filters, soft-delete behavior, uniqueness constraints, and existing cache expiry semantics.
 - Do not reset, reseed, or destructively migrate a shared database as part of routine verification. Inspect the target environment before applying migrations.
-- Only `syncSiteToKvs` (apps/deploy-service) writes site KV entries; the database is the source of truth. Never run `terraform apply`, `wrangler deploy`, or anything that writes to a real Cloudflare account.
+- Only `syncSiteToKvs` (apps/deploy-service) writes site KV entries; the database is the source of truth. Custom domains are data in that derivation and stay behind `CUSTOM_DOMAINS_ENABLED` (default off) until both spikes in `apps/deploy-service/RUNBOOK.md` pass. Never run `terraform apply`, `wrangler deploy`, or anything that writes to a real Cloudflare account.
 
 ## Agent Workflow
 
