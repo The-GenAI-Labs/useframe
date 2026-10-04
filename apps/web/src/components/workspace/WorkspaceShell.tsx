@@ -542,10 +542,10 @@ export function WorkspaceShell({ project }: Props) {
         {currentStep === "DEPLOY" && (
           <DeployStepView
             project={project}
-            locked={isStepApproved("DEPLOY")}
             creditLocked={deployCreditLocked}
             creditLockedReason={`You need at least ${DEPLOY_CREDIT_COST} credit to deploy.`}
-            onApproved={invalidatePipeline}
+            insufficientCredits={balance < DEPLOY_CREDIT_COST}
+            onLive={invalidatePipeline}
           />
         )}
       </div>
