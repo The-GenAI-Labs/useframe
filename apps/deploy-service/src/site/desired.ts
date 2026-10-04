@@ -5,7 +5,11 @@ export type SiteState = {
   primaryHost: string;
   suspended: boolean;
   active: { projectId: string; deploymentId: string; mode: "n" | "s" } | null;
+  // Custom hosts that serve the site before (or while) being primary.
+  extraServeHosts?: string[];
 };
+
+export const SERVING_DOMAIN_STATUSES = ["AWAITING_ROUTING_DNS", "ACTIVE"] as const;
 
 export type DesiredEntries = Map<string, SiteKvValue | null>;
 
@@ -18,12 +22,14 @@ export function computeDesiredEntries(site: SiteState, deleteHosts: string[] = [
   const serve: SiteKvValue | null = site.active
     ? { v: 1, t: "p", k: `${site.active.projectId}/${site.active.deploymentId}`, m: site.active.mode }
     : null;
-  const hosts = new Set([site.defaultHost, site.primaryHost].map((h) => h.toLowerCase()));
+  const primary = site.primaryHost.toLowerCase();
+  const extra = new Set((site.extraServeHosts ?? []).map((h) => h.toLowerCase()));
+  const hosts = new Set([site.defaultHost.toLowerCase(), primary, ...extra]);
 
   for (const host of hosts) {
     if (site.suspended) entries.set(host, { v: 1, t: "x" });
-    else if (host === site.primaryHost.toLowerCase()) entries.set(host, serve);
-    else entries.set(host, { v: 1, t: "r", u: `https://${site.primaryHost.toLowerCase()}` });
+    else if (host === primary || extra.has(host)) entries.set(host, serve);
+    else entries.set(host, { v: 1, t: "r", u: `https://${primary}` });
   }
   return entries;
 }

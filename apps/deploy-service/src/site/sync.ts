@@ -2,7 +2,13 @@ import type { prisma as Prisma } from "@useframe/db";
 import type { LockClient } from "@/lib/locks.js";
 import { siteKvLockKey, withLock } from "@/lib/locks.js";
 import { log } from "@/lib/logger.js";
-import { computeDesiredEntries, orderWrites, type DesiredEntries, type SiteState } from "./desired.js";
+import {
+  computeDesiredEntries,
+  orderWrites,
+  SERVING_DOMAIN_STATUSES,
+  type DesiredEntries,
+  type SiteState,
+} from "./desired.js";
 import { kvKeyForHost, serializeValue } from "./kvContract.js";
 
 export type Db = typeof Prisma;
@@ -46,7 +52,12 @@ export async function loadSiteState(
         select: { id: true, framework: true },
       })
     : null;
+  const domain = await db.customDomain.findFirst({
+    where: { projectId: site.projectId, status: { in: [...SERVING_DOMAIN_STATUSES] } },
+    select: { domain: true },
+  });
   return {
+    extraServeHosts: domain ? [domain.domain] : [],
     defaultHost: site.defaultHost,
     primaryHost: site.primaryHost,
     suspended: site.suspendedAt !== null,
@@ -72,8 +83,12 @@ export async function syncSiteToKvs(
 ): Promise<DesiredEntries> {
   return withLock(deps.redis, siteKvLockKey(siteId), 60_000, 60_000, async () => {
     const state = await loadSiteState(deps.db, siteId, options.activeDeploymentId);
-    const entries = options.remove
-      ? new Map([state.defaultHost, state.primaryHost].map((h) => [h.toLowerCase(), null] as const))
+    const entries: DesiredEntries = options.remove
+      ? new Map(
+          [state.defaultHost, state.primaryHost, ...(state.extraServeHosts ?? []), ...(options.deleteHosts ?? [])].map(
+            (h) => [h.toLowerCase(), null] as const,
+          ),
+        )
       : computeDesiredEntries(state, options.deleteHosts);
     await applyEntries(deps.kv, entries);
     log.info("kv sync", { siteId, hosts: [...entries.keys()] });

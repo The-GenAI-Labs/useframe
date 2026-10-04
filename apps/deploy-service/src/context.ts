@@ -1,11 +1,20 @@
 import { Queue } from "bullmq";
 import { prisma } from "@useframe/db";
-import { QUEUES, type DeployRunJobPayload } from "@repo/events";
+import { QUEUES, type DeployRunJobPayload, type DomainTickJobPayload } from "@repo/events";
 import { env } from "@/config/env.js";
 import type { Deps } from "@/deps.js";
 import { CloudflareKv } from "@/lib/cloudflareKv.js";
 import { createR2 } from "@/lib/r2.js";
 import { redis } from "@/lib/redis.js";
+import { CloudflareCustomHostnameProvider } from "@/domains/cloudflareProvider.js";
+import type { DomainDeps } from "@/domains/deps.js";
+import { createExplicitResolver } from "@/domains/dns.js";
+import { fetchProber } from "@/domains/prober.js";
+import { createRedisScratch, createTickScheduler } from "@/domains/runtime.js";
+import { log } from "@/lib/logger.js";
+import { createDeployment } from "@/services/deployments.js";
+import { HttpError } from "@/services/httpError.js";
+import { syncSiteToKvs } from "@/site/sync.js";
 
 export const runQueue = new Queue<DeployRunJobPayload>(QUEUES.DEPLOY_RUN, { connection: redis });
 
@@ -46,8 +55,64 @@ export const deps: Deps = {
   },
 };
 
+function domainsDisabledReason(): string | null {
+  if (!env.CUSTOM_DOMAINS_ENABLED) return "CUSTOM_DOMAINS_ENABLED is not true";
+  if (!env.CLOUDFLARE_ZONE_ID) return "CLOUDFLARE_ZONE_ID is not set";
+  return null;
+}
+
+export const domainTickQueue = new Queue<DomainTickJobPayload>(QUEUES.DEPLOY_DOMAIN_RECONCILE, {
+  connection: redis,
+});
+export const domainTicks = createTickScheduler(domainTickQueue, redis);
+
+export const domainProvider = env.CLOUDFLARE_ZONE_ID
+  ? new CloudflareCustomHostnameProvider({ zoneId: env.CLOUDFLARE_ZONE_ID, apiToken: env.CLOUDFLARE_API_TOKEN })
+  : null;
+
+const disabledReason = domainsDisabledReason();
+if (disabledReason) log.info(`Custom domains disabled: ${disabledReason}`);
+
+export const domainDeps: DomainDeps | null =
+  disabledReason || !domainProvider
+    ? null
+    : {
+        db: prisma,
+        provider: domainProvider,
+        dns: createExplicitResolver(env.DNS_RESOLVERS),
+        prober: fetchProber,
+        scratch: createRedisScratch(redis),
+        config: {
+          baseDomain: env.SITES_BASE_DOMAIN,
+          reservedHosts: env.SITES_RESERVED_HOSTS,
+          blocklist: env.CUSTOM_DOMAIN_BLOCKLIST,
+          edgeTarget: env.SITES_EDGE_CNAME_TARGET,
+          capacityLimit: env.CUSTOM_DOMAIN_CAPACITY_LIMIT,
+          ownershipWindowMs: env.CUSTOM_DOMAIN_OWNERSHIP_WINDOW_HOURS * 60 * 60 * 1000,
+          routingWindowMs: env.CUSTOM_DOMAIN_ROUTING_WINDOW_DAYS * 24 * 60 * 60 * 1000,
+        },
+        syncSite: (siteId, options) => syncSiteToKvs(deps, siteId, options),
+        readKv: (key) => deps.kv.get(key),
+        async requestRedeploy(input) {
+          try {
+            await createDeployment(deps, { ...input, triggeredBy: "domain_change" });
+            return "queued";
+          } catch (err) {
+            if (err instanceof HttpError && err.status === 409) return "busy";
+            if (err instanceof HttpError && (err.status === 403 || err.status === 404)) return "skipped";
+            throw err;
+          }
+        },
+        schedule: (domainId, delayMs) => domainTicks.schedule(domainId, delayMs),
+        alert: (message, fields) => log.error(`ALERT: ${message}`, fields),
+        now: () => new Date(),
+      };
+
+deps.domains = domainDeps;
+
 export async function closeContext(): Promise<void> {
   await runQueue.close();
+  await domainTickQueue.close();
   await redis.quit().catch(() => undefined);
   await prisma.$disconnect();
 }

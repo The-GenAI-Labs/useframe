@@ -224,3 +224,123 @@ verification failed"), any reconcile cap trip, any reaper activation.
 allowlist, timeouts and tree kill (`taskkill /T /F`) still apply. Work dir defaults to the OS temp
 dir. The service still needs real Cloudflare/R2 config to boot; unit tests (`pnpm test`) and the
 Worker's Miniflare tests need none.
+
+---
+
+# Stage 2 — Custom domains (Cloudflare for SaaS)
+
+**Off by default.** `CUSTOM_DOMAINS_ENABLED=false` hides the Domains UI and makes every mutating
+domain endpoint return `404 feature_disabled`. Domains also stay off (with one log line) when
+`CLOUDFLARE_ZONE_ID` is missing. **Do not turn it on until the Stage 1 spike and `spike:domains`
+have both passed.**
+
+Flow: the user adds `www.acme.com` → publishes `_useframe-challenge.www.acme.com TXT
+useframe-site-verification=<token>` → we create a Cloudflare custom hostname (HTTP DCV) → the user
+points `www.acme.com CNAME cname.useframe.in` → Cloudflare issues the certificate → our probe passes
+→ `ACTIVE`: the domain becomes `primaryHost`, `<label>.useframe.in` 301-redirects to it, and the site
+is rebuilt once (free) so canonical/sitemap/`og:url` use the new URL. Removal reverses all of it.
+
+## S2.1 One-time setup (you)
+
+1. **Enable Cloudflare for SaaS.** Dashboard → `useframe.in` → _SSL/TLS → Custom Hostnames_ →
+   _Enable Cloudflare for SaaS_ (a payment method must be on file). Pricing and limits as found in
+   Cloudflare's docs on **2026-10-04**: Free/Pro/Business include **100** custom hostnames; each
+   additional one is **$0.10**; the non-Enterprise maximum is **50,000**. Enterprise-only: wildcard
+   custom hostnames, custom certificates, apex proxying/BYOIP, selectable CA, and **custom metadata**
+   (a paid add-on — see S2.6).
+2. **Runtime token:** add _Zone → SSL and Certificates: Edit_ (keep _Workers KV Storage: Edit_ and
+   _Zone: Read_).
+3. **Env (deploy service):** `CLOUDFLARE_ZONE_ID`, `SITES_EDGE_CNAME_TARGET=cname.useframe.in`.
+   API server: `CUSTOM_DOMAIN_MAX_ADD_PER_HOUR` (default 5).
+4. **Terraform** (`infra/terraform/modules/sites-hosting/custom-hostnames.tf`): `terraform apply`
+   creates `fallback.useframe.in` (AAAA `100::`, proxied), `cname.useframe.in` (CNAME → fallback,
+   proxied), the custom-hostname fallback origin, and script-less Worker routes for
+   `*/.well-known/pki-validation/*`, `*/.well-known/acme-challenge/*` and
+   `*/.well-known/cf-custom-hostname-challenge/*`. Validated (not applied) against provider 5.26.0.
+5. `pnpm --filter @useframe/deploy-service deploy:domains:doctor` checks the SaaS API with the
+   runtime token, the fallback origin (`fallback.useframe.in`, `active`), that
+   `SITES_EDGE_CNAME_TARGET` resolves, and the hostname count vs `CUSTOM_DOMAIN_CAPACITY_LIMIT`.
+6. `SPIKE_CUSTOM_HOSTNAME=www.<a domain you control> pnpm --filter @useframe/deploy-service spike:domains`
+   prints each DNS record to add and waits; 7 checks. **If check 3 (status and certificate `active`
+   with the Worker on `*/*`) fails, stop.** The script prints the hostname status, `ssl.status`,
+   validation errors, where the name resolves, and what `http://<host>/.well-known/pki-validation/…`
+   returned. Record results here: _not yet run_.
+7. Only then set `CUSTOM_DOMAINS_ENABLED=true` and restart the deploy-service server and worker.
+
+## S2.2 CAA records
+
+If a customer's DNS has CAA records, they must allow Cloudflare's CAs (from Cloudflare's
+certificate-authority reference, checked 2026-10-04; Cloudflare notes the list can change):
+
+```
+<domain>. CAA 0 issue "letsencrypt.org"
+<domain>. CAA 0 issue "pki.goog; cansignhttpexchanges=yes"
+<domain>. CAA 0 issue "ssl.com"
+<domain>. CAA 0 issue "sectigo.com"
+```
+
+DNS hosted on Cloudflare adds these automatically. The Domains UI shows this guidance when a
+validation error mentions CAA.
+
+## S2.3 Alerts
+
+All are `ALERT:` log lines from the deploy service; create log-based alerts on:
+
+- `custom domain capacity reached` and provider quota errors (plus the doctor's WARN at ≥ 80% of
+  `CUSTOM_DOMAIN_CAPACITY_LIMIT`),
+- `custom domain failing healthcheck 3 days running`,
+- `custom domain certificate not active`,
+- `active custom domain missing at provider`.
+
+## S2.4 Operations
+
+| Task                             | Command                                                                                             |
+| -------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Pre-flight / support check       | `pnpm --filter @useframe/deploy-service deploy:domains:doctor`                                      |
+| A domain changed hands (dispute) | `pnpm --filter @useframe/deploy-service deploy:domain:release --domain <host> --reason "ticket #…"` |
+
+Background jobs (only when enabled): per-domain ticks (`deployDomainReconcile`), a daily healthcheck
+at 04:00 UTC (warns, never tears down), and a weekly GC on Sundays at 05:00 UTC (stale unproven
+claims, old FAILED rows that still have a Cloudflare hostname, reserved rows stuck in routing past the
+window + 7 days).
+
+Hooks: `DELETE /internal/projects/:projectId/site` tears the domain down first, and
+`POST /internal/users/:userId/domains/teardown` tears down a user's domains. **The API has no project-
+or user-deletion flow yet**, so nothing calls these today.
+
+## S2.5 Support playbook
+
+- **"It's stuck."** Read the Domains UI: which step is pending, the "currently points to" line and
+  the certificate hint. Run the doctor. Common causes: the TXT/CNAME name typed in full where the
+  registrar appends the domain (use the _relative_ name); a leftover A/AAAA record next to the CNAME;
+  a CAA record (S2.2); propagation still in progress (up to an hour).
+- **Customer DNS on Cloudflare:** recommend the CNAME as **DNS only**. Record the manual-QA result for
+  proxied vs DNS only below, and update the UI note if it differs.
+- **Domain changed hands:** run `deploy:domain:release` (above); then the new owner connects it.
+
+## S2.6 Known risk to confirm in the spike
+
+Cloudflare lists **custom metadata** as an Enterprise paid add-on, so the provider does **not** send
+`custom_metadata`. Adopt-or-create therefore keys on our database: a provider hostname that no other
+row references is adopted (this covers a crash between create and saving the id, and an orphan from
+an interrupted teardown of the same hostname); one referenced by another row fails as a conflict.
+
+## S2.7 Manual QA (you run it)
+
+Use three throwaway domains: DNS at GoDaddy, DNS at Hostinger, and DNS on Cloudflare. For each:
+connect `www.<domain>`; add the TXT with the **relative** name; confirm Step 1 ✓; add the CNAME;
+confirm `ACTIVE`; confirm `<label>.useframe.in` 301s to it; check the new URL in view-source and in
+robots.txt/sitemap.xml; remove the domain and confirm everything reverts. Extra cases: (a) Cloudflare
+DNS with the CNAME DNS only vs proxied — record which works; (b) a hostname currently serving
+another site — record how long the certificate warning lasts; (c) the bare apex — confirm the
+guidance matches what each registrar offers; (d) a blocking CAA record — confirm the CAA hint appears.
+
+| Case                        | GoDaddy | Hostinger | Cloudflare DNS |
+| --------------------------- | ------- | --------- | -------------- |
+| Connect www → ACTIVE (time) |         |           |                |
+| Redirect + canonical        |         |           |                |
+| Remove reverts              |         |           |                |
+| (a) DNS only / proxied      | n/a     | n/a       |                |
+| (b) cert warning duration   |         |           |                |
+| (c) apex guidance           |         |           |                |
+| (d) CAA hint                |         |           |                |

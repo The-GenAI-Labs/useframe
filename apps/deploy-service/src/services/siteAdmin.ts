@@ -1,6 +1,7 @@
 import { IN_FLIGHT, type Deps } from "@/deps.js";
 import { log } from "@/lib/logger.js";
 import { deletePrefix } from "@/lib/r2.js";
+import { teardownProjectDomain } from "@/domains/service.js";
 import { failDeployment } from "@/pipeline/lifecycle.js";
 import { syncSiteToKvs } from "@/site/sync.js";
 import { HttpError } from "./httpError.js";
@@ -26,6 +27,7 @@ export async function removeSite(deps: Deps, projectId: string) {
     select: { id: true },
   });
   for (const d of inFlight) await failDeployment(deps, d.id, "The project was deleted.");
+  if (deps.domains) await teardownProjectDomain(deps.domains, projectId);
 
   await syncSiteToKvs(deps, site.id, { remove: true });
   await deletePrefix(deps.r2, `sites/${projectId}/`);

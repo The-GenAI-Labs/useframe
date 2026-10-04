@@ -1,6 +1,6 @@
 import type { Deps } from "@/deps.js";
 import { log, metric } from "@/lib/logger.js";
-import { computeDesiredEntries } from "@/site/desired.js";
+import { computeDesiredEntries, SERVING_DOMAIN_STATUSES } from "@/site/desired.js";
 import { kvKeyForHost, serializeValue } from "@/site/kvContract.js";
 import { applyBulk } from "@/site/sync.js";
 
@@ -60,6 +60,11 @@ export async function buildDesiredMap(deps: Pick<Deps, "db">): Promise<Map<strin
       select: { id: true, projectId: true, framework: true },
     });
     const byId = new Map(deployments.map((d) => [d.id, d]));
+    const domains = await deps.db.customDomain.findMany({
+      where: { projectId: { in: sites.map((s) => s.projectId) }, status: { in: [...SERVING_DOMAIN_STATUSES] } },
+      select: { projectId: true, domain: true },
+    });
+    const domainByProject = new Map(domains.map((d) => [d.projectId, d.domain]));
 
     for (const site of sites) {
       const active = site.activeDeploymentId ? byId.get(site.activeDeploymentId) : undefined;
@@ -67,6 +72,7 @@ export async function buildDesiredMap(deps: Pick<Deps, "db">): Promise<Map<strin
         defaultHost: site.defaultHost,
         primaryHost: site.primaryHost,
         suspended: site.suspendedAt !== null,
+        extraServeHosts: domainByProject.has(site.projectId) ? [domainByProject.get(site.projectId)!] : [],
         active:
           active && active.projectId === site.projectId
             ? { projectId: site.projectId, deploymentId: active.id, mode: active.framework === "NEXT_EXPORT" ? "n" : "s" }

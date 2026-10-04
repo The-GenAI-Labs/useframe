@@ -61,7 +61,14 @@ describe("subdomain labels", () => {
   });
 });
 
+const WRITES_LABEL = /\b(subdomainLabel|defaultHost)\s*:/;
+
 describe("label immutability guard", () => {
+  it("flags a write but not a read", () => {
+    expect(WRITES_LABEL.test("projectSite.update({ data: { defaultHost: x } })")).toBe(true);
+    expect(WRITES_LABEL.test("projectSite.update({ data: { primaryHost: site.defaultHost } })")).toBe(false);
+  });
+
   it("no code path updates subdomainLabel or defaultHost", async () => {
     const root = path.resolve(__dirname, "../../..");
     const roots = ["apps/deploy-service/src", "apps/server/src", "apps/worker/src", "apps/orchestrator-service/src"];
@@ -74,7 +81,8 @@ describe("label immutability guard", () => {
           const source = await readFile(full, "utf-8");
           const updates = source.match(/projectSite\.(update|updateMany|upsert)\([\s\S]*?\}\s*\)/g) ?? [];
           for (const call of updates) {
-            if (/\b(subdomainLabel|defaultHost)\b/.test(call)) offenders.push(path.relative(root, full));
+            // A write names the field as a key; reading it as a value is fine.
+            if (WRITES_LABEL.test(call)) offenders.push(path.relative(root, full));
           }
         }
       }

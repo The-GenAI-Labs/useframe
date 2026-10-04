@@ -4,6 +4,7 @@ import type { LockClient } from "@/lib/locks.js";
 import type { R2 } from "@/lib/r2.js";
 import type { Db } from "@/site/sync.js";
 import type { Isolation } from "@/pipeline/build.js";
+import type { DomainDeps } from "@/domains/deps.js";
 
 export type KvClient = {
   put(key: string, value: string): Promise<void>;
@@ -39,6 +40,8 @@ export type Deps = {
   redis: LockClient;
   runQueue: Pick<Queue<DeployRunJobPayload>, "add" | "getJob">;
   validationQueue?: Pick<Queue, "add">;
+  /** Present only when custom domains are enabled and configured. */
+  domains?: DomainDeps | null;
   config: DeployConfig;
   fetchImpl?: typeof fetch;
 };

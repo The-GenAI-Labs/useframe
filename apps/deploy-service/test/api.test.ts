@@ -87,6 +87,14 @@ describe("internal API", () => {
     lockHeld.clear();
   });
 
+  it("keeps custom domains off when the feature is disabled", async () => {
+    const get = await fetch(`${base}/internal/projects/p1/domains`, { headers: { "x-internal-secret": SECRET } });
+    expect(await get.json()).toEqual({ success: true, data: { enabled: false, domain: null } });
+    const add = await post("/internal/projects/p1/domains", { hostname: "www.acme.com" });
+    expect(add.status).toBe(404);
+    expect(await add.json()).toMatchObject({ success: false, code: "feature_disabled" });
+  });
+
   it("refuses another user's project", async () => {
     const res = await post("/internal/deployments", { projectId: "p1", versionId: "v1", userId: "intruder" });
     expect(res.status).toBe(403);

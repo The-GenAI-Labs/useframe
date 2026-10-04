@@ -117,6 +117,9 @@ importers:
       mime-types:
         specifier: 3.0.2
         version: 3.0.2
+      tldts:
+        specifier: 7.0.30
+        version: 7.0.30
       tsx:
         specifier: ^4.22.1
         version: 4.22.1
@@ -8611,9 +8614,6 @@ packages:
     resolution: {integrity: sha512-n1cw8k1k0x4pgA2+9XrOkFydTerNcJ1zWCO5Nn9scWHTD+5tp8dghT2x1uduQePZTZgd3Tupf+x9BxJjeJi77Q==}
     engines: {node: '>=14.0.0'}
 
-  tldts-core@7.0.30:
-    resolution: {integrity: sha512-uiHN8PIB1VmWyS98eZYja4xzlYqeFZVjb4OuYlJQnZAuJhMw4PbKQOKgHKhBdJR3FE/t5mUQ1Kd80++B+qhD1Q==}
-
   tldts-core@7.4.13:
     resolution: {integrity: sha512-mbYsrih5FRtGxs3Usvl/PqwJsNpp+jsmrdFviiK02teHDG0/HebBG/pqCylje3kzgXYzuLoHJF/0mz9W53t8Xg==}
 
@@ -17019,8 +17019,6 @@ snapshots:
 
   tinyspy@3.0.2: {}
 
-  tldts-core@7.0.30: {}
-
   tldts-core@7.4.13: {}
 
   tldts-icann@7.4.13:
@@ -17029,7 +17027,7 @@ snapshots:
 
   tldts@7.0.30:
     dependencies:
-      tldts-core: 7.0.30
+      tldts-core: 7.4.13
 
   to-regex-range@5.0.1:
     dependencies:

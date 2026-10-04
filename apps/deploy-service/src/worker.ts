@@ -1,8 +1,17 @@
 import { Queue, Worker } from "bullmq";
 import { prisma } from "@useframe/db";
-import { QUEUES, type DeployKvsReconcileJobPayload, type DeployRunJobPayload } from "@repo/events";
+import {
+  QUEUES,
+  type DeployKvsReconcileJobPayload,
+  type DeployRunJobPayload,
+  type DomainTickJobPayload,
+} from "@repo/events";
 import { env } from "@/config/env.js";
-import { closeContext, deps } from "@/context.js";
+import { closeContext, deps, domainDeps, domainTicks } from "@/context.js";
+import { tick } from "@/domains/machine.js";
+import { ERROR_BACKOFF_MS } from "@/domains/schedule.js";
+import { runDomainGc, runDomainHealthcheck } from "@/domains/service.js";
+import { withLock } from "@/lib/locks.js";
 import { runGc } from "@/jobs/gc.js";
 import { reapStuckDeployments } from "@/jobs/reaper.js";
 import { reconcile } from "@/jobs/reconcile.js";
@@ -23,7 +32,37 @@ async function schedule(): Promise<Queue[]> {
     { pattern: "30 3 * * *" },
     { name: "reconcile", data: { apply: true } },
   );
-  return [gc, reaper, reconcileQueue];
+  if (!domainDeps) return [gc, reaper, reconcileQueue];
+  const domainHealth = new Queue(QUEUES.DEPLOY_DOMAIN_HEALTHCHECK, { connection: redis });
+  const domainGc = new Queue(QUEUES.DEPLOY_DOMAIN_GC, { connection: redis });
+  await domainHealth.upsertJobScheduler("deploy-domain-healthcheck", { pattern: "0 4 * * *" }, { name: "health" });
+  await domainGc.upsertJobScheduler("deploy-domain-gc", { pattern: "0 5 * * 0" }, { name: "gc" });
+  return [gc, reaper, reconcileQueue, domainHealth, domainGc];
+}
+
+function domainWorkers(): Worker[] {
+  const domains = domainDeps;
+  if (!domains) return [];
+  return [
+    new Worker<DomainTickJobPayload>(
+      QUEUES.DEPLOY_DOMAIN_RECONCILE,
+      async (job) => {
+        const { domainId } = job.data;
+        if (!(await domainTicks.isCurrent(domainId, job.id))) return;
+        let next: number | null;
+        try {
+          next = await withLock(redis, `deploy:domain:${domainId}`, 120_000, 5_000, () => tick(domains, domainId));
+        } catch (err) {
+          log.warn("domain tick failed; retrying", { domainId, error: errorMessage(err) });
+          next = ERROR_BACKOFF_MS;
+        }
+        if (next !== null) await domainTicks.schedule(domainId, next);
+      },
+      { connection: redis, concurrency: 10 },
+    ),
+    new Worker(QUEUES.DEPLOY_DOMAIN_HEALTHCHECK, () => runDomainHealthcheck(domains), { connection: redis }),
+    new Worker(QUEUES.DEPLOY_DOMAIN_GC, () => runDomainGc(domains), { connection: redis }),
+  ];
 }
 
 const start = async () => {
@@ -44,6 +83,7 @@ const start = async () => {
       (job) => reconcile(deps, { apply: job.data.apply, scheduled: true }),
       { connection: redis },
     ),
+    ...domainWorkers(),
   ];
   for (const worker of workers) {
     worker.on("failed", (job, err) =>
@@ -54,6 +94,7 @@ const start = async () => {
     concurrency: env.DEPLOY_BUILD_CONCURRENCY,
     isolation: env.DEPLOY_BUILD_ISOLATION,
     workDir: env.DEPLOY_WORK_DIR,
+    customDomains: !!domainDeps,
   });
 
   // SIGTERM: stop taking jobs and let in-flight builds finish (k8s grace period covers it).

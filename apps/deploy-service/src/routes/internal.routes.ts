@@ -13,6 +13,7 @@ import {
 import { HttpError } from "@/services/httpError.js";
 import { rollback } from "@/services/rollback.js";
 import { removeSite } from "@/services/siteAdmin.js";
+import { domainsRouter } from "./domains.routes.js";
 
 const id = z.string().min(1).max(64).regex(/^[A-Za-z0-9_-]+$/);
 
@@ -95,12 +96,13 @@ export function internalRouter(deps: Deps, secret: string): Router {
     "/projects/:projectId/site",
     handle(async (req) => removeSite(deps, ProjectParams.parse(req.params).projectId)),
   );
+  router.use(domainsRouter(() => deps.domains));
   return router;
 }
 
 export function errorHandler(err: unknown, _req: Request, res: Response, _next: NextFunction): void {
   if (err instanceof HttpError) {
-    res.status(err.status).json({ success: false, message: err.message });
+    res.status(err.status).json({ success: false, message: err.message, code: err.code });
     return;
   }
   if (err instanceof z.ZodError) {

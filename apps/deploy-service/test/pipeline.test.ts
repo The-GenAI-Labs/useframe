@@ -34,6 +34,26 @@ describe("env", () => {
     expect(parsed.ok && parsed.env.DEPLOY_WORK_DIR).toBe("/work");
   });
 
+  it("treats blank optional values from a copied .env.example as unset", () => {
+    const parsed = parseEnv({
+      ...REQUIRED,
+      SITES_R2_ENDPOINT: "",
+      DEPLOY_WORK_DIR: "",
+      CLOUDFLARE_ZONE_ID: "",
+      SITES_EDGE_CNAME_TARGET: "",
+      CUSTOM_DOMAIN_BLOCKLIST: "",
+    });
+    expect(parsed.ok).toBe(true);
+    if (parsed.ok) {
+      expect(parsed.env.SITES_R2_ENDPOINT).toBe("https://acct.r2.cloudflarestorage.com");
+      expect(parsed.env.DEPLOY_WORK_DIR).not.toBe("");
+      expect(parsed.env.CLOUDFLARE_ZONE_ID).toBeUndefined();
+      expect(parsed.env.SITES_EDGE_CNAME_TARGET).toBe("cname.useframe.in");
+      expect(parsed.env.CUSTOM_DOMAIN_BLOCKLIST).toEqual([]);
+      expect(parsed.env.CUSTOM_DOMAINS_ENABLED).toBe(false);
+    }
+  });
+
   it("names the missing variable without echoing secrets", () => {
     const { CLOUDFLARE_API_TOKEN: _omit, ...rest } = REQUIRED;
     const parsed = parseEnv(rest);
