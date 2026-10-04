@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-service-server
+  namespace: useframe
+  labels:
+    app: deploy-service-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deploy-service-server
+  template:
+    metadata:
+      labels:
+        app: deploy-service-server
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: server
+          image: <registry>/useframe/deploy-service:<tag>
+          # args (not command) so the image ENTRYPOINT, tini, stays PID 1.
+          args: ["node", "--import", "tsx", "dist/server.js"]
+          ports:
+            - name: http
+              containerPort: 4005
+          envFrom:
+            - configMapRef:
+                name: deploy-service-config
+          env:
+            - name: DATABASE_URL
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: DATABASE_URL } }
+            - name: REDIS_URL
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: REDIS_URL } }
+            - name: INTERNAL_SERVICE_SECRET
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: INTERNAL_SERVICE_SECRET } }
+            - name: CLOUDFLARE_ACCOUNT_ID
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: CLOUDFLARE_ACCOUNT_ID } }
+            - name: CLOUDFLARE_API_TOKEN
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: CLOUDFLARE_API_TOKEN } }
+            - name: CLOUDFLARE_ZONE_ID
+              valueFrom:
+                { secretKeyRef: { name: deploy-service-secrets, key: CLOUDFLARE_ZONE_ID, optional: true } }
+            - name: SITES_KV_NAMESPACE_ID
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: SITES_KV_NAMESPACE_ID } }
+            - name: SITES_R2_ACCESS_KEY_ID
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: SITES_R2_ACCESS_KEY_ID } }
+            - name: SITES_R2_SECRET_ACCESS_KEY
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: SITES_R2_SECRET_ACCESS_KEY } }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          readinessProbe:
+            httpGet: { path: /healthz, port: http }
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /healthz, port: http }
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests: { cpu: 100m, memory: 256Mi }
+            limits: { memory: 512Mi }
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deploy-service
+  namespace: useframe
+spec:
+  type: ClusterIP
+  selector:
+    app: deploy-service-server
+  ports:
+    - name: http
+      port: 4005
+      targetPort: http

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deploy-service-config
+  namespace: useframe
+data:
+  NODE_ENV: "production"
+  PORT: "4005"
+  SITES_BASE_DOMAIN: "useframe.in"
+  SITES_RESERVED_HOSTS: "useframe.in,www.useframe.in,api.useframe.in"
+  SITES_R2_BUCKET: "useframe-sites"
+  DEPLOY_RETAIN_COUNT: "10"
+  DEPLOY_MAX_FILES: "5000"
+  DEPLOY_MAX_TOTAL_MB: "100"
+  DEPLOY_INSTALL_TIMEOUT_MS: "300000"
+  DEPLOY_BUILD_TIMEOUT_MS: "480000"
+  DEPLOY_BUILD_CONCURRENCY: "2"
+  DEPLOY_ACTIVATION_PROBE_MS: "150000"
+  DEPLOY_REAPER_STUCK_MINUTES: "30"
+  DEPLOY_WORK_DIR: "/work"
+  DEPLOY_BUILD_UID: "10002"
+  DEPLOY_BUILD_GID: "10002"
+  DEPLOY_BUILD_ISOLATION: "setpriv"
+  DEPLOY_NODE_MODULES_TEMPLATES: "/opt/templates"
+  DEPLOY_ENQUEUE_VALIDATION: "false"

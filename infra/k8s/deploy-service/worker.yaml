@@ -1,0 +1,86 @@
+# Runs untrusted builds. The container is root with a minimal capability set so it
+# can drop each build to uid/gid 10002 via setpriv (a non-root process cannot
+# switch uid). If cluster policy forbids these capabilities, see
+# apps/deploy-service/RUNBOOK.md, "Cluster policy fallback".
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-service-worker
+  namespace: useframe
+  labels:
+    app: deploy-service-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-service-worker
+  template:
+    metadata:
+      labels:
+        app: deploy-service-worker
+    spec:
+      automountServiceAccountToken: false
+      # >= install (5 min) + build (8 min) + upload/probe + margin. On SIGTERM the
+      # worker stops taking jobs and lets in-flight builds finish.
+      terminationGracePeriodSeconds: 900
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: worker
+          image: <registry>/useframe/deploy-service:<tag>
+          # args (not command) so the image ENTRYPOINT, tini, stays PID 1.
+          args: ["node", "--import", "tsx", "dist/worker.js"]
+          envFrom:
+            - configMapRef:
+                name: deploy-service-config
+          env:
+            - name: DATABASE_URL
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: DATABASE_URL } }
+            - name: REDIS_URL
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: REDIS_URL } }
+            - name: INTERNAL_SERVICE_SECRET
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: INTERNAL_SERVICE_SECRET } }
+            - name: CLOUDFLARE_ACCOUNT_ID
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: CLOUDFLARE_ACCOUNT_ID } }
+            - name: CLOUDFLARE_API_TOKEN
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: CLOUDFLARE_API_TOKEN } }
+            - name: CLOUDFLARE_ZONE_ID
+              valueFrom:
+                { secretKeyRef: { name: deploy-service-secrets, key: CLOUDFLARE_ZONE_ID, optional: true } }
+            - name: SITES_KV_NAMESPACE_ID
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: SITES_KV_NAMESPACE_ID } }
+            - name: SITES_R2_ACCESS_KEY_ID
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: SITES_R2_ACCESS_KEY_ID } }
+            - name: SITES_R2_SECRET_ACCESS_KEY
+              valueFrom: { secretKeyRef: { name: deploy-service-secrets, key: SITES_R2_SECRET_ACCESS_KEY } }
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            privileged: false
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+              add: ["CHOWN", "SETUID", "SETGID", "DAC_OVERRIDE"]
+          volumeMounts:
+            - name: work
+              mountPath: /work
+            - name: npm-cache
+              mountPath: /work/.npm-cache
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            # ~2.5 GiB per concurrent build with DEPLOY_BUILD_CONCURRENCY=2.
+            requests: { cpu: "2", memory: 5Gi }
+            limits: { cpu: "4", memory: 6Gi }
+      volumes:
+        - name: work
+          emptyDir:
+            sizeLimit: 8Gi
+        - name: npm-cache
+          emptyDir:
+            sizeLimit: 2Gi
+        - name: tmp
+          emptyDir:
+            sizeLimit: 512Mi

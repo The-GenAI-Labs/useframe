@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+**/.next
+**/.turbo
+**/.wrangler
+**/.env
+**/.env.*
+!**/.env.example
+.git
+apps/worker/snapshots
