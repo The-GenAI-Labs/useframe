@@ -43,3 +43,11 @@ output "r2_bucket_name" {
 output "account_id" {
   value = module.sites_hosting.account_id
 }
+
+output "edge_cname_target" {
+  value = module.sites_hosting.edge_cname_target
+}
+
+output "fallback_origin" {
+  value = module.sites_hosting.fallback_origin
+}
