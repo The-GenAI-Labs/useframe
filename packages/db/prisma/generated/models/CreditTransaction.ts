@@ -43,6 +43,7 @@ export type CreditTransactionMinAggregateOutputType = {
   type: $Enums.CreditTxnType | null
   reason: string | null
   balanceAfter: number | null
+  refType: string | null
   refId: string | null
   paymentId: string | null
   expiresAt: Date | null
@@ -56,6 +57,7 @@ export type CreditTransactionMaxAggregateOutputType = {
   type: $Enums.CreditTxnType | null
   reason: string | null
   balanceAfter: number | null
+  refType: string | null
   refId: string | null
   paymentId: string | null
   expiresAt: Date | null
@@ -69,6 +71,7 @@ export type CreditTransactionCountAggregateOutputType = {
   type: number
   reason: number
   balanceAfter: number
+  refType: number
   refId: number
   paymentId: number
   expiresAt: number
@@ -94,6 +97,7 @@ export type CreditTransactionMinAggregateInputType = {
   type?: true
   reason?: true
   balanceAfter?: true
+  refType?: true
   refId?: true
   paymentId?: true
   expiresAt?: true
@@ -107,6 +111,7 @@ export type CreditTransactionMaxAggregateInputType = {
   type?: true
   reason?: true
   balanceAfter?: true
+  refType?: true
   refId?: true
   paymentId?: true
   expiresAt?: true
@@ -120,6 +125,7 @@ export type CreditTransactionCountAggregateInputType = {
   type?: true
   reason?: true
   balanceAfter?: true
+  refType?: true
   refId?: true
   paymentId?: true
   expiresAt?: true
@@ -220,6 +226,7 @@ export type CreditTransactionGroupByOutputType = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType: string | null
   refId: string | null
   paymentId: string | null
   expiresAt: Date | null
@@ -256,6 +263,7 @@ export type CreditTransactionWhereInput = {
   type?: Prisma.EnumCreditTxnTypeFilter<"CreditTransaction"> | $Enums.CreditTxnType
   reason?: Prisma.StringFilter<"CreditTransaction"> | string
   balanceAfter?: Prisma.IntFilter<"CreditTransaction"> | number
+  refType?: Prisma.StringNullableFilter<"CreditTransaction"> | string | null
   refId?: Prisma.StringNullableFilter<"CreditTransaction"> | string | null
   paymentId?: Prisma.StringNullableFilter<"CreditTransaction"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"CreditTransaction"> | Date | string | null
@@ -271,6 +279,7 @@ export type CreditTransactionOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   reason?: Prisma.SortOrder
   balanceAfter?: Prisma.SortOrder
+  refType?: Prisma.SortOrderInput | Prisma.SortOrder
   refId?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -289,6 +298,7 @@ export type CreditTransactionWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumCreditTxnTypeFilter<"CreditTransaction"> | $Enums.CreditTxnType
   reason?: Prisma.StringFilter<"CreditTransaction"> | string
   balanceAfter?: Prisma.IntFilter<"CreditTransaction"> | number
+  refType?: Prisma.StringNullableFilter<"CreditTransaction"> | string | null
   refId?: Prisma.StringNullableFilter<"CreditTransaction"> | string | null
   paymentId?: Prisma.StringNullableFilter<"CreditTransaction"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"CreditTransaction"> | Date | string | null
@@ -304,6 +314,7 @@ export type CreditTransactionOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   reason?: Prisma.SortOrder
   balanceAfter?: Prisma.SortOrder
+  refType?: Prisma.SortOrderInput | Prisma.SortOrder
   refId?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -325,6 +336,7 @@ export type CreditTransactionScalarWhereWithAggregatesInput = {
   type?: Prisma.EnumCreditTxnTypeWithAggregatesFilter<"CreditTransaction"> | $Enums.CreditTxnType
   reason?: Prisma.StringWithAggregatesFilter<"CreditTransaction"> | string
   balanceAfter?: Prisma.IntWithAggregatesFilter<"CreditTransaction"> | number
+  refType?: Prisma.StringNullableWithAggregatesFilter<"CreditTransaction"> | string | null
   refId?: Prisma.StringNullableWithAggregatesFilter<"CreditTransaction"> | string | null
   paymentId?: Prisma.StringNullableWithAggregatesFilter<"CreditTransaction"> | string | null
   expiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CreditTransaction"> | Date | string | null
@@ -337,6 +349,7 @@ export type CreditTransactionCreateInput = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType?: string | null
   refId?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -351,6 +364,7 @@ export type CreditTransactionUncheckedCreateInput = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType?: string | null
   refId?: string | null
   paymentId?: string | null
   expiresAt?: Date | string | null
@@ -363,6 +377,7 @@ export type CreditTransactionUpdateInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -377,6 +392,7 @@ export type CreditTransactionUncheckedUpdateInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -390,6 +406,7 @@ export type CreditTransactionCreateManyInput = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType?: string | null
   refId?: string | null
   paymentId?: string | null
   expiresAt?: Date | string | null
@@ -402,6 +419,7 @@ export type CreditTransactionUpdateManyMutationInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -414,6 +432,7 @@ export type CreditTransactionUncheckedUpdateManyInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -437,6 +456,7 @@ export type CreditTransactionCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   reason?: Prisma.SortOrder
   balanceAfter?: Prisma.SortOrder
+  refType?: Prisma.SortOrder
   refId?: Prisma.SortOrder
   paymentId?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
@@ -455,6 +475,7 @@ export type CreditTransactionMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   reason?: Prisma.SortOrder
   balanceAfter?: Prisma.SortOrder
+  refType?: Prisma.SortOrder
   refId?: Prisma.SortOrder
   paymentId?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
@@ -468,6 +489,7 @@ export type CreditTransactionMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   reason?: Prisma.SortOrder
   balanceAfter?: Prisma.SortOrder
+  refType?: Prisma.SortOrder
   refId?: Prisma.SortOrder
   paymentId?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
@@ -573,6 +595,7 @@ export type CreditTransactionCreateWithoutUserInput = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType?: string | null
   refId?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -585,6 +608,7 @@ export type CreditTransactionUncheckedCreateWithoutUserInput = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType?: string | null
   refId?: string | null
   paymentId?: string | null
   expiresAt?: Date | string | null
@@ -627,6 +651,7 @@ export type CreditTransactionScalarWhereInput = {
   type?: Prisma.EnumCreditTxnTypeFilter<"CreditTransaction"> | $Enums.CreditTxnType
   reason?: Prisma.StringFilter<"CreditTransaction"> | string
   balanceAfter?: Prisma.IntFilter<"CreditTransaction"> | number
+  refType?: Prisma.StringNullableFilter<"CreditTransaction"> | string | null
   refId?: Prisma.StringNullableFilter<"CreditTransaction"> | string | null
   paymentId?: Prisma.StringNullableFilter<"CreditTransaction"> | string | null
   expiresAt?: Prisma.DateTimeNullableFilter<"CreditTransaction"> | Date | string | null
@@ -639,6 +664,7 @@ export type CreditTransactionCreateWithoutPaymentInput = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType?: string | null
   refId?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -652,6 +678,7 @@ export type CreditTransactionUncheckedCreateWithoutPaymentInput = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType?: string | null
   refId?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -689,6 +716,7 @@ export type CreditTransactionCreateManyUserInput = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType?: string | null
   refId?: string | null
   paymentId?: string | null
   expiresAt?: Date | string | null
@@ -701,6 +729,7 @@ export type CreditTransactionUpdateWithoutUserInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -713,6 +742,7 @@ export type CreditTransactionUncheckedUpdateWithoutUserInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -725,6 +755,7 @@ export type CreditTransactionUncheckedUpdateManyWithoutUserInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -738,6 +769,7 @@ export type CreditTransactionCreateManyPaymentInput = {
   type: $Enums.CreditTxnType
   reason: string
   balanceAfter: number
+  refType?: string | null
   refId?: string | null
   expiresAt?: Date | string | null
   createdAt?: Date | string
@@ -749,6 +781,7 @@ export type CreditTransactionUpdateWithoutPaymentInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -762,6 +795,7 @@ export type CreditTransactionUncheckedUpdateWithoutPaymentInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -774,6 +808,7 @@ export type CreditTransactionUncheckedUpdateManyWithoutPaymentInput = {
   type?: Prisma.EnumCreditTxnTypeFieldUpdateOperationsInput | $Enums.CreditTxnType
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   balanceAfter?: Prisma.IntFieldUpdateOperationsInput | number
+  refType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -788,6 +823,7 @@ export type CreditTransactionSelect<ExtArgs extends runtime.Types.Extensions.Int
   type?: boolean
   reason?: boolean
   balanceAfter?: boolean
+  refType?: boolean
   refId?: boolean
   paymentId?: boolean
   expiresAt?: boolean
@@ -803,6 +839,7 @@ export type CreditTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.T
   type?: boolean
   reason?: boolean
   balanceAfter?: boolean
+  refType?: boolean
   refId?: boolean
   paymentId?: boolean
   expiresAt?: boolean
@@ -818,6 +855,7 @@ export type CreditTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   type?: boolean
   reason?: boolean
   balanceAfter?: boolean
+  refType?: boolean
   refId?: boolean
   paymentId?: boolean
   expiresAt?: boolean
@@ -833,13 +871,14 @@ export type CreditTransactionSelectScalar = {
   type?: boolean
   reason?: boolean
   balanceAfter?: boolean
+  refType?: boolean
   refId?: boolean
   paymentId?: boolean
   expiresAt?: boolean
   createdAt?: boolean
 }
 
-export type CreditTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "delta" | "type" | "reason" | "balanceAfter" | "refId" | "paymentId" | "expiresAt" | "createdAt", ExtArgs["result"]["creditTransaction"]>
+export type CreditTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "delta" | "type" | "reason" | "balanceAfter" | "refType" | "refId" | "paymentId" | "expiresAt" | "createdAt", ExtArgs["result"]["creditTransaction"]>
 export type CreditTransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   payment?: boolean | Prisma.CreditTransaction$paymentArgs<ExtArgs>
@@ -866,6 +905,7 @@ export type $CreditTransactionPayload<ExtArgs extends runtime.Types.Extensions.I
     type: $Enums.CreditTxnType
     reason: string
     balanceAfter: number
+    refType: string | null
     refId: string | null
     paymentId: string | null
     expiresAt: Date | null
@@ -1301,6 +1341,7 @@ export interface CreditTransactionFieldRefs {
   readonly type: Prisma.FieldRef<"CreditTransaction", 'CreditTxnType'>
   readonly reason: Prisma.FieldRef<"CreditTransaction", 'String'>
   readonly balanceAfter: Prisma.FieldRef<"CreditTransaction", 'Int'>
+  readonly refType: Prisma.FieldRef<"CreditTransaction", 'String'>
   readonly refId: Prisma.FieldRef<"CreditTransaction", 'String'>
   readonly paymentId: Prisma.FieldRef<"CreditTransaction", 'String'>
   readonly expiresAt: Prisma.FieldRef<"CreditTransaction", 'DateTime'>

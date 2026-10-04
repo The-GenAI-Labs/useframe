@@ -157,6 +157,11 @@ export type Message = Prisma.MessageModel
  */
 export type Deployment = Prisma.DeploymentModel
 /**
+ * Model ProjectSite
+ * 
+ */
+export type ProjectSite = Prisma.ProjectSiteModel
+/**
  * Model CustomDomain
  * 
  */

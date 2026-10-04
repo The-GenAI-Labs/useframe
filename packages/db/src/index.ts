@@ -33,3 +33,4 @@ if (process.env.NODE_ENV !== "production") {
 
 export * from "./cache/scanCache.js";
 export * from "./validation.js";
+export * from "./credits.js";

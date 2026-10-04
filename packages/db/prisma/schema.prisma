@@ -84,9 +84,16 @@ enum DeploymentStatus {
   BUILDING
   UPLOADING
   DNS_PROVISIONING
+  ACTIVATING
   LIVE
   FAILED
   ROLLED_BACK
+  SUPERSEDED
+}
+
+enum SiteFramework {
+  NEXT_EXPORT
+  VITE_SPA
 }
 
 enum PipelineStage {
@@ -543,6 +550,7 @@ model CreditTransaction {
   type         CreditTxnType
   reason       String
   balanceAfter Int
+  refType      String?
   refId        String?
   paymentId    String?
   expiresAt    DateTime?
@@ -621,13 +629,14 @@ model Project {
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
 
-  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user            User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   versions        ProjectVersion[]
   pages           Page[]
   chatMessages    ProjectChatMessage[]
   conversations   Conversation[]
   deployments     Deployment[]
   customDomain    CustomDomain?
+  site            ProjectSite?
   pipelineLogs    PipelineLog[]
   analytics       ProjectAnalytics?
   pageAnalytics   PageAnalytics[]
@@ -770,6 +779,16 @@ model Deployment {
   ogImageKey  String?
   assetsKey   String?
 
+  siteId         String?
+  framework      SiteFramework?
+  storagePrefix  String?
+  fileCount      Int?
+  totalBytes     BigInt?
+  rootHtmlSha256 String?
+  siteUrl        String?
+  triggeredBy    String         @default("user")
+  purgedAt       DateTime?
+
   deletedAt DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -778,6 +797,7 @@ model Deployment {
   projectVersion ProjectVersion @relation(fields: [versionId], references: [id], onDelete: Cascade)
   page           Page?          @relation(fields: [pageId], references: [id])
   user           User           @relation(fields: [userId], references: [id])
+  site           ProjectSite?   @relation(fields: [siteId], references: [id], onDelete: SetNull)
 
   @@index([projectId])
   @@index([versionId])
@@ -786,7 +806,27 @@ model Deployment {
   @@index([status])
   @@index([subdomain])
   @@index([deletedAt])
+  @@index([siteId])
+  @@index([projectId, status])
   @@map("deployments")
+}
+
+model ProjectSite {
+  id                 String    @id @default(cuid())
+  projectId          String    @unique
+  subdomainLabel     String    @unique
+  defaultHost        String    @unique
+  primaryHost        String
+  activeDeploymentId String?
+  suspendedAt        DateTime?
+  suspendedReason    String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  project     Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  deployments Deployment[]
+
+  @@map("project_sites")
 }
 
 model CustomDomain {
@@ -1527,7 +1567,7 @@ model SeoAuditResult {
 }
 
 model RetrievalCacheEntry {
-  id             String @id @default(cuid())
+  id             String                      @id @default(cuid())
   decisionArea   DecisionArea
   niche          NicheCategory
   hydePassage    String
@@ -1536,8 +1576,8 @@ model RetrievalCacheEntry {
   fingerprint    String
   findings       Json
   corpusVersion  Int
-  hitCount       Int @default(0)
-  createdAt      DateTime @default(now())
+  hitCount       Int                         @default(0)
+  createdAt      DateTime                    @default(now())
   lastHitAt      DateTime?
 
   @@index([decisionArea, niche, corpusVersion, embeddingModel, fingerprint], map: "retrieval_cache_metadata_idx")
@@ -1550,8 +1590,9 @@ model CorpusVersion {
 
   @@map("corpus_version")
 }
+
 model JevDecisionLog {
-  id         String @id @default(cuid())
+  id         String   @id @default(cuid())
   feature    String
   mode       String
   policyKey  String

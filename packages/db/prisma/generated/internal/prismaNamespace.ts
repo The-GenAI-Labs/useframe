@@ -407,6 +407,7 @@ export const ModelName = {
   Conversation: 'Conversation',
   Message: 'Message',
   Deployment: 'Deployment',
+  ProjectSite: 'ProjectSite',
   CustomDomain: 'CustomDomain',
   PipelineLog: 'PipelineLog',
   ProjectAnalytics: 'ProjectAnalytics',
@@ -456,7 +457,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "researchDocument" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchIntake" | "styleTag" | "styleDirective" | "componentExemplar" | "researchFinding" | "findingRelation" | "sourceDocument" | "findingChunk" | "pendingFindingRelation" | "researchReportCitation" | "corpusIngestionLog" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "replication" | "validationRun" | "validationIteration" | "scoreResult" | "searchQueryCache" | "seoAuditResult" | "retrievalCacheEntry" | "corpusVersion" | "jevDecisionLog" | "projectChatMessage"
+    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "researchDocument" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "projectSite" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "researchIntake" | "styleTag" | "styleDirective" | "componentExemplar" | "researchFinding" | "findingRelation" | "sourceDocument" | "findingChunk" | "pendingFindingRelation" | "researchReportCitation" | "corpusIngestionLog" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "replication" | "validationRun" | "validationIteration" | "scoreResult" | "searchQueryCache" | "seoAuditResult" | "retrievalCacheEntry" | "corpusVersion" | "jevDecisionLog" | "projectChatMessage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2159,6 +2160,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.DeploymentCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.DeploymentCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectSite: {
+      payload: Prisma.$ProjectSitePayload<ExtArgs>
+      fields: Prisma.ProjectSiteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectSiteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectSiteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectSiteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectSiteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload>
+        }
+        findMany: {
+          args: Prisma.ProjectSiteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload>[]
+        }
+        create: {
+          args: Prisma.ProjectSiteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload>
+        }
+        createMany: {
+          args: Prisma.ProjectSiteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectSiteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectSiteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload>
+        }
+        update: {
+          args: Prisma.ProjectSiteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectSiteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectSiteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectSiteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectSiteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectSitePayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectSiteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectSite>
+        }
+        groupBy: {
+          args: Prisma.ProjectSiteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectSiteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectSiteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectSiteCountAggregateOutputType> | number
         }
       }
     }
@@ -4925,6 +5000,7 @@ export const CreditTransactionScalarFieldEnum = {
   type: 'type',
   reason: 'reason',
   balanceAfter: 'balanceAfter',
+  refType: 'refType',
   refId: 'refId',
   paymentId: 'paymentId',
   expiresAt: 'expiresAt',
@@ -5079,12 +5155,37 @@ export const DeploymentScalarFieldEnum = {
   r2BucketKey: 'r2BucketKey',
   ogImageKey: 'ogImageKey',
   assetsKey: 'assetsKey',
+  siteId: 'siteId',
+  framework: 'framework',
+  storagePrefix: 'storagePrefix',
+  fileCount: 'fileCount',
+  totalBytes: 'totalBytes',
+  rootHtmlSha256: 'rootHtmlSha256',
+  siteUrl: 'siteUrl',
+  triggeredBy: 'triggeredBy',
+  purgedAt: 'purgedAt',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type DeploymentScalarFieldEnum = (typeof DeploymentScalarFieldEnum)[keyof typeof DeploymentScalarFieldEnum]
+
+
+export const ProjectSiteScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  subdomainLabel: 'subdomainLabel',
+  defaultHost: 'defaultHost',
+  primaryHost: 'primaryHost',
+  activeDeploymentId: 'activeDeploymentId',
+  suspendedAt: 'suspendedAt',
+  suspendedReason: 'suspendedReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectSiteScalarFieldEnum = (typeof ProjectSiteScalarFieldEnum)[keyof typeof ProjectSiteScalarFieldEnum]
 
 
 export const CustomDomainScalarFieldEnum = {
@@ -6063,6 +6164,34 @@ export type ListEnumDeploymentStatusFieldRefInput<$PrismaModel> = FieldRefInputT
 
 
 /**
+ * Reference to a field of type 'SiteFramework'
+ */
+export type EnumSiteFrameworkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SiteFramework'>
+    
+
+
+/**
+ * Reference to a field of type 'SiteFramework[]'
+ */
+export type ListEnumSiteFrameworkFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SiteFramework[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+/**
  * Reference to a field of type 'DomainStatus'
  */
 export type EnumDomainStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DomainStatus'>
@@ -6516,6 +6645,7 @@ export type GlobalOmitConfig = {
   conversation?: Prisma.ConversationOmit
   message?: Prisma.MessageOmit
   deployment?: Prisma.DeploymentOmit
+  projectSite?: Prisma.ProjectSiteOmit
   customDomain?: Prisma.CustomDomainOmit
   pipelineLog?: Prisma.PipelineLogOmit
   projectAnalytics?: Prisma.ProjectAnalyticsOmit

@@ -74,6 +74,7 @@ export const ModelName = {
   Conversation: 'Conversation',
   Message: 'Message',
   Deployment: 'Deployment',
+  ProjectSite: 'ProjectSite',
   CustomDomain: 'CustomDomain',
   PipelineLog: 'PipelineLog',
   ProjectAnalytics: 'ProjectAnalytics',
@@ -366,6 +367,7 @@ export const CreditTransactionScalarFieldEnum = {
   type: 'type',
   reason: 'reason',
   balanceAfter: 'balanceAfter',
+  refType: 'refType',
   refId: 'refId',
   paymentId: 'paymentId',
   expiresAt: 'expiresAt',
@@ -520,12 +522,37 @@ export const DeploymentScalarFieldEnum = {
   r2BucketKey: 'r2BucketKey',
   ogImageKey: 'ogImageKey',
   assetsKey: 'assetsKey',
+  siteId: 'siteId',
+  framework: 'framework',
+  storagePrefix: 'storagePrefix',
+  fileCount: 'fileCount',
+  totalBytes: 'totalBytes',
+  rootHtmlSha256: 'rootHtmlSha256',
+  siteUrl: 'siteUrl',
+  triggeredBy: 'triggeredBy',
+  purgedAt: 'purgedAt',
   deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type DeploymentScalarFieldEnum = (typeof DeploymentScalarFieldEnum)[keyof typeof DeploymentScalarFieldEnum]
+
+
+export const ProjectSiteScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  subdomainLabel: 'subdomainLabel',
+  defaultHost: 'defaultHost',
+  primaryHost: 'primaryHost',
+  activeDeploymentId: 'activeDeploymentId',
+  suspendedAt: 'suspendedAt',
+  suspendedReason: 'suspendedReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectSiteScalarFieldEnum = (typeof ProjectSiteScalarFieldEnum)[keyof typeof ProjectSiteScalarFieldEnum]
 
 
 export const CustomDomainScalarFieldEnum = {

@@ -111,12 +111,22 @@ export const DeploymentStatus = {
   BUILDING: 'BUILDING',
   UPLOADING: 'UPLOADING',
   DNS_PROVISIONING: 'DNS_PROVISIONING',
+  ACTIVATING: 'ACTIVATING',
   LIVE: 'LIVE',
   FAILED: 'FAILED',
-  ROLLED_BACK: 'ROLLED_BACK'
+  ROLLED_BACK: 'ROLLED_BACK',
+  SUPERSEDED: 'SUPERSEDED'
 } as const
 
 export type DeploymentStatus = (typeof DeploymentStatus)[keyof typeof DeploymentStatus]
+
+
+export const SiteFramework = {
+  NEXT_EXPORT: 'NEXT_EXPORT',
+  VITE_SPA: 'VITE_SPA'
+} as const
+
+export type SiteFramework = (typeof SiteFramework)[keyof typeof SiteFramework]
 
 
 export const PipelineStage = {

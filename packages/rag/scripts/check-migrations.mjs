@@ -6,6 +6,7 @@ const protectedNames = [
   "retrieval_cache_embedding_hnsw_idx",
   "research_findings_search_vector_idx",
   "research_findings_search_vector_trg",
+  "credit_transactions_deployment_refund_key",
 ];
 export function unsafeDrops(sql) {
   const clean = sql.replace(/\/\*[\s\S]*?\*\//g, "").replace(/--[^\n]*/g, "");

@@ -349,6 +349,7 @@ export type ProjectWhereInput = {
   conversations?: Prisma.ConversationListRelationFilter
   deployments?: Prisma.DeploymentListRelationFilter
   customDomain?: Prisma.XOR<Prisma.CustomDomainNullableScalarRelationFilter, Prisma.CustomDomainWhereInput> | null
+  site?: Prisma.XOR<Prisma.ProjectSiteNullableScalarRelationFilter, Prisma.ProjectSiteWhereInput> | null
   pipelineLogs?: Prisma.PipelineLogListRelationFilter
   analytics?: Prisma.XOR<Prisma.ProjectAnalyticsNullableScalarRelationFilter, Prisma.ProjectAnalyticsWhereInput> | null
   pageAnalytics?: Prisma.PageAnalyticsListRelationFilter
@@ -394,6 +395,7 @@ export type ProjectOrderByWithRelationInput = {
   conversations?: Prisma.ConversationOrderByRelationAggregateInput
   deployments?: Prisma.DeploymentOrderByRelationAggregateInput
   customDomain?: Prisma.CustomDomainOrderByWithRelationInput
+  site?: Prisma.ProjectSiteOrderByWithRelationInput
   pipelineLogs?: Prisma.PipelineLogOrderByRelationAggregateInput
   analytics?: Prisma.ProjectAnalyticsOrderByWithRelationInput
   pageAnalytics?: Prisma.PageAnalyticsOrderByRelationAggregateInput
@@ -442,6 +444,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   conversations?: Prisma.ConversationListRelationFilter
   deployments?: Prisma.DeploymentListRelationFilter
   customDomain?: Prisma.XOR<Prisma.CustomDomainNullableScalarRelationFilter, Prisma.CustomDomainWhereInput> | null
+  site?: Prisma.XOR<Prisma.ProjectSiteNullableScalarRelationFilter, Prisma.ProjectSiteWhereInput> | null
   pipelineLogs?: Prisma.PipelineLogListRelationFilter
   analytics?: Prisma.XOR<Prisma.ProjectAnalyticsNullableScalarRelationFilter, Prisma.ProjectAnalyticsWhereInput> | null
   pageAnalytics?: Prisma.PageAnalyticsListRelationFilter
@@ -548,6 +551,7 @@ export type ProjectCreateInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -592,6 +596,7 @@ export type ProjectUncheckedCreateInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -636,6 +641,7 @@ export type ProjectUpdateInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -680,6 +686,7 @@ export type ProjectUncheckedUpdateInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -1009,6 +1016,20 @@ export type ProjectUpdateOneRequiredWithoutDeploymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutDeploymentsInput, Prisma.ProjectUpdateWithoutDeploymentsInput>, Prisma.ProjectUncheckedUpdateWithoutDeploymentsInput>
 }
 
+export type ProjectCreateNestedOneWithoutSiteInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutSiteInput, Prisma.ProjectUncheckedCreateWithoutSiteInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutSiteInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutSiteNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutSiteInput, Prisma.ProjectUncheckedCreateWithoutSiteInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutSiteInput
+  upsert?: Prisma.ProjectUpsertWithoutSiteInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutSiteInput, Prisma.ProjectUpdateWithoutSiteInput>, Prisma.ProjectUncheckedUpdateWithoutSiteInput>
+}
+
 export type ProjectCreateNestedOneWithoutCustomDomainInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutCustomDomainInput, Prisma.ProjectUncheckedCreateWithoutCustomDomainInput>
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCustomDomainInput
@@ -1198,6 +1219,7 @@ export type ProjectCreateWithoutUserInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -1241,6 +1263,7 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -1342,6 +1365,7 @@ export type ProjectCreateWithoutResearchDocsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -1385,6 +1409,7 @@ export type ProjectUncheckedCreateWithoutResearchDocsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -1444,6 +1469,7 @@ export type ProjectUpdateWithoutResearchDocsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -1487,6 +1513,7 @@ export type ProjectUncheckedUpdateWithoutResearchDocsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -1529,6 +1556,7 @@ export type ProjectCreateWithoutVersionsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -1572,6 +1600,7 @@ export type ProjectUncheckedCreateWithoutVersionsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -1631,6 +1660,7 @@ export type ProjectUpdateWithoutVersionsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -1674,6 +1704,7 @@ export type ProjectUncheckedUpdateWithoutVersionsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -1717,6 +1748,7 @@ export type ProjectCreateWithoutPagesInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -1760,6 +1792,7 @@ export type ProjectUncheckedCreateWithoutPagesInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -1819,6 +1852,7 @@ export type ProjectUpdateWithoutPagesInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -1862,6 +1896,7 @@ export type ProjectUncheckedUpdateWithoutPagesInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -1905,6 +1940,7 @@ export type ProjectCreateWithoutConversationsInput = {
   chatMessages?: Prisma.ProjectChatMessageCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -1948,6 +1984,7 @@ export type ProjectUncheckedCreateWithoutConversationsInput = {
   chatMessages?: Prisma.ProjectChatMessageUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -2007,6 +2044,7 @@ export type ProjectUpdateWithoutConversationsInput = {
   chatMessages?: Prisma.ProjectChatMessageUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -2050,6 +2088,7 @@ export type ProjectUncheckedUpdateWithoutConversationsInput = {
   chatMessages?: Prisma.ProjectChatMessageUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -2093,6 +2132,7 @@ export type ProjectCreateWithoutDeploymentsInput = {
   chatMessages?: Prisma.ProjectChatMessageCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -2136,6 +2176,7 @@ export type ProjectUncheckedCreateWithoutDeploymentsInput = {
   chatMessages?: Prisma.ProjectChatMessageUncheckedCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -2195,6 +2236,7 @@ export type ProjectUpdateWithoutDeploymentsInput = {
   chatMessages?: Prisma.ProjectChatMessageUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -2237,6 +2279,199 @@ export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
   pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
   chatMessages?: Prisma.ProjectChatMessageUncheckedUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  researchIntake?: Prisma.ResearchIntakeUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
+  researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutSiteInput = {
+  id?: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  brandPersonality?: string | null
+  pricePositioning?: string | null
+  businessModel?: string | null
+  differentiator?: string | null
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  vercelProjectId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  chatMessages?: Prisma.ProjectChatMessageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  researchIntake?: Prisma.ResearchIntakeCreateNestedOneWithoutProjectInput
+  pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
+  researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutSiteInput = {
+  id?: string
+  userId: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  brandPersonality?: string | null
+  pricePositioning?: string | null
+  businessModel?: string | null
+  differentiator?: string | null
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  vercelProjectId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  chatMessages?: Prisma.ProjectChatMessageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  researchIntake?: Prisma.ResearchIntakeUncheckedCreateNestedOneWithoutProjectInput
+  pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
+  researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutSiteInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutSiteInput, Prisma.ProjectUncheckedCreateWithoutSiteInput>
+}
+
+export type ProjectUpsertWithoutSiteInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutSiteInput, Prisma.ProjectUncheckedUpdateWithoutSiteInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutSiteInput, Prisma.ProjectUncheckedCreateWithoutSiteInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutSiteInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutSiteInput, Prisma.ProjectUncheckedUpdateWithoutSiteInput>
+}
+
+export type ProjectUpdateWithoutSiteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  brandPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePositioning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vercelProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  chatMessages?: Prisma.ProjectChatMessageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  researchIntake?: Prisma.ResearchIntakeUpdateOneWithoutProjectNestedInput
+  pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
+  researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutSiteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  brandPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePositioning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vercelProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  chatMessages?: Prisma.ProjectChatMessageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
@@ -2281,6 +2516,7 @@ export type ProjectCreateWithoutCustomDomainInput = {
   chatMessages?: Prisma.ProjectChatMessageCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -2324,6 +2560,7 @@ export type ProjectUncheckedCreateWithoutCustomDomainInput = {
   chatMessages?: Prisma.ProjectChatMessageUncheckedCreateNestedManyWithoutProjectInput
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -2383,6 +2620,7 @@ export type ProjectUpdateWithoutCustomDomainInput = {
   chatMessages?: Prisma.ProjectChatMessageUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -2426,6 +2664,7 @@ export type ProjectUncheckedUpdateWithoutCustomDomainInput = {
   chatMessages?: Prisma.ProjectChatMessageUncheckedUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -2470,6 +2709,7 @@ export type ProjectCreateWithoutPipelineLogsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
   researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
@@ -2513,6 +2753,7 @@ export type ProjectUncheckedCreateWithoutPipelineLogsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
   researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
@@ -2572,6 +2813,7 @@ export type ProjectUpdateWithoutPipelineLogsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
   researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
@@ -2615,6 +2857,7 @@ export type ProjectUncheckedUpdateWithoutPipelineLogsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
   researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
@@ -2658,6 +2901,7 @@ export type ProjectCreateWithoutAnalyticsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
   researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
@@ -2701,6 +2945,7 @@ export type ProjectUncheckedCreateWithoutAnalyticsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
   researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
@@ -2760,6 +3005,7 @@ export type ProjectUpdateWithoutAnalyticsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
   researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
@@ -2803,6 +3049,7 @@ export type ProjectUncheckedUpdateWithoutAnalyticsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
   researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
@@ -2846,6 +3093,7 @@ export type ProjectCreateWithoutPageAnalyticsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
@@ -2889,6 +3137,7 @@ export type ProjectUncheckedCreateWithoutPageAnalyticsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
@@ -2948,6 +3197,7 @@ export type ProjectUpdateWithoutPageAnalyticsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
@@ -2991,6 +3241,7 @@ export type ProjectUncheckedUpdateWithoutPageAnalyticsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
@@ -3034,6 +3285,7 @@ export type ProjectCreateWithoutResearchReportInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -3077,6 +3329,7 @@ export type ProjectUncheckedCreateWithoutResearchReportInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -3136,6 +3389,7 @@ export type ProjectUpdateWithoutResearchReportInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -3179,6 +3433,7 @@ export type ProjectUncheckedUpdateWithoutResearchReportInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -3222,6 +3477,7 @@ export type ProjectCreateWithoutResearchIntakeInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -3265,6 +3521,7 @@ export type ProjectUncheckedCreateWithoutResearchIntakeInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -3324,6 +3581,7 @@ export type ProjectUpdateWithoutResearchIntakeInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -3367,6 +3625,7 @@ export type ProjectUncheckedUpdateWithoutResearchIntakeInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -3410,6 +3669,7 @@ export type ProjectCreateWithoutPipelineStateInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -3453,6 +3713,7 @@ export type ProjectUncheckedCreateWithoutPipelineStateInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -3512,6 +3773,7 @@ export type ProjectUpdateWithoutPipelineStateInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -3555,6 +3817,7 @@ export type ProjectUncheckedUpdateWithoutPipelineStateInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -3598,6 +3861,7 @@ export type ProjectCreateWithoutCompetitorScansInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -3641,6 +3905,7 @@ export type ProjectUncheckedCreateWithoutCompetitorScansInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -3700,6 +3965,7 @@ export type ProjectUpdateWithoutCompetitorScansInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -3743,6 +4009,7 @@ export type ProjectUncheckedUpdateWithoutCompetitorScansInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -3786,6 +4053,7 @@ export type ProjectCreateWithoutReplicationInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -3829,6 +4097,7 @@ export type ProjectUncheckedCreateWithoutReplicationInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -3888,6 +4157,7 @@ export type ProjectUpdateWithoutReplicationInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -3931,6 +4201,7 @@ export type ProjectUncheckedUpdateWithoutReplicationInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -3974,6 +4245,7 @@ export type ProjectCreateWithoutValidationRunsInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -4017,6 +4289,7 @@ export type ProjectUncheckedCreateWithoutValidationRunsInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -4076,6 +4349,7 @@ export type ProjectUpdateWithoutValidationRunsInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -4119,6 +4393,7 @@ export type ProjectUncheckedUpdateWithoutValidationRunsInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -4161,6 +4436,7 @@ export type ProjectCreateWithoutChatMessagesInput = {
   conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
@@ -4204,6 +4480,7 @@ export type ProjectUncheckedCreateWithoutChatMessagesInput = {
   conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
   customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
   pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
   analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
@@ -4263,6 +4540,7 @@ export type ProjectUpdateWithoutChatMessagesInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -4306,6 +4584,7 @@ export type ProjectUncheckedUpdateWithoutChatMessagesInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -4376,6 +4655,7 @@ export type ProjectUpdateWithoutUserInput = {
   conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
@@ -4419,6 +4699,7 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
   pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
   analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
   pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
@@ -4603,6 +4884,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   conversations?: boolean | Prisma.Project$conversationsArgs<ExtArgs>
   deployments?: boolean | Prisma.Project$deploymentsArgs<ExtArgs>
   customDomain?: boolean | Prisma.Project$customDomainArgs<ExtArgs>
+  site?: boolean | Prisma.Project$siteArgs<ExtArgs>
   pipelineLogs?: boolean | Prisma.Project$pipelineLogsArgs<ExtArgs>
   analytics?: boolean | Prisma.Project$analyticsArgs<ExtArgs>
   pageAnalytics?: boolean | Prisma.Project$pageAnalyticsArgs<ExtArgs>
@@ -4711,6 +4993,7 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   conversations?: boolean | Prisma.Project$conversationsArgs<ExtArgs>
   deployments?: boolean | Prisma.Project$deploymentsArgs<ExtArgs>
   customDomain?: boolean | Prisma.Project$customDomainArgs<ExtArgs>
+  site?: boolean | Prisma.Project$siteArgs<ExtArgs>
   pipelineLogs?: boolean | Prisma.Project$pipelineLogsArgs<ExtArgs>
   analytics?: boolean | Prisma.Project$analyticsArgs<ExtArgs>
   pageAnalytics?: boolean | Prisma.Project$pageAnalyticsArgs<ExtArgs>
@@ -4740,6 +5023,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     conversations: Prisma.$ConversationPayload<ExtArgs>[]
     deployments: Prisma.$DeploymentPayload<ExtArgs>[]
     customDomain: Prisma.$CustomDomainPayload<ExtArgs> | null
+    site: Prisma.$ProjectSitePayload<ExtArgs> | null
     pipelineLogs: Prisma.$PipelineLogPayload<ExtArgs>[]
     analytics: Prisma.$ProjectAnalyticsPayload<ExtArgs> | null
     pageAnalytics: Prisma.$PageAnalyticsPayload<ExtArgs>[]
@@ -5178,6 +5462,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   conversations<T extends Prisma.Project$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deployments<T extends Prisma.Project$deploymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$deploymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeploymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   customDomain<T extends Prisma.Project$customDomainArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$customDomainArgs<ExtArgs>>): Prisma.Prisma__CustomDomainClient<runtime.Types.Result.GetResult<Prisma.$CustomDomainPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  site<T extends Prisma.Project$siteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$siteArgs<ExtArgs>>): Prisma.Prisma__ProjectSiteClient<runtime.Types.Result.GetResult<Prisma.$ProjectSitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   pipelineLogs<T extends Prisma.Project$pipelineLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$pipelineLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PipelineLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   analytics<T extends Prisma.Project$analyticsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$analyticsArgs<ExtArgs>>): Prisma.Prisma__ProjectAnalyticsClient<runtime.Types.Result.GetResult<Prisma.$ProjectAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   pageAnalytics<T extends Prisma.Project$pageAnalyticsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$pageAnalyticsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PageAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -5779,6 +6064,25 @@ export type Project$customDomainArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.CustomDomainInclude<ExtArgs> | null
   where?: Prisma.CustomDomainWhereInput
+}
+
+/**
+ * Project.site
+ */
+export type Project$siteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectSite
+   */
+  select?: Prisma.ProjectSiteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectSite
+   */
+  omit?: Prisma.ProjectSiteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectSiteInclude<ExtArgs> | null
+  where?: Prisma.ProjectSiteWhereInput
 }
 
 /**

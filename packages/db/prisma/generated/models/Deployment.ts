@@ -29,11 +29,15 @@ export type AggregateDeployment = {
 export type DeploymentAvgAggregateOutputType = {
   version: number | null
   buildDurationMs: number | null
+  fileCount: number | null
+  totalBytes: number | null
 }
 
 export type DeploymentSumAggregateOutputType = {
   version: number | null
   buildDurationMs: number | null
+  fileCount: number | null
+  totalBytes: bigint | null
 }
 
 export type DeploymentMinAggregateOutputType = {
@@ -57,6 +61,15 @@ export type DeploymentMinAggregateOutputType = {
   r2BucketKey: string | null
   ogImageKey: string | null
   assetsKey: string | null
+  siteId: string | null
+  framework: $Enums.SiteFramework | null
+  storagePrefix: string | null
+  fileCount: number | null
+  totalBytes: bigint | null
+  rootHtmlSha256: string | null
+  siteUrl: string | null
+  triggeredBy: string | null
+  purgedAt: Date | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -83,6 +96,15 @@ export type DeploymentMaxAggregateOutputType = {
   r2BucketKey: string | null
   ogImageKey: string | null
   assetsKey: string | null
+  siteId: string | null
+  framework: $Enums.SiteFramework | null
+  storagePrefix: string | null
+  fileCount: number | null
+  totalBytes: bigint | null
+  rootHtmlSha256: string | null
+  siteUrl: string | null
+  triggeredBy: string | null
+  purgedAt: Date | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -109,6 +131,15 @@ export type DeploymentCountAggregateOutputType = {
   r2BucketKey: number
   ogImageKey: number
   assetsKey: number
+  siteId: number
+  framework: number
+  storagePrefix: number
+  fileCount: number
+  totalBytes: number
+  rootHtmlSha256: number
+  siteUrl: number
+  triggeredBy: number
+  purgedAt: number
   deletedAt: number
   createdAt: number
   updatedAt: number
@@ -119,11 +150,15 @@ export type DeploymentCountAggregateOutputType = {
 export type DeploymentAvgAggregateInputType = {
   version?: true
   buildDurationMs?: true
+  fileCount?: true
+  totalBytes?: true
 }
 
 export type DeploymentSumAggregateInputType = {
   version?: true
   buildDurationMs?: true
+  fileCount?: true
+  totalBytes?: true
 }
 
 export type DeploymentMinAggregateInputType = {
@@ -147,6 +182,15 @@ export type DeploymentMinAggregateInputType = {
   r2BucketKey?: true
   ogImageKey?: true
   assetsKey?: true
+  siteId?: true
+  framework?: true
+  storagePrefix?: true
+  fileCount?: true
+  totalBytes?: true
+  rootHtmlSha256?: true
+  siteUrl?: true
+  triggeredBy?: true
+  purgedAt?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -173,6 +217,15 @@ export type DeploymentMaxAggregateInputType = {
   r2BucketKey?: true
   ogImageKey?: true
   assetsKey?: true
+  siteId?: true
+  framework?: true
+  storagePrefix?: true
+  fileCount?: true
+  totalBytes?: true
+  rootHtmlSha256?: true
+  siteUrl?: true
+  triggeredBy?: true
+  purgedAt?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -199,6 +252,15 @@ export type DeploymentCountAggregateInputType = {
   r2BucketKey?: true
   ogImageKey?: true
   assetsKey?: true
+  siteId?: true
+  framework?: true
+  storagePrefix?: true
+  fileCount?: true
+  totalBytes?: true
+  rootHtmlSha256?: true
+  siteUrl?: true
+  triggeredBy?: true
+  purgedAt?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -312,6 +374,15 @@ export type DeploymentGroupByOutputType = {
   r2BucketKey: string | null
   ogImageKey: string | null
   assetsKey: string | null
+  siteId: string | null
+  framework: $Enums.SiteFramework | null
+  storagePrefix: string | null
+  fileCount: number | null
+  totalBytes: bigint | null
+  rootHtmlSha256: string | null
+  siteUrl: string | null
+  triggeredBy: string
+  purgedAt: Date | null
   deletedAt: Date | null
   createdAt: Date
   updatedAt: Date
@@ -361,6 +432,15 @@ export type DeploymentWhereInput = {
   r2BucketKey?: Prisma.StringNullableFilter<"Deployment"> | string | null
   ogImageKey?: Prisma.StringNullableFilter<"Deployment"> | string | null
   assetsKey?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  siteId?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  framework?: Prisma.EnumSiteFrameworkNullableFilter<"Deployment"> | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  fileCount?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  totalBytes?: Prisma.BigIntNullableFilter<"Deployment"> | bigint | number | null
+  rootHtmlSha256?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  siteUrl?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  triggeredBy?: Prisma.StringFilter<"Deployment"> | string
+  purgedAt?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
@@ -368,6 +448,7 @@ export type DeploymentWhereInput = {
   projectVersion?: Prisma.XOR<Prisma.ProjectVersionScalarRelationFilter, Prisma.ProjectVersionWhereInput>
   page?: Prisma.XOR<Prisma.PageNullableScalarRelationFilter, Prisma.PageWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  site?: Prisma.XOR<Prisma.ProjectSiteNullableScalarRelationFilter, Prisma.ProjectSiteWhereInput> | null
 }
 
 export type DeploymentOrderByWithRelationInput = {
@@ -391,6 +472,15 @@ export type DeploymentOrderByWithRelationInput = {
   r2BucketKey?: Prisma.SortOrderInput | Prisma.SortOrder
   ogImageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   assetsKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  siteId?: Prisma.SortOrderInput | Prisma.SortOrder
+  framework?: Prisma.SortOrderInput | Prisma.SortOrder
+  storagePrefix?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalBytes?: Prisma.SortOrderInput | Prisma.SortOrder
+  rootHtmlSha256?: Prisma.SortOrderInput | Prisma.SortOrder
+  siteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  triggeredBy?: Prisma.SortOrder
+  purgedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -398,6 +488,7 @@ export type DeploymentOrderByWithRelationInput = {
   projectVersion?: Prisma.ProjectVersionOrderByWithRelationInput
   page?: Prisma.PageOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  site?: Prisma.ProjectSiteOrderByWithRelationInput
 }
 
 export type DeploymentWhereUniqueInput = Prisma.AtLeast<{
@@ -424,6 +515,15 @@ export type DeploymentWhereUniqueInput = Prisma.AtLeast<{
   r2BucketKey?: Prisma.StringNullableFilter<"Deployment"> | string | null
   ogImageKey?: Prisma.StringNullableFilter<"Deployment"> | string | null
   assetsKey?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  siteId?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  framework?: Prisma.EnumSiteFrameworkNullableFilter<"Deployment"> | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  fileCount?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  totalBytes?: Prisma.BigIntNullableFilter<"Deployment"> | bigint | number | null
+  rootHtmlSha256?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  siteUrl?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  triggeredBy?: Prisma.StringFilter<"Deployment"> | string
+  purgedAt?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
@@ -431,6 +531,7 @@ export type DeploymentWhereUniqueInput = Prisma.AtLeast<{
   projectVersion?: Prisma.XOR<Prisma.ProjectVersionScalarRelationFilter, Prisma.ProjectVersionWhereInput>
   page?: Prisma.XOR<Prisma.PageNullableScalarRelationFilter, Prisma.PageWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  site?: Prisma.XOR<Prisma.ProjectSiteNullableScalarRelationFilter, Prisma.ProjectSiteWhereInput> | null
 }, "id">
 
 export type DeploymentOrderByWithAggregationInput = {
@@ -454,6 +555,15 @@ export type DeploymentOrderByWithAggregationInput = {
   r2BucketKey?: Prisma.SortOrderInput | Prisma.SortOrder
   ogImageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   assetsKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  siteId?: Prisma.SortOrderInput | Prisma.SortOrder
+  framework?: Prisma.SortOrderInput | Prisma.SortOrder
+  storagePrefix?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileCount?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalBytes?: Prisma.SortOrderInput | Prisma.SortOrder
+  rootHtmlSha256?: Prisma.SortOrderInput | Prisma.SortOrder
+  siteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  triggeredBy?: Prisma.SortOrder
+  purgedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -488,6 +598,15 @@ export type DeploymentScalarWhereWithAggregatesInput = {
   r2BucketKey?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
   ogImageKey?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
   assetsKey?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
+  siteId?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
+  framework?: Prisma.EnumSiteFrameworkNullableWithAggregatesFilter<"Deployment"> | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
+  fileCount?: Prisma.IntNullableWithAggregatesFilter<"Deployment"> | number | null
+  totalBytes?: Prisma.BigIntNullableWithAggregatesFilter<"Deployment"> | bigint | number | null
+  rootHtmlSha256?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
+  siteUrl?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
+  triggeredBy?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
+  purgedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Deployment"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Deployment"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Deployment"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Deployment"> | Date | string
@@ -510,6 +629,14 @@ export type DeploymentCreateInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -517,6 +644,7 @@ export type DeploymentCreateInput = {
   projectVersion: Prisma.ProjectVersionCreateNestedOneWithoutDeploymentsInput
   page?: Prisma.PageCreateNestedOneWithoutDeploymentsInput
   user: Prisma.UserCreateNestedOneWithoutDeploymentsInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutDeploymentsInput
 }
 
 export type DeploymentUncheckedCreateInput = {
@@ -540,6 +668,15 @@ export type DeploymentUncheckedCreateInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -562,6 +699,14 @@ export type DeploymentUpdateInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -569,6 +714,7 @@ export type DeploymentUpdateInput = {
   projectVersion?: Prisma.ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput
   page?: Prisma.PageUpdateOneWithoutDeploymentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutDeploymentsNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutDeploymentsNestedInput
 }
 
 export type DeploymentUncheckedUpdateInput = {
@@ -592,6 +738,15 @@ export type DeploymentUncheckedUpdateInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -618,6 +773,15 @@ export type DeploymentCreateManyInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -640,6 +804,14 @@ export type DeploymentUpdateManyMutationInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -666,6 +838,15 @@ export type DeploymentUncheckedUpdateManyInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -702,6 +883,15 @@ export type DeploymentCountOrderByAggregateInput = {
   r2BucketKey?: Prisma.SortOrder
   ogImageKey?: Prisma.SortOrder
   assetsKey?: Prisma.SortOrder
+  siteId?: Prisma.SortOrder
+  framework?: Prisma.SortOrder
+  storagePrefix?: Prisma.SortOrder
+  fileCount?: Prisma.SortOrder
+  totalBytes?: Prisma.SortOrder
+  rootHtmlSha256?: Prisma.SortOrder
+  siteUrl?: Prisma.SortOrder
+  triggeredBy?: Prisma.SortOrder
+  purgedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -710,6 +900,8 @@ export type DeploymentCountOrderByAggregateInput = {
 export type DeploymentAvgOrderByAggregateInput = {
   version?: Prisma.SortOrder
   buildDurationMs?: Prisma.SortOrder
+  fileCount?: Prisma.SortOrder
+  totalBytes?: Prisma.SortOrder
 }
 
 export type DeploymentMaxOrderByAggregateInput = {
@@ -733,6 +925,15 @@ export type DeploymentMaxOrderByAggregateInput = {
   r2BucketKey?: Prisma.SortOrder
   ogImageKey?: Prisma.SortOrder
   assetsKey?: Prisma.SortOrder
+  siteId?: Prisma.SortOrder
+  framework?: Prisma.SortOrder
+  storagePrefix?: Prisma.SortOrder
+  fileCount?: Prisma.SortOrder
+  totalBytes?: Prisma.SortOrder
+  rootHtmlSha256?: Prisma.SortOrder
+  siteUrl?: Prisma.SortOrder
+  triggeredBy?: Prisma.SortOrder
+  purgedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -759,6 +960,15 @@ export type DeploymentMinOrderByAggregateInput = {
   r2BucketKey?: Prisma.SortOrder
   ogImageKey?: Prisma.SortOrder
   assetsKey?: Prisma.SortOrder
+  siteId?: Prisma.SortOrder
+  framework?: Prisma.SortOrder
+  storagePrefix?: Prisma.SortOrder
+  fileCount?: Prisma.SortOrder
+  totalBytes?: Prisma.SortOrder
+  rootHtmlSha256?: Prisma.SortOrder
+  siteUrl?: Prisma.SortOrder
+  triggeredBy?: Prisma.SortOrder
+  purgedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -767,6 +977,8 @@ export type DeploymentMinOrderByAggregateInput = {
 export type DeploymentSumOrderByAggregateInput = {
   version?: Prisma.SortOrder
   buildDurationMs?: Prisma.SortOrder
+  fileCount?: Prisma.SortOrder
+  totalBytes?: Prisma.SortOrder
 }
 
 export type DeploymentCreateNestedManyWithoutUserInput = {
@@ -941,6 +1153,60 @@ export type EnumDeploymentStatusFieldUpdateOperationsInput = {
   set?: $Enums.DeploymentStatus
 }
 
+export type NullableEnumSiteFrameworkFieldUpdateOperationsInput = {
+  set?: $Enums.SiteFramework | null
+}
+
+export type NullableBigIntFieldUpdateOperationsInput = {
+  set?: bigint | number | null
+  increment?: bigint | number
+  decrement?: bigint | number
+  multiply?: bigint | number
+  divide?: bigint | number
+}
+
+export type DeploymentCreateNestedManyWithoutSiteInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutSiteInput, Prisma.DeploymentUncheckedCreateWithoutSiteInput> | Prisma.DeploymentCreateWithoutSiteInput[] | Prisma.DeploymentUncheckedCreateWithoutSiteInput[]
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutSiteInput | Prisma.DeploymentCreateOrConnectWithoutSiteInput[]
+  createMany?: Prisma.DeploymentCreateManySiteInputEnvelope
+  connect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+}
+
+export type DeploymentUncheckedCreateNestedManyWithoutSiteInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutSiteInput, Prisma.DeploymentUncheckedCreateWithoutSiteInput> | Prisma.DeploymentCreateWithoutSiteInput[] | Prisma.DeploymentUncheckedCreateWithoutSiteInput[]
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutSiteInput | Prisma.DeploymentCreateOrConnectWithoutSiteInput[]
+  createMany?: Prisma.DeploymentCreateManySiteInputEnvelope
+  connect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+}
+
+export type DeploymentUpdateManyWithoutSiteNestedInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutSiteInput, Prisma.DeploymentUncheckedCreateWithoutSiteInput> | Prisma.DeploymentCreateWithoutSiteInput[] | Prisma.DeploymentUncheckedCreateWithoutSiteInput[]
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutSiteInput | Prisma.DeploymentCreateOrConnectWithoutSiteInput[]
+  upsert?: Prisma.DeploymentUpsertWithWhereUniqueWithoutSiteInput | Prisma.DeploymentUpsertWithWhereUniqueWithoutSiteInput[]
+  createMany?: Prisma.DeploymentCreateManySiteInputEnvelope
+  set?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  disconnect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  delete?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  connect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  update?: Prisma.DeploymentUpdateWithWhereUniqueWithoutSiteInput | Prisma.DeploymentUpdateWithWhereUniqueWithoutSiteInput[]
+  updateMany?: Prisma.DeploymentUpdateManyWithWhereWithoutSiteInput | Prisma.DeploymentUpdateManyWithWhereWithoutSiteInput[]
+  deleteMany?: Prisma.DeploymentScalarWhereInput | Prisma.DeploymentScalarWhereInput[]
+}
+
+export type DeploymentUncheckedUpdateManyWithoutSiteNestedInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutSiteInput, Prisma.DeploymentUncheckedCreateWithoutSiteInput> | Prisma.DeploymentCreateWithoutSiteInput[] | Prisma.DeploymentUncheckedCreateWithoutSiteInput[]
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutSiteInput | Prisma.DeploymentCreateOrConnectWithoutSiteInput[]
+  upsert?: Prisma.DeploymentUpsertWithWhereUniqueWithoutSiteInput | Prisma.DeploymentUpsertWithWhereUniqueWithoutSiteInput[]
+  createMany?: Prisma.DeploymentCreateManySiteInputEnvelope
+  set?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  disconnect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  delete?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  connect?: Prisma.DeploymentWhereUniqueInput | Prisma.DeploymentWhereUniqueInput[]
+  update?: Prisma.DeploymentUpdateWithWhereUniqueWithoutSiteInput | Prisma.DeploymentUpdateWithWhereUniqueWithoutSiteInput[]
+  updateMany?: Prisma.DeploymentUpdateManyWithWhereWithoutSiteInput | Prisma.DeploymentUpdateManyWithWhereWithoutSiteInput[]
+  deleteMany?: Prisma.DeploymentScalarWhereInput | Prisma.DeploymentScalarWhereInput[]
+}
+
 export type DeploymentCreateWithoutUserInput = {
   id?: string
   version?: number
@@ -958,12 +1224,21 @@ export type DeploymentCreateWithoutUserInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutDeploymentsInput
   projectVersion: Prisma.ProjectVersionCreateNestedOneWithoutDeploymentsInput
   page?: Prisma.PageCreateNestedOneWithoutDeploymentsInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutDeploymentsInput
 }
 
 export type DeploymentUncheckedCreateWithoutUserInput = {
@@ -986,6 +1261,15 @@ export type DeploymentUncheckedCreateWithoutUserInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1041,6 +1325,15 @@ export type DeploymentScalarWhereInput = {
   r2BucketKey?: Prisma.StringNullableFilter<"Deployment"> | string | null
   ogImageKey?: Prisma.StringNullableFilter<"Deployment"> | string | null
   assetsKey?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  siteId?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  framework?: Prisma.EnumSiteFrameworkNullableFilter<"Deployment"> | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  fileCount?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  totalBytes?: Prisma.BigIntNullableFilter<"Deployment"> | bigint | number | null
+  rootHtmlSha256?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  siteUrl?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  triggeredBy?: Prisma.StringFilter<"Deployment"> | string
+  purgedAt?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
   deletedAt?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Deployment"> | Date | string
@@ -1063,12 +1356,21 @@ export type DeploymentCreateWithoutProjectInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   projectVersion: Prisma.ProjectVersionCreateNestedOneWithoutDeploymentsInput
   page?: Prisma.PageCreateNestedOneWithoutDeploymentsInput
   user: Prisma.UserCreateNestedOneWithoutDeploymentsInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutDeploymentsInput
 }
 
 export type DeploymentUncheckedCreateWithoutProjectInput = {
@@ -1091,6 +1393,15 @@ export type DeploymentUncheckedCreateWithoutProjectInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1139,12 +1450,21 @@ export type DeploymentCreateWithoutProjectVersionInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutDeploymentsInput
   page?: Prisma.PageCreateNestedOneWithoutDeploymentsInput
   user: Prisma.UserCreateNestedOneWithoutDeploymentsInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutDeploymentsInput
 }
 
 export type DeploymentUncheckedCreateWithoutProjectVersionInput = {
@@ -1167,6 +1487,15 @@ export type DeploymentUncheckedCreateWithoutProjectVersionInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1215,12 +1544,21 @@ export type DeploymentCreateWithoutPageInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutDeploymentsInput
   projectVersion: Prisma.ProjectVersionCreateNestedOneWithoutDeploymentsInput
   user: Prisma.UserCreateNestedOneWithoutDeploymentsInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutDeploymentsInput
 }
 
 export type DeploymentUncheckedCreateWithoutPageInput = {
@@ -1243,6 +1581,15 @@ export type DeploymentUncheckedCreateWithoutPageInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1274,6 +1621,100 @@ export type DeploymentUpdateManyWithWhereWithoutPageInput = {
   data: Prisma.XOR<Prisma.DeploymentUpdateManyMutationInput, Prisma.DeploymentUncheckedUpdateManyWithoutPageInput>
 }
 
+export type DeploymentCreateWithoutSiteInput = {
+  id?: string
+  version?: number
+  status?: $Enums.DeploymentStatus
+  subdomain: string
+  customDomain?: string | null
+  liveUrl?: string | null
+  buildLog?: string | null
+  buildDurationMs?: number | null
+  deployedAt?: Date | string | null
+  failedAt?: Date | string | null
+  failureReason?: string | null
+  rolledBackAt?: Date | string | null
+  rolledBackFromId?: string | null
+  r2BucketKey?: string | null
+  ogImageKey?: string | null
+  assetsKey?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutDeploymentsInput
+  projectVersion: Prisma.ProjectVersionCreateNestedOneWithoutDeploymentsInput
+  page?: Prisma.PageCreateNestedOneWithoutDeploymentsInput
+  user: Prisma.UserCreateNestedOneWithoutDeploymentsInput
+}
+
+export type DeploymentUncheckedCreateWithoutSiteInput = {
+  id?: string
+  projectId: string
+  versionId: string
+  pageId?: string | null
+  userId: string
+  version?: number
+  status?: $Enums.DeploymentStatus
+  subdomain: string
+  customDomain?: string | null
+  liveUrl?: string | null
+  buildLog?: string | null
+  buildDurationMs?: number | null
+  deployedAt?: Date | string | null
+  failedAt?: Date | string | null
+  failureReason?: string | null
+  rolledBackAt?: Date | string | null
+  rolledBackFromId?: string | null
+  r2BucketKey?: string | null
+  ogImageKey?: string | null
+  assetsKey?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DeploymentCreateOrConnectWithoutSiteInput = {
+  where: Prisma.DeploymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DeploymentCreateWithoutSiteInput, Prisma.DeploymentUncheckedCreateWithoutSiteInput>
+}
+
+export type DeploymentCreateManySiteInputEnvelope = {
+  data: Prisma.DeploymentCreateManySiteInput | Prisma.DeploymentCreateManySiteInput[]
+  skipDuplicates?: boolean
+}
+
+export type DeploymentUpsertWithWhereUniqueWithoutSiteInput = {
+  where: Prisma.DeploymentWhereUniqueInput
+  update: Prisma.XOR<Prisma.DeploymentUpdateWithoutSiteInput, Prisma.DeploymentUncheckedUpdateWithoutSiteInput>
+  create: Prisma.XOR<Prisma.DeploymentCreateWithoutSiteInput, Prisma.DeploymentUncheckedCreateWithoutSiteInput>
+}
+
+export type DeploymentUpdateWithWhereUniqueWithoutSiteInput = {
+  where: Prisma.DeploymentWhereUniqueInput
+  data: Prisma.XOR<Prisma.DeploymentUpdateWithoutSiteInput, Prisma.DeploymentUncheckedUpdateWithoutSiteInput>
+}
+
+export type DeploymentUpdateManyWithWhereWithoutSiteInput = {
+  where: Prisma.DeploymentScalarWhereInput
+  data: Prisma.XOR<Prisma.DeploymentUpdateManyMutationInput, Prisma.DeploymentUncheckedUpdateManyWithoutSiteInput>
+}
+
 export type DeploymentCreateManyUserInput = {
   id?: string
   projectId: string
@@ -1294,6 +1735,15 @@ export type DeploymentCreateManyUserInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1316,12 +1766,21 @@ export type DeploymentUpdateWithoutUserInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutDeploymentsNestedInput
   projectVersion?: Prisma.ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput
   page?: Prisma.PageUpdateOneWithoutDeploymentsNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutDeploymentsNestedInput
 }
 
 export type DeploymentUncheckedUpdateWithoutUserInput = {
@@ -1344,6 +1803,15 @@ export type DeploymentUncheckedUpdateWithoutUserInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1369,6 +1837,15 @@ export type DeploymentUncheckedUpdateManyWithoutUserInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1394,6 +1871,15 @@ export type DeploymentCreateManyProjectInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1416,12 +1902,21 @@ export type DeploymentUpdateWithoutProjectInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectVersion?: Prisma.ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput
   page?: Prisma.PageUpdateOneWithoutDeploymentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutDeploymentsNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutDeploymentsNestedInput
 }
 
 export type DeploymentUncheckedUpdateWithoutProjectInput = {
@@ -1444,6 +1939,15 @@ export type DeploymentUncheckedUpdateWithoutProjectInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1469,6 +1973,15 @@ export type DeploymentUncheckedUpdateManyWithoutProjectInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1494,6 +2007,15 @@ export type DeploymentCreateManyProjectVersionInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1516,12 +2038,21 @@ export type DeploymentUpdateWithoutProjectVersionInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutDeploymentsNestedInput
   page?: Prisma.PageUpdateOneWithoutDeploymentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutDeploymentsNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutDeploymentsNestedInput
 }
 
 export type DeploymentUncheckedUpdateWithoutProjectVersionInput = {
@@ -1544,6 +2075,15 @@ export type DeploymentUncheckedUpdateWithoutProjectVersionInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1569,6 +2109,15 @@ export type DeploymentUncheckedUpdateManyWithoutProjectVersionInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1594,6 +2143,15 @@ export type DeploymentCreateManyPageInput = {
   r2BucketKey?: string | null
   ogImageKey?: string | null
   assetsKey?: string | null
+  siteId?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1616,12 +2174,21 @@ export type DeploymentUpdateWithoutPageInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutDeploymentsNestedInput
   projectVersion?: Prisma.ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutDeploymentsNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutDeploymentsNestedInput
 }
 
 export type DeploymentUncheckedUpdateWithoutPageInput = {
@@ -1644,6 +2211,15 @@ export type DeploymentUncheckedUpdateWithoutPageInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1669,6 +2245,151 @@ export type DeploymentUncheckedUpdateManyWithoutPageInput = {
   r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DeploymentCreateManySiteInput = {
+  id?: string
+  projectId: string
+  versionId: string
+  pageId?: string | null
+  userId: string
+  version?: number
+  status?: $Enums.DeploymentStatus
+  subdomain: string
+  customDomain?: string | null
+  liveUrl?: string | null
+  buildLog?: string | null
+  buildDurationMs?: number | null
+  deployedAt?: Date | string | null
+  failedAt?: Date | string | null
+  failureReason?: string | null
+  rolledBackAt?: Date | string | null
+  rolledBackFromId?: string | null
+  r2BucketKey?: string | null
+  ogImageKey?: string | null
+  assetsKey?: string | null
+  framework?: $Enums.SiteFramework | null
+  storagePrefix?: string | null
+  fileCount?: number | null
+  totalBytes?: bigint | number | null
+  rootHtmlSha256?: string | null
+  siteUrl?: string | null
+  triggeredBy?: string
+  purgedAt?: Date | string | null
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DeploymentUpdateWithoutSiteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildLog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildDurationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deployedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rolledBackAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rolledBackFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutDeploymentsNestedInput
+  projectVersion?: Prisma.ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput
+  page?: Prisma.PageUpdateOneWithoutDeploymentsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutDeploymentsNestedInput
+}
+
+export type DeploymentUncheckedUpdateWithoutSiteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildLog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildDurationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deployedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rolledBackAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rolledBackFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DeploymentUncheckedUpdateManyWithoutSiteInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionId?: Prisma.StringFieldUpdateOperationsInput | string
+  pageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  version?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumDeploymentStatusFieldUpdateOperationsInput | $Enums.DeploymentStatus
+  subdomain?: Prisma.StringFieldUpdateOperationsInput | string
+  customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildLog?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  buildDurationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deployedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rolledBackAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rolledBackFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  r2BucketKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ogImageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assetsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  framework?: Prisma.NullableEnumSiteFrameworkFieldUpdateOperationsInput | $Enums.SiteFramework | null
+  storagePrefix?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalBytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  rootHtmlSha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.StringFieldUpdateOperationsInput | string
+  purgedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1697,6 +2418,15 @@ export type DeploymentSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   r2BucketKey?: boolean
   ogImageKey?: boolean
   assetsKey?: boolean
+  siteId?: boolean
+  framework?: boolean
+  storagePrefix?: boolean
+  fileCount?: boolean
+  totalBytes?: boolean
+  rootHtmlSha256?: boolean
+  siteUrl?: boolean
+  triggeredBy?: boolean
+  purgedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1704,6 +2434,7 @@ export type DeploymentSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
   page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  site?: boolean | Prisma.Deployment$siteArgs<ExtArgs>
 }, ExtArgs["result"]["deployment"]>
 
 export type DeploymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1727,6 +2458,15 @@ export type DeploymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   r2BucketKey?: boolean
   ogImageKey?: boolean
   assetsKey?: boolean
+  siteId?: boolean
+  framework?: boolean
+  storagePrefix?: boolean
+  fileCount?: boolean
+  totalBytes?: boolean
+  rootHtmlSha256?: boolean
+  siteUrl?: boolean
+  triggeredBy?: boolean
+  purgedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1734,6 +2474,7 @@ export type DeploymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
   page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  site?: boolean | Prisma.Deployment$siteArgs<ExtArgs>
 }, ExtArgs["result"]["deployment"]>
 
 export type DeploymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1757,6 +2498,15 @@ export type DeploymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   r2BucketKey?: boolean
   ogImageKey?: boolean
   assetsKey?: boolean
+  siteId?: boolean
+  framework?: boolean
+  storagePrefix?: boolean
+  fileCount?: boolean
+  totalBytes?: boolean
+  rootHtmlSha256?: boolean
+  siteUrl?: boolean
+  triggeredBy?: boolean
+  purgedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1764,6 +2514,7 @@ export type DeploymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
   page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  site?: boolean | Prisma.Deployment$siteArgs<ExtArgs>
 }, ExtArgs["result"]["deployment"]>
 
 export type DeploymentSelectScalar = {
@@ -1787,29 +2538,41 @@ export type DeploymentSelectScalar = {
   r2BucketKey?: boolean
   ogImageKey?: boolean
   assetsKey?: boolean
+  siteId?: boolean
+  framework?: boolean
+  storagePrefix?: boolean
+  fileCount?: boolean
+  totalBytes?: boolean
+  rootHtmlSha256?: boolean
+  siteUrl?: boolean
+  triggeredBy?: boolean
+  purgedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DeploymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionId" | "pageId" | "userId" | "version" | "status" | "subdomain" | "customDomain" | "liveUrl" | "buildLog" | "buildDurationMs" | "deployedAt" | "failedAt" | "failureReason" | "rolledBackAt" | "rolledBackFromId" | "r2BucketKey" | "ogImageKey" | "assetsKey" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["deployment"]>
+export type DeploymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionId" | "pageId" | "userId" | "version" | "status" | "subdomain" | "customDomain" | "liveUrl" | "buildLog" | "buildDurationMs" | "deployedAt" | "failedAt" | "failureReason" | "rolledBackAt" | "rolledBackFromId" | "r2BucketKey" | "ogImageKey" | "assetsKey" | "siteId" | "framework" | "storagePrefix" | "fileCount" | "totalBytes" | "rootHtmlSha256" | "siteUrl" | "triggeredBy" | "purgedAt" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["deployment"]>
 export type DeploymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
   page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  site?: boolean | Prisma.Deployment$siteArgs<ExtArgs>
 }
 export type DeploymentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
   page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  site?: boolean | Prisma.Deployment$siteArgs<ExtArgs>
 }
 export type DeploymentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   projectVersion?: boolean | Prisma.ProjectVersionDefaultArgs<ExtArgs>
   page?: boolean | Prisma.Deployment$pageArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  site?: boolean | Prisma.Deployment$siteArgs<ExtArgs>
 }
 
 export type $DeploymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1819,6 +2582,7 @@ export type $DeploymentPayload<ExtArgs extends runtime.Types.Extensions.Internal
     projectVersion: Prisma.$ProjectVersionPayload<ExtArgs>
     page: Prisma.$PagePayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
+    site: Prisma.$ProjectSitePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1841,6 +2605,15 @@ export type $DeploymentPayload<ExtArgs extends runtime.Types.Extensions.Internal
     r2BucketKey: string | null
     ogImageKey: string | null
     assetsKey: string | null
+    siteId: string | null
+    framework: $Enums.SiteFramework | null
+    storagePrefix: string | null
+    fileCount: number | null
+    totalBytes: bigint | null
+    rootHtmlSha256: string | null
+    siteUrl: string | null
+    triggeredBy: string
+    purgedAt: Date | null
     deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -2242,6 +3015,7 @@ export interface Prisma__DeploymentClient<T, Null = never, ExtArgs extends runti
   projectVersion<T extends Prisma.ProjectVersionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectVersionDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectVersionClient<runtime.Types.Result.GetResult<Prisma.$ProjectVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   page<T extends Prisma.Deployment$pageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deployment$pageArgs<ExtArgs>>): Prisma.Prisma__PageClient<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  site<T extends Prisma.Deployment$siteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deployment$siteArgs<ExtArgs>>): Prisma.Prisma__ProjectSiteClient<runtime.Types.Result.GetResult<Prisma.$ProjectSitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2291,6 +3065,15 @@ export interface DeploymentFieldRefs {
   readonly r2BucketKey: Prisma.FieldRef<"Deployment", 'String'>
   readonly ogImageKey: Prisma.FieldRef<"Deployment", 'String'>
   readonly assetsKey: Prisma.FieldRef<"Deployment", 'String'>
+  readonly siteId: Prisma.FieldRef<"Deployment", 'String'>
+  readonly framework: Prisma.FieldRef<"Deployment", 'SiteFramework'>
+  readonly storagePrefix: Prisma.FieldRef<"Deployment", 'String'>
+  readonly fileCount: Prisma.FieldRef<"Deployment", 'Int'>
+  readonly totalBytes: Prisma.FieldRef<"Deployment", 'BigInt'>
+  readonly rootHtmlSha256: Prisma.FieldRef<"Deployment", 'String'>
+  readonly siteUrl: Prisma.FieldRef<"Deployment", 'String'>
+  readonly triggeredBy: Prisma.FieldRef<"Deployment", 'String'>
+  readonly purgedAt: Prisma.FieldRef<"Deployment", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"Deployment", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Deployment", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Deployment", 'DateTime'>
@@ -2711,6 +3494,25 @@ export type Deployment$pageArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   include?: Prisma.PageInclude<ExtArgs> | null
   where?: Prisma.PageWhereInput
+}
+
+/**
+ * Deployment.site
+ */
+export type Deployment$siteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectSite
+   */
+  select?: Prisma.ProjectSiteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectSite
+   */
+  omit?: Prisma.ProjectSiteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectSiteInclude<ExtArgs> | null
+  where?: Prisma.ProjectSiteWhereInput
 }
 
 /**
