@@ -1,7 +1,7 @@
 import type { LanguageModelV1 } from "ai"
 import type { SeoMaterializeRequest, SeoMaterializeResponse, SiteSpec } from "@repo/schemas"
 import { runSeoAgent } from "./seo.agent.js"
-import { buildRobotsTxt, buildSitemapXml, validateKeywords } from "@/spec/seoFiles.js"
+import { buildRobotsTxt, buildSitemapXml, validateKeywords } from "@repo/site-builder"
 import type { getProviderOptionsForTier } from "@/llm/router.js"
 
 function hasSeo(page: SiteSpec["pages"][number]): boolean {

@@ -50,6 +50,22 @@ export type DeployJobPayload = {
   adapter: string;
 };
 
+export type DeployTrigger = "user" | "domain_change" | "rollback";
+
+export type DeployRunJobPayload = {
+  deploymentId: string;
+  projectId: string;
+  versionId: string;
+  userId: string;
+  siteId: string;
+  triggeredBy: DeployTrigger;
+};
+
+export type DeployKvsReconcileJobPayload = {
+  apply: boolean;
+  rewriteValues?: boolean;
+};
+
 export type WebhookJobPayload = {
   webhookEventId: string;
   provider: string;

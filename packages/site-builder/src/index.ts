@@ -308,5 +308,11 @@ export default defineConfig({
 }
 
 export { withScaffold, type ReplicationNextFile } from "./nextScaffold.js";
+export {
+  buildRobotsTxt,
+  buildSitemapXml,
+  validateKeywords,
+  type KeywordValidationResult,
+} from "./seoFiles.js";
 export * from "./theme/tokens.js";
 export * from "./capabilities.js";

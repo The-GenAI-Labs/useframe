@@ -15,6 +15,11 @@ export const QUEUES = {
   AUTO_RELOAD: "autoReload",
   EXPIRE_CACHE: "expireCache",
   RESEARCH_PDF: "researchPdf",
+  // BullMQ rejects ":" in queue names.
+  DEPLOY_RUN: "deployRun",
+  DEPLOY_GC: "deployGc",
+  DEPLOY_REAPER: "deployReaper",
+  DEPLOY_KVS_RECONCILE: "deployKvsReconcile",
 } as const;
 
 export type QueueName = (typeof QUEUES)[keyof typeof QUEUES];
