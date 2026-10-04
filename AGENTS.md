@@ -25,7 +25,7 @@ Read the implementation and package manifests as the source of truth. See `READM
 - Cache and jobs: Redis through ioredis, BullMQ queues, and database-backed scan/cache records.
 - AI/research: Vercel AI SDK with OpenAI and Anthropic providers, an OpenAI SDK dependency in the API, PostgreSQL vector retrieval, BM25, and Cohere reranking.
 - Site tooling: WebContainers for browser previews; Playwright, Cheerio, Lighthouse, Vite/React build tooling, and robots-parser in the worker.
-- Integrations: Razorpay billing, Cloudflare R2 through the S3 SDK, and Vercel deployment/domain APIs.
+- Integrations: Razorpay billing; generated-site hosting on Cloudflare (Workers, KV, R2 through the S3 SDK) via `apps/deploy-service` and `apps/site-edge`. The older Vercel deploy/domain code in `apps/server` and `apps/worker` is unreferenced.
 - Quality tooling: TypeScript checks, ESLint, and `@repo/evals`. Vitest and Testing Library dependencies exist, but no root test script is currently defined; inspect available tests before choosing a command.
 
 ## Repository Structure
@@ -39,7 +39,10 @@ Read the implementation and package manifests as the source of truth. See `READM
 | `apps/research-service`                                | Research corpus endpoints, retrieval, fusion, and reranking                                                   |
 | `apps/scoring-service`                                 | Website scoring agents and criteria                                                                           |
 | `apps/billing-service`                                 | Razorpay checkout, payment methods, webhooks, and auto-reload endpoints                                       |
-| `apps/worker`                                          | BullMQ processors for scans, SEO, scoring, deploys, domains, PDFs, billing jobs, and cache expiry             |
+| `apps/worker`                                          | BullMQ processors for scans, SEO, scoring, domains, PDFs, billing jobs, and cache expiry                      |
+| `apps/deploy-service`                                  | Site builds, R2 uploads, KV publishing (`syncSiteToKvs`), rollback, GC, reaper, reconcile; see `RUNBOOK.md`   |
+| `apps/site-edge`                                       | Cloudflare Worker serving generated sites from KV + R2; deployed with Wrangler, never from CI                 |
+| `infra/terraform`, `infra/k8s`                         | Cloudflare sites-hosting Terraform module and GKE manifests (applied by a human, never by agents)             |
 | `packages/db`                                          | Shared Prisma client, schema, migrations, seed data, and scan cache helpers                                   |
 | `packages/schemas`                                     | Shared Zod contracts for projects, site specs, AI outputs, research, and credits                              |
 | `packages/events`                                      | Shared queue names and job payload contracts                                                                  |
@@ -111,6 +114,7 @@ The frontend currently has both `src/store` and `src/stores`. Follow the relevan
 - Use parameterized queries for specialized vector/raw SQL operations; never concatenate untrusted input into SQL.
 - Preserve ownership filters, soft-delete behavior, uniqueness constraints, and existing cache expiry semantics.
 - Do not reset, reseed, or destructively migrate a shared database as part of routine verification. Inspect the target environment before applying migrations.
+- Only `syncSiteToKvs` (apps/deploy-service) writes site KV entries; the database is the source of truth. Never run `terraform apply`, `wrangler deploy`, or anything that writes to a real Cloudflare account.
 
 ## Agent Workflow
 
@@ -126,26 +130,28 @@ The frontend currently has both `src/store` and `src/stores`. Follow the relevan
 
 Run these from the repository root unless otherwise noted:
 
-| Command                                          | Purpose                                                         |
-| ------------------------------------------------ | --------------------------------------------------------------- |
-| `pnpm install`                                   | Install workspace dependencies when needed                      |
-| `pnpm dev`                                       | Start workspace development tasks through Turbo                 |
-| `pnpm --filter @useframe/web dev`                | Start the frontend (normally port 3000)                         |
-| `pnpm --filter @useframe/server dev`             | Start the public API (default port 4000)                        |
-| `pnpm --filter @useframe/<service> dev`          | Start a specific service using its actual package name          |
-| `pnpm build`                                     | Build packages/apps that define a build task                    |
-| `pnpm lint`                                      | Run defined lint tasks; report script/configuration failures    |
-| `pnpm check-types`                               | Run defined `check-types` tasks through Turbo                   |
-| `pnpm --filter @useframe/web typecheck`          | Check frontend types separately                                 |
-| `pnpm --filter @useframe/server typecheck`       | Check public API types separately                               |
-| `pnpm --filter @repo/evals runEvals -- --tier=1` | Run structural evaluations; inspect runner arguments before use |
-| `pnpm --dir packages/db exec prisma generate`    | Regenerate the Prisma client                                    |
+| Command                                                 | Purpose                                                         |
+| ------------------------------------------------------- | --------------------------------------------------------------- |
+| `pnpm install`                                          | Install workspace dependencies when needed                      |
+| `pnpm dev`                                              | Start workspace development tasks through Turbo                 |
+| `pnpm --filter @useframe/web dev`                       | Start the frontend (normally port 3000)                         |
+| `pnpm --filter @useframe/server dev`                    | Start the public API (default port 4000)                        |
+| `pnpm --filter @useframe/<service> dev`                 | Start a specific service using its actual package name          |
+| `pnpm build`                                            | Build packages/apps that define a build task                    |
+| `pnpm lint`                                             | Run defined lint tasks; report script/configuration failures    |
+| `pnpm check-types`                                      | Run defined `check-types` tasks through Turbo                   |
+| `pnpm --filter @useframe/web typecheck`                 | Check frontend types separately                                 |
+| `pnpm --filter @useframe/server typecheck`              | Check public API types separately                               |
+| `pnpm --filter @repo/evals runEvals -- --tier=1`        | Run structural evaluations; inspect runner arguments before use |
+| `pnpm --dir packages/db exec prisma generate`           | Regenerate the Prisma client                                    |
+| `pnpm --filter @useframe/site-edge test`                | Worker unit + Miniflare tests (own pinned Vitest 4)             |
+| `pnpm --filter @useframe/deploy-service test:isolation` | Build-isolation checks in a Linux container (Docker)            |
 
 - Root `check-types` does not include web/server's differently named `typecheck` scripts. Run these explicitly when affected.
 - The web lint script is still `next lint` despite the Next.js 16 dependency. Inspect the local ESLint setup and use `pnpm --filter @useframe/web exec eslint .` when appropriate; report configuration failures rather than treating them as passes.
 - There is no root `test` script. Run relevant existing tests/evaluations where available and report coverage gaps instead of inventing a passing test command.
 - Shared packages such as schemas, events, and site-builder export `dist`; rebuild them after changes before restarting consumers. A running watch process does not prove shared output is current.
-- Service default ports: API 4000, orchestrator 4001, billing 4002, scoring 4003, research 4004. Confirm actual configured ports and probe their `/health` routes. Check the frontend HTTP response and worker startup/Redis connectivity separately; the worker has no HTTP health endpoint.
+- Service default ports: API 4000, orchestrator 4001, billing 4002, scoring 4003, research 4004, deploy 4005. Confirm actual configured ports and probe their `/health` routes. Check the frontend HTTP response and worker startup/Redis connectivity separately; the worker has no HTTP health endpoint.
 - Identify project-owned processes before restarting them. Do not kill every Node process. Leave the updated development services running after verification; on Windows, launch background helpers without visible windows.
 - Check required PostgreSQL, Redis, and external-service configuration before starting dependent flows. If configuration or infrastructure prevents startup, report the exact blocker and what could be verified.
 
