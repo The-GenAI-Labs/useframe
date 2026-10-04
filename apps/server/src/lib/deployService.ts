@@ -60,12 +60,14 @@ async function deployFetch<T>(path: string, init?: RequestInit, timeoutMs = 30_0
 
   const body = (await res.json().catch(() => null)) as
     | { success: true; data: T }
-    | { success: false; message: string }
+    | { success: false; message: string; code?: string }
     | null;
 
   if (!res.ok || !body?.success) {
     const message = body && "message" in body ? body.message : "Deploy service request failed";
-    throw new AppError(message, res.status >= 400 && res.status < 500 ? res.status : 502);
+    const code = body && "code" in body ? body.code : undefined;
+    const status = res.status >= 400 && res.status < 500 ? res.status : res.status === 503 ? 503 : 502;
+    throw new AppError(message, status, code);
   }
   return body.data;
 }
@@ -112,4 +114,48 @@ export function rollbackDeployment(projectId: string, deploymentId: string): Pro
 
 export function removeProjectSite(projectId: string): Promise<{ removed: boolean }> {
   return deployFetch(`${project(projectId)}/site`, { method: "DELETE" }, 120_000);
+}
+
+export type DomainView = {
+  id: string;
+  hostname: string;
+  registrableDomain: string;
+  isApex: boolean;
+  status: string;
+  steps: unknown[];
+  currentDns: { resolvesTo: string[]; txtFound: string[] };
+  certificate: { status: string | null; hint: string | null };
+  failureReason: string | null;
+  retryable: boolean;
+  warning: string | null;
+  lastCheckedAt: string | null;
+  apexAdvice: string | null;
+  notes: string[];
+};
+
+const domainPath = (projectId: string, domainId: string) =>
+  `${project(projectId)}/domains/${encodeURIComponent(domainId)}`;
+
+export function getProjectDomain(projectId: string): Promise<{ enabled: boolean; domain: DomainView | null }> {
+  return deployFetch(`${project(projectId)}/domains`);
+}
+
+export function addProjectDomain(projectId: string, hostname: string): Promise<DomainView> {
+  return deployFetch(`${project(projectId)}/domains`, { method: "POST", body: JSON.stringify({ hostname }) });
+}
+
+export function checkProjectDomain(projectId: string, domainId: string): Promise<DomainView> {
+  return deployFetch(`${domainPath(projectId, domainId)}/check`, { method: "POST" });
+}
+
+export function retryProjectDomain(projectId: string, domainId: string): Promise<DomainView> {
+  return deployFetch(`${domainPath(projectId, domainId)}/retry`, { method: "POST" });
+}
+
+export function removeProjectDomain(projectId: string, domainId: string): Promise<{ id: string; status: "REMOVING" }> {
+  return deployFetch(domainPath(projectId, domainId), { method: "DELETE" });
+}
+
+export function teardownUserDomains(userId: string): Promise<{ tornDown: number }> {
+  return deployFetch(`/internal/users/${encodeURIComponent(userId)}/domains/teardown`, { method: "POST" }, 120_000);
 }

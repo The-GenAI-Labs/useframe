@@ -37,6 +37,7 @@ const envSchema = z.object({
   RESEARCH_SERVICE_URL: z.string().default("http://localhost:4004"),
   DEPLOY_SERVICE_URL: z.string().default("http://localhost:4005"),
   DEPLOY_USER_RATE_LIMIT_PER_HOUR: z.coerce.number().int().positive().default(10),
+  CUSTOM_DOMAIN_MAX_ADD_PER_HOUR: z.coerce.number().int().positive().default(5),
 
   VERCEL_TOKEN: z.string().default(""),
   VERCEL_TEAM_ID: z.string().default(""),
