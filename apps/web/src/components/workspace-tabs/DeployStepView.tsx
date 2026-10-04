@@ -18,6 +18,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { DomainSection } from "./DomainSection"
 
 const PROPAGATION_NOTE = "Changes can take up to 2 minutes to appear everywhere."
 
@@ -271,6 +272,7 @@ export function DeployStepView({ project, creditLocked, creditLockedReason, insu
             )}
           </section>
         )}
+        {project && <DomainSection slug={project.slug} defaultHost={site?.defaultHost} />}
       </div>
 
       <Dialog open={!!rollbackTarget} onOpenChange={(open) => !open && setRollbackTarget(null)}>
