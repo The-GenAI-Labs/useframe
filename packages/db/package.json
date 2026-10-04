@@ -2,7 +2,7 @@
   "name": "@useframe/db",
   "version": "0.0.0",
   "private": true,
-  "type": "module", 
+  "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
@@ -13,7 +13,8 @@
     "db:studio": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate",
     "check-types": "tsc --noEmit",
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.0",
@@ -34,6 +35,7 @@
     "drizzle-kit": "^0.31.1",
     "prisma": "^7.8.0",
     "tsx": "^4.22.1",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "^2.1.9"
   }
 }

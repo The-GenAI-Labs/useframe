@@ -1,0 +1,45 @@
+{
+  "name": "@useframe/deploy-service",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx --watch src/server.ts",
+    "dev:worker": "tsx --watch src/worker.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node --import tsx dist/server.js",
+    "start:worker": "node --import tsx dist/worker.js",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:isolation": "node test/isolation/docker.mjs",
+    "spike": "tsx src/cli/spike.ts",
+    "deploy:gc": "tsx src/cli/gc.ts",
+    "deploy:kvs:reconcile": "tsx src/cli/reconcile.ts",
+    "deploy:suspend": "tsx src/cli/suspend.ts suspend",
+    "deploy:unsuspend": "tsx src/cli/suspend.ts unsuspend"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1144.0",
+    "@aws-sdk/lib-storage": "3.1144.0",
+    "@repo/events": "workspace:*",
+    "@repo/schemas": "workspace:*",
+    "@repo/site-builder": "workspace:*",
+    "@useframe/db": "workspace:*",
+    "bullmq": "^5.28.0",
+    "dotenv": "^16.6.1",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.4.1",
+    "mime-types": "3.0.2",
+    "tsx": "^4.22.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/mime-types": "3.0.1",
+    "@types/node": "^22.0.0",
+    "@useframe/typescript-config": "workspace:*",
+    "typescript": "5.9.2",
+    "vitest": "^2.1.9"
+  }
+}
