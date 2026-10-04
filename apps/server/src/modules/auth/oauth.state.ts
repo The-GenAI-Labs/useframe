@@ -1,9 +1,8 @@
 import type { Request, Response } from "express"
-import { env } from "@/config/env.js"
+import { authCookieName, authCookieOptions } from "@/lib/cookie.js"
 
-const isProd = env.NODE_ENV === "production"
-const STATE_COOKIE = "oauth_state"
-const VERIFIER_COOKIE = "oauth_code_verifier"
+const STATE_COOKIE = authCookieName("oauth_state")
+const VERIFIER_COOKIE = authCookieName("oauth_code_verifier")
 const MAX_AGE_MS = 5 * 60 * 1000
 
 export function setOAuthStateCookies(
@@ -11,21 +10,12 @@ export function setOAuthStateCookies(
     state: string,
     codeVerifier?: string
 ): void {
-    res.cookie(STATE_COOKIE, state, {
-        httpOnly: true,
-        secure: isProd,
-        sameSite: "lax",
-        maxAge: MAX_AGE_MS,
-        path: "/api/auth",
-    })
+    res.cookie(STATE_COOKIE, state, { ...authCookieOptions("lax"), maxAge: MAX_AGE_MS })
 
     if (codeVerifier) {
         res.cookie(VERIFIER_COOKIE, codeVerifier, {
-            httpOnly: true,
-            secure: isProd,
-            sameSite: "lax",
+            ...authCookieOptions("lax"),
             maxAge: MAX_AGE_MS,
-            path: "/api/auth",
         })
     }
 }
@@ -41,6 +31,6 @@ export function readOAuthStateCookies(req: Request): {
 }
 
 export function clearOAuthStateCookies(res: Response): void {
-    res.clearCookie(STATE_COOKIE, { path: "/api/auth" })
-    res.clearCookie(VERIFIER_COOKIE, { path: "/api/auth" })
+    res.clearCookie(STATE_COOKIE, authCookieOptions("lax"))
+    res.clearCookie(VERIFIER_COOKIE, authCookieOptions("lax"))
 }

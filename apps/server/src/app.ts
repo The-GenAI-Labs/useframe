@@ -7,6 +7,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import { env } from "@/config/env.js";
+import { corsOptions } from "@/lib/cors.js";
 import authRoutes from "@/modules/auth/auth.routes.js";
 import projectRoutes from "@/modules/projects/projects.routes.js";
 import replicateRoutes from "@/modules/replicate/replicate.routes.js";
@@ -20,16 +21,12 @@ import generateRoutes from "@/modules/generate/generate.routes.js";
 import researchDocumentRoutes from "@/modules/plan/researchDocument.routes.js";
 import webcontainerSnapshotRoutes from "@/modules/webcontainerSnapshot/webcontainerSnapshot.routes.js";
 import { errorHandler } from "@/middleware/errorHandler.js";
+import { requireAllowedOrigin } from "@/middleware/originCheck.js";
 
 const app: Express = express();
 
 app.use(helmet());
-app.use(
-  cors({
-    origin: env.CLIENT_URL,
-    credentials: true,
-  }),
-);
+app.use(cors(corsOptions(env.CLIENT_URL)));
 
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true }));
@@ -43,7 +40,11 @@ app.get("/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-app.use("/api/auth", authRoutes);
+app.use(
+  "/api/auth",
+  requireAllowedOrigin([env.CLIENT_URL, env.FRONTEND_URL]),
+  authRoutes,
+);
 app.use("/api/projects", researchCitationsRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/chat", chatRoutes);

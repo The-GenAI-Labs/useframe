@@ -3,6 +3,7 @@ import type { AuthenticatedRequest } from "@/types/index.js"
 import { AuthService } from "./auth.service.js"
 import { readOAuthStateCookies, clearOAuthStateCookies } from "./oauth.state.js"
 import { env } from "@/config/env.js"
+import { readRefreshTokenCookie } from "@/lib/cookie.js"
 import type { MagicLinkInput, MagicLinkVerifyInput, ExchangeTicketInput } from "./auth.schema.js"
 
 // Placeholder values ship in .env.example / are left unfilled in dev; zod's
@@ -121,7 +122,7 @@ export const AuthController = {
 
     refresh: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const rawToken = req.cookies?.refresh_token
+            const rawToken = readRefreshTokenCookie(req)
             const result = await AuthService.rotateRefreshToken(rawToken, res)
             res.status(200).json({ success: true, message: "Token refreshed", data: result })
         } catch (err) {
@@ -131,7 +132,7 @@ export const AuthController = {
 
     logout: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            const rawToken = req.cookies?.refresh_token
+            const rawToken = readRefreshTokenCookie(req)
             await AuthService.logout(rawToken, res)
             res.status(200).json({ success: true, message: "Logged out successfully" })
         } catch (err) {

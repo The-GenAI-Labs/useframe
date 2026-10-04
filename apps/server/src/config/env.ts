@@ -35,6 +35,8 @@ const envSchema = z.object({
   SCORING_SERVICE_URL: z.string().default("http://localhost:4003"),
   INTERNAL_SERVICE_SECRET: z.string().min(16).optional(),
   RESEARCH_SERVICE_URL: z.string().default("http://localhost:4004"),
+  DEPLOY_SERVICE_URL: z.string().default("http://localhost:4005"),
+  DEPLOY_USER_RATE_LIMIT_PER_HOUR: z.coerce.number().int().positive().default(10),
 
   VERCEL_TOKEN: z.string().default(""),
   VERCEL_TEAM_ID: z.string().default(""),

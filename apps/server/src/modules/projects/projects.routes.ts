@@ -10,7 +10,6 @@ import websiteRoutes from "@/modules/website/website.routes.js"
 import seoStepRoutes from "@/modules/seoStep/seoStep.routes.js"
 import deployRoutes from "@/modules/deploy/deploy.routes.js"
 import pipelineRoutes from "@/modules/pipeline/pipeline.routes.js"
-import domainsRoutes from "@/modules/domains/domains.routes.js"
 
 const router: Router = Router()
 
@@ -30,8 +29,7 @@ router.post("/:slug/messages", validate(SendMessageSchema), MessagesController.s
 router.use("/:slug/research", planRoutes)
 router.use("/:slug/website", websiteRoutes)
 router.use("/:slug/seo-step", seoStepRoutes)
-router.use("/:slug/deploy", deployRoutes)
+router.use("/:slug", deployRoutes)
 router.use("/:slug/pipeline", pipelineRoutes)
-router.use("/:slug/domains", domainsRoutes)
 
 export default router
