@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "useframe-site-edge",
+  "main": "src/index.ts",
+  // Pinned to what both the deploy-time workerd and the test-time Miniflare support.
+  "compatibility_date": "2026-08-15",
+  "workers_dev": false,
+  "preview_urls": false,
+  // One wildcard route on purpose: it serves *.useframe.in now and Cloudflare-for-SaaS
+  // custom hostnames later. Script-less bypass routes in Terraform win for the
+  // dashboard/API hosts.
+  "routes": [{ "pattern": "*/*", "zone_name": "useframe.in" }],
+  "kv_namespaces": [
+    // Not a secret. Replace with `terraform output kv_namespace_id` after the first apply;
+    // `pnpm deploy` refuses to run while the placeholder is present.
+    { "binding": "SITES_KV", "id": "REPLACE_WITH_KV_NAMESPACE_ID" }
+  ],
+  "r2_buckets": [{ "binding": "SITES_BUCKET", "bucket_name": "useframe-sites" }],
+  "vars": {
+    "SITES_BASE_DOMAIN": "useframe.in",
+    "RESERVED_HOSTS": "useframe.in,www.useframe.in,api.useframe.in"
+  },
+  "limits": { "cpu_ms": 50 },
+  "observability": { "enabled": true, "head_sampling_rate": 0.05 }
+}
