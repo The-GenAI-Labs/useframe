@@ -20,8 +20,18 @@ export type CustomDomainModel = runtime.Types.Result.DefaultSelection<Prisma.$Cu
 
 export type AggregateCustomDomain = {
   _count: CustomDomainCountAggregateOutputType | null
+  _avg: CustomDomainAvgAggregateOutputType | null
+  _sum: CustomDomainSumAggregateOutputType | null
   _min: CustomDomainMinAggregateOutputType | null
   _max: CustomDomainMaxAggregateOutputType | null
+}
+
+export type CustomDomainAvgAggregateOutputType = {
+  retryCount: number | null
+}
+
+export type CustomDomainSumAggregateOutputType = {
+  retryCount: number | null
 }
 
 export type CustomDomainMinAggregateOutputType = {
@@ -34,9 +44,17 @@ export type CustomDomainMinAggregateOutputType = {
   verifiedAt: Date | null
   lastCheckedAt: Date | null
   failureReason: string | null
+  failureCode: string | null
   sslStatus: string | null
   sslIssuedAt: Date | null
   sslExpiresAt: Date | null
+  ownershipToken: string | null
+  ownershipVerifiedAt: Date | null
+  cfCustomHostnameId: string | null
+  cfHostnameStatus: string | null
+  isApex: boolean | null
+  retryCount: number | null
+  stateChangedAt: Date | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -52,9 +70,17 @@ export type CustomDomainMaxAggregateOutputType = {
   verifiedAt: Date | null
   lastCheckedAt: Date | null
   failureReason: string | null
+  failureCode: string | null
   sslStatus: string | null
   sslIssuedAt: Date | null
   sslExpiresAt: Date | null
+  ownershipToken: string | null
+  ownershipVerifiedAt: Date | null
+  cfCustomHostnameId: string | null
+  cfHostnameStatus: string | null
+  isApex: boolean | null
+  retryCount: number | null
+  stateChangedAt: Date | null
   deletedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -70,15 +96,31 @@ export type CustomDomainCountAggregateOutputType = {
   verifiedAt: number
   lastCheckedAt: number
   failureReason: number
+  failureCode: number
   sslStatus: number
   sslIssuedAt: number
   sslExpiresAt: number
+  ownershipToken: number
+  ownershipVerifiedAt: number
+  cfCustomHostnameId: number
+  cfHostnameStatus: number
+  isApex: number
+  retryCount: number
+  stateChangedAt: number
   deletedAt: number
   createdAt: number
   updatedAt: number
   _all: number
 }
 
+
+export type CustomDomainAvgAggregateInputType = {
+  retryCount?: true
+}
+
+export type CustomDomainSumAggregateInputType = {
+  retryCount?: true
+}
 
 export type CustomDomainMinAggregateInputType = {
   id?: true
@@ -90,9 +132,17 @@ export type CustomDomainMinAggregateInputType = {
   verifiedAt?: true
   lastCheckedAt?: true
   failureReason?: true
+  failureCode?: true
   sslStatus?: true
   sslIssuedAt?: true
   sslExpiresAt?: true
+  ownershipToken?: true
+  ownershipVerifiedAt?: true
+  cfCustomHostnameId?: true
+  cfHostnameStatus?: true
+  isApex?: true
+  retryCount?: true
+  stateChangedAt?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -108,9 +158,17 @@ export type CustomDomainMaxAggregateInputType = {
   verifiedAt?: true
   lastCheckedAt?: true
   failureReason?: true
+  failureCode?: true
   sslStatus?: true
   sslIssuedAt?: true
   sslExpiresAt?: true
+  ownershipToken?: true
+  ownershipVerifiedAt?: true
+  cfCustomHostnameId?: true
+  cfHostnameStatus?: true
+  isApex?: true
+  retryCount?: true
+  stateChangedAt?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -126,9 +184,17 @@ export type CustomDomainCountAggregateInputType = {
   verifiedAt?: true
   lastCheckedAt?: true
   failureReason?: true
+  failureCode?: true
   sslStatus?: true
   sslIssuedAt?: true
   sslExpiresAt?: true
+  ownershipToken?: true
+  ownershipVerifiedAt?: true
+  cfCustomHostnameId?: true
+  cfHostnameStatus?: true
+  isApex?: true
+  retryCount?: true
+  stateChangedAt?: true
   deletedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -173,6 +239,18 @@ export type CustomDomainAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: CustomDomainAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: CustomDomainSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: CustomDomainMinAggregateInputType
@@ -203,6 +281,8 @@ export type CustomDomainGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: CustomDomainCountAggregateInputType | true
+  _avg?: CustomDomainAvgAggregateInputType
+  _sum?: CustomDomainSumAggregateInputType
   _min?: CustomDomainMinAggregateInputType
   _max?: CustomDomainMaxAggregateInputType
 }
@@ -217,13 +297,23 @@ export type CustomDomainGroupByOutputType = {
   verifiedAt: Date | null
   lastCheckedAt: Date | null
   failureReason: string | null
+  failureCode: string | null
   sslStatus: string | null
   sslIssuedAt: Date | null
   sslExpiresAt: Date | null
+  ownershipToken: string | null
+  ownershipVerifiedAt: Date | null
+  cfCustomHostnameId: string | null
+  cfHostnameStatus: string | null
+  isApex: boolean
+  retryCount: number
+  stateChangedAt: Date
   deletedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: CustomDomainCountAggregateOutputType | null
+  _avg: CustomDomainAvgAggregateOutputType | null
+  _sum: CustomDomainSumAggregateOutputType | null
   _min: CustomDomainMinAggregateOutputType | null
   _max: CustomDomainMaxAggregateOutputType | null
 }
@@ -256,9 +346,17 @@ export type CustomDomainWhereInput = {
   verifiedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
   lastCheckedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
   failureReason?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
+  failureCode?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
   sslStatus?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
   sslIssuedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
   sslExpiresAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
+  ownershipToken?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
+  ownershipVerifiedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
+  cfCustomHostnameId?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
+  cfHostnameStatus?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
+  isApex?: Prisma.BoolFilter<"CustomDomain"> | boolean
+  retryCount?: Prisma.IntFilter<"CustomDomain"> | number
+  stateChangedAt?: Prisma.DateTimeFilter<"CustomDomain"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CustomDomain"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CustomDomain"> | Date | string
@@ -275,9 +373,17 @@ export type CustomDomainOrderByWithRelationInput = {
   verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   lastCheckedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  failureCode?: Prisma.SortOrderInput | Prisma.SortOrder
   sslStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   sslIssuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   sslExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownershipToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownershipVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cfCustomHostnameId?: Prisma.SortOrderInput | Prisma.SortOrder
+  cfHostnameStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  isApex?: Prisma.SortOrder
+  retryCount?: Prisma.SortOrder
+  stateChangedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -288,6 +394,7 @@ export type CustomDomainWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   projectId?: string
   domain?: string
+  cfCustomHostnameId?: string
   AND?: Prisma.CustomDomainWhereInput | Prisma.CustomDomainWhereInput[]
   OR?: Prisma.CustomDomainWhereInput[]
   NOT?: Prisma.CustomDomainWhereInput | Prisma.CustomDomainWhereInput[]
@@ -297,14 +404,21 @@ export type CustomDomainWhereUniqueInput = Prisma.AtLeast<{
   verifiedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
   lastCheckedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
   failureReason?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
+  failureCode?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
   sslStatus?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
   sslIssuedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
   sslExpiresAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
+  ownershipToken?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
+  ownershipVerifiedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
+  cfHostnameStatus?: Prisma.StringNullableFilter<"CustomDomain"> | string | null
+  isApex?: Prisma.BoolFilter<"CustomDomain"> | boolean
+  retryCount?: Prisma.IntFilter<"CustomDomain"> | number
+  stateChangedAt?: Prisma.DateTimeFilter<"CustomDomain"> | Date | string
   deletedAt?: Prisma.DateTimeNullableFilter<"CustomDomain"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CustomDomain"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CustomDomain"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
-}, "id" | "projectId" | "domain">
+}, "id" | "projectId" | "domain" | "cfCustomHostnameId">
 
 export type CustomDomainOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -316,15 +430,25 @@ export type CustomDomainOrderByWithAggregationInput = {
   verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   lastCheckedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   failureReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  failureCode?: Prisma.SortOrderInput | Prisma.SortOrder
   sslStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   sslIssuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   sslExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownershipToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownershipVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cfCustomHostnameId?: Prisma.SortOrderInput | Prisma.SortOrder
+  cfHostnameStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  isApex?: Prisma.SortOrder
+  retryCount?: Prisma.SortOrder
+  stateChangedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CustomDomainCountOrderByAggregateInput
+  _avg?: Prisma.CustomDomainAvgOrderByAggregateInput
   _max?: Prisma.CustomDomainMaxOrderByAggregateInput
   _min?: Prisma.CustomDomainMinOrderByAggregateInput
+  _sum?: Prisma.CustomDomainSumOrderByAggregateInput
 }
 
 export type CustomDomainScalarWhereWithAggregatesInput = {
@@ -340,9 +464,17 @@ export type CustomDomainScalarWhereWithAggregatesInput = {
   verifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomDomain"> | Date | string | null
   lastCheckedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomDomain"> | Date | string | null
   failureReason?: Prisma.StringNullableWithAggregatesFilter<"CustomDomain"> | string | null
+  failureCode?: Prisma.StringNullableWithAggregatesFilter<"CustomDomain"> | string | null
   sslStatus?: Prisma.StringNullableWithAggregatesFilter<"CustomDomain"> | string | null
   sslIssuedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomDomain"> | Date | string | null
   sslExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomDomain"> | Date | string | null
+  ownershipToken?: Prisma.StringNullableWithAggregatesFilter<"CustomDomain"> | string | null
+  ownershipVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomDomain"> | Date | string | null
+  cfCustomHostnameId?: Prisma.StringNullableWithAggregatesFilter<"CustomDomain"> | string | null
+  cfHostnameStatus?: Prisma.StringNullableWithAggregatesFilter<"CustomDomain"> | string | null
+  isApex?: Prisma.BoolWithAggregatesFilter<"CustomDomain"> | boolean
+  retryCount?: Prisma.IntWithAggregatesFilter<"CustomDomain"> | number
+  stateChangedAt?: Prisma.DateTimeWithAggregatesFilter<"CustomDomain"> | Date | string
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CustomDomain"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CustomDomain"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CustomDomain"> | Date | string
@@ -357,9 +489,17 @@ export type CustomDomainCreateInput = {
   verifiedAt?: Date | string | null
   lastCheckedAt?: Date | string | null
   failureReason?: string | null
+  failureCode?: string | null
   sslStatus?: string | null
   sslIssuedAt?: Date | string | null
   sslExpiresAt?: Date | string | null
+  ownershipToken?: string | null
+  ownershipVerifiedAt?: Date | string | null
+  cfCustomHostnameId?: string | null
+  cfHostnameStatus?: string | null
+  isApex?: boolean
+  retryCount?: number
+  stateChangedAt?: Date | string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -376,9 +516,17 @@ export type CustomDomainUncheckedCreateInput = {
   verifiedAt?: Date | string | null
   lastCheckedAt?: Date | string | null
   failureReason?: string | null
+  failureCode?: string | null
   sslStatus?: string | null
   sslIssuedAt?: Date | string | null
   sslExpiresAt?: Date | string | null
+  ownershipToken?: string | null
+  ownershipVerifiedAt?: Date | string | null
+  cfCustomHostnameId?: string | null
+  cfHostnameStatus?: string | null
+  isApex?: boolean
+  retryCount?: number
+  stateChangedAt?: Date | string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -393,9 +541,17 @@ export type CustomDomainUpdateInput = {
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastCheckedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sslExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownershipToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownershipVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cfCustomHostnameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cfHostnameStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isApex?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  retryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  stateChangedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -412,9 +568,17 @@ export type CustomDomainUncheckedUpdateInput = {
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastCheckedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sslExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownershipToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownershipVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cfCustomHostnameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cfHostnameStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isApex?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  retryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  stateChangedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -430,9 +594,17 @@ export type CustomDomainCreateManyInput = {
   verifiedAt?: Date | string | null
   lastCheckedAt?: Date | string | null
   failureReason?: string | null
+  failureCode?: string | null
   sslStatus?: string | null
   sslIssuedAt?: Date | string | null
   sslExpiresAt?: Date | string | null
+  ownershipToken?: string | null
+  ownershipVerifiedAt?: Date | string | null
+  cfCustomHostnameId?: string | null
+  cfHostnameStatus?: string | null
+  isApex?: boolean
+  retryCount?: number
+  stateChangedAt?: Date | string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -447,9 +619,17 @@ export type CustomDomainUpdateManyMutationInput = {
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastCheckedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sslExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownershipToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownershipVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cfCustomHostnameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cfHostnameStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isApex?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  retryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  stateChangedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -465,9 +645,17 @@ export type CustomDomainUncheckedUpdateManyInput = {
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastCheckedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sslExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownershipToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownershipVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cfCustomHostnameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cfHostnameStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isApex?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  retryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  stateChangedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -488,12 +676,24 @@ export type CustomDomainCountOrderByAggregateInput = {
   verifiedAt?: Prisma.SortOrder
   lastCheckedAt?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
+  failureCode?: Prisma.SortOrder
   sslStatus?: Prisma.SortOrder
   sslIssuedAt?: Prisma.SortOrder
   sslExpiresAt?: Prisma.SortOrder
+  ownershipToken?: Prisma.SortOrder
+  ownershipVerifiedAt?: Prisma.SortOrder
+  cfCustomHostnameId?: Prisma.SortOrder
+  cfHostnameStatus?: Prisma.SortOrder
+  isApex?: Prisma.SortOrder
+  retryCount?: Prisma.SortOrder
+  stateChangedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type CustomDomainAvgOrderByAggregateInput = {
+  retryCount?: Prisma.SortOrder
 }
 
 export type CustomDomainMaxOrderByAggregateInput = {
@@ -506,9 +706,17 @@ export type CustomDomainMaxOrderByAggregateInput = {
   verifiedAt?: Prisma.SortOrder
   lastCheckedAt?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
+  failureCode?: Prisma.SortOrder
   sslStatus?: Prisma.SortOrder
   sslIssuedAt?: Prisma.SortOrder
   sslExpiresAt?: Prisma.SortOrder
+  ownershipToken?: Prisma.SortOrder
+  ownershipVerifiedAt?: Prisma.SortOrder
+  cfCustomHostnameId?: Prisma.SortOrder
+  cfHostnameStatus?: Prisma.SortOrder
+  isApex?: Prisma.SortOrder
+  retryCount?: Prisma.SortOrder
+  stateChangedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -524,12 +732,24 @@ export type CustomDomainMinOrderByAggregateInput = {
   verifiedAt?: Prisma.SortOrder
   lastCheckedAt?: Prisma.SortOrder
   failureReason?: Prisma.SortOrder
+  failureCode?: Prisma.SortOrder
   sslStatus?: Prisma.SortOrder
   sslIssuedAt?: Prisma.SortOrder
   sslExpiresAt?: Prisma.SortOrder
+  ownershipToken?: Prisma.SortOrder
+  ownershipVerifiedAt?: Prisma.SortOrder
+  cfCustomHostnameId?: Prisma.SortOrder
+  cfHostnameStatus?: Prisma.SortOrder
+  isApex?: Prisma.SortOrder
+  retryCount?: Prisma.SortOrder
+  stateChangedAt?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type CustomDomainSumOrderByAggregateInput = {
+  retryCount?: Prisma.SortOrder
 }
 
 export type CustomDomainCreateNestedOneWithoutProjectInput = {
@@ -577,9 +797,17 @@ export type CustomDomainCreateWithoutProjectInput = {
   verifiedAt?: Date | string | null
   lastCheckedAt?: Date | string | null
   failureReason?: string | null
+  failureCode?: string | null
   sslStatus?: string | null
   sslIssuedAt?: Date | string | null
   sslExpiresAt?: Date | string | null
+  ownershipToken?: string | null
+  ownershipVerifiedAt?: Date | string | null
+  cfCustomHostnameId?: string | null
+  cfHostnameStatus?: string | null
+  isApex?: boolean
+  retryCount?: number
+  stateChangedAt?: Date | string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -594,9 +822,17 @@ export type CustomDomainUncheckedCreateWithoutProjectInput = {
   verifiedAt?: Date | string | null
   lastCheckedAt?: Date | string | null
   failureReason?: string | null
+  failureCode?: string | null
   sslStatus?: string | null
   sslIssuedAt?: Date | string | null
   sslExpiresAt?: Date | string | null
+  ownershipToken?: string | null
+  ownershipVerifiedAt?: Date | string | null
+  cfCustomHostnameId?: string | null
+  cfHostnameStatus?: string | null
+  isApex?: boolean
+  retryCount?: number
+  stateChangedAt?: Date | string
   deletedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -627,9 +863,17 @@ export type CustomDomainUpdateWithoutProjectInput = {
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastCheckedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sslExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownershipToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownershipVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cfCustomHostnameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cfHostnameStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isApex?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  retryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  stateChangedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -644,9 +888,17 @@ export type CustomDomainUncheckedUpdateWithoutProjectInput = {
   verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   lastCheckedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sslIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sslExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  ownershipToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownershipVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cfCustomHostnameId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cfHostnameStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isApex?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  retryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  stateChangedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -664,9 +916,17 @@ export type CustomDomainSelect<ExtArgs extends runtime.Types.Extensions.Internal
   verifiedAt?: boolean
   lastCheckedAt?: boolean
   failureReason?: boolean
+  failureCode?: boolean
   sslStatus?: boolean
   sslIssuedAt?: boolean
   sslExpiresAt?: boolean
+  ownershipToken?: boolean
+  ownershipVerifiedAt?: boolean
+  cfCustomHostnameId?: boolean
+  cfHostnameStatus?: boolean
+  isApex?: boolean
+  retryCount?: boolean
+  stateChangedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -683,9 +943,17 @@ export type CustomDomainSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   verifiedAt?: boolean
   lastCheckedAt?: boolean
   failureReason?: boolean
+  failureCode?: boolean
   sslStatus?: boolean
   sslIssuedAt?: boolean
   sslExpiresAt?: boolean
+  ownershipToken?: boolean
+  ownershipVerifiedAt?: boolean
+  cfCustomHostnameId?: boolean
+  cfHostnameStatus?: boolean
+  isApex?: boolean
+  retryCount?: boolean
+  stateChangedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -702,9 +970,17 @@ export type CustomDomainSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   verifiedAt?: boolean
   lastCheckedAt?: boolean
   failureReason?: boolean
+  failureCode?: boolean
   sslStatus?: boolean
   sslIssuedAt?: boolean
   sslExpiresAt?: boolean
+  ownershipToken?: boolean
+  ownershipVerifiedAt?: boolean
+  cfCustomHostnameId?: boolean
+  cfHostnameStatus?: boolean
+  isApex?: boolean
+  retryCount?: boolean
+  stateChangedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -721,15 +997,23 @@ export type CustomDomainSelectScalar = {
   verifiedAt?: boolean
   lastCheckedAt?: boolean
   failureReason?: boolean
+  failureCode?: boolean
   sslStatus?: boolean
   sslIssuedAt?: boolean
   sslExpiresAt?: boolean
+  ownershipToken?: boolean
+  ownershipVerifiedAt?: boolean
+  cfCustomHostnameId?: boolean
+  cfHostnameStatus?: boolean
+  isApex?: boolean
+  retryCount?: boolean
+  stateChangedAt?: boolean
   deletedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CustomDomainOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "domain" | "status" | "cloudflareRecordId" | "cnameTarget" | "verifiedAt" | "lastCheckedAt" | "failureReason" | "sslStatus" | "sslIssuedAt" | "sslExpiresAt" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["customDomain"]>
+export type CustomDomainOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "domain" | "status" | "cloudflareRecordId" | "cnameTarget" | "verifiedAt" | "lastCheckedAt" | "failureReason" | "failureCode" | "sslStatus" | "sslIssuedAt" | "sslExpiresAt" | "ownershipToken" | "ownershipVerifiedAt" | "cfCustomHostnameId" | "cfHostnameStatus" | "isApex" | "retryCount" | "stateChangedAt" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["customDomain"]>
 export type CustomDomainInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
 }
@@ -755,9 +1039,17 @@ export type $CustomDomainPayload<ExtArgs extends runtime.Types.Extensions.Intern
     verifiedAt: Date | null
     lastCheckedAt: Date | null
     failureReason: string | null
+    failureCode: string | null
     sslStatus: string | null
     sslIssuedAt: Date | null
     sslExpiresAt: Date | null
+    ownershipToken: string | null
+    ownershipVerifiedAt: Date | null
+    cfCustomHostnameId: string | null
+    cfHostnameStatus: string | null
+    isApex: boolean
+    retryCount: number
+    stateChangedAt: Date
     deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -1194,9 +1486,17 @@ export interface CustomDomainFieldRefs {
   readonly verifiedAt: Prisma.FieldRef<"CustomDomain", 'DateTime'>
   readonly lastCheckedAt: Prisma.FieldRef<"CustomDomain", 'DateTime'>
   readonly failureReason: Prisma.FieldRef<"CustomDomain", 'String'>
+  readonly failureCode: Prisma.FieldRef<"CustomDomain", 'String'>
   readonly sslStatus: Prisma.FieldRef<"CustomDomain", 'String'>
   readonly sslIssuedAt: Prisma.FieldRef<"CustomDomain", 'DateTime'>
   readonly sslExpiresAt: Prisma.FieldRef<"CustomDomain", 'DateTime'>
+  readonly ownershipToken: Prisma.FieldRef<"CustomDomain", 'String'>
+  readonly ownershipVerifiedAt: Prisma.FieldRef<"CustomDomain", 'DateTime'>
+  readonly cfCustomHostnameId: Prisma.FieldRef<"CustomDomain", 'String'>
+  readonly cfHostnameStatus: Prisma.FieldRef<"CustomDomain", 'String'>
+  readonly isApex: Prisma.FieldRef<"CustomDomain", 'Boolean'>
+  readonly retryCount: Prisma.FieldRef<"CustomDomain", 'Int'>
+  readonly stateChangedAt: Prisma.FieldRef<"CustomDomain", 'DateTime'>
   readonly deletedAt: Prisma.FieldRef<"CustomDomain", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CustomDomain", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CustomDomain", 'DateTime'>

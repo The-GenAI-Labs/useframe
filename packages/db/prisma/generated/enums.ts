@@ -161,7 +161,11 @@ export const DomainStatus = {
   PENDING: 'PENDING',
   VERIFYING: 'VERIFYING',
   ACTIVE: 'ACTIVE',
-  FAILED: 'FAILED'
+  FAILED: 'FAILED',
+  AWAITING_OWNERSHIP_TXT: 'AWAITING_OWNERSHIP_TXT',
+  CONFIGURING_EDGE: 'CONFIGURING_EDGE',
+  AWAITING_ROUTING_DNS: 'AWAITING_ROUTING_DNS',
+  REMOVING: 'REMOVING'
 } as const
 
 export type DomainStatus = (typeof DomainStatus)[keyof typeof DomainStatus]

@@ -20,6 +20,9 @@ export const QUEUES = {
   DEPLOY_GC: "deployGc",
   DEPLOY_REAPER: "deployReaper",
   DEPLOY_KVS_RECONCILE: "deployKvsReconcile",
+  DEPLOY_DOMAIN_RECONCILE: "deployDomainReconcile",
+  DEPLOY_DOMAIN_HEALTHCHECK: "deployDomainHealthcheck",
+  DEPLOY_DOMAIN_GC: "deployDomainGc",
 } as const;
 
 export type QueueName = (typeof QUEUES)[keyof typeof QUEUES];

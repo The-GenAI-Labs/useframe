@@ -1,0 +1,16 @@
+ALTER TYPE "DomainStatus" ADD VALUE IF NOT EXISTS 'AWAITING_OWNERSHIP_TXT';
+ALTER TYPE "DomainStatus" ADD VALUE IF NOT EXISTS 'CONFIGURING_EDGE';
+ALTER TYPE "DomainStatus" ADD VALUE IF NOT EXISTS 'AWAITING_ROUTING_DNS';
+ALTER TYPE "DomainStatus" ADD VALUE IF NOT EXISTS 'REMOVING';
+
+ALTER TABLE "custom_domains"
+  ADD COLUMN "failureCode" TEXT,
+  ADD COLUMN "ownershipToken" TEXT,
+  ADD COLUMN "ownershipVerifiedAt" TIMESTAMP(3),
+  ADD COLUMN "cfCustomHostnameId" TEXT,
+  ADD COLUMN "cfHostnameStatus" TEXT,
+  ADD COLUMN "isApex" BOOLEAN NOT NULL DEFAULT false,
+  ADD COLUMN "retryCount" INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "stateChangedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+CREATE UNIQUE INDEX "custom_domains_cfCustomHostnameId_key" ON "custom_domains"("cfCustomHostnameId");

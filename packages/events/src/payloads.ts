@@ -66,6 +66,10 @@ export type DeployKvsReconcileJobPayload = {
   rewriteValues?: boolean;
 };
 
+export type DomainTickJobPayload = {
+  domainId: string;
+};
+
 export type WebhookJobPayload = {
   webhookEventId: string;
   provider: string;

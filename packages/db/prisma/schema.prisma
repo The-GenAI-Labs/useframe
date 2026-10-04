@@ -123,6 +123,10 @@ enum DomainStatus {
   VERIFYING
   ACTIVE
   FAILED
+  AWAITING_OWNERSHIP_TXT
+  CONFIGURING_EDGE
+  AWAITING_ROUTING_DNS
+  REMOVING
 }
 
 enum NicheCategory {
@@ -840,10 +844,21 @@ model CustomDomain {
   verifiedAt         DateTime?
   lastCheckedAt      DateTime?
   failureReason      String?
+  // Machine-readable failure; retryability is derived from it.
+  failureCode        String?
 
   sslStatus    String?
   sslIssuedAt  DateTime?
   sslExpiresAt DateTime?
+
+  ownershipToken      String?
+  ownershipVerifiedAt DateTime?
+  cfCustomHostnameId  String?   @unique
+  cfHostnameStatus    String?
+  isApex              Boolean   @default(false)
+  retryCount          Int       @default(0)
+  // When the current status was entered; the ownership/routing windows and Retry reset it.
+  stateChangedAt      DateTime  @default(now())
 
   deletedAt DateTime?
   createdAt DateTime  @default(now())
