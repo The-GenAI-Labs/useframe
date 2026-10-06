@@ -30,7 +30,7 @@ spec:
         - name: worker
           image: <registry>/useframe/deploy-service:<tag>
           # args (not command) so the image ENTRYPOINT, tini, stays PID 1.
-          args: ["node", "--import", "tsx", "dist/worker.js"]
+          args: ["node", "dist/worker.js"]
           envFrom:
             - configMapRef:
                 name: deploy-service-config

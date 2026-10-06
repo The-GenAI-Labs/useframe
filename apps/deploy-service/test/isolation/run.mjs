@@ -1,20 +1,20 @@
 // Runs inside the deploy-service image as root with the k8s worker's capability set
-// (`pnpm --filter @useframe/deploy-service test:isolation`). Exits non-zero on failure.
+// (`pnpm --filter @useframe/deploy-service test:isolation`). Imports the image's compiled /app/dist.
 import { execFileSync } from "node:child_process";
 import { chmod, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { buildChildEnv, runChild } from "../../src/pipeline/build.js";
-import { dependencyHash, detectFramework, readPackageJson } from "../../src/pipeline/detect.js";
-import { filesFromVersion } from "../../src/pipeline/files.js";
-import { copyTemplate, prepareWorkDir, removeWorkDir, writeTree } from "../../src/pipeline/materialize.js";
-import { FIXTURE_SPEC } from "../../src/pipeline/templates.js";
-import { verifyOutput } from "../../src/pipeline/verifyOutput.js";
+import { buildChildEnv, runChild } from "/app/dist/pipeline/build.js";
+import { dependencyHash, detectFramework, readPackageJson } from "/app/dist/pipeline/detect.js";
+import { filesFromVersion } from "/app/dist/pipeline/files.js";
+import { copyTemplate, prepareWorkDir, removeWorkDir, writeTree } from "/app/dist/pipeline/materialize.js";
+import { FIXTURE_SPEC } from "/app/dist/pipeline/templates.js";
+import { verifyOutput } from "/app/dist/pipeline/verifyOutput.js";
 
 const UID = 10002;
 const GID = 10002;
 const owner = { uid: UID, gid: GID };
 let failures = 0;
-function check(name: string, ok: boolean, detail = "") {
+function check(name, ok, detail = "") {
   if (!ok) failures++;
   console.log(`${ok ? "PASS" : "FAIL"}  ${name}${detail ? ` — ${detail}` : ""}`);
 }
@@ -58,7 +58,7 @@ const probe = await runChild({
   uid: UID,
   gid: GID,
 });
-const result = JSON.parse(probe.output.split("RESULT")[1] ?? "{}") as Record<string, unknown>;
+const result = JSON.parse(probe.output.split("RESULT")[1] ?? "{}");
 if (result.uid === undefined) console.log(probe.output);
 check("build child runs as uid/gid 10002", result.uid === UID && result.gid === GID, `${result.uid}/${result.gid}`);
 check("build child has no supplementary groups", JSON.stringify(result.groups) === JSON.stringify([GID]) || JSON.stringify(result.groups) === "[]", JSON.stringify(result.groups));
