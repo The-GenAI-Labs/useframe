@@ -1,0 +1,17 @@
+[
+  { "name": "server", "dir": "apps/server", "package": "@useframe/server", "port": 4000 },
+  { "name": "orchestrator-service", "dir": "apps/orchestrator-service", "package": "@useframe/orchestrator-service", "port": 4001 },
+  { "name": "billing-service", "dir": "apps/billing-service", "package": "@useframe/billing-service", "port": 4002 },
+  { "name": "scoring-service", "dir": "apps/scoring-service", "package": "@useframe/scoring-service", "port": 4003 },
+  { "name": "research-service", "dir": "apps/research-service", "package": "@useframe/research-service", "port": 4004 },
+  {
+    "name": "deploy-service",
+    "dir": "apps/deploy-service",
+    "package": "@useframe/deploy-service",
+    "port": 4005,
+    "commands": [["node", "dist/server.js"], ["node", "dist/worker.js"]],
+    "runsAsRoot": true
+  },
+  { "name": "worker", "dir": "apps/worker", "package": "@useframe/worker", "port": null, "maxImageMb": 2500 },
+  { "name": "migrate", "dir": "packages/db", "package": "@useframe/db", "port": null, "kind": "migrate" }
+]
