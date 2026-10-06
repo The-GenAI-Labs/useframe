@@ -130,27 +130,29 @@ The frontend currently has both `src/store` and `src/stores`. Follow the relevan
 
 Run these from the repository root unless otherwise noted:
 
-| Command                                                 | Purpose                                                         |
-| ------------------------------------------------------- | --------------------------------------------------------------- |
-| `pnpm install`                                          | Install workspace dependencies when needed                      |
-| `pnpm dev`                                              | Start workspace development tasks through Turbo                 |
-| `pnpm --filter @useframe/web dev`                       | Start the frontend (normally port 3000)                         |
-| `pnpm --filter @useframe/server dev`                    | Start the public API (default port 4000)                        |
-| `pnpm --filter @useframe/<service> dev`                 | Start a specific service using its actual package name          |
-| `pnpm build`                                            | Build packages/apps that define a build task                    |
-| `pnpm lint`                                             | Run defined lint tasks; report script/configuration failures    |
-| `pnpm check-types`                                      | Run defined `check-types` tasks through Turbo                   |
-| `pnpm --filter @useframe/web typecheck`                 | Check frontend types separately                                 |
-| `pnpm --filter @useframe/server typecheck`              | Check public API types separately                               |
-| `pnpm --filter @repo/evals runEvals -- --tier=1`        | Run structural evaluations; inspect runner arguments before use |
-| `pnpm --dir packages/db exec prisma generate`           | Regenerate the Prisma client                                    |
-| `pnpm --filter @useframe/site-edge test`                | Worker unit + Miniflare tests (own pinned Vitest 4)             |
-| `pnpm --filter @useframe/deploy-service test:isolation` | Build-isolation checks in a Linux container (Docker)            |
+| Command                                                 | Purpose                                                                |
+| ------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `pnpm install`                                          | Install workspace dependencies when needed                             |
+| `pnpm dev`                                              | Start workspace development tasks through Turbo                        |
+| `pnpm --filter @useframe/web dev`                       | Start the frontend (normally port 3000)                                |
+| `pnpm --filter @useframe/server dev`                    | Start the public API (default port 4000)                               |
+| `pnpm --filter @useframe/<service> dev`                 | Start a specific service using its actual package name                 |
+| `pnpm build`                                            | Build packages/apps that define a build task                           |
+| `pnpm lint`                                             | Run defined lint tasks; report script/configuration failures           |
+| `pnpm check-types`                                      | Run defined `check-types` tasks through Turbo                          |
+| `pnpm --filter @useframe/web typecheck`                 | Check frontend types separately                                        |
+| `pnpm --filter @useframe/server typecheck`              | Check public API types separately                                      |
+| `pnpm --filter @repo/evals runEvals -- --tier=1`        | Run structural evaluations; inspect runner arguments before use        |
+| `pnpm --dir packages/db exec prisma generate`           | Regenerate the Prisma client                                           |
+| `pnpm --filter @useframe/site-edge test`                | Worker unit + Miniflare tests (own pinned Vitest 4)                    |
+| `pnpm --filter @useframe/deploy-service test:isolation` | Build-isolation checks in a Linux container (Docker)                   |
+| `pnpm docker:build -- <service\|all>` / `docker:smoke`  | Build and smoke-test production images locally; see `docker/README.md` |
 
 - Root `check-types` does not include web/server's differently named `typecheck` scripts. Run these explicitly when affected.
 - The web lint script is still `next lint` despite the Next.js 16 dependency. Inspect the local ESLint setup and use `pnpm --filter @useframe/web exec eslint .` when appropriate; report configuration failures rather than treating them as passes.
 - There is no root `test` script. Run relevant existing tests/evaluations where available and report coverage gaps instead of inventing a passing test command.
-- Shared packages such as schemas, events, and site-builder export `dist`; rebuild them after changes before restarting consumers. A running watch process does not prove shared output is current.
+- Shared packages such as db, schemas, events, and site-builder export `dist`; rebuild them after changes before restarting consumers (`@useframe/db` runs `prisma generate` then `tsc`). A running watch process does not prove shared output is current.
+- Backend services build with `tsc && tsc-alias` (the `@/` alias becomes relative paths) and run in production with plain `node dist/...`; never ship `tsx` in an image. Runtime workspace packages declare `files` (normally `dist`) because `pnpm deploy` only copies published files.
 - Service default ports: API 4000, orchestrator 4001, billing 4002, scoring 4003, research 4004, deploy 4005. Confirm actual configured ports and probe their `/health` routes. Check the frontend HTTP response and worker startup/Redis connectivity separately; the worker has no HTTP health endpoint.
 - Identify project-owned processes before restarting them. Do not kill every Node process. Leave the updated development services running after verification; on Windows, launch background helpers without visible windows.
 - Check required PostgreSQL, Redis, and external-service configuration before starting dependent flows. If configuration or infrastructure prevents startup, report the exact blocker and what could be verified.

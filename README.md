@@ -288,3 +288,32 @@ Project-specific assistant instructions are maintained in [AGENTS.md](AGENTS.md)
 See [Research corpus operations](docs/rag-corpus.md) for GCS/PubSub setup, finding-file validation, ingestion and recovery commands, retrieval configuration, and evaluation.
 
 See [Project-scoped chat](docs/project-chat.md) for Q&A, grounding, Jev rollout, and configuration.
+
+## Website metadata and crawling
+
+The Next.js app uses `apps/web/src/lib/metadata.ts` for the canonical origin
+(`https://useframe.in`), page metadata, and shared Open Graph/X cards.
+The original share image is served from `apps/web/public/og-image.png`.
+Page metadata stays in Server Components or route layouts, including for client-rendered pages.
+
+- `app/robots.ts` serves `/robots.txt`; `app/sitemap.ts` serves `/sitemap.xml`.
+  Do not add duplicate static files for these routes.
+- Pages default to `noindex, nofollow`. Only explicitly public pages opt into indexing.
+  Development builds and Vercel preview builds remain non-indexable. Vercel supplies
+  `VERCEL_ENV` automatically. For a non-Vercel staging build, set the optional
+  `SITE_INDEXING_ENABLED=false` in `apps/web/.env` or the build environment.
+  When omitted, public pages allow indexing in production (excluding Vercel previews).
+  Only the literal value `true` enables this override; it cannot enable indexing in
+  development or Vercel previews. Rebuild and restart the frontend after changing it.
+  Turbo passes both indexing variables to builds and includes them in its cache key.
+- The sitemap currently includes only the homepage. Pricing is its `#pricing` section.
+  The draft legal pages, authentication routes, workspace routes, and research finding
+  pages are excluded. Once legal pages are finalized, explicitly enable indexing in
+  their metadata and add their canonical URLs to the sitemap.
+- Production robots rules allow page crawling so search engines can read `noindex`.
+  Authentication and API ownership checks protect data; robots rules do not.
+- Private pages use generic metadata without user data, resource IDs, or token-bearing
+  URLs. Authentication pages use a `no-referrer` policy.
+- Run `pnpm --filter @useframe/web exec vitest run src/lib/metadata.test.ts` for
+  metadata policy coverage. Verify the rendered title, canonical, robots, Open Graph,
+  and X tags as well as the image URL after a production build.
