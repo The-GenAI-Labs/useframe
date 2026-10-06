@@ -15,6 +15,7 @@ import { withLock } from "@/lib/locks.js";
 import { runGc } from "@/jobs/gc.js";
 import { reapStuckDeployments } from "@/jobs/reaper.js";
 import { reconcile } from "@/jobs/reconcile.js";
+import { startHealthServer } from "@/lib/health.js";
 import { errorMessage, log } from "@/lib/logger.js";
 import { redis } from "@/lib/redis.js";
 import { runDeployment } from "@/pipeline/runDeployment.js";
@@ -90,6 +91,14 @@ const start = async () => {
       log.error("job failed", { queue: worker.name, jobId: job?.id, error: errorMessage(err) }),
     );
   }
+  let shuttingDown = false;
+  if (env.HEALTH_PORT) {
+    // Draining after SIGTERM is expected, so it must not fail liveness and cut builds short.
+    startHealthServer(
+      env.HEALTH_PORT,
+      () => redis.status === "ready" && (shuttingDown || workers.every((w) => w.isRunning())),
+    );
+  }
   log.info("deploy worker started", {
     concurrency: env.DEPLOY_BUILD_CONCURRENCY,
     isolation: env.DEPLOY_BUILD_ISOLATION,
@@ -99,6 +108,7 @@ const start = async () => {
 
   // SIGTERM: stop taking jobs and let in-flight builds finish (k8s grace period covers it).
   const shutdown = () => {
+    shuttingDown = true;
     log.info("deploy worker shutting down; waiting for in-flight jobs");
     void Promise.all(workers.map((w) => w.close()))
       .then(() => Promise.all(queues.map((q) => q.close())))
