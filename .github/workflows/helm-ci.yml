@@ -1,0 +1,86 @@
+name: Helm chart
+
+# Lint, render, schema-validate and unit-test infra/helm/useframe. Never talks to a cluster and has
+# no deploy job: releases are `helm upgrade --install` run by a human (see the chart README).
+on:
+  pull_request:
+    paths:
+      - "infra/helm/**"
+      - ".github/workflows/helm-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: helm-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CHART: infra/helm/useframe
+  HELM_VERSION: v3.22.0
+  HELM_SHA256: 1e4ab49e429626cf6c6958d914248b78c9730803c2751b87627e171dc800e7bb
+  KUBECONFORM_VERSION: v0.8.0
+  KUBECONFORM_SHA256: 9bc2bffbf71f261128533edaf912153948b7ff238f9a531ae6d34466ec287883
+  HELM_UNITTEST_VERSION: 1.2.1
+  HELM_UNITTEST_SHA256: 48e86ecc1467b009630e5954375e5d8494139f73b466df5fe8c04fa45b634939
+  # Pinned commit of datreeio/CRDs-catalog for the GKE CRDs (ManagedCertificate, FrontendConfig, BackendConfig).
+  CRDS_CATALOG_REF: 4c8dc296d32b06d15ccde9668ff136c951f4d539
+  KUBERNETES_VERSION: 1.33.0
+  # Placeholders: rendering needs a namespace and an immutable tag, nothing is pulled.
+  REQUIRED: --set global.image.namespace=ci-placeholder --set global.image.tag=sha-0000000
+
+jobs:
+  chart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install helm, kubeconform and helm-unittest (checksum-verified)
+        run: |
+          set -euo pipefail
+          bin="$RUNNER_TEMP/bin"; mkdir -p "$bin"
+          cd "$RUNNER_TEMP"
+          curl -fsSLo helm.tgz "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz"
+          echo "${HELM_SHA256}  helm.tgz" | sha256sum -c -
+          tar -xzf helm.tgz && mv linux-amd64/helm "$bin/"
+          curl -fsSLo kubeconform.tgz "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz"
+          echo "${KUBECONFORM_SHA256}  kubeconform.tgz" | sha256sum -c -
+          tar -xzf kubeconform.tgz -C "$bin" kubeconform
+          curl -fsSLo unittest.tgz "https://github.com/helm-unittest/helm-unittest/releases/download/v${HELM_UNITTEST_VERSION}/helm-unittest-linux-amd64-${HELM_UNITTEST_VERSION}.tgz"
+          echo "${HELM_UNITTEST_SHA256}  unittest.tgz" | sha256sum -c -
+          plugins="$RUNNER_TEMP/helm-plugins"; mkdir -p "$plugins/unittest"
+          tar -xzf unittest.tgz -C "$plugins/unittest"
+          echo "$bin" >> "$GITHUB_PATH"
+          echo "HELM_PLUGINS=$plugins" >> "$GITHUB_ENV"
+
+      - name: helm lint --strict
+        run: |
+          set -euo pipefail
+          helm lint --strict "$CHART" $REQUIRED
+          helm lint --strict "$CHART" -f "$CHART/values-production.yaml" $REQUIRED
+
+      - name: helm template | kubeconform -strict
+        run: |
+          set -euo pipefail
+          crds="https://raw.githubusercontent.com/datreeio/CRDs-catalog/${CRDS_CATALOG_REF}/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json"
+          all_on="--set services.deploy-service-worker.enabled=true --set services.billing-service.enabled=true --set services.scoring-service.enabled=true --set networkPolicy.enabled=true --set migration.enabled=true"
+          render() {
+            echo "::group::$1"
+            shift
+            helm template useframe "$CHART" -n useframe $REQUIRED "$@" \
+              | kubeconform -strict -summary -kubernetes-version "$KUBERNETES_VERSION" \
+                  -schema-location default -schema-location "$crds"
+            echo "::endgroup::"
+          }
+          render "default values"
+          render "default values, every workload on" $all_on
+          render "production" -f "$CHART/values-production.yaml"
+          render "production, every workload on" -f "$CHART/values-production.yaml" $all_on
+          render "production, single-repo naming" -f "$CHART/values-production.yaml" -f "$CHART/values-single-repo.yaml" $all_on
+          render "non-GCE ingress" --set ingress.className=nginx
+
+      - name: helm unittest
+        run: helm unittest "$CHART"

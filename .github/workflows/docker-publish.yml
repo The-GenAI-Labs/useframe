@@ -1,0 +1,197 @@
+name: Docker images
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*.*.*"]
+    paths:
+      - "apps/**"
+      - "packages/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "package.json"
+      - ".dockerignore"
+      - "docker/**"
+      - "scripts/docker*.mjs"
+      - ".github/workflows/docker-publish.yml"
+  pull_request:
+    paths:
+      - "apps/**"
+      - "packages/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "package.json"
+      - ".dockerignore"
+      - "docker/**"
+      - "scripts/docker*.mjs"
+      - ".github/workflows/docker-publish.yml"
+  workflow_dispatch:
+    inputs:
+      service:
+        description: "Service to build (name from docker/services.json) or all"
+        required: true
+        default: all
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docker-${{ github.ref }}
+  # Superseded PR runs are cancelled; a main or tag publish is never interrupted.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  services:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.list.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - id: list
+        env:
+          ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.service || 'all' }}
+        run: echo "matrix=$(node scripts/docker.mjs matrix --service "$ONLY")" >> "$GITHUB_OUTPUT"
+
+  image:
+    needs: services
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        service: ${{ fromJSON(needs.services.outputs.matrix) }}
+    env:
+      PUSH: ${{ github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')) }}
+      DOCKER_IMAGE_NAMING: ${{ vars.DOCKER_IMAGE_NAMING || 'per-service' }}
+      DOCKER_PLATFORMS: ${{ vars.DOCKER_PLATFORMS || 'linux/amd64' }}
+      # PR builds never push, so they may run without the real namespace.
+      DOCKERHUB_NAMESPACE: ${{ vars.DOCKERHUB_NAMESPACE || (github.event_name == 'pull_request' && 'pr-build' || '') }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@06be81baf89a55ffd0e24b8f04a4185738dd3387 # v3.5.0
+        with:
+          dockerfile: ${{ matrix.service.dir }}/Dockerfile
+          failure-threshold: error
+
+      - name: Compute image references
+        id: refs
+        run: |
+          refs="$(node scripts/docker.mjs tags --service '${{ matrix.service.name }}')"
+          {
+            echo "refs<<EOF"
+            echo "$refs"
+            echo "EOF"
+            echo "first=$(echo "$refs" | head -n1)"
+            echo "pnpm=$(node -p 'require("./package.json").packageManager.split("@")[1]')"
+            echo "date=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Set up QEMU
+        if: contains(env.DOCKER_PLATFORMS, 'arm64')
+        uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - name: Build (amd64, loaded for scanning)
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          file: ${{ matrix.service.dir }}/Dockerfile
+          platforms: linux/amd64
+          load: true
+          push: false
+          tags: ${{ steps.refs.outputs.refs }}
+          build-args: |
+            GIT_SHA=${{ github.sha }}
+            BUILD_DATE=${{ steps.refs.outputs.date }}
+            VERSION=${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
+            PNPM_VERSION=${{ steps.refs.outputs.pnpm }}
+            SOURCE_URL=${{ github.server_url }}/${{ github.repository }}
+          cache-from: type=gha,scope=${{ matrix.service.name }}
+          cache-to: type=gha,scope=${{ matrix.service.name }},mode=max
+          provenance: false
+          sbom: false
+
+      - name: Scan (fail on fixable CRITICAL)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: ${{ steps.refs.outputs.first }}
+          severity: CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
+          format: table
+
+      - name: Scan (HIGH, report only)
+        if: always()
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: ${{ steps.refs.outputs.first }}
+          severity: HIGH
+          ignore-unfixed: true
+          exit-code: "0"
+          format: table
+          output: trivy-high.txt
+          skip-setup-trivy: true
+
+      - name: HIGH findings to summary
+        if: always()
+        run: |
+          {
+            echo "### ${{ matrix.service.name }}: HIGH vulnerabilities with a fix"
+            echo '```'
+            if [ -s trivy-high.txt ]; then head -c 60000 trivy-high.txt; else echo "none"; fi
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Require namespace for publishing
+        if: env.PUSH == 'true' && env.DOCKERHUB_NAMESPACE == ''
+        run: |
+          echo "::error::Set the repository variable DOCKERHUB_NAMESPACE before publishing."
+          exit 1
+
+      - name: Log in to Docker Hub
+        if: env.PUSH == 'true'
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push
+        id: push
+        if: env.PUSH == 'true'
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          file: ${{ matrix.service.dir }}/Dockerfile
+          platforms: ${{ env.DOCKER_PLATFORMS }}
+          push: true
+          tags: ${{ steps.refs.outputs.refs }}
+          build-args: |
+            GIT_SHA=${{ github.sha }}
+            BUILD_DATE=${{ steps.refs.outputs.date }}
+            VERSION=${{ github.ref_type == 'tag' && github.ref_name || github.sha }}
+            PNPM_VERSION=${{ steps.refs.outputs.pnpm }}
+            SOURCE_URL=${{ github.server_url }}/${{ github.repository }}
+          cache-from: type=gha,scope=${{ matrix.service.name }}
+          provenance: false
+          sbom: false
+
+      - name: Published image
+        if: env.PUSH == 'true'
+        run: |
+          {
+            echo "### ${{ matrix.service.name }}"
+            echo "Deploy tag (Helm \`global.image.tag\`): \`sha-${GITHUB_SHA::7}\`"
+            echo
+            echo "| Reference | Digest |"
+            echo "| --- | --- |"
+            while read -r ref; do
+              [ -n "$ref" ] && echo "| \`$ref\` | \`${{ steps.push.outputs.digest }}\` |"
+            done <<< "${{ steps.refs.outputs.refs }}"
+          } >> "$GITHUB_STEP_SUMMARY"
