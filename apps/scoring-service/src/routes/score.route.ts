@@ -4,6 +4,7 @@ import { Queue } from "bullmq"
 import { QUEUES } from "@repo/events"
 import type { ScoreJobPayload } from "@repo/events"
 import { prisma, resolveContext, getCachedAnalysis } from "@useframe/db"
+import { normalizeUrl } from "@repo/schemas"
 import { redis } from "@/lib/redis.js"
 import { CURRENT_SCORER_VERSION } from "@/config/scoring.js"
 
@@ -57,7 +58,16 @@ router.post("/score", (req: Request, res: Response, next) => {
       }
     }
 
-    const scoreResult = await prisma.scoreResult.create({ data: { url, userId, status: "PENDING" } })
+    const scoreResult = await prisma.scoreResult.create({
+      data: {
+        url,
+        userId,
+        status: "PENDING",
+        normalizedUrl: normalizeUrl(url),
+        analysisType: ANALYSIS_TYPE,
+        scorerVersion: CURRENT_SCORER_VERSION,
+      },
+    })
     const payload: ScoreJobPayload = { scoreId: scoreResult.id, url }
     await scoreQueue.add("score", payload, {
       attempts: 3,
@@ -72,7 +82,7 @@ router.post("/score", (req: Request, res: Response, next) => {
 router.get("/score/:scoreId", (req: Request, res: Response, next) => {
   prisma.scoreResult
     .findUnique({
-      where: { id: req.params.scoreId },
+      where: { id: String(req.params.scoreId) },
       select: { status: true, report: true, url: true, failureReason: true },
     })
     .then((result: { status: string; report: unknown; url: string; failureReason: string | null } | null) => {
@@ -88,7 +98,7 @@ router.get("/score/:scoreId", (req: Request, res: Response, next) => {
 router.get("/score/:scoreId/screenshot", (req: Request, res: Response, next) => {
   prisma.scoreResult
     .findUnique({
-      where: { id: req.params.scoreId },
+      where: { id: String(req.params.scoreId) },
       select: { screenshotBase64: true },
     })
     .then((result: { screenshotBase64: string | null } | null) => {
