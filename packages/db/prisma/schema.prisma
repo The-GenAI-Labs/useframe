@@ -1,7 +1,9 @@
 generator client {
   provider        = "prisma-client"
-  output          = "./generated"
-  previewFeatures = ["postgresqlExtensions"]
+  output              = "./generated"
+  previewFeatures     = ["postgresqlExtensions"]
+  // Compiled with tsc to dist/, so generated imports must use .js specifiers.
+  importFileExtension = "js"
 }
 
 datasource db {
