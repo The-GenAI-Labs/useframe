@@ -1,24 +1,12 @@
-"use client";
+import type { Metadata } from "next";
+import { HomePage } from "@/components/home/HomePage";
+import { pageMetadata, SITE_DESCRIPTION, SITE_TITLE } from "@/lib/metadata";
 
-import { useAuth } from "@/lib/authContext";
-import { HomeView } from "@/components/home/HomeView";
-import ChatHomeView from "@/components/chat/ChatHomeView";
-import { PageFadeIn } from "@/components/shared/PageFadeIn";
+export const metadata: Metadata = pageMetadata(SITE_TITLE, SITE_DESCRIPTION, {
+  path: "/",
+  indexable: true,
+});
 
 export default function RootPage() {
-  const { status } = useAuth();
-
-  if (status === "loading") {
-    return null;
-  }
-
-  if (status === "unauthenticated") {
-    return <HomeView />;
-  }
-
-  return (
-    <PageFadeIn>
-      <ChatHomeView />
-    </PageFadeIn>
-  );
+  return <HomePage />;
 }
