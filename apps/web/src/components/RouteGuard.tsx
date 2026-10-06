@@ -7,25 +7,25 @@ import { useAuth } from "@/lib/authContext";
 const PUBLIC_ROUTES = ["/"];
 
 export function RouteGuard({ children }: { children: React.ReactNode }) {
-    const { status } = useAuth();
-    const router = useRouter();
-    const pathname = usePathname();
+  const { status } = useAuth();
+  const router = useRouter();
+  const pathname = usePathname();
 
-    const isPublic = PUBLIC_ROUTES.includes(pathname);
+  const isPublic = PUBLIC_ROUTES.includes(pathname);
 
-    useEffect(() => {
-        if (status === "unauthenticated" && !isPublic) {
-            router.replace(`/signin?callbackUrl=${encodeURIComponent(pathname)}`);
-        }
-    }, [status, isPublic, pathname, router]);
-
-    if (status === "loading") {
-        return null;
-    }
-
+  useEffect(() => {
     if (status === "unauthenticated" && !isPublic) {
-        return null;
+      router.replace(`/signin?callbackUrl=${encodeURIComponent(pathname)}`);
     }
+  }, [status, isPublic, pathname, router]);
 
-    return <>{children}</>;
+  if (status === "loading" && !isPublic) {
+    return null;
+  }
+
+  if (status === "unauthenticated" && !isPublic) {
+    return null;
+  }
+
+  return <>{children}</>;
 }
