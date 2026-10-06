@@ -1,0 +1,22 @@
+# Overlay for Part 1's DOCKER_IMAGE_NAMING=single-repo: every image lives in one private `useframe`
+# repository as useframe:<service>-sha-<gitsha>. global.image.tag stays sha-<gitsha>; each service
+# prepends its own prefix. Use together with the environment overlay:
+#   -f values-production.yaml -f values-single-repo.yaml
+services:
+  server:
+    image: { name: useframe, tagPrefix: server- }
+  orchestrator-service:
+    image: { name: useframe, tagPrefix: orchestrator-service- }
+  research-service:
+    image: { name: useframe, tagPrefix: research-service- }
+  deploy-service-server:
+    image: { name: useframe, tagPrefix: deploy-service- }
+  deploy-service-worker:
+    image: { name: useframe, tagPrefix: deploy-service- }
+  billing-service:
+    image: { name: useframe, tagPrefix: billing-service- }
+  scoring-service:
+    image: { name: useframe, tagPrefix: scoring-service- }
+
+migration:
+  image: { name: useframe, tagPrefix: migrate- }

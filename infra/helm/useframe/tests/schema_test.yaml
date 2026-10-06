@@ -1,0 +1,75 @@
+suite: values schema
+templates: [templates/workloads.yaml]
+release: { name: useframe, namespace: useframe }
+set:
+  global.image.namespace: acme
+  global.image.tag: sha-abc1234
+tests:
+  - it: rejects an unknown top-level key
+    set:
+      replicaCount: 3
+    asserts:
+      - failedTemplate:
+          errorPattern: "additional properties 'replicaCount' not allowed"
+
+  - it: rejects an enabled workload without resources
+    set:
+      services.new-service:
+        enabled: true
+        image: { name: useframe-new-service }
+        port: 4010
+        healthPath: /health
+    asserts:
+      - failedTemplate:
+          errorPattern: "resources"
+
+  - it: rejects resources without a memory limit
+    set:
+      services.new-service:
+        enabled: true
+        image: { name: useframe-new-service }
+        port: 4010
+        healthPath: /health
+        resources:
+          requests: { cpu: 100m, memory: 256Mi }
+          limits: { cpu: "1" }
+    asserts:
+      - failedTemplate:
+          errorPattern: "memory"
+
+  - it: rejects an unknown per-workload key (typo guard)
+    set:
+      services.server.replica: 2
+    asserts:
+      - failedTemplate:
+          errorPattern: "additional properties 'replica' not allowed"
+
+  - it: rejects an out-of-range port
+    set:
+      services.server.port: 70000
+    asserts:
+      - failedTemplate: {}
+
+  - it: rejects an unknown Service type
+    set:
+      services.server.service.type: ExternalName
+    asserts:
+      - failedTemplate: {}
+
+  - it: accepts a new enabled service that has image and resources
+    set:
+      services.new-service:
+        enabled: true
+        image: { name: useframe-new-service }
+        port: 4010
+        healthPath: /health
+        resources:
+          requests: { cpu: 50m, memory: 64Mi }
+          limits: { memory: 128Mi }
+    asserts:
+      - notFailedTemplate: {}
+      - containsDocument:
+          kind: Deployment
+          apiVersion: apps/v1
+          name: useframe-new-service
+          any: true

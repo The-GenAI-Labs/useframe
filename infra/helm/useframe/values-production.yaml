@@ -1,0 +1,61 @@
+# Production overlay: sizing, replicas and hosts only. No secrets (they live in existing Secrets).
+#   helm upgrade --install useframe infra/helm/useframe -n useframe -f infra/helm/useframe/values-production.yaml \
+#     --set global.image.namespace=<ns> --set global.image.tag=sha-<gitsha> --atomic --timeout 10m
+# Sizes are starting points; tune them after observing real usage (kubectl top pods).
+
+global:
+  env:
+    CLIENT_URL: https://useframe.in
+
+services:
+  server:
+    env:
+      FRONTEND_URL: https://useframe.in
+      GOOGLE_REDIRECT_URI: https://api.useframe.in/api/auth/google/callback
+      GITHUB_REDIRECT_URI: https://api.useframe.in/api/auth/github/callback
+    replicas: 2
+    autoscaling:
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 6
+      targetCPUUtilizationPercentage: 70
+    resources:
+      requests: { cpu: 250m, memory: 512Mi }
+      limits: { memory: 1Gi }
+
+  orchestrator-service:
+    replicas: 2
+    resources:
+      requests: { cpu: 500m, memory: 1Gi }
+      limits: { memory: 2Gi }
+
+  research-service:
+    replicas: 2
+    resources:
+      requests: { cpu: 500m, memory: 1Gi }
+      limits: { memory: 2Gi }
+
+  # Two replicas, as in infra/k8s/deploy-service/server.yaml.
+  deploy-service-server:
+    replicas: 2
+    resources:
+      requests: { cpu: 100m, memory: 256Mi }
+      limits: { memory: 512Mi }
+
+  # Enable only after confirming the cluster is GKE Standard (README "Build worker"):
+  #   gcloud container clusters describe <cluster> --location <loc> --format="value(autopilot.enabled)"
+  # prints nothing / False on Standard. Sizes follow infra/k8s/deploy-service/worker.yaml.
+  deploy-service-worker:
+    enabled: false
+    resources:
+      requests: { cpu: "2", memory: 5Gi }
+      limits: { cpu: "4", memory: 6Gi }
+
+ingress:
+  host: api.useframe.in
+  gke:
+    # gcloud compute addresses create useframe-api --global
+    staticIpName: useframe-api
+
+migration:
+  enabled: true

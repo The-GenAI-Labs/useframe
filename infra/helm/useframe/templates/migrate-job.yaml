@@ -1,0 +1,61 @@
+{{- if .Values.migration.enabled }}
+{{- $m := include "useframe.workload" (dict "root" $ "svc" .Values.migration) | fromYaml -}}
+{{- $key := "migrate" -}}
+{{- $version := include "useframe.imageVersion" (dict "root" $ "image" $m.image) -}}
+{{- $ctx := dict "root" $ "key" $key "version" $version -}}
+# Runs before any regular resource, so its Secrets must already exist. Migrations must stay
+# backward-compatible with the previous release; helm rollback never reverts the database.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "useframe.fullname" $ctx }}
+  labels:
+    {{- include "useframe.labels" $ctx | nindent 4 }}
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-weight: "-5"
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: {{ int $m.activeDeadlineSeconds }}
+  ttlSecondsAfterFinished: {{ int $m.ttlSecondsAfterFinished }}
+  template:
+    metadata:
+      labels:
+        {{- include "useframe.labels" $ctx | nindent 8 }}
+        {{- with $m.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with $m.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      restartPolicy: Never
+      serviceAccountName: default
+      {{- include "useframe.podCommon" (dict "root" $ "w" $m) | trim | nindent 6 }}
+      containers:
+        - name: {{ $key }}
+          image: {{ include "useframe.image" (dict "root" $ "key" "migration" "image" $m.image) }}
+          imagePullPolicy: {{ $m.image.pullPolicy | default .Values.global.image.pullPolicy }}
+          {{- with $m.args }}
+          args:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $m.envFromSecrets }}
+          envFrom:
+            {{- range . }}
+            - secretRef:
+                name: {{ . }}
+            {{- end }}
+          {{- end }}
+          resources:
+            {{- toYaml (required "migration: resources are required" $m.resources) | nindent 12 }}
+          securityContext:
+            {{- toYaml $m.securityContext | nindent 12 }}
+          {{- $mounts := include "useframe.volumeMounts" $m | trim }}
+          {{- if $mounts }}
+          volumeMounts:
+            {{- $mounts | nindent 12 }}
+          {{- end }}
+{{- end }}

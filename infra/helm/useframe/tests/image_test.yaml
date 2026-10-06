@@ -1,0 +1,126 @@
+suite: image references
+templates: [templates/workloads.yaml]
+release: { name: useframe, namespace: useframe }
+set:
+  global.image.namespace: acme
+  global.image.tag: sha-abc1234
+tests:
+  - it: fails with a clear message when global.image.namespace is missing
+    set:
+      global.image.namespace: ""
+    asserts:
+      - failedTemplate:
+          errorPattern: "global.image.namespace is required"
+
+  - it: fails with a clear message when no tag is set
+    set:
+      global.image.tag: ""
+    asserts:
+      - failedTemplate:
+          errorPattern: "an image tag is required: --set global.image.tag=sha-<gitsha>"
+
+  - it: refuses the latest tag (schema)
+    set:
+      global.image.tag: latest
+    asserts:
+      - failedTemplate:
+          errorPattern: "/global/image/tag"
+
+  - it: refuses a Latest tag in any case (template guard)
+    set:
+      global.image.tag: LaTeSt
+    asserts:
+      - failedTemplate:
+          errorPattern: "is a moving tag"
+
+  - it: refuses latest as a per-service tag
+    set:
+      services.server.image.tag: latest
+    asserts:
+      - failedTemplate: {}
+
+  - it: renders per-service naming (useframe-<service>:sha-...)
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: docker.io/acme/useframe-server:sha-abc1234
+      - equal:
+          path: spec.template.spec.containers[0].imagePullPolicy
+          value: IfNotPresent
+      - equal:
+          path: spec.template.spec.imagePullSecrets
+          value: [{ name: dockerhub-pull }]
+
+  - it: renders single-repo naming (useframe:<service>-sha-...)
+    values: [../values-single-repo.yaml]
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: docker.io/acme/useframe:deploy-service-sha-abc1234
+
+  - it: lets a service override the tag
+    set:
+      services.server.image.tag: sha-def5678
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: docker.io/acme/useframe-server:sha-def5678
+
+  - it: uses the digest instead of the tag when set
+    set:
+      services.server.image.digest: sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: docker.io/acme/useframe-server@sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+      - equal:
+          path: metadata.labels["app.kubernetes.io/version"]
+          value: 0123456789ab
+
+  - it: rejects a malformed digest
+    set:
+      services.server.image.digest: sha256:nothex
+    asserts:
+      - failedTemplate: {}
+
+  - it: renders no resource of any kind for a disabled service
+    set:
+      services.server.enabled: false
+    asserts:
+      - containsDocument:
+          kind: Deployment
+          apiVersion: apps/v1
+          name: useframe-server
+        not: true
+      - containsDocument:
+          kind: Service
+          apiVersion: v1
+          name: useframe-server
+        not: true
+      - containsDocument:
+          kind: ConfigMap
+          apiVersion: v1
+          name: useframe-server-config
+        not: true
+
+  - it: renders nothing when every service is disabled
+    set:
+      services.server.enabled: false
+      services.orchestrator-service.enabled: false
+      services.research-service.enabled: false
+      services.deploy-service-server.enabled: false
+    asserts:
+      - hasDocuments:
+          count: 0

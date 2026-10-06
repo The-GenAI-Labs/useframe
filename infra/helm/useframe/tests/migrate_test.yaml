@@ -1,0 +1,70 @@
+suite: migration hook
+templates: [templates/migrate-job.yaml]
+release: { name: useframe, namespace: useframe }
+set:
+  global.image.namespace: acme
+  global.image.tag: sha-abc1234
+tests:
+  - it: renders nothing when migration is disabled
+    asserts:
+      - hasDocuments: { count: 0 }
+
+  - it: renders a pre-install/pre-upgrade hook Job when enabled
+    set:
+      migration.enabled: true
+    asserts:
+      - isKind: { of: Job }
+      - equal:
+          path: metadata.annotations
+          value:
+            helm.sh/hook: pre-install,pre-upgrade
+            helm.sh/hook-weight: "-5"
+            helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+      - equal: { path: spec.backoffLimit, value: 0 }
+      - equal: { path: spec.activeDeadlineSeconds, value: 600 }
+      - equal: { path: spec.ttlSecondsAfterFinished, value: 600 }
+      - equal: { path: spec.template.spec.restartPolicy, value: Never }
+
+  - it: runs the migrate image's default command with the DB Secret
+    set:
+      migration.enabled: true
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: docker.io/acme/useframe-migrate:sha-abc1234
+      - notExists:
+          path: spec.template.spec.containers[0].command
+      - notExists:
+          path: spec.template.spec.containers[0].args
+      - equal:
+          path: spec.template.spec.containers[0].envFrom
+          value: [{ secretRef: { name: migrate-secrets } }]
+
+  - it: is hardened like every other workload
+    set:
+      migration.enabled: true
+    asserts:
+      - equal: { path: spec.template.spec.securityContext.runAsNonRoot, value: true }
+      - equal: { path: spec.template.spec.securityContext.seccompProfile.type, value: RuntimeDefault }
+      - equal: { path: spec.template.spec.automountServiceAccountToken, value: false }
+      - equal:
+          path: spec.template.spec.containers[0].securityContext
+          value:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            privileged: false
+            capabilities: { drop: [ALL] }
+      - isNotEmpty:
+          path: spec.template.spec.containers[0].resources.limits.memory
+      - equal:
+          path: spec.template.spec.imagePullSecrets
+          value: [{ name: dockerhub-pull }]
+
+  - it: follows single-repo naming
+    values: [../values-single-repo.yaml]
+    set:
+      migration.enabled: true
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: docker.io/acme/useframe:migrate-sha-abc1234

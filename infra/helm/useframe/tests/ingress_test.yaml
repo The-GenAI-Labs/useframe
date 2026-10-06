@@ -1,0 +1,174 @@
+suite: ingress and GKE resources
+templates:
+  - templates/ingress.yaml
+  - templates/gke-resources.yaml
+  - templates/workloads.yaml
+release: { name: useframe, namespace: useframe }
+set:
+  global.image.namespace: acme
+  global.image.tag: sha-abc1234
+  ingress.gke.staticIpName: useframe-api
+tests:
+  - it: GCE mode selects the controller by annotation and wires cert, frontend config and static IP
+    template: templates/ingress.yaml
+    asserts:
+      - isKind: { of: Ingress }
+      - equal:
+          path: metadata.annotations
+          value:
+            kubernetes.io/ingress.class: gce
+            kubernetes.io/ingress.global-static-ip-name: useframe-api
+            networking.gke.io/managed-certificates: useframe-ingress
+            networking.gke.io/v1beta1.FrontendConfig: useframe-ingress
+      - notExists: { path: spec.ingressClassName }
+      - notExists: { path: spec.tls }
+      - equal:
+          path: spec.rules
+          value:
+            - host: api.useframe.in
+              http:
+                paths:
+                  - path: /
+                    pathType: Prefix
+                    backend: { service: { name: useframe-server, port: { number: 4000 } } }
+
+  - it: GCE mode renders a ManagedCertificate for the host
+    template: templates/gke-resources.yaml
+    documentSelector: { path: kind, value: ManagedCertificate }
+    asserts:
+      - equal: { path: apiVersion, value: networking.gke.io/v1 }
+      - equal: { path: spec.domains, value: [api.useframe.in] }
+
+  - it: GCE mode renders a FrontendConfig that redirects to HTTPS
+    template: templates/gke-resources.yaml
+    documentSelector: { path: kind, value: FrontendConfig }
+    asserts:
+      - equal: { path: spec.redirectToHttps.enabled, value: true }
+
+  - it: GCE mode renders a BackendConfig with the real health path and a streaming-safe timeout
+    template: templates/gke-resources.yaml
+    documentSelector: { path: kind, value: BackendConfig }
+    asserts:
+      - equal: { path: metadata.name, value: useframe-server }
+      - equal: { path: spec.timeoutSec, value: 3600 }
+      - equal: { path: spec.healthCheck.requestPath, value: /health }
+      - equal: { path: spec.healthCheck.port, value: 4000 }
+      - equal: { path: spec.healthCheck.type, value: HTTP }
+
+  - it: GCE mode annotates the exposed Service for NEG and its BackendConfig
+    template: templates/workloads.yaml
+    documentSelector:
+      path: $[?(@.kind == "Service" && @.metadata.name == "useframe-server")].kind
+      value: Service
+    asserts:
+      - equal:
+          path: metadata.annotations
+          value:
+            cloud.google.com/neg: '{"ingress": true}'
+            cloud.google.com/backend-config: '{"default": "useframe-server"}'
+
+  - it: leaves internal Services without load-balancer annotations
+    template: templates/workloads.yaml
+    documentSelector:
+      path: $[?(@.kind == "Service" && @.metadata.name == "useframe-research-service")].kind
+      value: Service
+    asserts:
+      - notExists: { path: metadata.annotations }
+
+  - it: non-GCE mode renders only a plain Ingress with className, annotations and TLS
+    set:
+      ingress.className: nginx
+      ingress.annotations:
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+      ingress.tls:
+        - hosts: [api.useframe.in]
+          secretName: api-tls
+    asserts:
+      - equal: { path: spec.ingressClassName, value: nginx }
+        template: templates/ingress.yaml
+      - equal:
+          path: metadata.annotations
+          value:
+            nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+        template: templates/ingress.yaml
+      - equal:
+          path: spec.tls
+          value: [{ hosts: [api.useframe.in], secretName: api-tls }]
+        template: templates/ingress.yaml
+      - hasDocuments: { count: 0 }
+        template: templates/gke-resources.yaml
+      - notExists: { path: metadata.annotations }
+        template: templates/workloads.yaml
+        documentSelector:
+          path: $[?(@.kind == "Service" && @.metadata.name == "useframe-server")].kind
+          value: Service
+
+  - it: includes only services with ingress.enabled, grouped by host
+    set:
+      services.orchestrator-service.ingress.enabled: true
+      services.orchestrator-service.ingress.host: orchestrator.useframe.in
+    asserts:
+      - equal:
+          path: spec.rules
+          value:
+            - host: api.useframe.in
+              http:
+                paths:
+                  - path: /
+                    pathType: Prefix
+                    backend: { service: { name: useframe-server, port: { number: 4000 } } }
+            - host: orchestrator.useframe.in
+              http:
+                paths:
+                  - path: /
+                    pathType: Prefix
+                    backend: { service: { name: useframe-orchestrator-service, port: { number: 4001 } } }
+        template: templates/ingress.yaml
+      - equal:
+          path: spec.domains
+          value: [api.useframe.in, orchestrator.useframe.in]
+        template: templates/gke-resources.yaml
+        documentSelector: { path: kind, value: ManagedCertificate }
+      - equal:
+          path: spec.healthCheck.requestPath
+          value: /health
+        template: templates/gke-resources.yaml
+        documentSelector:
+          path: $[?(@.kind == "BackendConfig" && @.metadata.name == "useframe-orchestrator-service")].kind
+          value: BackendConfig
+
+  - it: never routes to a workload without a Service (the build worker)
+    set:
+      services.deploy-service-worker.enabled: true
+      services.deploy-service-worker.ingress.enabled: true
+    template: templates/ingress.yaml
+    asserts:
+      - notContains:
+          path: spec.rules[0].http.paths
+          content: { backend: { service: { name: useframe-deploy-service-worker } } }
+          any: true
+
+  - it: renders nothing when the ingress is disabled
+    set:
+      ingress.enabled: false
+    asserts:
+      - hasDocuments: { count: 0 }
+        template: templates/ingress.yaml
+      - hasDocuments: { count: 0 }
+        template: templates/gke-resources.yaml
+
+  - it: omits the static IP annotation when no name is set
+    set:
+      ingress.gke.staticIpName: ""
+    template: templates/ingress.yaml
+    asserts:
+      - notExists:
+          path: metadata.annotations["kubernetes.io/ingress.global-static-ip-name"]
+
+  - it: lets a service override the load-balancer timeout
+    set:
+      services.server.ingress.timeoutSec: 120
+    template: templates/gke-resources.yaml
+    documentSelector: { path: kind, value: BackendConfig }
+    asserts:
+      - equal: { path: spec.timeoutSec, value: 120 }

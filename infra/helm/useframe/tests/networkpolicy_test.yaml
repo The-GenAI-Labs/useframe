@@ -1,0 +1,55 @@
+suite: network policy
+templates: [templates/networkpolicy.yaml]
+release: { name: useframe, namespace: useframe }
+set:
+  global.image.namespace: acme
+  global.image.tag: sha-abc1234
+tests:
+  - it: is off by default
+    asserts:
+      - hasDocuments: { count: 0 }
+
+  - it: renders one default-deny policy per enabled workload
+    set:
+      networkPolicy.enabled: true
+    asserts:
+      - hasDocuments: { count: 4 }
+      - equal: { path: spec.policyTypes, value: [Ingress] }
+        documentSelector: { path: kind, value: NetworkPolicy, matchMany: true }
+
+  - it: lets the load balancer reach the exposed server, plus in-namespace pods
+    set:
+      networkPolicy.enabled: true
+    documentSelector: { path: metadata.name, value: useframe-server }
+    asserts:
+      - equal:
+          path: spec.ingress
+          value:
+            - from: [{ podSelector: {} }]
+              ports: [{ port: http, protocol: TCP }]
+            - from:
+                - ipBlock: { cidr: 130.211.0.0/22 }
+                - ipBlock: { cidr: 35.191.0.0/16 }
+              ports: [{ port: http, protocol: TCP }]
+
+  - it: allows only in-namespace traffic to internal services
+    set:
+      networkPolicy.enabled: true
+    documentSelector: { path: metadata.name, value: useframe-research-service }
+    asserts:
+      - equal:
+          path: spec.ingress
+          value:
+            - from: [{ podSelector: {} }]
+              ports: [{ port: http, protocol: TCP }]
+
+  - it: denies all ingress to the build worker
+    set:
+      networkPolicy.enabled: true
+      services.deploy-service-worker.enabled: true
+    documentSelector: { path: metadata.name, value: useframe-deploy-service-worker }
+    asserts:
+      - equal: { path: spec.ingress, value: [] }
+      - equal:
+          path: spec.podSelector.matchLabels["app.kubernetes.io/component"]
+          value: deploy-service-worker

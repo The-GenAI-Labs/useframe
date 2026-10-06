@@ -1,0 +1,65 @@
+{{- $exposed := include "useframe.exposedKeys" . | fromJsonArray -}}
+{{- if and $exposed (include "useframe.gce" .) }}
+{{- $gke := .Values.ingress.gke -}}
+{{- $name := include "useframe.fullname" (dict "root" $ "key" "ingress") -}}
+{{- $labels := include "useframe.labels" (dict "root" $ "key" "ingress") -}}
+{{- if $gke.managedCertificate.enabled }}
+{{- $hosts := list -}}
+{{- range $key := $exposed }}
+{{- $w := include "useframe.workload" (dict "root" $ "svc" (index $.Values.services $key)) | fromYaml }}
+{{- $hosts = append $hosts ($w.ingress.host | default $.Values.ingress.host) }}
+{{- end }}
+---
+# Provisions only once each domain resolves directly (DNS only, not proxied) to the static IP.
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+  domains:
+    {{- range $hosts | uniq | sortAlpha }}
+    - {{ . | quote }}
+    {{- end }}
+{{- end }}
+{{- if $gke.frontendConfig.enabled }}
+---
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+  redirectToHttps:
+    enabled: {{ $gke.frontendConfig.redirectToHttps }}
+  {{- with $gke.frontendConfig.sslPolicy }}
+  sslPolicy: {{ . | quote }}
+  {{- end }}
+{{- end }}
+{{- if $gke.backendConfig.enabled }}
+{{- range $key := $exposed }}
+{{- $w := include "useframe.workload" (dict "root" $ "svc" (index $.Values.services $key)) | fromYaml }}
+{{- $version := include "useframe.imageVersion" (dict "root" $ "image" $w.image) }}
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: {{ include "useframe.fullname" (dict "root" $ "key" $key) }}
+  labels:
+    {{- include "useframe.labels" (dict "root" $ "key" $key "version" $version) | nindent 4 }}
+spec:
+  timeoutSec: {{ int ($w.ingress.timeoutSec | default $gke.backendConfig.timeoutSec) }}
+  connectionDraining:
+    drainingTimeoutSec: {{ int $gke.backendConfig.connectionDrainingTimeoutSec }}
+  healthCheck:
+    type: HTTP
+    requestPath: {{ required (printf "services.%s: healthPath is required for the load-balancer health check" $key) $w.healthPath }}
+    port: {{ int $w.port }}
+    {{- range $k, $v := $gke.backendConfig.healthCheck }}
+    {{ $k }}: {{ int $v }}
+    {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

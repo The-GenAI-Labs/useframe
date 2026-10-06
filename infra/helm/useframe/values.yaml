@@ -1,0 +1,361 @@
+# UseFrame backend chart. Every workload is rendered from the `services:` map by one shared template;
+# adding a service is a values block, not a template change. Databases (Postgres, Redis) are external
+# and reach the pods only through existing Kubernetes Secrets (see ENV.md / secrets.example.yaml).
+#
+# Required at deploy time:
+#   --set global.image.namespace=<docker hub user/org>
+#   --set global.image.tag=sha-<first 7 of the commit>
+
+global:
+  image:
+    # Image reference: <registry>/<namespace>/<services.X.image.name>:<tagPrefix><tag>
+    # (or <registry>/<namespace>/<name>@<digest> when services.X.image.digest is set).
+    registry: docker.io
+    # REQUIRED. Docker Hub user or organisation that Part 1 publishes to.
+    namespace: ""
+    # REQUIRED unless every enabled service sets its own tag or digest. Always an immutable
+    # `sha-<gitsha>` tag from Part 1's CI summary; the chart refuses the moving tags `latest` and `main`.
+    tag: ""
+    pullPolicy: IfNotPresent
+  # Existing docker-registry Secrets (Docker Hub Read-only token). The chart never creates them.
+  imagePullSecrets:
+    - name: dockerhub-pull
+  # Plain (non-secret) env applied to every workload; a service's own `env` wins on conflict.
+  # Values are rendered with `tpl`. Secret-looking names are refused (see README "Secrets").
+  env:
+    NODE_ENV: production
+  podAnnotations: {}
+  podLabels: {}
+
+# Deep-merged under every service (and the migration Job); a service overrides only what it sets.
+# Maps merge key by key; lists and scalars replace.
+workloadDefaults:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 0
+  # Must exceed preStopSleepSeconds plus the app's own shutdown time (render fails otherwise).
+  terminationGracePeriodSeconds: 30
+  # `sleep N` in preStop so endpoints/load balancers stop routing before SIGTERM. 0 disables it.
+  preStopSleepSeconds: 5
+  automountServiceAccountToken: false
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 10001
+    runAsGroup: 10001
+    seccompProfile:
+      type: RuntimeDefault
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    privileged: false
+    capabilities:
+      drop: [ALL]
+  # Every writable path is listed here (the root filesystem is read-only). Optional `medium: Memory`.
+  emptyDirs:
+    - name: tmp
+      mountPath: /tmp
+      sizeLimit: 256Mi
+  # Default handler: httpGet on `healthPath` at the container port named `http` (= `port`).
+  # Set `enabled: false` to drop a probe, or give a raw handler (exec/tcpSocket/grpc/httpGet) to replace it.
+  probes:
+    startup:
+      enabled: true
+      periodSeconds: 5
+      timeoutSeconds: 3
+      failureThreshold: 30
+    readiness:
+      enabled: true
+      periodSeconds: 10
+      timeoutSeconds: 3
+      failureThreshold: 3
+    liveness:
+      enabled: true
+      periodSeconds: 20
+      timeoutSeconds: 3
+      failureThreshold: 3
+  # Rendered only when the effective replica count (or HPA minReplicas) is above 1.
+  pdb:
+    enabled: true
+    minAvailable: 1
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 6
+    targetCPUUtilizationPercentage: 70
+  # Zone and node spread, best effort (ScheduleAnyway).
+  topologySpread:
+    enabled: true
+  serviceAccount:
+    create: true
+    # Defaults to <release>-<service key>. Workload Identity:
+    #   annotations: { iam.gke.io/gcp-service-account: <gsa>@<project>.iam.gserviceaccount.com }
+    name: ""
+    annotations: {}
+  service:
+    enabled: true
+    type: ClusterIP
+    # Defaults to `port`.
+    port: null
+    annotations: {}
+  ingress:
+    enabled: false
+    # Defaults to the top-level ingress.host.
+    host: ""
+    path: /
+    pathType: Prefix
+  # Name of the env var that receives `port` (keeps the listener and the probes/Service in sync).
+  portEnv: PORT
+  command: []
+  args: []
+  env: {}
+  # Existing Secret names, loaded whole with envFrom. A Secret change does not roll pods by itself.
+  envFromSecrets: []
+  envFromConfigMaps: []
+  volumes: []
+  volumeMounts: []
+  podAnnotations: {}
+  podLabels: {}
+  affinity: {}
+  nodeSelector: {}
+  tolerations: []
+
+services:
+  # Public API (apps/server). The only workload exposed through the ingress by default.
+  server:
+    enabled: true
+    image:
+      name: useframe-server
+    port: 4000
+    healthPath: /health
+    # SSE responses close themselves after 15 min; anything still open at SIGKILL reconnects.
+    terminationGracePeriodSeconds: 60
+    preStopSleepSeconds: 15
+    env:
+      ORCHESTRATOR_URL: '{{ include "useframe.serviceUrl" (list . "orchestrator-service") }}'
+      RESEARCH_SERVICE_URL: '{{ include "useframe.serviceUrl" (list . "research-service") }}'
+      DEPLOY_SERVICE_URL: '{{ include "useframe.serviceUrl" (list . "deploy-service-server") }}'
+      BILLING_SERVICE_URL: '{{ include "useframe.serviceUrl" (list . "billing-service") }}'
+      SCORING_SERVICE_URL: '{{ include "useframe.serviceUrl" (list . "scoring-service") }}'
+    envFromSecrets: [server-secrets]
+    ingress:
+      enabled: true
+      path: /
+    resources:
+      requests: { cpu: 100m, memory: 256Mi }
+      limits: { memory: 512Mi }
+
+  # AI planning/generation (apps/orchestrator-service). Streams SSE generation responses.
+  # NOTE: apps/web calls this service directly from the browser (NEXT_PUBLIC_ORCHESTRATOR_URL).
+  # Exposing it is a separate decision: set ingress.enabled=true and ingress.host (README "Ingress").
+  orchestrator-service:
+    enabled: true
+    image:
+      name: useframe-orchestrator-service
+    port: 4001
+    healthPath: /health
+    terminationGracePeriodSeconds: 300
+    preStopSleepSeconds: 15
+    env:
+      RESEARCH_SERVICE_URL: '{{ include "useframe.serviceUrl" (list . "research-service") }}'
+    envFromSecrets: [orchestrator-service-secrets]
+    ingress:
+      enabled: false
+    resources:
+      requests: { cpu: 250m, memory: 512Mi }
+      limits: { memory: 1Gi }
+
+  # Research corpus retrieval (apps/research-service).
+  research-service:
+    enabled: true
+    image:
+      name: useframe-research-service
+    port: 4004
+    healthPath: /health
+    env:
+      ORCHESTRATOR_URL: '{{ include "useframe.serviceUrl" (list . "orchestrator-service") }}'
+      RESEARCH_MOCK: "true"
+    envFromSecrets: [research-service-secrets]
+    resources:
+      requests: { cpu: 250m, memory: 512Mi }
+      limits: { memory: 1Gi }
+
+  # Deploy service HTTP API (apps/deploy-service, `node dist/server.js`). Internal only.
+  deploy-service-server:
+    enabled: true
+    image:
+      name: useframe-deploy-service
+    # args (not command) keep the image ENTRYPOINT, tini, as PID 1.
+    args: ["node", "dist/server.js"]
+    port: 4005
+    healthPath: /healthz
+    env: &deployEnv
+      SITES_BASE_DOMAIN: useframe.in
+      SITES_RESERVED_HOSTS: useframe.in,www.useframe.in,api.useframe.in
+      SITES_R2_BUCKET: useframe-sites
+      DEPLOY_RETAIN_COUNT: "10"
+      DEPLOY_MAX_FILES: "5000"
+      DEPLOY_MAX_TOTAL_MB: "100"
+      DEPLOY_INSTALL_TIMEOUT_MS: "300000"
+      DEPLOY_BUILD_TIMEOUT_MS: "480000"
+      DEPLOY_BUILD_CONCURRENCY: "2"
+      DEPLOY_ACTIVATION_PROBE_MS: "150000"
+      DEPLOY_REAPER_STUCK_MINUTES: "30"
+      DEPLOY_WORK_DIR: /work
+      DEPLOY_BUILD_UID: "10002"
+      DEPLOY_BUILD_GID: "10002"
+      DEPLOY_BUILD_ISOLATION: setpriv
+      DEPLOY_NODE_MODULES_TEMPLATES: /opt/templates
+      DEPLOY_ENQUEUE_VALIDATION: "false"
+      # Stays off until both spikes in apps/deploy-service/RUNBOOK.md pass.
+      CUSTOM_DOMAINS_ENABLED: "false"
+      SITES_EDGE_CNAME_TARGET: cname.useframe.in
+      CUSTOM_DOMAIN_CAPACITY_LIMIT: "100"
+      CUSTOM_DOMAIN_BLOCKLIST: ""
+      CUSTOM_DOMAIN_OWNERSHIP_WINDOW_HOURS: "72"
+      CUSTOM_DOMAIN_ROUTING_WINDOW_DAYS: "7"
+      DNS_RESOLVERS: 1.1.1.1,8.8.8.8
+    envFromSecrets: [deploy-service-secrets]
+    resources:
+      requests: { cpu: 100m, memory: 256Mi }
+      limits: { memory: 512Mi }
+
+  # Deploy build worker (same image, `node dist/worker.js`). Runs untrusted user-site builds, each
+  # dropped to uid/gid 10002 with setpriv, so this pod alone runs as root with four capabilities.
+  # Pod Security `baseline`, not `restricted`; rejected on GKE Autopilot. Keep it disabled until the
+  # cluster is confirmed to be GKE Standard (README "Build worker").
+  deploy-service-worker:
+    enabled: false
+    image:
+      name: useframe-deploy-service
+    args: ["node", "dist/worker.js"]
+    # Health listener only (HEALTH_PORT); 200 while every BullMQ worker runs and Redis is ready.
+    port: 8080
+    portEnv: HEALTH_PORT
+    healthPath: /healthz
+    service:
+      enabled: false
+    serviceAccount:
+      create: false
+    automountServiceAccountToken: false
+    podSecurityContext:
+      runAsNonRoot: false
+      runAsUser: 0
+      runAsGroup: 0
+      seccompProfile:
+        type: RuntimeDefault
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      privileged: false
+      capabilities:
+        drop: [ALL]
+        add: [CHOWN, SETUID, SETGID, DAC_OVERRIDE]
+    # The worker keeps the npm cache at $DEPLOY_WORK_DIR/.npm-cache and passes it to builds itself.
+    emptyDirs:
+      - name: work
+        mountPath: /work
+        sizeLimit: 8Gi
+      - name: npm-cache
+        mountPath: /work/.npm-cache
+        sizeLimit: 2Gi
+      - name: tmp
+        mountPath: /tmp
+        sizeLimit: 512Mi
+    # >= install (5 min) + build (8 min) + upload/probe + margin; SIGTERM lets in-flight builds finish.
+    terminationGracePeriodSeconds: 900
+    preStopSleepSeconds: 0
+    autoscaling:
+      enabled: false
+    pdb:
+      enabled: false
+    env: *deployEnv
+    envFromSecrets: [deploy-service-secrets]
+    # ~2.5 GiB per concurrent build with DEPLOY_BUILD_CONCURRENCY=2.
+    resources:
+      requests: { cpu: "2", memory: 5Gi }
+      limits: { cpu: "4", memory: 6Gi }
+
+  # Not in the initial rollout; images exist (Part 1). apps/server calls both, so enable them before
+  # relying on billing or scoring endpoints.
+  billing-service:
+    enabled: false
+    image:
+      name: useframe-billing-service
+    port: 4002
+    healthPath: /health
+    envFromSecrets: [billing-service-secrets]
+    resources:
+      requests: { cpu: 100m, memory: 256Mi }
+      limits: { memory: 512Mi }
+
+  scoring-service:
+    enabled: false
+    image:
+      name: useframe-scoring-service
+    port: 4003
+    healthPath: /health
+    envFromSecrets: [scoring-service-secrets]
+    resources:
+      requests: { cpu: 250m, memory: 512Mi }
+      limits: { memory: 1Gi }
+
+ingress:
+  enabled: true
+  # `gce` = GKE-native external Application Load Balancer: selected with the
+  # kubernetes.io/ingress.class annotation (GKE ignores spec.ingressClassName) and rendered with a
+  # ManagedCertificate, FrontendConfig and per-service BackendConfig. Any other value renders a plain
+  # networking.k8s.io/v1 Ingress with spec.ingressClassName and `tls` below.
+  className: gce
+  host: api.useframe.in
+  annotations: {}
+  # Non-GCE mode only, e.g. [{ hosts: [api.useframe.in], secretName: api-tls }].
+  tls: []
+  gke:
+    # Name of a reserved *global* static IP (gcloud compute addresses create <name> --global).
+    staticIpName: ""
+    managedCertificate:
+      enabled: true
+    frontendConfig:
+      enabled: true
+      redirectToHttps: true
+      # Optional name of an existing SSL policy (e.g. TLS 1.2+ only).
+      sslPolicy: ""
+    backendConfig:
+      enabled: true
+      # Load-balancer response timeout. server and orchestrator stream SSE; the 30 s GKE default
+      # would cut those streams.
+      timeoutSec: 3600
+      connectionDrainingTimeoutSec: 30
+      healthCheck:
+        checkIntervalSec: 15
+        timeoutSec: 5
+        healthyThreshold: 1
+        unhealthyThreshold: 2
+    # Adds cloud.google.com/neg: '{"ingress": true}' to exposed Services (VPC-native clusters).
+    neg: true
+
+# Prisma `migrate deploy` as a pre-install/pre-upgrade hook (image useframe-migrate). The Secrets it
+# references must already exist before the first install. Merged over workloadDefaults.
+migration:
+  enabled: false
+  image:
+    name: useframe-migrate
+  envFromSecrets: [migrate-secrets]
+  activeDeadlineSeconds: 600
+  ttlSecondsAfterFinished: 600
+  resources:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { memory: 512Mi }
+
+# Default-deny ingress per workload; only takes effect when the cluster enforces NetworkPolicy
+# (GKE Dataplane V2 or the network-policy add-on).
+networkPolicy:
+  enabled: false
+  # Sources allowed to reach ingress-exposed workloads. Defaults are Google's load-balancer proxy and
+  # health-check ranges (GKE Ingress with NEGs). For another controller, replace with its namespace.
+  publicIngressFrom:
+    - ipBlock: { cidr: 130.211.0.0/22 }
+    - ipBlock: { cidr: 35.191.0.0/16 }

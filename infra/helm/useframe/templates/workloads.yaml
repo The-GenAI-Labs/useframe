@@ -1,0 +1,119 @@
+{{- $gce := include "useframe.gce" . -}}
+{{- $exposed := include "useframe.exposedKeys" . | fromJsonArray -}}
+{{- range $key := keys .Values.services | sortAlpha }}
+{{- $svc := index $.Values.services $key }}
+{{- if $svc.enabled }}
+{{- $w := include "useframe.workload" (dict "root" $ "svc" $svc) | fromYaml }}
+{{- $name := include "useframe.fullname" (dict "root" $ "key" $key) }}
+{{- $version := include "useframe.imageVersion" (dict "root" $ "image" $w.image) }}
+{{- $ctx := dict "root" $ "key" $key "version" $version }}
+{{- $env := include "useframe.env" (dict "root" $ "key" $key "w" $w) | fromYaml }}
+{{- if $env }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $name }}-config
+  labels:
+    {{- include "useframe.labels" $ctx | nindent 4 }}
+data:
+  {{- range $k, $v := $env }}
+  {{ $k }}: {{ $v | toString | quote }}
+  {{- end }}
+{{- end }}
+{{- if $w.serviceAccount.create }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $w.serviceAccount.name | default $name }}
+  labels:
+    {{- include "useframe.labels" $ctx | nindent 4 }}
+  {{- with $w.serviceAccount.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+automountServiceAccountToken: false
+{{- end }}
+---
+{{ include "useframe.deployment" (dict "root" $ "key" $key "w" $w) }}
+{{- if $w.service.enabled }}
+{{- if not $w.port }}
+{{- fail (printf "services.%s: service.enabled needs a port" $key) }}
+{{- end }}
+{{- $isExposed := has $key $exposed }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "useframe.labels" $ctx | nindent 4 }}
+  {{- if or $w.service.annotations (and $isExposed $gce) }}
+  annotations:
+    {{- with $w.service.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- if and $isExposed $gce }}
+    {{- if $.Values.ingress.gke.neg }}
+    cloud.google.com/neg: '{"ingress": true}'
+    {{- end }}
+    {{- if $.Values.ingress.gke.backendConfig.enabled }}
+    cloud.google.com/backend-config: '{"default": "{{ $name }}"}'
+    {{- end }}
+    {{- end }}
+  {{- end }}
+spec:
+  type: {{ $w.service.type }}
+  selector:
+    {{- include "useframe.selectorLabels" $ctx | nindent 4 }}
+  ports:
+    - name: http
+      port: {{ int ($w.service.port | default $w.port) }}
+      targetPort: http
+      protocol: TCP
+{{- end }}
+{{- if $w.autoscaling.enabled }}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "useframe.labels" $ctx | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ $name }}
+  minReplicas: {{ int $w.autoscaling.minReplicas }}
+  maxReplicas: {{ int $w.autoscaling.maxReplicas }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ int $w.autoscaling.targetCPUUtilizationPercentage }}
+{{- end }}
+{{- $effective := ternary $w.autoscaling.minReplicas $w.replicas (eq (toString $w.autoscaling.enabled) "true") | int }}
+{{- if and $w.pdb.enabled (gt $effective 1) }}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "useframe.labels" $ctx | nindent 4 }}
+spec:
+  {{- if hasKey $w.pdb "maxUnavailable" }}
+  maxUnavailable: {{ $w.pdb.maxUnavailable }}
+  {{- else }}
+  minAvailable: {{ $w.pdb.minAvailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "useframe.selectorLabels" $ctx | nindent 6 }}
+{{- end }}
+{{- end }}
+{{- end }}

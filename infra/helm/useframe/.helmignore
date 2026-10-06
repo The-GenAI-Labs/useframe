@@ -1,0 +1,8 @@
+.DS_Store
+.git/
+*.swp
+*.bak
+*.tmp
+tests/
+secrets.example.yaml
+ENV.md

@@ -1,0 +1,145 @@
+suite: deploy build worker
+templates: [templates/workloads.yaml]
+release: { name: useframe, namespace: useframe }
+set:
+  global.image.namespace: acme
+  global.image.tag: sha-abc1234
+  services.deploy-service-worker.enabled: true
+tests:
+  - it: is disabled by default (cluster type unconfirmed)
+    set:
+      services.deploy-service-worker.enabled: false
+    asserts:
+      - containsDocument:
+          kind: Deployment
+          apiVersion: apps/v1
+          name: useframe-deploy-service-worker
+        not: true
+
+  - it: runs as root with exactly CHOWN, SETUID, SETGID, DAC_OVERRIDE
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-worker")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.securityContext
+          value:
+            runAsNonRoot: false
+            runAsUser: 0
+            runAsGroup: 0
+            seccompProfile: { type: RuntimeDefault }
+      - equal:
+          path: spec.template.spec.containers[0].securityContext
+          value:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            privileged: false
+            capabilities:
+              drop: [ALL]
+              add: [CHOWN, SETUID, SETGID, DAC_OVERRIDE]
+
+  - it: has no ServiceAccount token and no dedicated ServiceAccount
+    asserts:
+      - equal:
+          path: spec.template.spec.automountServiceAccountToken
+          value: false
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-worker")].kind
+          value: Deployment
+      - containsDocument:
+          kind: ServiceAccount
+          apiVersion: v1
+          name: useframe-deploy-service-worker
+        not: true
+
+  - it: has no Service
+    asserts:
+      - containsDocument:
+          kind: Service
+          apiVersion: v1
+          name: useframe-deploy-service-worker
+        not: true
+
+  - it: mounts the three size-limited emptyDirs and nothing else writable
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-worker")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.volumes
+          value:
+            - { name: work, emptyDir: { sizeLimit: 8Gi } }
+            - { name: npm-cache, emptyDir: { sizeLimit: 2Gi } }
+            - { name: tmp, emptyDir: { sizeLimit: 512Mi } }
+      - equal:
+          path: spec.template.spec.containers[0].volumeMounts
+          value:
+            - { name: work, mountPath: /work }
+            - { name: npm-cache, mountPath: /work/.npm-cache }
+            - { name: tmp, mountPath: /tmp }
+
+  - it: waits 900 s for in-flight builds with no preStop sleep
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-worker")].kind
+      value: Deployment
+    asserts:
+      - equal: { path: spec.template.spec.terminationGracePeriodSeconds, value: 900 }
+      - notExists:
+          path: spec.template.spec.containers[0].lifecycle
+
+  - it: runs node dist/worker.js as args so tini stays PID 1
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-worker")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].args
+          value: ["node", "dist/worker.js"]
+      - notExists:
+          path: spec.template.spec.containers[0].command
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: docker.io/acme/useframe-deploy-service:sha-abc1234
+
+  - it: probes the worker health listener on HEALTH_PORT
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].livenessProbe.httpGet
+          value: { path: /healthz, port: http }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-worker")].kind
+          value: Deployment
+      - equal:
+          path: data.HEALTH_PORT
+          value: "8080"
+        documentSelector:
+          path: $[?(@.kind == "ConfigMap" && @.metadata.name == "useframe-deploy-service-worker-config")].kind
+          value: ConfigMap
+      - equal:
+          path: data.DEPLOY_WORK_DIR
+          value: /work
+        documentSelector:
+          path: $[?(@.kind == "ConfigMap" && @.metadata.name == "useframe-deploy-service-worker-config")].kind
+          value: ConfigMap
+
+  - it: sets CPU and memory limits and no HPA/PDB
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].resources
+          value:
+            requests: { cpu: "2", memory: 5Gi }
+            limits: { cpu: "4", memory: 6Gi }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-worker")].kind
+          value: Deployment
+      - containsDocument:
+          kind: HorizontalPodAutoscaler
+          apiVersion: autoscaling/v2
+          name: useframe-deploy-service-worker
+        not: true
+      - containsDocument:
+          kind: PodDisruptionBudget
+          apiVersion: policy/v1
+          name: useframe-deploy-service-worker
+        not: true
+

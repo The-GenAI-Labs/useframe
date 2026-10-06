@@ -1,0 +1,78 @@
+suite: hardening (every workload except the build worker)
+templates: [templates/workloads.yaml]
+release: { name: useframe, namespace: useframe }
+set:
+  global.image.namespace: acme
+  global.image.tag: sha-abc1234
+  services.billing-service.enabled: true
+  services.scoring-service.enabled: true
+  services.deploy-service-worker.enabled: false
+tests:
+  - it: runs every pod as non-root with RuntimeDefault seccomp and no SA token
+    documentSelector: { path: kind, value: Deployment, matchMany: true }
+    asserts:
+      - equal: { path: spec.template.spec.securityContext.runAsNonRoot, value: true }
+      - equal: { path: spec.template.spec.securityContext.runAsUser, value: 10001 }
+      - equal: { path: spec.template.spec.securityContext.seccompProfile.type, value: RuntimeDefault }
+      - equal: { path: spec.template.spec.automountServiceAccountToken, value: false }
+
+  - it: drops all capabilities, forbids escalation and mounts the root filesystem read-only
+    documentSelector: { path: kind, value: Deployment, matchMany: true }
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].securityContext
+          value:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            privileged: false
+            capabilities:
+              drop: [ALL]
+
+  - it: uses no host namespaces or host paths
+    documentSelector: { path: kind, value: Deployment, matchMany: true }
+    asserts:
+      - notExists: { path: spec.template.spec.hostNetwork }
+      - notExists: { path: spec.template.spec.hostPID }
+      - notExists: { path: spec.template.spec.hostIPC }
+      - notContains:
+          path: spec.template.spec.volumes
+          content: { hostPath: {} }
+          any: true
+
+  - it: gives every container memory limits and CPU/memory requests, with /tmp as an emptyDir
+    documentSelector: { path: kind, value: Deployment, matchMany: true }
+    asserts:
+      - isNotEmpty:
+          path: spec.template.spec.containers[0].resources.requests.cpu
+      - isNotEmpty:
+          path: spec.template.spec.containers[0].resources.requests.memory
+      - isNotEmpty:
+          path: spec.template.spec.containers[0].resources.limits.memory
+      - notExists:
+          path: spec.template.spec.containers[0].resources.limits.cpu
+      - contains:
+          path: spec.template.spec.volumes
+          content: { name: tmp, emptyDir: { sizeLimit: 256Mi } }
+      - contains:
+          path: spec.template.spec.containers[0].volumeMounts
+          content: { name: tmp, mountPath: /tmp }
+
+  - it: has a preStop hook on every HTTP workload
+    documentSelector: { path: kind, value: Deployment, matchMany: true }
+    asserts:
+      - isNotEmpty:
+          path: spec.template.spec.containers[0].lifecycle.preStop.exec.command
+
+  - it: rejects privileged containers through the schema
+    set:
+      services.server.securityContext.privileged: true
+    asserts:
+      - failedTemplate: {}
+
+  - it: rejects hostPath volumes through the schema
+    set:
+      services.server.volumes:
+        - name: host
+          hostPath: { path: /var/run }
+    asserts:
+      - failedTemplate: {}

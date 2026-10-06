@@ -1,0 +1,318 @@
+suite: workload rendering
+templates: [templates/workloads.yaml]
+release: { name: useframe, namespace: useframe }
+set:
+  global.image.namespace: acme
+  global.image.tag: sha-abc1234
+tests:
+  - it: names resources <release>-<key> with stable selector labels
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.selector.matchLabels
+          value:
+            app.kubernetes.io/name: useframe
+            app.kubernetes.io/instance: useframe
+            app.kubernetes.io/component: server
+      - equal:
+          path: metadata.labels["app.kubernetes.io/version"]
+          value: sha-abc1234
+      - equal:
+          path: metadata.labels["app.kubernetes.io/part-of"]
+          value: useframe
+      - isNotEmpty:
+          path: metadata.labels["helm.sh/chart"]
+
+  - it: renders no Service when service.enabled is false
+    set:
+      services.research-service.service.enabled: false
+    asserts:
+      - containsDocument:
+          kind: Service
+          apiVersion: v1
+          name: useframe-research-service
+        not: true
+
+  - it: renders a ClusterIP Service on the container port by default
+    documentSelector:
+      path: $[?(@.kind == "Service" && @.metadata.name == "useframe-orchestrator-service")].kind
+      value: Service
+    asserts:
+      - equal: { path: spec.type, value: ClusterIP }
+      - equal:
+          path: spec.ports
+          value: [{ name: http, port: 4001, targetPort: http, protocol: TCP }]
+
+  - it: drops replicas from the Deployment when the HPA is enabled
+    set:
+      services.server.autoscaling.enabled: true
+      services.server.autoscaling.minReplicas: 2
+      services.server.autoscaling.maxReplicas: 6
+    asserts:
+      - notExists: { path: spec.replicas }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+          value: Deployment
+      - equal: { path: spec.minReplicas, value: 2 }
+        documentSelector: { path: kind, value: HorizontalPodAutoscaler }
+      - equal: { path: spec.maxReplicas, value: 6 }
+        documentSelector: { path: kind, value: HorizontalPodAutoscaler }
+      - equal:
+          path: spec.metrics[0].resource.target.averageUtilization
+          value: 70
+        documentSelector: { path: kind, value: HorizontalPodAutoscaler }
+
+  - it: keeps replicas and renders no HPA when autoscaling is off
+    set:
+      services.server.replicas: 3
+    asserts:
+      - equal: { path: spec.replicas, value: 3 }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+          value: Deployment
+      - containsDocument:
+          kind: HorizontalPodAutoscaler
+          apiVersion: autoscaling/v2
+          any: true
+        not: true
+
+  - it: renders no PDB for single-replica workloads
+    asserts:
+      - containsDocument:
+          kind: PodDisruptionBudget
+          apiVersion: policy/v1
+          any: true
+        not: true
+
+  - it: renders a PDB when replicas > 1
+    set:
+      services.research-service.replicas: 2
+    documentSelector: { path: kind, value: PodDisruptionBudget }
+    asserts:
+      - equal: { path: metadata.name, value: useframe-research-service }
+      - equal: { path: spec.minAvailable, value: 1 }
+      - equal:
+          path: spec.selector.matchLabels["app.kubernetes.io/component"]
+          value: research-service
+
+  - it: renders a PDB when the HPA minimum is > 1 even with replicas 1
+    set:
+      services.server.autoscaling.enabled: true
+      services.server.autoscaling.minReplicas: 2
+    documentSelector: { path: kind, value: PodDisruptionBudget }
+    asserts:
+      - equal: { path: metadata.name, value: useframe-server }
+
+  - it: renders no PDB when pdb.enabled is false
+    set:
+      services.research-service.replicas: 2
+      services.research-service.pdb.enabled: false
+    asserts:
+      - containsDocument:
+          kind: PodDisruptionBudget
+          apiVersion: policy/v1
+          any: true
+        not: true
+
+  - it: puts plain env in a per-service ConfigMap consumed with envFrom, plus existing Secrets
+    asserts:
+      - equal:
+          path: data
+          value:
+            NODE_ENV: production
+            PORT: "4000"
+            ORCHESTRATOR_URL: http://useframe-orchestrator-service.useframe.svc.cluster.local:4001
+            RESEARCH_SERVICE_URL: http://useframe-research-service.useframe.svc.cluster.local:4004
+            DEPLOY_SERVICE_URL: http://useframe-deploy-service-server.useframe.svc.cluster.local:4005
+            BILLING_SERVICE_URL: http://useframe-billing-service.useframe.svc.cluster.local:4002
+            SCORING_SERVICE_URL: http://useframe-scoring-service.useframe.svc.cluster.local:4003
+        documentSelector:
+          path: $[?(@.kind == "ConfigMap" && @.metadata.name == "useframe-server-config")].kind
+          value: ConfigMap
+      - equal:
+          path: spec.template.spec.containers[0].envFrom
+          value:
+            - configMapRef: { name: useframe-server-config }
+            - secretRef: { name: server-secrets }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+          value: Deployment
+
+  - it: derives in-cluster URLs from the release name and namespace
+    release: { name: prod, namespace: apps }
+    documentSelector:
+      path: $[?(@.kind == "ConfigMap" && @.metadata.name == "prod-research-service-config")].kind
+      value: ConfigMap
+    asserts:
+      - equal:
+          path: data.ORCHESTRATOR_URL
+          value: http://prod-orchestrator-service.apps.svc.cluster.local:4001
+
+  - it: lets a service env value override global env
+    set:
+      global.env.LOG_LEVEL: info
+      services.server.env.LOG_LEVEL: debug
+    documentSelector:
+      path: $[?(@.kind == "ConfigMap" && @.metadata.name == "useframe-server-config")].kind
+      value: ConfigMap
+    asserts:
+      - equal: { path: data.LOG_LEVEL, value: debug }
+
+  - it: annotates pods with the config checksum (baseline)
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.metadata.annotations["checksum/config"]
+          value: 1741fa4ada84f8aca638cecef2131d56885ba6c948c02a167ad14b72213b33ab
+
+  - it: changes the config checksum when env changes
+    set:
+      services.server.env.LOG_LEVEL: debug
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+      value: Deployment
+    asserts:
+      - notEqual:
+          path: spec.template.metadata.annotations["checksum/config"]
+          value: 1741fa4ada84f8aca638cecef2131d56885ba6c948c02a167ad14b72213b33ab
+      - matchRegex:
+          path: spec.template.metadata.annotations["checksum/config"]
+          pattern: ^[a-f0-9]{64}$
+
+  - it: refuses a secret-looking env name with a value in a ConfigMap
+    set:
+      services.server.env.RESEND_API_KEY: re_live_value
+    asserts:
+      - failedTemplate:
+          errorPattern: "env RESEND_API_KEY looks secret"
+
+  - it: refuses secret-looking names in global env too
+    set:
+      global.env.JWT_ACCESS_SECRET: value
+    asserts:
+      - failedTemplate:
+          errorPattern: "looks secret"
+
+  - it: allows a secret-looking name with an empty value
+    set:
+      services.server.env.IPQS_API_KEY: ""
+    asserts:
+      - notFailedTemplate: {}
+
+  - it: adds preStop sleep and the grace period
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].lifecycle.preStop.exec.command
+          value: ["sleep", "15"]
+      - equal: { path: spec.template.spec.terminationGracePeriodSeconds, value: 60 }
+
+  - it: fails when terminationGracePeriodSeconds does not exceed preStopSleepSeconds
+    set:
+      services.research-service.terminationGracePeriodSeconds: 5
+      services.research-service.preStopSleepSeconds: 5
+    asserts:
+      - failedTemplate:
+          errorPattern: "research-service: terminationGracePeriodSeconds \\(5\\) must exceed preStopSleepSeconds \\(5\\)"
+
+  - it: probes use the service's real health route on the named http port
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].startupProbe
+          value: { httpGet: { path: /healthz, port: http }, periodSeconds: 5, timeoutSeconds: 3, failureThreshold: 30 }
+      - equal:
+          path: spec.template.spec.containers[0].readinessProbe
+          value: { httpGet: { path: /healthz, port: http }, periodSeconds: 10, timeoutSeconds: 3, failureThreshold: 3 }
+      - equal:
+          path: spec.template.spec.containers[0].livenessProbe
+          value: { httpGet: { path: /healthz, port: http }, periodSeconds: 20, timeoutSeconds: 3, failureThreshold: 3 }
+      - equal:
+          path: spec.template.spec.containers[0].ports
+          value: [{ name: http, containerPort: 4005, protocol: TCP }]
+
+  - it: drops a probe with enabled false and accepts a raw handler
+    set:
+      services.server.probes.readiness.enabled: false
+      services.server.probes.liveness.tcpSocket.port: http
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+      value: Deployment
+    asserts:
+      - notExists:
+          path: spec.template.spec.containers[0].readinessProbe
+      - equal:
+          path: spec.template.spec.containers[0].livenessProbe.tcpSocket.port
+          value: http
+      - notExists:
+          path: spec.template.spec.containers[0].livenessProbe.httpGet
+
+  - it: uses args (not command) so tini stays PID 1 for the deploy service
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-deploy-service-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].args
+          value: ["node", "dist/server.js"]
+      - notExists:
+          path: spec.template.spec.containers[0].command
+
+  - it: creates a ServiceAccount with Workload Identity annotations and no token
+    set:
+      services.orchestrator-service.serviceAccount.annotations:
+        iam.gke.io/gcp-service-account: orchestrator@example-project.iam.gserviceaccount.com
+    asserts:
+      - equal:
+          path: metadata.annotations["iam.gke.io/gcp-service-account"]
+          value: orchestrator@example-project.iam.gserviceaccount.com
+        documentSelector:
+          path: $[?(@.kind == "ServiceAccount" && @.metadata.name == "useframe-orchestrator-service")].kind
+          value: ServiceAccount
+      - equal: { path: automountServiceAccountToken, value: false }
+        documentSelector:
+          path: $[?(@.kind == "ServiceAccount" && @.metadata.name == "useframe-orchestrator-service")].kind
+          value: ServiceAccount
+      - equal:
+          path: spec.template.spec.serviceAccountName
+          value: useframe-orchestrator-service
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-orchestrator-service")].kind
+          value: Deployment
+
+  - it: spreads replicas across zones and nodes without blocking scheduling
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+      value: Deployment
+    asserts:
+      - equal:
+          path: spec.template.spec.topologySpreadConstraints[0].topologyKey
+          value: topology.kubernetes.io/zone
+      - equal:
+          path: spec.template.spec.topologySpreadConstraints[0].whenUnsatisfiable
+          value: ScheduleAnyway
+
+  - it: adds a service from values alone
+    set:
+      services.billing-service.enabled: true
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: docker.io/acme/useframe-billing-service:sha-abc1234
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-billing-service")].kind
+          value: Deployment
+      - equal:
+          path: spec.ports[0].port
+          value: 4002
+        documentSelector:
+          path: $[?(@.kind == "Service" && @.metadata.name == "useframe-billing-service")].kind
+          value: Service

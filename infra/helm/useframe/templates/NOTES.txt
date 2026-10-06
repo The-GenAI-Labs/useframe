@@ -1,0 +1,22 @@
+UseFrame {{ .Release.Name }} (revision {{ .Release.Revision }}) in namespace {{ .Release.Namespace }}.
+
+Workloads:
+{{- range $key := keys .Values.services | sortAlpha }}
+{{- $svc := index $.Values.services $key }}
+  - {{ $key }}: {{ ternary "enabled" "disabled" (eq (toString $svc.enabled) "true") }}
+{{- end }}
+
+Check the rollout:
+  kubectl -n {{ .Release.Namespace }} get pods -l app.kubernetes.io/instance={{ .Release.Name }}
+  kubectl -n {{ .Release.Namespace }} rollout status deploy/{{ .Release.Name }}-server
+{{- if include "useframe.gce" . }}
+  kubectl -n {{ .Release.Namespace }} describe managedcertificate {{ .Release.Name }}-ingress   # first issue: 15-60 min
+  curl -fsS https://{{ .Values.ingress.host }}/health
+{{- end }}
+
+Secrets are referenced, never created by this chart; a Secret change needs
+  kubectl -n {{ .Release.Namespace }} rollout restart deploy/<name>
+
+Roll back the workloads (never the database):
+  helm -n {{ .Release.Namespace }} history {{ .Release.Name }}
+  helm -n {{ .Release.Namespace }} rollback {{ .Release.Name }} <revision>

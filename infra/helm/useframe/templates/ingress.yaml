@@ -1,0 +1,62 @@
+{{- $exposed := include "useframe.exposedKeys" . | fromJsonArray -}}
+{{- if $exposed }}
+{{- $gce := include "useframe.gce" . -}}
+{{- $ing := .Values.ingress -}}
+{{- $name := include "useframe.fullname" (dict "root" $ "key" "ingress") -}}
+{{- $rules := dict -}}
+{{- range $key := $exposed }}
+{{- $w := include "useframe.workload" (dict "root" $ "svc" (index $.Values.services $key)) | fromYaml }}
+{{- $host := required (printf "services.%s: ingress.host or the top-level ingress.host is required" $key) ($w.ingress.host | default $ing.host) }}
+{{- $paths := get $rules $host | default list }}
+{{- $paths = append $paths (dict "path" $w.ingress.path "pathType" $w.ingress.pathType "service" (include "useframe.fullname" (dict "root" $ "key" $key)) "port" (int ($w.service.port | default $w.port))) }}
+{{- $_ := set $rules $host $paths }}
+{{- end }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "useframe.labels" (dict "root" $ "key" "ingress") | nindent 4 }}
+  {{- if or $gce $ing.annotations }}
+  annotations:
+    {{- if $gce }}
+    # GKE selects its controller by this annotation and ignores spec.ingressClassName.
+    kubernetes.io/ingress.class: gce
+    {{- with $ing.gke.staticIpName }}
+    kubernetes.io/ingress.global-static-ip-name: {{ . | quote }}
+    {{- end }}
+    {{- if $ing.gke.managedCertificate.enabled }}
+    networking.gke.io/managed-certificates: {{ $name }}
+    {{- end }}
+    {{- if $ing.gke.frontendConfig.enabled }}
+    networking.gke.io/v1beta1.FrontendConfig: {{ $name }}
+    {{- end }}
+    {{- end }}
+    {{- with $ing.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  {{- if and (not $gce) $ing.className }}
+  ingressClassName: {{ $ing.className }}
+  {{- end }}
+  {{- if and (not $gce) $ing.tls }}
+  tls:
+    {{- toYaml $ing.tls | nindent 4 }}
+  {{- end }}
+  rules:
+    {{- range $host := keys $rules | sortAlpha }}
+    - host: {{ $host | quote }}
+      http:
+        paths:
+          {{- range get $rules $host }}
+          - path: {{ .path }}
+            pathType: {{ .pathType }}
+            backend:
+              service:
+                name: {{ .service }}
+                port:
+                  number: {{ .port }}
+          {{- end }}
+    {{- end }}
+{{- end }}

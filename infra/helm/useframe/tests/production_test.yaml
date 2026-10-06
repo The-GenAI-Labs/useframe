@@ -1,0 +1,74 @@
+suite: production values
+templates:
+  - templates/workloads.yaml
+  - templates/ingress.yaml
+  - templates/gke-resources.yaml
+  - templates/migrate-job.yaml
+release: { name: useframe, namespace: useframe }
+values: [../values-production.yaml]
+set:
+  global.image.namespace: acme
+  global.image.tag: sha-abc1234
+tests:
+  # Rendering at all proves no ConfigMap carries a secret-looking key with a value (render-time guard).
+  - it: renders with production values
+    asserts:
+      - notFailedTemplate: {}
+
+  - it: autoscales the server 2-6 at 70 % CPU with a PDB
+    template: templates/workloads.yaml
+    asserts:
+      - equal: { path: spec.minReplicas, value: 2 }
+        documentSelector: { path: kind, value: HorizontalPodAutoscaler }
+      - equal: { path: spec.maxReplicas, value: 6 }
+        documentSelector: { path: kind, value: HorizontalPodAutoscaler }
+      - notExists: { path: spec.replicas }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-server")].kind
+          value: Deployment
+      - containsDocument:
+          kind: PodDisruptionBudget
+          apiVersion: policy/v1
+          name: useframe-server
+          any: true
+
+  - it: sizes the orchestrator per the production table
+    template: templates/workloads.yaml
+    documentSelector:
+      path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-orchestrator-service")].kind
+      value: Deployment
+    asserts:
+      - equal: { path: spec.replicas, value: 2 }
+      - equal:
+          path: spec.template.spec.containers[0].resources
+          value:
+            requests: { cpu: 500m, memory: 1Gi }
+            limits: { memory: 2Gi }
+
+  - it: keeps the build worker disabled until GKE Standard is confirmed
+    template: templates/workloads.yaml
+    asserts:
+      - containsDocument:
+          kind: Deployment
+          apiVersion: apps/v1
+          name: useframe-deploy-service-worker
+        not: true
+
+  - it: sets production URLs as plain config
+    template: templates/workloads.yaml
+    documentSelector:
+      path: $[?(@.kind == "ConfigMap" && @.metadata.name == "useframe-server-config")].kind
+      value: ConfigMap
+    asserts:
+      - equal: { path: data.CLIENT_URL, value: https://useframe.in }
+      - equal: { path: data.GOOGLE_REDIRECT_URI, value: https://api.useframe.in/api/auth/google/callback }
+      - equal: { path: data.ORCHESTRATOR_URL, value: http://useframe-orchestrator-service.useframe.svc.cluster.local:4001 }
+
+  - it: uses the reserved static IP and runs migrations
+    asserts:
+      - equal:
+          path: metadata.annotations["kubernetes.io/ingress.global-static-ip-name"]
+          value: useframe-api
+        template: templates/ingress.yaml
+      - isKind: { of: Job }
+        template: templates/migrate-job.yaml

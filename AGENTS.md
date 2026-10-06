@@ -43,6 +43,7 @@ Read the implementation and package manifests as the source of truth. See `READM
 | `apps/deploy-service`                                  | Site builds, R2 uploads, KV publishing (`syncSiteToKvs`), rollback, GC, reaper, reconcile; see `RUNBOOK.md`   |
 | `apps/site-edge`                                       | Cloudflare Worker serving generated sites from KV + R2; deployed with Wrangler, never from CI                 |
 | `infra/terraform`, `infra/k8s`                         | Cloudflare sites-hosting Terraform module and GKE manifests (applied by a human, never by agents)             |
+| `infra/helm/useframe`                                  | Helm chart for the backend workloads on GKE; agents run only offline checks (lint/template/unittest)          |
 | `packages/db`                                          | Shared Prisma client, schema, migrations, seed data, and scan cache helpers                                   |
 | `packages/schemas`                                     | Shared Zod contracts for projects, site specs, AI outputs, research, and credits                              |
 | `packages/events`                                      | Shared queue names and job payload contracts                                                                  |
@@ -147,6 +148,7 @@ Run these from the repository root unless otherwise noted:
 | `pnpm --filter @useframe/site-edge test`                | Worker unit + Miniflare tests (own pinned Vitest 4)                    |
 | `pnpm --filter @useframe/deploy-service test:isolation` | Build-isolation checks in a Linux container (Docker)                   |
 | `pnpm docker:build -- <service\|all>` / `docker:smoke`  | Build and smoke-test production images locally; see `docker/README.md` |
+| `helm unittest infra/helm/useframe`                     | Chart unit tests (lint/kubeconform: see the chart README)              |
 
 - Root `check-types` does not include web/server's differently named `typecheck` scripts. Run these explicitly when affected.
 - The web lint script is still `next lint` despite the Next.js 16 dependency. Inspect the local ESLint setup and use `pnpm --filter @useframe/web exec eslint .` when appropriate; report configuration failures rather than treating them as passes.

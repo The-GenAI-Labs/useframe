@@ -1,0 +1,8 @@
+apiVersion: v2
+name: useframe
+description: UseFrame backend workloads on GKE (images from Docker Hub). Databases are external.
+type: application
+version: 0.1.0
+# Informational only: every deploy pins images with global.image.tag=sha-<gitsha>.
+appVersion: "0"
+kubeVersion: ">=1.25.0-0"
