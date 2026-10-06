@@ -6,6 +6,7 @@ import { env, CONFIGURED_PROVIDERS } from "@/config/env.js"
 import scoreRoute from "@/routes/score.route.js"
 import internalRoute from "@/routes/internal.route.js"
 import { prisma } from "@useframe/db"
+import { redis } from "@/lib/redis.js"
 
 const app = express()
 
@@ -43,9 +44,19 @@ app.use(
 
 const start = async () => {
   await prisma.$connect()
-  app.listen(env.PORT, () => {
+  const server = app.listen(env.PORT, () => {
     console.log(`Scoring service running on port ${env.PORT}`)
   })
+  const shutdown = () => {
+    server.close(() => {
+      void redis
+        .quit()
+        .catch(() => undefined)
+        .finally(() => prisma.$disconnect().finally(() => process.exit(0)))
+    })
+  }
+  process.once("SIGTERM", shutdown)
+  process.once("SIGINT", shutdown)
 }
 
 start().catch((err) => {

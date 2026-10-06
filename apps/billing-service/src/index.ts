@@ -8,6 +8,7 @@ import checkoutRoute from "@/routes/checkout.route.js"
 import paymentMethodRoute from "@/routes/paymentMethod.route.js"
 import autoReloadRoute from "@/routes/autoReload.route.js"
 import { prisma } from "@useframe/db"
+import { redis } from "@/lib/redis.js"
 
 const app = express()
 
@@ -50,9 +51,19 @@ app.use(
 
 const start = async () => {
   await prisma.$connect()
-  app.listen(env.PORT, () => {
+  const server = app.listen(env.PORT, () => {
     console.log(`Billing service running on port ${env.PORT}`)
   })
+  const shutdown = () => {
+    server.close(() => {
+      void redis
+        .quit()
+        .catch(() => undefined)
+        .finally(() => prisma.$disconnect().finally(() => process.exit(0)))
+    })
+  }
+  process.once("SIGTERM", shutdown)
+  process.once("SIGINT", shutdown)
 }
 
 start().catch((err) => {
