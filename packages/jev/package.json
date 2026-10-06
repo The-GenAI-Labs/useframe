@@ -7,6 +7,9 @@
     ".": "./dist/index.js",
     "./config": "./dist/config.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check-types": "tsc --noEmit",

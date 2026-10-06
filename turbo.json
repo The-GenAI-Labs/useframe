@@ -5,6 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "env": ["SITE_INDEXING_ENABLED", "VERCEL_ENV"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "lint": {

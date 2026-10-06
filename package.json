@@ -14,7 +14,13 @@
     "corpus:reconcile": "pnpm --filter @repo/rag cli reconcile",
     "retrieval-cache:stats": "pnpm --filter @useframe/research-service exec tsx src/retrieval/cache/cli.ts stats",
     "retrieval-cache:prune": "pnpm --filter @useframe/research-service exec tsx src/retrieval/cache/cli.ts prune",
-    "eval:retrieval": "pnpm --filter @repo/evals eval:retrieval"
+    "eval:retrieval": "pnpm --filter @repo/evals eval:retrieval",
+    "docker:list": "node scripts/docker.mjs list",
+    "docker:build": "node scripts/docker.mjs build",
+    "docker:smoke": "node scripts/docker.mjs smoke",
+    "docker:push": "node scripts/docker.mjs push",
+    "docker:context-check": "node scripts/docker.mjs context-check",
+    "docker:test": "node --test scripts/docker-lib.test.mjs"
   },
   "devDependencies": {
     "prettier": "^3.7.4",
