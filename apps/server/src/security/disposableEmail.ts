@@ -1,4 +1,4 @@
-import disposableDomains from "disposable-email-domains"
+import disposableDomains from "disposable-email-domains" with { type: "json" }
 
 // The npm package is community-maintained but new disposable services
 // appear faster than any package release cadence — keep a small manual list
