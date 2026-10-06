@@ -1,14 +1,17 @@
 # syntax=docker/dockerfile:1.7
-# Build from the repo root: docker build -f apps/deploy-service/Dockerfile .
+# Migration image (useframe-migrate): runs `prisma migrate deploy`.
+# Build from the repo root: docker build -f packages/db/Dockerfile .
 
 ARG NODE_VERSION=24
 ARG NODE_IMAGE_DIGEST=
 
+############################
 # Stage 1 — builder
+############################
 FROM node:${NODE_VERSION}-bookworm-slim${NODE_IMAGE_DIGEST:+@${NODE_IMAGE_DIGEST}} AS builder
 ARG PNPM_VERSION=11.1.3
-ARG APP_DIR=apps/deploy-service
-ARG APP_PACKAGE=@useframe/deploy-service
+ARG APP_PACKAGE=@useframe/db
+ARG DEBIAN_FRONTEND=noninteractive
 ENV PNPM_HOME=/pnpm \
     PATH=/pnpm:$PATH \
     CI=1 \
@@ -20,8 +23,13 @@ ENV PNPM_HOME=/pnpm \
 # here only repeats it (one registry request per package) for a --frozen-lockfile install.
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+# Prisma downloads the schema engine for the OpenSSL it detects at install time.
+# hadolint ignore=DL3008
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openssl \
+ && rm -rf /var/lib/apt/lists/*
+
 # Optional BuildKit secret "extra_ca": a CA for TLS-intercepting proxies on build machines.
-# Download steps trust it; it is never written to a layer.
 RUN --mount=type=secret,id=extra_ca,required=false \
     if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
     corepack enable && corepack prepare "pnpm@${PNPM_VERSION}" --activate
@@ -40,30 +48,26 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
     if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
     pnpm install --offline --frozen-lockfile
 
-# prisma.config.ts resolves DATABASE_URL eagerly; `prisma generate` never connects.
-RUN DATABASE_URL=postgresql://build:build@localhost:5432/build pnpm --filter "${APP_PACKAGE}..." build
-
-# pnpm 11 deploys non-injected workspaces only with --legacy.
+# The prisma CLI is a devDependency of the db package, so this deploy keeps dev dependencies.
 RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
     --mount=type=secret,id=extra_ca,required=false \
     if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
-    pnpm --filter "${APP_PACKAGE}" deploy --prod --legacy /out \
- && node docker/prune-dev-peers.mjs /out \
- && mkdir /runtime \
- && cp -a /out/package.json /out/dist /out/node_modules /runtime/
+    pnpm --filter "${APP_PACKAGE}" deploy --legacy /out \
+ && mkdir -p /runtime/prisma \
+ && cp -a /out/package.json /out/node_modules /runtime/ \
+ && cp -a packages/db/prisma.config.ts /runtime/ \
+ && cp -a packages/db/prisma/schema.prisma packages/db/prisma/migrations /runtime/prisma/
 
-# node_modules templates for the compiler's pinned dependency sets (offline fast path for user builds).
-RUN --mount=type=secret,id=extra_ca,required=false \
-    if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
-    node /runtime/dist/cli/bakeTemplates.js /opt/templates
-
+############################
 # Stage 2 — runner
+############################
 FROM node:${NODE_VERSION}-bookworm-slim${NODE_IMAGE_DIGEST:+@${NODE_IMAGE_DIGEST}} AS runner
 ARG GIT_SHA=unknown
 ARG BUILD_DATE=unknown
 ARG VERSION=unknown
 ARG SOURCE_URL=unknown
-LABEL org.opencontainers.image.title="useframe-deploy-service" \
+ARG DEBIAN_FRONTEND=noninteractive
+LABEL org.opencontainers.image.title="useframe-migrate" \
       org.opencontainers.image.source="${SOURCE_URL}" \
       org.opencontainers.image.revision="${GIT_SHA}" \
       org.opencontainers.image.created="${BUILD_DATE}" \
@@ -71,30 +75,22 @@ LABEL org.opencontainers.image.title="useframe-deploy-service" \
 
 ENV NODE_ENV=production \
     TMPDIR=/tmp \
-    PORT=4005 \
-    DEPLOY_WORK_DIR=/work \
-    DEPLOY_NODE_MODULES_TEMPLATES=/opt/templates
+    HOME=/tmp \
+    CHECKPOINT_DISABLE=1 \
+    PRISMA_HIDE_UPDATE_MESSAGE=1
 
-ARG DEBIAN_FRONTEND=noninteractive
 # Package versions follow the pinned base image's Debian security updates.
 # hadolint ignore=DL3008
 RUN apt-get update \
- && apt-get install -y --no-install-recommends ca-certificates tini \
+ && apt-get install -y --no-install-recommends ca-certificates tini openssl \
  && rm -rf /var/lib/apt/lists/* \
  && groupadd --gid 10001 app \
- && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app \
- && groupadd --gid 10002 builder \
- && useradd --uid 10002 --gid 10002 --no-create-home --shell /usr/sbin/nologin builder \
- && mkdir -p /work \
- && chown 10001:10001 /work \
- && setpriv --version
+ && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app
 
 WORKDIR /app
 COPY --from=builder --chown=10001:10001 /runtime ./
-COPY --from=builder /opt/templates /opt/templates
 
 USER 10001:10001
-EXPOSE 4005
 ENTRYPOINT ["/usr/bin/tini", "--"]
-# The worker pod runs `node dist/worker.js` as root; it drops each build to uid 10002.
-CMD ["node", "dist/server.js"]
+# DATABASE_URL comes from the environment at run time only.
+CMD ["node", "node_modules/prisma/build/index.js", "migrate", "deploy"]

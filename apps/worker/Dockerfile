@@ -1,29 +1,94 @@
-# Playwright's own image so Chromium and its system libraries are already
-# present and version-matched to the playwright package — installing browsers
-# onto a plain node image means tracking that dependency set by hand.
-FROM mcr.microsoft.com/playwright:v1.48.0-jammy
+# syntax=docker/dockerfile:1.7
+# Build from the repo root: docker build -f apps/worker/Dockerfile .
 
-WORKDIR /app
+ARG NODE_VERSION=24
+ARG NODE_IMAGE_DIGEST=
 
-RUN corepack enable && corepack prepare pnpm@11.1.3 --activate
+# Stage 1 — builder
+FROM node:${NODE_VERSION}-bookworm-slim${NODE_IMAGE_DIGEST:+@${NODE_IMAGE_DIGEST}} AS builder
+ARG PNPM_VERSION=11.1.3
+ARG APP_DIR=apps/worker
+ARG APP_PACKAGE=@useframe/worker
+ENV PNPM_HOME=/pnpm \
+    PATH=/pnpm:$PATH \
+    CI=1 \
+    pnpm_config_store_dir=/pnpm/store \
+    pnpm_config_verify_deps_before_run=false \
+    pnpm_config_minimum_release_age=0 \
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+# The release-age policy is enforced when the lockfile is resolved; re-checking every entry
+# here only repeats it (one registry request per package) for a --frozen-lockfile install.
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Copy only what pnpm needs to resolve the workspace graph first, so a source
-# change doesn't invalidate the dependency layer.
-COPY pnpm-lock.yaml pnpm-workspace.yaml package.json ./
-COPY apps/worker/package.json ./apps/worker/
-COPY packages/db/package.json ./packages/db/
-COPY packages/events/package.json ./packages/events/
-COPY packages/schemas/package.json ./packages/schemas/
-COPY packages/types/package.json ./packages/types/
+# Optional BuildKit secret "extra_ca": a CA for TLS-intercepting proxies on build machines.
+# Download steps trust it; it is never written to a layer.
+RUN --mount=type=secret,id=extra_ca,required=false \
+    if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
+    corepack enable && corepack prepare "pnpm@${PNPM_VERSION}" --activate
 
-RUN pnpm install --frozen-lockfile --filter worker...
+WORKDIR /repo
+
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc* ./
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    --mount=type=secret,id=extra_ca,required=false \
+    if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
+    pnpm fetch
 
 COPY . .
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    --mount=type=secret,id=extra_ca,required=false \
+    if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
+    pnpm install --offline --frozen-lockfile
 
-# The Prisma client is generated code, not checked-in build output — it has to
-# exist before the worker's TypeScript will compile.
-RUN pnpm --filter @useframe/db exec prisma generate
-RUN pnpm --filter @repo/schemas build
-RUN pnpm --filter worker build
+# prisma.config.ts resolves DATABASE_URL eagerly; `prisma generate` never connects.
+RUN DATABASE_URL=postgresql://build:build@localhost:5432/build pnpm --filter "${APP_PACKAGE}..." build
 
-CMD ["pnpm", "--filter", "worker", "start"]
+# pnpm 11 deploys non-injected workspaces only with --legacy.
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    --mount=type=secret,id=extra_ca,required=false \
+    if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
+    pnpm --filter "${APP_PACKAGE}" deploy --prod --legacy /out \
+ && node docker/prune-dev-peers.mjs /out \
+ && mkdir /runtime \
+ && cp -a /out/package.json /out/dist /out/node_modules /runtime/
+
+# Stage 2 — runner
+FROM node:${NODE_VERSION}-bookworm-slim${NODE_IMAGE_DIGEST:+@${NODE_IMAGE_DIGEST}} AS runner
+ARG GIT_SHA=unknown
+ARG BUILD_DATE=unknown
+ARG VERSION=unknown
+ARG SOURCE_URL=unknown
+LABEL org.opencontainers.image.title="useframe-worker" \
+      org.opencontainers.image.source="${SOURCE_URL}" \
+      org.opencontainers.image.revision="${GIT_SHA}" \
+      org.opencontainers.image.created="${BUILD_DATE}" \
+      org.opencontainers.image.version="${VERSION}"
+
+ENV NODE_ENV=production \
+    TMPDIR=/tmp \
+    HOME=/tmp \
+    PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+
+ARG DEBIAN_FRONTEND=noninteractive
+# Package versions follow the pinned base image's Debian security updates.
+# hadolint ignore=DL3008
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates tini \
+ && rm -rf /var/lib/apt/lists/* \
+ && groupadd --gid 10001 app \
+ && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app
+
+WORKDIR /app
+COPY --from=builder --chown=10001:10001 /runtime ./
+
+# Chromium and its system libraries for Playwright and Lighthouse, matching the installed
+# playwright version; readable by any uid.
+RUN --mount=type=secret,id=extra_ca,required=false \
+    if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
+    node node_modules/playwright/cli.js install --with-deps chromium \
+ && rm -rf /var/lib/apt/lists/* \
+ && chmod -R a+rX /ms-playwright
+
+USER 10001:10001
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["node", "dist/index.js"]

@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-# Build from the repo root: docker build -f apps/deploy-service/Dockerfile .
+# Build from the repo root: docker build -f apps/server/Dockerfile .
 
 ARG NODE_VERSION=24
 ARG NODE_IMAGE_DIGEST=
@@ -7,8 +7,8 @@ ARG NODE_IMAGE_DIGEST=
 # Stage 1 — builder
 FROM node:${NODE_VERSION}-bookworm-slim${NODE_IMAGE_DIGEST:+@${NODE_IMAGE_DIGEST}} AS builder
 ARG PNPM_VERSION=11.1.3
-ARG APP_DIR=apps/deploy-service
-ARG APP_PACKAGE=@useframe/deploy-service
+ARG APP_DIR=apps/server
+ARG APP_PACKAGE=@useframe/server
 ENV PNPM_HOME=/pnpm \
     PATH=/pnpm:$PATH \
     CI=1 \
@@ -52,18 +52,13 @@ RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
  && mkdir /runtime \
  && cp -a /out/package.json /out/dist /out/node_modules /runtime/
 
-# node_modules templates for the compiler's pinned dependency sets (offline fast path for user builds).
-RUN --mount=type=secret,id=extra_ca,required=false \
-    if [ -s /run/secrets/extra_ca ]; then export NODE_EXTRA_CA_CERTS=/run/secrets/extra_ca; fi; \
-    node /runtime/dist/cli/bakeTemplates.js /opt/templates
-
 # Stage 2 — runner
 FROM node:${NODE_VERSION}-bookworm-slim${NODE_IMAGE_DIGEST:+@${NODE_IMAGE_DIGEST}} AS runner
 ARG GIT_SHA=unknown
 ARG BUILD_DATE=unknown
 ARG VERSION=unknown
 ARG SOURCE_URL=unknown
-LABEL org.opencontainers.image.title="useframe-deploy-service" \
+LABEL org.opencontainers.image.title="useframe-server" \
       org.opencontainers.image.source="${SOURCE_URL}" \
       org.opencontainers.image.revision="${GIT_SHA}" \
       org.opencontainers.image.created="${BUILD_DATE}" \
@@ -71,9 +66,7 @@ LABEL org.opencontainers.image.title="useframe-deploy-service" \
 
 ENV NODE_ENV=production \
     TMPDIR=/tmp \
-    PORT=4005 \
-    DEPLOY_WORK_DIR=/work \
-    DEPLOY_NODE_MODULES_TEMPLATES=/opt/templates
+    PORT=4000
 
 ARG DEBIAN_FRONTEND=noninteractive
 # Package versions follow the pinned base image's Debian security updates.
@@ -82,19 +75,12 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends ca-certificates tini \
  && rm -rf /var/lib/apt/lists/* \
  && groupadd --gid 10001 app \
- && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app \
- && groupadd --gid 10002 builder \
- && useradd --uid 10002 --gid 10002 --no-create-home --shell /usr/sbin/nologin builder \
- && mkdir -p /work \
- && chown 10001:10001 /work \
- && setpriv --version
+ && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin app
 
 WORKDIR /app
 COPY --from=builder --chown=10001:10001 /runtime ./
-COPY --from=builder /opt/templates /opt/templates
 
 USER 10001:10001
-EXPOSE 4005
+EXPOSE 4000
 ENTRYPOINT ["/usr/bin/tini", "--"]
-# The worker pod runs `node dist/worker.js` as root; it drops each build to uid 10002.
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/index.js"]
