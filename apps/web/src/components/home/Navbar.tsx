@@ -1,6 +1,7 @@
 "use client";
 
 import { memo, useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
 
@@ -55,10 +56,18 @@ export const Navbar = memo(function Navbar({ serifClassName }: { serifClassName:
         >
           <Link
             href="/"
-            className={`${serifClassName} cursor-pointer shrink-0 tracking-tight text-slate-950 transition-all duration-500 ease-out ${
+            className={`${serifClassName} inline-flex cursor-pointer shrink-0 items-center gap-2 tracking-tight text-slate-950 transition-all duration-500 ease-out ${
               scrolled ? "mr-6 text-[26px]" : "text-2xl"
             }`}
           >
+            <Image
+              src="/useFrame logo.png"
+              alt=""
+              width={36}
+              height={36}
+              priority
+              className={`shrink-0 transition-all duration-500 ease-out ${scrolled ? "size-8" : "size-9"}`}
+            />
             UseFrame
           </Link>
 
