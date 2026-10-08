@@ -24,6 +24,8 @@ const envSchema = z
 
     SEO_AUDIT_MAX_PAGES: z.coerce.number().int().positive().default(8),
     SEO_AUDIT_CONCURRENCY: z.coerce.number().int().positive().default(2),
+    // Unattached intake drafts untouched this long are deleted by expireCache.
+    BRIEF_DRAFT_TTL_DAYS: z.coerce.number().int().positive().default(30),
     ANTHROPIC_API_KEY: z.string().optional(),
     DEEPSEEK_API_KEY: z.string().optional(),
     OPENAI_API_KEY: z.string().optional(),
