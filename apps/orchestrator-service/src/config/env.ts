@@ -40,6 +40,11 @@ const envSchema = z
     LANGFUSE_PUBLIC_KEY: z.string().default(""),
     LANGFUSE_SECRET_KEY: z.string().default(""),
     LANGFUSE_HOST: z.string().default(""),
+
+    // Intake brief pre-fill and resolver (routes/brief.route.ts).
+    BRIEF_PREFILL_MAX_CHARS: z.coerce.number().int().positive().default(20000),
+    BRIEF_PREFILL_TIMEOUT_MS: z.coerce.number().int().positive().default(25000),
+    BRIEF_DOC_MAX_BYTES: z.coerce.number().int().positive().default(10485760),
   })
   .refine(
     (d) =>

@@ -380,6 +380,8 @@ export type UserWhereInput = {
   scoreResults?: Prisma.ScoreResultListRelationFilter
   seoAuditResults?: Prisma.SeoAuditResultListRelationFilter
   replications?: Prisma.ReplicationListRelationFilter
+  projectBriefs?: Prisma.ProjectBriefListRelationFilter
+  briefUploads?: Prisma.BriefUploadListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -426,6 +428,8 @@ export type UserOrderByWithRelationInput = {
   scoreResults?: Prisma.ScoreResultOrderByRelationAggregateInput
   seoAuditResults?: Prisma.SeoAuditResultOrderByRelationAggregateInput
   replications?: Prisma.ReplicationOrderByRelationAggregateInput
+  projectBriefs?: Prisma.ProjectBriefOrderByRelationAggregateInput
+  briefUploads?: Prisma.BriefUploadOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -475,6 +479,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   scoreResults?: Prisma.ScoreResultListRelationFilter
   seoAuditResults?: Prisma.SeoAuditResultListRelationFilter
   replications?: Prisma.ReplicationListRelationFilter
+  projectBriefs?: Prisma.ProjectBriefListRelationFilter
+  briefUploads?: Prisma.BriefUploadListRelationFilter
 }, "id" | "phone" | "razorpayCustomerId">
 
 export type UserOrderByWithAggregationInput = {
@@ -581,6 +587,8 @@ export type UserCreateInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -627,6 +635,8 @@ export type UserUncheckedCreateInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -673,6 +683,8 @@ export type UserUpdateInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -719,6 +731,8 @@ export type UserUncheckedUpdateInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1146,6 +1160,34 @@ export type UserUpdateOneRequiredWithoutUsageLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUsageLogsInput, Prisma.UserUpdateWithoutUsageLogsInput>, Prisma.UserUncheckedUpdateWithoutUsageLogsInput>
 }
 
+export type UserCreateNestedOneWithoutProjectBriefsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProjectBriefsInput, Prisma.UserUncheckedCreateWithoutProjectBriefsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProjectBriefsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutProjectBriefsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutProjectBriefsInput, Prisma.UserUncheckedCreateWithoutProjectBriefsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutProjectBriefsInput
+  upsert?: Prisma.UserUpsertWithoutProjectBriefsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProjectBriefsInput, Prisma.UserUpdateWithoutProjectBriefsInput>, Prisma.UserUncheckedUpdateWithoutProjectBriefsInput>
+}
+
+export type UserCreateNestedOneWithoutBriefUploadsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBriefUploadsInput, Prisma.UserUncheckedCreateWithoutBriefUploadsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBriefUploadsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBriefUploadsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBriefUploadsInput, Prisma.UserUncheckedCreateWithoutBriefUploadsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBriefUploadsInput
+  upsert?: Prisma.UserUpsertWithoutBriefUploadsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBriefUploadsInput, Prisma.UserUpdateWithoutBriefUploadsInput>, Prisma.UserUncheckedUpdateWithoutBriefUploadsInput>
+}
+
 export type UserCreateNestedOneWithoutCompetitorScansInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCompetitorScansInput, Prisma.UserUncheckedCreateWithoutCompetitorScansInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCompetitorScansInput
@@ -1245,6 +1287,8 @@ export type UserCreateWithoutIdentitiesInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIdentitiesInput = {
@@ -1290,6 +1334,8 @@ export type UserUncheckedCreateWithoutIdentitiesInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIdentitiesInput = {
@@ -1351,6 +1397,8 @@ export type UserUpdateWithoutIdentitiesInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIdentitiesInput = {
@@ -1396,6 +1444,8 @@ export type UserUncheckedUpdateWithoutIdentitiesInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1441,6 +1491,8 @@ export type UserCreateWithoutSessionsInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1486,6 +1538,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1547,6 +1601,8 @@ export type UserUpdateWithoutSessionsInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1592,6 +1648,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRefreshTokensInput = {
@@ -1637,6 +1695,8 @@ export type UserCreateWithoutRefreshTokensInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -1682,6 +1742,8 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -1743,6 +1805,8 @@ export type UserUpdateWithoutRefreshTokensInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -1788,6 +1852,8 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTicketTokensInput = {
@@ -1833,6 +1899,8 @@ export type UserCreateWithoutTicketTokensInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTicketTokensInput = {
@@ -1878,6 +1946,8 @@ export type UserUncheckedCreateWithoutTicketTokensInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTicketTokensInput = {
@@ -1939,6 +2009,8 @@ export type UserUpdateWithoutTicketTokensInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTicketTokensInput = {
@@ -1984,6 +2056,8 @@ export type UserUncheckedUpdateWithoutTicketTokensInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSignupRiskEventsInput = {
@@ -2029,6 +2103,8 @@ export type UserCreateWithoutSignupRiskEventsInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSignupRiskEventsInput = {
@@ -2074,6 +2150,8 @@ export type UserUncheckedCreateWithoutSignupRiskEventsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSignupRiskEventsInput = {
@@ -2135,6 +2213,8 @@ export type UserUpdateWithoutSignupRiskEventsInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSignupRiskEventsInput = {
@@ -2180,6 +2260,8 @@ export type UserUncheckedUpdateWithoutSignupRiskEventsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPhoneOtpsInput = {
@@ -2225,6 +2307,8 @@ export type UserCreateWithoutPhoneOtpsInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPhoneOtpsInput = {
@@ -2270,6 +2354,8 @@ export type UserUncheckedCreateWithoutPhoneOtpsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPhoneOtpsInput = {
@@ -2331,6 +2417,8 @@ export type UserUpdateWithoutPhoneOtpsInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
@@ -2376,6 +2464,8 @@ export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOrdersInput = {
@@ -2421,6 +2511,8 @@ export type UserCreateWithoutOrdersInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -2466,6 +2558,8 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -2527,6 +2621,8 @@ export type UserUpdateWithoutOrdersInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -2572,6 +2668,8 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionInput = {
@@ -2617,6 +2715,8 @@ export type UserCreateWithoutSubscriptionInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionInput = {
@@ -2662,6 +2762,8 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionInput = {
@@ -2723,6 +2825,8 @@ export type UserUpdateWithoutSubscriptionInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionInput = {
@@ -2768,6 +2872,8 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -2813,6 +2919,8 @@ export type UserCreateWithoutPaymentsInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2858,6 +2966,8 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2919,6 +3029,8 @@ export type UserUpdateWithoutPaymentsInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2964,6 +3076,8 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreditBalanceInput = {
@@ -3009,6 +3123,8 @@ export type UserCreateWithoutCreditBalanceInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreditBalanceInput = {
@@ -3054,6 +3170,8 @@ export type UserUncheckedCreateWithoutCreditBalanceInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreditBalanceInput = {
@@ -3115,6 +3233,8 @@ export type UserUpdateWithoutCreditBalanceInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreditBalanceInput = {
@@ -3160,6 +3280,8 @@ export type UserUncheckedUpdateWithoutCreditBalanceInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreditTransactionsInput = {
@@ -3205,6 +3327,8 @@ export type UserCreateWithoutCreditTransactionsInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreditTransactionsInput = {
@@ -3250,6 +3374,8 @@ export type UserUncheckedCreateWithoutCreditTransactionsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreditTransactionsInput = {
@@ -3311,6 +3437,8 @@ export type UserUpdateWithoutCreditTransactionsInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
@@ -3356,6 +3484,8 @@ export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAutoReloadSettingInput = {
@@ -3401,6 +3531,8 @@ export type UserCreateWithoutAutoReloadSettingInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAutoReloadSettingInput = {
@@ -3446,6 +3578,8 @@ export type UserUncheckedCreateWithoutAutoReloadSettingInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAutoReloadSettingInput = {
@@ -3507,6 +3641,8 @@ export type UserUpdateWithoutAutoReloadSettingInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAutoReloadSettingInput = {
@@ -3552,6 +3688,8 @@ export type UserUncheckedUpdateWithoutAutoReloadSettingInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
@@ -3597,6 +3735,8 @@ export type UserCreateWithoutProjectsInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
@@ -3642,6 +3782,8 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -3703,6 +3845,8 @@ export type UserUpdateWithoutProjectsInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -3748,6 +3892,8 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationsInput = {
@@ -3793,6 +3939,8 @@ export type UserCreateWithoutConversationsInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationsInput = {
@@ -3838,6 +3986,8 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationsInput = {
@@ -3899,6 +4049,8 @@ export type UserUpdateWithoutConversationsInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -3944,6 +4096,8 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeploymentsInput = {
@@ -3989,6 +4143,8 @@ export type UserCreateWithoutDeploymentsInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeploymentsInput = {
@@ -4034,6 +4190,8 @@ export type UserUncheckedCreateWithoutDeploymentsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeploymentsInput = {
@@ -4095,6 +4253,8 @@ export type UserUpdateWithoutDeploymentsInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeploymentsInput = {
@@ -4140,6 +4300,8 @@ export type UserUncheckedUpdateWithoutDeploymentsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUsageLogsInput = {
@@ -4185,6 +4347,8 @@ export type UserCreateWithoutUsageLogsInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUsageLogsInput = {
@@ -4230,6 +4394,8 @@ export type UserUncheckedCreateWithoutUsageLogsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUsageLogsInput = {
@@ -4291,6 +4457,8 @@ export type UserUpdateWithoutUsageLogsInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUsageLogsInput = {
@@ -4336,6 +4504,416 @@ export type UserUncheckedUpdateWithoutUsageLogsInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutProjectBriefsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
+  razorpayCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutProjectBriefsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
+  razorpayCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutProjectBriefsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutProjectBriefsInput, Prisma.UserUncheckedCreateWithoutProjectBriefsInput>
+}
+
+export type UserUpsertWithoutProjectBriefsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutProjectBriefsInput, Prisma.UserUncheckedUpdateWithoutProjectBriefsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutProjectBriefsInput, Prisma.UserUncheckedCreateWithoutProjectBriefsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutProjectBriefsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutProjectBriefsInput, Prisma.UserUncheckedUpdateWithoutProjectBriefsInput>
+}
+
+export type UserUpdateWithoutProjectBriefsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutProjectBriefsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutBriefUploadsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
+  razorpayCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBriefUploadsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
+  razorpayCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBriefUploadsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBriefUploadsInput, Prisma.UserUncheckedCreateWithoutBriefUploadsInput>
+}
+
+export type UserUpsertWithoutBriefUploadsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBriefUploadsInput, Prisma.UserUncheckedUpdateWithoutBriefUploadsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBriefUploadsInput, Prisma.UserUncheckedCreateWithoutBriefUploadsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBriefUploadsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBriefUploadsInput, Prisma.UserUncheckedUpdateWithoutBriefUploadsInput>
+}
+
+export type UserUpdateWithoutBriefUploadsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBriefUploadsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCompetitorScansInput = {
@@ -4381,6 +4959,8 @@ export type UserCreateWithoutCompetitorScansInput = {
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCompetitorScansInput = {
@@ -4426,6 +5006,8 @@ export type UserUncheckedCreateWithoutCompetitorScansInput = {
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCompetitorScansInput = {
@@ -4487,6 +5069,8 @@ export type UserUpdateWithoutCompetitorScansInput = {
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCompetitorScansInput = {
@@ -4532,6 +5116,8 @@ export type UserUncheckedUpdateWithoutCompetitorScansInput = {
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReplicationsInput = {
@@ -4577,6 +5163,8 @@ export type UserCreateWithoutReplicationsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReplicationsInput = {
@@ -4622,6 +5210,8 @@ export type UserUncheckedCreateWithoutReplicationsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReplicationsInput = {
@@ -4683,6 +5273,8 @@ export type UserUpdateWithoutReplicationsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReplicationsInput = {
@@ -4728,6 +5320,8 @@ export type UserUncheckedUpdateWithoutReplicationsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutScoreResultsInput = {
@@ -4773,6 +5367,8 @@ export type UserCreateWithoutScoreResultsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutScoreResultsInput = {
@@ -4818,6 +5414,8 @@ export type UserUncheckedCreateWithoutScoreResultsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutScoreResultsInput = {
@@ -4879,6 +5477,8 @@ export type UserUpdateWithoutScoreResultsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutScoreResultsInput = {
@@ -4924,6 +5524,8 @@ export type UserUncheckedUpdateWithoutScoreResultsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSeoAuditResultsInput = {
@@ -4969,6 +5571,8 @@ export type UserCreateWithoutSeoAuditResultsInput = {
   competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSeoAuditResultsInput = {
@@ -5014,6 +5618,8 @@ export type UserUncheckedCreateWithoutSeoAuditResultsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
   scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSeoAuditResultsInput = {
@@ -5075,6 +5681,8 @@ export type UserUpdateWithoutSeoAuditResultsInput = {
   competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSeoAuditResultsInput = {
@@ -5120,6 +5728,8 @@ export type UserUncheckedUpdateWithoutSeoAuditResultsInput = {
   competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
   scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -5145,6 +5755,8 @@ export type UserCountOutputType = {
   scoreResults: number
   seoAuditResults: number
   replications: number
+  projectBriefs: number
+  briefUploads: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5165,6 +5777,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   scoreResults?: boolean | UserCountOutputTypeCountScoreResultsArgs
   seoAuditResults?: boolean | UserCountOutputTypeCountSeoAuditResultsArgs
   replications?: boolean | UserCountOutputTypeCountReplicationsArgs
+  projectBriefs?: boolean | UserCountOutputTypeCountProjectBriefsArgs
+  briefUploads?: boolean | UserCountOutputTypeCountBriefUploadsArgs
 }
 
 /**
@@ -5296,6 +5910,20 @@ export type UserCountOutputTypeCountReplicationsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.ReplicationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountProjectBriefsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectBriefWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBriefUploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BriefUploadWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5341,6 +5969,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   scoreResults?: boolean | Prisma.User$scoreResultsArgs<ExtArgs>
   seoAuditResults?: boolean | Prisma.User$seoAuditResultsArgs<ExtArgs>
   replications?: boolean | Prisma.User$replicationsArgs<ExtArgs>
+  projectBriefs?: boolean | Prisma.User$projectBriefsArgs<ExtArgs>
+  briefUploads?: boolean | Prisma.User$briefUploadsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -5444,6 +6074,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   scoreResults?: boolean | Prisma.User$scoreResultsArgs<ExtArgs>
   seoAuditResults?: boolean | Prisma.User$seoAuditResultsArgs<ExtArgs>
   replications?: boolean | Prisma.User$replicationsArgs<ExtArgs>
+  projectBriefs?: boolean | Prisma.User$projectBriefsArgs<ExtArgs>
+  briefUploads?: boolean | Prisma.User$briefUploadsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -5472,6 +6104,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     scoreResults: Prisma.$ScoreResultPayload<ExtArgs>[]
     seoAuditResults: Prisma.$SeoAuditResultPayload<ExtArgs>[]
     replications: Prisma.$ReplicationPayload<ExtArgs>[]
+    projectBriefs: Prisma.$ProjectBriefPayload<ExtArgs>[]
+    briefUploads: Prisma.$BriefUploadPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5911,6 +6545,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   scoreResults<T extends Prisma.User$scoreResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$scoreResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScoreResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   seoAuditResults<T extends Prisma.User$seoAuditResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$seoAuditResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SeoAuditResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   replications<T extends Prisma.User$replicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$replicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  projectBriefs<T extends Prisma.User$projectBriefsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projectBriefsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectBriefPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  briefUploads<T extends Prisma.User$briefUploadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$briefUploadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BriefUploadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6818,6 +7454,54 @@ export type User$replicationsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.ReplicationScalarFieldEnum | Prisma.ReplicationScalarFieldEnum[]
+}
+
+/**
+ * User.projectBriefs
+ */
+export type User$projectBriefsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectBrief
+   */
+  select?: Prisma.ProjectBriefSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectBrief
+   */
+  omit?: Prisma.ProjectBriefOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectBriefInclude<ExtArgs> | null
+  where?: Prisma.ProjectBriefWhereInput
+  orderBy?: Prisma.ProjectBriefOrderByWithRelationInput | Prisma.ProjectBriefOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectBriefWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectBriefScalarFieldEnum | Prisma.ProjectBriefScalarFieldEnum[]
+}
+
+/**
+ * User.briefUploads
+ */
+export type User$briefUploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BriefUpload
+   */
+  select?: Prisma.BriefUploadSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BriefUpload
+   */
+  omit?: Prisma.BriefUploadOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BriefUploadInclude<ExtArgs> | null
+  where?: Prisma.BriefUploadWhereInput
+  orderBy?: Prisma.BriefUploadOrderByWithRelationInput | Prisma.BriefUploadOrderByWithRelationInput[]
+  cursor?: Prisma.BriefUploadWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BriefUploadScalarFieldEnum | Prisma.BriefUploadScalarFieldEnum[]
 }
 
 /**

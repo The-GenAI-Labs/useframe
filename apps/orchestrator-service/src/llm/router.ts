@@ -1,6 +1,7 @@
 import type { LanguageModelV1, ProviderMetadata } from "ai"
 import type { Tier } from "@repo/schemas"
-import { getClaudeModel, getDeepseekModel, DEEPSEEK_HIGH_REASONING_OPTIONS } from "./providers.js"
+import { getClaudeModel, getDeepseekModel, getModel, DEEPSEEK_HIGH_REASONING_OPTIONS } from "./providers.js"
+import { env } from "@/config/env.js"
 
 export type { Tier }
 
@@ -17,4 +18,10 @@ export function getModelForTier(tier: Tier): LanguageModelV1 {
 // DeepSeek's deepseek-flash into its high-effort reasoning mode on free tier.
 export function getProviderOptionsForTier(tier: Tier): ProviderMetadata | undefined {
   return tier === "paid" ? undefined : DEEPSEEK_HIGH_REASONING_OPTIONS
+}
+
+// Intake pre-fill and brief resolving are free to the user, so they always
+// run on the cheap model regardless of tier, without high-effort reasoning.
+export function getCheapModel(): LanguageModelV1 {
+  return env.DEEPSEEK_API_KEY ? getDeepseekModel() : getModel("claude-haiku-4-5-20251001")
 }

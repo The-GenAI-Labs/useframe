@@ -8,20 +8,23 @@
   "exports": {
     ".": "./dist/index.js",
     "./siteSpec": "./dist/siteSpec.js",
-    "./project": "./dist/project.schema.js"
+    "./project": "./dist/project.schema.js",
+    "./brief": "./dist/brief/index.js"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "^2.1.9"
   }
 }

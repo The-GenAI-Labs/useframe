@@ -1,7 +1,8 @@
 import type { Response, NextFunction } from "express"
 import type { AuthenticatedRequest } from "@/types/index.js"
 import { ProjectsService } from "./projects.service.js"
-import type { CreateProjectInput, UpdateProjectInput } from "./projects.schema.js"
+import { BriefsService } from "@/modules/briefs/briefs.service.js"
+import type { CreateProjectFromBriefInput, CreateProjectInput, UpdateProjectInput } from "./projects.schema.js"
 
 export const ProjectsController = {
   create: async (
@@ -10,9 +11,15 @@ export const ProjectsController = {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const result = await ProjectsService.createProject(
-        req.user!.id,
-        req.body as CreateProjectInput
+      const body = req.body as CreateProjectFromBriefInput | CreateProjectInput
+      if ("briefId" in body) {
+        const result = await BriefsService.createProjectFromBrief(req.user!, body.briefId)
+        res.status(201).json({ success: true, data: result })
+        return
+      }
+      const result = await ProjectsService.createProject(req.user!.id, body)
+      await BriefsService.createLegacyBrief(req.user!.id, result.project.id, body).catch((err) =>
+        console.error("[projects] legacy brief failed:", err instanceof Error ? err.name : "unknown")
       )
       res.status(201).json({ success: true, data: result })
     } catch (err) {

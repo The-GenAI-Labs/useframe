@@ -11,6 +11,7 @@ import { toSnapshot } from "@/spec/toSnapshot.js";
 import { uniqueSlug } from "@/lib/slug.js";
 import { prisma, type Prisma } from "@useframe/db";
 import type { GenerateRequest, SiteSpec } from "@repo/schemas";
+import { applyBriefToSpec, loadBriefContext } from "@/lib/briefPipeline.js";
 
 async function ensureProject(
   request: GenerateRequest,
@@ -108,6 +109,14 @@ export async function runOrchestrator(
       select: { designBrief: true },
     });
 
+    const briefCtx = await loadBriefContext(projectId, userId);
+    if (briefCtx?.revisionId) {
+      await prisma.projectVersion.update({
+        where: { id: versionId },
+        data: { briefRevisionId: briefCtx.revisionId },
+      });
+    }
+
     let spec: Partial<SiteSpec> = {
       projectId,
       versionId,
@@ -121,14 +130,14 @@ export async function runOrchestrator(
       stage: "GENERATE",
       message: "Building page structure...",
     });
-    spec = await runStructureAgent(res, spec, request, model, providerOptions);
+    spec = await runStructureAgent(res, spec, request, model, providerOptions, undefined, briefCtx);
 
     sseWrite(res, {
       type: "stage",
       stage: "COPY",
       message: "Writing conversion copy...",
     });
-    spec = await runCopyAgent(res, spec, request, model, providerOptions);
+    spec = await runCopyAgent(res, spec, request, model, providerOptions, undefined, briefCtx);
 
     sseWrite(res, {
       type: "stage",
@@ -150,6 +159,7 @@ export async function runOrchestrator(
       message: "Running critique pass...",
     });
     spec = await runCritiqueAgent(spec, request, model, providerOptions);
+    spec = applyBriefToSpec(spec, briefCtx);
 
     const snapshot = toSnapshot(spec as SiteSpec);
 

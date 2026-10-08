@@ -173,6 +173,21 @@ export type Waitlist = Prisma.WaitlistModel
  */
 export type ResearchReport = Prisma.ResearchReportModel
 /**
+ * Model ProjectBrief
+ * 
+ */
+export type ProjectBrief = Prisma.ProjectBriefModel
+/**
+ * Model BriefRevision
+ * 
+ */
+export type BriefRevision = Prisma.BriefRevisionModel
+/**
+ * Model BriefUpload
+ * 
+ */
+export type BriefUpload = Prisma.BriefUploadModel
+/**
  * Model ResearchIntake
  * 
  */

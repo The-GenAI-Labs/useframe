@@ -276,6 +276,8 @@ model User {
   scoreResults       ScoreResult[]
   seoAuditResults    SeoAuditResult[]
   replications       Replication[]
+  projectBriefs      ProjectBrief[]
+  briefUploads       BriefUpload[]
 
   @@index([status])
   @@index([deletedAt])
@@ -653,6 +655,7 @@ model Project {
   researchDocs    ResearchDocument[]
   validationRuns  ValidationRun[]
   replication     Replication?
+  brief           ProjectBrief?
 
   @@index([userId])
   @@index([status])
@@ -676,11 +679,15 @@ model ProjectVersion {
   validationFixKey   String?  @unique
   nextFiles          Json?
   snapshot           Json
+  // Brief revision this version was generated from; older than the brief's
+  // latest revision means the version is stale.
+  briefRevisionId    String?
   createdAt          DateTime @default(now())
 
-  project     Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  pages       Page[]
-  deployments Deployment[]
+  project       Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  briefRevision BriefRevision? @relation(fields: [briefRevisionId], references: [id], onDelete: SetNull)
+  pages         Page[]
+  deployments   Deployment[]
 
   validationRuns ValidationRun[]
 
@@ -1026,6 +1033,90 @@ model ResearchReport {
   citationRows ResearchReportCitation[]
 
   @@map("research_reports")
+}
+
+enum BriefStatus {
+  DRAFT
+  RESOLVING
+  AWAITING_REVIEW
+  APPROVED
+}
+
+enum BriefMode {
+  QUICK
+  FULL
+}
+
+// Intake answers for a project, plus where each answer came from. data and
+// meta are only ever written through writeBriefFields (packages/db/src/brief.ts).
+model ProjectBrief {
+  id             String      @id @default(cuid())
+  userId         String
+  projectId      String?     @unique
+  status         BriefStatus @default(DRAFT)
+  mode           BriefMode   @default(QUICK)
+  currentStep    String?
+  version        Int         @default(1)
+  data           Json        @default("{}")
+  meta           Json        @default("{}")
+  // Resolver outcome shown on review: { notice?, dropped?: fieldIds[] }.
+  resolution     Json        @default("{}")
+  catalogVersion Int
+  lastPrefillAt  DateTime?
+  approvedAt     DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project   Project?        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  revisions BriefRevision[]
+  uploads   BriefUpload[]
+
+  @@index([userId, status])
+  @@index([userId, projectId])
+  @@index([projectId, updatedAt])
+  @@map("project_briefs")
+}
+
+model BriefRevision {
+  id        String   @id @default(cuid())
+  briefId   String
+  version   Int
+  data      Json
+  meta      Json
+  reason    String
+  createdAt DateTime @default(now())
+
+  brief    ProjectBrief     @relation(fields: [briefId], references: [id], onDelete: Cascade)
+  versions ProjectVersion[]
+
+  @@unique([briefId, version])
+  @@map("brief_revisions")
+}
+
+// Logo and source-document bytes for a brief. Private: served only to the
+// owner through short-lived signed URLs. Source documents expire.
+model BriefUpload {
+  id        String    @id @default(cuid())
+  userId    String
+  briefId   String
+  field     String
+  mime      String
+  name      String?
+  size      Int
+  width     Int?
+  height    Int?
+  data      Bytes
+  expiresAt DateTime?
+  createdAt DateTime  @default(now())
+
+  user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  brief ProjectBrief @relation(fields: [briefId], references: [id], onDelete: Cascade)
+
+  @@index([briefId])
+  @@index([userId, createdAt])
+  @@index([expiresAt])
+  @@map("brief_uploads")
 }
 
 model ResearchIntake {

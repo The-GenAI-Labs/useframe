@@ -71,6 +71,17 @@ const envSchema = z.object({
   // — those credentials aren't provisioned yet, so this reads the built
   // .snapshot files straight off disk until that's wired up.
   WEBCONTAINER_SNAPSHOTS_DIR: z.string().default(""),
+
+  // Intake brief (apps/server/src/modules/briefs).
+  BRIEF_MAX_OPEN_DRAFTS: z.coerce.number().int().positive().default(5),
+  BRIEF_DRAFT_TTL_DAYS: z.coerce.number().int().positive().default(30),
+  BRIEF_PREFILL_MAX_CHARS: z.coerce.number().int().positive().default(20000),
+  BRIEF_PREFILL_TIMEOUT_MS: z.coerce.number().int().positive().default(25000),
+  BRIEF_DOC_MAX_BYTES: z.coerce.number().int().positive().default(10485760),
+  BRIEF_LOGO_MAX_BYTES: z.coerce.number().int().positive().default(2097152),
+  BRIEF_RATE_CREATE_PER_HOUR: z.coerce.number().int().positive().default(10),
+  BRIEF_RATE_PREFILL_PER_HOUR: z.coerce.number().int().positive().default(10),
+  BRIEF_RATE_PREFILL_URL_PER_HOUR: z.coerce.number().int().positive().default(3),
 });
 
 const parsed = envSchema.safeParse(process.env);

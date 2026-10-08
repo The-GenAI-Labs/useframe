@@ -11,6 +11,7 @@ import { callRetrieve, callDomainPattern, callAudienceModifier } from "@/lib/res
 import { findCompetitorUrls, enqueueCompetitorScans, waitForScans } from "@/tools/competitorSearch.js"
 import type { PlannerExtracted } from "@/prompts/planner.prompt.js"
 import { prisma, type Prisma } from "@useframe/db"
+import { loadBriefContext, plannerBriefVars, restrictLayout, writeResearchedFields } from "@/lib/briefPipeline.js"
 
 const router: Router = Router()
 
@@ -53,6 +54,8 @@ router.post("/plan", (req: Request, res: Response): void => {
       const audience = inferAudienceKey(targetAudience)
       const model = getModelForTier(tier)
       const providerOptions = getProviderOptionsForTier(tier)
+      const briefCtx = await loadBriefContext(projectId, user.id)
+      const userCompetitorUrls = (briefCtx?.input.userCompetitors ?? []).flatMap((c) => (c.url ? [c.url] : []))
 
       // Competitor research is paid-tier only. The DeepSeek-only model router
       // protects the generation LLM call, but did nothing to gate the Brave
@@ -63,8 +66,12 @@ router.post("/plan", (req: Request, res: Response): void => {
       // rather than discovery we paid for.
       let competitorUrls: string[] = []
 
+      // User-named competitors are their own input, so they're scanned first on
+      // any tier; discovery only tops the list up on paid.
       if (sourceUrl) {
         competitorUrls = [sourceUrl]
+      } else if (userCompetitorUrls.length >= 3 || (userCompetitorUrls.length > 0 && tier !== "paid")) {
+        competitorUrls = userCompetitorUrls.slice(0, 3)
       } else if (tier === "paid") {
         sseWrite(res, {
           type: "stage",
@@ -72,11 +79,11 @@ router.post("/plan", (req: Request, res: Response): void => {
           message: "Discovering competitors...",
         })
 
-        competitorUrls = await findCompetitorUrls(domain, ideaText, audience).catch((err) => {
+        const discovered = await findCompetitorUrls(domain, ideaText, audience).catch((err) => {
           console.warn("[plan] competitor discovery failed, continuing without it:", err)
-          return []
+          return [] as string[]
         })
-        competitorUrls = competitorUrls.slice(0, 3)
+        competitorUrls = [...userCompetitorUrls, ...discovered.filter((u) => !userCompetitorUrls.includes(u))].slice(0, 3)
       }
 
       let scannedCompetitors: {
@@ -149,9 +156,15 @@ router.post("/plan", (req: Request, res: Response): void => {
         message: isPaid ? "Compiling two design directions..." : "Compiling design brief...",
       })
 
-      const plannerVars = { extracted: plannerExtracted, results, domainPattern, audienceModifier }
+      const plannerVars = {
+        extracted: plannerExtracted,
+        results,
+        domainPattern,
+        audienceModifier,
+        brief: plannerBriefVars(briefCtx),
+      }
 
-      const [plannerOutput, researchReport] = await Promise.all([
+      const [rawPlannerOutput, researchReport] = await Promise.all([
         isPaid
           ? runPlannerCandidatesAgent(plannerVars, model, providerOptions)
           : runPlannerAgent(plannerVars, model, providerOptions),
@@ -167,8 +180,23 @@ router.post("/plan", (req: Request, res: Response): void => {
         ),
       ])
 
+      const plannerOutput = isPaid
+        ? {
+            ...(rawPlannerOutput as DesignBriefCandidates),
+            candidateA: restrictLayout((rawPlannerOutput as DesignBriefCandidates).candidateA, briefCtx),
+            candidateB: restrictLayout((rawPlannerOutput as DesignBriefCandidates).candidateB, briefCtx),
+          }
+        : restrictLayout(rawPlannerOutput as DesignBrief, briefCtx)
       const candidates = isPaid ? (plannerOutput as DesignBriefCandidates) : null
       const singleBrief = isPaid ? null : (plannerOutput as DesignBrief)
+
+      if (briefCtx) {
+        const userUrls = new Set(userCompetitorUrls)
+        await writeResearchedFields(briefCtx, {
+          keywords: researchReport.seoKeywords,
+          competitorUrls: scannedCompetitors.map((c) => c.sourceUrl).filter((u) => !userUrls.has(u)),
+        })
+      }
 
       // On the paid path ProjectVersion.designBrief is deliberately NOT
       // written here — with two candidates there is no chosen brief yet, so
@@ -275,8 +303,9 @@ const PlanSyncRequestSchema = z.object({
 })
 
 router.post("/plan/sync", (req: Request, res: Response, next: NextFunction): void => {
+  let user: { id: string }
   try {
-    verifyToken(req)
+    user = verifyToken(req)
   } catch (err) {
     console.error("[plan/sync] auth failed:", err instanceof Error ? err.message : err)
     res.status(401).json({ success: false, message: "Unauthorized" })
@@ -293,7 +322,7 @@ router.post("/plan/sync", (req: Request, res: Response, next: NextFunction): voi
     return
   }
 
-  const { startupIdea, niche, targetAudience, brandPersonality, pricePositioning, businessModel, differentiator } =
+  const { projectId, startupIdea, niche, targetAudience, brandPersonality, pricePositioning, businessModel, differentiator } =
     parsed.data
 
   const domain = nicheToDomain(niche)
@@ -313,14 +342,24 @@ router.post("/plan/sync", (req: Request, res: Response, next: NextFunction): voi
     callRetrieve(DECISION_QUERIES(domain, audience), domain, audience),
     callDomainPattern(domain),
     callAudienceModifier(audience),
+    projectId ? loadBriefContext(projectId, user.id) : Promise.resolve(null),
   ])
-    .then(([{ results }, domainPattern, audienceModifier]) => {
+    .then(async ([{ results }, domainPattern, audienceModifier, briefCtx]) => {
       // This sync path is the pre-existing DesignBrief-approval workflow's
       // dependency, not the new tier-gated generation flow, so it keeps its
       // original always-DeepSeek behavior rather than taking a tier param.
       const model = getModelForTier("free")
       const providerOptions = getProviderOptionsForTier("free")
-      return runPlannerCandidatesAgent({ extracted, results, domainPattern, audienceModifier }, model, providerOptions)
+      const raw = await runPlannerCandidatesAgent(
+        { extracted, results, domainPattern, audienceModifier, brief: plannerBriefVars(briefCtx) },
+        model,
+        providerOptions,
+      )
+      return {
+        ...raw,
+        candidateA: restrictLayout(raw.candidateA, briefCtx),
+        candidateB: restrictLayout(raw.candidateB, briefCtx),
+      }
     })
     .then((candidates) => {
       // `brief` is still returned (the recommended candidate) so any caller

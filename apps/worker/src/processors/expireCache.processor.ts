@@ -2,6 +2,7 @@ import { Worker, Queue } from "bullmq"
 import { prisma } from "@useframe/db"
 import { QUEUES } from "@repo/events"
 import { redis } from "../lib/redis.js"
+import { env } from "../config/env.js"
 
 const CLEANUP_INTERVAL_MS = 24 * 60 * 60 * 1000
 
@@ -9,6 +10,15 @@ async function expireCache(): Promise<void> {
   await prisma.competitorScan.deleteMany({ where: { expiresAt: { lt: new Date() } } })
   await prisma.scoreResult.deleteMany({ where: { expiresAt: { lt: new Date() }, status: "DONE" } })
   await prisma.searchQueryCache.deleteMany({ where: { expiresAt: { lt: new Date() } } })
+
+  const draftCutoff = new Date(Date.now() - env.BRIEF_DRAFT_TTL_DAYS * 24 * 60 * 60 * 1000)
+  const drafts = await prisma.projectBrief.deleteMany({
+    where: { projectId: null, status: "DRAFT", updatedAt: { lt: draftCutoff } },
+  })
+  const uploads = await prisma.briefUpload.deleteMany({ where: { expiresAt: { lt: new Date() } } })
+  if (drafts.count || uploads.count) {
+    console.log(`[expireCache] Removed ${drafts.count} stale brief drafts, ${uploads.count} expired brief uploads`)
+  }
 }
 
 export function startExpireCacheWorker(): Worker {

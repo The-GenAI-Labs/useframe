@@ -293,6 +293,24 @@ export const ResearchDocumentType = {
 export type ResearchDocumentType = (typeof ResearchDocumentType)[keyof typeof ResearchDocumentType]
 
 
+export const BriefStatus = {
+  DRAFT: 'DRAFT',
+  RESOLVING: 'RESOLVING',
+  AWAITING_REVIEW: 'AWAITING_REVIEW',
+  APPROVED: 'APPROVED'
+} as const
+
+export type BriefStatus = (typeof BriefStatus)[keyof typeof BriefStatus]
+
+
+export const BriefMode = {
+  QUICK: 'QUICK',
+  FULL: 'FULL'
+} as const
+
+export type BriefMode = (typeof BriefMode)[keyof typeof BriefMode]
+
+
 export const FindingStatus = {
   DRAFT: 'DRAFT',
   VERIFIED: 'VERIFIED',

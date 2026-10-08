@@ -44,6 +44,7 @@ export type ProjectVersionMinAggregateOutputType = {
   createdByMessageId: string | null
   triggeredBy: string | null
   validationFixKey: string | null
+  briefRevisionId: string | null
   createdAt: Date | null
 }
 
@@ -57,6 +58,7 @@ export type ProjectVersionMaxAggregateOutputType = {
   createdByMessageId: string | null
   triggeredBy: string | null
   validationFixKey: string | null
+  briefRevisionId: string | null
   createdAt: Date | null
 }
 
@@ -74,6 +76,7 @@ export type ProjectVersionCountAggregateOutputType = {
   validationFixKey: number
   nextFiles: number
   snapshot: number
+  briefRevisionId: number
   createdAt: number
   _all: number
 }
@@ -97,6 +100,7 @@ export type ProjectVersionMinAggregateInputType = {
   createdByMessageId?: true
   triggeredBy?: true
   validationFixKey?: true
+  briefRevisionId?: true
   createdAt?: true
 }
 
@@ -110,6 +114,7 @@ export type ProjectVersionMaxAggregateInputType = {
   createdByMessageId?: true
   triggeredBy?: true
   validationFixKey?: true
+  briefRevisionId?: true
   createdAt?: true
 }
 
@@ -127,6 +132,7 @@ export type ProjectVersionCountAggregateInputType = {
   validationFixKey?: true
   nextFiles?: true
   snapshot?: true
+  briefRevisionId?: true
   createdAt?: true
   _all?: true
 }
@@ -231,6 +237,7 @@ export type ProjectVersionGroupByOutputType = {
   validationFixKey: string | null
   nextFiles: runtime.JsonValue | null
   snapshot: runtime.JsonValue
+  briefRevisionId: string | null
   createdAt: Date
   _count: ProjectVersionCountAggregateOutputType | null
   _avg: ProjectVersionAvgAggregateOutputType | null
@@ -271,8 +278,10 @@ export type ProjectVersionWhereInput = {
   validationFixKey?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   nextFiles?: Prisma.JsonNullableFilter<"ProjectVersion">
   snapshot?: Prisma.JsonFilter<"ProjectVersion">
+  briefRevisionId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProjectVersion"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  briefRevision?: Prisma.XOR<Prisma.BriefRevisionNullableScalarRelationFilter, Prisma.BriefRevisionWhereInput> | null
   pages?: Prisma.PageListRelationFilter
   deployments?: Prisma.DeploymentListRelationFilter
   validationRuns?: Prisma.ValidationRunListRelationFilter
@@ -292,8 +301,10 @@ export type ProjectVersionOrderByWithRelationInput = {
   validationFixKey?: Prisma.SortOrderInput | Prisma.SortOrder
   nextFiles?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshot?: Prisma.SortOrder
+  briefRevisionId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
+  briefRevision?: Prisma.BriefRevisionOrderByWithRelationInput
   pages?: Prisma.PageOrderByRelationAggregateInput
   deployments?: Prisma.DeploymentOrderByRelationAggregateInput
   validationRuns?: Prisma.ValidationRunOrderByRelationAggregateInput
@@ -317,8 +328,10 @@ export type ProjectVersionWhereUniqueInput = Prisma.AtLeast<{
   triggeredBy?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   nextFiles?: Prisma.JsonNullableFilter<"ProjectVersion">
   snapshot?: Prisma.JsonFilter<"ProjectVersion">
+  briefRevisionId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProjectVersion"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  briefRevision?: Prisma.XOR<Prisma.BriefRevisionNullableScalarRelationFilter, Prisma.BriefRevisionWhereInput> | null
   pages?: Prisma.PageListRelationFilter
   deployments?: Prisma.DeploymentListRelationFilter
   validationRuns?: Prisma.ValidationRunListRelationFilter
@@ -338,6 +351,7 @@ export type ProjectVersionOrderByWithAggregationInput = {
   validationFixKey?: Prisma.SortOrderInput | Prisma.SortOrder
   nextFiles?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshot?: Prisma.SortOrder
+  briefRevisionId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ProjectVersionCountOrderByAggregateInput
   _avg?: Prisma.ProjectVersionAvgOrderByAggregateInput
@@ -363,6 +377,7 @@ export type ProjectVersionScalarWhereWithAggregatesInput = {
   validationFixKey?: Prisma.StringNullableWithAggregatesFilter<"ProjectVersion"> | string | null
   nextFiles?: Prisma.JsonNullableWithAggregatesFilter<"ProjectVersion">
   snapshot?: Prisma.JsonWithAggregatesFilter<"ProjectVersion">
+  briefRevisionId?: Prisma.StringNullableWithAggregatesFilter<"ProjectVersion"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ProjectVersion"> | Date | string
 }
 
@@ -381,6 +396,7 @@ export type ProjectVersionCreateInput = {
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
+  briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
   pages?: Prisma.PageCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectVersionInput
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutStartVersionInput
@@ -400,6 +416,7 @@ export type ProjectVersionUncheckedCreateInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: string | null
   createdAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
@@ -421,6 +438,7 @@ export type ProjectVersionUpdateInput = {
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
+  briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
   pages?: Prisma.PageUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectVersionNestedInput
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutStartVersionNestedInput
@@ -440,6 +458,7 @@ export type ProjectVersionUncheckedUpdateInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
@@ -460,6 +479,7 @@ export type ProjectVersionCreateManyInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: string | null
   createdAt?: Date | string
 }
 
@@ -493,6 +513,7 @@ export type ProjectVersionUncheckedUpdateManyInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -525,6 +546,7 @@ export type ProjectVersionCountOrderByAggregateInput = {
   validationFixKey?: Prisma.SortOrder
   nextFiles?: Prisma.SortOrder
   snapshot?: Prisma.SortOrder
+  briefRevisionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -542,6 +564,7 @@ export type ProjectVersionMaxOrderByAggregateInput = {
   createdByMessageId?: Prisma.SortOrder
   triggeredBy?: Prisma.SortOrder
   validationFixKey?: Prisma.SortOrder
+  briefRevisionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -555,6 +578,7 @@ export type ProjectVersionMinOrderByAggregateInput = {
   createdByMessageId?: Prisma.SortOrder
   triggeredBy?: Prisma.SortOrder
   validationFixKey?: Prisma.SortOrder
+  briefRevisionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -641,6 +665,48 @@ export type ProjectVersionUpdateOneRequiredWithoutDeploymentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectVersionUpdateToOneWithWhereWithoutDeploymentsInput, Prisma.ProjectVersionUpdateWithoutDeploymentsInput>, Prisma.ProjectVersionUncheckedUpdateWithoutDeploymentsInput>
 }
 
+export type ProjectVersionCreateNestedManyWithoutBriefRevisionInput = {
+  create?: Prisma.XOR<Prisma.ProjectVersionCreateWithoutBriefRevisionInput, Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput> | Prisma.ProjectVersionCreateWithoutBriefRevisionInput[] | Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput[]
+  connectOrCreate?: Prisma.ProjectVersionCreateOrConnectWithoutBriefRevisionInput | Prisma.ProjectVersionCreateOrConnectWithoutBriefRevisionInput[]
+  createMany?: Prisma.ProjectVersionCreateManyBriefRevisionInputEnvelope
+  connect?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+}
+
+export type ProjectVersionUncheckedCreateNestedManyWithoutBriefRevisionInput = {
+  create?: Prisma.XOR<Prisma.ProjectVersionCreateWithoutBriefRevisionInput, Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput> | Prisma.ProjectVersionCreateWithoutBriefRevisionInput[] | Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput[]
+  connectOrCreate?: Prisma.ProjectVersionCreateOrConnectWithoutBriefRevisionInput | Prisma.ProjectVersionCreateOrConnectWithoutBriefRevisionInput[]
+  createMany?: Prisma.ProjectVersionCreateManyBriefRevisionInputEnvelope
+  connect?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+}
+
+export type ProjectVersionUpdateManyWithoutBriefRevisionNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectVersionCreateWithoutBriefRevisionInput, Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput> | Prisma.ProjectVersionCreateWithoutBriefRevisionInput[] | Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput[]
+  connectOrCreate?: Prisma.ProjectVersionCreateOrConnectWithoutBriefRevisionInput | Prisma.ProjectVersionCreateOrConnectWithoutBriefRevisionInput[]
+  upsert?: Prisma.ProjectVersionUpsertWithWhereUniqueWithoutBriefRevisionInput | Prisma.ProjectVersionUpsertWithWhereUniqueWithoutBriefRevisionInput[]
+  createMany?: Prisma.ProjectVersionCreateManyBriefRevisionInputEnvelope
+  set?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+  disconnect?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+  delete?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+  connect?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+  update?: Prisma.ProjectVersionUpdateWithWhereUniqueWithoutBriefRevisionInput | Prisma.ProjectVersionUpdateWithWhereUniqueWithoutBriefRevisionInput[]
+  updateMany?: Prisma.ProjectVersionUpdateManyWithWhereWithoutBriefRevisionInput | Prisma.ProjectVersionUpdateManyWithWhereWithoutBriefRevisionInput[]
+  deleteMany?: Prisma.ProjectVersionScalarWhereInput | Prisma.ProjectVersionScalarWhereInput[]
+}
+
+export type ProjectVersionUncheckedUpdateManyWithoutBriefRevisionNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectVersionCreateWithoutBriefRevisionInput, Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput> | Prisma.ProjectVersionCreateWithoutBriefRevisionInput[] | Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput[]
+  connectOrCreate?: Prisma.ProjectVersionCreateOrConnectWithoutBriefRevisionInput | Prisma.ProjectVersionCreateOrConnectWithoutBriefRevisionInput[]
+  upsert?: Prisma.ProjectVersionUpsertWithWhereUniqueWithoutBriefRevisionInput | Prisma.ProjectVersionUpsertWithWhereUniqueWithoutBriefRevisionInput[]
+  createMany?: Prisma.ProjectVersionCreateManyBriefRevisionInputEnvelope
+  set?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+  disconnect?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+  delete?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+  connect?: Prisma.ProjectVersionWhereUniqueInput | Prisma.ProjectVersionWhereUniqueInput[]
+  update?: Prisma.ProjectVersionUpdateWithWhereUniqueWithoutBriefRevisionInput | Prisma.ProjectVersionUpdateWithWhereUniqueWithoutBriefRevisionInput[]
+  updateMany?: Prisma.ProjectVersionUpdateManyWithWhereWithoutBriefRevisionInput | Prisma.ProjectVersionUpdateManyWithWhereWithoutBriefRevisionInput[]
+  deleteMany?: Prisma.ProjectVersionScalarWhereInput | Prisma.ProjectVersionScalarWhereInput[]
+}
+
 export type ProjectVersionCreateNestedOneWithoutValidationRunsInput = {
   create?: Prisma.XOR<Prisma.ProjectVersionCreateWithoutValidationRunsInput, Prisma.ProjectVersionUncheckedCreateWithoutValidationRunsInput>
   connectOrCreate?: Prisma.ProjectVersionCreateOrConnectWithoutValidationRunsInput
@@ -669,6 +735,7 @@ export type ProjectVersionCreateWithoutProjectInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
+  briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
   pages?: Prisma.PageCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectVersionInput
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutStartVersionInput
@@ -687,6 +754,7 @@ export type ProjectVersionUncheckedCreateWithoutProjectInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: string | null
   createdAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
@@ -736,6 +804,7 @@ export type ProjectVersionScalarWhereInput = {
   validationFixKey?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   nextFiles?: Prisma.JsonNullableFilter<"ProjectVersion">
   snapshot?: Prisma.JsonFilter<"ProjectVersion">
+  briefRevisionId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
   createdAt?: Prisma.DateTimeFilter<"ProjectVersion"> | Date | string
 }
 
@@ -754,6 +823,7 @@ export type ProjectVersionCreateWithoutPagesInput = {
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
+  briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectVersionInput
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutStartVersionInput
 }
@@ -772,6 +842,7 @@ export type ProjectVersionUncheckedCreateWithoutPagesInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: string | null
   createdAt?: Date | string
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutStartVersionInput
@@ -808,6 +879,7 @@ export type ProjectVersionUpdateWithoutPagesInput = {
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
+  briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectVersionNestedInput
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutStartVersionNestedInput
 }
@@ -826,6 +898,7 @@ export type ProjectVersionUncheckedUpdateWithoutPagesInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutStartVersionNestedInput
@@ -846,6 +919,7 @@ export type ProjectVersionCreateWithoutDeploymentsInput = {
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
+  briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
   pages?: Prisma.PageCreateNestedManyWithoutVersionInput
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutStartVersionInput
 }
@@ -864,6 +938,7 @@ export type ProjectVersionUncheckedCreateWithoutDeploymentsInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: string | null
   createdAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutStartVersionInput
@@ -900,6 +975,7 @@ export type ProjectVersionUpdateWithoutDeploymentsInput = {
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
+  briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
   pages?: Prisma.PageUpdateManyWithoutVersionNestedInput
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutStartVersionNestedInput
 }
@@ -918,9 +994,76 @@ export type ProjectVersionUncheckedUpdateWithoutDeploymentsInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutStartVersionNestedInput
+}
+
+export type ProjectVersionCreateWithoutBriefRevisionInput = {
+  id?: string
+  versionNumber: number
+  label?: string | null
+  siteType?: $Enums.SiteType
+  seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  parentVersionId?: string | null
+  createdByMessageId?: string | null
+  triggeredBy?: string | null
+  validationFixKey?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
+  pages?: Prisma.PageCreateNestedManyWithoutVersionInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectVersionInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutStartVersionInput
+}
+
+export type ProjectVersionUncheckedCreateWithoutBriefRevisionInput = {
+  id?: string
+  projectId: string
+  versionNumber: number
+  label?: string | null
+  siteType?: $Enums.SiteType
+  seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  parentVersionId?: string | null
+  createdByMessageId?: string | null
+  triggeredBy?: string | null
+  validationFixKey?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutStartVersionInput
+}
+
+export type ProjectVersionCreateOrConnectWithoutBriefRevisionInput = {
+  where: Prisma.ProjectVersionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectVersionCreateWithoutBriefRevisionInput, Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput>
+}
+
+export type ProjectVersionCreateManyBriefRevisionInputEnvelope = {
+  data: Prisma.ProjectVersionCreateManyBriefRevisionInput | Prisma.ProjectVersionCreateManyBriefRevisionInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProjectVersionUpsertWithWhereUniqueWithoutBriefRevisionInput = {
+  where: Prisma.ProjectVersionWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProjectVersionUpdateWithoutBriefRevisionInput, Prisma.ProjectVersionUncheckedUpdateWithoutBriefRevisionInput>
+  create: Prisma.XOR<Prisma.ProjectVersionCreateWithoutBriefRevisionInput, Prisma.ProjectVersionUncheckedCreateWithoutBriefRevisionInput>
+}
+
+export type ProjectVersionUpdateWithWhereUniqueWithoutBriefRevisionInput = {
+  where: Prisma.ProjectVersionWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProjectVersionUpdateWithoutBriefRevisionInput, Prisma.ProjectVersionUncheckedUpdateWithoutBriefRevisionInput>
+}
+
+export type ProjectVersionUpdateManyWithWhereWithoutBriefRevisionInput = {
+  where: Prisma.ProjectVersionScalarWhereInput
+  data: Prisma.XOR<Prisma.ProjectVersionUpdateManyMutationInput, Prisma.ProjectVersionUncheckedUpdateManyWithoutBriefRevisionInput>
 }
 
 export type ProjectVersionCreateWithoutValidationRunsInput = {
@@ -938,6 +1081,7 @@ export type ProjectVersionCreateWithoutValidationRunsInput = {
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
+  briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
   pages?: Prisma.PageCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectVersionInput
 }
@@ -956,6 +1100,7 @@ export type ProjectVersionUncheckedCreateWithoutValidationRunsInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: string | null
   createdAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
@@ -992,6 +1137,7 @@ export type ProjectVersionUpdateWithoutValidationRunsInput = {
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
+  briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
   pages?: Prisma.PageUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectVersionNestedInput
 }
@@ -1010,6 +1156,7 @@ export type ProjectVersionUncheckedUpdateWithoutValidationRunsInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
@@ -1028,6 +1175,7 @@ export type ProjectVersionCreateManyProjectInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: string | null
   createdAt?: Date | string
 }
 
@@ -1045,6 +1193,7 @@ export type ProjectVersionUpdateWithoutProjectInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
   pages?: Prisma.PageUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUpdateManyWithoutProjectVersionNestedInput
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutStartVersionNestedInput
@@ -1063,6 +1212,7 @@ export type ProjectVersionUncheckedUpdateWithoutProjectInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
@@ -1071,6 +1221,81 @@ export type ProjectVersionUncheckedUpdateWithoutProjectInput = {
 
 export type ProjectVersionUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
+  seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ProjectVersionCreateManyBriefRevisionInput = {
+  id?: string
+  projectId: string
+  versionNumber: number
+  label?: string | null
+  siteType?: $Enums.SiteType
+  seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  parentVersionId?: string | null
+  createdByMessageId?: string | null
+  triggeredBy?: string | null
+  validationFixKey?: string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+}
+
+export type ProjectVersionUpdateWithoutBriefRevisionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
+  seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
+  pages?: Prisma.PageUpdateManyWithoutVersionNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectVersionNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutStartVersionNestedInput
+}
+
+export type ProjectVersionUncheckedUpdateWithoutBriefRevisionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
+  seo?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  designBrief?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  parentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByMessageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  triggeredBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutStartVersionNestedInput
+}
+
+export type ProjectVersionUncheckedUpdateManyWithoutBriefRevisionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
   versionNumber?: Prisma.IntFieldUpdateOperationsInput | number
   label?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   siteType?: Prisma.EnumSiteTypeFieldUpdateOperationsInput | $Enums.SiteType
@@ -1148,8 +1373,10 @@ export type ProjectVersionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   validationFixKey?: boolean
   nextFiles?: boolean
   snapshot?: boolean
+  briefRevisionId?: boolean
   createdAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
   pages?: boolean | Prisma.ProjectVersion$pagesArgs<ExtArgs>
   deployments?: boolean | Prisma.ProjectVersion$deploymentsArgs<ExtArgs>
   validationRuns?: boolean | Prisma.ProjectVersion$validationRunsArgs<ExtArgs>
@@ -1170,8 +1397,10 @@ export type ProjectVersionSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   validationFixKey?: boolean
   nextFiles?: boolean
   snapshot?: boolean
+  briefRevisionId?: boolean
   createdAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
 }, ExtArgs["result"]["projectVersion"]>
 
 export type ProjectVersionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1188,8 +1417,10 @@ export type ProjectVersionSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   validationFixKey?: boolean
   nextFiles?: boolean
   snapshot?: boolean
+  briefRevisionId?: boolean
   createdAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
 }, ExtArgs["result"]["projectVersion"]>
 
 export type ProjectVersionSelectScalar = {
@@ -1206,12 +1437,14 @@ export type ProjectVersionSelectScalar = {
   validationFixKey?: boolean
   nextFiles?: boolean
   snapshot?: boolean
+  briefRevisionId?: boolean
   createdAt?: boolean
 }
 
-export type ProjectVersionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionNumber" | "label" | "siteType" | "seo" | "designBrief" | "parentVersionId" | "createdByMessageId" | "triggeredBy" | "validationFixKey" | "nextFiles" | "snapshot" | "createdAt", ExtArgs["result"]["projectVersion"]>
+export type ProjectVersionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionNumber" | "label" | "siteType" | "seo" | "designBrief" | "parentVersionId" | "createdByMessageId" | "triggeredBy" | "validationFixKey" | "nextFiles" | "snapshot" | "briefRevisionId" | "createdAt", ExtArgs["result"]["projectVersion"]>
 export type ProjectVersionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
   pages?: boolean | Prisma.ProjectVersion$pagesArgs<ExtArgs>
   deployments?: boolean | Prisma.ProjectVersion$deploymentsArgs<ExtArgs>
   validationRuns?: boolean | Prisma.ProjectVersion$validationRunsArgs<ExtArgs>
@@ -1219,15 +1452,18 @@ export type ProjectVersionInclude<ExtArgs extends runtime.Types.Extensions.Inter
 }
 export type ProjectVersionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
 }
 export type ProjectVersionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
 }
 
 export type $ProjectVersionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectVersion"
   objects: {
     project: Prisma.$ProjectPayload<ExtArgs>
+    briefRevision: Prisma.$BriefRevisionPayload<ExtArgs> | null
     pages: Prisma.$PagePayload<ExtArgs>[]
     deployments: Prisma.$DeploymentPayload<ExtArgs>[]
     validationRuns: Prisma.$ValidationRunPayload<ExtArgs>[]
@@ -1246,6 +1482,7 @@ export type $ProjectVersionPayload<ExtArgs extends runtime.Types.Extensions.Inte
     validationFixKey: string | null
     nextFiles: runtime.JsonValue | null
     snapshot: runtime.JsonValue
+    briefRevisionId: string | null
     createdAt: Date
   }, ExtArgs["result"]["projectVersion"]>
   composites: {}
@@ -1642,6 +1879,7 @@ readonly fields: ProjectVersionFieldRefs;
 export interface Prisma__ProjectVersionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  briefRevision<T extends Prisma.ProjectVersion$briefRevisionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>>): Prisma.Prisma__BriefRevisionClient<runtime.Types.Result.GetResult<Prisma.$BriefRevisionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   pages<T extends Prisma.ProjectVersion$pagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectVersion$pagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   deployments<T extends Prisma.ProjectVersion$deploymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectVersion$deploymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeploymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   validationRuns<T extends Prisma.ProjectVersion$validationRunsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectVersion$validationRunsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ValidationRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1687,6 +1925,7 @@ export interface ProjectVersionFieldRefs {
   readonly validationFixKey: Prisma.FieldRef<"ProjectVersion", 'String'>
   readonly nextFiles: Prisma.FieldRef<"ProjectVersion", 'Json'>
   readonly snapshot: Prisma.FieldRef<"ProjectVersion", 'Json'>
+  readonly briefRevisionId: Prisma.FieldRef<"ProjectVersion", 'String'>
   readonly createdAt: Prisma.FieldRef<"ProjectVersion", 'DateTime'>
 }
     
@@ -2086,6 +2325,25 @@ export type ProjectVersionDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many ProjectVersions to delete.
    */
   limit?: number
+}
+
+/**
+ * ProjectVersion.briefRevision
+ */
+export type ProjectVersion$briefRevisionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BriefRevision
+   */
+  select?: Prisma.BriefRevisionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BriefRevision
+   */
+  omit?: Prisma.BriefRevisionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BriefRevisionInclude<ExtArgs> | null
+  where?: Prisma.BriefRevisionWhereInput
 }
 
 /**

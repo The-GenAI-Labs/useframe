@@ -17,6 +17,7 @@
   "dependencies": {
     "@repo/events": "workspace:*",
     "@repo/schemas": "workspace:*",
+    "@repo/site-builder": "workspace:*",
     "@useframe/db": "workspace:*",
     "arctic": "^3.7.0",
     "bcryptjs": "^2.4.3",
@@ -36,6 +37,7 @@
     "openai": "^4.77.0",
     "pino": "^9.5.0",
     "pino-pretty": "^13.0.0",
+    "sharp": "^0.34.3",
     "ws": "^8.18.0",
     "zod": "^3.25.76"
   },

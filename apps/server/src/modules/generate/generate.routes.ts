@@ -7,5 +7,6 @@ const router: Router = Router()
 router.use(authenticate)
 
 router.post("/authorize", GenerateController.authorize)
+router.get("/eligibility", GenerateController.eligibility)
 
 export default router

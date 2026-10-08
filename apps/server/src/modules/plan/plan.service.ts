@@ -83,6 +83,13 @@ export const PlanService = {
     if (!["PENDING", "REJECTED"].includes(pipeline.researchStatus)) {
       throw new AppError("Research is already running or awaiting review", 409)
     }
+    const brief = await prisma.projectBrief.findUnique({
+      where: { projectId: project.id },
+      select: { status: true },
+    })
+    if (brief && brief.status !== "APPROVED") {
+      throw new AppError("Review your brief before research starts", 409, "BRIEF_NOT_APPROVED")
+    }
 
     await prisma.pipelineState.update({
       where: { projectId: project.id },

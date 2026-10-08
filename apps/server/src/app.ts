@@ -21,6 +21,10 @@ import generateRoutes from "@/modules/generate/generate.routes.js";
 import researchDocumentRoutes from "@/modules/plan/researchDocument.routes.js";
 import webcontainerSnapshotRoutes from "@/modules/webcontainerSnapshot/webcontainerSnapshot.routes.js";
 import { errorHandler } from "@/middleware/errorHandler.js";
+import briefRoutes, {
+  briefJsonParser,
+  briefUploadsPublicRouter,
+} from "@/modules/briefs/briefs.routes.js";
 import { requireAllowedOrigin } from "@/middleware/originCheck.js";
 
 const app: Express = express();
@@ -28,6 +32,10 @@ const app: Express = express();
 app.use(helmet());
 app.use(cors(corsOptions(env.CLIENT_URL)));
 
+const BRIEF_BODY_PATH = /^\/api\/(?:briefs(?:\/|$)|projects\/[^/]+\/brief(?:\/|$))/;
+app.use((req, res, next) =>
+  BRIEF_BODY_PATH.test(req.path) ? briefJsonParser(req, res, next) : next(),
+);
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -45,6 +53,8 @@ app.use(
   requireAllowedOrigin([env.CLIENT_URL, env.FRONTEND_URL]),
   authRoutes,
 );
+app.use("/api/briefs", briefRoutes);
+app.use("/api/brief-uploads", briefUploadsPublicRouter);
 app.use("/api/projects", researchCitationsRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/chat", chatRoutes);
