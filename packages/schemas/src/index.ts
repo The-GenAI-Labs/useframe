@@ -13,3 +13,4 @@ export * from "./credits.js";
 export * from "./retrieval.schema.js";
 
 export * from "./project-chat.schema.js";
+export * from "./brief/index.js";
