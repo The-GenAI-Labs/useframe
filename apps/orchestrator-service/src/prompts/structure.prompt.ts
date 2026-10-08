@@ -3,7 +3,11 @@ export type StructurePromptVars = {
   niche: string
   targetAudience: string
   inputType: string
+  allowedSections?: string[]
+  briefFacts?: string
 }
+
+const DEFAULT_SECTION_MENU = ["HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "PRICING", "CTA", "FAQ", "FOOTER"]
 
 export const DEFAULT_STRUCTURE_PROMPT = (v: StructurePromptVars): string => `
 You are a landing page architect. Given this startup:
@@ -23,11 +27,12 @@ Determine the optimal site structure. Respond ONLY with valid JSON matching this
       "slug": "string",
       "title": "string",
       "sections": [
-        { "type": "HERO"|"FEATURES"|"HOW_IT_WORKS"|"TESTIMONIALS"|"PRICING"|"CTA"|"FAQ"|"FOOTER", "index": 0 }
+        { "type": ${(v.allowedSections ?? DEFAULT_SECTION_MENU).filter((t) => DEFAULT_SECTION_MENU.includes(t) || t === "CONTACT").map((t) => `"${t}"`).join("|")}, "index": 0 }
       ]
     }
   ]
 }
 
 Keep it focused. Single page sites: 1 HOME page with 5-7 sections. Multi page: 2-4 pages.
+${v.briefFacts ? `\n${v.briefFacts}` : ""}
 `.trim()

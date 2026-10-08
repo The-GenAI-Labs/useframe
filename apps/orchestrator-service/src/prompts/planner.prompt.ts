@@ -40,6 +40,8 @@ export type PlannerPromptVars = {
   results: PlannerRetrievalResult[]
   domainPattern: PlannerDomainPattern | null
   audienceModifier: PlannerAudienceModifier | null
+  // Present when the project has an approved intake brief.
+  brief?: { facts: string; allowedSections: string[] }
 }
 
 function formatFindings(results: PlannerRetrievalResult[]): string {
@@ -105,4 +107,12 @@ RULES:
    the specific product where the retrieved layout findings suggest a deviation.
 7. Respect the audience modifier's constraints (density, motion, contrast, avoid list) in your
    final decisions.
+${
+  v.brief
+    ? `8. layout.sections may only use these section types: ${v.brief.allowedSections.join(", ")}.
+   Sections that need proof the user hasn't given (testimonials, pricing plans, team) are not available.
+
+${v.brief.facts}`
+    : ""
+}
 `.trim()

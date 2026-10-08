@@ -9,6 +9,7 @@ export type CopyPromptVars = {
   sectionIndex: number
   brandTone?: string
   frameworkRationale?: string
+  briefFacts?: string
 }
 
 export const DEFAULT_COPY_PROMPT = (v: CopyPromptVars): string => `
@@ -19,7 +20,7 @@ Niche: ${v.niche}
 Target Audience: ${v.targetAudience}
 ${v.brandTone ? `Brand tone to match: ${v.brandTone}\n` : ""}Page: ${v.pageTitle} (${v.pageType})
 Section: ${v.sectionType} (position ${v.sectionIndex})
-
+${v.briefFacts ? `\n${v.briefFacts}\n` : ""}
 Write compelling copy for this section. Respond ONLY with valid JSON:
 {
   "headline": "string",

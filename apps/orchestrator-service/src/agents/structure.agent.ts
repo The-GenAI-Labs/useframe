@@ -9,6 +9,12 @@ import {
   type StructurePromptVars,
 } from "@/prompts/structure.prompt.js"
 import type { getProviderOptionsForTier } from "@/llm/router.js"
+import {
+  allowedSectionTypes,
+  briefFactsBlock,
+  filterSections,
+  type ProjectBriefContext,
+} from "@/lib/briefPipeline.js"
 
 const VALID_SECTION_TYPES = new Set<string>([
   "HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "PRICING",
@@ -45,7 +51,13 @@ export async function runStructureAgent(
   model: LanguageModelV1,
   providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
   promptFn: (vars: StructurePromptVars) => string = DEFAULT_STRUCTURE_PROMPT,
+  briefCtx: ProjectBriefContext | null = null,
 ): Promise<Partial<SiteSpec>> {
+  const reindex = <T extends { type: string; index: number }>(sections: T[]): T[] =>
+    filterSections(sections, briefCtx).map((s, index) => ({ ...s, index }))
+  const preferredSiteType =
+    briefCtx?.data.siteType === "SINGLE_PAGE" || briefCtx?.data.siteType === "MULTI_PAGE" ? briefCtx.data.siteType : undefined
+
   // When a DesignBrief was approved via the Research step, its layout and
   // copyFramework decisions are already grounded in retrieved research —
   // skip the LLM call for those two fields entirely and execute the brief
@@ -55,14 +67,14 @@ export async function runStructureAgent(
     const brief = spec.designBrief
     return {
       ...spec,
-      siteType: brief.layout.sections.length > 5 ? "MULTI_PAGE" : "SINGLE_PAGE",
+      siteType: preferredSiteType ?? (brief.layout.sections.length > 5 ? "MULTI_PAGE" : "SINGLE_PAGE"),
       copyFramework: brief.copyFramework,
       pages: [
         {
           type: "HOME",
           slug: "home",
           title: brief.product || request.name || "Home",
-          sections: sectionsFromBrief(brief.layout.sections, {
+          sections: sectionsFromBrief(filterSections(brief.layout.sections.map((type) => ({ type })), briefCtx).map((s) => s.type), {
             layout: brief.layout.citation,
             colors: brief.colors.citation,
             typography: brief.typography.citation,
@@ -78,6 +90,7 @@ export async function runStructureAgent(
     niche: request.niche,
     targetAudience: request.targetAudience,
     inputType: request.inputType,
+    ...(briefCtx ? { allowedSections: allowedSectionTypes(briefCtx), briefFacts: briefFactsBlock(briefCtx) } : {}),
   })
 
   const result = streamText({
@@ -101,7 +114,7 @@ export async function runStructureAgent(
 
     return {
       ...spec,
-      siteType: parsed.siteType ?? "SINGLE_PAGE",
+      siteType: preferredSiteType ?? parsed.siteType ?? "SINGLE_PAGE",
       copyFramework: parsed.copyFramework ?? "AIDA",
       pages: (parsed.pages ?? []).map(
         (p: {
@@ -113,11 +126,11 @@ export async function runStructureAgent(
           type: p.type,
           slug: p.slug,
           title: p.title,
-          sections: (p.sections ?? []).map(
-            (s: { type: string; index: number }) => ({
+          sections: reindex(
+            (p.sections ?? []).map((s: { type: string; index: number }) => ({
               type: s.type,
               index: s.index,
-            }),
+            })),
           ),
         }),
       ),

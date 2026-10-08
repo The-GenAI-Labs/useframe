@@ -9,6 +9,7 @@ import {
   type CopyPromptVars,
 } from "@/prompts/copy.prompt.js"
 import type { getProviderOptionsForTier } from "@/llm/router.js"
+import { briefFactsBlock, deterministicContent, type ProjectBriefContext } from "@/lib/briefPipeline.js"
 
 export async function runCopyAgent(
   res: Response,
@@ -17,8 +18,10 @@ export async function runCopyAgent(
   model: LanguageModelV1,
   providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
   promptFn: (vars: CopyPromptVars) => string = DEFAULT_COPY_PROMPT,
+  briefCtx: ProjectBriefContext | null = null,
 ): Promise<Partial<SiteSpec>> {
   if (!spec.pages) return spec
+  const briefFacts = briefCtx ? briefFactsBlock(briefCtx) : undefined
 
   const updatedPages = []
 
@@ -26,6 +29,18 @@ export async function runCopyAgent(
     const updatedSections: Section[] = []
 
     for (const section of page.sections) {
+      const fixed = briefCtx ? deterministicContent(section.type, briefCtx) : null
+      if (fixed) {
+        updatedSections.push({ ...section, content: fixed })
+        sseWrite(res, {
+          type: "section_complete",
+          pageSlug: page.slug,
+          sectionType: section.type,
+          sectionIndex: section.index,
+        })
+        continue
+      }
+
       const prompt = promptFn({
         copyFramework: spec.copyFramework ?? "AIDA",
         startupIdea: request.startupIdea,
@@ -37,6 +52,7 @@ export async function runCopyAgent(
         sectionIndex: section.index,
         brandTone: spec.designBrief?.brand.tone,
         frameworkRationale: spec.designBrief?.frameworkRationale,
+        briefFacts,
       })
 
       const result = streamText({
