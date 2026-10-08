@@ -715,6 +715,40 @@ export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
 }
 
+export type EnumBriefStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.BriefStatus | Prisma.EnumBriefStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BriefStatus[] | Prisma.ListEnumBriefStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BriefStatus[] | Prisma.ListEnumBriefStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBriefStatusFilter<$PrismaModel> | $Enums.BriefStatus
+}
+
+export type EnumBriefModeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BriefMode | Prisma.EnumBriefModeFieldRefInput<$PrismaModel>
+  in?: $Enums.BriefMode[] | Prisma.ListEnumBriefModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BriefMode[] | Prisma.ListEnumBriefModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBriefModeFilter<$PrismaModel> | $Enums.BriefMode
+}
+
+export type EnumBriefStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BriefStatus | Prisma.EnumBriefStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BriefStatus[] | Prisma.ListEnumBriefStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BriefStatus[] | Prisma.ListEnumBriefStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBriefStatusWithAggregatesFilter<$PrismaModel> | $Enums.BriefStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBriefStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBriefStatusFilter<$PrismaModel>
+}
+
+export type EnumBriefModeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BriefMode | Prisma.EnumBriefModeFieldRefInput<$PrismaModel>
+  in?: $Enums.BriefMode[] | Prisma.ListEnumBriefModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BriefMode[] | Prisma.ListEnumBriefModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBriefModeWithAggregatesFilter<$PrismaModel> | $Enums.BriefMode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBriefModeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBriefModeFilter<$PrismaModel>
+}
+
 export type EnumNicheCategoryNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.NicheCategory | Prisma.EnumNicheCategoryFieldRefInput<$PrismaModel> | null
   in?: $Enums.NicheCategory[] | Prisma.ListEnumNicheCategoryFieldRefInput<$PrismaModel> | null
@@ -1759,6 +1793,40 @@ export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumBriefStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.BriefStatus | Prisma.EnumBriefStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BriefStatus[] | Prisma.ListEnumBriefStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BriefStatus[] | Prisma.ListEnumBriefStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBriefStatusFilter<$PrismaModel> | $Enums.BriefStatus
+}
+
+export type NestedEnumBriefModeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BriefMode | Prisma.EnumBriefModeFieldRefInput<$PrismaModel>
+  in?: $Enums.BriefMode[] | Prisma.ListEnumBriefModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BriefMode[] | Prisma.ListEnumBriefModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBriefModeFilter<$PrismaModel> | $Enums.BriefMode
+}
+
+export type NestedEnumBriefStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BriefStatus | Prisma.EnumBriefStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.BriefStatus[] | Prisma.ListEnumBriefStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BriefStatus[] | Prisma.ListEnumBriefStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBriefStatusWithAggregatesFilter<$PrismaModel> | $Enums.BriefStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBriefStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBriefStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumBriefModeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BriefMode | Prisma.EnumBriefModeFieldRefInput<$PrismaModel>
+  in?: $Enums.BriefMode[] | Prisma.ListEnumBriefModeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BriefMode[] | Prisma.ListEnumBriefModeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBriefModeWithAggregatesFilter<$PrismaModel> | $Enums.BriefMode
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBriefModeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBriefModeFilter<$PrismaModel>
 }
 
 export type NestedEnumNicheCategoryNullableFilter<$PrismaModel = never> = {

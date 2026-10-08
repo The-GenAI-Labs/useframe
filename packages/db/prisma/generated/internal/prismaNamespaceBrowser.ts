@@ -82,6 +82,9 @@ export const ModelName = {
   UsageLog: 'UsageLog',
   Waitlist: 'Waitlist',
   ResearchReport: 'ResearchReport',
+  ProjectBrief: 'ProjectBrief',
+  BriefRevision: 'BriefRevision',
+  BriefUpload: 'BriefUpload',
   ResearchIntake: 'ResearchIntake',
   StyleTag: 'StyleTag',
   StyleDirective: 'StyleDirective',
@@ -445,6 +448,7 @@ export const ProjectVersionScalarFieldEnum = {
   validationFixKey: 'validationFixKey',
   nextFiles: 'nextFiles',
   snapshot: 'snapshot',
+  briefRevisionId: 'briefRevisionId',
   createdAt: 'createdAt'
 } as const
 
@@ -708,6 +712,58 @@ export const ResearchReportScalarFieldEnum = {
 } as const
 
 export type ResearchReportScalarFieldEnum = (typeof ResearchReportScalarFieldEnum)[keyof typeof ResearchReportScalarFieldEnum]
+
+
+export const ProjectBriefScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  projectId: 'projectId',
+  status: 'status',
+  mode: 'mode',
+  currentStep: 'currentStep',
+  version: 'version',
+  data: 'data',
+  meta: 'meta',
+  resolution: 'resolution',
+  catalogVersion: 'catalogVersion',
+  lastPrefillAt: 'lastPrefillAt',
+  approvedAt: 'approvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProjectBriefScalarFieldEnum = (typeof ProjectBriefScalarFieldEnum)[keyof typeof ProjectBriefScalarFieldEnum]
+
+
+export const BriefRevisionScalarFieldEnum = {
+  id: 'id',
+  briefId: 'briefId',
+  version: 'version',
+  data: 'data',
+  meta: 'meta',
+  reason: 'reason',
+  createdAt: 'createdAt'
+} as const
+
+export type BriefRevisionScalarFieldEnum = (typeof BriefRevisionScalarFieldEnum)[keyof typeof BriefRevisionScalarFieldEnum]
+
+
+export const BriefUploadScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  briefId: 'briefId',
+  field: 'field',
+  mime: 'mime',
+  name: 'name',
+  size: 'size',
+  width: 'width',
+  height: 'height',
+  data: 'data',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type BriefUploadScalarFieldEnum = (typeof BriefUploadScalarFieldEnum)[keyof typeof BriefUploadScalarFieldEnum]
 
 
 export const ResearchIntakeScalarFieldEnum = {
