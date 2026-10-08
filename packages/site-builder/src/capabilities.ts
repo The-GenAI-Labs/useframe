@@ -17,6 +17,14 @@ export const KNOWN_CAPABILITIES = [
 ] as const;
 export type KnownCapability = (typeof KNOWN_CAPABILITIES)[number];
 
+// What generated sites can actually do today; the brief uses this to hide
+// options (forms, extra languages) and to warn about legal pages.
+export const BUILDER_CAPABILITIES = {
+  formHandler: false,
+  legalPages: false,
+  languages: ["en"],
+} as const satisfies { formHandler: boolean; legalPages: boolean; languages: readonly string[] };
+
 export function isSupportedCapability(value: string | null | undefined): boolean {
   return !value || (SUPPORTED_CAPABILITIES as readonly string[]).includes(value);
 }

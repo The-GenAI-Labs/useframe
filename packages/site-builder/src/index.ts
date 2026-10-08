@@ -1,4 +1,4 @@
-import type { SiteSpec } from "@repo/schemas";
+import { safeHref, type SiteSpec } from "@repo/schemas";
 
 export type SeoFiles = {
   robotsTxt?: string;
@@ -7,13 +7,42 @@ export type SeoFiles = {
 
 export type GeneratedFile = { path: string; content: string };
 
+// User- and model-supplied strings reach generated source code, so every
+// value is emitted as a JS string literal inside a JSX expression (React then
+// escapes it as text) and every href goes through safeHref.
+function jsxText(value: unknown): string {
+  return `{${JSON.stringify(typeof value === "string" ? value : "")}}`;
+}
+
+function jsxHref(value: unknown): string {
+  return `{${JSON.stringify(safeHref(value) ?? "#")}}`;
+}
+
+export function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function cssColor(value: string, fallback: string): string {
+  return /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(value) ? value : fallback;
+}
+
+export function cssFontName(value: string): string {
+  const cleaned = value.replace(/[^A-Za-z0-9 \-]/g, "").trim().slice(0, 60);
+  return cleaned || "Inter";
+}
+
 export function cssVars(ds: SiteSpec["designSystem"]): string {
   return `:root {
-  --primary: ${ds.primaryColor};
-  --secondary: ${ds.secondaryColor};
-  --accent: ${ds.accentColor};
-  --font-primary: "${ds.fontPrimary}", system-ui, sans-serif;
-  --font-secondary: "${ds.fontSecondary}", system-ui, sans-serif;
+  --primary: ${cssColor(ds.primaryColor, "#2563EB")};
+  --secondary: ${cssColor(ds.secondaryColor, "#F1F5F9")};
+  --accent: ${cssColor(ds.accentColor, "#F97316")};
+  --font-primary: "${cssFontName(ds.fontPrimary)}", system-ui, sans-serif;
+  --font-secondary: "${cssFontName(ds.fontSecondary)}", system-ui, sans-serif;
   --radius: ${ds.borderRadius === "none" ? "0" : ds.borderRadius === "sm" ? "4px" : ds.borderRadius === "lg" ? "12px" : ds.borderRadius === "full" ? "9999px" : "8px"};
 }
 
@@ -35,6 +64,7 @@ export function sectionToJsx(
   const subheadline = c.subheadline ?? "";
   const body = c.body ?? "";
   const ctaPrimary = c.cta?.primary ?? "";
+  const ctaHref = jsxHref(c.cta?.primaryHref);
   const items = c.items ?? [];
 
   // Only emitted when a section actually carries citations, so generated
@@ -51,23 +81,23 @@ export function sectionToJsx(
     case "HERO":
       return `
 <section${citationAttr} style={{ padding: "80px 24px", textAlign: "center", background: "var(--primary)", color: "#fff" }}>
-  <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, marginBottom: "1rem" }}>${headline}</h1>
-  ${subheadline ? `<p style={{ fontSize: "1.25rem", opacity: 0.85, marginBottom: "2rem" }}>${subheadline}</p>` : ""}
-  ${ctaPrimary ? `<a href="#" style={{ display: "inline-block", padding: "14px 32px", background: "#fff", color: "var(--primary)", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${ctaPrimary}</a>` : ""}
+  <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, marginBottom: "1rem" }}>${jsxText(headline)}</h1>
+  ${subheadline ? `<p style={{ fontSize: "1.25rem", opacity: 0.85, marginBottom: "2rem" }}>${jsxText(subheadline)}</p>` : ""}
+  ${ctaPrimary ? `<a href=${ctaHref} style={{ display: "inline-block", padding: "14px 32px", background: "#fff", color: "var(--primary)", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${jsxText(ctaPrimary)}</a>` : ""}
 </section>`;
 
     case "FEATURES":
       return `
 <section${citationAttr} style={{ padding: "80px 24px", maxWidth: "1100px", margin: "0 auto" }}>
-  <h2 style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center", marginBottom: "3rem" }}>${headline}</h2>
+  <h2 style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center", marginBottom: "3rem" }}>${jsxText(headline)}</h2>
   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "2rem" }}>
     ${items
       .map(
         (
           item,
         ) => `<div style={{ padding: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "var(--radius)" }}>
-      <h3 style={{ fontWeight: 600, marginBottom: ".5rem" }}>${item.title}</h3>
-      <p style={{ color: "#6b7280", fontSize: ".9rem" }}>${item.description}</p>
+      <h3 style={{ fontWeight: 600, marginBottom: ".5rem" }}>${jsxText(item.title)}</h3>
+      <p style={{ color: "#6b7280", fontSize: ".9rem" }}>${jsxText(item.description)}</p>
     </div>`,
       )
       .join("\n    ")}
@@ -77,22 +107,22 @@ export function sectionToJsx(
     case "CTA":
       return `
 <section${citationAttr} style={{ padding: "80px 24px", background: "var(--accent)", textAlign: "center" }}>
-  <h2 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "1rem" }}>${headline}</h2>
-  ${body ? `<p style={{ marginBottom: "2rem", color: "#374151" }}>${body}</p>` : ""}
-  ${ctaPrimary ? `<a href="#" style={{ display: "inline-block", padding: "14px 32px", background: "var(--primary)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${ctaPrimary}</a>` : ""}
+  <h2 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "1rem" }}>${jsxText(headline)}</h2>
+  ${body ? `<p style={{ marginBottom: "2rem", color: "#374151" }}>${jsxText(body)}</p>` : ""}
+  ${ctaPrimary ? `<a href=${ctaHref} style={{ display: "inline-block", padding: "14px 32px", background: "var(--primary)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${jsxText(ctaPrimary)}</a>` : ""}
 </section>`;
 
     case "FOOTER":
       return `
 <footer${citationAttr} style={{ padding: "2rem 24px", borderTop: "1px solid #e5e7eb", textAlign: "center", color: "#9ca3af", fontSize: ".85rem" }}>
-  <p>${headline || "© 2025 All rights reserved."}</p>
+  <p>${jsxText(headline || "© 2025 All rights reserved.")}</p>
 </footer>`;
 
     default:
       return `
 <section${citationAttr} style={{ padding: "60px 24px", maxWidth: "900px", margin: "0 auto" }}>
-  <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1rem" }}>${headline}</h2>
-  ${body ? `<p style={{ color: "#374151" }}>${body}</p>` : ""}
+  <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1rem" }}>${jsxText(headline)}</h2>
+  ${body ? `<p style={{ color: "#374151" }}>${jsxText(body)}</p>` : ""}
 </section>`;
   }
 }
@@ -164,9 +194,9 @@ export function buildSiteFiles(
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${homePage.seo?.title ?? homePage.title}</title>
+    <title>${escapeHtml(homePage.seo?.title ?? homePage.title)}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=${encodeURIComponent(spec.designSystem.fontPrimary)}:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=${encodeURIComponent(cssFontName(spec.designSystem.fontPrimary))}:wght@400;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
@@ -240,7 +270,7 @@ ${pageMeta.map((m) => `import ${m.componentName} from "./pages/${m.fileName.repl
 export default function App() {
   return (
     <Routes>
-      ${pageMeta.map((m) => `<Route path="${m.routePath}" element={<${m.componentName} />} />`).join("\n      ")}
+      ${pageMeta.map((m) => `<Route path={${JSON.stringify(m.routePath)}} element={<${m.componentName} />} />`).join("\n      ")}
     </Routes>
   )
 }
