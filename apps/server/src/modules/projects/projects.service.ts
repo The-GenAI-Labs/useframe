@@ -161,6 +161,7 @@ export const ProjectsService = {
             label: true,
             siteType: true,
             snapshot: true,
+            briefRevisionId: true,
             createdAt: true,
           },
         },
