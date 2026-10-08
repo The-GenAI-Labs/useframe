@@ -24,6 +24,18 @@ export async function hasUsedFreeGeneration(userId: string): Promise<boolean> {
 }
 
 export const GenerateService = {
+  // Read-only twin of authorize() for UI hints: never reserves the free
+  // grant or deducts credits. authorize() stays the only real gate.
+  async eligibility(userId: string): Promise<{ eligible: boolean }> {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { hasUsedFreeGeneration: true, signupRiskDecision: true },
+    })
+    if (!user) throw new AppError("User not found", 404)
+    if (!user.hasUsedFreeGeneration && user.signupRiskDecision !== "BLOCK_FREE_TIER") return { eligible: true }
+    return { eligible: await CreditsService.hasSufficientBalance(userId, GENERATE_CREDIT_COST) }
+  },
+
   // Pre-flight check-and-reserve called by apps/web BEFORE it opens the SSE
   // connection to orchestrator-service's /generate or /plan. First-ever
   // generation is free (DeepSeek, no credit deduction) — the

@@ -5,7 +5,10 @@ export class AppError extends Error {
     constructor(
         public message: string,
         public statusCode: number = 500,
-        public code?: string
+        public code?: string,
+        // Extra response fields, e.g. field-level `errors` or the current
+        // resource on a 409.
+        public body?: { errors?: Record<string, string[]>; data?: unknown }
     ) {
         super(message)
         this.name = "AppError"
@@ -23,10 +26,11 @@ export const errorHandler = (
         if (err.statusCode >= 500) {
             console.error(`[${new Date().toISOString()}] ${err.name}: ${err.message}`)
         }
-        const response: ApiResponse = {
+        const response: ApiResponse<unknown> = {
             success: false,
             message: err.message,
             code: err.code,
+            ...err.body,
         }
         res.status(err.statusCode).json(response)
         return

@@ -159,3 +159,53 @@ export async function callChat(
 
   return body.data
 }
+
+export type BriefPrefillPayload =
+  | { briefId: string; kind: "text"; text: string }
+  | { briefId: string; kind: "url"; url: string }
+  | { briefId: string; kind: "doc"; uploadId: string }
+
+export type BriefPrefillResult = {
+  values: Record<string, unknown>
+  confidence: Record<string, number>
+  excerpts: Record<string, string>
+}
+
+async function orchestratorJson<T>(path: string, payload: unknown, userToken: string, signal?: AbortSignal): Promise<T> {
+  const res = await fetch(`${env.ORCHESTRATOR_URL}${path}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${userToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+    signal,
+  })
+
+  const body = (await res.json().catch(() => null)) as
+    | { success: true; data: T }
+    | { success: false; message: string }
+    | null
+
+  if (!res.ok || !body?.success) {
+    const message = body && "message" in body ? body.message : "Orchestrator request failed"
+    throw new AppError(message, res.status >= 400 && res.status < 500 ? res.status : 502)
+  }
+
+  return body.data
+}
+
+export function callBriefPrefill(
+  payload: BriefPrefillPayload,
+  userToken: string,
+  signal: AbortSignal
+): Promise<BriefPrefillResult> {
+  return orchestratorJson<BriefPrefillResult>("/brief/prefill", payload, userToken, signal)
+}
+
+export function callBriefResolve(
+  briefId: string,
+  userToken: string
+): Promise<{ status: string }> {
+  return orchestratorJson<{ status: string }>("/brief/resolve", { briefId }, userToken, AbortSignal.timeout(60_000))
+}
