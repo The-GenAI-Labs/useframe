@@ -88,7 +88,7 @@ export default function ProjectsView({ initialProjects }: { initialProjects: Pro
                     <p className="text-sm text-mut">All your UseFrame projects in one place.</p>
                 </div>
                 <button
-                    onClick={openProjectModal}
+                    onClick={() => openProjectModal()}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-inv text-inv text-[13px] font-semibold hover:opacity-90 transition-opacity duration-150 cursor-pointer"
                 >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -108,7 +108,7 @@ export default function ProjectsView({ initialProjects }: { initialProjects: Pro
                         </div>
                         <p className="text-sm font-medium text-mut">No projects yet</p>
                         <button
-                            onClick={openProjectModal}
+                            onClick={() => openProjectModal()}
                             className="text-[13px] font-semibold text-pri underline underline-offset-2 cursor-pointer"
                         >
                             Create your first project

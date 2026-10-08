@@ -14,7 +14,7 @@ import {
   PipelineToggle,
   type PipelineToggleStep,
 } from "@/components/workspace-tabs/PipelineToggle";
-import { ExtractFlowPanel } from "@/components/chat/ExtractFlowPanel";
+import { useProjectModalStore } from "@/store/projectModalStore";
 import { usePendingPromptStore } from "@/stores/pendingPromptStore";
 import { WorkspaceShell } from "@/components/workspace/WorkspaceShell";
 import WorkspaceLoading from "../../../app/(chat)/project/[slug]/loading";
@@ -83,10 +83,7 @@ export default function ChatHomeView() {
   const [greeting, setGreeting] = useState("Hi");
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [activeTab, setActiveTab] = useState<WelcomeTab>("RESEARCH");
-  // New, additive guided-setup flow (/extract -> dynamic questions -> minimal
-  // create form -> /plan SSE). Entirely separate from the existing
-  // useClarifyStore turn-by-turn chat flow below, which is left untouched.
-  const [useGuidedSetup, setUseGuidedSetup] = useState(false);
+  const openBriefModal = useProjectModalStore((s) => s.open);
   // Once a project exists — either from typing an idea here, or from the
   // create-project modal's "Start generation" — the home page renders the
   // same 4-step human-in-the-loop pipeline (WorkspaceShell) that
@@ -144,7 +141,6 @@ export default function ChatHomeView() {
     inputType,
     sourceUrl,
     error,
-    startIdea,
     setQuestions,
     answerQuestion,
     setGenerating,
@@ -220,36 +216,10 @@ export default function ChatHomeView() {
 
   const handleSubmit = useCallback(
     async (message: string) => {
+      // A new idea goes through the intake modal (BriefModal), which replaces
+      // the old chip-question clarify round.
       if (phase === "idle") {
-        startIdea(message);
-        setIsThinking(true);
-        try {
-          const result = await clarify(message);
-          setIsThinking(false);
-          setQuestions(result.ready ? [] : (result.questions ?? []), {
-            name: result.name,
-            niche: result.niche,
-            targetAudience: result.targetAudience,
-            brandPersonality: result.brandPersonality,
-            pricePositioning: result.pricePositioning,
-            businessModel: result.businessModel,
-            differentiator: result.differentiator,
-          });
-          if (result.ready) {
-            runGeneration(
-              result.niche ?? "OTHER",
-              result.targetAudience ?? "General audience",
-              result.name ?? message.slice(0, 40),
-              result.brandPersonality,
-              result.pricePositioning,
-              result.businessModel,
-              result.differentiator,
-            );
-          }
-        } catch (err) {
-          setIsThinking(false);
-          setError(err instanceof Error ? err.message : "Something went wrong");
-        }
+        openBriefModal({ mode: "create", ideaText: message });
         return;
       }
 
@@ -294,7 +264,7 @@ export default function ChatHomeView() {
     },
     [
       phase,
-      startIdea,
+      openBriefModal,
       clarify,
       runGeneration,
       setQuestions,
@@ -319,8 +289,8 @@ export default function ChatHomeView() {
 
   // A visitor typed an idea into the marketing homepage's hero chatbox
   // while signed out, then landed here after completing sign-in. Pick up
-  // that stored prompt once and kick off the normal clarify flow with it,
-  // exactly as if they'd typed it into ChatInput themselves.
+  // that stored prompt once and open the intake modal with it; nothing
+  // reaches a model before sign-in.
   const pendingPrompt = usePendingPromptStore((s) => s.prompt);
   const clearPendingPrompt = usePendingPromptStore((s) => s.clear);
   useEffect(() => {
@@ -410,15 +380,6 @@ export default function ChatHomeView() {
                 onSelectStep={(id) => setActiveTab(id as WelcomeTab)}
               />
               <WelcomeCards tab={activeTab} onCardClick={handleCardClick} />
-              <button
-                type="button"
-                onClick={() => setUseGuidedSetup((v) => !v)}
-                className="self-center text-[12px] font-medium text-mut hover:text-sec transition-colors cursor-pointer underline underline-offset-2"
-              >
-                {useGuidedSetup
-                  ? "Use chat instead"
-                  : "Try the new guided setup"}
-              </button>
             </>
           ) : (
             <div
@@ -463,17 +424,8 @@ export default function ChatHomeView() {
               </a>
             </p>
           )}
-          {isIdle && useGuidedSetup ? (
-            <ExtractFlowPanel />
-          ) : (
-            phase !== "generating" && (
-              <>
-                <ChatInput
-                  onSubmit={handleSubmit}
-                  autoFocus={shouldAutoFocus}
-                />
-              </>
-            )
+          {phase !== "generating" && (
+            <ChatInput onSubmit={handleSubmit} autoFocus={shouldAutoFocus} />
           )}
         </div>
       </div>

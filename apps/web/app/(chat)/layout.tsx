@@ -6,7 +6,8 @@ import Layout from "@/components/layout/Layout";
 import { ChatModal } from "@/components/chat/modal/ChatModal";
 import { MinimizedPill } from "@/components/chat/modal/MinimizedPill";
 import { SearchModal } from "@/components/search/SearchModal";
-import { CreateProjectModal } from "@/components/project/CreateProjectModal";
+import { BriefModal } from "@/components/brief/BriefModal";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function ChatLayout({ children }: { children: React.ReactNode }) {
     const { status } = useAuth();
@@ -22,7 +23,8 @@ export default function ChatLayout({ children }: { children: React.ReactNode }) 
                 <ChatModal />
                 <MinimizedPill />
                 <SearchModal />
-                <CreateProjectModal />
+                <BriefModal />
+                <Toaster />
             </Layout>
         </RouteGuard>
     );
