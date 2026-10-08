@@ -483,6 +483,7 @@ export function WorkspaceShell({ project }: Props) {
               invalidatePipeline();
               setViewingStep(null);
             }}
+            onRegenerate={() => createVersionMutation.mutate()}
           />
         )}
 

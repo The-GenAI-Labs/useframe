@@ -45,8 +45,19 @@ api.interceptors.response.use(
             error?.message ??
             "An unexpected error occurred";
 
-        const rejected = new Error(message) as Error & { code?: string };
+        const rejected = new Error(message) as Error & {
+            code?: string;
+            status?: number;
+            errors?: Record<string, string[]>;
+            data?: unknown;
+            retryAfter?: number;
+        };
         rejected.code = error?.response?.data?.code;
+        rejected.status = status;
+        rejected.errors = error?.response?.data?.errors;
+        rejected.data = error?.response?.data?.data;
+        const retryAfter = Number(error?.response?.headers?.["retry-after"]);
+        if (Number.isFinite(retryAfter)) rejected.retryAfter = retryAfter;
         return Promise.reject(rejected);
     }
 );

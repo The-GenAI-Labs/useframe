@@ -12,6 +12,7 @@ import { CandidatePicker } from "./CandidatePicker"
 import { StepApprovalBar } from "./StepApprovalBar"
 import { BriefFieldEditor } from "./BriefFieldEditor"
 import type { PipelineStepStatus } from "@/lib/api/services/pipeline.service"
+import { BriefPanel, useProjectBrief } from "@/components/brief/BriefPanel"
 
 type LoadState =
   | { status: "loading" }
@@ -99,9 +100,24 @@ type Props = {
   pipelineStatus?: PipelineStepStatus
   locked?: boolean
   onApproved?: () => void
+  onRegenerate?: () => void
 }
 
-export function ResearchTab({ project, pipelineStatus, locked, onApproved }: Props) {
+function hasGeneratedSnapshot(snapshot: unknown): boolean {
+  return !!snapshot && typeof snapshot === "object" && Array.isArray((snapshot as { pages?: unknown }).pages)
+}
+
+export function ResearchTab({ project, pipelineStatus, locked, onApproved, onRegenerate }: Props) {
+  const { data: brief, isLoading: briefLoading } = useProjectBrief(project?.slug)
+  // Projects created before intake briefs have none and research as before;
+  // otherwise research waits until the brief is approved.
+  const briefReady = !briefLoading && (brief === null || brief?.status === "APPROVED")
+  const currentVersion = project?.versions.find((v) => v.id === project.currentVersionId)
+  const staleVersion =
+    !!brief?.latestRevision &&
+    !!currentVersion?.briefRevisionId &&
+    hasGeneratedSnapshot(currentVersion.snapshot) &&
+    currentVersion.briefRevisionId !== brief.latestRevision.id
   const [state, setState] = useState<LoadState>({ status: "loading" })
   const [isGenerating, setIsGenerating] = useState(false)
   const [isApproving, setIsApproving] = useState(false)
@@ -153,11 +169,11 @@ export function ResearchTab({ project, pipelineStatus, locked, onApproved }: Pro
   // exists yet — the user still approves/rejects the result, this just saves
   // them a manual "generate" click on a step that has to happen either way.
   useEffect(() => {
-    if (state.status === "empty" && project && pipelineStatus === "PENDING" && !isGenerating) {
+    if (state.status === "empty" && project && pipelineStatus === "PENDING" && !isGenerating && briefReady) {
       generate()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.status, project, pipelineStatus])
+  }, [state.status, project, pipelineStatus, briefReady])
 
   const handleApprove = useCallback(() => {
     if (!project) return
@@ -224,6 +240,18 @@ export function ResearchTab({ project, pipelineStatus, locked, onApproved }: Pro
         </p>
       </div>
 
+      {project && brief && (
+        <div className="px-6 md:px-10 pb-4 max-w-2xl">
+          <BriefPanel
+            slug={project.slug}
+            brief={brief}
+            staleVersion={staleVersion}
+            onRegenerate={onRegenerate}
+            onApproved={() => setState({ status: "empty" })}
+          />
+        </div>
+      )}
+
       {(state.status === "loading" || isGenerating) && (
         <div className="flex-1 flex flex-col items-center justify-center gap-3">
           <div className="h-6 w-6 animate-spin rounded-full border-2 border-indigo-500 border-t-transparent" />
@@ -236,7 +264,9 @@ export function ResearchTab({ project, pipelineStatus, locked, onApproved }: Pro
           title={project ? "No design brief yet" : "Start a project to see research"}
           subtitle={
             project
-              ? "This project hasn't generated a design brief yet."
+              ? briefReady
+                ? "This project hasn't generated a design brief yet."
+                : "Research starts once you approve your brief above."
               : "Design and copy rationale will appear here once you generate a page."
           }
         />

@@ -38,6 +38,7 @@ export type ProjectDetail = ProjectListItem & {
     label: string | null
     siteType: string
     snapshot: Record<string, unknown>
+    briefRevisionId?: string | null
     createdAt: string
   }[]
   competitorScans: {
