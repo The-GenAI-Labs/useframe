@@ -15,6 +15,7 @@ import researchRoute from "@/routes/research.route.js";
 import seoMaterializeRoute from "@/routes/seoMaterialize.route.js";
 import planRoute from "@/routes/plan.route.js";
 import extractRoute from "@/routes/extract.route.js";
+import briefRoute from "@/routes/brief.route.js";
 import { MODELS } from "@/llm/providers.js";
 import { prisma } from "@useframe/db";
 
@@ -57,6 +58,7 @@ app.use("/", researchRoute);
 app.use("/", seoMaterializeRoute);
 app.use("/", planRoute);
 app.use("/", extractRoute);
+app.use("/", briefRoute);
 
 app.use("/{*splat}", (_req: express.Request, res: express.Response) => {
   res.status(404).json({ success: false, message: "Not found" });
