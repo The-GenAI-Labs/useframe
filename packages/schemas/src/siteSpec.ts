@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { CitationSchema } from "./citation.schema.js";
 import { DesignBriefSchema } from "./designBrief.schema.js";
+import { MediaBindingsSchema } from "./media.schema.js";
 import { ResearchReportDataSchema } from "./research.schema.js";
 
 export const SeoSchema = z.object({
@@ -93,6 +94,8 @@ export const SiteSpecSchema = z.object({
   copyFramework: z.enum(["AIDA", "PAS", "FAB", "PASTOR"]),
   citations: z.array(CitationSchema),
   designBrief: DesignBriefSchema.optional(),
+  // slotId ("{pageSlug}/{sectionId}/{slotKey}") -> media asset binding.
+  media: MediaBindingsSchema.optional(),
 });
 
 export type SiteSpec = z.infer<typeof SiteSpecSchema>;
