@@ -382,6 +382,7 @@ export type UserWhereInput = {
   replications?: Prisma.ReplicationListRelationFilter
   projectBriefs?: Prisma.ProjectBriefListRelationFilter
   briefUploads?: Prisma.BriefUploadListRelationFilter
+  mediaAssets?: Prisma.MediaAssetListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -430,6 +431,7 @@ export type UserOrderByWithRelationInput = {
   replications?: Prisma.ReplicationOrderByRelationAggregateInput
   projectBriefs?: Prisma.ProjectBriefOrderByRelationAggregateInput
   briefUploads?: Prisma.BriefUploadOrderByRelationAggregateInput
+  mediaAssets?: Prisma.MediaAssetOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -481,6 +483,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   replications?: Prisma.ReplicationListRelationFilter
   projectBriefs?: Prisma.ProjectBriefListRelationFilter
   briefUploads?: Prisma.BriefUploadListRelationFilter
+  mediaAssets?: Prisma.MediaAssetListRelationFilter
 }, "id" | "phone" | "razorpayCustomerId">
 
 export type UserOrderByWithAggregationInput = {
@@ -589,6 +592,7 @@ export type UserCreateInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -637,6 +641,7 @@ export type UserUncheckedCreateInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -685,6 +690,7 @@ export type UserUpdateInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -733,6 +739,7 @@ export type UserUncheckedUpdateInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1244,6 +1251,20 @@ export type UserUpdateOneRequiredWithoutSeoAuditResultsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSeoAuditResultsInput, Prisma.UserUpdateWithoutSeoAuditResultsInput>, Prisma.UserUncheckedUpdateWithoutSeoAuditResultsInput>
 }
 
+export type UserCreateNestedOneWithoutMediaAssetsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMediaAssetsInput, Prisma.UserUncheckedCreateWithoutMediaAssetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMediaAssetsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMediaAssetsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMediaAssetsInput, Prisma.UserUncheckedCreateWithoutMediaAssetsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMediaAssetsInput
+  upsert?: Prisma.UserUpsertWithoutMediaAssetsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMediaAssetsInput, Prisma.UserUpdateWithoutMediaAssetsInput>, Prisma.UserUncheckedUpdateWithoutMediaAssetsInput>
+}
+
 export type UserCreateWithoutIdentitiesInput = {
   id?: string
   name?: string | null
@@ -1289,6 +1310,7 @@ export type UserCreateWithoutIdentitiesInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIdentitiesInput = {
@@ -1336,6 +1358,7 @@ export type UserUncheckedCreateWithoutIdentitiesInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIdentitiesInput = {
@@ -1399,6 +1422,7 @@ export type UserUpdateWithoutIdentitiesInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIdentitiesInput = {
@@ -1446,6 +1470,7 @@ export type UserUncheckedUpdateWithoutIdentitiesInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1493,6 +1518,7 @@ export type UserCreateWithoutSessionsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1540,6 +1566,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1603,6 +1630,7 @@ export type UserUpdateWithoutSessionsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1650,6 +1678,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRefreshTokensInput = {
@@ -1697,6 +1726,7 @@ export type UserCreateWithoutRefreshTokensInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -1744,6 +1774,7 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -1807,6 +1838,7 @@ export type UserUpdateWithoutRefreshTokensInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -1854,6 +1886,7 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTicketTokensInput = {
@@ -1901,6 +1934,7 @@ export type UserCreateWithoutTicketTokensInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTicketTokensInput = {
@@ -1948,6 +1982,7 @@ export type UserUncheckedCreateWithoutTicketTokensInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTicketTokensInput = {
@@ -2011,6 +2046,7 @@ export type UserUpdateWithoutTicketTokensInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTicketTokensInput = {
@@ -2058,6 +2094,7 @@ export type UserUncheckedUpdateWithoutTicketTokensInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSignupRiskEventsInput = {
@@ -2105,6 +2142,7 @@ export type UserCreateWithoutSignupRiskEventsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSignupRiskEventsInput = {
@@ -2152,6 +2190,7 @@ export type UserUncheckedCreateWithoutSignupRiskEventsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSignupRiskEventsInput = {
@@ -2215,6 +2254,7 @@ export type UserUpdateWithoutSignupRiskEventsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSignupRiskEventsInput = {
@@ -2262,6 +2302,7 @@ export type UserUncheckedUpdateWithoutSignupRiskEventsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPhoneOtpsInput = {
@@ -2309,6 +2350,7 @@ export type UserCreateWithoutPhoneOtpsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPhoneOtpsInput = {
@@ -2356,6 +2398,7 @@ export type UserUncheckedCreateWithoutPhoneOtpsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPhoneOtpsInput = {
@@ -2419,6 +2462,7 @@ export type UserUpdateWithoutPhoneOtpsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
@@ -2466,6 +2510,7 @@ export type UserUncheckedUpdateWithoutPhoneOtpsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOrdersInput = {
@@ -2513,6 +2558,7 @@ export type UserCreateWithoutOrdersInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOrdersInput = {
@@ -2560,6 +2606,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOrdersInput = {
@@ -2623,6 +2670,7 @@ export type UserUpdateWithoutOrdersInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -2670,6 +2718,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSubscriptionInput = {
@@ -2717,6 +2766,7 @@ export type UserCreateWithoutSubscriptionInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSubscriptionInput = {
@@ -2764,6 +2814,7 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSubscriptionInput = {
@@ -2827,6 +2878,7 @@ export type UserUpdateWithoutSubscriptionInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubscriptionInput = {
@@ -2874,6 +2926,7 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPaymentsInput = {
@@ -2921,6 +2974,7 @@ export type UserCreateWithoutPaymentsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2968,6 +3022,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -3031,6 +3086,7 @@ export type UserUpdateWithoutPaymentsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -3078,6 +3134,7 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreditBalanceInput = {
@@ -3125,6 +3182,7 @@ export type UserCreateWithoutCreditBalanceInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreditBalanceInput = {
@@ -3172,6 +3230,7 @@ export type UserUncheckedCreateWithoutCreditBalanceInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreditBalanceInput = {
@@ -3235,6 +3294,7 @@ export type UserUpdateWithoutCreditBalanceInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreditBalanceInput = {
@@ -3282,6 +3342,7 @@ export type UserUncheckedUpdateWithoutCreditBalanceInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCreditTransactionsInput = {
@@ -3329,6 +3390,7 @@ export type UserCreateWithoutCreditTransactionsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCreditTransactionsInput = {
@@ -3376,6 +3438,7 @@ export type UserUncheckedCreateWithoutCreditTransactionsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCreditTransactionsInput = {
@@ -3439,6 +3502,7 @@ export type UserUpdateWithoutCreditTransactionsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
@@ -3486,6 +3550,7 @@ export type UserUncheckedUpdateWithoutCreditTransactionsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAutoReloadSettingInput = {
@@ -3533,6 +3598,7 @@ export type UserCreateWithoutAutoReloadSettingInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAutoReloadSettingInput = {
@@ -3580,6 +3646,7 @@ export type UserUncheckedCreateWithoutAutoReloadSettingInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAutoReloadSettingInput = {
@@ -3643,6 +3710,7 @@ export type UserUpdateWithoutAutoReloadSettingInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAutoReloadSettingInput = {
@@ -3690,6 +3758,7 @@ export type UserUncheckedUpdateWithoutAutoReloadSettingInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
@@ -3737,6 +3806,7 @@ export type UserCreateWithoutProjectsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
@@ -3784,6 +3854,7 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -3847,6 +3918,7 @@ export type UserUpdateWithoutProjectsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -3894,6 +3966,7 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationsInput = {
@@ -3941,6 +4014,7 @@ export type UserCreateWithoutConversationsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationsInput = {
@@ -3988,6 +4062,7 @@ export type UserUncheckedCreateWithoutConversationsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationsInput = {
@@ -4051,6 +4126,7 @@ export type UserUpdateWithoutConversationsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -4098,6 +4174,7 @@ export type UserUncheckedUpdateWithoutConversationsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutDeploymentsInput = {
@@ -4145,6 +4222,7 @@ export type UserCreateWithoutDeploymentsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutDeploymentsInput = {
@@ -4192,6 +4270,7 @@ export type UserUncheckedCreateWithoutDeploymentsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutDeploymentsInput = {
@@ -4255,6 +4334,7 @@ export type UserUpdateWithoutDeploymentsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDeploymentsInput = {
@@ -4302,6 +4382,7 @@ export type UserUncheckedUpdateWithoutDeploymentsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutUsageLogsInput = {
@@ -4349,6 +4430,7 @@ export type UserCreateWithoutUsageLogsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutUsageLogsInput = {
@@ -4396,6 +4478,7 @@ export type UserUncheckedCreateWithoutUsageLogsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutUsageLogsInput = {
@@ -4459,6 +4542,7 @@ export type UserUpdateWithoutUsageLogsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUsageLogsInput = {
@@ -4506,6 +4590,7 @@ export type UserUncheckedUpdateWithoutUsageLogsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectBriefsInput = {
@@ -4553,6 +4638,7 @@ export type UserCreateWithoutProjectBriefsInput = {
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectBriefsInput = {
@@ -4600,6 +4686,7 @@ export type UserUncheckedCreateWithoutProjectBriefsInput = {
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectBriefsInput = {
@@ -4663,6 +4750,7 @@ export type UserUpdateWithoutProjectBriefsInput = {
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectBriefsInput = {
@@ -4710,6 +4798,7 @@ export type UserUncheckedUpdateWithoutProjectBriefsInput = {
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBriefUploadsInput = {
@@ -4757,6 +4846,7 @@ export type UserCreateWithoutBriefUploadsInput = {
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBriefUploadsInput = {
@@ -4804,6 +4894,7 @@ export type UserUncheckedCreateWithoutBriefUploadsInput = {
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBriefUploadsInput = {
@@ -4867,6 +4958,7 @@ export type UserUpdateWithoutBriefUploadsInput = {
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBriefUploadsInput = {
@@ -4914,6 +5006,7 @@ export type UserUncheckedUpdateWithoutBriefUploadsInput = {
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCompetitorScansInput = {
@@ -4961,6 +5054,7 @@ export type UserCreateWithoutCompetitorScansInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCompetitorScansInput = {
@@ -5008,6 +5102,7 @@ export type UserUncheckedCreateWithoutCompetitorScansInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCompetitorScansInput = {
@@ -5071,6 +5166,7 @@ export type UserUpdateWithoutCompetitorScansInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCompetitorScansInput = {
@@ -5118,6 +5214,7 @@ export type UserUncheckedUpdateWithoutCompetitorScansInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReplicationsInput = {
@@ -5165,6 +5262,7 @@ export type UserCreateWithoutReplicationsInput = {
   seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReplicationsInput = {
@@ -5212,6 +5310,7 @@ export type UserUncheckedCreateWithoutReplicationsInput = {
   seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReplicationsInput = {
@@ -5275,6 +5374,7 @@ export type UserUpdateWithoutReplicationsInput = {
   seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReplicationsInput = {
@@ -5322,6 +5422,7 @@ export type UserUncheckedUpdateWithoutReplicationsInput = {
   seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutScoreResultsInput = {
@@ -5369,6 +5470,7 @@ export type UserCreateWithoutScoreResultsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutScoreResultsInput = {
@@ -5416,6 +5518,7 @@ export type UserUncheckedCreateWithoutScoreResultsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutScoreResultsInput = {
@@ -5479,6 +5582,7 @@ export type UserUpdateWithoutScoreResultsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutScoreResultsInput = {
@@ -5526,6 +5630,7 @@ export type UserUncheckedUpdateWithoutScoreResultsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSeoAuditResultsInput = {
@@ -5573,6 +5678,7 @@ export type UserCreateWithoutSeoAuditResultsInput = {
   replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSeoAuditResultsInput = {
@@ -5620,6 +5726,7 @@ export type UserUncheckedCreateWithoutSeoAuditResultsInput = {
   replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
   projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
   briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSeoAuditResultsInput = {
@@ -5683,6 +5790,7 @@ export type UserUpdateWithoutSeoAuditResultsInput = {
   replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSeoAuditResultsInput = {
@@ -5730,6 +5838,215 @@ export type UserUncheckedUpdateWithoutSeoAuditResultsInput = {
   replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
   projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
   briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutMediaAssetsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
+  razorpayCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutMediaAssetsInput = {
+  id?: string
+  name?: string | null
+  avatarUrl?: string | null
+  status?: $Enums.UserStatus
+  phone?: string | null
+  phoneVerifiedAt?: Date | string | null
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  deletedAt?: Date | string | null
+  hasUsedFreeGeneration?: boolean
+  freeReplicationUsed?: boolean
+  freeReplicationUsedAt?: Date | string | null
+  razorpayCustomerId?: string | null
+  defaultPaymentMethodId?: string | null
+  referralSource?: string | null
+  utmSource?: string | null
+  utmMedium?: string | null
+  utmCampaign?: string | null
+  acceptedTermsAt?: Date | string | null
+  acceptedTermsVersion?: string | null
+  signupRiskDecision?: string | null
+  signupRiskScore?: number | null
+  identities?: Prisma.IdentityUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedCreateNestedManyWithoutUserInput
+  ticketTokens?: Prisma.TicketTokenUncheckedCreateNestedManyWithoutUserInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  creditBalance?: Prisma.CreditBalanceUncheckedCreateNestedOneWithoutUserInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutUserInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedCreateNestedOneWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutUserInput
+  usageLogs?: Prisma.UsageLogUncheckedCreateNestedManyWithoutUserInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutUserInput
+  scoreResults?: Prisma.ScoreResultUncheckedCreateNestedManyWithoutUserInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedCreateNestedManyWithoutUserInput
+  replications?: Prisma.ReplicationUncheckedCreateNestedManyWithoutUserInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedCreateNestedManyWithoutUserInput
+  briefUploads?: Prisma.BriefUploadUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutMediaAssetsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutMediaAssetsInput, Prisma.UserUncheckedCreateWithoutMediaAssetsInput>
+}
+
+export type UserUpsertWithoutMediaAssetsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMediaAssetsInput, Prisma.UserUncheckedUpdateWithoutMediaAssetsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMediaAssetsInput, Prisma.UserUncheckedCreateWithoutMediaAssetsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutMediaAssetsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMediaAssetsInput, Prisma.UserUncheckedUpdateWithoutMediaAssetsInput>
+}
+
+export type UserUpdateWithoutMediaAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutMediaAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  hasUsedFreeGeneration?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  freeReplicationUsedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  razorpayCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  referralSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmMedium?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  utmCampaign?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedTermsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  acceptedTermsVersion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  signupRiskScore?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  identities?: Prisma.IdentityUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+  phoneOtps?: Prisma.PhoneOtpUncheckedUpdateManyWithoutUserNestedInput
+  ticketTokens?: Prisma.TicketTokenUncheckedUpdateManyWithoutUserNestedInput
+  signupRiskEvents?: Prisma.SignupRiskEventUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  creditBalance?: Prisma.CreditBalanceUncheckedUpdateOneWithoutUserNestedInput
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutUserNestedInput
+  autoReloadSetting?: Prisma.AutoReloadSettingUncheckedUpdateOneWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutUserNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutUserNestedInput
+  usageLogs?: Prisma.UsageLogUncheckedUpdateManyWithoutUserNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutUserNestedInput
+  scoreResults?: Prisma.ScoreResultUncheckedUpdateManyWithoutUserNestedInput
+  seoAuditResults?: Prisma.SeoAuditResultUncheckedUpdateManyWithoutUserNestedInput
+  replications?: Prisma.ReplicationUncheckedUpdateManyWithoutUserNestedInput
+  projectBriefs?: Prisma.ProjectBriefUncheckedUpdateManyWithoutUserNestedInput
+  briefUploads?: Prisma.BriefUploadUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -5757,6 +6074,7 @@ export type UserCountOutputType = {
   replications: number
   projectBriefs: number
   briefUploads: number
+  mediaAssets: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5779,6 +6097,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   replications?: boolean | UserCountOutputTypeCountReplicationsArgs
   projectBriefs?: boolean | UserCountOutputTypeCountProjectBriefsArgs
   briefUploads?: boolean | UserCountOutputTypeCountBriefUploadsArgs
+  mediaAssets?: boolean | UserCountOutputTypeCountMediaAssetsArgs
 }
 
 /**
@@ -5924,6 +6243,13 @@ export type UserCountOutputTypeCountBriefUploadsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.BriefUploadWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountMediaAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaAssetWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5971,6 +6297,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   replications?: boolean | Prisma.User$replicationsArgs<ExtArgs>
   projectBriefs?: boolean | Prisma.User$projectBriefsArgs<ExtArgs>
   briefUploads?: boolean | Prisma.User$briefUploadsArgs<ExtArgs>
+  mediaAssets?: boolean | Prisma.User$mediaAssetsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -6076,6 +6403,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   replications?: boolean | Prisma.User$replicationsArgs<ExtArgs>
   projectBriefs?: boolean | Prisma.User$projectBriefsArgs<ExtArgs>
   briefUploads?: boolean | Prisma.User$briefUploadsArgs<ExtArgs>
+  mediaAssets?: boolean | Prisma.User$mediaAssetsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -6106,6 +6434,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     replications: Prisma.$ReplicationPayload<ExtArgs>[]
     projectBriefs: Prisma.$ProjectBriefPayload<ExtArgs>[]
     briefUploads: Prisma.$BriefUploadPayload<ExtArgs>[]
+    mediaAssets: Prisma.$MediaAssetPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -6547,6 +6876,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   replications<T extends Prisma.User$replicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$replicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projectBriefs<T extends Prisma.User$projectBriefsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projectBriefsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectBriefPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   briefUploads<T extends Prisma.User$briefUploadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$briefUploadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BriefUploadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  mediaAssets<T extends Prisma.User$mediaAssetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mediaAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7502,6 +7832,30 @@ export type User$briefUploadsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.BriefUploadScalarFieldEnum | Prisma.BriefUploadScalarFieldEnum[]
+}
+
+/**
+ * User.mediaAssets
+ */
+export type User$mediaAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MediaAsset
+   */
+  select?: Prisma.MediaAssetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MediaAsset
+   */
+  omit?: Prisma.MediaAssetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaAssetInclude<ExtArgs> | null
+  where?: Prisma.MediaAssetWhereInput
+  orderBy?: Prisma.MediaAssetOrderByWithRelationInput | Prisma.MediaAssetOrderByWithRelationInput[]
+  cursor?: Prisma.MediaAssetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaAssetScalarFieldEnum | Prisma.MediaAssetScalarFieldEnum[]
 }
 
 /**

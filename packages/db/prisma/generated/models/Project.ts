@@ -361,6 +361,7 @@ export type ProjectWhereInput = {
   validationRuns?: Prisma.ValidationRunListRelationFilter
   replication?: Prisma.XOR<Prisma.ReplicationNullableScalarRelationFilter, Prisma.ReplicationWhereInput> | null
   brief?: Prisma.XOR<Prisma.ProjectBriefNullableScalarRelationFilter, Prisma.ProjectBriefWhereInput> | null
+  mediaAssets?: Prisma.MediaAssetListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -408,6 +409,7 @@ export type ProjectOrderByWithRelationInput = {
   validationRuns?: Prisma.ValidationRunOrderByRelationAggregateInput
   replication?: Prisma.ReplicationOrderByWithRelationInput
   brief?: Prisma.ProjectBriefOrderByWithRelationInput
+  mediaAssets?: Prisma.MediaAssetOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -458,6 +460,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   validationRuns?: Prisma.ValidationRunListRelationFilter
   replication?: Prisma.XOR<Prisma.ReplicationNullableScalarRelationFilter, Prisma.ReplicationWhereInput> | null
   brief?: Prisma.XOR<Prisma.ProjectBriefNullableScalarRelationFilter, Prisma.ProjectBriefWhereInput> | null
+  mediaAssets?: Prisma.MediaAssetListRelationFilter
 }, "id" | "slug">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -566,6 +569,7 @@ export type ProjectCreateInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -612,6 +616,7 @@ export type ProjectUncheckedCreateInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -658,6 +663,7 @@ export type ProjectUpdateInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -704,6 +710,7 @@ export type ProjectUncheckedUpdateInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -1211,6 +1218,20 @@ export type ProjectUpdateOneRequiredWithoutChatMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutChatMessagesInput, Prisma.ProjectUpdateWithoutChatMessagesInput>, Prisma.ProjectUncheckedUpdateWithoutChatMessagesInput>
 }
 
+export type ProjectCreateNestedOneWithoutMediaAssetsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutMediaAssetsInput, Prisma.ProjectUncheckedCreateWithoutMediaAssetsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutMediaAssetsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutMediaAssetsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutMediaAssetsInput, Prisma.ProjectUncheckedCreateWithoutMediaAssetsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutMediaAssetsInput
+  upsert?: Prisma.ProjectUpsertWithoutMediaAssetsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutMediaAssetsInput, Prisma.ProjectUpdateWithoutMediaAssetsInput>, Prisma.ProjectUncheckedUpdateWithoutMediaAssetsInput>
+}
+
 export type ProjectCreateWithoutUserInput = {
   id?: string
   name: string
@@ -1254,6 +1275,7 @@ export type ProjectCreateWithoutUserInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutUserInput = {
@@ -1299,6 +1321,7 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutUserInput = {
@@ -1401,6 +1424,7 @@ export type ProjectCreateWithoutResearchDocsInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutResearchDocsInput = {
@@ -1446,6 +1470,7 @@ export type ProjectUncheckedCreateWithoutResearchDocsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutResearchDocsInput = {
@@ -1507,6 +1532,7 @@ export type ProjectUpdateWithoutResearchDocsInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutResearchDocsInput = {
@@ -1552,6 +1578,7 @@ export type ProjectUncheckedUpdateWithoutResearchDocsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutVersionsInput = {
@@ -1597,6 +1624,7 @@ export type ProjectCreateWithoutVersionsInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutVersionsInput = {
@@ -1642,6 +1670,7 @@ export type ProjectUncheckedCreateWithoutVersionsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutVersionsInput = {
@@ -1703,6 +1732,7 @@ export type ProjectUpdateWithoutVersionsInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutVersionsInput = {
@@ -1748,6 +1778,7 @@ export type ProjectUncheckedUpdateWithoutVersionsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPagesInput = {
@@ -1793,6 +1824,7 @@ export type ProjectCreateWithoutPagesInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPagesInput = {
@@ -1838,6 +1870,7 @@ export type ProjectUncheckedCreateWithoutPagesInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPagesInput = {
@@ -1899,6 +1932,7 @@ export type ProjectUpdateWithoutPagesInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPagesInput = {
@@ -1944,6 +1978,7 @@ export type ProjectUncheckedUpdateWithoutPagesInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutConversationsInput = {
@@ -1989,6 +2024,7 @@ export type ProjectCreateWithoutConversationsInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutConversationsInput = {
@@ -2034,6 +2070,7 @@ export type ProjectUncheckedCreateWithoutConversationsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutConversationsInput = {
@@ -2095,6 +2132,7 @@ export type ProjectUpdateWithoutConversationsInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutConversationsInput = {
@@ -2140,6 +2178,7 @@ export type ProjectUncheckedUpdateWithoutConversationsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutDeploymentsInput = {
@@ -2185,6 +2224,7 @@ export type ProjectCreateWithoutDeploymentsInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutDeploymentsInput = {
@@ -2230,6 +2270,7 @@ export type ProjectUncheckedCreateWithoutDeploymentsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutDeploymentsInput = {
@@ -2291,6 +2332,7 @@ export type ProjectUpdateWithoutDeploymentsInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
@@ -2336,6 +2378,7 @@ export type ProjectUncheckedUpdateWithoutDeploymentsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutSiteInput = {
@@ -2381,6 +2424,7 @@ export type ProjectCreateWithoutSiteInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutSiteInput = {
@@ -2426,6 +2470,7 @@ export type ProjectUncheckedCreateWithoutSiteInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutSiteInput = {
@@ -2487,6 +2532,7 @@ export type ProjectUpdateWithoutSiteInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutSiteInput = {
@@ -2532,6 +2578,7 @@ export type ProjectUncheckedUpdateWithoutSiteInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutCustomDomainInput = {
@@ -2577,6 +2624,7 @@ export type ProjectCreateWithoutCustomDomainInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutCustomDomainInput = {
@@ -2622,6 +2670,7 @@ export type ProjectUncheckedCreateWithoutCustomDomainInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutCustomDomainInput = {
@@ -2683,6 +2732,7 @@ export type ProjectUpdateWithoutCustomDomainInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutCustomDomainInput = {
@@ -2728,6 +2778,7 @@ export type ProjectUncheckedUpdateWithoutCustomDomainInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPipelineLogsInput = {
@@ -2773,6 +2824,7 @@ export type ProjectCreateWithoutPipelineLogsInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPipelineLogsInput = {
@@ -2818,6 +2870,7 @@ export type ProjectUncheckedCreateWithoutPipelineLogsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPipelineLogsInput = {
@@ -2879,6 +2932,7 @@ export type ProjectUpdateWithoutPipelineLogsInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPipelineLogsInput = {
@@ -2924,6 +2978,7 @@ export type ProjectUncheckedUpdateWithoutPipelineLogsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutAnalyticsInput = {
@@ -2969,6 +3024,7 @@ export type ProjectCreateWithoutAnalyticsInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutAnalyticsInput = {
@@ -3014,6 +3070,7 @@ export type ProjectUncheckedCreateWithoutAnalyticsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutAnalyticsInput = {
@@ -3075,6 +3132,7 @@ export type ProjectUpdateWithoutAnalyticsInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutAnalyticsInput = {
@@ -3120,6 +3178,7 @@ export type ProjectUncheckedUpdateWithoutAnalyticsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPageAnalyticsInput = {
@@ -3165,6 +3224,7 @@ export type ProjectCreateWithoutPageAnalyticsInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPageAnalyticsInput = {
@@ -3210,6 +3270,7 @@ export type ProjectUncheckedCreateWithoutPageAnalyticsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPageAnalyticsInput = {
@@ -3271,6 +3332,7 @@ export type ProjectUpdateWithoutPageAnalyticsInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPageAnalyticsInput = {
@@ -3316,6 +3378,7 @@ export type ProjectUncheckedUpdateWithoutPageAnalyticsInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutResearchReportInput = {
@@ -3361,6 +3424,7 @@ export type ProjectCreateWithoutResearchReportInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutResearchReportInput = {
@@ -3406,6 +3470,7 @@ export type ProjectUncheckedCreateWithoutResearchReportInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutResearchReportInput = {
@@ -3467,6 +3532,7 @@ export type ProjectUpdateWithoutResearchReportInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutResearchReportInput = {
@@ -3512,6 +3578,7 @@ export type ProjectUncheckedUpdateWithoutResearchReportInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutBriefInput = {
@@ -3557,6 +3624,7 @@ export type ProjectCreateWithoutBriefInput = {
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutBriefInput = {
@@ -3602,6 +3670,7 @@ export type ProjectUncheckedCreateWithoutBriefInput = {
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutBriefInput = {
@@ -3663,6 +3732,7 @@ export type ProjectUpdateWithoutBriefInput = {
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutBriefInput = {
@@ -3708,6 +3778,7 @@ export type ProjectUncheckedUpdateWithoutBriefInput = {
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutResearchIntakeInput = {
@@ -3753,6 +3824,7 @@ export type ProjectCreateWithoutResearchIntakeInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutResearchIntakeInput = {
@@ -3798,6 +3870,7 @@ export type ProjectUncheckedCreateWithoutResearchIntakeInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutResearchIntakeInput = {
@@ -3859,6 +3932,7 @@ export type ProjectUpdateWithoutResearchIntakeInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutResearchIntakeInput = {
@@ -3904,6 +3978,7 @@ export type ProjectUncheckedUpdateWithoutResearchIntakeInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutPipelineStateInput = {
@@ -3949,6 +4024,7 @@ export type ProjectCreateWithoutPipelineStateInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutPipelineStateInput = {
@@ -3994,6 +4070,7 @@ export type ProjectUncheckedCreateWithoutPipelineStateInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutPipelineStateInput = {
@@ -4055,6 +4132,7 @@ export type ProjectUpdateWithoutPipelineStateInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutPipelineStateInput = {
@@ -4100,6 +4178,7 @@ export type ProjectUncheckedUpdateWithoutPipelineStateInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutCompetitorScansInput = {
@@ -4145,6 +4224,7 @@ export type ProjectCreateWithoutCompetitorScansInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutCompetitorScansInput = {
@@ -4190,6 +4270,7 @@ export type ProjectUncheckedCreateWithoutCompetitorScansInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutCompetitorScansInput = {
@@ -4251,6 +4332,7 @@ export type ProjectUpdateWithoutCompetitorScansInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutCompetitorScansInput = {
@@ -4296,6 +4378,7 @@ export type ProjectUncheckedUpdateWithoutCompetitorScansInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutReplicationInput = {
@@ -4341,6 +4424,7 @@ export type ProjectCreateWithoutReplicationInput = {
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutReplicationInput = {
@@ -4386,6 +4470,7 @@ export type ProjectUncheckedCreateWithoutReplicationInput = {
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutReplicationInput = {
@@ -4447,6 +4532,7 @@ export type ProjectUpdateWithoutReplicationInput = {
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutReplicationInput = {
@@ -4492,6 +4578,7 @@ export type ProjectUncheckedUpdateWithoutReplicationInput = {
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutValidationRunsInput = {
@@ -4537,6 +4624,7 @@ export type ProjectCreateWithoutValidationRunsInput = {
   researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutValidationRunsInput = {
@@ -4582,6 +4670,7 @@ export type ProjectUncheckedCreateWithoutValidationRunsInput = {
   researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutValidationRunsInput = {
@@ -4643,6 +4732,7 @@ export type ProjectUpdateWithoutValidationRunsInput = {
   researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutValidationRunsInput = {
@@ -4688,6 +4778,7 @@ export type ProjectUncheckedUpdateWithoutValidationRunsInput = {
   researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutChatMessagesInput = {
@@ -4733,6 +4824,7 @@ export type ProjectCreateWithoutChatMessagesInput = {
   validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutChatMessagesInput = {
@@ -4778,6 +4870,7 @@ export type ProjectUncheckedCreateWithoutChatMessagesInput = {
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
   replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
   brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+  mediaAssets?: Prisma.MediaAssetUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutChatMessagesInput = {
@@ -4839,6 +4932,7 @@ export type ProjectUpdateWithoutChatMessagesInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutChatMessagesInput = {
@@ -4869,6 +4963,207 @@ export type ProjectUncheckedUpdateWithoutChatMessagesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
   pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUncheckedUpdateOneWithoutProjectNestedInput
+  researchIntake?: Prisma.ResearchIntakeUncheckedUpdateOneWithoutProjectNestedInput
+  pipelineState?: Prisma.PipelineStateUncheckedUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUncheckedUpdateManyWithoutProjectNestedInput
+  researchDocs?: Prisma.ResearchDocumentUncheckedUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
+  brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutMediaAssetsInput = {
+  id?: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  brandPersonality?: string | null
+  pricePositioning?: string | null
+  businessModel?: string | null
+  differentiator?: string | null
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  vercelProjectId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjectsInput
+  versions?: Prisma.ProjectVersionCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageCreateNestedManyWithoutProjectInput
+  chatMessages?: Prisma.ProjectChatMessageCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportCreateNestedOneWithoutProjectInput
+  researchIntake?: Prisma.ResearchIntakeCreateNestedOneWithoutProjectInput
+  pipelineState?: Prisma.PipelineStateCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanCreateNestedManyWithoutProjectInput
+  researchDocs?: Prisma.ResearchDocumentCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationCreateNestedOneWithoutProjectInput
+  brief?: Prisma.ProjectBriefCreateNestedOneWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutMediaAssetsInput = {
+  id?: string
+  userId: string
+  name: string
+  slug: string
+  startupIdea: string
+  niche?: $Enums.NicheCategory
+  targetAudience: string
+  brandPersonality?: string | null
+  pricePositioning?: string | null
+  businessModel?: string | null
+  differentiator?: string | null
+  status?: $Enums.ProjectStatus
+  inputType?: $Enums.ProjectInputType
+  generationTier?: $Enums.GenerationTier
+  sourceUrl?: string | null
+  docsKey?: string | null
+  description?: string | null
+  logoUrl?: string | null
+  currentVersionId?: string | null
+  vercelProjectId?: string | null
+  pinned?: boolean
+  deletedAt?: Date | string | null
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.ProjectVersionUncheckedCreateNestedManyWithoutProjectInput
+  pages?: Prisma.PageUncheckedCreateNestedManyWithoutProjectInput
+  chatMessages?: Prisma.ProjectChatMessageUncheckedCreateNestedManyWithoutProjectInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutProjectInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectInput
+  customDomain?: Prisma.CustomDomainUncheckedCreateNestedOneWithoutProjectInput
+  site?: Prisma.ProjectSiteUncheckedCreateNestedOneWithoutProjectInput
+  pipelineLogs?: Prisma.PipelineLogUncheckedCreateNestedManyWithoutProjectInput
+  analytics?: Prisma.ProjectAnalyticsUncheckedCreateNestedOneWithoutProjectInput
+  pageAnalytics?: Prisma.PageAnalyticsUncheckedCreateNestedManyWithoutProjectInput
+  researchReport?: Prisma.ResearchReportUncheckedCreateNestedOneWithoutProjectInput
+  researchIntake?: Prisma.ResearchIntakeUncheckedCreateNestedOneWithoutProjectInput
+  pipelineState?: Prisma.PipelineStateUncheckedCreateNestedOneWithoutProjectInput
+  competitorScans?: Prisma.CompetitorScanUncheckedCreateNestedManyWithoutProjectInput
+  researchDocs?: Prisma.ResearchDocumentUncheckedCreateNestedManyWithoutProjectInput
+  validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutProjectInput
+  replication?: Prisma.ReplicationUncheckedCreateNestedOneWithoutProjectInput
+  brief?: Prisma.ProjectBriefUncheckedCreateNestedOneWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutMediaAssetsInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutMediaAssetsInput, Prisma.ProjectUncheckedCreateWithoutMediaAssetsInput>
+}
+
+export type ProjectUpsertWithoutMediaAssetsInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutMediaAssetsInput, Prisma.ProjectUncheckedUpdateWithoutMediaAssetsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutMediaAssetsInput, Prisma.ProjectUncheckedCreateWithoutMediaAssetsInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutMediaAssetsInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutMediaAssetsInput, Prisma.ProjectUncheckedUpdateWithoutMediaAssetsInput>
+}
+
+export type ProjectUpdateWithoutMediaAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  brandPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePositioning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vercelProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjectsNestedInput
+  versions?: Prisma.ProjectVersionUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUpdateManyWithoutProjectNestedInput
+  chatMessages?: Prisma.ProjectChatMessageUpdateManyWithoutProjectNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutProjectNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutProjectNestedInput
+  customDomain?: Prisma.CustomDomainUpdateOneWithoutProjectNestedInput
+  site?: Prisma.ProjectSiteUpdateOneWithoutProjectNestedInput
+  pipelineLogs?: Prisma.PipelineLogUpdateManyWithoutProjectNestedInput
+  analytics?: Prisma.ProjectAnalyticsUpdateOneWithoutProjectNestedInput
+  pageAnalytics?: Prisma.PageAnalyticsUpdateManyWithoutProjectNestedInput
+  researchReport?: Prisma.ResearchReportUpdateOneWithoutProjectNestedInput
+  researchIntake?: Prisma.ResearchIntakeUpdateOneWithoutProjectNestedInput
+  pipelineState?: Prisma.PipelineStateUpdateOneWithoutProjectNestedInput
+  competitorScans?: Prisma.CompetitorScanUpdateManyWithoutProjectNestedInput
+  researchDocs?: Prisma.ResearchDocumentUpdateManyWithoutProjectNestedInput
+  validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
+  replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
+  brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutMediaAssetsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  startupIdea?: Prisma.StringFieldUpdateOperationsInput | string
+  niche?: Prisma.EnumNicheCategoryFieldUpdateOperationsInput | $Enums.NicheCategory
+  targetAudience?: Prisma.StringFieldUpdateOperationsInput | string
+  brandPersonality?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pricePositioning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessModel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  differentiator?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  inputType?: Prisma.EnumProjectInputTypeFieldUpdateOperationsInput | $Enums.ProjectInputType
+  generationTier?: Prisma.EnumGenerationTierFieldUpdateOperationsInput | $Enums.GenerationTier
+  sourceUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  docsKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentVersionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vercelProjectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.ProjectVersionUncheckedUpdateManyWithoutProjectNestedInput
+  pages?: Prisma.PageUncheckedUpdateManyWithoutProjectNestedInput
+  chatMessages?: Prisma.ProjectChatMessageUncheckedUpdateManyWithoutProjectNestedInput
   conversations?: Prisma.ConversationUncheckedUpdateManyWithoutProjectNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectNestedInput
   customDomain?: Prisma.CustomDomainUncheckedUpdateOneWithoutProjectNestedInput
@@ -4956,6 +5251,7 @@ export type ProjectUpdateWithoutUserInput = {
   validationRuns?: Prisma.ValidationRunUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutUserInput = {
@@ -5001,6 +5297,7 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutProjectNestedInput
   replication?: Prisma.ReplicationUncheckedUpdateOneWithoutProjectNestedInput
   brief?: Prisma.ProjectBriefUncheckedUpdateOneWithoutProjectNestedInput
+  mediaAssets?: Prisma.MediaAssetUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutUserInput = {
@@ -5046,6 +5343,7 @@ export type ProjectCountOutputType = {
   competitorScans: number
   researchDocs: number
   validationRuns: number
+  mediaAssets: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5059,6 +5357,7 @@ export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   competitorScans?: boolean | ProjectCountOutputTypeCountCompetitorScansArgs
   researchDocs?: boolean | ProjectCountOutputTypeCountResearchDocsArgs
   validationRuns?: boolean | ProjectCountOutputTypeCountValidationRunsArgs
+  mediaAssets?: boolean | ProjectCountOutputTypeCountMediaAssetsArgs
 }
 
 /**
@@ -5141,6 +5440,13 @@ export type ProjectCountOutputTypeCountValidationRunsArgs<ExtArgs extends runtim
   where?: Prisma.ValidationRunWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountMediaAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaAssetWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -5187,6 +5493,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   validationRuns?: boolean | Prisma.Project$validationRunsArgs<ExtArgs>
   replication?: boolean | Prisma.Project$replicationArgs<ExtArgs>
   brief?: boolean | Prisma.Project$briefArgs<ExtArgs>
+  mediaAssets?: boolean | Prisma.Project$mediaAssetsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -5297,6 +5604,7 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   validationRuns?: boolean | Prisma.Project$validationRunsArgs<ExtArgs>
   replication?: boolean | Prisma.Project$replicationArgs<ExtArgs>
   brief?: boolean | Prisma.Project$briefArgs<ExtArgs>
+  mediaAssets?: boolean | Prisma.Project$mediaAssetsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5328,6 +5636,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     validationRuns: Prisma.$ValidationRunPayload<ExtArgs>[]
     replication: Prisma.$ReplicationPayload<ExtArgs> | null
     brief: Prisma.$ProjectBriefPayload<ExtArgs> | null
+    mediaAssets: Prisma.$MediaAssetPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5768,6 +6077,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   validationRuns<T extends Prisma.Project$validationRunsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$validationRunsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ValidationRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   replication<T extends Prisma.Project$replicationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$replicationArgs<ExtArgs>>): Prisma.Prisma__ReplicationClient<runtime.Types.Result.GetResult<Prisma.$ReplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   brief<T extends Prisma.Project$briefArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$briefArgs<ExtArgs>>): Prisma.Prisma__ProjectBriefClient<runtime.Types.Result.GetResult<Prisma.$ProjectBriefPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  mediaAssets<T extends Prisma.Project$mediaAssetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$mediaAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6612,6 +6922,30 @@ export type Project$briefArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   include?: Prisma.ProjectBriefInclude<ExtArgs> | null
   where?: Prisma.ProjectBriefWhereInput
+}
+
+/**
+ * Project.mediaAssets
+ */
+export type Project$mediaAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MediaAsset
+   */
+  select?: Prisma.MediaAssetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MediaAsset
+   */
+  omit?: Prisma.MediaAssetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaAssetInclude<ExtArgs> | null
+  where?: Prisma.MediaAssetWhereInput
+  orderBy?: Prisma.MediaAssetOrderByWithRelationInput | Prisma.MediaAssetOrderByWithRelationInput[]
+  cursor?: Prisma.MediaAssetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaAssetScalarFieldEnum | Prisma.MediaAssetScalarFieldEnum[]
 }
 
 /**

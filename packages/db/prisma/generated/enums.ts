@@ -285,6 +285,32 @@ export const ProjectInputType = {
 export type ProjectInputType = (typeof ProjectInputType)[keyof typeof ProjectInputType]
 
 
+export const MediaKind = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+} as const
+
+export type MediaKind = (typeof MediaKind)[keyof typeof MediaKind]
+
+
+export const MediaOrigin = {
+  UPLOADED: 'UPLOADED',
+  GENERATED: 'GENERATED'
+} as const
+
+export type MediaOrigin = (typeof MediaOrigin)[keyof typeof MediaOrigin]
+
+
+export const MediaStatus = {
+  UPLOADING: 'UPLOADING',
+  PROCESSING: 'PROCESSING',
+  READY: 'READY',
+  FAILED: 'FAILED'
+} as const
+
+export type MediaStatus = (typeof MediaStatus)[keyof typeof MediaStatus]
+
+
 export const ResearchDocumentType = {
   COMPETITOR_ANALYSIS: 'COMPETITOR_ANALYSIS',
   RESEARCH_RATIONALE: 'RESEARCH_RATIONALE'

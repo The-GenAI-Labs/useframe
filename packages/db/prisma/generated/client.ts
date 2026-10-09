@@ -346,3 +346,8 @@ export type JevDecisionLog = Prisma.JevDecisionLogModel
  * 
  */
 export type ProjectChatMessage = Prisma.ProjectChatMessageModel
+/**
+ * Model MediaAsset
+ * 
+ */
+export type MediaAsset = Prisma.MediaAssetModel
