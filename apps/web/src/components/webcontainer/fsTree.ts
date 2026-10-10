@@ -1,11 +1,11 @@
 import type { SiteSpec } from "@repo/schemas"
 import type { FileSystemTree } from "@webcontainer/api"
-import { buildSiteFiles, type SeoFiles } from "@repo/site-builder"
+import { buildSiteFiles, type BuildSiteOptions, type SeoFiles } from "@repo/site-builder"
 
 export type { SeoFiles }
 
-export function buildFsTree(spec: SiteSpec, seoFiles?: SeoFiles): FileSystemTree {
-  const files = buildSiteFiles(spec, seoFiles)
+export function buildFsTree(spec: SiteSpec, seoFiles?: SeoFiles, options?: BuildSiteOptions): FileSystemTree {
+  const files = buildSiteFiles(spec, seoFiles, options)
   const tree: FileSystemTree = {}
 
   for (const { path, content } of files) {

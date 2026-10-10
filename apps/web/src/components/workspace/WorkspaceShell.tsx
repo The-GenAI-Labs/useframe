@@ -26,6 +26,7 @@ import {
 import { PipelineModeToggle } from "@/components/workspace-tabs/PipelineModeToggle";
 import { ProjectChatPanel } from "@/components/chat/ProjectChatPanel";
 import { ResearchTab } from "@/components/workspace-tabs/ResearchTab";
+import { MediaTab } from "@/components/workspace-tabs/MediaTab";
 import { SeoStepView } from "@/components/workspace-tabs/SeoStepView";
 import { DeployStepView } from "@/components/workspace-tabs/DeployStepView";
 import { StepApprovalBar } from "@/components/workspace-tabs/StepApprovalBar";
@@ -67,6 +68,7 @@ function hasSnapshot(snapshot: unknown): boolean {
 
 export function WorkspaceShell({ project }: Props) {
   const [showProjectChat, setShowProjectChat] = useState(false);
+  const [showMedia, setShowMedia] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -457,13 +459,23 @@ export function WorkspaceShell({ project }: Props) {
           })()}
       </div>
 
-      <div className="shrink-0 px-4 py-2">
+      <div className="flex shrink-0 gap-2 px-4 py-2">
         <button
           type="button"
           onClick={() => setShowProjectChat(true)}
           className="rounded-lg border border-base px-3 py-2 text-sm text-sec focus-visible:outline-2"
         >
           Ask about this project
+        </button>
+        <button
+          type="button"
+          aria-pressed={showMedia}
+          onClick={() => setShowMedia((v) => !v)}
+          className={`rounded-lg border px-3 py-2 text-sm focus-visible:outline-2 ${
+            showMedia ? "border-em bg-tertiary text-pri" : "border-base text-sec"
+          }`}
+        >
+          {showMedia ? "Back to steps" : "Media"}
         </button>
       </div>
       {showProjectChat && (
@@ -474,7 +486,9 @@ export function WorkspaceShell({ project }: Props) {
         />
       )}
       <div className="flex-1 overflow-hidden">
-        {currentStep === "RESEARCH" && (
+        {showMedia && <MediaTab projectSlug={project.slug} />}
+
+        {!showMedia && currentStep === "RESEARCH" && (
           <ResearchTab
             project={project}
             pipelineStatus={pipeline?.researchStatus}
@@ -487,10 +501,11 @@ export function WorkspaceShell({ project }: Props) {
           />
         )}
 
-        {currentStep === "WEBSITE" && (
+        {!showMedia && currentStep === "WEBSITE" && (
           <div className="flex h-full flex-col">
             <div className="flex-1 overflow-hidden">
               <VersionSlider
+                projectSlug={project.slug}
                 versions={versions}
                 generatingVersionId={generatingVersionId}
                 activeIndex={activeIndex}
@@ -526,7 +541,7 @@ export function WorkspaceShell({ project }: Props) {
           </div>
         )}
 
-        {currentStep === "SEO" && (
+        {!showMedia && currentStep === "SEO" && (
           <SeoStepView
             project={project}
             pipelineStatus={pipeline?.seoStatus}
@@ -540,7 +555,7 @@ export function WorkspaceShell({ project }: Props) {
           />
         )}
 
-        {currentStep === "DEPLOY" && (
+        {!showMedia && currentStep === "DEPLOY" && (
           <DeployStepView
             project={project}
             creditLocked={deployCreditLocked}
