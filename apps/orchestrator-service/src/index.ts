@@ -16,6 +16,7 @@ import seoMaterializeRoute from "@/routes/seoMaterialize.route.js";
 import planRoute from "@/routes/plan.route.js";
 import extractRoute from "@/routes/extract.route.js";
 import briefRoute from "@/routes/brief.route.js";
+import mediaRoute from "@/routes/media.route.js";
 import { MODELS } from "@/llm/providers.js";
 import { prisma } from "@useframe/db";
 
@@ -28,6 +29,8 @@ app.use(
     credentials: true,
   }),
 );
+// Carries its own larger body parser (an image), so it sits ahead of the 1mb one.
+app.use("/", mediaRoute);
 app.use(express.json({ limit: "1mb" }));
 
 if (env.NODE_ENV === "development") {

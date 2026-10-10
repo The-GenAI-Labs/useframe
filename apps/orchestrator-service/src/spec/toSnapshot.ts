@@ -18,5 +18,6 @@ export function toSnapshot(spec: SiteSpec): SiteSpec {
     },
     pages: spec.pages ?? [],
     citations: spec.citations ?? [],
+    ...(spec.media && Object.keys(spec.media).length > 0 ? { media: spec.media } : {}),
   }
 }

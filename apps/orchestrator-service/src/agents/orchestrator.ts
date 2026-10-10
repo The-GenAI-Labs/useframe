@@ -12,6 +12,7 @@ import { uniqueSlug } from "@/lib/slug.js";
 import { prisma, type Prisma } from "@useframe/db";
 import type { GenerateRequest, SiteSpec } from "@repo/schemas";
 import { applyBriefToSpec, loadBriefContext } from "@/lib/briefPipeline.js";
+import { loadAssetMenu, runMediaPlacement } from "./mediaPlacement.agent.js";
 
 async function ensureProject(
   request: GenerateRequest,
@@ -160,6 +161,20 @@ export async function runOrchestrator(
     });
     spec = await runCritiqueAgent(spec, request, model, providerOptions);
     spec = applyBriefToSpec(spec, briefCtx);
+
+    // Placed last, once sections and their items are final.
+    const menu = await loadAssetMenu(projectId, userId);
+    if (menu.items.length > 0 && spec.pages) {
+      sseWrite(res, {
+        type: "stage",
+        stage: "GENERATE",
+        message: "Placing your media...",
+      });
+      spec = {
+        ...spec,
+        media: await runMediaPlacement({ spec: { pages: spec.pages, media: spec.media }, menu, model, providerOptions }),
+      };
+    }
 
     const snapshot = toSnapshot(spec as SiteSpec);
 

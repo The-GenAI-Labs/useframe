@@ -25,3 +25,9 @@ export function getProviderOptionsForTier(tier: Tier): ProviderMetadata | undefi
 export function getCheapModel(): LanguageModelV1 {
   return env.DEEPSEEK_API_KEY ? getDeepseekModel() : getModel("claude-haiku-4-5-20251001")
 }
+
+// Cheap vision model for media descriptions: DeepSeek flash (vision-capable)
+// on the free tier, Haiku on paid. Falls back to Haiku when DeepSeek is unset.
+export function getVisionModelForTier(tier: Tier): LanguageModelV1 {
+  return tier === "free" ? getCheapModel() : getModel("claude-haiku-4-5-20251001")
+}

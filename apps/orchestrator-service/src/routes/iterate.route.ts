@@ -45,8 +45,9 @@ router.post(
         });
       return;
     }
+    let userId: string;
     try {
-      verifyToken(req);
+      userId = verifyToken(req).id;
     } catch (err) {
       console.error(
         "[iterate] auth failed:",
@@ -66,7 +67,7 @@ router.post(
       return;
     }
 
-    runIteration(parsed.data)
+    runIteration(parsed.data, false, { userId })
       .then((result) => {
         res.status(200).json({ success: true, data: result });
       })
