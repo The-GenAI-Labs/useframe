@@ -17,6 +17,8 @@ services:
     image: { name: useframe, tagPrefix: billing-service- }
   scoring-service:
     image: { name: useframe, tagPrefix: scoring-service- }
+  media-service:
+    image: { name: useframe, tagPrefix: media-service- }
 
 migration:
   image: { name: useframe, tagPrefix: migrate- }

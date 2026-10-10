@@ -16,6 +16,7 @@ git push → CI builds each image (2 stages) → hadolint → Trivy → push sha
 | `useframe-research-service`     | `apps/research-service/Dockerfile`     | 4004 | `node dist/index.js`                                     |
 | `useframe-deploy-service`       | `apps/deploy-service/Dockerfile`       | 4005 | `node dist/server.js`; worker pod: `node dist/worker.js` |
 | `useframe-worker`               | `apps/worker/Dockerfile`               | —    | `node dist/index.js` (BullMQ only, includes Chromium)    |
+| `useframe-media-service`        | `apps/media-service/Dockerfile`        | —    | `node dist/worker.js` (BullMQ only, includes ffmpeg)     |
 | `useframe-migrate`              | `packages/db/Dockerfile`               | —    | `prisma migrate deploy`                                  |
 
 The single source of truth for this list is `docker/services.json`; CI's matrix is generated from it,
@@ -72,11 +73,11 @@ tmpfs `/tmp`, reaching the service's own env validation with no `ERR_MODULE_NOT_
 `Cannot find module` / `ERR_REQUIRE_ESM` / Prisma engine errors; every `@repo/*`/`@useframe/*`
 dependency resolves to its `dist/` and the Prisma client constructs; there is no `/repo`, no `.ts`
 source, no `.env*` and no pnpm; the image size is under `DOCKER_MAX_IMAGE_MB` (default 600; the
-worker has its own limit in `services.json` because it ships Chromium). For `deploy-service` it also
+worker and media-service have their own limits in `services.json` because they ship Chromium and ffmpeg). For `deploy-service` it also
 starts the worker entry **as root** and checks `setpriv`.
 
 Writable paths at runtime (for `readOnlyRootFilesystem` in Part 2): `/tmp` for every service;
-`deploy-service` also `/work` (an `emptyDir`); `worker` uses `/tmp` as `HOME` for Chromium and needs a
+`deploy-service` and `media-service` also `/work` (an `emptyDir`); `worker` uses `/tmp` as `HOME` for Chromium and needs a
 memory-backed `/dev/shm`.
 
 ## Docker Hub setup (you do this)

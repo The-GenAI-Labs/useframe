@@ -66,7 +66,7 @@ jobs:
         run: |
           set -euo pipefail
           crds="https://raw.githubusercontent.com/datreeio/CRDs-catalog/${CRDS_CATALOG_REF}/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json"
-          all_on="--set services.deploy-service-worker.enabled=true --set services.billing-service.enabled=true --set services.scoring-service.enabled=true --set networkPolicy.enabled=true --set migration.enabled=true"
+          all_on="--set services.deploy-service-worker.enabled=true --set services.media-service.enabled=true --set services.billing-service.enabled=true --set services.scoring-service.enabled=true --set networkPolicy.enabled=true --set migration.enabled=true"
           render() {
             echo "::group::$1"
             shift

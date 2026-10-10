@@ -37,3 +37,15 @@ variable "bypass_hosts" {
   type        = list(string)
   default     = ["useframe.in/*", "www.useframe.in/*", "api.useframe.in/*"]
 }
+
+variable "media_bucket_name" {
+  description = "Private R2 bucket for the media library (uploads and generated media)."
+  type        = string
+  default     = "useframe-media"
+}
+
+variable "media_cors_origins" {
+  description = "Web app origins allowed to PUT presigned uploads to the media bucket."
+  type        = list(string)
+  default     = ["https://useframe.in", "https://www.useframe.in"]
+}
