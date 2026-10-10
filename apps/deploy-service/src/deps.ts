@@ -37,6 +37,8 @@ export type Deps = {
   db: Db;
   kv: KvClient;
   r2: R2;
+  // Read-only client for the private media library; absent until configured.
+  mediaSource?: R2 | null;
   redis: LockClient;
   runQueue: Pick<Queue<DeployRunJobPayload>, "add" | "getJob">;
   validationQueue?: Pick<Queue, "add">;
