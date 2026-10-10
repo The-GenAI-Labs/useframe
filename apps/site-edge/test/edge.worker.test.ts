@@ -250,3 +250,110 @@ describe("responses", () => {
     expect(r2).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("media and ranges", () => {
+  const CLIP = `https://${NEXT_HOST}/media/clip.mp4`;
+  const HASHED = `https://${NEXT_HOST}/media/a1b2/mp4_720.0123abcd.mp4`;
+
+  beforeEach(async () => {
+    await put("sites/proj1/dep1/media/a1b2/mp4_720.0123abcd.mp4", "abcdefghij", "video/mp4", "public, max-age=3600");
+    await put("sites/proj1/dep1/media/a1b2/w960.0123abcd.webp", "webp-bytes", "image/webp", "public, max-age=3600");
+  });
+
+  it("serves a full video straight from R2 with length and range support", async () => {
+    const r2 = vi.spyOn(env.SITES_BUCKET, "get");
+    const res = await call(CLIP);
+    expect(res.status).toBe(200);
+    expect(res.headers.get("content-length")).toBe("10");
+    expect(res.headers.get("accept-ranges")).toBe("bytes");
+    expect(res.headers.get("x-useframe-cache")).toBe("bypass");
+    expect(res.headers.get("x-useframe-deployment")).toBe("dep1");
+    expect(res.headers.get("x-content-type-options")).toBe("nosniff");
+    expect(await res.text()).toBe("0123456789");
+    expect(r2.mock.calls[0]![1]).toMatchObject({ range: undefined, onlyIf: expect.any(Headers) });
+    const ranged = await call(CLIP, { headers: { range: "bytes=0-1" } });
+    expect(r2.mock.calls[1]![1]).toMatchObject({ range: expect.any(Headers), onlyIf: expect.any(Headers) });
+    await ranged.text();
+  });
+
+  it("answers open-ended and suffix ranges", async () => {
+    const open = await call(CLIP, { headers: { range: "bytes=6-" } });
+    expect(open.status).toBe(206);
+    expect(open.headers.get("content-range")).toBe("bytes 6-9/10");
+    expect(open.headers.get("content-length")).toBe("4");
+    expect(await open.text()).toBe("6789");
+
+    const suffix = await call(CLIP, { headers: { range: "bytes=-3" } });
+    expect(suffix.status).toBe(206);
+    expect(suffix.headers.get("content-range")).toBe("bytes 7-9/10");
+    expect(await suffix.text()).toBe("789");
+  });
+
+  it("answers 416 for an unsatisfiable range", async () => {
+    const res = await call(CLIP, { headers: { range: "bytes=50-60" } });
+    expect(res.status).toBe(416);
+    expect(res.headers.get("content-range")).toBe("bytes */10");
+    expect(await res.text()).toBe("");
+  });
+
+  it("ignores a malformed range and serves the whole file", async () => {
+    const res = await call(CLIP, { headers: { range: "pages=1-2" } });
+    expect(res.status).toBe(200);
+    expect(await res.text()).toBe("0123456789");
+  });
+
+  it("answers HEAD with the full length and no body", async () => {
+    const res = await call(CLIP, { method: "HEAD" });
+    expect(res.status).toBe(200);
+    expect(res.headers.get("content-length")).toBe("10");
+    expect(res.headers.get("accept-ranges")).toBe("bytes");
+    expect(await res.text()).toBe("");
+
+    const ranged = await call(CLIP, { method: "HEAD", headers: { range: "bytes=0-1" } });
+    expect(ranged.status).toBe(206);
+    expect(ranged.headers.get("content-range")).toBe("bytes 0-1/10");
+    expect(await ranged.text()).toBe("");
+  });
+
+  it("answers 304 for a matching If-None-Match, strong or weak", async () => {
+    const first = await call(CLIP);
+    const etag = first.headers.get("etag")!;
+    await first.text();
+    for (const tag of [etag, `W/${etag}`]) {
+      const res = await call(CLIP, { headers: { "if-none-match": tag } });
+      expect(res.status).toBe(304);
+      expect(res.headers.get("etag")).toBe(etag);
+      expect(await res.text()).toBe("");
+    }
+    const head = await call(CLIP, { method: "HEAD", headers: { "if-none-match": etag } });
+    expect(head.status).toBe(304);
+  });
+
+  it("marks hashed media paths immutable on both the direct and the cached path", async () => {
+    const video = await call(HASHED, { headers: { range: "bytes=0-3" } });
+    expect(video.status).toBe(206);
+    expect(video.headers.get("cache-control")).toBe("public, max-age=31536000, immutable");
+    expect(await video.text()).toBe("abcd");
+
+    const image = await call(`https://${NEXT_HOST}/media/a1b2/w960.0123abcd.webp`);
+    expect(image.status).toBe(200);
+    expect(image.headers.get("cache-control")).toBe("public, max-age=31536000, immutable");
+    expect(image.headers.get("x-useframe-cache")).toBe("miss");
+    expect(await image.text()).toBe("webp-bytes");
+
+    const unhashed = await call(CLIP);
+    expect(unhashed.headers.get("cache-control")).toBe("public, max-age=3600");
+    await unhashed.text();
+  });
+
+  it("serves media in SPA mode and 404s a missing video", async () => {
+    await put("sites/proj2/dep2/media/x/clip.0123abcd.mp4", "spa-video", "video/mp4");
+    const res = await call(`https://${SPA_HOST}/media/x/clip.0123abcd.mp4`, { headers: { range: "bytes=0-2" } });
+    expect(res.status).toBe(206);
+    expect(await res.text()).toBe("spa");
+
+    const missing = await call(`https://${NEXT_HOST}/media/nope.mp4`);
+    expect(missing.status).toBe(404);
+    await missing.text();
+  });
+});
