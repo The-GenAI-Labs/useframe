@@ -10,3 +10,8 @@ output "r2_bucket_name" {
 output "account_id" {
   value = var.account_id
 }
+
+output "media_bucket_name" {
+  description = "Use as MEDIA_R2_BUCKET in apps/server, apps/media-service and apps/deploy-service."
+  value       = cloudflare_r2_bucket.media.name
+}

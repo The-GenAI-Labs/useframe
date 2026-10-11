@@ -13,5 +13,6 @@
     "runsAsRoot": true
   },
   { "name": "worker", "dir": "apps/worker", "package": "@useframe/worker", "port": null, "maxImageMb": 2500 },
+  { "name": "media-service", "dir": "apps/media-service", "package": "@useframe/media-service", "port": null, "maxImageMb": 1000 },
   { "name": "migrate", "dir": "packages/db", "package": "@useframe/db", "port": null, "kind": "migrate" }
 ]

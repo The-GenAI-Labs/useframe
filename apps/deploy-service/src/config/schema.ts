@@ -43,6 +43,13 @@ export const envSchema = z
     SITES_R2_SECRET_ACCESS_KEY: z.string().min(1, "SITES_R2_SECRET_ACCESS_KEY is required"),
     SITES_R2_ENDPOINT: optional(z.string().url()),
 
+    // Read-only access to the private media library, used to copy referenced
+    // media into each deployment. Deploys of sites without media work without it.
+    MEDIA_R2_BUCKET: z.string().min(1).default("useframe-media"),
+    MEDIA_R2_READ_ACCESS_KEY_ID: optional(z.string().min(1)),
+    MEDIA_R2_READ_SECRET_ACCESS_KEY: optional(z.string().min(1)),
+    MEDIA_R2_ENDPOINT: optional(z.string().url()),
+
     DEPLOY_RETAIN_COUNT: int(10),
     DEPLOY_MAX_FILES: int(5000),
     DEPLOY_MAX_TOTAL_MB: int(100),
@@ -88,6 +95,8 @@ export const envSchema = z
     ...value,
     SITES_R2_ENDPOINT:
       value.SITES_R2_ENDPOINT ?? `https://${value.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+    MEDIA_R2_ENDPOINT:
+      value.MEDIA_R2_ENDPOINT ?? `https://${value.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
     SITES_EDGE_CNAME_TARGET: value.SITES_EDGE_CNAME_TARGET ?? `cname.${value.SITES_BASE_DOMAIN}`,
     DEPLOY_WORK_DIR:
       value.DEPLOY_WORK_DIR ??

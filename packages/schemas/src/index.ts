@@ -11,6 +11,7 @@ export * from "./turnstile.js";
 export * from "./heroPreview.js";
 export * from "./credits.js";
 export * from "./retrieval.schema.js";
+export * from "./media.schema.js";
 
 export * from "./project-chat.schema.js";
 export * from "./brief/index.js";

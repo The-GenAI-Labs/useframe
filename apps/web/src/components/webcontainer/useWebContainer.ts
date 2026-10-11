@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useCallback } from "react"
-import type { SiteSpec } from "@repo/schemas"
+import type { ResolvedMediaAsset, SiteSpec } from "@repo/schemas"
 import { buildFsTree } from "./fsTree"
 
 type WCState =
@@ -50,7 +50,7 @@ async function fetchBaseSnapshot(): Promise<ArrayBuffer | null> {
 export function useWebContainer() {
   const [state, setState] = useState<WCState>({ status: "idle" })
 
-  const boot = useCallback(async (spec: SiteSpec) => {
+  const boot = useCallback(async (spec: SiteSpec, mediaAssets: ResolvedMediaAsset[] = []) => {
     const myToken = ++activeToken
     const stillCurrent = () => activeToken === myToken
 
@@ -73,7 +73,7 @@ export function useWebContainer() {
         if (!stillCurrent()) return
       }
 
-      const tree = buildFsTree(spec)
+      const tree = buildFsTree(spec, undefined, { media: { target: "preview", assets: mediaAssets } })
       await wc.mount(tree)
       if (!stillCurrent()) return
 

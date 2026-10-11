@@ -87,7 +87,7 @@ const spec = {
 
 describe("buildable files", () => {
   it("builds a Vite SPA with robots/sitemap on the real site URL", () => {
-    const files = filesFromVersion({ snapshot: spec, nextFiles: null }, "https://acme-x7k.useframe.in");
+    const { files } = filesFromVersion({ snapshot: spec, nextFiles: null }, "https://acme-x7k.useframe.in");
     const robots = files.find((f) => f.path === "public/robots.txt")!.content;
     const sitemap = files.find((f) => f.path === "public/sitemap.xml")!.content;
     expect(robots).toContain("Sitemap: https://acme-x7k.useframe.in/sitemap.xml");
@@ -97,7 +97,7 @@ describe("buildable files", () => {
   });
 
   it("scaffolds a Replicate Next tree as a static export", () => {
-    const files = filesFromVersion(
+    const { files } = filesFromVersion(
       { snapshot: {}, nextFiles: [{ path: "app/page.tsx", content: "export default () => null" }] },
       "https://x.useframe.in",
     );

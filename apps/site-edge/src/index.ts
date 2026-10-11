@@ -115,33 +115,81 @@ function isMedia(contentType: string): boolean {
   return contentType.startsWith("video/") || contentType.startsWith("audio/");
 }
 
-async function serveRange(
+// The Cache API never stores 206s, so video and ranged requests go straight to R2.
+const DIRECT_EXTENSIONS = /\.(mp4|webm|mov)$/i;
+// Deployed media files carry a content hash in their name and never change.
+const HASHED_MEDIA = /^\/media\/[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+\.[0-9a-f]{8}\.[a-z0-9]+$/;
+const IMMUTABLE = "public, max-age=31536000, immutable";
+const BYTE_RANGE = /^bytes=(\d*)-(\d*)$/;
+
+// Malformed ranges get a full 200; Miniflare ignores out-of-bounds ranges, so satisfiability is decided here.
+function rangeIntent(header: string | null, size: number): "none" | "partial" | "unsatisfiable" {
+  const match = header ? BYTE_RANGE.exec(header.trim()) : null;
+  if (!match || (match[1] === "" && match[2] === "")) return "none";
+  if (match[1] !== "") return Number(match[1]) >= size ? "unsatisfiable" : "partial";
+  return Number(match[2]) === 0 ? "unsatisfiable" : "partial";
+}
+
+function objectHeaders(headers: Headers, obj: R2Object, cacheControl: string | undefined): void {
+  headers.set("content-type", obj.httpMetadata?.contentType ?? "application/octet-stream");
+  headers.set("etag", obj.httpEtag);
+  headers.set("cache-control", cacheControl ?? obj.httpMetadata?.cacheControl ?? "public, max-age=3600");
+  headers.set("accept-ranges", "bytes");
+  headers.set("x-useframe-cache", "bypass");
+}
+
+async function serveDirect(
   env: Env,
   request: Request,
   r2Key: string,
   headers: Headers,
+  cacheControl: string | undefined,
 ): Promise<Response | null> {
+  const ranged = rangeIntent(request.headers.get("range"), Infinity) !== "none";
+  if (request.method === "HEAD" && !ranged) {
+    const head = await env.SITES_BUCKET.head(r2Key);
+    if (!head) return null;
+    objectHeaders(headers, head, cacheControl);
+    headers.set("content-length", String(head.size));
+    const fresh = etagMatches(request.headers.get("if-none-match"), head.httpEtag);
+    return new Response(null, { status: fresh ? 304 : 200, headers });
+  }
+
   let obj: R2ObjectBody | R2Object | null;
   try {
-    obj = await env.SITES_BUCKET.get(r2Key, { range: request.headers });
+    obj = await env.SITES_BUCKET.get(r2Key, { range: ranged ? request.headers : undefined, onlyIf: request.headers });
   } catch {
     const head = await env.SITES_BUCKET.head(r2Key);
     if (!head) return null;
+    objectHeaders(headers, head, cacheControl);
     headers.set("content-range", `bytes */${head.size}`);
     return new Response(null, { status: 416, headers });
   }
   if (!obj) return null;
+  objectHeaders(headers, obj, cacheControl);
 
-  headers.set("content-type", obj.httpMetadata?.contentType ?? "application/octet-stream");
-  headers.set("etag", obj.httpEtag);
-  headers.set("cache-control", obj.httpMetadata?.cacheControl ?? "public, max-age=3600");
-  headers.set("accept-ranges", "bytes");
-  headers.set("x-useframe-cache", "bypass");
+  // A failed precondition returns metadata without a body.
+  if (!("body" in obj)) {
+    const conditional = request.headers.has("if-none-match") || request.headers.has("if-modified-since");
+    return new Response(null, { status: conditional ? 304 : 412, headers });
+  }
+  // R2 compares strong ETags only; browsers often revalidate with weak ones.
+  if (etagMatches(request.headers.get("if-none-match"), obj.httpEtag)) {
+    await obj.body.cancel();
+    return new Response(null, { status: 304, headers });
+  }
 
-  const body = "body" in obj ? obj.body : null;
-  const range = obj.range;
+  const intent = rangeIntent(request.headers.get("range"), obj.size);
+  if (intent === "unsatisfiable") {
+    await obj.body.cancel();
+    headers.set("content-range", `bytes */${obj.size}`);
+    return new Response(null, { status: 416, headers });
+  }
+  const range = intent === "partial" ? obj.range : undefined;
   if (!range) {
-    return new Response(request.method === "HEAD" ? null : body, { status: 200, headers });
+    headers.set("content-length", String(obj.size));
+    if (request.method === "HEAD") await obj.body.cancel();
+    return new Response(request.method === "HEAD" ? null : obj.body, { status: 200, headers });
   }
   // The runtime may return every key with undefined values, so check values, not keys.
   const r = range as { offset?: number; length?: number; suffix?: number };
@@ -152,11 +200,12 @@ async function serveRange(
     offset = obj.size - length;
   } else {
     offset = r.offset ?? 0;
-    length = r.length ?? obj.size - offset;
+    length = Math.min(r.length ?? obj.size - offset, obj.size - offset);
   }
   headers.set("content-range", `bytes ${offset}-${offset + length - 1}/${obj.size}`);
   headers.set("content-length", String(length));
-  return new Response(request.method === "HEAD" ? null : body, { status: 206, headers });
+  if (request.method === "HEAD") await obj.body.cancel();
+  return new Response(request.method === "HEAD" ? null : obj.body, { status: 206, headers });
 }
 
 async function serve(
@@ -177,9 +226,10 @@ async function serve(
     return redirect(url.pathname + "/" + url.search, headers);
   }
 
-  if (request.headers.has("range")) {
-    const ranged = await serveRange(env, request, `sites/${deploymentKey}/${plan.key}`, headers);
-    if (ranged) return ranged;
+  const immutable = HASHED_MEDIA.test(path) ? IMMUTABLE : undefined;
+  if (request.headers.has("range") || DIRECT_EXTENSIONS.test(plan.key)) {
+    const direct = await serveDirect(env, request, `sites/${deploymentKey}/${plan.key}`, headers, immutable);
+    if (direct) return direct;
   }
 
   let status = 200;
@@ -195,7 +245,7 @@ async function serve(
 
   headers.set("content-type", loaded.contentType);
   if (loaded.etag) headers.set("etag", loaded.etag);
-  headers.set("cache-control", status === 404 ? HTML_404_CACHE_CONTROL : loaded.cacheControl);
+  headers.set("cache-control", status === 404 ? HTML_404_CACHE_CONTROL : (immutable ?? loaded.cacheControl));
   headers.set("x-useframe-cache", loaded.cache);
   if (isMedia(loaded.contentType)) headers.set("accept-ranges", "bytes");
 

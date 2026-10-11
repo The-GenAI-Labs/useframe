@@ -12,6 +12,7 @@ export default defineConfig({
       "src/lib/briefPipeline.test.ts",
       "src/tools/safeFetch.test.ts",
       "src/lib/docExtract.test.ts",
+      "src/agents/mediaPlacement.test.ts",
     ],
   },
 });

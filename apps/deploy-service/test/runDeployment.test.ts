@@ -12,6 +12,8 @@ const m = vi.hoisted(() => ({
   verifyOutput: vi.fn(),
   copyTemplate: vi.fn(),
   remove: vi.fn(),
+  copyMedia: vi.fn(),
+  media: [] as { bytes: number }[],
 }));
 
 vi.mock("@useframe/db", () => ({ ensureValidationRun: vi.fn() }));
@@ -41,10 +43,13 @@ vi.mock("@/pipeline/materialize.js", () => ({
   removeWorkDir: m.remove,
 }));
 vi.mock("@/pipeline/files.js", () => ({
-  getBuildableFiles: async () => [
-    { path: "package.json", content: JSON.stringify({ devDependencies: { vite: "5.4.0" } }) },
-  ],
+  getBuildableFiles: async () => ({
+    files: [{ path: "package.json", content: JSON.stringify({ devDependencies: { vite: "5.4.0" } }) }],
+    media: m.media,
+    mediaWarnings: m.media.length ? ["home/hero-0/visual: hero image is larger than 400 KB"] : [],
+  }),
 }));
+vi.mock("@/pipeline/media.js", () => ({ copyMediaToSite: m.copyMedia }));
 
 const { runDeployment } = await import("@/pipeline/runDeployment.js");
 
@@ -82,7 +87,11 @@ function deps() {
 }
 
 beforeEach(() => {
-  for (const fn of Object.values(m)) fn.mockReset();
+  for (const fn of Object.values(m)) if (typeof fn === "function") fn.mockReset();
+  m.media = [];
+  m.copyMedia.mockImplementation(async (_s: unknown, _d: unknown, _p: string, items: { bytes: number }[]) =>
+    items.reduce((sum, i) => sum + i.bytes, 0),
+  );
   m.transition.mockResolvedValue(true);
   m.copyTemplate.mockResolvedValue(true);
   m.runChild.mockResolvedValue({ code: 0, signal: null, timedOut: false, output: "built" });
@@ -166,5 +175,35 @@ describe("runDeployment", () => {
     m.goLive.mockResolvedValue(false);
     await runDeployment(deps(), job);
     expect(m.sync).toHaveBeenLastCalledWith(expect.anything(), "s1");
+  });
+
+  it("copies referenced media into the deployment before the build upload, counting its files and bytes", async () => {
+    m.media = [{ bytes: 300 }, { bytes: 200 }];
+    const d = deps() as unknown as { mediaSource: unknown; r2: unknown };
+    d.mediaSource = { bucket: "useframe-media" };
+    await runDeployment(d as never, job);
+    expect(m.copyMedia).toHaveBeenCalledWith(d.mediaSource, d.r2, "sites/p1/d1/", m.media);
+    expect(m.transition.mock.calls[1]![3]).toMatchObject({ fileCount: 3, totalBytes: BigInt(510) });
+    expect(m.verifyUpload).toHaveBeenCalledWith(expect.anything(), "sites/p1/d1/", 3, "abc");
+    expect(m.copyMedia.mock.invocationCallOrder[0]).toBeLessThan(m.upload.mock.invocationCallOrder[0]!);
+    expect(m.fail).not.toHaveBeenCalled();
+  });
+
+  it("fails before uploading when media would push the deployment over the size limit", async () => {
+    m.media = [{ bytes: 995 }];
+    await runDeployment(deps(), job);
+    expect(m.fail.mock.calls[0]![2]).toMatch(/larger than/);
+    expect(m.copyMedia).not.toHaveBeenCalled();
+    expect(m.upload).not.toHaveBeenCalled();
+  });
+
+  it("fails closed when a referenced media file is missing", async () => {
+    m.media = [{ bytes: 10 }];
+    const { DeployError } = await import("@/pipeline/errors.js");
+    m.copyMedia.mockRejectedValue(new DeployError('The media "Team photo" is missing from storage.'));
+    await runDeployment(deps(), job);
+    expect(m.fail.mock.calls[0]![2]).toBe('The media "Team photo" is missing from storage.');
+    expect(m.sync).not.toHaveBeenCalled();
+    expect(m.goLive).not.toHaveBeenCalled();
   });
 });

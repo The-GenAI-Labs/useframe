@@ -70,6 +70,16 @@ export type DomainTickJobPayload = {
   domainId: string;
 };
 
+export type MediaProcessOptions = {
+  stripAudio?: boolean;
+  skipDescribe?: boolean;
+};
+
+export type MediaProcessJobPayload = {
+  assetId: string;
+  options?: MediaProcessOptions;
+};
+
 export type WebhookJobPayload = {
   webhookEventId: string;
   provider: string;

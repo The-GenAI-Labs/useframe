@@ -31,6 +31,15 @@ export const deps: Deps = {
     secretAccessKey: env.SITES_R2_SECRET_ACCESS_KEY,
     bucket: env.SITES_R2_BUCKET,
   }),
+  mediaSource:
+    env.MEDIA_R2_READ_ACCESS_KEY_ID && env.MEDIA_R2_READ_SECRET_ACCESS_KEY
+      ? createR2({
+          endpoint: env.MEDIA_R2_ENDPOINT,
+          accessKeyId: env.MEDIA_R2_READ_ACCESS_KEY_ID,
+          secretAccessKey: env.MEDIA_R2_READ_SECRET_ACCESS_KEY,
+          bucket: env.MEDIA_R2_BUCKET,
+        })
+      : null,
   redis,
   runQueue,
   validationQueue: env.DEPLOY_ENQUEUE_VALIDATION

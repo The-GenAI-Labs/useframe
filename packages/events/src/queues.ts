@@ -23,6 +23,8 @@ export const QUEUES = {
   DEPLOY_DOMAIN_RECONCILE: "deployDomainReconcile",
   DEPLOY_DOMAIN_HEALTHCHECK: "deployDomainHealthcheck",
   DEPLOY_DOMAIN_GC: "deployDomainGc",
+  MEDIA_PROCESS: "mediaProcess",
+  MEDIA_GC: "mediaGc",
 } as const;
 
 export type QueueName = (typeof QUEUES)[keyof typeof QUEUES];

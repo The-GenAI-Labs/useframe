@@ -42,6 +42,7 @@ Read the implementation and package manifests as the source of truth. See `READM
 | `apps/worker`                                          | BullMQ processors for scans, SEO, scoring, domains, PDFs, billing jobs, and cache expiry                      |
 | `apps/deploy-service`                                  | Site builds, R2 uploads, KV publishing (`syncSiteToKvs`), rollback, GC, reaper, reconcile; see `RUNBOOK.md`   |
 | `apps/site-edge`                                       | Cloudflare Worker serving generated sites from KV + R2; deployed with Wrangler, never from CI                 |
+| `apps/media-service`                                   | BullMQ worker for the media library: upload processing (sharp/ffmpeg), vision descriptions, media GC          |
 | `infra/terraform`, `infra/k8s`                         | Cloudflare sites-hosting Terraform module and GKE manifests (applied by a human, never by agents)             |
 | `infra/helm/useframe`                                  | Helm chart for the backend workloads on GKE; agents run only offline checks (lint/template/unittest)          |
 | `packages/db`                                          | Shared Prisma client, schema, migrations, seed data, and scan cache helpers                                   |
@@ -155,7 +156,7 @@ Run these from the repository root unless otherwise noted:
 - There is no root `test` script. Run relevant existing tests/evaluations where available and report coverage gaps instead of inventing a passing test command.
 - Shared packages such as db, schemas, events, and site-builder export `dist`; rebuild them after changes before restarting consumers (`@useframe/db` runs `prisma generate` then `tsc`). A running watch process does not prove shared output is current.
 - Backend services build with `tsc && tsc-alias` (the `@/` alias becomes relative paths) and run in production with plain `node dist/...`; never ship `tsx` in an image. Runtime workspace packages declare `files` (normally `dist`) because `pnpm deploy` only copies published files.
-- Service default ports: API 4000, orchestrator 4001, billing 4002, scoring 4003, research 4004, deploy 4005. Confirm actual configured ports and probe their `/health` routes. Check the frontend HTTP response and worker startup/Redis connectivity separately; the worker has no HTTP health endpoint.
+- Service default ports: API 4000, orchestrator 4001, billing 4002, scoring 4003, research 4004, deploy 4005. Confirm actual configured ports and probe their `/health` routes. Check the frontend HTTP response and worker startup/Redis connectivity separately; the worker and media-service have no HTTP endpoint beyond an optional `HEALTH_PORT` listener (media-service).
 - Identify project-owned processes before restarting them. Do not kill every Node process. Leave the updated development services running after verification; on Windows, launch background helpers without visible windows.
 - Check required PostgreSQL, Redis, and external-service configuration before starting dependent flows. If configuration or infrastructure prevents startup, report the exact blocker and what could be verified.
 

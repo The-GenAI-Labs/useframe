@@ -1,4 +1,16 @@
-import { safeHref, type SiteSpec } from "@repo/schemas";
+import { safeHref, type ResolvedMediaAsset, type Section, type SiteSpec } from "@repo/schemas";
+import {
+  createMediaContext,
+  hasBoundSlot,
+  listMediaSlots,
+  MEDIA_PLAYBACK_JS,
+  renderSlotMedia,
+  slotIdOf,
+  slotsForSection,
+  type MediaFileRef,
+  type MediaRenderContext,
+  type MediaTarget,
+} from "./media.js";
 
 export type SeoFiles = {
   robotsTxt?: string;
@@ -56,9 +68,29 @@ body {
 `;
 }
 
-export function sectionToJsx(
-  section: SiteSpec["pages"][number]["sections"][number],
-): string {
+type SectionMedia = { ctx: MediaRenderContext; pageSlug: string };
+
+function slotMarkup(media: SectionMedia | undefined, section: Section, key: string): string {
+  if (!media) return "";
+  const slot = slotsForSection(section).find((s) => s.key === key);
+  return slot ? renderSlotMedia(media.ctx, slotIdOf(media.pageSlug, section, key), slot) : "";
+}
+
+function itemCards(items: NonNullable<Section["content"]>["items"], itemMedia: (i: number) => string): string {
+  return (items ?? [])
+    .map((item, i) => {
+      const visual = itemMedia(i);
+      return `<div style={{ padding: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "var(--radius)" }}>
+      ${visual ? `<div style={{ marginBottom: "1rem" }}>${visual}</div>` : ""}<h3 style={{ fontWeight: 600, marginBottom: ".5rem" }}>${jsxText(item.title)}</h3>
+      <p style={{ color: "#6b7280", fontSize: ".9rem" }}>${jsxText(item.description)}</p>
+    </div>`;
+    })
+    .join("\n    ");
+}
+
+const ITEMS_GRID = `display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "2rem"`;
+
+export function sectionToJsx(section: Section, media?: SectionMedia): string {
   const c = section.content ?? {};
   const headline = c.headline ?? section.type;
   const subheadline = c.subheadline ?? "";
@@ -66,6 +98,7 @@ export function sectionToJsx(
   const ctaPrimary = c.cta?.primary ?? "";
   const ctaHref = jsxHref(c.cta?.primaryHref);
   const items = c.items ?? [];
+  const itemMedia = (i: number) => slotMarkup(media, section, `item-${i}`);
 
   // Only emitted when a section actually carries citations, so generated
   // markup stays clean for the common case. Consumed by the citationHover.js
@@ -77,39 +110,41 @@ export function sectionToJsx(
       ? ` data-citation-ids={${JSON.stringify(JSON.stringify(section.citationIds))}}`
       : "";
 
+  // Background media sits at z 0, its scrim at z 1 and the content above both.
+  const background = slotMarkup(media, section, "background");
+  const layered = background ? `position: "relative", overflow: "hidden", ` : "";
+  const front = (inner: string) =>
+    background ? `<div style={{ position: "relative", zIndex: 2 }}>${inner}</div>` : inner;
+
   switch (section.type) {
-    case "HERO":
+    case "HERO": {
+      const visual = slotMarkup(media, section, "visual");
       return `
-<section${citationAttr} style={{ padding: "80px 24px", textAlign: "center", background: "var(--primary)", color: "#fff" }}>
+<section${citationAttr} style={{ ${layered}padding: "80px 24px", textAlign: "center", background: "var(--primary)", color: "#fff" }}>
+  ${background}${front(`
   <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, marginBottom: "1rem" }}>${jsxText(headline)}</h1>
   ${subheadline ? `<p style={{ fontSize: "1.25rem", opacity: 0.85, marginBottom: "2rem" }}>${jsxText(subheadline)}</p>` : ""}
   ${ctaPrimary ? `<a href=${ctaHref} style={{ display: "inline-block", padding: "14px 32px", background: "#fff", color: "var(--primary)", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${jsxText(ctaPrimary)}</a>` : ""}
+  ${visual ? `<div style={{ maxWidth: "960px", margin: "2.5rem auto 0" }}>${visual}</div>` : ""}`)}
 </section>`;
+    }
 
     case "FEATURES":
       return `
 <section${citationAttr} style={{ padding: "80px 24px", maxWidth: "1100px", margin: "0 auto" }}>
   <h2 style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center", marginBottom: "3rem" }}>${jsxText(headline)}</h2>
-  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "2rem" }}>
-    ${items
-      .map(
-        (
-          item,
-        ) => `<div style={{ padding: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "var(--radius)" }}>
-      <h3 style={{ fontWeight: 600, marginBottom: ".5rem" }}>${jsxText(item.title)}</h3>
-      <p style={{ color: "#6b7280", fontSize: ".9rem" }}>${jsxText(item.description)}</p>
-    </div>`,
-      )
-      .join("\n    ")}
+  <div style={{ ${ITEMS_GRID} }}>
+    ${itemCards(items, itemMedia)}
   </div>
 </section>`;
 
     case "CTA":
       return `
-<section${citationAttr} style={{ padding: "80px 24px", background: "var(--accent)", textAlign: "center" }}>
+<section${citationAttr} style={{ ${layered}padding: "80px 24px", background: "var(--accent)", textAlign: "center" }}>
+  ${background}${front(`
   <h2 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "1rem" }}>${jsxText(headline)}</h2>
   ${body ? `<p style={{ marginBottom: "2rem", color: "#374151" }}>${jsxText(body)}</p>` : ""}
-  ${ctaPrimary ? `<a href=${ctaHref} style={{ display: "inline-block", padding: "14px 32px", background: "var(--primary)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${jsxText(ctaPrimary)}</a>` : ""}
+  ${ctaPrimary ? `<a href=${ctaHref} style={{ display: "inline-block", padding: "14px 32px", background: "var(--primary)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${jsxText(ctaPrimary)}</a>` : ""}`)}
 </section>`;
 
     case "FOOTER":
@@ -118,20 +153,34 @@ export function sectionToJsx(
   <p>${jsxText(headline || "© 2025 All rights reserved.")}</p>
 </footer>`;
 
-    default:
+    default: {
+      const logo = slotMarkup(media, section, "logo");
+      const showcase = slotMarkup(media, section, "showcase");
+      // Item cards appear only when an item has media, so media-less sections render as before.
+      const cards = items.some((_, i) => hasBoundSlot(media?.ctx, media ? slotIdOf(media.pageSlug, section, `item-${i}`) : ""))
+        ? `<div style={{ ${ITEMS_GRID}, marginTop: "2rem" }}>
+    ${itemCards(items, itemMedia)}
+  </div>`
+        : "";
       return `
-<section${citationAttr} style={{ padding: "60px 24px", maxWidth: "900px", margin: "0 auto" }}>
-  <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1rem" }}>${jsxText(headline)}</h2>
+<section${citationAttr} style={{ ${layered}padding: "60px 24px", maxWidth: "${cards || showcase ? "1100px" : "900px"}", margin: "0 auto" }}>
+  ${background}${front(`
+  ${logo ? `<div style={{ marginBottom: "1rem" }}>${logo}</div>` : ""}<h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1rem" }}>${jsxText(headline)}</h2>
   ${body ? `<p style={{ color: "#374151" }}>${jsxText(body)}</p>` : ""}
+  ${showcase ? `<div style={{ marginTop: "2rem" }}>${showcase}</div>` : ""}${cards}`)}
 </section>`;
+    }
   }
 }
 
 export function pageToComponent(
   page: SiteSpec["pages"][number],
   componentName: string,
+  mediaCtx?: MediaRenderContext,
 ): string {
-  const sections = page.sections.map(sectionToJsx).join("\n");
+  const sections = page.sections
+    .map((section) => sectionToJsx(section, mediaCtx ? { ctx: mediaCtx, pageSlug: page.slug } : undefined))
+    .join("\n");
   return `export default function ${componentName}() {
   return (
     <main>
@@ -174,6 +223,32 @@ export function buildPageMeta(spec: SiteSpec): PageMeta[] {
   }));
 }
 
+export type MediaBuildOptions = {
+  target: MediaTarget;
+  // Already resolved for this target: preview variants carry signed URLs.
+  assets: readonly ResolvedMediaAsset[];
+  maxAutoplayVideosPerPage?: number;
+};
+
+export type BuildSiteOptions = { media?: MediaBuildOptions };
+
+export type BuiltSite = {
+  files: GeneratedFile[];
+  mediaWarnings: string[];
+  // Exactly the variant files the markup references (export target only).
+  mediaFiles: MediaFileRef[];
+};
+
+const DEFAULT_MAX_AUTOPLAY_VIDEOS_PER_PAGE = 3;
+
+export function buildSiteFiles(
+  spec: SiteSpec,
+  seoFiles?: SeoFiles,
+  options?: BuildSiteOptions,
+): GeneratedFile[] {
+  return buildSite(spec, seoFiles, options).files;
+}
+
 /**
  * Produces the same Vite+React scaffold used for the live WebContainer
  * preview, as a flat file list — usable both by a FileSystemTree consumer
@@ -181,13 +256,29 @@ export function buildPageMeta(spec: SiteSpec): PageMeta[] {
  * Keeping this one shared implementation is what guarantees the deployed
  * site matches what the user approved in preview.
  */
-export function buildSiteFiles(
+export function buildSite(
   spec: SiteSpec,
   seoFiles?: SeoFiles,
-): GeneratedFile[] {
+  options?: BuildSiteOptions,
+): BuiltSite {
   const homePage = spec.pages.find((p) => p.type === "HOME") ?? spec.pages[0]!;
   const pageMeta = buildPageMeta(spec);
   const isMultiPage = pageMeta.length > 1;
+  const mediaCtx = createMediaContext(spec, options?.media?.target ?? "preview", options?.media?.assets ?? []);
+  const hasMedia = Object.keys(spec.media ?? {}).length > 0;
+  const maxAutoplay = options?.media?.maxAutoplayVideosPerPage ?? DEFAULT_MAX_AUTOPLAY_VIDEOS_PER_PAGE;
+  const knownSlots = new Set(listMediaSlots(spec).map((ref) => ref.slotId));
+  for (const slotId of Object.keys(spec.media ?? {})) {
+    if (!knownSlots.has(slotId)) mediaCtx.warnings.push(`${slotId}: media dropped (unknown slot)`);
+  }
+  const renderPage = (page: SiteSpec["pages"][number], componentName: string) => {
+    const before = mediaCtx.autoplayCount;
+    const source = pageToComponent(page, componentName, hasMedia ? mediaCtx : undefined);
+    if (mediaCtx.autoplayCount - before > maxAutoplay) {
+      mediaCtx.warnings.push(`${page.slug}: more than ${maxAutoplay} autoplaying videos on one page`);
+    }
+    return source;
+  };
 
   const indexHtml = `<!doctype html>
 <html lang="en">
@@ -205,12 +296,13 @@ export function buildSiteFiles(
 </html>
 `;
 
+  const mediaImport = hasMedia ? `import "./mediaPlayback.js"\n\n` : "\n";
+
   const mainJsxSinglePage = `import { createRoot } from "react-dom/client"
 import App from "./App"
 import "./index.css"
 import "./citationHover.js"
-
-createRoot(document.getElementById("root")).render(<App />)
+${mediaImport}createRoot(document.getElementById("root")).render(<App />)
 `;
 
   const mainJsxMultiPage = `import { createRoot } from "react-dom/client"
@@ -218,8 +310,7 @@ import { BrowserRouter } from "react-router-dom"
 import App from "./App"
 import "./index.css"
 import "./citationHover.js"
-
-createRoot(document.getElementById("root")).render(
+${mediaImport}createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <App />
   </BrowserRouter>
@@ -262,7 +353,7 @@ document.body.addEventListener("mouseout", (e) => {
 })
 `;
 
-  const appJsxSinglePage = pageToComponent(homePage, "App");
+  const appJsxSinglePage = isMultiPage ? "" : renderPage(homePage, "App");
 
   const appJsxMultiPage = `import { Routes, Route } from "react-router-dom"
 ${pageMeta.map((m) => `import ${m.componentName} from "./pages/${m.fileName.replace(".jsx", "")}"`).join("\n")}
@@ -317,12 +408,13 @@ export default defineConfig({
     { path: "src/index.css", content: cssVars(spec.designSystem) },
     { path: "src/citationHover.js", content: citationHoverJs },
   ];
+  if (hasMedia) files.push({ path: "src/mediaPlayback.js", content: MEDIA_PLAYBACK_JS });
 
   if (isMultiPage) {
     for (const m of pageMeta) {
       files.push({
         path: `src/pages/${m.fileName}`,
-        content: pageToComponent(m.page, m.componentName),
+        content: renderPage(m.page, m.componentName),
       });
     }
   }
@@ -334,7 +426,7 @@ export default defineConfig({
     files.push({ path: "public/sitemap.xml", content: seoFiles.sitemapXml });
   }
 
-  return files;
+  return { files, mediaWarnings: mediaCtx.warnings, mediaFiles: [...mediaCtx.files.values()] };
 }
 
 export { withScaffold, type ReplicationNextFile } from "./nextScaffold.js";
@@ -346,3 +438,4 @@ export {
 } from "./seoFiles.js";
 export * from "./theme/tokens.js";
 export * from "./capabilities.js";
+export * from "./media.js";

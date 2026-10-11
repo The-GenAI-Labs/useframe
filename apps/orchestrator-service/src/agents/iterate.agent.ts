@@ -6,6 +6,7 @@ import type { SiteSpec, IterateRequest, IterateChange } from "@repo/schemas";
 import { getModel } from "@/llm/providers.js";
 import { DEFAULT_ITERATE_PLAN_PROMPT } from "@/prompts/iteratePlan.prompt.js";
 import { DEFAULT_ITERATE_SECTION_PROMPT } from "@/prompts/iterateSection.prompt.js";
+import { loadAssetMenu, runMediaPlacement, sanitizeMediaBindings } from "./mediaPlacement.agent.js";
 
 export type IterateResult = {
   updatedSpec: SiteSpec;
@@ -26,11 +27,48 @@ function extractJson(text: string): unknown {
   return JSON.parse(match[0]);
 }
 
+const MEDIA_INSTRUCTION =
+  /(photos?|images?|pictures?|pics?|videos?|clips?|footage|logos?|media|background|screenshots?|avatars?|headshots?|gallery|uploads?|uploaded)/i;
+
+// Bindings are re-checked after every edit; placement runs only when the user talks about media.
+async function settleMedia(
+  result: IterateResult,
+  request: IterateRequest,
+  model: ReturnType<typeof getModel>,
+  userId: string | undefined,
+): Promise<IterateResult> {
+  const spec = result.updatedSpec;
+  const wantsMedia = MEDIA_INSTRUCTION.test(request.instruction);
+  if (!wantsMedia && Object.keys(spec.media ?? {}).length === 0) return result;
+  const menu = await loadAssetMenu(request.projectId, userId);
+  const media = wantsMedia
+    ? await runMediaPlacement({ spec, menu, model, instruction: request.instruction })
+    : sanitizeMediaBindings(spec, menu).media;
+  const { media: _previous, ...rest } = spec;
+  const updatedSpec: SiteSpec = Object.keys(media).length > 0 ? { ...rest, media } : rest;
+  const mediaChanged = JSON.stringify(media) !== JSON.stringify(request.currentSpec.media ?? {});
+  return {
+    ...result,
+    updatedSpec,
+    changed: result.changed || mediaChanged,
+    summary: !result.changed && mediaChanged ? "Updated the media on your site." : result.summary,
+  };
+}
+
 export async function runIteration(
   request: IterateRequest,
   includeDesign = false,
+  options: { userId?: string } = {},
 ): Promise<IterateResult> {
   const model = getModel(request.modelId);
+  return settleMedia(await runContentIteration(request, includeDesign, model), request, model, options.userId);
+}
+
+async function runContentIteration(
+  request: IterateRequest,
+  includeDesign: boolean,
+  model: ReturnType<typeof getModel>,
+): Promise<IterateResult> {
   const spec = request.currentSpec;
   if (includeDesign) {
     const { object } = await generateObject({

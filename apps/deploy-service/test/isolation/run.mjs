@@ -89,7 +89,7 @@ await removeWorkDir(dirs.base);
 
 // A real Vite build of a generated site, offline, from the baked template.
 const site = await prepareWorkDir("/work", "vite-build", owner);
-const files = filesFromVersion({ snapshot: FIXTURE_SPEC(2), nextFiles: null }, "https://acme-x7k.useframe.in");
+const { files } = filesFromVersion({ snapshot: FIXTURE_SPEC(2), nextFiles: null }, "https://acme-x7k.useframe.in");
 const detected = detectFramework(files);
 await writeTree(site.src, files, owner);
 const usedTemplate = await copyTemplate(

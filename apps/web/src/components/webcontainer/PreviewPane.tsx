@@ -4,23 +4,34 @@ import { useEffect, useRef, useState } from "react"
 import { useWebContainer } from "./useWebContainer"
 import { CitationTooltip } from "./CitationTooltip"
 import type { SiteSpec } from "@repo/schemas"
+import { mediaApi } from "@/lib/api/services/media.service"
 
 type Props = {
+  projectSlug: string
   siteSpec: SiteSpec
   active: boolean
 }
 
 type HoverState = { citationIds: string[]; rect: { top: number; left: number; width: number; height: number } } | null
 
-export function PreviewPane({ siteSpec, active }: Props) {
+export function PreviewPane({ projectSlug, siteSpec, active }: Props) {
   const { state, boot } = useWebContainer()
   const [hover, setHover] = useState<HoverState>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {
     if (!active) return
-    boot(siteSpec)
-  }, [active, siteSpec, boot])
+    let cancelled = false
+    const assetIds = [...new Set(Object.values(siteSpec.media ?? {}).map((b) => b.assetId))]
+    // The API mints signed media URLs; on failure the preview renders without media.
+    const resolved = assetIds.length ? mediaApi.resolve(projectSlug, assetIds).catch(() => []) : Promise.resolve([])
+    void resolved.then((assets) => {
+      if (!cancelled) boot(siteSpec, assets)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [active, siteSpec, projectSlug, boot])
 
   useEffect(() => {
     function handleMessage(event: MessageEvent) {

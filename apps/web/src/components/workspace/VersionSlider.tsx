@@ -15,6 +15,7 @@ type VersionItem = {
 };
 
 type Props = {
+  projectSlug: string;
   versions: VersionItem[];
   generatingVersionId: string | null;
   activeIndex: number;
@@ -30,6 +31,7 @@ function hasSnapshot(snapshot: unknown): snapshot is SiteSpec {
 }
 
 export function VersionSlider({
+  projectSlug,
   versions,
   generatingVersionId,
   activeIndex,
@@ -83,6 +85,7 @@ export function VersionSlider({
               <GenerationStream />
             ) : hasSnapshot(version.snapshot) ? (
               <PreviewPane
+                projectSlug={projectSlug}
                 siteSpec={version.snapshot}
                 active={version.id === versions[activeIndex]?.id}
               />

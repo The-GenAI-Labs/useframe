@@ -302,6 +302,48 @@ services:
       requests: { cpu: 250m, memory: 512Mi }
       limits: { memory: 1Gi }
 
+  # Media processing worker (apps/media-service, `node dist/worker.js`). BullMQ only, no public HTTP;
+  # transcodes uploads with ffmpeg in /work. Disabled until the media bucket and its tokens exist.
+  media-service:
+    enabled: false
+    image:
+      name: useframe-media-service
+    # Health listener only (HEALTH_PORT); 200 while every BullMQ worker runs and Redis is ready.
+    port: 8080
+    portEnv: HEALTH_PORT
+    healthPath: /healthz
+    service:
+      enabled: false
+    serviceAccount:
+      create: false
+    emptyDirs:
+      - name: work
+        mountPath: /work
+        sizeLimit: 4Gi
+      - name: tmp
+        mountPath: /tmp
+        sizeLimit: 256Mi
+    # Longer than one ffmpeg run (MEDIA_FFMPEG_TIMEOUT_MS) so SIGTERM lets it finish.
+    terminationGracePeriodSeconds: 240
+    preStopSleepSeconds: 0
+    autoscaling:
+      enabled: false
+    pdb:
+      enabled: false
+    env:
+      ORCHESTRATOR_URL: '{{ include "useframe.serviceUrl" (list . "orchestrator-service") }}'
+      MEDIA_R2_BUCKET: useframe-media
+      MEDIA_WORK_DIR: /work
+      MEDIA_PROCESS_CONCURRENCY: "2"
+      MEDIA_FFMPEG_TIMEOUT_MS: "180000"
+      MEDIA_MAX_INPUT_PIXELS: "60000000"
+      MEDIA_MAX_VIDEO_SECONDS: "60"
+      MEDIA_DESCRIBE_ENABLED: "true"
+    envFromSecrets: [media-service-secrets]
+    resources:
+      requests: { cpu: "1", memory: 2Gi }
+      limits: { memory: 3Gi }
+
 ingress:
   enabled: true
   # `gce` = GKE-native external Application Load Balancer: selected with the

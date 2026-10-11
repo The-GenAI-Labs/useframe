@@ -4,7 +4,7 @@ import { afterAll, describe, expect, it } from "vitest"
 import * as React from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 import { buildSiteFiles } from "@repo/site-builder"
-import type { SiteSpec } from "@repo/schemas"
+import type { ResolvedMediaAsset, SiteSpec } from "@repo/schemas"
 
 const PAYLOADS = [
   "<script>alert(1)</script>",
@@ -88,5 +88,61 @@ describe("site-builder output encoding", () => {
     expect(css).not.toContain("</style>")
     expect(css).not.toContain("javascript:")
     expect(css).not.toContain("<script")
+  })
+
+  it("renders hostile alt text and titles on media as inert attributes", async () => {
+    const asset = (id: string, kind: "IMAGE" | "VIDEO"): ResolvedMediaAsset => ({
+      id,
+      kind,
+      origin: "UPLOADED",
+      status: "READY",
+      deleted: false,
+      title: evil,
+      width: 1600,
+      height: 900,
+      durationMs: kind === "VIDEO" ? 5000 : null,
+      dominantColor: 'red;background:url(javascript:alert(1))',
+      lqip: null,
+      altText: evil,
+      decorative: false,
+      variants:
+        kind === "IMAGE"
+          ? [
+              { role: "w960", mime: "image/webp", width: 960, height: 540, bytes: 1, sha256: "a".repeat(64), url: "https://api.test/m/w960?sig=1" },
+              { role: "fallback", mime: "image/jpeg", width: 1600, height: 900, bytes: 1, sha256: "b".repeat(64), url: 'javascript:alert(1)//"' },
+            ]
+          : [
+              { role: "mp4_720", mime: "video/mp4", width: 1280, height: 720, bytes: 1, sha256: "c".repeat(64), url: "https://api.test/m/v?sig=1" },
+              { role: "poster", mime: "image/webp", width: 1280, height: 720, bytes: 1, sha256: "d".repeat(64), url: "https://api.test/m/p?sig=1" },
+            ],
+    })
+    const mediaSpec: SiteSpec = {
+      ...spec,
+      media: {
+        "home/hero-0/visual": { assetId: "img", alt: evil },
+        "home/how_it_works-2/item-0": { assetId: "vid", alt: evil, objectPosition: "center" },
+      },
+    }
+    const exported = buildSiteFiles(mediaSpec, undefined, { media: { target: "export", assets: [asset("img", "IMAGE"), asset("vid", "VIDEO")] } })
+    const preview = buildSiteFiles(mediaSpec, undefined, { media: { target: "preview", assets: [asset("img", "IMAGE"), asset("vid", "VIDEO")] } })
+
+    for (const [name, files] of [["export", exported], ["preview", preview]] as const) {
+      const app = files.find((f) => f.path === "src/App.jsx")!.content
+      writeFileSync(join(tmpDir, `Media-${name}.jsx`), `import * as React from "react"
+${app}`)
+      const mod = (await import(/* @vite-ignore */ join(tmpDir, `Media-${name}.jsx`))) as { default: React.ComponentType }
+      const html = renderToStaticMarkup(React.createElement(mod.default))
+
+      expect((globalThis as Record<string, unknown>).__pwned).toBeUndefined()
+      expect(html).not.toMatch(/<script/i)
+      // Hostile text inside quoted (escaped) attribute values is inert; real handlers would be bare attributes.
+      expect(html.replace(/"[^"]*"/g, '""')).not.toMatch(/<[^>]*\son\w+\s*=/i)
+      expect(html).not.toMatch(/(src|srcset|poster)="\s*javascript:/i)
+      expect(html).not.toContain("url(javascript:")
+      expect(html).toMatch(/<video[^>]*aria-label="&lt;script&gt;alert\(1\)&lt;\/script&gt;/)
+      if (name === "export") expect(html).toMatch(/<img[^>]*src="\/media\/img\/fallback\.bbbbbbbb\.jpg"/)
+      // The unsafe preview fallback URL is refused, which drops the image entirely.
+      else expect(html).not.toContain("<img")
+    }
   })
 })

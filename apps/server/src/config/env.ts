@@ -82,6 +82,31 @@ const envSchema = z.object({
   BRIEF_RATE_CREATE_PER_HOUR: z.coerce.number().int().positive().default(10),
   BRIEF_RATE_PREFILL_PER_HOUR: z.coerce.number().int().positive().default(10),
   BRIEF_RATE_PREFILL_URL_PER_HOUR: z.coerce.number().int().positive().default(3),
+
+  // Media library (apps/server/src/modules/media). Storage is the private
+  // useframe-media bucket; media routes answer 503 until it is configured.
+  MEDIA_R2_BUCKET: z.string().min(1).default("useframe-media"),
+  MEDIA_R2_ACCESS_KEY_ID: z.string().default(""),
+  MEDIA_R2_SECRET_ACCESS_KEY: z.string().default(""),
+  MEDIA_R2_ENDPOINT: z.string().default(""),
+  CLOUDFLARE_ACCOUNT_ID: z.string().default(""),
+  MEDIA_SIGNING_SECRET: z
+    .string()
+    .refine((v) => v === "" || v.length >= 32, "MEDIA_SIGNING_SECRET must be at least 32 chars")
+    .default(""),
+  MEDIA_SIGNED_URL_TTL_SECONDS: z.coerce.number().int().min(60).max(86400).default(3600),
+  // Origin that serves GET /media/... (this API's public origin).
+  MEDIA_PUBLIC_BASE_URL: z.string().url().default("http://localhost:4000"),
+  MEDIA_CORS_ORIGINS: z.string().default(""),
+  MEDIA_FREE_MAX_IMAGES: z.coerce.number().int().positive().default(10),
+  MEDIA_FREE_MAX_IMAGE_BYTES: z.coerce.number().int().positive().default(5242880),
+  MEDIA_FREE_TOTAL_BYTES: z.coerce.number().int().positive().default(104857600),
+  MEDIA_PAID_MAX_IMAGES: z.coerce.number().int().positive().default(100),
+  MEDIA_PAID_MAX_IMAGE_BYTES: z.coerce.number().int().positive().default(20971520),
+  MEDIA_PAID_MAX_VIDEOS: z.coerce.number().int().positive().default(5),
+  MEDIA_PAID_MAX_VIDEO_BYTES: z.coerce.number().int().positive().default(157286400),
+  MEDIA_PAID_TOTAL_BYTES: z.coerce.number().int().positive().default(5368709120),
+  MEDIA_MAX_AUTOPLAY_VIDEOS_PER_PAGE: z.coerce.number().int().positive().default(3),
 });
 
 const parsed = envSchema.safeParse(process.env);

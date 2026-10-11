@@ -215,6 +215,23 @@ enum ProjectInputType {
   FROM_OWN_SITE
 }
 
+enum MediaKind {
+  IMAGE
+  VIDEO
+}
+
+enum MediaOrigin {
+  UPLOADED
+  GENERATED
+}
+
+enum MediaStatus {
+  UPLOADING
+  PROCESSING
+  READY
+  FAILED
+}
+
 model User {
   id        String     @id @default(cuid())
   name      String?
@@ -278,6 +295,7 @@ model User {
   replications       Replication[]
   projectBriefs      ProjectBrief[]
   briefUploads       BriefUpload[]
+  mediaAssets        MediaAsset[]
 
   @@index([status])
   @@index([deletedAt])
@@ -656,6 +674,7 @@ model Project {
   validationRuns  ValidationRun[]
   replication     Replication?
   brief           ProjectBrief?
+  mediaAssets     MediaAsset[]
 
   @@index([userId])
   @@index([status])
@@ -1749,4 +1768,52 @@ model ProjectChatMessage {
 
   @@index([projectId, createdAt])
   @@map("project_chat_messages")
+}
+
+// Uploaded and AI-generated media share this table. Where an asset is used is
+// not stored here: it is the `media` bindings inside ProjectVersion.snapshot.
+model MediaAsset {
+  id                String      @id @default(cuid())
+  projectId         String
+  userId            String
+  kind              MediaKind
+  origin            MediaOrigin @default(UPLOADED)
+  status            MediaStatus @default(UPLOADING)
+  title             String?
+  originalKey       String
+  originalMime      String
+  originalBytes     Int
+  sha256            String?
+  width             Int?
+  height            Int?
+  durationMs        Int?
+  hasAudio          Boolean?
+  // [{ role, key, mime, width?, height?, bytes, sha256 }]
+  variants          Json        @default("[]")
+  dominantColor     String?
+  lqip              String?
+  altText           String?
+  caption           String?
+  decorative        Boolean     @default(false)
+  // Vision-model description used only to place the asset (<= 300 chars).
+  description       String?
+  suggestedPurposes Json?
+  purpose           String?
+  aiGenerated       Boolean     @default(false)
+  generation        Json?
+  failureReason     String?
+  retryCount        Int         @default(0)
+  deletedAt         DateTime?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId, deletedAt])
+  @@index([userId])
+  @@index([sha256])
+  @@index([status, createdAt])
+  @@index([deletedAt])
+  @@map("media_assets")
 }

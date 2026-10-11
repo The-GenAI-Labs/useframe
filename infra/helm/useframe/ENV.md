@@ -63,6 +63,13 @@ Every workload also gets `NODE_ENV=production` from `global.env`.
 | `IPQS_API_KEY`                    | no       | `""` (risk check no-ops)                         | yes    | Secret                                                   |
 | `WEBCONTAINER_SNAPSHOTS_DIR`      | no       | `""`                                             | no     | values (needs a mounted volume; unset on GKE)            |
 | `VERCEL_TOKEN`, `VERCEL_TEAM_ID`  | no       | `""`                                             | yes    | not set (legacy Vercel deploy code, unreferenced)        |
+| `MEDIA_R2_ACCESS_KEY_ID` / `MEDIA_R2_SECRET_ACCESS_KEY` | no | `""` (media routes answer 503)       | yes    | Secret (R2 Object Read & Write on `useframe-media`)      |
+| `MEDIA_SIGNING_SECRET`            | no       | `""` (media routes answer 503; ≥ 32 chars)       | yes    | Secret                                                   |
+| `MEDIA_R2_ENDPOINT` / `CLOUDFLARE_ACCOUNT_ID` | no | `""` (endpoint derived from the account id)   | no     | Secret or values                                         |
+| `MEDIA_R2_BUCKET`                 | no       | `useframe-media`                                 | no     | values                                                   |
+| `MEDIA_PUBLIC_BASE_URL`           | no       | `http://localhost:4000`                          | no     | values (production: `https://api.useframe.in`)           |
+| `MEDIA_CORS_ORIGINS`              | no       | `""` (CLIENT_URL and FRONTEND_URL always allowed) | no    | values                                                   |
+| `MEDIA_SIGNED_URL_TTL_SECONDS`, `MEDIA_FREE_*`, `MEDIA_PAID_*`, `MEDIA_MAX_AUTOPLAY_VIDEOS_PER_PAGE` | no | see `apps/server/.env.example` | no | values |
 
 ## orchestrator-service (`services.orchestrator-service`, Secret `orchestrator-service-secrets`)
 
@@ -172,6 +179,27 @@ environment only (`PATH`, `HOME`, `CI`, `NODE_OPTIONS`, `NEXT_TELEMETRY_DISABLED
 | `CUSTOM_DOMAIN_OWNERSHIP_WINDOW_HOURS`  | no       | `72`                                          | no     | values                                            |
 | `CUSTOM_DOMAIN_ROUTING_WINDOW_DAYS`     | no       | `7`                                           | no     | values                                            |
 | `DNS_RESOLVERS`                         | no       | `1.1.1.1,8.8.8.8`                             | no     | values                                            |
+| `MEDIA_R2_READ_ACCESS_KEY_ID` / `MEDIA_R2_READ_SECRET_ACCESS_KEY` | no | unset (deploys of sites with media fail clearly) | yes | Secret (R2 Object Read only on `useframe-media`) |
+| `MEDIA_R2_BUCKET` / `MEDIA_R2_ENDPOINT` | no       | `useframe-media` / derived from the account id | no    | values                                            |
+
+## media-service (disabled by default, Secret `media-service-secrets`)
+
+| Name                                                        | Required        | Default                    | Secret | Set in                              |
+| ----------------------------------------------------------- | --------------- | -------------------------- | ------ | ----------------------------------- |
+| `HEALTH_PORT`                                               | no              | unset (no health listener) | no     | chart (`8080`)                      |
+| `DATABASE_URL`                                              | **yes**         | —                          | yes    | Secret                              |
+| `REDIS_URL`                                                 | **yes**         | —                          | yes    | Secret                              |
+| `MEDIA_R2_ACCESS_KEY_ID` / `MEDIA_R2_SECRET_ACCESS_KEY`     | **yes**         | —                          | yes    | Secret                              |
+| `MEDIA_R2_ENDPOINT` or `CLOUDFLARE_ACCOUNT_ID`              | **yes**         | —                          | no     | Secret                              |
+| `INTERNAL_SERVICE_SECRET`                                   | when describing | —                          | yes    | Secret (same as orchestrator)       |
+| `ORCHESTRATOR_URL`                                          | no              | `http://localhost:4001`    | no     | chart (`useframe.serviceUrl`)       |
+| `MEDIA_R2_BUCKET`                                           | no              | `useframe-media`           | no     | values                              |
+| `MEDIA_WORK_DIR`                                            | no              | `/work` in production      | no     | values (`/work`, an emptyDir)       |
+| `MEDIA_PROCESS_CONCURRENCY`                                 | no              | `2`                        | no     | values                              |
+| `MEDIA_FFMPEG_TIMEOUT_MS` / `MEDIA_FFMPEG_THREADS`          | no              | `180000` / `2`             | no     | values                              |
+| `MEDIA_MAX_INPUT_PIXELS` / `MEDIA_MAX_VIDEO_SECONDS`        | no              | `60000000` / `60`          | no     | values                              |
+| `MEDIA_PAID_MAX_IMAGE_BYTES` / `MEDIA_PAID_MAX_VIDEO_BYTES` | no              | `20971520` / `157286400`   | no     | values (hard ceilings for any file) |
+| `MEDIA_DESCRIBE_ENABLED` / `MEDIA_DESCRIBE_TIMEOUT_MS`      | no              | `true` / `30000`           | no     | values                              |
 
 ## migration Job (`migration`, Secret `migrate-secrets`)
 

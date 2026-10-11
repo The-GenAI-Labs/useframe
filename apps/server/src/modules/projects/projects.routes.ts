@@ -12,6 +12,7 @@ import deployRoutes from "@/modules/deploy/deploy.routes.js"
 import pipelineRoutes from "@/modules/pipeline/pipeline.routes.js"
 import domainsRoutes from "@/modules/domains/domains.routes.js"
 import { projectBriefRouter } from "@/modules/briefs/briefs.routes.js"
+import mediaRoutes from "@/modules/media/media.routes.js"
 
 const router: Router = Router()
 
@@ -35,5 +36,6 @@ router.use("/:slug/seo-step", seoStepRoutes)
 router.use("/:slug", deployRoutes)
 router.use("/:slug/pipeline", pipelineRoutes)
 router.use("/:slug/domains", domainsRoutes)
+router.use("/:slug/media", mediaRoutes)
 
 export default router

@@ -111,7 +111,8 @@ export const ModelName = {
   RetrievalCacheEntry: 'RetrievalCacheEntry',
   CorpusVersion: 'CorpusVersion',
   JevDecisionLog: 'JevDecisionLog',
-  ProjectChatMessage: 'ProjectChatMessage'
+  ProjectChatMessage: 'ProjectChatMessage',
+  MediaAsset: 'MediaAsset'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1223,6 +1224,43 @@ export const ProjectChatMessageScalarFieldEnum = {
 } as const
 
 export type ProjectChatMessageScalarFieldEnum = (typeof ProjectChatMessageScalarFieldEnum)[keyof typeof ProjectChatMessageScalarFieldEnum]
+
+
+export const MediaAssetScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  userId: 'userId',
+  kind: 'kind',
+  origin: 'origin',
+  status: 'status',
+  title: 'title',
+  originalKey: 'originalKey',
+  originalMime: 'originalMime',
+  originalBytes: 'originalBytes',
+  sha256: 'sha256',
+  width: 'width',
+  height: 'height',
+  durationMs: 'durationMs',
+  hasAudio: 'hasAudio',
+  variants: 'variants',
+  dominantColor: 'dominantColor',
+  lqip: 'lqip',
+  altText: 'altText',
+  caption: 'caption',
+  decorative: 'decorative',
+  description: 'description',
+  suggestedPurposes: 'suggestedPurposes',
+  purpose: 'purpose',
+  aiGenerated: 'aiGenerated',
+  generation: 'generation',
+  failureReason: 'failureReason',
+  retryCount: 'retryCount',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MediaAssetScalarFieldEnum = (typeof MediaAssetScalarFieldEnum)[keyof typeof MediaAssetScalarFieldEnum]
 
 
 export const SortOrder = {

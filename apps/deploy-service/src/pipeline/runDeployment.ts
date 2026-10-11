@@ -10,6 +10,7 @@ import { buildChildEnv, INSTALL_ARGS, runChild, type ChildResult } from "./build
 import { dependencyHash, detectFramework, readPackageJson } from "./detect.js";
 import { DeployError, publicReason } from "./errors.js";
 import { getBuildableFiles } from "./files.js";
+import { copyMediaToSite } from "./media.js";
 import { failDeployment, goLive, tail, transition } from "./lifecycle.js";
 import { copyTemplate, prepareWorkDir, removeWorkDir, writeTree, type WorkDirs } from "./materialize.js";
 import { probeDeployment } from "./probe.js";
@@ -58,7 +59,8 @@ export async function runDeployment(deps: Deps, job: DeployRunJobPayload): Promi
     const siteUrl = `https://${site.primaryHost}`;
 
     let t = Date.now();
-    const files = await getBuildableFiles(deps.db, job.versionId, siteUrl);
+    const { files, media, mediaWarnings } = await getBuildableFiles(deps.db, job.versionId, siteUrl, projectId);
+    if (mediaWarnings.length) log.warn("media warnings", { deploymentId, warnings: mediaWarnings });
     const detected = detectFramework(files);
     dirs = await prepareWorkDir(config.workDir, deploymentId, owner);
     await writeTree(dirs.src, files, owner);
@@ -103,14 +105,22 @@ export async function runDeployment(deps: Deps, job: DeployRunJobPayload): Promi
       maxTotalBytes: config.maxTotalBytes,
     });
     if (output.skipped.length) log.warn("skipped denied output files", { deploymentId, files: output.skipped });
+    // Media is copied next to the build output and counts toward the same limits.
+    const mediaBytes = media.reduce((sum, item) => sum + item.bytes, 0);
+    const fileCount = output.fileCount + media.length;
+    const totalBytes = output.totalBytes + mediaBytes;
+    if (fileCount > config.maxFiles) throw new DeployError(`Build output has more than ${config.maxFiles} files.`);
+    if (totalBytes > config.maxTotalBytes) {
+      throw new DeployError(`Build output is larger than ${Math.round(config.maxTotalBytes / 1048576)} MB.`);
+    }
 
     const prefix = storagePrefixFor(projectId, deploymentId);
     const toUploading = await transition(deps, deploymentId, ["BUILDING"], {
       status: "UPLOADING",
       framework: detected.framework,
       storagePrefix: prefix,
-      fileCount: output.fileCount,
-      totalBytes: BigInt(output.totalBytes),
+      fileCount,
+      totalBytes: BigInt(totalBytes),
       rootHtmlSha256: output.rootHtmlSha256,
       siteUrl,
       buildLog: tail(buildLog),
@@ -118,8 +128,9 @@ export async function runDeployment(deps: Deps, job: DeployRunJobPayload): Promi
     if (!toUploading) return;
 
     t = Date.now();
+    await copyMediaToSite(deps.mediaSource, deps.r2, prefix, media);
     await uploadOutput(deps.r2, prefix, output.files);
-    await verifyUpload(deps.r2, prefix, output.fileCount, output.rootHtmlSha256);
+    await verifyUpload(deps.r2, prefix, fileCount, output.rootHtmlSha256);
     metric("deploy.upload_duration_ms", Date.now() - t, { deploymentId, files: output.fileCount });
     step("upload", t);
 

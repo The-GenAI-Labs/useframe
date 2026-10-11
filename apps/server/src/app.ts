@@ -26,10 +26,14 @@ import briefRoutes, {
   briefUploadsPublicRouter,
 } from "@/modules/briefs/briefs.routes.js";
 import { requireAllowedOrigin } from "@/middleware/originCheck.js";
+import { mediaAccountRouter } from "@/modules/media/media.routes.js";
+import { mediaServeRouter } from "@/modules/media/media.serve.js";
 
 const app: Express = express();
 
 app.use(helmet());
+// Signed media has its own CORS/CORP and no cookies, so it sits before the credentialed CORS.
+app.use("/media", mediaServeRouter);
 app.use(cors(corsOptions(env.CLIENT_URL)));
 
 const BRIEF_BODY_PATH = /^\/api\/(?:briefs(?:\/|$)|projects\/[^/]+\/brief(?:\/|$))/;
@@ -68,6 +72,7 @@ app.use("/api/replicate", replicateRoutes);
 app.use("/api/validation", validationRoutes);
 app.use("/api/research-documents", researchDocumentRoutes);
 app.use("/api/webcontainer-snapshot", webcontainerSnapshotRoutes);
+app.use("/api/media", mediaAccountRouter);
 app.use("/{*splat}", (_req: Request, res: Response) => {
   res.status(404).json({ success: false, message: "Route not found" });
 });
