@@ -1,10 +1,14 @@
 import { mkdir } from "node:fs/promises"
 import { Queue, Worker } from "bullmq"
 import { prisma } from "@useframe/db"
-import { QUEUES, type MediaProcessJobPayload } from "@repo/events"
+import { QUEUES, type MediaGenerateJobPayload, type MediaProcessJobPayload } from "@repo/events"
 import { env } from "@/config/env.js"
 import { closeContext, deps } from "@/context.js"
+import { generateDeps } from "@/generate/context.js"
+import { runMediaJob } from "@/generate/runner.js"
+import { sweepMediaJobs } from "@/generate/sweep.js"
 import { runMediaGc } from "@/jobs/gc.js"
+import { withJobLock } from "@/lib/semaphore.js"
 import { processAsset } from "@/jobs/process.js"
 import { startHealthServer } from "@/lib/health.js"
 import { errorMessage, log } from "@/lib/logger.js"
@@ -16,6 +20,8 @@ const start = async () => {
 
   const gcQueue = new Queue(QUEUES.MEDIA_GC, { connection: redis })
   await gcQueue.upsertJobScheduler("media-gc-daily", { pattern: "15 4 * * *" }, { name: "gc" })
+  const sweepQueue = new Queue(QUEUES.MEDIA_JOBS_SWEEP, { connection: redis })
+  await sweepQueue.upsertJobScheduler("media-jobs-sweep", { every: 5 * 60_000 }, { name: "sweep" })
 
   const workers = [
     new Worker<MediaProcessJobPayload>(
@@ -29,6 +35,13 @@ const start = async () => {
       },
     ),
     new Worker(QUEUES.MEDIA_GC, () => runMediaGc(deps), { connection: redis }),
+    new Worker<MediaGenerateJobPayload>(
+      QUEUES.MEDIA_GENERATE,
+      (job) => withJobLock(redis, job.data.jobId, () => runMediaJob(generateDeps, job.data.jobId)),
+      // Video renders are polled inside the job for up to MEDIA_VIDEO_TIMEOUT_S; BullMQ renews the lock meanwhile.
+      { connection: redis, concurrency: 4, lockDuration: 120_000 },
+    ),
+    new Worker(QUEUES.MEDIA_JOBS_SWEEP, () => sweepMediaJobs(generateDeps.db), { connection: redis }),
   ]
   for (const worker of workers) {
     worker.on("failed", (job, err) =>
@@ -54,7 +67,7 @@ const start = async () => {
     shuttingDown = true
     log.info("media worker shutting down; waiting for in-flight jobs")
     void Promise.all(workers.map((w) => w.close()))
-      .then(() => gcQueue.close())
+      .then(() => Promise.all([gcQueue.close(), sweepQueue.close()]))
       .finally(() => closeContext().finally(() => process.exit(0)))
   }
   process.once("SIGTERM", shutdown)
