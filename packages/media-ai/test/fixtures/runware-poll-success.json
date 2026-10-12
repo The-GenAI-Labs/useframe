@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "taskType": "videoInference",
+      "taskUUID": "TASK",
+      "status": "success",
+      "videoUUID": "b7c1",
+      "videoURL": "https://vm.runware.ai/video/ws/5/vi/b7c1.mp4",
+      "cost": 0.48
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "code": "taskNotFound",
+      "message": "Task with the given taskUUID was not found",
+      "taskUUID": "TASK"
+    }
+  ]
+}
