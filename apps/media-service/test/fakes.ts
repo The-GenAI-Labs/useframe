@@ -102,6 +102,15 @@ export function createFakeStore(): MediaStore & { objects: Map<string, Buffer>; 
       for (const key of [...objects.keys()]) if (key.startsWith(prefix) && objects.delete(key)) n++
       return n
     },
+    async getBuffer(key: string, maxBytes: number) {
+      const body = objects.get(key)
+      if (!body) return null
+      if (body.length > maxBytes) throw new TooLargeError()
+      return body
+    },
+    async presignPut(key: string) {
+      return `https://upload.test/${key}`
+    },
   }
   return store
 }
