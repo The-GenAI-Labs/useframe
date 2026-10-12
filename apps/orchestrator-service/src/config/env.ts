@@ -1,6 +1,7 @@
 import { z } from "zod";
 import dotenv from "dotenv";
 import { JevEnvSchema } from "@repo/jev/config";
+import { loadMediaAiConfig, type MediaAiConfig } from "@repo/media-ai";
 
 dotenv.config();
 
@@ -45,6 +46,14 @@ const envSchema = z
     BRIEF_PREFILL_MAX_CHARS: z.coerce.number().int().positive().default(20000),
     BRIEF_PREFILL_TIMEOUT_MS: z.coerce.number().int().positive().default(25000),
     BRIEF_DOC_MAX_BYTES: z.coerce.number().int().positive().default(10485760),
+
+    // AI media (Site Blueprint + creative pipeline). fake = no real model or provider calls.
+    MEDIA_AI_PROVIDER_MODE: z.enum(["fake", "live"]).default("fake"),
+    BLUEPRINT_MODEL_ID: z.string().min(1).default("claude-opus-5-5"),
+    MEDIA_CREATIVE_MODEL_ID: z.string().min(1).default("claude-sonnet-5-5"),
+    MEDIA_VISION_MODEL_ID: z.string().min(1).default("claude-sonnet-5-5"),
+    MEDIA_IMAGES_TIMEOUT_S: z.coerce.number().int().min(0).default(240),
+    MEDIA_VIDEO_TIMEOUT_S: z.coerce.number().int().min(0).default(600),
   })
   .refine(
     (d) =>
@@ -64,6 +73,16 @@ if (!parsed.success) {
 }
 
 export const env = parsed.data;
+
+let media: MediaAiConfig;
+try {
+  media = loadMediaAiConfig(process.env);
+} catch (err) {
+  console.error("Invalid environment variables:");
+  console.error(err instanceof Error ? err.message : err);
+  process.exit(1);
+}
+export const mediaAiConfig = media;
 
 export const CONFIGURED_PROVIDERS = {
   anthropic: env.ANTHROPIC_API_KEY !== "",

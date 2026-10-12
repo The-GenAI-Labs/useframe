@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { loadMediaAiConfig, type MediaAiConfig } from "@repo/media-ai";
 import dotenv from "dotenv";
 import type { SignOptions } from "jsonwebtoken";
 
@@ -118,3 +119,14 @@ if (!parsed.success) {
 }
 
 export const env = parsed.data;
+
+// AI media budgets, caps and credit prices (MEDIA_ENABLED, MEDIA_BUDGET_*, MEDIA_CREDIT_*, ...).
+let media: MediaAiConfig;
+try {
+  media = loadMediaAiConfig(process.env);
+} catch (err) {
+  console.error("Invalid environment variables:");
+  console.error(err instanceof Error ? err.message : err);
+  process.exit(1);
+}
+export const mediaAiConfig = media;

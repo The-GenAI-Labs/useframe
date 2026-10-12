@@ -41,8 +41,46 @@ export const envSchema = z
     ORCHESTRATOR_URL: z.string().url().default("http://localhost:4001"),
     INTERNAL_SERVICE_SECRET: optional(z.string().min(16, "INTERNAL_SERVICE_SECRET must be at least 16 chars")),
     MEDIA_DESCRIBE_TIMEOUT_MS: int(30_000),
+
+    // AI creative pipeline. Budgets, caps and credit prices are read by @repo/media-ai.
+    MEDIA_AI_PROVIDER_MODE: z.enum(["fake", "live"]).default("fake"),
+    OPENAI_API_KEY: optional(z.string().min(1)),
+    OPENAI_IMAGE_MODEL: z.string().min(1).default("gpt-image-2.5-sunburst"),
+    OPENAI_IMAGE_QUALITY: z.enum(["low", "medium", "high", "xhigh", "max", "auto"]).default("high"),
+    VIDEO_PROVIDER: z.enum(["runware", "fal", "minimax"]).default("runware"),
+    RUNWARE_API_KEY: optional(z.string().min(1)),
+    MEDIA_VIDEO_MODEL: z.string().min(1).default("minimax:h3@max"),
+    MEDIA_VIDEO_RESOLUTION: z.enum(["480p", "768p"]).default("768p"),
+    MEDIA_VIDEO_TIMEOUT_S: int(600),
+    MEDIA_VIDEO_PROMPT_EXPANSION: z.enum(["disabled", "balanced", "quality"]).default("disabled"),
+    MEDIA_VIDEO_PROMPT_MAX_CHARS: int(3000),
+    MEDIA_IMAGE_CONCURRENCY: int(3),
+    MEDIA_VIDEO_CONCURRENCY: int(2),
+    // Hosts provider result downloads may come from (https only).
+    MEDIA_PROVIDER_HOST_ALLOWLIST: z
+      .string()
+      .default("vm.runware.ai,im.runware.ai")
+      .transform((v) =>
+        v
+          .split(",")
+          .map((h) => h.trim().toLowerCase())
+          .filter(Boolean),
+      ),
   })
   .superRefine((value, ctx) => {
+    if (value.MEDIA_AI_PROVIDER_MODE === "live") {
+      if (!value.OPENAI_API_KEY) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["OPENAI_API_KEY"], message: "OPENAI_API_KEY is required in live mode" })
+      }
+      if (value.VIDEO_PROVIDER !== "runware") {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["VIDEO_PROVIDER"], message: "Only the runware video provider is built" })
+      } else if (!value.RUNWARE_API_KEY) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["RUNWARE_API_KEY"], message: "RUNWARE_API_KEY is required in live mode" })
+      }
+      if (!value.INTERNAL_SERVICE_SECRET) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["INTERNAL_SERVICE_SECRET"], message: "INTERNAL_SERVICE_SECRET is required in live mode" })
+      }
+    }
     if (!value.MEDIA_R2_ENDPOINT && !value.CLOUDFLARE_ACCOUNT_ID) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
