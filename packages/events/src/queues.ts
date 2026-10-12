@@ -25,6 +25,8 @@ export const QUEUES = {
   DEPLOY_DOMAIN_GC: "deployDomainGc",
   MEDIA_PROCESS: "mediaProcess",
   MEDIA_GC: "mediaGc",
+  MEDIA_GENERATE: "mediaGenerate",
+  MEDIA_JOBS_SWEEP: "mediaJobsSweep",
 } as const;
 
 export type QueueName = (typeof QUEUES)[keyof typeof QUEUES];

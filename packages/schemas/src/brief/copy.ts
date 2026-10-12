@@ -48,6 +48,9 @@ export const BRIEF_FIELD_COPY = {
   tone: { label: "Tone of voice", help: "Pick up to two." },
   designReferences: { label: "Sites you like", help: "Up to 3 links. Used as style inspiration, never copied." },
   visualNotes: { label: "Anything else about the look", help: "Used for: design direction.", example: "Calm, lots of white space, no stock photos of handshakes" },
+  mediaMode: { label: "AI images and videos", help: "AUTO builds your images and videos without asking. MANUAL asks you to approve each step." },
+  mediaBudget: { label: "How much AI-made media", help: "How much AI-made media should your site have?" },
+  mediaNotes: { label: "Anything the visuals should or shouldn't show?", help: "Used for: AI-made images and videos.", example: "Show the product on a kitchen counter, no people" },
   sourceDocument: { label: "Source document", help: "PDF, DOCX, PPTX, TXT or MD up to 10 MB. Used only to pre-fill this form." },
   testimonials: { label: "Testimonials", help: "Real quotes you have permission to publish." },
   trustedBy: { label: "Customers you can name", help: "Company names you are allowed to show." },
@@ -131,6 +134,17 @@ export const BRIEF_OPTION_LABELS = {
     youtube: "YouTube",
     github: "GitHub",
     other: "Other",
+  },
+  mediaMode: {
+    AUTO: "Make them for me",
+    MANUAL: "Let me approve each step",
+    OFF: "Off",
+  },
+  mediaBudget: {
+    IMAGES_ONLY: "Images only",
+    LIGHT: "Light",
+    STANDARD: "Standard",
+    RICH: "Rich",
   },
 } as const
 

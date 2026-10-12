@@ -124,6 +124,8 @@ export type SSEStageEvent = {
   type: "stage";
   stage: PipelineStage;
   message: string;
+  // Finer step inside a stage, e.g. "blueprint" or "media.frames".
+  substep?: string;
 };
 
 export type SSETokenEvent = {
