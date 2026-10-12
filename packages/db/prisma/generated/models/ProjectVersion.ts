@@ -77,6 +77,7 @@ export type ProjectVersionCountAggregateOutputType = {
   nextFiles: number
   snapshot: number
   briefRevisionId: number
+  blueprint: number
   createdAt: number
   _all: number
 }
@@ -133,6 +134,7 @@ export type ProjectVersionCountAggregateInputType = {
   nextFiles?: true
   snapshot?: true
   briefRevisionId?: true
+  blueprint?: true
   createdAt?: true
   _all?: true
 }
@@ -238,6 +240,7 @@ export type ProjectVersionGroupByOutputType = {
   nextFiles: runtime.JsonValue | null
   snapshot: runtime.JsonValue
   briefRevisionId: string | null
+  blueprint: runtime.JsonValue | null
   createdAt: Date
   _count: ProjectVersionCountAggregateOutputType | null
   _avg: ProjectVersionAvgAggregateOutputType | null
@@ -279,6 +282,7 @@ export type ProjectVersionWhereInput = {
   nextFiles?: Prisma.JsonNullableFilter<"ProjectVersion">
   snapshot?: Prisma.JsonFilter<"ProjectVersion">
   briefRevisionId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
+  blueprint?: Prisma.JsonNullableFilter<"ProjectVersion">
   createdAt?: Prisma.DateTimeFilter<"ProjectVersion"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
   briefRevision?: Prisma.XOR<Prisma.BriefRevisionNullableScalarRelationFilter, Prisma.BriefRevisionWhereInput> | null
@@ -302,6 +306,7 @@ export type ProjectVersionOrderByWithRelationInput = {
   nextFiles?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshot?: Prisma.SortOrder
   briefRevisionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  blueprint?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
   briefRevision?: Prisma.BriefRevisionOrderByWithRelationInput
@@ -329,6 +334,7 @@ export type ProjectVersionWhereUniqueInput = Prisma.AtLeast<{
   nextFiles?: Prisma.JsonNullableFilter<"ProjectVersion">
   snapshot?: Prisma.JsonFilter<"ProjectVersion">
   briefRevisionId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
+  blueprint?: Prisma.JsonNullableFilter<"ProjectVersion">
   createdAt?: Prisma.DateTimeFilter<"ProjectVersion"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
   briefRevision?: Prisma.XOR<Prisma.BriefRevisionNullableScalarRelationFilter, Prisma.BriefRevisionWhereInput> | null
@@ -352,6 +358,7 @@ export type ProjectVersionOrderByWithAggregationInput = {
   nextFiles?: Prisma.SortOrderInput | Prisma.SortOrder
   snapshot?: Prisma.SortOrder
   briefRevisionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  blueprint?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ProjectVersionCountOrderByAggregateInput
   _avg?: Prisma.ProjectVersionAvgOrderByAggregateInput
@@ -378,6 +385,7 @@ export type ProjectVersionScalarWhereWithAggregatesInput = {
   nextFiles?: Prisma.JsonNullableWithAggregatesFilter<"ProjectVersion">
   snapshot?: Prisma.JsonWithAggregatesFilter<"ProjectVersion">
   briefRevisionId?: Prisma.StringNullableWithAggregatesFilter<"ProjectVersion"> | string | null
+  blueprint?: Prisma.JsonNullableWithAggregatesFilter<"ProjectVersion">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ProjectVersion"> | Date | string
 }
 
@@ -394,6 +402,7 @@ export type ProjectVersionCreateInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
   briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
@@ -417,6 +426,7 @@ export type ProjectVersionUncheckedCreateInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
@@ -436,6 +446,7 @@ export type ProjectVersionUpdateInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
   briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
@@ -459,6 +470,7 @@ export type ProjectVersionUncheckedUpdateInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
@@ -480,6 +492,7 @@ export type ProjectVersionCreateManyInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -496,6 +509,7 @@ export type ProjectVersionUpdateManyMutationInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -514,6 +528,7 @@ export type ProjectVersionUncheckedUpdateManyInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -547,6 +562,7 @@ export type ProjectVersionCountOrderByAggregateInput = {
   nextFiles?: Prisma.SortOrder
   snapshot?: Prisma.SortOrder
   briefRevisionId?: Prisma.SortOrder
+  blueprint?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -734,6 +750,7 @@ export type ProjectVersionCreateWithoutProjectInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
   pages?: Prisma.PageCreateNestedManyWithoutVersionInput
@@ -755,6 +772,7 @@ export type ProjectVersionUncheckedCreateWithoutProjectInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
@@ -805,6 +823,7 @@ export type ProjectVersionScalarWhereInput = {
   nextFiles?: Prisma.JsonNullableFilter<"ProjectVersion">
   snapshot?: Prisma.JsonFilter<"ProjectVersion">
   briefRevisionId?: Prisma.StringNullableFilter<"ProjectVersion"> | string | null
+  blueprint?: Prisma.JsonNullableFilter<"ProjectVersion">
   createdAt?: Prisma.DateTimeFilter<"ProjectVersion"> | Date | string
 }
 
@@ -821,6 +840,7 @@ export type ProjectVersionCreateWithoutPagesInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
   briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
@@ -843,6 +863,7 @@ export type ProjectVersionUncheckedCreateWithoutPagesInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutStartVersionInput
@@ -877,6 +898,7 @@ export type ProjectVersionUpdateWithoutPagesInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
   briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
@@ -899,6 +921,7 @@ export type ProjectVersionUncheckedUpdateWithoutPagesInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutStartVersionNestedInput
@@ -917,6 +940,7 @@ export type ProjectVersionCreateWithoutDeploymentsInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
   briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
@@ -939,6 +963,7 @@ export type ProjectVersionUncheckedCreateWithoutDeploymentsInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
   validationRuns?: Prisma.ValidationRunUncheckedCreateNestedManyWithoutStartVersionInput
@@ -973,6 +998,7 @@ export type ProjectVersionUpdateWithoutDeploymentsInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
   briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
@@ -995,6 +1021,7 @@ export type ProjectVersionUncheckedUpdateWithoutDeploymentsInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
   validationRuns?: Prisma.ValidationRunUncheckedUpdateManyWithoutStartVersionNestedInput
@@ -1013,6 +1040,7 @@ export type ProjectVersionCreateWithoutBriefRevisionInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
   pages?: Prisma.PageCreateNestedManyWithoutVersionInput
@@ -1034,6 +1062,7 @@ export type ProjectVersionUncheckedCreateWithoutBriefRevisionInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
@@ -1079,6 +1108,7 @@ export type ProjectVersionCreateWithoutValidationRunsInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutVersionsInput
   briefRevision?: Prisma.BriefRevisionCreateNestedOneWithoutVersionsInput
@@ -1101,6 +1131,7 @@ export type ProjectVersionUncheckedCreateWithoutValidationRunsInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   pages?: Prisma.PageUncheckedCreateNestedManyWithoutVersionInput
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutProjectVersionInput
@@ -1135,6 +1166,7 @@ export type ProjectVersionUpdateWithoutValidationRunsInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
   briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
@@ -1157,6 +1189,7 @@ export type ProjectVersionUncheckedUpdateWithoutValidationRunsInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
@@ -1176,6 +1209,7 @@ export type ProjectVersionCreateManyProjectInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -1192,6 +1226,7 @@ export type ProjectVersionUpdateWithoutProjectInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   briefRevision?: Prisma.BriefRevisionUpdateOneWithoutVersionsNestedInput
   pages?: Prisma.PageUpdateManyWithoutVersionNestedInput
@@ -1213,6 +1248,7 @@ export type ProjectVersionUncheckedUpdateWithoutProjectInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
@@ -1233,6 +1269,7 @@ export type ProjectVersionUncheckedUpdateManyWithoutProjectInput = {
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   briefRevisionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1250,6 +1287,7 @@ export type ProjectVersionCreateManyBriefRevisionInput = {
   validationFixKey?: string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
 }
 
@@ -1266,6 +1304,7 @@ export type ProjectVersionUpdateWithoutBriefRevisionInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutVersionsNestedInput
   pages?: Prisma.PageUpdateManyWithoutVersionNestedInput
@@ -1287,6 +1326,7 @@ export type ProjectVersionUncheckedUpdateWithoutBriefRevisionInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   pages?: Prisma.PageUncheckedUpdateManyWithoutVersionNestedInput
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutProjectVersionNestedInput
@@ -1307,6 +1347,7 @@ export type ProjectVersionUncheckedUpdateManyWithoutBriefRevisionInput = {
   validationFixKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextFiles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  blueprint?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1374,6 +1415,7 @@ export type ProjectVersionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   nextFiles?: boolean
   snapshot?: boolean
   briefRevisionId?: boolean
+  blueprint?: boolean
   createdAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
@@ -1398,6 +1440,7 @@ export type ProjectVersionSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   nextFiles?: boolean
   snapshot?: boolean
   briefRevisionId?: boolean
+  blueprint?: boolean
   createdAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
@@ -1418,6 +1461,7 @@ export type ProjectVersionSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   nextFiles?: boolean
   snapshot?: boolean
   briefRevisionId?: boolean
+  blueprint?: boolean
   createdAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
@@ -1438,10 +1482,11 @@ export type ProjectVersionSelectScalar = {
   nextFiles?: boolean
   snapshot?: boolean
   briefRevisionId?: boolean
+  blueprint?: boolean
   createdAt?: boolean
 }
 
-export type ProjectVersionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionNumber" | "label" | "siteType" | "seo" | "designBrief" | "parentVersionId" | "createdByMessageId" | "triggeredBy" | "validationFixKey" | "nextFiles" | "snapshot" | "briefRevisionId" | "createdAt", ExtArgs["result"]["projectVersion"]>
+export type ProjectVersionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "versionNumber" | "label" | "siteType" | "seo" | "designBrief" | "parentVersionId" | "createdByMessageId" | "triggeredBy" | "validationFixKey" | "nextFiles" | "snapshot" | "briefRevisionId" | "blueprint" | "createdAt", ExtArgs["result"]["projectVersion"]>
 export type ProjectVersionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
   briefRevision?: boolean | Prisma.ProjectVersion$briefRevisionArgs<ExtArgs>
@@ -1483,6 +1528,7 @@ export type $ProjectVersionPayload<ExtArgs extends runtime.Types.Extensions.Inte
     nextFiles: runtime.JsonValue | null
     snapshot: runtime.JsonValue
     briefRevisionId: string | null
+    blueprint: runtime.JsonValue | null
     createdAt: Date
   }, ExtArgs["result"]["projectVersion"]>
   composites: {}
@@ -1926,6 +1972,7 @@ export interface ProjectVersionFieldRefs {
   readonly nextFiles: Prisma.FieldRef<"ProjectVersion", 'Json'>
   readonly snapshot: Prisma.FieldRef<"ProjectVersion", 'Json'>
   readonly briefRevisionId: Prisma.FieldRef<"ProjectVersion", 'String'>
+  readonly blueprint: Prisma.FieldRef<"ProjectVersion", 'Json'>
   readonly createdAt: Prisma.FieldRef<"ProjectVersion", 'DateTime'>
 }
     

@@ -112,7 +112,9 @@ export const ModelName = {
   CorpusVersion: 'CorpusVersion',
   JevDecisionLog: 'JevDecisionLog',
   ProjectChatMessage: 'ProjectChatMessage',
-  MediaAsset: 'MediaAsset'
+  MediaAsset: 'MediaAsset',
+  MediaJob: 'MediaJob',
+  MediaGeneration: 'MediaGeneration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -450,6 +452,7 @@ export const ProjectVersionScalarFieldEnum = {
   nextFiles: 'nextFiles',
   snapshot: 'snapshot',
   briefRevisionId: 'briefRevisionId',
+  blueprint: 'blueprint',
   createdAt: 'createdAt'
 } as const
 
@@ -1261,6 +1264,62 @@ export const MediaAssetScalarFieldEnum = {
 } as const
 
 export type MediaAssetScalarFieldEnum = (typeof MediaAssetScalarFieldEnum)[keyof typeof MediaAssetScalarFieldEnum]
+
+
+export const MediaJobScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  userId: 'userId',
+  mode: 'mode',
+  status: 'status',
+  stage: 'stage',
+  checkpoint: 'checkpoint',
+  checkpointExpiresAt: 'checkpointExpiresAt',
+  scope: 'scope',
+  mediaBrief: 'mediaBrief',
+  plan: 'plan',
+  concepts: 'concepts',
+  state: 'state',
+  bindings: 'bindings',
+  creditsReserved: 'creditsReserved',
+  creditsRefunded: 'creditsRefunded',
+  costUsd: 'costUsd',
+  versionId: 'versionId',
+  compiledAt: 'compiledAt',
+  compiledBindings: 'compiledBindings',
+  resultVersionId: 'resultVersionId',
+  failureReason: 'failureReason',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MediaJobScalarFieldEnum = (typeof MediaJobScalarFieldEnum)[keyof typeof MediaJobScalarFieldEnum]
+
+
+export const MediaGenerationScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  itemId: 'itemId',
+  stage: 'stage',
+  kind: 'kind',
+  provider: 'provider',
+  model: 'model',
+  attempt: 'attempt',
+  requestKey: 'requestKey',
+  providerTaskId: 'providerTaskId',
+  status: 'status',
+  promptText: 'promptText',
+  inputAssetIds: 'inputAssetIds',
+  outputAssetId: 'outputAssetId',
+  costUsd: 'costUsd',
+  latencyMs: 'latencyMs',
+  error: 'error',
+  createdAt: 'createdAt'
+} as const
+
+export type MediaGenerationScalarFieldEnum = (typeof MediaGenerationScalarFieldEnum)[keyof typeof MediaGenerationScalarFieldEnum]
 
 
 export const SortOrder = {
