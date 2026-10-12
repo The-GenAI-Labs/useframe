@@ -16,8 +16,10 @@
   "dependencies": {
     "@ai-sdk/anthropic": "^1.0.0",
     "@ai-sdk/openai": "^1.0.0",
+    "@anthropic-ai/sdk": "0.133.0",
     "@repo/events": "workspace:*",
     "@repo/jev": "workspace:*",
+    "@repo/media-ai": "workspace:*",
     "@repo/rag": "workspace:*",
     "@repo/schemas": "workspace:*",
     "@repo/site-builder": "workspace:*",

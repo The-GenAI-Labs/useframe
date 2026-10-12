@@ -1,0 +1,31 @@
+{
+  "name": "@repo/media-ai",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./testing": "./dist/testing.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@repo/schemas": "workspace:*",
+    "@repo/site-builder": "workspace:*",
+    "@useframe/db": "workspace:*",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "typescript": "5.9.2",
+    "vitest": "^2.1.9"
+  }
+}
