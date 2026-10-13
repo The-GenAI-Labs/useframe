@@ -11,6 +11,7 @@ import {
   type ResolvedMediaAsset,
 } from "@repo/schemas"
 import { listMediaSlots } from "@repo/site-builder"
+import { MECHANISM_LABELS, readJobState, type Mechanism } from "@repo/media-ai"
 import { env } from "@/config/env.js"
 import { redis } from "@/lib/redis.js"
 import { getMediaStorage, type MediaStorage } from "@/lib/mediaStorage.js"
@@ -180,6 +181,40 @@ function serialize(asset: AssetRow) {
     needsAlt: !asset.decorative && !asset.altText,
     createdAt: asset.createdAt,
     thumbUrl: sign(asset, variants, "thumb"),
+  }
+}
+
+export type MediaProvenance = {
+  concept: string | null
+  approach: string | null
+  summary: string | null
+  research: { id: string; title: string }[]
+}
+
+// Only user-facing provenance leaves the API: no provider, model, size or QA internals.
+async function provenanceOf(projectId: string, userId: string, generation: unknown): Promise<MediaProvenance | null> {
+  if (!generation || typeof generation !== "object") return null
+  const g = generation as Record<string, unknown>
+  const str = (v: unknown) => (typeof v === "string" && v ? v : null)
+  const jobId = str(g.jobId)
+  const itemId = str(g.itemId)
+  const conceptId = str(g.conceptId)
+  const mechanism = str(g.mechanism)
+  const findingIds = Array.isArray(g.researchFindingIds) ? g.researchFindingIds.filter((x): x is string => typeof x === "string").slice(0, 20) : []
+  const [job, findings] = await Promise.all([
+    jobId && itemId && conceptId
+      ? prisma.mediaJob.findFirst({ where: { id: jobId, projectId, userId }, select: { state: true } })
+      : null,
+    findingIds.length
+      ? prisma.researchFinding.findMany({ where: { id: { in: findingIds } }, select: { id: true, title: true }, take: 20 })
+      : [],
+  ])
+  const concept = job ? readJobState(job.state).items[itemId!]?.concept?.concepts.find((c) => c.id === conceptId) : undefined
+  return {
+    concept: concept?.title ?? null,
+    approach: mechanism && mechanism in MECHANISM_LABELS ? MECHANISM_LABELS[mechanism as Mechanism] : null,
+    summary: str(g.summary)?.slice(0, 300) ?? null,
+    research: findings,
   }
 }
 
@@ -389,7 +424,7 @@ export const MediaService = {
       ...serialize(asset),
       usage,
       warnings,
-      generation: asset.aiGenerated ? asset.generation : null,
+      generation: asset.aiGenerated ? await provenanceOf(project.id, userId, asset.generation) : null,
       preview: {
         image: sign(asset, variants, "w1600") ?? sign(asset, variants, "fallback"),
         video: sign(asset, variants, "mp4_720"),

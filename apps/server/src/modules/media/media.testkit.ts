@@ -44,6 +44,8 @@ export function createFakeDb() {
   const projects: Row[] = []
   const versions: Row[] = []
   const assets: Row[] = []
+  const jobs: Row[] = []
+  const findings: Row[] = []
   let seq = 0
 
   const apply = (row: Row, data: Row) => {
@@ -103,6 +105,10 @@ export function createFakeDb() {
     project: { findFirst: async ({ where }: { where?: Row }) => projects.find((p) => matches(p, where)) ?? null },
     projectVersion: { findUnique: async ({ where }: { where: Row }) => versions.find((v) => v.id === where.id) ?? null },
     mediaAsset,
+    mediaJob: { findFirst: async ({ where }: { where?: Row }) => jobs.find((j) => matches(j, where)) ?? null },
+    researchFinding: {
+      findMany: async ({ where }: { where: { id: { in: string[] } } }) => findings.filter((f) => where.id.in.includes(f.id as string)),
+    },
     $transaction: async <T>(fn: (tx: unknown) => Promise<T>) => fn(db),
     $queryRaw: async (_strings: TemplateStringsArray, userId: string) => {
       const used = assets
@@ -111,7 +117,7 @@ export function createFakeDb() {
       return [{ used }]
     },
   }
-  return { db, projects, versions, assets }
+  return { db, projects, versions, assets, jobs, findings }
 }
 
 export function createFakeStorage(): MediaStorage & { objects: Map<string, Buffer> } {

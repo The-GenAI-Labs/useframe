@@ -1,6 +1,9 @@
 "use client"
 
+import Link from "next/link"
 import { useCallback, useEffect, useState } from "react"
+import { useQuery } from "@tanstack/react-query"
+import { chatApi } from "@/lib/api/services/chat.service"
 import type { ProjectDetail } from "@/lib/api/services/projects.service"
 import {
   researchApi,
@@ -92,6 +95,30 @@ function CitationLine({ text, source }: { text: string; source?: string }) {
       {text}
       {source && <span className="text-mut italic"> — {source}</span>}
     </p>
+  )
+}
+
+function ImageryResearch({ projectId }: { projectId: string }) {
+  const research = useQuery({
+    queryKey: ["project-chat-citations", projectId],
+    queryFn: () => chatApi.research(projectId),
+    staleTime: 60_000,
+  })
+  const findings = research.data?.areas.find((a) => a.area === "IMAGERY")?.findings.filter((f) => !f.retired) ?? []
+  if (findings.length === 0) return null
+  return (
+    <Section title="Imagery">
+      <p className="text-[12px] text-mut">This research guides the AI images and videos made for your site.</p>
+      <ul className="mt-1.5 flex flex-col gap-1 text-[12px]">
+        {findings.map((f) => (
+          <li key={f.findingId}>
+            <Link href={`/research/${f.findingId}`} className="font-medium text-sec underline underline-offset-2 hover:text-pri">
+              {f.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Section>
   )
 }
 
@@ -351,6 +378,8 @@ export function ResearchTab({ project, pipelineStatus, locked, onApproved, onReg
               <span>Density: {state.brief.density} · Motion: {state.brief.motion}</span>
             </div>
           </Section>
+
+          {project && <ImageryResearch projectId={project.id} />}
 
           {state.brief.citations.length > 0 && (
             <Section title="Citations">
