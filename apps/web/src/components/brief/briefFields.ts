@@ -19,8 +19,11 @@ export type BriefViewMode = "QUICK" | "FULL"
 // "Start faster" panel rather than the brand step.
 const PANEL_ONLY: FieldId[] = ["sourceDocument"]
 
-export function isFieldVisible(id: FieldId, data: BriefData): boolean {
+export const MEDIA_FIELDS: FieldId[] = ["mediaMode", "mediaBudget", "mediaNotes"]
+
+export function isFieldVisible(id: FieldId, data: BriefData, paid = false): boolean {
   if (PANEL_ONLY.includes(id)) return false
+  if (MEDIA_FIELDS.includes(id)) return paid && (id === "mediaMode" || data.mediaMode !== "OFF")
   if (id === "language") return BUILDER_CAPABILITIES.languages.length > 1
   if (id === "launchDate") return data.availability === "LAUNCHING_SOON"
   return true
@@ -30,9 +33,9 @@ export function stepsFor(view: BriefViewMode): StepId[] {
   return view === "QUICK" ? [...QUICK_STEP_IDS] : [...STEP_IDS]
 }
 
-export function fieldsFor(step: StepId, view: BriefViewMode, data: BriefData): FieldId[] {
+export function fieldsFor(step: StepId, view: BriefViewMode, data: BriefData, paid = false): FieldId[] {
   return fieldsForStep(step).filter(
-    (id) => isFieldVisible(id, data) && (view === "FULL" || REQUIRED_FIELD_IDS.includes(id)),
+    (id) => isFieldVisible(id, data, paid) && (view === "FULL" || REQUIRED_FIELD_IDS.includes(id)),
   )
 }
 
@@ -83,6 +86,10 @@ export function summarize(id: FieldId, data: BriefData): string {
       return label("audienceSegment", v as string)
     case "siteType":
       return label("siteType", v as string)
+    case "mediaMode":
+      return label("mediaMode", v as string)
+    case "mediaBudget":
+      return label("mediaBudget", v as string)
     case "tone":
       return (v as string[]).map((t) => label("tone", t)).join(", ")
     case "trafficSources":

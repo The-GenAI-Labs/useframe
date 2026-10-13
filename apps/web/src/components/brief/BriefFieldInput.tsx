@@ -4,6 +4,8 @@ import { useId, useState, type ReactNode } from "react"
 import {
   AUDIENCE_SEGMENTS,
   AVAILABILITY,
+  BRIEF_MEDIA_BUDGETS,
+  BRIEF_MEDIA_MODES,
   BRIEF_OPTION_LABELS,
   BRIEF_SITE_TYPES,
   BRIEF_UI_COPY,
@@ -257,6 +259,7 @@ export function BriefFieldInput(props: FieldRenderProps) {
     case "problem":
     case "visualNotes":
     case "objections":
+    case "mediaNotes":
       return (
         <TextControl inputId={id} multiline value={data[id] as string | undefined} max={textMax} placeholder={"example" in def ? def.example : undefined} onChange={(v) => onChange(v)} onBlur={onBlur} disabled={disabled} describedBy={describedBy} invalid={invalid} />
       )
@@ -283,6 +286,10 @@ export function BriefFieldInput(props: FieldRenderProps) {
       return <Chips name={id} multiple max={2} options={TONES} labels={L.tone} value={data.tone} onChange={onChange} disabled={disabled} describedBy={describedBy} />
     case "trafficSources":
       return <Chips name={id} multiple options={TRAFFIC_SOURCES} labels={L.trafficSource} value={data.trafficSources} onChange={onChange} disabled={disabled} describedBy={describedBy} />
+    case "mediaMode":
+      return <Chips name={id} options={BRIEF_MEDIA_MODES} labels={L.mediaMode} value={data.mediaMode} onChange={onChange} disabled={disabled} describedBy={describedBy} />
+    case "mediaBudget":
+      return <Chips name={id} options={BRIEF_MEDIA_BUDGETS} labels={L.mediaBudget} value={data.mediaBudget} onChange={onChange} disabled={disabled} describedBy={describedBy} />
     case "language":
       return <Chips name={id} options={BUILDER_CAPABILITIES.languages} labels={{ en: "English" }} value={data.language} onChange={onChange} disabled={disabled} describedBy={describedBy} />
     case "niche":

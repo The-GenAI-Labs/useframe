@@ -44,6 +44,13 @@ import { callBriefPrefill, callBriefResolve } from "@/lib/orchestrator.js"
 import { AppError } from "@/middleware/errorHandler.js"
 import { ProjectsService } from "@/modules/projects/projects.service.js"
 import { BriefUploadsService } from "./briefUploads.service.js"
+import { CreditsService } from "@/modules/credits/credits.service.js"
+
+// AI media is paid-only: a free account's brief always stores OFF.
+async function mediaFieldsForTier<T extends Record<string, unknown> | undefined>(userId: string, set: T): Promise<T> {
+  if (!set || set.mediaMode === undefined || set.mediaMode === "OFF") return set
+  return (await CreditsService.getBalance(userId)) > 0 ? set : ({ ...set, mediaMode: "OFF" } as T)
+}
 
 type AuthUser = { id: string; email: string; plan: string }
 
@@ -258,7 +265,7 @@ export const BriefsService = {
         briefId,
         userId,
         expectedVersion: input.expectedVersion,
-        changes: { set: input.set, unset: input.unset, aiDecide: input.aiDecide },
+        changes: { set: await mediaFieldsForTier(userId, input.set), unset: input.unset, aiDecide: input.aiDecide },
         source: "user",
         columns: {
           ...(input.mode ? { mode: input.mode } : {}),
@@ -469,7 +476,7 @@ export const BriefsService = {
         briefId: brief.id,
         userId: user.id,
         expectedVersion: input.expectedVersion,
-        changes: { set: input.set, unset: input.unset, aiDecide: input.aiDecide },
+        changes: { set: await mediaFieldsForTier(user.id, input.set), unset: input.unset, aiDecide: input.aiDecide },
         source: "user",
         mode: "submit",
         strictProof: true,
