@@ -6,6 +6,7 @@ import { useInfiniteQuery, useQuery, useQueryClient } from "@tanstack/react-quer
 import { mediaApi, type MediaFilters, type MediaItem } from "@/lib/api/services/media.service"
 import { Progress } from "@/components/ui/progress"
 import { MediaDetailDrawer } from "@/components/media/MediaDetailDrawer"
+import { MediaAiPanel } from "@/components/media/MediaAiPanel"
 import { ACCEPTED_MEDIA, useMediaUploads, type UploadEntry } from "@/components/media/useMediaUploads"
 import { formatBytes, formatDuration } from "@/components/media/mediaFormat"
 
@@ -151,6 +152,11 @@ export function MediaTab({ projectSlug }: Props) {
     queryClient.invalidateQueries({ queryKey: ["media-quota"] })
   }, [queryClient, projectSlug])
 
+  const refreshAfterAi = useCallback(() => {
+    refresh()
+    queryClient.invalidateQueries({ queryKey: ["project", projectSlug] })
+  }, [refresh, queryClient, projectSlug])
+
   const { uploads, add, cancel, dismiss } = useMediaUploads(projectSlug, refresh)
   const items = list.data?.pages.flatMap((p) => p.items) ?? []
   const q = quota.data
@@ -200,6 +206,8 @@ export function MediaTab({ projectSlug }: Props) {
           </Link>
         </p>
       )}
+
+      {q && <MediaAiPanel projectSlug={projectSlug} paid={q.tier === "paid"} onMediaChanged={refreshAfterAi} />}
 
       <div className="flex flex-col gap-3 px-4 pt-4 sm:flex-row sm:items-center sm:justify-between">
         <div role="group" aria-label="Filter media" className="flex flex-wrap gap-1.5">
