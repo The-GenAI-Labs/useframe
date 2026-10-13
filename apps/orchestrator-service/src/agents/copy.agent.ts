@@ -19,6 +19,7 @@ export async function runCopyAgent(
   providerOptions?: ReturnType<typeof getProviderOptionsForTier>,
   promptFn: (vars: CopyPromptVars) => string = DEFAULT_COPY_PROMPT,
   briefCtx: ProjectBriefContext | null = null,
+  mediaContextFor?: (pageSlug: string, section: Section) => string | undefined,
 ): Promise<Partial<SiteSpec>> {
   if (!spec.pages) return spec
   const briefFacts = briefCtx ? briefFactsBlock(briefCtx) : undefined
@@ -53,6 +54,7 @@ export async function runCopyAgent(
         brandTone: spec.designBrief?.brand.tone,
         frameworkRationale: spec.designBrief?.frameworkRationale,
         briefFacts,
+        mediaContext: mediaContextFor?.(page.slug, section),
       })
 
       const result = streamText({

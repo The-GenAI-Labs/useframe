@@ -13,6 +13,7 @@ export default defineConfig({
       "src/tools/safeFetch.test.ts",
       "src/lib/docExtract.test.ts",
       "src/agents/mediaPlacement.test.ts",
+      "src/lib/siteMedia.test.ts",
     ],
   },
 });
