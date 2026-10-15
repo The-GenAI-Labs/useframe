@@ -1,13 +1,18 @@
 import { Router, type Request, type Response } from "express"
 import { z } from "zod"
 import { prisma } from "@useframe/db"
+import { CUSTOM_MAX_AMOUNT_CENTS } from "@repo/schemas"
 
 const router: Router = Router()
 
 const AutoReloadSchema = z.object({
   enabled: z.boolean(),
   thresholdCents: z.number().int().positive(),
-  topUpToCents: z.number().int().min(500, "Top-up amount must be at least $5"),
+  topUpToCents: z
+    .number()
+    .int()
+    .min(500, "Top-up amount must be at least $5")
+    .max(CUSTOM_MAX_AMOUNT_CENTS, `Top-up amount can be at most $${CUSTOM_MAX_AMOUNT_CENTS / 100}`),
 })
 
 router.get("/auto-reload", (req: Request, res: Response, next) => {

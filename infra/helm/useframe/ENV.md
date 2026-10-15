@@ -201,6 +201,35 @@ environment only (`PATH`, `HOME`, `CI`, `NODE_OPTIONS`, `NEXT_TELEMETRY_DISABLED
 | `MEDIA_PAID_MAX_IMAGE_BYTES` / `MEDIA_PAID_MAX_VIDEO_BYTES` | no              | `20971520` / `157286400`   | no     | values (hard ceilings for any file) |
 | `MEDIA_DESCRIBE_ENABLED` / `MEDIA_DESCRIBE_TIMEOUT_MS`      | no              | `true` / `30000`           | no     | values                              |
 
+## AI media (server, orchestrator-service and media-service)
+
+Read by `loadMediaAiConfig` in `packages/media-ai` (shared block) and the services' own schemas. Off by
+default; see `docs/media-ai.md`. Set the shared block to the same values on all three workloads with
+`global.env` or each `services.<key>.env`.
+
+| Name                                                                 | Workloads           | Required                          | Default                          | Secret | Set in |
+| -------------------------------------------------------------------- | ------------------- | --------------------------------- | -------------------------------- | ------ | ------ |
+| `MEDIA_ENABLED`                                                      | all three           | no                                | `false`                          | no     | values |
+| `MEDIA_CREDIT_IMAGE` / `MEDIA_CREDIT_VIDEO_PER_SECOND` / `MEDIA_CREDIT_BLUEPRINT` | all three | **yes** in production when enabled | `1` outside production       | no     | values |
+| `MEDIA_BUDGET_IMAGES_ONLY` / `_LIGHT` / `_STANDARD` / `_RICH`        | all three           | no                                | `8:0` / `4:1` / `8:3` / `14:6`   | no     | values |
+| `MEDIA_HARD_MAX_IMAGES` / `MEDIA_HARD_MAX_VIDEOS` / `MEDIA_HARD_MAX_GENERATED_ASSETS` | all three | no                     | `24` / `10` / `60`               | no     | values |
+| `VIDEO_MIN_SECONDS` / `VIDEO_MAX_SECONDS`                            | all three           | no                                | `5` / `10`                       | no     | values |
+| `MEDIA_DAILY_COST_CAP_USD`                                           | all three           | no                                | unset (no circuit breaker)       | no     | values |
+| `MEDIA_COST_IMAGE_USD` / `_VIDEO_USD_PER_SECOND` / `_LLM_CALL_USD` / `_BLUEPRINT_USD` | all three | no                     | `0.25` / `0.08` / `0.05` / `0.4` | no     | values |
+| `MEDIA_AI_PROVIDER_MODE`                                             | orchestrator, media | no                                | `fake`                           | no     | values |
+| `BLUEPRINT_MODEL_ID` / `MEDIA_CREATIVE_MODEL_ID` / `MEDIA_VISION_MODEL_ID` | orchestrator  | no                                | `claude-opus-5-5` / `claude-sonnet-5-5` / `claude-sonnet-5-5` | no | values |
+| `MEDIA_IMAGES_TIMEOUT_S` / `MEDIA_VIDEO_TIMEOUT_S`                   | orchestrator        | no                                | `240` / `600` (generation waits) | no     | values |
+| `ANTHROPIC_API_KEY`                                                  | orchestrator        | when live                         | `""`                             | yes    | Secret (existing key) |
+| `OPENAI_API_KEY`                                                     | media               | when live                         | unset                            | yes    | Secret |
+| `RUNWARE_API_KEY`                                                    | media               | when live                         | unset                            | yes    | Secret |
+| `INTERNAL_SERVICE_SECRET`                                            | media               | when live                         | —                                | yes    | Secret (same as orchestrator) |
+| `OPENAI_IMAGE_MODEL` / `OPENAI_IMAGE_QUALITY`                        | media               | no                                | `gpt-image-2.5-sunburst` / `high` | no    | values |
+| `VIDEO_PROVIDER` / `MEDIA_VIDEO_MODEL` / `MEDIA_VIDEO_RESOLUTION`    | media               | no                                | `runware` / `minimax:h3@max` / `768p` | no | values |
+| `MEDIA_VIDEO_TIMEOUT_S`                                              | media               | no                                | `600` (one render)               | no     | values |
+| `MEDIA_VIDEO_PROMPT_EXPANSION` / `MEDIA_VIDEO_PROMPT_MAX_CHARS`      | media               | no                                | `disabled` / `3000`              | no     | values |
+| `MEDIA_IMAGE_CONCURRENCY` / `MEDIA_VIDEO_CONCURRENCY`                | media               | no                                | `3` / `2` (across replicas)      | no     | values |
+| `MEDIA_PROVIDER_HOST_ALLOWLIST`                                      | media               | no                                | `vm.runware.ai,im.runware.ai`    | no     | values |
+
 ## migration Job (`migration`, Secret `migrate-secrets`)
 
 | Name           | Required | Default | Secret | Set in                                                      |

@@ -13,7 +13,10 @@
     "check-types": "tsc --noEmit",
     "build:snapshots": "tsx scripts/buildSnapshots.ts",
     "test:snapshots": "tsx scripts/buildSnapshots.ts --test",
-    "verify:snapshots": "node scripts/verifySnapshots.mjs"
+    "verify:snapshots": "node scripts/verifySnapshots.mjs",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.0.0",
@@ -48,6 +51,7 @@
     "@webcontainer/snapshot": "^0.1.0",
     "tsc-alias": "1.9.7",
     "tsx": "^4.22.1",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "^2.1.9"
   }
 }
