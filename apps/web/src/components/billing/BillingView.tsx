@@ -8,54 +8,19 @@ import { billingApi } from "@/lib/api/services/billing.service";
 import { serif } from "@/components/home/fonts";
 import { CrossLineBackground } from "@/components/web-score/CrossLineBackground";
 import {
-    CREDIT_PACKS,
+    CUSTOM_MAX_AMOUNT_CENTS,
     CUSTOM_MIN_AMOUNT_CENTS,
     creditsForCustomAmount,
-    findCreditPack,
 } from "@repo/schemas";
+import { formatPlanPrice, plansApi, PLANS_QUERY_KEY } from "@/lib/api/services/plans.service";
 
-// Fixed packs plus a custom-amount path. CREDIT_PACKS and the custom rate
-// are imported from @repo/schemas — the same source billing-service's
-// checkout validates against — so what's shown here is what checkout grants.
-function formatRate(amountCents: number, credits: number): string {
-    return `$${(amountCents / 100 / credits).toFixed(2)}/credit`;
-}
-
-type PackTier = {
-    name: string;
-    tagline: string;
-    amountCents: number;
-    credits: number;
-    rate: string;
-    gradient: string;
-    featured?: boolean;
-};
-
-const PACK_PRESENTATION: Record<number, { name: string; tagline: string; gradient: string; featured?: boolean }> = {
-    1900: {
-        name: "Starter",
-        tagline: "One real site, fully iterated",
-        gradient: "from-sky-400 via-blue-400 to-blue-600",
-    },
-    4900: {
-        name: "Builder",
-        tagline: "A couple of sites, room to explore",
-        gradient: "from-blue-500 via-blue-600 to-indigo-700",
-    },
-    9900: {
-        name: "Studio",
-        tagline: "Best rate, for shipping regularly",
-        gradient: "from-indigo-500 via-blue-700 to-slate-800",
-        featured: true,
-    },
-};
-
-const PACK_TIERS: PackTier[] = CREDIT_PACKS.map((pack) => ({
-    ...PACK_PRESENTATION[pack.amountCents]!,
-    amountCents: pack.amountCents,
-    credits: pack.credits,
-    rate: formatRate(pack.amountCents, pack.credits),
-}));
+// Plans and their prices come from GET /api/plans, and checkout prices them again on
+// the server. Only the custom top-up preview uses the shared custom rate.
+const PLAN_GRADIENTS = [
+    "from-sky-400 via-blue-400 to-blue-600",
+    "from-blue-500 via-blue-600 to-indigo-700",
+    "from-indigo-500 via-blue-700 to-slate-800",
+];
 
 const THRESHOLD_OPTIONS_CENTS = [500, 1000, 1500, 2500];
 const TOPUP_OPTIONS_CENTS = [1000, 1500, 2500, 5000];
@@ -76,7 +41,8 @@ export default function BillingView() {
         queryClient.invalidateQueries({ queryKey: ["credits-summary"] });
     }, [queryClient]);
 
-    const [selectedAmount, setSelectedAmount] = useState<number>(1900);
+    const plans = useQuery({ queryKey: PLANS_QUERY_KEY, queryFn: plansApi.list, staleTime: 60_000 });
+    const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
     const [customAmount, setCustomAmount] = useState("");
     const [checkoutCredits, setCheckoutCredits] = useState(0);
     const [checkoutSuccess, setCheckoutSuccess] = useState(false);
@@ -102,28 +68,32 @@ export default function BillingView() {
         setAutoReloadSynced(true);
     }, [summary, autoReloadSynced]);
 
-    // A pack purchase is identified by packId; a typed custom amount always
-    // prices at the custom rate even if it happens to equal a pack's price,
-    // matching how checkout validates it server-side.
     const isCustom = customAmount.length > 0;
-    const amountCents = isCustom ? Math.round(Number(customAmount) * 100) : selectedAmount;
-    const selectedPack = isCustom ? undefined : findCreditPack(selectedAmount);
-    const liveCredits =
-        amountCents > 0
-            ? (selectedPack?.credits ?? creditsForCustomAmount(amountCents))
-            : 0;
+    const customCents = isCustom ? Math.round(Number(customAmount) * 100) : 0;
+    const selectedPlan = isCustom
+        ? undefined
+        : (plans.data?.find((p) => p.slug === selectedSlug) ?? plans.data?.find((p) => p.highlighted) ?? plans.data?.[0]);
+    const customCredits = customCents > 0 ? creditsForCustomAmount(customCents) : 0;
+    const canCheckout = isCustom
+        ? customCents >= CUSTOM_MIN_AMOUNT_CENTS && customCents <= CUSTOM_MAX_AMOUNT_CENTS
+        : !!selectedPlan;
 
     const handleStartCheckout = useCallback(async () => {
-        if (isCustom && amountCents < CUSTOM_MIN_AMOUNT_CENTS) {
-            setCheckoutError("Minimum top-up is $10");
+        if (isCustom && customCents < CUSTOM_MIN_AMOUNT_CENTS) {
+            setCheckoutError(`Minimum top-up is ${formatDollars(CUSTOM_MIN_AMOUNT_CENTS)}`);
             return;
         }
+        if (isCustom && customCents > CUSTOM_MAX_AMOUNT_CENTS) {
+            setCheckoutError(`Maximum top-up is ${formatDollars(CUSTOM_MAX_AMOUNT_CENTS)}`);
+            return;
+        }
+        if (!isCustom && !selectedPlan) return;
         setStartingCheckout(true);
         setCheckoutError(null);
         setCheckoutSuccess(false);
         try {
             const order = await billingApi.createCheckout(
-                isCustom ? { amountCents } : { packId: selectedAmount },
+                isCustom ? { amountCents: customCents } : { planSlug: selectedPlan!.slug },
             );
             setCheckoutCredits(order.credits);
 
@@ -150,7 +120,7 @@ export default function BillingView() {
         } finally {
             setStartingCheckout(false);
         }
-    }, [amountCents, isCustom, selectedAmount, invalidateSummary]);
+    }, [customCents, isCustom, selectedPlan, invalidateSummary]);
 
     const handleStartAddCard = useCallback(async () => {
         setStartingAddCard(true);
@@ -253,29 +223,54 @@ export default function BillingView() {
 
                     {(
                         <>
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto w-full">
-                                {PACK_TIERS.map((tier) => {
-                                    const isSelected = !customAmount && selectedAmount === tier.amountCents;
+                            {plans.isError ? (
+                                <div role="alert" className="max-w-md w-full mx-auto flex flex-col items-center gap-3 px-4 py-5 rounded-2xl border border-base bg-surface text-center">
+                                    <p className="text-[12.5px] text-sec">We couldn&apos;t load plans right now.</p>
+                                    <button
+                                        type="button"
+                                        onClick={() => plans.refetch()}
+                                        disabled={plans.isFetching}
+                                        className="px-4 py-2 rounded-xl text-[12.5px] font-semibold text-white bg-blue-500 hover:bg-blue-600 transition-all cursor-pointer disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                                    >
+                                        {plans.isFetching ? "Retrying…" : "Try again"}
+                                    </button>
+                                </div>
+                            ) : (
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto w-full" aria-busy={plans.isLoading}>
+                                {plans.isLoading &&
+                                    [0, 1, 2].map((i) => (
+                                        <div key={i} aria-hidden className="flex flex-col rounded-3xl border border-base overflow-hidden shadow-sm">
+                                            <div className="min-h-[86px] animate-pulse bg-tertiary" />
+                                            <div className="flex flex-col gap-3 px-4 py-4 bg-surface">
+                                                <div className="h-7 w-16 animate-pulse rounded bg-tertiary" />
+                                                <div className="h-3 w-28 animate-pulse rounded bg-tertiary" />
+                                                <div className="h-8 w-full animate-pulse rounded-xl bg-tertiary" />
+                                            </div>
+                                        </div>
+                                    ))}
+                                {plans.data?.map((plan, index) => {
+                                    const isSelected = !customAmount && selectedPlan?.slug === plan.slug;
                                     return (
                                         <button
-                                            key={tier.amountCents}
+                                            key={plan.slug}
                                             type="button"
+                                            aria-pressed={isSelected}
                                             onClick={() => {
-                                                setSelectedAmount(tier.amountCents);
+                                                setSelectedSlug(plan.slug);
                                                 setCustomAmount("");
                                             }}
-                                            className={`relative flex h-full flex-col text-left rounded-3xl border overflow-hidden transition-all cursor-pointer ${
+                                            className={`relative flex h-full flex-col text-left rounded-3xl border overflow-hidden transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 ${
                                                 isSelected
                                                     ? "border-blue-400 shadow-lg ring-2 ring-blue-100 dark:ring-blue-900/40"
                                                     : "border-base shadow-sm hover:border-em"
                                             }`}
                                         >
-                                            {tier.featured && (
+                                            {plan.highlighted && (
                                                 <span className="absolute top-3 right-3 z-10 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wide text-white bg-white/20 backdrop-blur-sm border border-white/30">
                                                     Most popular
                                                 </span>
                                             )}
-                                            <div className={`relative px-4 pt-4 pb-5 bg-gradient-to-br overflow-hidden shrink-0 min-h-[86px] flex flex-col justify-center ${tier.gradient}`}>
+                                            <div className={`relative px-4 pt-4 pb-5 bg-gradient-to-br overflow-hidden shrink-0 min-h-[86px] flex flex-col justify-center ${PLAN_GRADIENTS[index % PLAN_GRADIENTS.length]}`}>
                                                 <div
                                                     className="absolute inset-0"
                                                     style={{ background: "linear-gradient(115deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.08) 35%, transparent 60%)" }}
@@ -288,20 +283,22 @@ export default function BillingView() {
                                                         backgroundSize: "60px 60px",
                                                     }}
                                                 />
-                                                <p className="relative text-white text-[15px] font-bold">{tier.name}</p>
-                                                <p className="relative text-white/80 text-[11px] mt-0.5">{tier.tagline}</p>
+                                                <p className="relative text-white text-[15px] font-bold">{plan.name}</p>
+                                                {plan.description && <p className="relative text-white/80 text-[11px] mt-0.5">{plan.description}</p>}
                                             </div>
                                             <div className="flex-1 flex flex-col gap-3 px-4 py-4 bg-surface">
-                                                <div>
-                                                    <span className={`font-mono text-2xl font-bold tabular-nums ${isSelected ? "text-blue-600 dark:text-blue-400" : "text-pri"}`}>
-                                                        {formatDollars(tier.amountCents)}
-                                                    </span>
-                                                    <p className="text-[11.5px] text-mut font-medium mt-0.5">
-                                                        {tier.credits} credits · {tier.rate}
-                                                    </p>
-                                                </div>
+                                                <span className={`font-mono text-2xl font-bold tabular-nums ${isSelected ? "text-blue-600 dark:text-blue-400" : "text-pri"}`}>
+                                                    {formatPlanPrice(plan)}
+                                                </span>
+                                                {plan.features.length > 0 && (
+                                                    <ul className="flex flex-col gap-1 text-[11.5px] text-mut">
+                                                        {plan.features.map((feature) => (
+                                                            <li key={feature}>{feature}</li>
+                                                        ))}
+                                                    </ul>
+                                                )}
                                                 <div
-                                                    className={`w-full text-center py-2 rounded-xl text-[12px] font-semibold transition-all ${
+                                                    className={`mt-auto w-full text-center py-2 rounded-xl text-[12px] font-semibold transition-all ${
                                                         isSelected
                                                             ? "bg-blue-500 text-white"
                                                             : "bg-tertiary text-sec"
@@ -314,6 +311,7 @@ export default function BillingView() {
                                     );
                                 })}
                             </div>
+                            )}
 
                             <div className="flex items-center gap-2.5 max-w-sm w-full mx-auto">
                                 <div className="h-px flex-1 bg-base" />
@@ -326,16 +324,18 @@ export default function BillingView() {
                                     <span className="text-[13.5px] text-mut font-medium">$</span>
                                     <input
                                         type="number"
-                                        min={5}
+                                        min={CUSTOM_MIN_AMOUNT_CENTS / 100}
+                                        max={CUSTOM_MAX_AMOUNT_CENTS / 100}
                                         step={1}
                                         value={customAmount}
                                         onChange={(e) => setCustomAmount(e.target.value)}
-                                        placeholder="Custom amount, min $5"
+                                        aria-label="Custom top-up amount in dollars"
+                                        placeholder={`Custom amount, min ${formatDollars(CUSTOM_MIN_AMOUNT_CENTS)}`}
                                         className="flex-1 bg-transparent text-[13.5px] text-sec placeholder:text-mut outline-none"
                                     />
                                     {customAmount && (
                                         <span className="text-[12px] font-semibold text-blue-500 whitespace-nowrap">
-                                            = {liveCredits} credits
+                                            = {customCredits} credits
                                         </span>
                                     )}
                                 </div>
@@ -345,10 +345,16 @@ export default function BillingView() {
                                 <button
                                     type="button"
                                     onClick={handleStartCheckout}
-                                    disabled={amountCents < 500 || startingCheckout}
+                                    disabled={!canCheckout || startingCheckout}
                                     className="px-5 py-3 rounded-2xl text-[13px] font-semibold text-white bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                                 >
-                                    {startingCheckout ? "Starting…" : `Continue — ${formatDollars(amountCents)} for ${liveCredits} credits`}
+                                    {startingCheckout
+                                        ? "Starting…"
+                                        : isCustom
+                                          ? `Continue — ${formatDollars(customCents)} for ${customCredits} credits`
+                                          : selectedPlan
+                                            ? `Continue — ${selectedPlan.name}, ${formatPlanPrice(selectedPlan)}`
+                                            : "Choose a plan"}
                                 </button>
                             </div>
                         </>
