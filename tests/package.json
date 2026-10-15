@@ -1,0 +1,27 @@
+{
+  "name": "@useframe/tests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:e2e": "playwright test -c e2e/playwright.config.ts",
+    "test:security": "playwright test -c security/playwright.config.ts",
+    "test:load": "tsx load/run.ts smoke",
+    "load:smoke": "tsx load/run.ts smoke",
+    "load:load": "tsx load/run.ts load",
+    "load:stress": "tsx load/run.ts stress",
+    "security:deps": "pnpm audit --prod --audit-level=high",
+    "report": "playwright show-report",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/node": "^22.15.3",
+    "@useframe/db": "workspace:*",
+    "@useframe/typescript-config": "workspace:*",
+    "dotenv": "^16.6.1",
+    "tsx": "^4.22.1",
+    "typescript": "5.9.2"
+  }
+}

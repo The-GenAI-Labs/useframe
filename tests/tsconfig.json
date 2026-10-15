@@ -1,0 +1,11 @@
+{
+  "extends": "@useframe/typescript-config/node.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": false,
+    "types": ["node"]
+  },
+  "include": ["shared", "e2e", "security", "load/run.ts"],
+  "exclude": ["node_modules", "playwright-report", "test-results"]
+}
