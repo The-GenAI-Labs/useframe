@@ -20,9 +20,6 @@ export const CtaSection = memo(function CtaSection() {
   const rawCard = useTransform(scrollYProgress, [0, 1], [130, -130]);
   const cardY   = useSpring(rawCard, { stiffness: 18, damping: 14, mass: 1.2 });
 
-  const { scrollYProgress: rightP } = useScroll({ target: rightRef, offset: ["start end", "end start"] });
-  const rawRight = useTransform(rightP, [0, 1], [70, -70]);
-  const rightY   = useSpring(rawRight, { stiffness: 14, damping: 12, mass: 1.5 });
 
   const feat = FEATURES[active];
   const handleEnter = useCallback((i: number) => setActive(i), []);

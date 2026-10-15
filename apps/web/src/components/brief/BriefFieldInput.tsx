@@ -394,7 +394,7 @@ export function BriefFieldInput(props: FieldRenderProps) {
               <TextControl inputId={sub(`n${i}`)} value={item.note} max={150} onChange={(v) => update({ ...item, note: optional(v) })} disabled={disabled} />
               <label className="flex items-center gap-2 text-[12.5px] text-sec">
                 <input type="checkbox" checked={item.redesignFrom} onChange={(e) => update({ ...item, redesignFrom: e.target.checked })} disabled={disabled} className="size-4 accent-blue-600" />
-                This is the site I'm redesigning
+                This is the site I&apos;m redesigning
               </label>
             </div>
           )}
@@ -494,7 +494,7 @@ export function BriefFieldInput(props: FieldRenderProps) {
                     </div>
                   </div>
                   <Chips name={sub(`i${i}`)} options={PRICE_INTERVALS} labels={L.priceInterval} value={plan.interval} onChange={(interval) => update({ ...plan, interval: interval as typeof plan.interval })} disabled={disabled} />
-                  <SubLabel htmlFor={sub(`f${i}`)}>What's included (one per line, up to 8)</SubLabel>
+                  <SubLabel htmlFor={sub(`f${i}`)}>What&apos;s included (one per line, up to 8)</SubLabel>
                   <Textarea id={sub(`f${i}`)} rows={3} className={control} value={plan.features.join("\n")} onChange={(e) => update({ ...plan, features: e.target.value.split("\n").slice(0, 8) })} disabled={disabled} />
                   <label className="flex items-center gap-2 text-[12.5px] text-sec">
                     <input type="checkbox" checked={plan.highlighted} onChange={(e) => update({ ...plan, highlighted: e.target.checked })} disabled={disabled} className="size-4 accent-blue-600" />

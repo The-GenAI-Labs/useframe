@@ -11,7 +11,6 @@ import {
   FIELD_DEFS,
   QUICK_STEP_IDS,
   REQUIRED_FIELD_IDS,
-  STEP_IDS,
   dropUnconfirmedImportedProof,
   validateFieldValue,
   validateForSubmit,
@@ -446,9 +445,9 @@ function BriefModalSession({ request, onClose }: { request: BriefModalRequest; o
           {!editing && eligibility && !eligibility.eligible && (
             <div className="mb-4 rounded-2xl bg-amber-50 px-4 py-3 text-[12.5px] text-amber-900 dark:bg-amber-950/30 dark:text-amber-200">
               {BRIEF_UI_COPY.eligibility}{" "}
-              <a href="/billing" className="font-semibold underline underline-offset-2">
+              <Link href="/billing" className="font-semibold underline underline-offset-2">
                 {BRIEF_UI_COPY.upgrade}
-              </a>
+              </Link>
             </div>
           )}
           {draft.saveState === "conflict" && (
@@ -463,9 +462,9 @@ function BriefModalSession({ request, onClose }: { request: BriefModalRequest; o
             <div role="alert" className="mb-4 rounded-2xl bg-red-50 px-4 py-3 text-[12.5px] text-red-700 dark:bg-red-950/30 dark:text-red-300">
               {banner.text}{" "}
               {banner.upgrade && (
-                <a href="/billing" className="font-semibold underline underline-offset-2">
+                <Link href="/billing" className="font-semibold underline underline-offset-2">
                   {BRIEF_UI_COPY.upgrade}
-                </a>
+                </Link>
               )}
             </div>
           )}

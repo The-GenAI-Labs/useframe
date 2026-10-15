@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 import type { Tool } from "./types";
-import { MIN_ZOOM, MAX_ZOOM, TOOLS } from "./boardConstants";
+import { MIN_ZOOM, MAX_ZOOM } from "./boardConstants";
 
 interface Props {
     zoom: number;
@@ -62,12 +62,10 @@ function TextBtn({ onClick, children, active }: {
 }
 
 export const BoardTopBar = memo(function BoardTopBar({
-    zoom, showGrid, shapeCount, selectedCount,
-    canUndo, canRedo, activeTool,
+    zoom, showGrid, shapeCount,
+    canUndo, canRedo,
     onZoom, onToggleGrid, onUndo, onRedo, onClear,
 }: Props) {
-    const toolLabel = TOOLS.find(t => t.id === activeTool)?.label ?? "";
-
     return (
         <div
             className="flex items-center justify-between px-4 h-11 shrink-0 border-b"
