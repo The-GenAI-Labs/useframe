@@ -15,7 +15,7 @@ const STAGE_LABELS: Record<string, string> = {
 }
 
 export function GenerationStream() {
-  const { currentStage, stageMessage, streamBuffer, isStreaming, error } =
+  const { currentStage, stageMessage, substep, streamBuffer, isStreaming, error } =
     useGenerationStore()
 
   if (error) {
@@ -52,6 +52,11 @@ export function GenerationStream() {
               {STAGE_LABELS[currentStage] ?? stageMessage}
             </span>
           </div>
+          {substep && (
+            <p className="mt-1 pl-4 text-xs text-muted-foreground" aria-live="polite">
+              {stageMessage}
+            </p>
+          )}
         </div>
       )}
 
