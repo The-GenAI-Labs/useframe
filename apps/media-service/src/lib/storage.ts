@@ -11,6 +11,7 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3"
 import { Upload } from "@aws-sdk/lib-storage"
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 
 const MULTIPART_THRESHOLD = 5 * 1024 * 1024
 
@@ -28,6 +29,9 @@ export interface MediaStore {
   put(key: string, body: Buffer | Readable, size: number, contentType: string): Promise<void>
   head(key: string): Promise<{ size: number } | null>
   deletePrefix(prefix: string): Promise<number>
+  getBuffer(key: string, maxBytes: number): Promise<Buffer | null>
+  // A short-lived URL a provider can PUT a result to directly.
+  presignPut(key: string, contentType: string, expiresInSeconds: number): Promise<string>
 }
 
 function isNotFound(err: unknown): boolean {
@@ -108,6 +112,32 @@ export function createS3MediaStore(config: {
     uploadFile: (key, absPath, size, contentType) => put(key, createReadStream(absPath), size, contentType),
 
     put,
+
+    async getBuffer(key, maxBytes) {
+      let res
+      try {
+        res = await client.send(new GetObjectCommand({ Bucket, Key: key }))
+      } catch (err) {
+        if (isNotFound(err)) return null
+        throw err
+      }
+      if (!res.Body) return null
+      if ((res.ContentLength ?? 0) > maxBytes) throw new TooLargeError()
+      const chunks: Buffer[] = []
+      let size = 0
+      for await (const chunk of res.Body as Readable) {
+        size += (chunk as Buffer).length
+        if (size > maxBytes) throw new TooLargeError()
+        chunks.push(Buffer.from(chunk as Uint8Array))
+      }
+      return Buffer.concat(chunks)
+    },
+
+    presignPut(key, contentType, expiresInSeconds) {
+      return getSignedUrl(client, new PutObjectCommand({ Bucket, Key: key, ContentType: contentType }), {
+        expiresIn: expiresInSeconds,
+      })
+    },
 
     async head(key) {
       try {

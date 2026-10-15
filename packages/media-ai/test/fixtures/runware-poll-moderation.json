@@ -1,0 +1,9 @@
+{
+  "errors": [
+    {
+      "code": "contentModeration",
+      "message": "The prompt was blocked by content moderation",
+      "taskUUID": "TASK"
+    }
+  ]
+}

@@ -445,7 +445,9 @@ export const ModelName = {
   CorpusVersion: 'CorpusVersion',
   JevDecisionLog: 'JevDecisionLog',
   ProjectChatMessage: 'ProjectChatMessage',
-  MediaAsset: 'MediaAsset'
+  MediaAsset: 'MediaAsset',
+  MediaJob: 'MediaJob',
+  MediaGeneration: 'MediaGeneration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -461,7 +463,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "researchDocument" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "projectSite" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "projectBrief" | "briefRevision" | "briefUpload" | "researchIntake" | "styleTag" | "styleDirective" | "componentExemplar" | "researchFinding" | "findingRelation" | "sourceDocument" | "findingChunk" | "pendingFindingRelation" | "researchReportCitation" | "corpusIngestionLog" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "replication" | "validationRun" | "validationIteration" | "scoreResult" | "searchQueryCache" | "seoAuditResult" | "retrievalCacheEntry" | "corpusVersion" | "jevDecisionLog" | "projectChatMessage" | "mediaAsset"
+    modelProps: "user" | "identity" | "session" | "refreshToken" | "magicLinkToken" | "ticketToken" | "signupRiskEvent" | "phoneOtp" | "plan" | "order" | "subscription" | "payment" | "webhookEvent" | "creditBalance" | "creditTransaction" | "autoReloadSetting" | "researchDocument" | "project" | "projectVersion" | "page" | "conversation" | "message" | "deployment" | "projectSite" | "customDomain" | "pipelineLog" | "projectAnalytics" | "pageAnalytics" | "usageLog" | "waitlist" | "researchReport" | "projectBrief" | "briefRevision" | "briefUpload" | "researchIntake" | "styleTag" | "styleDirective" | "componentExemplar" | "researchFinding" | "findingRelation" | "sourceDocument" | "findingChunk" | "pendingFindingRelation" | "researchReportCitation" | "corpusIngestionLog" | "domainPattern" | "audienceModifier" | "generationOutcome" | "pipelineState" | "researchArticle" | "competitorScan" | "replication" | "validationRun" | "validationIteration" | "scoreResult" | "searchQueryCache" | "seoAuditResult" | "retrievalCacheEntry" | "corpusVersion" | "jevDecisionLog" | "projectChatMessage" | "mediaAsset" | "mediaJob" | "mediaGeneration"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5021,6 +5023,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    MediaJob: {
+      payload: Prisma.$MediaJobPayload<ExtArgs>
+      fields: Prisma.MediaJobFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MediaJobFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MediaJobFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload>
+        }
+        findFirst: {
+          args: Prisma.MediaJobFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MediaJobFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload>
+        }
+        findMany: {
+          args: Prisma.MediaJobFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload>[]
+        }
+        create: {
+          args: Prisma.MediaJobCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload>
+        }
+        createMany: {
+          args: Prisma.MediaJobCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MediaJobCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload>[]
+        }
+        delete: {
+          args: Prisma.MediaJobDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload>
+        }
+        update: {
+          args: Prisma.MediaJobUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload>
+        }
+        deleteMany: {
+          args: Prisma.MediaJobDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MediaJobUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MediaJobUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload>[]
+        }
+        upsert: {
+          args: Prisma.MediaJobUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaJobPayload>
+        }
+        aggregate: {
+          args: Prisma.MediaJobAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMediaJob>
+        }
+        groupBy: {
+          args: Prisma.MediaJobGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MediaJobGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MediaJobCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MediaJobCountAggregateOutputType> | number
+        }
+      }
+    }
+    MediaGeneration: {
+      payload: Prisma.$MediaGenerationPayload<ExtArgs>
+      fields: Prisma.MediaGenerationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MediaGenerationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MediaGenerationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload>
+        }
+        findFirst: {
+          args: Prisma.MediaGenerationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MediaGenerationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload>
+        }
+        findMany: {
+          args: Prisma.MediaGenerationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload>[]
+        }
+        create: {
+          args: Prisma.MediaGenerationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload>
+        }
+        createMany: {
+          args: Prisma.MediaGenerationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MediaGenerationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload>[]
+        }
+        delete: {
+          args: Prisma.MediaGenerationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload>
+        }
+        update: {
+          args: Prisma.MediaGenerationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload>
+        }
+        deleteMany: {
+          args: Prisma.MediaGenerationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MediaGenerationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MediaGenerationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload>[]
+        }
+        upsert: {
+          args: Prisma.MediaGenerationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaGenerationPayload>
+        }
+        aggregate: {
+          args: Prisma.MediaGenerationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMediaGeneration>
+        }
+        groupBy: {
+          args: Prisma.MediaGenerationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MediaGenerationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MediaGenerationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MediaGenerationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -5379,6 +5529,7 @@ export const ProjectVersionScalarFieldEnum = {
   nextFiles: 'nextFiles',
   snapshot: 'snapshot',
   briefRevisionId: 'briefRevisionId',
+  blueprint: 'blueprint',
   createdAt: 'createdAt'
 } as const
 
@@ -6192,6 +6343,62 @@ export const MediaAssetScalarFieldEnum = {
 export type MediaAssetScalarFieldEnum = (typeof MediaAssetScalarFieldEnum)[keyof typeof MediaAssetScalarFieldEnum]
 
 
+export const MediaJobScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  userId: 'userId',
+  mode: 'mode',
+  status: 'status',
+  stage: 'stage',
+  checkpoint: 'checkpoint',
+  checkpointExpiresAt: 'checkpointExpiresAt',
+  scope: 'scope',
+  mediaBrief: 'mediaBrief',
+  plan: 'plan',
+  concepts: 'concepts',
+  state: 'state',
+  bindings: 'bindings',
+  creditsReserved: 'creditsReserved',
+  creditsRefunded: 'creditsRefunded',
+  costUsd: 'costUsd',
+  versionId: 'versionId',
+  compiledAt: 'compiledAt',
+  compiledBindings: 'compiledBindings',
+  resultVersionId: 'resultVersionId',
+  failureReason: 'failureReason',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MediaJobScalarFieldEnum = (typeof MediaJobScalarFieldEnum)[keyof typeof MediaJobScalarFieldEnum]
+
+
+export const MediaGenerationScalarFieldEnum = {
+  id: 'id',
+  jobId: 'jobId',
+  itemId: 'itemId',
+  stage: 'stage',
+  kind: 'kind',
+  provider: 'provider',
+  model: 'model',
+  attempt: 'attempt',
+  requestKey: 'requestKey',
+  providerTaskId: 'providerTaskId',
+  status: 'status',
+  promptText: 'promptText',
+  inputAssetIds: 'inputAssetIds',
+  outputAssetId: 'outputAssetId',
+  costUsd: 'costUsd',
+  latencyMs: 'latencyMs',
+  error: 'error',
+  createdAt: 'createdAt'
+} as const
+
+export type MediaGenerationScalarFieldEnum = (typeof MediaGenerationScalarFieldEnum)[keyof typeof MediaGenerationScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6980,6 +7187,34 @@ export type EnumMediaStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
 export type ListEnumMediaStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaStatus[]'>
     
 
+
+/**
+ * Reference to a field of type 'MediaJobMode'
+ */
+export type EnumMediaJobModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaJobMode'>
+    
+
+
+/**
+ * Reference to a field of type 'MediaJobMode[]'
+ */
+export type ListEnumMediaJobModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaJobMode[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MediaJobStatus'
+ */
+export type EnumMediaJobStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaJobStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MediaJobStatus[]'
+ */
+export type ListEnumMediaJobStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaJobStatus[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -7152,6 +7387,8 @@ export type GlobalOmitConfig = {
   jevDecisionLog?: Prisma.JevDecisionLogOmit
   projectChatMessage?: Prisma.ProjectChatMessageOmit
   mediaAsset?: Prisma.MediaAssetOmit
+  mediaJob?: Prisma.MediaJobOmit
+  mediaGeneration?: Prisma.MediaGenerationOmit
 }
 
 /* Types for Logging */

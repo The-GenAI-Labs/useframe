@@ -92,3 +92,46 @@ export async function createAssetFromBytes(deps: Deps, input: CreateAssetInput):
   await deps.enqueue({ assetId: asset.id, ...(input.options ? { options: input.options } : {}) }, `${asset.id}-0`)
   return { assetId: asset.id }
 }
+
+// Direct provider delivery: the row and key exist first, the provider PUTs the
+// original, then finishReservedAsset verifies it and starts processing.
+export async function reserveGeneratedAsset(
+  deps: Deps,
+  input: { projectId: string; userId: string; kind: "IMAGE" | "VIDEO"; mime: string; purpose?: string; title?: string; generation?: Prisma.InputJsonValue },
+): Promise<{ assetId: string; key: string }> {
+  return deps.db.$transaction(async (tx) => {
+    const created = await tx.mediaAsset.create({
+      data: {
+        projectId: input.projectId,
+        userId: input.userId,
+        kind: input.kind,
+        origin: "GENERATED",
+        status: "UPLOADING",
+        title: input.title?.slice(0, 120) ?? null,
+        purpose: input.purpose ?? null,
+        aiGenerated: true,
+        generation: input.generation,
+        originalKey: "",
+        originalMime: input.mime,
+        originalBytes: 0,
+      },
+      select: { id: true },
+    })
+    const key = `${mediaPrefix(input.projectId, created.id)}orig`
+    await tx.mediaAsset.update({ where: { id: created.id }, data: { originalKey: key } })
+    return { assetId: created.id, key }
+  })
+}
+
+export async function finishReservedAsset(
+  deps: Deps,
+  asset: { assetId: string; key: string; kind: "IMAGE" | "VIDEO" },
+  options?: MediaProcessOptions,
+): Promise<boolean> {
+  const head = await deps.store.head(asset.key)
+  const max = asset.kind === "VIDEO" ? deps.config.maxVideoBytes : deps.config.maxImageBytes
+  if (!head || head.size <= 0 || head.size > max) return false
+  await deps.db.mediaAsset.update({ where: { id: asset.assetId }, data: { status: "PROCESSING", originalBytes: head.size } })
+  await deps.enqueue({ assetId: asset.assetId, ...(options ? { options } : {}) }, `${asset.assetId}-0`)
+  return true
+}

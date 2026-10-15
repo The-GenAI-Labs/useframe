@@ -2,7 +2,7 @@ import { BRIEF_FIELD_COPY } from "./copy.js"
 
 // Bump when a field is added, removed or its value shape changes, so stored
 // drafts can be told apart from the catalog they were written against.
-export const BRIEF_CATALOG_VERSION = 1
+export const BRIEF_CATALOG_VERSION = 2
 
 export const STEP_IDS = [
   "about",
@@ -70,6 +70,8 @@ export const SOCIAL_NETWORKS = [
   "other",
 ] as const
 export const BRIEF_LANGUAGES = ["en"] as const
+export const BRIEF_MEDIA_MODES = ["AUTO", "MANUAL", "OFF"] as const
+export const BRIEF_MEDIA_BUDGETS = ["IMAGES_ONLY", "LIGHT", "STANDARD", "RICH"] as const
 
 export type FieldTier = "required" | "recommended" | "optional"
 export type IfBlank =
@@ -147,6 +149,10 @@ const SPECS = {
   tone: { step: "brand", tier: "recommended", kind: "multiselect", limits: { options: TONES, maxItems: 2 }, ifBlank: { kind: "pipeline" } },
   designReferences: { step: "brand", tier: "optional", kind: "list", limits: { maxItems: 3, note: 150, url: 500 }, ifBlank: { kind: "pipeline" } },
   visualNotes: { step: "brand", tier: "optional", kind: "textarea", limits: len(0, 300), ifBlank: { kind: "pipeline" } },
+  // AI media is paid-only: free accounts are always OFF, whatever is stored.
+  mediaMode: { step: "brand", tier: "recommended", kind: "select", limits: { options: BRIEF_MEDIA_MODES }, ifBlank: { kind: "conditional" } },
+  mediaBudget: { step: "brand", tier: "recommended", kind: "select", limits: { options: BRIEF_MEDIA_BUDGETS }, ifBlank: { kind: "default", value: "STANDARD" } },
+  mediaNotes: { step: "brand", tier: "optional", kind: "textarea", limits: len(0, 300), ifBlank: { kind: "omit" } },
   sourceDocument: { step: "brand", tier: "optional", kind: "upload", limits: { mimes: ["application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.openxmlformats-officedocument.presentationml.presentation", "text/plain", "text/markdown"], maxBytesEnv: "BRIEF_DOC_MAX_BYTES" }, ifBlank: { kind: "omit" } },
 
   testimonials: { step: "proof", tier: "optional", kind: "list", limits: { maxItems: 6, quote: len(10, 400), personName: len(1, 80), role: 80, company: 80 }, ifBlank: { kind: "omit" }, proof: true },

@@ -1,3 +1,5 @@
+import { DATA_PARAGRAPH, dataBlock } from "@repo/media-ai"
+
 export type CopyPromptVars = {
   copyFramework: string
   startupIdea: string
@@ -10,6 +12,7 @@ export type CopyPromptVars = {
   brandTone?: string
   frameworkRationale?: string
   briefFacts?: string
+  mediaContext?: string
 }
 
 export const DEFAULT_COPY_PROMPT = (v: CopyPromptVars): string => `
@@ -20,7 +23,7 @@ Niche: ${v.niche}
 Target Audience: ${v.targetAudience}
 ${v.brandTone ? `Brand tone to match: ${v.brandTone}\n` : ""}Page: ${v.pageTitle} (${v.pageType})
 Section: ${v.sectionType} (position ${v.sectionIndex})
-${v.briefFacts ? `\n${v.briefFacts}\n` : ""}
+${v.briefFacts ? `\n${v.briefFacts}\n` : ""}${v.mediaContext ? `\nVISUALS: read-only context so the copy matches the images; the ${v.copyFramework} framework still decides structure and tone.\n${DATA_PARAGRAPH}\n${dataBlock("VISUALS", v.mediaContext)}\n` : ""}
 Write compelling copy for this section. Respond ONLY with valid JSON:
 {
   "headline": "string",

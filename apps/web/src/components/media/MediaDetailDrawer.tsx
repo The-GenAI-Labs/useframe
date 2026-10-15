@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
@@ -153,7 +154,29 @@ export function MediaDetailDrawer({ slug, assetId, onClose, onChanged }: Props) 
                   <span className="mr-2 rounded-full bg-indigo-100 px-2 py-0.5 text-[11px] font-semibold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
                     AI-generated
                   </span>
-                  How this was made: created by useframe&apos;s image generator for this project.
+                  {asset.generation?.concept || asset.generation?.summary ? (
+                    <dl className="mt-2 grid gap-1.5">
+                      <dt className="font-semibold text-pri">How this was made</dt>
+                      {asset.generation.concept && <dd>Idea: {asset.generation.concept}</dd>}
+                      {asset.generation.approach && <dd>Motion: {asset.generation.approach}</dd>}
+                      {asset.generation.summary && <dd>{asset.generation.summary}</dd>}
+                      {asset.generation.research.length > 0 && (
+                        <dd>
+                          Based on research:{" "}
+                          {asset.generation.research.map((f, i) => (
+                            <span key={f.id}>
+                              {i > 0 && ", "}
+                              <Link href={`/research/${f.id}`} className="underline underline-offset-2">
+                                {f.title}
+                              </Link>
+                            </span>
+                          ))}
+                        </dd>
+                      )}
+                    </dl>
+                  ) : (
+                    <>How this was made: created by useframe&apos;s image generator for this project.</>
+                  )}
                 </div>
               )}
 

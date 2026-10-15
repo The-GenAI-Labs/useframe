@@ -44,6 +44,54 @@ function sectionsFromBrief(
   })
 }
 
+type ModelPage = { type: string; slug: string; title: string; sections?: Array<{ type: string; index: number }> }
+
+// The one reading of a structure answer, shared with the Site Blueprint's full mode.
+export function structureFromModelOutput(
+  parsed: { siteType?: SiteSpec["siteType"]; copyFramework?: SiteSpec["copyFramework"]; pages?: ModelPage[] },
+  briefCtx: ProjectBriefContext | null,
+  preferredSiteType?: SiteSpec["siteType"],
+): Pick<SiteSpec, "siteType" | "copyFramework" | "pages"> {
+  return {
+    siteType: preferredSiteType ?? parsed.siteType ?? "SINGLE_PAGE",
+    copyFramework: parsed.copyFramework ?? "AIDA",
+    pages: (parsed.pages ?? []).map((p) => ({
+      type: p.type as SiteSpec["pages"][number]["type"],
+      slug: p.slug,
+      title: p.title,
+      sections: filterSections(
+        (p.sections ?? []).filter((s) => VALID_SECTION_TYPES.has(s.type)).map((s) => ({ type: s.type as SectionType, index: s.index })),
+        briefCtx,
+      ).map((s, index) => ({ ...s, index })),
+    })),
+  }
+}
+
+export function structurePromptVars(request: GenerateRequest, briefCtx: ProjectBriefContext | null): StructurePromptVars {
+  return {
+    startupIdea: request.startupIdea,
+    niche: request.niche,
+    targetAudience: request.targetAudience,
+    inputType: request.inputType,
+    ...(briefCtx ? { allowedSections: allowedSectionTypes(briefCtx), briefFacts: briefFactsBlock(briefCtx) } : {}),
+  }
+}
+
+// Validation for the blueprint's full mode: the same reading, plus no empty pages.
+export function parseStructureForBlueprint(raw: unknown, briefCtx: ProjectBriefContext | null):
+  | { ok: true; value: Pick<SiteSpec, "siteType" | "copyFramework" | "pages"> }
+  | { ok: false; errors: string[] } {
+  const value = structureFromModelOutput(raw as Parameters<typeof structureFromModelOutput>[0], briefCtx, structurePreferredSiteType(briefCtx))
+  const errors: string[] = []
+  if (value.pages.length === 0) errors.push("pages: at least one page is required")
+  for (const page of value.pages) if (page.sections.length === 0) errors.push(`pages.${page.slug}: no allowed sections left`)
+  return errors.length ? { ok: false, errors } : { ok: true, value }
+}
+
+export function structurePreferredSiteType(briefCtx: ProjectBriefContext | null): SiteSpec["siteType"] | undefined {
+  return briefCtx?.data.siteType === "SINGLE_PAGE" || briefCtx?.data.siteType === "MULTI_PAGE" ? briefCtx.data.siteType : undefined
+}
+
 export async function runStructureAgent(
   res: Response,
   spec: Partial<SiteSpec>,
@@ -53,10 +101,7 @@ export async function runStructureAgent(
   promptFn: (vars: StructurePromptVars) => string = DEFAULT_STRUCTURE_PROMPT,
   briefCtx: ProjectBriefContext | null = null,
 ): Promise<Partial<SiteSpec>> {
-  const reindex = <T extends { type: string; index: number }>(sections: T[]): T[] =>
-    filterSections(sections, briefCtx).map((s, index) => ({ ...s, index }))
-  const preferredSiteType =
-    briefCtx?.data.siteType === "SINGLE_PAGE" || briefCtx?.data.siteType === "MULTI_PAGE" ? briefCtx.data.siteType : undefined
+  const preferredSiteType = structurePreferredSiteType(briefCtx)
 
   // When a DesignBrief was approved via the Research step, its layout and
   // copyFramework decisions are already grounded in retrieved research —
@@ -85,13 +130,7 @@ export async function runStructureAgent(
     }
   }
 
-  const prompt = promptFn({
-    startupIdea: request.startupIdea,
-    niche: request.niche,
-    targetAudience: request.targetAudience,
-    inputType: request.inputType,
-    ...(briefCtx ? { allowedSections: allowedSectionTypes(briefCtx), briefFacts: briefFactsBlock(briefCtx) } : {}),
-  })
+  const prompt = promptFn(structurePromptVars(request, briefCtx))
 
   const result = streamText({
     model,
@@ -110,32 +149,8 @@ export async function runStructureAgent(
   try {
     const jsonMatch = fullText.match(/\{[\s\S]*\}/)
     if (!jsonMatch) throw new Error("No JSON in structure response")
-    const parsed = JSON.parse(jsonMatch[0])
-
-    return {
-      ...spec,
-      siteType: preferredSiteType ?? parsed.siteType ?? "SINGLE_PAGE",
-      copyFramework: parsed.copyFramework ?? "AIDA",
-      pages: (parsed.pages ?? []).map(
-        (p: {
-          type: string
-          slug: string
-          title: string
-          sections: Array<{ type: string; index: number }>
-        }) => ({
-          type: p.type,
-          slug: p.slug,
-          title: p.title,
-          sections: reindex(
-            (p.sections ?? []).map((s: { type: string; index: number }) => ({
-              type: s.type,
-              index: s.index,
-            })),
-          ),
-        }),
-      ),
-      citations: [],
-    }
+    const parsed = structureFromModelOutput(JSON.parse(jsonMatch[0]), briefCtx, preferredSiteType)
+    return { ...spec, ...parsed, citations: [] }
   } catch {
     return {
       ...spec,

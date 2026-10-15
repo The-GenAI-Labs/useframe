@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
@@ -26,6 +27,8 @@ import { useAuth } from "@/lib/authContext"
 import { isFreeTierExhausted } from "@/lib/freeTierError"
 import { useProjectModalStore, type BriefModalRequest } from "@/store/projectModalStore"
 import { briefAssetUrl, briefsApi, type BriefApiError } from "@/lib/api/services/briefs.service"
+import { mediaApi } from "@/lib/api/services/media.service"
+import { mediaJobsApi, type MediaBudgetTier } from "@/lib/api/services/mediaJobs.service"
 import { BriefFieldInput } from "./BriefFieldInput"
 import { PrefillPanel } from "./PrefillPanel"
 import { useBriefDraft } from "./useBriefDraft"
@@ -176,7 +179,9 @@ function BriefModalSession({ request, onClose }: { request: BriefModalRequest; o
   const steps = stepsFor(view)
   const stepIndex = Math.max(0, steps.indexOf(step))
   const isLastStep = stepIndex === steps.length - 1
-  const fields = useMemo(() => fieldsFor(step, view, draft.data), [step, view, draft.data])
+  const quota = useQuery({ queryKey: ["media-quota"], queryFn: () => mediaApi.quota(), enabled: !!user, staleTime: 60_000 })
+  const paid = quota.data?.tier === "paid"
+  const fields = useMemo(() => fieldsFor(step, view, draft.data, paid), [step, view, draft.data, paid])
   const errors: BriefFieldErrors = { ...draft.errors, ...clientErrors }
 
   const goTo = useCallback(
@@ -551,6 +556,9 @@ function BriefModalSession({ request, onClose }: { request: BriefModalRequest; o
                   accountEmail={user?.email}
                 />
               ))}
+              {step === "brand" && view === "FULL" && quota.data && (
+                <MediaBriefNote paid={paid} mode={draft.data.mediaMode} budget={draft.data.mediaBudget ?? "STANDARD"} />
+              )}
             </div>
           )}
         </div>
@@ -685,5 +693,31 @@ function FieldBlock({
         </p>
       )}
     </div>
+  )
+}
+
+function MediaBriefNote({ paid, mode, budget }: { paid: boolean; mode: string | undefined; budget: MediaBudgetTier }) {
+  const on = paid && mode !== "OFF"
+  const estimate = useQuery({
+    queryKey: ["media-estimate", budget],
+    queryFn: () => mediaJobsApi.accountEstimate(budget),
+    enabled: on,
+    staleTime: 5 * 60_000,
+  })
+  if (!paid) {
+    return (
+      <p className="rounded-2xl bg-tertiary px-4 py-3 text-[12.5px] text-sec">
+        Paid plans can add AI-made images and short videos that tell your site&apos;s story.{" "}
+        <Link href="/billing" className="font-semibold underline underline-offset-2">
+          See plans
+        </Link>
+      </p>
+    )
+  }
+  if (!on || !estimate.data) return null
+  return (
+    <p className="text-[12.5px] text-mut" aria-live="polite">
+      AI media costs up to {estimate.data.credits} credits. Anything we don&apos;t make is refunded.
+    </p>
   )
 }

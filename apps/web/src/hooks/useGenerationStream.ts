@@ -48,7 +48,7 @@ export function useGenerationStream() {
         onEvent: (event: SSEEvent) => {
           switch (event.type) {
             case "stage":
-              setStage(event.stage, event.message)
+              setStage(event.stage, event.message, event.substep)
               break
             case "token":
               appendToken(event.delta)

@@ -13,6 +13,17 @@ import { prisma, type Prisma } from "@useframe/db";
 import type { GenerateRequest, SiteSpec } from "@repo/schemas";
 import { applyBriefToSpec, loadBriefContext } from "@/lib/briefPipeline.js";
 import { loadAssetMenu, runMediaPlacement } from "./mediaPlacement.agent.js";
+import { parseStructureForBlueprint, structurePromptVars } from "./structure.agent.js";
+import { DEFAULT_STRUCTURE_PROMPT } from "@/prompts/structure.prompt.js";
+import {
+  bindingsOf,
+  copyMediaContext,
+  planSiteMedia,
+  waitForAllMedia,
+  waitForImages,
+  type SiteMediaPlan,
+} from "@/lib/siteMedia.js";
+import { applyJobResult, applyMediaBindings, markCompiled } from "@repo/media-ai";
 
 async function ensureProject(
   request: GenerateRequest,
@@ -131,14 +142,48 @@ export async function runOrchestrator(
       stage: "GENERATE",
       message: "Building page structure...",
     });
-    spec = await runStructureAgent(res, spec, request, model, providerOptions, undefined, briefCtx);
+    // Media projects: the Site Blueprint. With an approved design brief it
+    // runs over the brief's fixed sections; without one it replaces the
+    // structure call (full mode). Every other project skips it entirely.
+    const mediaInput = { res, userId, projectId: projectId!, versionId: versionId!, tier: request.tier }
+    let media: SiteMediaPlan
+    if (spec.designBrief) {
+      spec = await runStructureAgent(res, spec, request, model, providerOptions, undefined, briefCtx);
+      media = await planSiteMedia({ ...mediaInput, spec, briefCtx });
+    } else {
+      media = await planSiteMedia({
+        ...mediaInput,
+        spec,
+        briefCtx,
+        full: {
+          prompt: DEFAULT_STRUCTURE_PROMPT(structurePromptVars(request, briefCtx)),
+          parse: (raw) => parseStructureForBlueprint(raw, briefCtx),
+        },
+      });
+      spec = media.structure
+        ? { ...spec, ...media.structure, citations: [] }
+        : await runStructureAgent(res, spec, request, model, providerOptions, undefined, briefCtx);
+    }
 
+    const imagesReady = media.jobId ? await waitForImages(res, media.jobId) : null;
     sseWrite(res, {
       type: "stage",
       stage: "COPY",
       message: "Writing conversion copy...",
     });
-    spec = await runCopyAgent(res, spec, request, model, providerOptions, undefined, briefCtx);
+    const blueprint = media.blueprint;
+    spec = await runCopyAgent(
+      res,
+      spec,
+      request,
+      model,
+      providerOptions,
+      undefined,
+      briefCtx,
+      blueprint
+        ? (pageSlug, section) => copyMediaContext(blueprint, imagesReady, pageSlug, `${section.type.toLowerCase()}-${section.index}`)
+        : undefined,
+    );
 
     sseWrite(res, {
       type: "stage",
@@ -162,18 +207,23 @@ export async function runOrchestrator(
     spec = await runCritiqueAgent(spec, request, model, providerOptions);
     spec = applyBriefToSpec(spec, briefCtx);
 
-    // Placed last, once sections and their items are final.
-    const menu = await loadAssetMenu(projectId, userId);
-    if (menu.items.length > 0 && spec.pages) {
-      sseWrite(res, {
-        type: "stage",
-        stage: "GENERATE",
-        message: "Placing your media...",
-      });
-      spec = {
-        ...spec,
-        media: await runMediaPlacement({ spec: { pages: spec.pages, media: spec.media }, menu, model, providerOptions }),
-      };
+    if (media.jobId) {
+      // The job owns placement: compile with whatever it has bound so far.
+      spec = { ...spec, media: bindingsOf(await waitForAllMedia(res, media.jobId)) };
+    } else {
+      // Placed last, once sections and their items are final.
+      const menu = await loadAssetMenu(projectId, userId);
+      if (menu.items.length > 0 && spec.pages) {
+        sseWrite(res, {
+          type: "stage",
+          stage: "GENERATE",
+          message: "Placing your media...",
+        });
+        spec = {
+          ...spec,
+          media: await runMediaPlacement({ spec: { pages: spec.pages, media: spec.media }, menu, model, providerOptions }),
+        };
+      }
     }
 
     const snapshot = toSnapshot(spec as SiteSpec);
@@ -186,6 +236,14 @@ export async function runOrchestrator(
         ) as Prisma.InputJsonObject,
       },
     });
+
+    if (media.jobId) {
+      const jobId = media.jobId;
+      await markCompiled(prisma, jobId, (snapshot.media ?? {}) as Record<string, unknown>);
+      await applyJobResult(prisma, jobId, (args) => applyMediaBindings(prisma, args)).catch((err) =>
+        console.error("[media] applying finished media failed", err instanceof Error ? err.name : err),
+      );
+    }
 
     await prisma.project.update({
       where: { id: projectId },

@@ -351,3 +351,13 @@ export type ProjectChatMessage = Prisma.ProjectChatMessageModel
  * 
  */
 export type MediaAsset = Prisma.MediaAssetModel
+/**
+ * Model MediaJob
+ * 
+ */
+export type MediaJob = Prisma.MediaJobModel
+/**
+ * Model MediaGeneration
+ * 
+ */
+export type MediaGeneration = Prisma.MediaGenerationModel

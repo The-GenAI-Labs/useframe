@@ -75,6 +75,10 @@ export type MediaProcessOptions = {
   skipDescribe?: boolean;
 };
 
+export type MediaGenerateJobPayload = {
+  jobId: string;
+};
+
 export type MediaProcessJobPayload = {
   assetId: string;
   options?: MediaProcessOptions;

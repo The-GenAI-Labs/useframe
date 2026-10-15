@@ -1,13 +1,17 @@
 import { Prisma } from "../prisma/generated/client.js";
 import type { PrismaClient } from "../prisma/generated/client.js";
 
-export type RefundRefType = "DEPLOYMENT";
+export type RefundRefType = "DEPLOYMENT" | "MEDIA";
 
 export type RefundInput = {
   userId: string;
   refType: RefundRefType;
   refId: string;
   reason: string;
+  // Partial refund of another charge: refunds at most `amount`, never more
+  // than what is left of the charge under `chargeRefId` after earlier refunds
+  // whose refId starts with `${chargeRefId}:`.
+  partial?: { chargeRefId: string; amount: number };
 };
 
 export type RefundResult = {
@@ -58,18 +62,27 @@ export async function refundCredits(
 
   try {
     return await client.$transaction(async (tx) => {
+      const chargeRefId = input.partial?.chargeRefId ?? input.refId;
       const charges = await tx.creditTransaction.findMany({
         where: {
           userId: input.userId,
           type: "SPEND",
-          refId: input.refId,
+          refId: chargeRefId,
           OR: [{ refType: input.refType }, { refType: null }],
         },
         select: { delta: true },
       });
-      const charged = charges.reduce((sum, c) => sum - c.delta, 0);
+      let charged = charges.reduce((sum, c) => sum - c.delta, 0);
+      if (input.partial) {
+        const earlier = await tx.creditTransaction.findMany({
+          where: { userId: input.userId, type: "REFUND", refType: input.refType, refId: { startsWith: `${chargeRefId}:` } },
+          select: { delta: true },
+        });
+        const left = charged - earlier.reduce((sum, r) => sum + r.delta, 0);
+        charged = Math.min(Math.floor(input.partial.amount), left);
+      }
       if (charged <= 0) {
-        throw new RefundRejectedError(`No charge found for ${input.refType} ${input.refId}`);
+        throw new RefundRejectedError(`Nothing to refund for ${input.refType} ${input.refId}`);
       }
 
       const balance = await tx.creditBalance.update({
@@ -104,4 +117,39 @@ export async function refundCredits(
     if (!winner) throw err;
     return winner;
   }
+}
+
+export class InsufficientCreditsError extends Error {
+  constructor(public readonly needed: number, public readonly balance: number) {
+    super(`Insufficient credits: need ${needed}, have ${balance}`);
+    this.name = "InsufficientCreditsError";
+  }
+}
+
+// Atomic deduction used by services outside apps/server (media reservations).
+export async function spendCredits(
+  client: Pick<PrismaClient, "$transaction">,
+  input: { userId: string; amount: number; reason: string; refType: RefundRefType; refId: string },
+): Promise<{ balanceAfter: number }> {
+  if (!Number.isInteger(input.amount) || input.amount <= 0) throw new Error("amount must be a positive integer");
+  return client.$transaction(async (tx) => {
+    const updated = await tx.creditBalance.updateMany({
+      where: { userId: input.userId, balance: { gte: input.amount } },
+      data: { balance: { decrement: input.amount } },
+    });
+    const balance = await tx.creditBalance.findUnique({ where: { userId: input.userId }, select: { balance: true } });
+    if (updated.count === 0) throw new InsufficientCreditsError(input.amount, balance?.balance ?? 0);
+    await tx.creditTransaction.create({
+      data: {
+        userId: input.userId,
+        delta: -input.amount,
+        type: "SPEND",
+        reason: input.reason,
+        balanceAfter: balance!.balance,
+        refType: input.refType,
+        refId: input.refId,
+      },
+    });
+    return { balanceAfter: balance!.balance };
+  });
 }

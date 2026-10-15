@@ -3,6 +3,7 @@ import { authenticate } from "@/middleware/authenticate.js"
 import { hourlyRateLimit } from "@/middleware/rateLimit.js"
 import { validate } from "@/middleware/validator.js"
 import { MediaController } from "./media.controller.js"
+import { MediaJobsController } from "@/modules/mediaJobs/mediaJobs.controller.js"
 import { PatchMediaSchema, ResolveMediaSchema, StartUploadSchema } from "./media.schema.js"
 
 // Mounted under /api/projects/:slug/media.
@@ -25,3 +26,4 @@ export default router
 export const mediaAccountRouter: Router = Router()
 mediaAccountRouter.use(authenticate)
 mediaAccountRouter.get("/quota", MediaController.quota)
+mediaAccountRouter.get("/estimate", MediaJobsController.accountEstimate)

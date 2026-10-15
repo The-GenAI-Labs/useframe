@@ -31,10 +31,17 @@ export type MediaItem = {
 
 export type MediaUsage = { slotId: string; pageSlug: string; pageTitle: string; sectionType: string; slotKey: string }
 
+export type MediaProvenance = {
+  concept: string | null
+  approach: string | null
+  summary: string | null
+  research: { id: string; title: string }[]
+}
+
 export type MediaDetail = MediaItem & {
   usage: MediaUsage[]
   warnings: string[]
-  generation: Record<string, unknown> | null
+  generation: MediaProvenance | null
   preview: { image: string | null; video: string | null; poster: string | null }
   variants: { role: string; mime: string; width?: number; height?: number; bytes: number }[]
 }

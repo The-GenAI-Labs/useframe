@@ -232,6 +232,20 @@ enum MediaStatus {
   FAILED
 }
 
+enum MediaJobStatus {
+  QUEUED
+  RUNNING
+  AWAITING_USER
+  DONE
+  FAILED
+  CANCELLED
+}
+
+enum MediaJobMode {
+  AUTO
+  MANUAL
+}
+
 model User {
   id        String     @id @default(cuid())
   name      String?
@@ -296,6 +310,7 @@ model User {
   projectBriefs      ProjectBrief[]
   briefUploads       BriefUpload[]
   mediaAssets        MediaAsset[]
+  mediaJobs          MediaJob[]
 
   @@index([status])
   @@index([deletedAt])
@@ -675,6 +690,7 @@ model Project {
   replication     Replication?
   brief           ProjectBrief?
   mediaAssets     MediaAsset[]
+  mediaJobs       MediaJob[]
 
   @@index([userId])
   @@index([status])
@@ -701,6 +717,9 @@ model ProjectVersion {
   // Brief revision this version was generated from; older than the brief's
   // latest revision means the version is stale.
   briefRevisionId    String?
+  // Site Blueprint (narrative, visual system, media script) and the hash of
+  // the brief sections it was written against.
+  blueprint          Json?
   createdAt          DateTime @default(now())
 
   project       Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
@@ -1816,4 +1835,77 @@ model MediaAsset {
   @@index([status, createdAt])
   @@index([deletedAt])
   @@map("media_assets")
+}
+
+model MediaJob {
+  id                  String         @id @default(cuid())
+  projectId           String
+  userId              String
+  mode                MediaJobMode
+  status              MediaJobStatus @default(QUEUED)
+  stage               String?
+  // PLAN_APPROVE | CONCEPT_PICK | IMAGES_APPROVE | VIDEO_APPROVE
+  checkpoint          String?
+  checkpointExpiresAt DateTime?
+  // { kind: "site" | "slots", slotIds? }
+  scope               Json
+  mediaBrief          Json?
+  // Validated media script items, the budget used and the dropped items.
+  plan                Json?
+  concepts            Json?
+  state               Json           @default("{}")
+  bindings            Json?
+  creditsReserved     Int            @default(0)
+  creditsRefunded     Int            @default(0)
+  costUsd             Float          @default(0)
+  versionId           String?
+  // Set when generation wrote the fed version's snapshot, with the bindings it used.
+  compiledAt          DateTime?
+  compiledBindings    Json?
+  // The version the bindings were applied to; set once by whoever applies them.
+  resultVersionId     String?
+  failureReason       String?
+  startedAt           DateTime?
+  finishedAt          DateTime?
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project     Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  generations MediaGeneration[]
+
+  @@index([projectId, status])
+  @@index([userId, status])
+  @@index([checkpointExpiresAt])
+  @@index([status, updatedAt])
+  @@map("media_jobs")
+}
+
+model MediaGeneration {
+  id             String   @id @default(cuid())
+  jobId          String
+  itemId         String
+  stage          String
+  // llm | image | video
+  kind           String
+  provider       String
+  model          String
+  attempt        Int      @default(1)
+  requestKey     String   @unique
+  providerTaskId String?
+  // PENDING | RUNNING | SUCCEEDED | FAILED | REFUSED
+  status         String
+  promptText     String?
+  inputAssetIds  Json?
+  outputAssetId  String?
+  costUsd        Float?
+  latencyMs      Int?
+  error          String?
+  createdAt      DateTime @default(now())
+
+  job MediaJob @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@index([jobId])
+  @@index([createdAt])
+  @@map("media_generations")
 }

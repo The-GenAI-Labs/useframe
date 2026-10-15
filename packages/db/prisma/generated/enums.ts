@@ -311,6 +311,26 @@ export const MediaStatus = {
 export type MediaStatus = (typeof MediaStatus)[keyof typeof MediaStatus]
 
 
+export const MediaJobStatus = {
+  QUEUED: 'QUEUED',
+  RUNNING: 'RUNNING',
+  AWAITING_USER: 'AWAITING_USER',
+  DONE: 'DONE',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type MediaJobStatus = (typeof MediaJobStatus)[keyof typeof MediaJobStatus]
+
+
+export const MediaJobMode = {
+  AUTO: 'AUTO',
+  MANUAL: 'MANUAL'
+} as const
+
+export type MediaJobMode = (typeof MediaJobMode)[keyof typeof MediaJobMode]
+
+
 export const ResearchDocumentType = {
   COMPETITOR_ANALYSIS: 'COMPETITOR_ANALYSIS',
   RESEARCH_RATIONALE: 'RESEARCH_RATIONALE'

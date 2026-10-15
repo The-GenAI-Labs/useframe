@@ -4,6 +4,8 @@ import {
   AUDIENCE_SEGMENTS,
   AVAILABILITY,
   BRIEF_LANGUAGES,
+  BRIEF_MEDIA_BUDGETS,
+  BRIEF_MEDIA_MODES,
   BRIEF_SITE_TYPES,
   CTA_TYPES,
   FIELD_DEFS,
@@ -236,6 +238,9 @@ export function buildFieldSchemas(mode: SchemaMode) {
       mode,
     ),
     visualNotes: text(F.visualNotes.limits, mode, true),
+    mediaMode: z.enum(BRIEF_MEDIA_MODES),
+    mediaBudget: z.enum(BRIEF_MEDIA_BUDGETS),
+    mediaNotes: text(F.mediaNotes.limits, mode, true),
     sourceDocument: uploadRef,
 
     testimonials: list(

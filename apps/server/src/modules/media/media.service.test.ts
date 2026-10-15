@@ -215,6 +215,46 @@ describe("list, get and patch", () => {
     expect(detail.warnings[0]).toMatch(/over 8 MB/)
   })
 
+  it("explains how an AI asset was made without naming providers or models", async () => {
+    m.fake!.jobs.push({
+      id: "job1",
+      projectId: "projA",
+      userId: A,
+      state: { items: { "vid-1": { item: { itemId: "vid-1" }, status: "DONE", done: [], concept: { chosenId: "A", concepts: [{ id: "A", title: "Paper becomes a plane" }] } } } },
+    })
+    m.fake!.findings.push({ id: "f1", title: "Motion that shows a process builds trust" })
+    const asset = await readyAsset({
+      aiGenerated: true,
+      generation: {
+        jobId: "job1",
+        itemId: "vid-1",
+        conceptId: "A",
+        mechanism: "MATERIAL_TRANSFORM",
+        provider: "runware",
+        model: "minimax-h3-max",
+        size: "1344x768",
+        summary: "Loose papers fold into one paper plane",
+        researchFindingIds: ["f1"],
+        analysis: { paletteDeltaE: 3 },
+      },
+    })
+    const detail = await MediaService.get(A, "proj-a", asset.id as string)
+    expect(detail.generation).toEqual({
+      concept: "Paper becomes a plane",
+      approach: "Material transformation",
+      summary: "Loose papers fold into one paper plane",
+      research: [{ id: "f1", title: "Motion that shows a process builds trust" }],
+    })
+    expect(JSON.stringify(detail)).not.toMatch(/runware|minimax|1344x768|paletteDeltaE/)
+  })
+
+  it("does not read another user's job for provenance", async () => {
+    m.fake!.jobs.push({ id: "jobB", projectId: "projA", userId: B, state: { items: { x: { item: { itemId: "x" }, status: "DONE", done: [], concept: { chosenId: "A", concepts: [{ id: "A", title: "Secret" }] } } } } })
+    const asset = await readyAsset({ aiGenerated: true, generation: { jobId: "jobB", itemId: "x", conceptId: "A" } })
+    const detail = await MediaService.get(A, "proj-a", asset.id as string)
+    expect(detail.generation?.concept).toBeNull()
+  })
+
   it("updates alt text, caption and the decorative flag", async () => {
     const asset = await readyAsset()
     const res = await MediaService.patch(A, "proj-a", asset.id as string, { altText: "A team", decorative: true })

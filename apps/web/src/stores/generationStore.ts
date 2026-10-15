@@ -11,13 +11,14 @@ export type SectionState = {
 interface GenerationState {
   currentStage: PipelineStage | null
   stageMessage: string
+  substep: string | null
   streamBuffer: string
   sections: SectionState[]
   siteSpec: SiteSpec | null
   isStreaming: boolean
   error: string | null
 
-  setStage: (stage: PipelineStage, message: string) => void
+  setStage: (stage: PipelineStage, message: string, substep?: string) => void
   appendToken: (delta: string) => void
   markSectionDone: (pageSlug: string, sectionType: string, sectionIndex: number) => void
   setSiteSpec: (spec: SiteSpec) => void
@@ -29,6 +30,7 @@ interface GenerationState {
 const initial = {
   currentStage: null as PipelineStage | null,
   stageMessage: "",
+  substep: null as string | null,
   streamBuffer: "",
   sections: [] as SectionState[],
   siteSpec: null as SiteSpec | null,
@@ -39,8 +41,8 @@ const initial = {
 export const useGenerationStore = create<GenerationState>()((set) => ({
   ...initial,
 
-  setStage: (stage, message) =>
-    set({ currentStage: stage, stageMessage: message }),
+  setStage: (stage, message, substep) =>
+    set({ currentStage: stage, stageMessage: message, substep: substep ?? null }),
 
   appendToken: (delta) =>
     set((s) => ({ streamBuffer: s.streamBuffer + delta })),

@@ -1,0 +1,9 @@
+{
+  "data": [
+    {
+      "taskType": "videoInference",
+      "taskUUID": "TASK",
+      "status": "processing"
+    }
+  ]
+}
