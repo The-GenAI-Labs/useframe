@@ -50,7 +50,7 @@ export const MessagesService = {
     )
     if (!hasCredits) throw new AppError("Insufficient credits", 402)
 
-    const userMessage = await prisma.message.create({
+    await prisma.message.create({
       data: {
         conversationId: conversation.id,
         role: "USER",

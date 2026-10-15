@@ -1,5 +1,5 @@
 import { beforeAll, afterAll, describe, it, expect, vi } from "vitest";
-import type { Prisma, prisma as PrismaInstance } from "@useframe/db";
+import type { Prisma } from "@useframe/db";
 const context = vi.hoisted(() => ({
   tx: undefined as Prisma.TransactionClient | undefined,
 }));

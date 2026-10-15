@@ -1,0 +1,5 @@
+{
+  "extends": "@useframe/typescript-config/base.json",
+  "compilerOptions": { "module": "ESNext", "noEmit": true },
+  "include": ["src"]
+}

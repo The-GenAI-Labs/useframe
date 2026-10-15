@@ -253,9 +253,7 @@ it("provider error chunks reject instead of waiting forever for object metadata"
 });
 it("cancellation rejects even if the provider stream never settles", async () => {
   vi.mocked(streamObject).mockReturnValue({
-    fullStream: (async function* () {
-      await new Promise(() => {});
-    })(),
+    fullStream: { [Symbol.asyncIterator]: () => ({ next: () => new Promise<never>(() => {}) }) },
   } as ReturnType<typeof streamObject>);
   const controller = new AbortController();
   const result = streamChatAnswer({

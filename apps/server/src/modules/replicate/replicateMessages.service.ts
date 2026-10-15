@@ -6,7 +6,7 @@ export const ReplicateMessagesService = {
   async sendMessage(
     user: { id: string; email: string; plan: string },
     slug: string,
-    input: ReplicateMessageInput
+    _input: ReplicateMessageInput
   ) {
     const replication = await prisma.replication.findFirst({
       where: { slug, userId: user.id },

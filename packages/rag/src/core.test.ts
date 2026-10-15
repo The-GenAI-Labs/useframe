@@ -159,7 +159,7 @@ it("deduplicates event IDs and excludes reports and nested paths", () => {
 
 it("treats an exact-generation download removed during overwrite as stale", async () => {
   const { ingestFinding } = await import("./ingestion.js");
-  const { prisma } = await import("@useframe/db");
+  await import("@useframe/db");
   let metadataReads = 0;
   const logs: unknown[] = [];
   const db = {
@@ -168,7 +168,7 @@ it("treats an exact-generation download removed during overwrite as stale", asyn
         logs.push(data);
       },
     },
-  } as unknown as typeof prisma;
+  } as unknown as typeof import("@useframe/db").prisma;
   const result = await ingestFinding(
     {
       bucketId: "fixture",

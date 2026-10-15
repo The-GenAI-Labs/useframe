@@ -25,7 +25,7 @@ export const AuthController = {
         res.redirect(url)
     },
 
-    googleCallback: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    googleCallback: async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
         try {
             const code = req.query.code as string | undefined
             const state = req.query.state as string | undefined
@@ -59,7 +59,7 @@ export const AuthController = {
         res.redirect(url)
     },
 
-    githubCallback: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    githubCallback: async (req: Request, res: Response, _next: NextFunction): Promise<void> => {
         try {
             const code = req.query.code as string | undefined
             const state = req.query.state as string | undefined

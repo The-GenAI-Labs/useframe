@@ -124,7 +124,7 @@ router.post(
 
 router.post(
   "/extract/answer",
-  (req: Request, res: Response, next: NextFunction): void => {
+  (req: Request, res: Response, _next: NextFunction): void => {
     try {
       verifyToken(req)
     } catch (err) {
