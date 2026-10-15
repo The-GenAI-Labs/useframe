@@ -30,29 +30,30 @@ Read the implementation and package manifests as the source of truth. See `READM
 
 ## Repository Structure
 
-| Path                                                   | Responsibility                                                                                                |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| `apps/web/app`                                         | Active Next.js App Router routes, layouts, and global styles                                                  |
-| `apps/web/src`                                         | Feature components, API clients, hooks, auth context, Zustand stores, and previews                            |
-| `apps/server`                                          | Public API, authentication, ownership checks, projects, generation entry points, credits, and service clients |
-| `apps/orchestrator-service`                            | AI planning, generation, iteration, replication, prompts, and model routing                                   |
-| `apps/research-service`                                | Research corpus endpoints, retrieval, fusion, and reranking                                                   |
-| `apps/scoring-service`                                 | Website scoring agents and criteria                                                                           |
-| `apps/billing-service`                                 | Razorpay checkout, payment methods, webhooks, and auto-reload endpoints                                       |
-| `apps/worker`                                          | BullMQ processors for scans, SEO, scoring, domains, PDFs, billing jobs, and cache expiry                      |
-| `apps/deploy-service`                                  | Site builds, R2 uploads, KV publishing (`syncSiteToKvs`), rollback, GC, reaper, reconcile; see `RUNBOOK.md`   |
-| `apps/site-edge`                                       | Cloudflare Worker serving generated sites from KV + R2; deployed with Wrangler, never from CI                 |
-| `apps/media-service`                                   | BullMQ worker for the media library: upload processing (sharp/ffmpeg), vision descriptions, media GC          |
-| `infra/terraform`, `infra/k8s`                         | Cloudflare sites-hosting Terraform module and GKE manifests (applied by a human, never by agents)             |
-| `infra/helm/useframe`                                  | Helm chart for the backend workloads on GKE; agents run only offline checks (lint/template/unittest)          |
-| `packages/db`                                          | Shared Prisma client, schema, migrations, seed data, and scan cache helpers                                   |
-| `packages/schemas`                                     | Shared Zod contracts for projects, site specs, AI outputs, research, and credits                              |
-| `packages/events`                                      | Shared queue names and job payload contracts                                                                  |
-| `packages/site-builder`                                | Shared generated-site construction logic                                                                      |
-| `packages/evals`                                       | Evaluation runner, scorers, and datasets                                                                      |
-| `packages/ui`                                          | Shared UI primitives; also check the richer app-local UI components before adding components                  |
-| `packages/validators`, `packages/types`                | Shared validation and type package entry points; verify actual exports before using                           |
-| `packages/typescript-config`, `packages/eslint-config` | Shared compiler and lint configuration                                                                        |
+| Path                                                   | Responsibility                                                                                                           |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `apps/web/app`                                         | Active Next.js App Router routes, layouts, and global styles                                                             |
+| `apps/web/src`                                         | Feature components, API clients, hooks, auth context, Zustand stores, and previews                                       |
+| `apps/server`                                          | Public API, authentication, ownership checks, projects, generation entry points, credits, and service clients            |
+| `apps/orchestrator-service`                            | AI planning, generation, iteration, replication, prompts, and model routing                                              |
+| `apps/research-service`                                | Research corpus endpoints, retrieval, fusion, and reranking                                                              |
+| `apps/scoring-service`                                 | Website scoring agents and criteria                                                                                      |
+| `apps/billing-service`                                 | Razorpay checkout, payment methods, webhooks, and auto-reload endpoints                                                  |
+| `apps/worker`                                          | BullMQ processors for scans, SEO, scoring, domains, PDFs, billing jobs, and cache expiry                                 |
+| `apps/deploy-service`                                  | Site builds, R2 uploads, KV publishing (`syncSiteToKvs`), rollback, GC, reaper, reconcile; see `RUNBOOK.md`              |
+| `apps/site-edge`                                       | Cloudflare Worker serving generated sites from KV + R2; deployed with Wrangler, never from CI                            |
+| `apps/media-service`                                   | BullMQ worker for the media library: uploads (sharp/ffmpeg), descriptions, GC, and AI media jobs; see `docs/media-ai.md` |
+| `infra/terraform`, `infra/k8s`                         | Cloudflare sites-hosting Terraform module and GKE manifests (applied by a human, never by agents)                        |
+| `infra/helm/useframe`                                  | Helm chart for the backend workloads on GKE; agents run only offline checks (lint/template/unittest)                     |
+| `packages/db`                                          | Shared Prisma client, schema, migrations, seed data, and scan cache helpers                                              |
+| `packages/schemas`                                     | Shared Zod contracts for projects, site specs, AI outputs, research, and credits                                         |
+| `packages/events`                                      | Shared queue names and job payload contracts                                                                             |
+| `packages/site-builder`                                | Shared generated-site construction logic                                                                                 |
+| `packages/media-ai`                                    | AI media: Site Blueprint, media job logic, prompts, providers (fake by default); test fakes at `@repo/media-ai/testing`  |
+| `packages/evals`                                       | Evaluation runner, scorers, and datasets                                                                                 |
+| `packages/ui`                                          | Shared UI primitives; also check the richer app-local UI components before adding components                             |
+| `packages/validators`, `packages/types`                | Shared validation and type package entry points; verify actual exports before using                                      |
+| `packages/typescript-config`, `packages/eslint-config` | Shared compiler and lint configuration                                                                                   |
 
 The frontend currently has both `src/store` and `src/stores`. Follow the relevant feature's existing location. The active routing tree is `apps/web/app`; do not create a competing routing tree under `src/app`.
 
@@ -140,7 +141,8 @@ Run these from the repository root unless otherwise noted:
 | `pnpm --filter @useframe/server dev`                    | Start the public API (default port 4000)                               |
 | `pnpm --filter @useframe/<service> dev`                 | Start a specific service using its actual package name                 |
 | `pnpm build`                                            | Build packages/apps that define a build task                           |
-| `pnpm lint`                                             | Run defined lint tasks; report script/configuration failures           |
+| `pnpm lint`                                             | Lint every package with the root ESLint config through Turbo           |
+| `pnpm typecheck`                                        | Type-check every package through Turbo (cached)                        |
 | `pnpm check-types`                                      | Run defined `check-types` tasks through Turbo                          |
 | `pnpm --filter @useframe/web typecheck`                 | Check frontend types separately                                        |
 | `pnpm --filter @useframe/server typecheck`              | Check public API types separately                                      |
@@ -151,8 +153,7 @@ Run these from the repository root unless otherwise noted:
 | `pnpm docker:build -- <service\|all>` / `docker:smoke`  | Build and smoke-test production images locally; see `docker/README.md` |
 | `helm unittest infra/helm/useframe`                     | Chart unit tests (lint/kubeconform: see the chart README)              |
 
-- Root `check-types` does not include web/server's differently named `typecheck` scripts. Run these explicitly when affected.
-- The web lint script is still `next lint` despite the Next.js 16 dependency. Inspect the local ESLint setup and use `pnpm --filter @useframe/web exec eslint .` when appropriate; report configuration failures rather than treating them as passes.
+- Use `pnpm typecheck` (every package); root `check-types` skips web, server and site-edge. Husky pre-commit/pre-push hooks run lint and type checks; never bypass them with `--no-verify` — fix the hook instead.
 - There is no root `test` script. Run relevant existing tests/evaluations where available and report coverage gaps instead of inventing a passing test command.
 - Shared packages such as db, schemas, events, and site-builder export `dist`; rebuild them after changes before restarting consumers (`@useframe/db` runs `prisma generate` then `tsc`). A running watch process does not prove shared output is current.
 - Backend services build with `tsc && tsc-alias` (the `@/` alias becomes relative paths) and run in production with plain `node dist/...`; never ship `tsx` in an image. Runtime workspace packages declare `files` (normally `dist`) because `pnpm deploy` only copies published files.
