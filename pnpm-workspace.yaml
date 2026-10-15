@@ -1,6 +1,7 @@
 packages:
   - "apps/*"
   - "packages/*"
+  - "tests"
 allowBuilds:
   "@prisma/engines": true
   esbuild: true

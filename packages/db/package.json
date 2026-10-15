@@ -20,8 +20,11 @@
     "db:generate": "drizzle-kit generate",
     "check-types": "tsc --noEmit -p tsconfig.json",
     "seed": "tsx prisma/seed.ts",
+    "seed:plans": "tsx prisma/seed.ts --plans-only",
     "test": "vitest run",
-    "build": "prisma generate && tsc -p tsconfig.json"
+    "build": "prisma generate && tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.0",

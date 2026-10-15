@@ -7,7 +7,9 @@
     "eval:chat-scope": "tsx src/chatScope.ts",
     "runEvals": "tsx src/runEvals.ts",
     "check-types": "tsc --noEmit",
-    "eval:retrieval": "tsx retrieval/run.ts"
+    "eval:retrieval": "tsx retrieval/run.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@repo/schemas": "workspace:*",
