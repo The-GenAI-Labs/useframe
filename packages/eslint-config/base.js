@@ -1,27 +1,28 @@
 import js from "@eslint/js";
-import eslintConfigPrettier from "eslint-config-prettier";
-import turboPlugin from "eslint-plugin-turbo";
 import tseslint from "typescript-eslint";
-import onlyWarn from "eslint-plugin-only-warn";
+import globals from "globals";
 
+// Every package: ESLint and typescript-eslint recommended rules.
 export const config = [
   js.configs.recommended,
-  eslintConfigPrettier,
   ...tseslint.configs.recommended,
   {
-    plugins: {
-      turbo: turboPlugin,
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+    linterOptions: {
+      reportUnusedDisableDirectives: "warn",
     },
     rules: {
-      "turbo/no-undeclared-env-vars": "warn",
+      // A leading underscore marks a deliberately unused binding (e.g. Express's 4-arg error handler).
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_", ignoreRestSiblings: true },
+      ],
+      "no-empty": ["error", { allowEmptyCatch: true }],
+      // Noisy here: sanitisers strip control characters on purpose.
+      "no-control-regex": "warn",
+      "@typescript-eslint/no-explicit-any": "warn",
     },
-  },
-  {
-    plugins: {
-      onlyWarn,
-    },
-  },
-  {
-    ignores: ["dist/**"],
   },
 ];

@@ -17,7 +17,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check-types": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "zod": "^3.25.76"

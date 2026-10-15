@@ -5358,7 +5358,11 @@ export const PlanScalarFieldEnum = {
   requiresPhoneVerification: 'requiresPhoneVerification',
   features: 'features',
   isActive: 'isActive',
-  createdAt: 'createdAt'
+  priceMinor: 'priceMinor',
+  credits: 'credits',
+  highlighted: 'highlighted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
@@ -5411,6 +5415,10 @@ export const PaymentScalarFieldEnum = {
   providerPaymentId: 'providerPaymentId',
   paymentMethod: 'paymentMethod',
   capturedAt: 'capturedAt',
+  planId: 'planId',
+  planSlug: 'planSlug',
+  planName: 'planName',
+  creditsGranted: 'creditsGranted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

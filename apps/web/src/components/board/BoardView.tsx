@@ -33,11 +33,11 @@ export default function BoardView() {
         return () => observer.disconnect();
     }, []);
 
-    const [fill, setFill] = useState("#FFFFFF");
-    const [stroke, setStroke] = useState("#1A1915");
-    const [strokeWidth, setStrokeWidth] = useState(2);
-    const [opacity, setOpacity] = useState(1);
-    const [fontSize, setFontSize] = useState(18);
+    const [fill] = useState("#FFFFFF");
+    const [stroke] = useState("#1A1915");
+    const [strokeWidth] = useState(2);
+    const [opacity] = useState(1);
+    const [fontSize] = useState(18);
     const [stickyColor, setStickyColor] = useState(STICKY_COLORS[0]);
 
     const drawing = useRef(false);

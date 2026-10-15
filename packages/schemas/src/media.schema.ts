@@ -42,7 +42,7 @@ export const UPLOAD_VIDEO_MIMES = ["video/mp4", "video/quicktime", "video/webm"]
 export type UploadMediaMime = (typeof UPLOAD_IMAGE_MIMES)[number] | (typeof UPLOAD_VIDEO_MIMES)[number];
 
 const ISO_BMFF_VIDEO_BRANDS =
-  /^(isom|iso[2-9a-z]|mp4[12v]|avc1|M4V |M4VP|mmp4|dash|f4v |qt  |3gp[0-9]|3g2[a-z]|MSNV|NDAS)$/;
+  /^(isom|iso[2-9a-z]|mp4[12v]|avc1|M4V |M4VP|mmp4|dash|f4v |qt {2}|3gp[0-9]|3g2[a-z]|MSNV|NDAS)$/;
 
 const ascii = (b: Uint8Array, start: number, end: number) => String.fromCharCode(...b.subarray(start, end));
 

@@ -28,10 +28,12 @@ export type AggregatePayment = {
 
 export type PaymentAvgAggregateOutputType = {
   amount: number | null
+  creditsGranted: number | null
 }
 
 export type PaymentSumAggregateOutputType = {
   amount: number | null
+  creditsGranted: number | null
 }
 
 export type PaymentMinAggregateOutputType = {
@@ -48,6 +50,10 @@ export type PaymentMinAggregateOutputType = {
   providerPaymentId: string | null
   paymentMethod: string | null
   capturedAt: Date | null
+  planId: string | null
+  planSlug: string | null
+  planName: string | null
+  creditsGranted: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +72,10 @@ export type PaymentMaxAggregateOutputType = {
   providerPaymentId: string | null
   paymentMethod: string | null
   capturedAt: Date | null
+  planId: string | null
+  planSlug: string | null
+  planName: string | null
+  creditsGranted: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -84,6 +94,10 @@ export type PaymentCountAggregateOutputType = {
   providerPaymentId: number
   paymentMethod: number
   capturedAt: number
+  planId: number
+  planSlug: number
+  planName: number
+  creditsGranted: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -92,10 +106,12 @@ export type PaymentCountAggregateOutputType = {
 
 export type PaymentAvgAggregateInputType = {
   amount?: true
+  creditsGranted?: true
 }
 
 export type PaymentSumAggregateInputType = {
   amount?: true
+  creditsGranted?: true
 }
 
 export type PaymentMinAggregateInputType = {
@@ -112,6 +128,10 @@ export type PaymentMinAggregateInputType = {
   providerPaymentId?: true
   paymentMethod?: true
   capturedAt?: true
+  planId?: true
+  planSlug?: true
+  planName?: true
+  creditsGranted?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -130,6 +150,10 @@ export type PaymentMaxAggregateInputType = {
   providerPaymentId?: true
   paymentMethod?: true
   capturedAt?: true
+  planId?: true
+  planSlug?: true
+  planName?: true
+  creditsGranted?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -148,6 +172,10 @@ export type PaymentCountAggregateInputType = {
   providerPaymentId?: true
   paymentMethod?: true
   capturedAt?: true
+  planId?: true
+  planSlug?: true
+  planName?: true
+  creditsGranted?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -253,6 +281,10 @@ export type PaymentGroupByOutputType = {
   providerPaymentId: string | null
   paymentMethod: string | null
   capturedAt: Date | null
+  planId: string | null
+  planSlug: string | null
+  planName: string | null
+  creditsGranted: number | null
   createdAt: Date
   updatedAt: Date
   _count: PaymentCountAggregateOutputType | null
@@ -294,8 +326,13 @@ export type PaymentWhereInput = {
   providerPaymentId?: Prisma.StringNullableFilter<"Payment"> | string | null
   paymentMethod?: Prisma.StringNullableFilter<"Payment"> | string | null
   capturedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  planId?: Prisma.StringNullableFilter<"Payment"> | string | null
+  planSlug?: Prisma.StringNullableFilter<"Payment"> | string | null
+  planName?: Prisma.StringNullableFilter<"Payment"> | string | null
+  creditsGranted?: Prisma.IntNullableFilter<"Payment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
+  plan?: Prisma.XOR<Prisma.PlanNullableScalarRelationFilter, Prisma.PlanWhereInput> | null
   order?: Prisma.XOR<Prisma.OrderNullableScalarRelationFilter, Prisma.OrderWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
@@ -316,8 +353,13 @@ export type PaymentOrderByWithRelationInput = {
   providerPaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   capturedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  planId?: Prisma.SortOrderInput | Prisma.SortOrder
+  planSlug?: Prisma.SortOrderInput | Prisma.SortOrder
+  planName?: Prisma.SortOrderInput | Prisma.SortOrder
+  creditsGranted?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  plan?: Prisma.PlanOrderByWithRelationInput
   order?: Prisma.OrderOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   subscription?: Prisma.SubscriptionOrderByWithRelationInput
@@ -341,8 +383,13 @@ export type PaymentWhereUniqueInput = Prisma.AtLeast<{
   providerPaymentId?: Prisma.StringNullableFilter<"Payment"> | string | null
   paymentMethod?: Prisma.StringNullableFilter<"Payment"> | string | null
   capturedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  planId?: Prisma.StringNullableFilter<"Payment"> | string | null
+  planSlug?: Prisma.StringNullableFilter<"Payment"> | string | null
+  planName?: Prisma.StringNullableFilter<"Payment"> | string | null
+  creditsGranted?: Prisma.IntNullableFilter<"Payment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
+  plan?: Prisma.XOR<Prisma.PlanNullableScalarRelationFilter, Prisma.PlanWhereInput> | null
   order?: Prisma.XOR<Prisma.OrderNullableScalarRelationFilter, Prisma.OrderWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
@@ -363,6 +410,10 @@ export type PaymentOrderByWithAggregationInput = {
   providerPaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentMethod?: Prisma.SortOrderInput | Prisma.SortOrder
   capturedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  planId?: Prisma.SortOrderInput | Prisma.SortOrder
+  planSlug?: Prisma.SortOrderInput | Prisma.SortOrder
+  planName?: Prisma.SortOrderInput | Prisma.SortOrder
+  creditsGranted?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PaymentCountOrderByAggregateInput
@@ -389,6 +440,10 @@ export type PaymentScalarWhereWithAggregatesInput = {
   providerPaymentId?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
   paymentMethod?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
   capturedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Payment"> | Date | string | null
+  planId?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
+  planSlug?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
+  planName?: Prisma.StringNullableWithAggregatesFilter<"Payment"> | string | null
+  creditsGranted?: Prisma.IntNullableWithAggregatesFilter<"Payment"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Payment"> | Date | string
 }
@@ -404,8 +459,12 @@ export type PaymentCreateInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  plan?: Prisma.PlanCreateNestedOneWithoutPaymentsInput
   order?: Prisma.OrderCreateNestedOneWithoutPaymentInput
   user: Prisma.UserCreateNestedOneWithoutPaymentsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
@@ -426,6 +485,10 @@ export type PaymentUncheckedCreateInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planId?: string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutPaymentInput
@@ -442,8 +505,12 @@ export type PaymentUpdateInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  plan?: Prisma.PlanUpdateOneWithoutPaymentsNestedInput
   order?: Prisma.OrderUpdateOneWithoutPaymentNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
@@ -464,6 +531,10 @@ export type PaymentUncheckedUpdateInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutPaymentNestedInput
@@ -483,6 +554,10 @@ export type PaymentCreateManyInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planId?: string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -498,6 +573,9 @@ export type PaymentUpdateManyMutationInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -516,6 +594,10 @@ export type PaymentUncheckedUpdateManyInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -549,12 +631,17 @@ export type PaymentCountOrderByAggregateInput = {
   providerPaymentId?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
   capturedAt?: Prisma.SortOrder
+  planId?: Prisma.SortOrder
+  planSlug?: Prisma.SortOrder
+  planName?: Prisma.SortOrder
+  creditsGranted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type PaymentAvgOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  creditsGranted?: Prisma.SortOrder
 }
 
 export type PaymentMaxOrderByAggregateInput = {
@@ -571,6 +658,10 @@ export type PaymentMaxOrderByAggregateInput = {
   providerPaymentId?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
   capturedAt?: Prisma.SortOrder
+  planId?: Prisma.SortOrder
+  planSlug?: Prisma.SortOrder
+  planName?: Prisma.SortOrder
+  creditsGranted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -589,12 +680,17 @@ export type PaymentMinOrderByAggregateInput = {
   providerPaymentId?: Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
   capturedAt?: Prisma.SortOrder
+  planId?: Prisma.SortOrder
+  planSlug?: Prisma.SortOrder
+  planName?: Prisma.SortOrder
+  creditsGranted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type PaymentSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  creditsGranted?: Prisma.SortOrder
 }
 
 export type PaymentCreateNestedManyWithoutUserInput = {
@@ -636,6 +732,48 @@ export type PaymentUncheckedUpdateManyWithoutUserNestedInput = {
   connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
   update?: Prisma.PaymentUpdateWithWhereUniqueWithoutUserInput | Prisma.PaymentUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutUserInput | Prisma.PaymentUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
+}
+
+export type PaymentCreateNestedManyWithoutPlanInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutPlanInput, Prisma.PaymentUncheckedCreateWithoutPlanInput> | Prisma.PaymentCreateWithoutPlanInput[] | Prisma.PaymentUncheckedCreateWithoutPlanInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutPlanInput | Prisma.PaymentCreateOrConnectWithoutPlanInput[]
+  createMany?: Prisma.PaymentCreateManyPlanInputEnvelope
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+}
+
+export type PaymentUncheckedCreateNestedManyWithoutPlanInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutPlanInput, Prisma.PaymentUncheckedCreateWithoutPlanInput> | Prisma.PaymentCreateWithoutPlanInput[] | Prisma.PaymentUncheckedCreateWithoutPlanInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutPlanInput | Prisma.PaymentCreateOrConnectWithoutPlanInput[]
+  createMany?: Prisma.PaymentCreateManyPlanInputEnvelope
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+}
+
+export type PaymentUpdateManyWithoutPlanNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutPlanInput, Prisma.PaymentUncheckedCreateWithoutPlanInput> | Prisma.PaymentCreateWithoutPlanInput[] | Prisma.PaymentUncheckedCreateWithoutPlanInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutPlanInput | Prisma.PaymentCreateOrConnectWithoutPlanInput[]
+  upsert?: Prisma.PaymentUpsertWithWhereUniqueWithoutPlanInput | Prisma.PaymentUpsertWithWhereUniqueWithoutPlanInput[]
+  createMany?: Prisma.PaymentCreateManyPlanInputEnvelope
+  set?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  delete?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  update?: Prisma.PaymentUpdateWithWhereUniqueWithoutPlanInput | Prisma.PaymentUpdateWithWhereUniqueWithoutPlanInput[]
+  updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutPlanInput | Prisma.PaymentUpdateManyWithWhereWithoutPlanInput[]
+  deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
+}
+
+export type PaymentUncheckedUpdateManyWithoutPlanNestedInput = {
+  create?: Prisma.XOR<Prisma.PaymentCreateWithoutPlanInput, Prisma.PaymentUncheckedCreateWithoutPlanInput> | Prisma.PaymentCreateWithoutPlanInput[] | Prisma.PaymentUncheckedCreateWithoutPlanInput[]
+  connectOrCreate?: Prisma.PaymentCreateOrConnectWithoutPlanInput | Prisma.PaymentCreateOrConnectWithoutPlanInput[]
+  upsert?: Prisma.PaymentUpsertWithWhereUniqueWithoutPlanInput | Prisma.PaymentUpsertWithWhereUniqueWithoutPlanInput[]
+  createMany?: Prisma.PaymentCreateManyPlanInputEnvelope
+  set?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  disconnect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  delete?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  connect?: Prisma.PaymentWhereUniqueInput | Prisma.PaymentWhereUniqueInput[]
+  update?: Prisma.PaymentUpdateWithWhereUniqueWithoutPlanInput | Prisma.PaymentUpdateWithWhereUniqueWithoutPlanInput[]
+  updateMany?: Prisma.PaymentUpdateManyWithWhereWithoutPlanInput | Prisma.PaymentUpdateManyWithWhereWithoutPlanInput[]
   deleteMany?: Prisma.PaymentScalarWhereInput | Prisma.PaymentScalarWhereInput[]
 }
 
@@ -748,8 +886,12 @@ export type PaymentCreateWithoutUserInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  plan?: Prisma.PlanCreateNestedOneWithoutPaymentsInput
   order?: Prisma.OrderCreateNestedOneWithoutPaymentInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
   creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutPaymentInput
@@ -768,6 +910,10 @@ export type PaymentUncheckedCreateWithoutUserInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planId?: string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutPaymentInput
@@ -816,8 +962,82 @@ export type PaymentScalarWhereInput = {
   providerPaymentId?: Prisma.StringNullableFilter<"Payment"> | string | null
   paymentMethod?: Prisma.StringNullableFilter<"Payment"> | string | null
   capturedAt?: Prisma.DateTimeNullableFilter<"Payment"> | Date | string | null
+  planId?: Prisma.StringNullableFilter<"Payment"> | string | null
+  planSlug?: Prisma.StringNullableFilter<"Payment"> | string | null
+  planName?: Prisma.StringNullableFilter<"Payment"> | string | null
+  creditsGranted?: Prisma.IntNullableFilter<"Payment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
+}
+
+export type PaymentCreateWithoutPlanInput = {
+  id?: string
+  purpose: $Enums.PaymentPurpose
+  amount: number
+  currency?: string
+  status?: $Enums.PaymentStatus
+  provider?: string
+  providerOrderId: string
+  providerPaymentId?: string | null
+  paymentMethod?: string | null
+  capturedAt?: Date | string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  order?: Prisma.OrderCreateNestedOneWithoutPaymentInput
+  user: Prisma.UserCreateNestedOneWithoutPaymentsInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
+  creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutPaymentInput
+}
+
+export type PaymentUncheckedCreateWithoutPlanInput = {
+  id?: string
+  orderId?: string | null
+  userId: string
+  purpose: $Enums.PaymentPurpose
+  subscriptionId?: string | null
+  amount: number
+  currency?: string
+  status?: $Enums.PaymentStatus
+  provider?: string
+  providerOrderId: string
+  providerPaymentId?: string | null
+  paymentMethod?: string | null
+  capturedAt?: Date | string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutPaymentInput
+}
+
+export type PaymentCreateOrConnectWithoutPlanInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.PaymentCreateWithoutPlanInput, Prisma.PaymentUncheckedCreateWithoutPlanInput>
+}
+
+export type PaymentCreateManyPlanInputEnvelope = {
+  data: Prisma.PaymentCreateManyPlanInput | Prisma.PaymentCreateManyPlanInput[]
+  skipDuplicates?: boolean
+}
+
+export type PaymentUpsertWithWhereUniqueWithoutPlanInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  update: Prisma.XOR<Prisma.PaymentUpdateWithoutPlanInput, Prisma.PaymentUncheckedUpdateWithoutPlanInput>
+  create: Prisma.XOR<Prisma.PaymentCreateWithoutPlanInput, Prisma.PaymentUncheckedCreateWithoutPlanInput>
+}
+
+export type PaymentUpdateWithWhereUniqueWithoutPlanInput = {
+  where: Prisma.PaymentWhereUniqueInput
+  data: Prisma.XOR<Prisma.PaymentUpdateWithoutPlanInput, Prisma.PaymentUncheckedUpdateWithoutPlanInput>
+}
+
+export type PaymentUpdateManyWithWhereWithoutPlanInput = {
+  where: Prisma.PaymentScalarWhereInput
+  data: Prisma.XOR<Prisma.PaymentUpdateManyMutationInput, Prisma.PaymentUncheckedUpdateManyWithoutPlanInput>
 }
 
 export type PaymentCreateWithoutOrderInput = {
@@ -831,8 +1051,12 @@ export type PaymentCreateWithoutOrderInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  plan?: Prisma.PlanCreateNestedOneWithoutPaymentsInput
   user: Prisma.UserCreateNestedOneWithoutPaymentsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
   creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutPaymentInput
@@ -851,6 +1075,10 @@ export type PaymentUncheckedCreateWithoutOrderInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planId?: string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutPaymentInput
@@ -883,8 +1111,12 @@ export type PaymentUpdateWithoutOrderInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  plan?: Prisma.PlanUpdateOneWithoutPaymentsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
   creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutPaymentNestedInput
@@ -903,6 +1135,10 @@ export type PaymentUncheckedUpdateWithoutOrderInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutPaymentNestedInput
@@ -919,8 +1155,12 @@ export type PaymentCreateWithoutSubscriptionInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  plan?: Prisma.PlanCreateNestedOneWithoutPaymentsInput
   order?: Prisma.OrderCreateNestedOneWithoutPaymentInput
   user: Prisma.UserCreateNestedOneWithoutPaymentsInput
   creditTransactions?: Prisma.CreditTransactionCreateNestedManyWithoutPaymentInput
@@ -939,6 +1179,10 @@ export type PaymentUncheckedCreateWithoutSubscriptionInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planId?: string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   creditTransactions?: Prisma.CreditTransactionUncheckedCreateNestedManyWithoutPaymentInput
@@ -981,8 +1225,12 @@ export type PaymentCreateWithoutCreditTransactionsInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  plan?: Prisma.PlanCreateNestedOneWithoutPaymentsInput
   order?: Prisma.OrderCreateNestedOneWithoutPaymentInput
   user: Prisma.UserCreateNestedOneWithoutPaymentsInput
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutPaymentsInput
@@ -1002,6 +1250,10 @@ export type PaymentUncheckedCreateWithoutCreditTransactionsInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planId?: string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1033,8 +1285,12 @@ export type PaymentUpdateWithoutCreditTransactionsInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  plan?: Prisma.PlanUpdateOneWithoutPaymentsNestedInput
   order?: Prisma.OrderUpdateOneWithoutPaymentNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
@@ -1054,6 +1310,10 @@ export type PaymentUncheckedUpdateWithoutCreditTransactionsInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1071,6 +1331,10 @@ export type PaymentCreateManyUserInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planId?: string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1086,8 +1350,12 @@ export type PaymentUpdateWithoutUserInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  plan?: Prisma.PlanUpdateOneWithoutPaymentsNestedInput
   order?: Prisma.OrderUpdateOneWithoutPaymentNestedInput
   subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
   creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutPaymentNestedInput
@@ -1106,6 +1374,10 @@ export type PaymentUncheckedUpdateWithoutUserInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutPaymentNestedInput
@@ -1124,6 +1396,96 @@ export type PaymentUncheckedUpdateManyWithoutUserInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PaymentCreateManyPlanInput = {
+  id?: string
+  orderId?: string | null
+  userId: string
+  purpose: $Enums.PaymentPurpose
+  subscriptionId?: string | null
+  amount: number
+  currency?: string
+  status?: $Enums.PaymentStatus
+  provider?: string
+  providerOrderId: string
+  providerPaymentId?: string | null
+  paymentMethod?: string | null
+  capturedAt?: Date | string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PaymentUpdateWithoutPlanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  purpose?: Prisma.EnumPaymentPurposeFieldUpdateOperationsInput | $Enums.PaymentPurpose
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerOrderId?: Prisma.StringFieldUpdateOperationsInput | string
+  providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  order?: Prisma.OrderUpdateOneWithoutPaymentNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutPaymentsNestedInput
+  creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutPaymentNestedInput
+}
+
+export type PaymentUncheckedUpdateWithoutPlanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  purpose?: Prisma.EnumPaymentPurposeFieldUpdateOperationsInput | $Enums.PaymentPurpose
+  subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerOrderId?: Prisma.StringFieldUpdateOperationsInput | string
+  providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutPaymentNestedInput
+}
+
+export type PaymentUncheckedUpdateManyWithoutPlanInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  orderId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  purpose?: Prisma.EnumPaymentPurposeFieldUpdateOperationsInput | $Enums.PaymentPurpose
+  subscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerOrderId?: Prisma.StringFieldUpdateOperationsInput | string
+  providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1141,6 +1503,10 @@ export type PaymentCreateManySubscriptionInput = {
   providerPaymentId?: string | null
   paymentMethod?: string | null
   capturedAt?: Date | string | null
+  planId?: string | null
+  planSlug?: string | null
+  planName?: string | null
+  creditsGranted?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1156,8 +1522,12 @@ export type PaymentUpdateWithoutSubscriptionInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  plan?: Prisma.PlanUpdateOneWithoutPaymentsNestedInput
   order?: Prisma.OrderUpdateOneWithoutPaymentNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutPaymentsNestedInput
   creditTransactions?: Prisma.CreditTransactionUpdateManyWithoutPaymentNestedInput
@@ -1176,6 +1546,10 @@ export type PaymentUncheckedUpdateWithoutSubscriptionInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creditTransactions?: Prisma.CreditTransactionUncheckedUpdateManyWithoutPaymentNestedInput
@@ -1194,6 +1568,10 @@ export type PaymentUncheckedUpdateManyWithoutSubscriptionInput = {
   providerPaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   paymentMethod?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   capturedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  planId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planSlug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  planName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creditsGranted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1243,8 +1621,13 @@ export type PaymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   providerPaymentId?: boolean
   paymentMethod?: boolean
   capturedAt?: boolean
+  planId?: boolean
+  planSlug?: boolean
+  planName?: boolean
+  creditsGranted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  plan?: boolean | Prisma.Payment$planArgs<ExtArgs>
   order?: boolean | Prisma.Payment$orderArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   subscription?: boolean | Prisma.Payment$subscriptionArgs<ExtArgs>
@@ -1266,8 +1649,13 @@ export type PaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   providerPaymentId?: boolean
   paymentMethod?: boolean
   capturedAt?: boolean
+  planId?: boolean
+  planSlug?: boolean
+  planName?: boolean
+  creditsGranted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  plan?: boolean | Prisma.Payment$planArgs<ExtArgs>
   order?: boolean | Prisma.Payment$orderArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   subscription?: boolean | Prisma.Payment$subscriptionArgs<ExtArgs>
@@ -1287,8 +1675,13 @@ export type PaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   providerPaymentId?: boolean
   paymentMethod?: boolean
   capturedAt?: boolean
+  planId?: boolean
+  planSlug?: boolean
+  planName?: boolean
+  creditsGranted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  plan?: boolean | Prisma.Payment$planArgs<ExtArgs>
   order?: boolean | Prisma.Payment$orderArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   subscription?: boolean | Prisma.Payment$subscriptionArgs<ExtArgs>
@@ -1308,12 +1701,17 @@ export type PaymentSelectScalar = {
   providerPaymentId?: boolean
   paymentMethod?: boolean
   capturedAt?: boolean
+  planId?: boolean
+  planSlug?: boolean
+  planName?: boolean
+  creditsGranted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "userId" | "purpose" | "subscriptionId" | "amount" | "currency" | "status" | "provider" | "providerOrderId" | "providerPaymentId" | "paymentMethod" | "capturedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["payment"]>
+export type PaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "userId" | "purpose" | "subscriptionId" | "amount" | "currency" | "status" | "provider" | "providerOrderId" | "providerPaymentId" | "paymentMethod" | "capturedAt" | "planId" | "planSlug" | "planName" | "creditsGranted" | "createdAt" | "updatedAt", ExtArgs["result"]["payment"]>
 export type PaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  plan?: boolean | Prisma.Payment$planArgs<ExtArgs>
   order?: boolean | Prisma.Payment$orderArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   subscription?: boolean | Prisma.Payment$subscriptionArgs<ExtArgs>
@@ -1321,11 +1719,13 @@ export type PaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   _count?: boolean | Prisma.PaymentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PaymentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  plan?: boolean | Prisma.Payment$planArgs<ExtArgs>
   order?: boolean | Prisma.Payment$orderArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   subscription?: boolean | Prisma.Payment$subscriptionArgs<ExtArgs>
 }
 export type PaymentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  plan?: boolean | Prisma.Payment$planArgs<ExtArgs>
   order?: boolean | Prisma.Payment$orderArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   subscription?: boolean | Prisma.Payment$subscriptionArgs<ExtArgs>
@@ -1334,6 +1734,7 @@ export type PaymentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $PaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Payment"
   objects: {
+    plan: Prisma.$PlanPayload<ExtArgs> | null
     order: Prisma.$OrderPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
     subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
@@ -1353,6 +1754,10 @@ export type $PaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     providerPaymentId: string | null
     paymentMethod: string | null
     capturedAt: Date | null
+    planId: string | null
+    planSlug: string | null
+    planName: string | null
+    creditsGranted: number | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["payment"]>
@@ -1749,6 +2154,7 @@ readonly fields: PaymentFieldRefs;
  */
 export interface Prisma__PaymentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  plan<T extends Prisma.Payment$planArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payment$planArgs<ExtArgs>>): Prisma.Prisma__PlanClient<runtime.Types.Result.GetResult<Prisma.$PlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   order<T extends Prisma.Payment$orderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payment$orderArgs<ExtArgs>>): Prisma.Prisma__OrderClient<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   subscription<T extends Prisma.Payment$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Payment$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -1795,6 +2201,10 @@ export interface PaymentFieldRefs {
   readonly providerPaymentId: Prisma.FieldRef<"Payment", 'String'>
   readonly paymentMethod: Prisma.FieldRef<"Payment", 'String'>
   readonly capturedAt: Prisma.FieldRef<"Payment", 'DateTime'>
+  readonly planId: Prisma.FieldRef<"Payment", 'String'>
+  readonly planSlug: Prisma.FieldRef<"Payment", 'String'>
+  readonly planName: Prisma.FieldRef<"Payment", 'String'>
+  readonly creditsGranted: Prisma.FieldRef<"Payment", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Payment", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Payment", 'DateTime'>
 }
@@ -2195,6 +2605,25 @@ export type PaymentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Payments to delete.
    */
   limit?: number
+}
+
+/**
+ * Payment.plan
+ */
+export type Payment$planArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Plan
+   */
+  select?: Prisma.PlanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Plan
+   */
+  omit?: Prisma.PlanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlanInclude<ExtArgs> | null
+  where?: Prisma.PlanWhereInput
 }
 
 /**

@@ -43,6 +43,8 @@ enum PaymentStatus {
   FAILED
   REFUNDED
   PARTIALLY_REFUNDED
+  // The provider reported a different amount or currency than was charged; nothing granted.
+  FLAGGED
 }
 
 enum OrderStatus {
@@ -483,11 +485,18 @@ model Plan {
   requiresPhoneVerification Boolean  @default(false)
   features                  Json     @default("{}")
   isActive                  Boolean  @default(true)
+  // One-time credit plans sold at checkout. rank is the display order.
+  priceMinor                Int      @default(0)
+  credits                   Int      @default(0)
+  highlighted               Boolean  @default(false)
   createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @default(now()) @updatedAt
 
   orders        Order[]
   subscriptions Subscription[]
+  payments      Payment[]
 
+  @@index([isActive, rank])
   @@map("plans")
 }
 
@@ -547,15 +556,23 @@ model Payment {
   providerPaymentId String?
   paymentMethod     String?
   capturedAt        DateTime?
+  // What was sold, frozen at checkout (amount and currency above are the charge).
+  // Credits are granted from creditsGranted, never by re-reading the plan.
+  planId            String?
+  planSlug          String?
+  planName          String?
+  creditsGranted    Int?
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
 
+  plan               Plan?               @relation(fields: [planId], references: [id])
   order              Order?              @relation(fields: [orderId], references: [id])
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   subscription       Subscription?       @relation(fields: [subscriptionId], references: [id])
   creditTransactions CreditTransaction[]
 
   @@index([userId])
+  @@index([planId])
   @@map("payments")
 }
 

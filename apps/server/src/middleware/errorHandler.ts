@@ -19,7 +19,7 @@ export const errorHandler = (
     err: Error,
     req: Request,
     res: Response,
-    next: NextFunction
+    _next: NextFunction
 ): void => {
     if (err instanceof AppError) {
         // only log real failures, not expected 401s
@@ -48,7 +48,7 @@ export const errorHandler = (
 
     console.error(`[${new Date().toISOString()}] ${err.name}: ${err.message}`)
 
-    if ((err as any).code === "P2002") {
+    if ((err as { code?: unknown }).code === "P2002") {
         res.status(409).json({ success: false, message: "Already exists" })
         return
     }

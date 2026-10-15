@@ -4,10 +4,10 @@ import {
   callGetAutoReload,
   callPutAutoReload,
 } from "@/lib/billingService.js"
-import type { AutoReloadInput } from "./billing.schema.js"
+import type { AutoReloadInput, CheckoutInput } from "./billing.schema.js"
 
 export const BillingService = {
-  createCheckout(user: { id: string; email: string }, input: { packId?: number; amountCents?: number }) {
+  createCheckout(user: { id: string; email: string }, input: CheckoutInput) {
     return callCreateCheckout(user, input)
   },
 

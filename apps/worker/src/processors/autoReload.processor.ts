@@ -61,6 +61,7 @@ async function processAutoReload(job: Job<AutoReloadJobPayload>): Promise<void> 
         status: "PENDING",
         provider: "razorpay",
         providerOrderId: order.id,
+        creditsGranted: credits,
       },
     })
 

@@ -11,7 +11,9 @@
     "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
     "start": "node dist/index.js",
     "check-types": "tsc --noEmit",
-    "test:chat": "vitest run"
+    "test:chat": "vitest run",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.0.0",

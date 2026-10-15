@@ -1,0 +1,31 @@
+# Disposable Postgres + Redis for the test suites. Non-default ports so they
+# never collide with (or get mistaken for) another local database.
+name: useframe-tests
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: useframe
+      POSTGRES_PASSWORD: useframe
+      POSTGRES_DB: useframe_test
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U useframe -d useframe_test"]
+      interval: 2s
+      retries: 30
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "127.0.0.1:56379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      retries: 30
+
+volumes:
+  pgdata:

@@ -1,50 +1,35 @@
-import js from "@eslint/js";
-import { globalIgnores } from "eslint/config";
-import eslintConfigPrettier from "eslint-config-prettier";
-import tseslint from "typescript-eslint";
-import pluginReactHooks from "eslint-plugin-react-hooks";
-import pluginReact from "eslint-plugin-react";
-import globals from "globals";
 import pluginNext from "@next/eslint-plugin-next";
-import { config as baseConfig } from "./base.js";
+import pluginReact from "eslint-plugin-react";
+import pluginReactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
 
-export const nextJsConfig = [
-  ...baseConfig,
-  js.configs.recommended,
-  eslintConfigPrettier,
-  ...tseslint.configs.recommended,
-  globalIgnores([
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-  {
-    ...pluginReact.configs.flat.recommended,
-    languageOptions: {
-      ...pluginReact.configs.flat.recommended.languageOptions,
-      globals: {
-        ...globals.serviceworker,
+// React, React hooks and Next.js rules, applied on top of the base config to `files`.
+// rootDir is the Next.js app's directory relative to the repo root.
+export function nextJsConfig(files, rootDir) {
+  return [
+    {
+      files,
+      ...pluginReact.configs.flat.recommended,
+      languageOptions: {
+        ...pluginReact.configs.flat.recommended.languageOptions,
+        globals: { ...globals.browser },
+      },
+      settings: { react: { version: "detect" } },
+    },
+    {
+      files,
+      plugins: {
+        "react-hooks": pluginReactHooks,
+        "@next/next": pluginNext,
+      },
+      settings: { next: { rootDir } },
+      rules: {
+        ...pluginReactHooks.configs.recommended.rules,
+        ...pluginNext.configs.recommended.rules,
+        ...pluginNext.configs["core-web-vitals"].rules,
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off",
       },
     },
-  },
-  {
-    plugins: {
-      "@next/next": pluginNext,
-    },
-    rules: {
-      ...pluginNext.configs.recommended.rules,
-      ...pluginNext.configs["core-web-vitals"].rules,
-    },
-  },
-  {
-    plugins: {
-      "react-hooks": pluginReactHooks,
-    },
-    settings: { react: { version: "detect" } },
-    rules: {
-      ...pluginReactHooks.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off",
-    },
-  },
-];
+  ];
+}

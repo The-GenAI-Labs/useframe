@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/authContext";
 import { isFreeTierExhausted } from "@/lib/freeTierError";
@@ -419,9 +420,9 @@ export default function ChatHomeView() {
           {user?.plan === "FREE" && (
             <p className="mb-3 text-xs text-mut">
               Free-tier generations may be slightly less accurate than Pro.{" "}
-              <a href="/billing" className="underline">
+              <Link href="/billing" className="underline">
                 Upgrade for higher-fidelity builds →
-              </a>
+              </Link>
             </p>
           )}
           {phase !== "generating" && (

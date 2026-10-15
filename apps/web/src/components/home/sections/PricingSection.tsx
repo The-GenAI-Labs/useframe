@@ -2,53 +2,32 @@
 
 import { memo } from "react";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { formatPlanPrice, plansApi, PLANS_QUERY_KEY } from "@/lib/api/services/plans.service";
 import { motion } from "framer-motion";
 import { Check, ExternalLink } from "lucide-react";
 import { SectionHeading } from "../ui/SectionHeading";
 import { Parallax } from "../ui/Parallax";
 
-const PLANS = [
-  {
-    name: "Starter",
-    price: "$9",
-    tagline: "One real site, fully iterated",
-    features: [
-      "Unlimited generations & iterations",
-      "Full 4-step pipeline — Research, Build, SEO, Deploy",
-      "Web Score checking on any URL",
-      "Research-backed design citations",
-    ],
-    highlighted: false,
-  },
-  {
-    name: "Studio",
-    price: "$49",
-    tagline: "For shipping pages regularly",
-    features: [
-      "Everything in Starter",
-      "Priority generation speed",
-      "Custom domains on deploy",
-      "Deeper research citation coverage",
-      "Priority support",
-    ],
-    highlighted: true,
-  },
-  {
-    name: "Agency",
-    price: "$99",
-    tagline: "Best rate, for heavy use",
-    features: [
-      "Everything in Studio",
-      "Full access to every research paper",
-      "Unlimited Web Score & SEO audits",
-      "Team workspaces",
-      "Priority support, front of the queue",
-    ],
-    highlighted: false,
-  },
-];
+function PlanCardSkeleton() {
+  return (
+    <div className="flex flex-col gap-3 rounded-3xl border-[10px] border-white bg-slate-100 p-6" aria-hidden>
+      <div className="h-4 w-20 animate-pulse rounded bg-slate-200" />
+      <div className="h-9 w-24 animate-pulse rounded bg-slate-200" />
+      <div className="h-3 w-40 animate-pulse rounded bg-slate-200" />
+      <div className="mt-3 space-y-2.5">
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="h-3.5 w-full animate-pulse rounded bg-slate-200" />
+        ))}
+      </div>
+      <div className="mt-4 h-10 w-full animate-pulse rounded-xl bg-slate-200" />
+    </div>
+  );
+}
 
 export const PricingSection = memo(function PricingSection() {
+  const plans = useQuery({ queryKey: PLANS_QUERY_KEY, queryFn: plansApi.list, staleTime: 60_000 });
+
   return (
     <section id="pricing" className="relative z-10 w-full scroll-mt-24 overflow-hidden px-6 py-8">
       <div
@@ -84,10 +63,24 @@ export const PricingSection = memo(function PricingSection() {
         />
 
         <Parallax offset={60} className="mt-14">
-          <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-3">
-            {PLANS.map((plan, i) => (
+          {plans.isError ? (
+            <div role="alert" className="mx-auto flex max-w-md flex-col items-center gap-3 rounded-3xl bg-slate-100 p-8 text-center">
+              <p className="text-sm text-slate-700">We couldn&apos;t load pricing right now.</p>
+              <button
+                type="button"
+                onClick={() => plans.refetch()}
+                disabled={plans.isFetching}
+                className="cursor-pointer rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 disabled:opacity-50"
+              >
+                {plans.isFetching ? "Retrying…" : "Try again"}
+              </button>
+            </div>
+          ) : (
+          <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-3" aria-busy={plans.isLoading}>
+            {plans.isLoading && [0, 1, 2].map((i) => <PlanCardSkeleton key={i} />)}
+            {plans.data?.map((plan, i) => (
               <motion.div
-                key={plan.name}
+                key={plan.slug}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
@@ -137,11 +130,11 @@ export const PricingSection = memo(function PricingSection() {
                   </p>
                   <div className="mt-2 flex items-baseline gap-1">
                     <span className={`text-4xl font-bold tracking-tight ${plan.highlighted ? "text-white" : "text-slate-900"}`}>
-                      {plan.price}
+                      {formatPlanPrice(plan)}
                     </span>
                     <span className={`text-xs ${plan.highlighted ? "text-blue-200" : "text-slate-400"}`}>one-time credits</span>
                   </div>
-                  <p className={`mt-1 text-xs ${plan.highlighted ? "text-blue-100" : "text-slate-500"}`}>{plan.tagline}</p>
+                  <p className={`mt-1 text-xs ${plan.highlighted ? "text-blue-100" : "text-slate-500"}`}>{plan.description}</p>
 
                   <ul className="mt-5 flex-1 space-y-2.5">
                     {plan.features.map((feature) => (
@@ -167,6 +160,7 @@ export const PricingSection = memo(function PricingSection() {
               </motion.div>
             ))}
           </div>
+          )}
         </Parallax>
 
         <Parallax offset={40} className="mt-6">

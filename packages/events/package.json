@@ -15,7 +15,9 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "typescript": "5.9.2"

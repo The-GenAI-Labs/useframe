@@ -20,7 +20,9 @@
     "test": "vitest run",
     "cli": "tsx src/cli.ts",
     "check:migrations": "node scripts/check-migrations.mjs",
-    "test:integration": "node --env-file=../db/.env ./node_modules/vitest/vitest.mjs run src/integration.test.ts"
+    "test:integration": "node --env-file=../db/.env ./node_modules/vitest/vitest.mjs run src/integration.test.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@repo/schemas": "workspace:*",

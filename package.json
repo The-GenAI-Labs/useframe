@@ -7,6 +7,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
+    "typecheck": "turbo run typecheck",
     "db:seed:styles": "pnpm --filter @repo/research-config seed:styles",
     "corpus:validate": "pnpm --filter @repo/rag cli validate",
     "corpus:ingest": "pnpm --filter @repo/rag cli ingest",
@@ -20,9 +21,19 @@
     "docker:smoke": "node scripts/docker.mjs smoke",
     "docker:push": "node scripts/docker.mjs push",
     "docker:context-check": "node scripts/docker.mjs context-check",
-    "docker:test": "node --test scripts/docker-lib.test.mjs"
+    "docker:test": "node --test scripts/docker-lib.test.mjs",
+    "test:e2e": "pnpm --filter @useframe/tests test:e2e",
+    "test:load": "pnpm --filter @useframe/tests test:load",
+    "test:security": "pnpm --filter @useframe/tests test:security",
+    "security:deps": "pnpm audit --prod --audit-level=high",
+    "prepare": "husky || true"
   },
   "devDependencies": {
+    "@useframe/eslint-config": "workspace:*",
+    "eslint": "^9.39.1",
+    "globals": "^14.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
     "prettier": "^3.7.4",
     "turbo": "^2.9.14",
     "typescript": "5.9.2"
@@ -30,5 +41,8 @@
   "packageManager": "pnpm@11.1.3",
   "engines": {
     "node": ">=18"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs}": "eslint --fix --no-warn-ignored"
   }
 }

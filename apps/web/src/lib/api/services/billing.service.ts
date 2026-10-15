@@ -7,9 +7,9 @@ export type AutoReloadSetting = {
 }
 
 export const billingApi = {
-  // Either a fixed pack ({ packId }) or a custom amount ({ amountCents }) —
-  // the server prices packs from its own table, so packId carries no amount.
-  createCheckout: async (body: { packId: number } | { amountCents: number }) => {
+  // A plan slug or a custom top-up amount. The server prices both; a plan
+  // purchase sends no amount at all.
+  createCheckout: async (body: { planSlug: string } | { amountCents: number }) => {
     const { data } = await api.post<{
       success: true
       data: {
@@ -18,6 +18,7 @@ export const billingApi = {
         amountCents: number
         currency: string
         credits: number
+        planSlug: string | null
       }
     }>("/billing/checkout", body)
     return data.data

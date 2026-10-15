@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const PropertiesPanel = memo(function PropertiesPanel({
-    selShape, shapes, selected, onApply, onDelete, onDuplicate,
+    selShape, onApply, onDelete, onDuplicate,
 }: Props) {
     const handleDuplicate = useCallback(() => {
         const clone: Shape = { ...selShape, id: uid(), x: selShape.x + 20, y: selShape.y + 20 };

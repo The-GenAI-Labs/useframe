@@ -48,26 +48,6 @@ export function SeoStepView({ project, pipelineStatus, locked, creditLocked, cre
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [project, pipelineStatus, state.status, creditLocked])
 
-  if (creditLocked) {
-    return (
-      <button
-        type="button"
-        onClick={() => router.push("/billing")}
-        className="flex h-full w-full cursor-pointer flex-col items-center justify-center gap-3 px-6 text-center"
-      >
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-tertiary text-mut">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg>
-        </div>
-        <p className="text-sm font-semibold text-pri">SEO is locked</p>
-        <p className="max-w-xs text-xs text-mut">{creditLockedReason ?? "Add credits to unlock this step."}</p>
-        <p className="text-xs font-medium text-blue-500">Upgrade to unlock &rarr;</p>
-      </button>
-    )
-  }
-
   const handleApprove = useCallback(() => {
     if (!project) return
     setIsApproving(true)
@@ -88,6 +68,26 @@ export function SeoStepView({ project, pipelineStatus, locked, creditLocked, cre
     },
     [project, generate]
   )
+
+  if (creditLocked) {
+    return (
+      <button
+        type="button"
+        onClick={() => router.push("/billing")}
+        className="flex h-full w-full cursor-pointer flex-col items-center justify-center gap-3 px-6 text-center"
+      >
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-tertiary text-mut">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+        </div>
+        <p className="text-sm font-semibold text-pri">SEO is locked</p>
+        <p className="max-w-xs text-xs text-mut">{creditLockedReason ?? "Add credits to unlock this step."}</p>
+        <p className="text-xs font-medium text-blue-500">Upgrade to unlock &rarr;</p>
+      </button>
+    )
+  }
 
   return (
     <div className="flex flex-col h-full w-full overflow-y-auto" style={{ scrollbarWidth: "none" }}>

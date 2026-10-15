@@ -22,7 +22,9 @@
     "deploy:unsuspend": "tsx src/cli/suspend.ts unsuspend",
     "spike:domains": "tsx src/cli/spikeDomains.ts",
     "deploy:domains:doctor": "tsx src/cli/domainsDoctor.ts",
-    "deploy:domain:release": "tsx src/cli/domainRelease.ts"
+    "deploy:domain:release": "tsx src/cli/domainRelease.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.1144.0",

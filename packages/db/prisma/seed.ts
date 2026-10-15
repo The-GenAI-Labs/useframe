@@ -6,6 +6,7 @@ import { dirname, join } from "node:path";
 import { embedMany } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
 import { prisma } from "../src/index.js";
+import { PLAN_SEEDS } from "./seedData/plans.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const seedDataDir = join(__dirname, "seedData");
@@ -90,7 +91,7 @@ async function seedResearchFindings() {
     : null;
 
   const BATCH_SIZE = 100;
-  let embeddings: number[][] = [];
+  const embeddings: number[][] = [];
 
   if (embeddingModel) {
     const inputs = rows.map((r) => `${r.contextHeader}\n${r.claim}`);
@@ -220,7 +221,27 @@ async function seedFindingRelations(findings: ResearchFindingSeed[]) {
   console.log(`[seed] Upserted ${created} finding relations`);
 }
 
+async function seedPlans() {
+  for (const plan of PLAN_SEEDS) {
+    const data = {
+      name: plan.name,
+      description: plan.description,
+      priceMinor: plan.priceMinor,
+      currency: plan.currency,
+      credits: plan.credits,
+      features: plan.features,
+      highlighted: plan.highlighted,
+      rank: plan.sortOrder,
+      isActive: true,
+    };
+    await prisma.plan.upsert({ where: { slug: plan.slug }, create: { slug: plan.slug, ...data }, update: data });
+  }
+  console.log(`[seed] Upserted ${PLAN_SEEDS.length} plans`);
+}
+
 async function main() {
+  await seedPlans();
+  if (process.argv.includes("--plans-only")) return;
   await seedDomainPatterns();
   await seedAudienceModifiers();
   const findings = await seedResearchFindings();

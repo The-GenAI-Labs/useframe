@@ -29,7 +29,7 @@ const start = async () => {
         }
         process.once("SIGTERM", shutdown)
         process.once("SIGINT", shutdown)
-    } catch (err) {
+    } catch {
         await prisma.$disconnect()
         process.exit(1)
     }

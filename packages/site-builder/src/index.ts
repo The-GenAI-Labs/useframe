@@ -44,7 +44,7 @@ function cssColor(value: string, fallback: string): string {
 }
 
 export function cssFontName(value: string): string {
-  const cleaned = value.replace(/[^A-Za-z0-9 \-]/g, "").trim().slice(0, 60);
+  const cleaned = value.replace(/[^A-Za-z0-9 -]/g, "").trim().slice(0, 60);
   return cleaned || "Inter";
 }
 

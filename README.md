@@ -245,7 +245,8 @@ their own WebContainer compatibility work before enabling a replacement snapshot
 | ------------------------------------------------ | ------------------------------------------- |
 | `pnpm dev`                                       | Run workspace development tasks             |
 | `pnpm build`                                     | Build apps and packages with a build script |
-| `pnpm lint`                                      | Run defined lint tasks                      |
+| `pnpm lint`                                      | Lint every package (ESLint, through Turbo)  |
+| `pnpm typecheck`                                 | Type-check every package (through Turbo)    |
 | `pnpm check-types`                               | Run defined `check-types` tasks             |
 | `pnpm --filter @useframe/web typecheck`          | Check frontend types                        |
 | `pnpm --filter @useframe/server typecheck`       | Check API types                             |
@@ -261,10 +262,21 @@ For a deliberate schema change in your development database:
 3. Regenerate the Prisma client.
 4. Commit the schema and migration together.
 
+## Quality checks
+
+- `pnpm lint` runs ESLint in every package with the single root config (`eslint.config.mjs`, built from `packages/eslint-config`).
+- `pnpm typecheck` runs `tsc --noEmit` in every package with its own `tsconfig.json`. Turbo caches both, so unchanged packages are skipped.
+
+Git hooks (Husky, installed by `pnpm install`):
+
+- **pre-commit:** ESLint with `--fix` on the staged `ts`/`tsx`/`js`/`mjs`/`cjs` files only (lint-staged), then a type check of only the packages changed since `HEAD` and the packages that depend on them, then a guard that blocks `.env*` files (other than `.env.example` and `.env.*.example`) and any new file over 5 MB.
+- **pre-push:** the full `pnpm lint` and `pnpm typecheck`.
+
+Never use `--no-verify`. If a hook is wrong, fix the hook.
+
 ## Current tooling caveats
 
-- **Type checks:** root `pnpm check-types` does not run web/server's differently named `typecheck` scripts. Run those separately when affected.
-- **Frontend lint:** its script still uses `next lint` despite the Next.js 16 dependency. The direct command is `pnpm --filter @useframe/web exec eslint .`; the existing configuration may still need attention.
+- **Type checks:** use `pnpm typecheck`, which covers every package. The older `pnpm check-types` skips web, server and site-edge.
 - **Database scripts:** `db:push`, `db:studio`, and `db:generate` currently point to Drizzle. Application persistence uses Prisma, so use the explicit Prisma commands above.
 - **Tests:** there is no root `test` script. Vitest and Testing Library dependencies are present, and `packages/evals` provides evaluation checks; these do not imply complete automated coverage.
 - **Shared output:** schemas, events, and site-builder export compiled `dist` files. Rebuild them after changes when starting services individually.
