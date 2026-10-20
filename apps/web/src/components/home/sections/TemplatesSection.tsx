@@ -33,8 +33,8 @@ export const TemplatesSection = memo(function TemplatesSection() {
       <div className="relative z-10 mx-auto max-w-[53rem]">
         <SectionHeading
           eyebrow="Templates"
-          title="Start from something beautiful"
-          description="Production-ready templates for every industry, generated and customised by AI."
+          title="Find a starting point for your website"
+          description="Explore designs across industries, then shape your website around your business and audience."
         />
 
         <motion.div

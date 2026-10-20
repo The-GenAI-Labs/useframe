@@ -59,7 +59,7 @@ export const PricingSection = memo(function PricingSection() {
         <SectionHeading
           eyebrow="Pricing"
           title="Simple pricing that scales with you"
-          description="Start free, upgrade when your ideas need more horsepower."
+          description="Start with a free generation. Purchase credits when you are ready to create more."
         />
 
         <Parallax offset={60} className="mt-14">
@@ -207,8 +207,8 @@ export const PricingSection = memo(function PricingSection() {
                 </span>
               </div>
               <p className="max-w-sm text-sm leading-relaxed text-white/60">
-                1 full generation on us — see the whole pipeline run, with read
-                access to the research papers behind every design decision.
+                Create your first website for free and explore the research
+                behind its design recommendations.
               </p>
             </div>
 

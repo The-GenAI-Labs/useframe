@@ -12,20 +12,20 @@ export const SLIDES: SlideContent[] = [
   {
     leftContent: (
       <SlideCard
-        tag="Feature One"
+        tag="Website assessment"
         title="Website Scoring"
-        description="Audit performance, UX and conversion signals with an AI web score. Get a prioritised fix list instantly."
+        description="Review design, usability, SEO, and performance with actionable recommendations for your website."
       />
     ),
     images: ["/auth/login13.png", "/auth/login16.png", "/auth/login17.png"],
-    imageTitle: "Live Scoring Dashboard",
+    imageTitle: "Website assessment preview",
   },
   {
     leftContent: (
       <SlideCard
-        tag="Feature Two"
+        tag="Competitor insights"
         title="Competitor Analysis"
-        description="Benchmark any competitor's positioning, pricing and funnel in one click. Know the gaps before you build."
+        description="Explore competitor websites to understand their structure, messaging, and design choices."
       />
     ),
     images: ["/auth/login18.png", "/auth/login20.png", "/auth/login12.png"],
@@ -34,9 +34,9 @@ export const SLIDES: SlideContent[] = [
   {
     leftContent: (
       <SlideCard
-        tag="Feature Three"
+        tag="Design research"
         title="Deep Research"
-        description="Long-form research summarised into action items you can ship from. 500+ sources, two pages."
+        description="Connect design recommendations to relevant research and understand the thinking behind your website."
       />
     ),
     images: ["/auth/landing1.png", "/auth/landing2.png", "/auth/login14.png"],

@@ -59,7 +59,7 @@ export const WorkspacePreview = memo(function WorkspacePreview() {
 
       <div className="rounded-3xl bg-white/90 p-3 shadow-[0_24px_70px_-20px_rgba(30,100,200,0.35)] backdrop-blur-xl">
         <label htmlFor="home-ai-prompt" className="sr-only">
-          Ask UseFrame AI
+          Describe your website
         </label>
         <input
           id="home-ai-prompt"
@@ -67,7 +67,7 @@ export const WorkspacePreview = memo(function WorkspacePreview() {
           value={value}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          placeholder="Describe the site you want to build..."
+          placeholder="Describe your website idea..."
           className="w-full bg-transparent px-2 pb-4 pt-3 text-[15px] text-slate-900 placeholder:text-slate-400 focus:outline-none"
         />
 
@@ -91,7 +91,7 @@ export const WorkspacePreview = memo(function WorkspacePreview() {
                 transition={{ duration: 0.2 }}
                 className="text-xs font-medium text-blue-600"
               >
-                Type something before sending
+                Please describe your website to continue.
               </motion.p>
             )}
           </AnimatePresence>
@@ -99,7 +99,7 @@ export const WorkspacePreview = memo(function WorkspacePreview() {
           <button
             type="button"
             onClick={handleSend}
-            aria-label="Send"
+            aria-label="Start building your website"
             className="ml-auto flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-blue-600 text-white shadow-[0_6px_20px_rgba(37,99,235,0.45)] transition-all hover:bg-blue-500"
           >
             <SendHorizontal className="size-4" />

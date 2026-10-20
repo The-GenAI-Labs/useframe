@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const ACTIONS = [
-  { label: "Analyse Competitor", circleClass: "bg-orange-500" },
-  { label: "Analyse Website", circleClass: "bg-green-500" },
-  { label: "Build New", circleClass: "bg-yellow-400" },
+  { label: "Analyse a competitor", circleClass: "bg-orange-500" },
+  { label: "Review a website", circleClass: "bg-green-500" },
+  { label: "Create a website", circleClass: "bg-yellow-400" },
 ];
 
 export const QuickActions = memo(function QuickActions() {

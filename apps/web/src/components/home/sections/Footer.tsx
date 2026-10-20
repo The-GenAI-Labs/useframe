@@ -41,7 +41,7 @@ const SOCIALS = [
     ),
   },
   {
-    label: "Gmail",
+    label: "Email",
     href: "mailto:hello@useframe.in",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">

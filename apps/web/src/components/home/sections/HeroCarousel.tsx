@@ -53,10 +53,10 @@ export const HeroCarousel = memo(function HeroCarousel() {
             Research
           </span>
           <h2 className={`${serif.className} mt-4 text-4xl tracking-tight text-slate-950 sm:text-5xl`}>
-            Know the market before you build
+            Make informed design decisions
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-            UseFrame turns scattered signals into clear, structured research you can act on.
+            Explore website assessments, competitor insights, and research to guide your next step.
           </p>
         </motion.div>
 

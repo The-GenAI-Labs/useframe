@@ -7,44 +7,44 @@ import { SectionHeading } from "../ui/SectionHeading";
 
 const FAQS = [
   {
-    q: "What exactly does UseFrame build for me?",
-    a: "A complete, production-ready landing page — structure, copy, design system and SEO — generated from a short description of your idea. You get a live preview you can iterate on in chat, then deploy to a real URL when you're happy with it.",
+    q: "What can I create with UseFrame?",
+    a: "UseFrame helps you create a business website or landing page from a short description. Generate a first version, refine the design and copy through chat, preview your changes, and publish when you are ready.",
   },
   {
-    q: "How is this different from a website builder or a template?",
-    a: "Templates give you a layout and leave the decisions to you. UseFrame makes the decisions — colour, typography, section order, copy framework — and cites the research behind each one. You're starting from a reasoned design, not a blank canvas with nice fonts.",
+    q: "How is UseFrame different from a traditional website builder?",
+    a: "UseFrame combines AI website generation with research-informed design recommendations. It helps you develop your page structure, content, and visual direction, then refine them in one workspace.",
   },
   {
-    q: "What does \"research-backed\" actually mean here?",
-    a: "Every significant design choice links to a real finding from published design and conversion research. Hover any citation in your brief to see the claim, the paper it came from, and why it was applied to your project. Nothing is invented — if there's no finding to support a decision, it isn't cited.",
+    q: "What does research-backed design mean?",
+    a: "UseFrame draws on a research library to inform design recommendations. Where supporting findings are available, citations let you explore the evidence behind a recommendation.",
   },
   {
-    q: "Do I have to accept the design it gives me?",
-    a: "No. Research produces two genuinely different directions and you pick one, or let the model choose. After that, everything is editable through chat — change a section, rewrite the copy, adjust the palette — and each change creates a new version you can roll back to.",
+    q: "Can I change the generated design?",
+    a: "Yes. Use chat to request changes to your layout, copy, colours, or individual sections. Version history lets you review earlier versions as you refine your website.",
   },
   {
-    q: "What is the Web Score, and can I run it on any site?",
-    a: "It's a six-criterion audit covering visual hierarchy, typography, colour and accessibility, copy, SEO, and measured page speed. It runs on any public URL — your own site or a competitor's — and the performance numbers are really measured, not estimated by a model.",
+    q: "What does the Web Score assess?",
+    a: "Web Score reviews visual hierarchy, typography, colour and accessibility, copy, SEO, and page speed. The assessment highlights areas for improvement on your own public website or a competitor website.",
   },
   {
-    q: "How does the competitor analysis work?",
-    a: "On paid plans we find and scan real competitor sites in your space, then extract the design patterns they use — layout, hierarchy, components, motion. It's used as orientation for your own design, never to copy: no competitor copy or imagery is ever reproduced in what we build for you.",
+    q: "How does competitor analysis help?",
+    a: "Competitor analysis examines public websites to identify patterns in layout, messaging, and visual design. These insights help you make informed decisions about your own website.",
   },
   {
-    q: "What do credits cover, and what's free?",
-    a: "Your first generation is free, no card needed. After that, credits cover generation, research, SEO passes and deploys — buy them in a pack or a custom amount, with no subscription and no expiry. You only spend when you actually generate something.",
+    q: "How do credits work?",
+    a: "Your first website generation is free. Credits cover eligible actions such as generation, research, SEO reviews, and publishing. Review the current costs in your workspace before starting an action.",
   },
   {
     q: "Can I use my own domain?",
-    a: "Yes. Deploy to a UseFrame subdomain instantly, or connect a custom domain you already own and we'll handle the DNS setup and SSL certificate for you.",
+    a: "You can publish to a UseFrame subdomain. Custom domain connections depend on feature availability and require you to verify ownership and configure DNS records.",
   },
   {
-    q: "Who owns the sites I generate?",
-    a: "You do. The pages, the copy and the design are yours to use commercially, modify, or export — we don't claim any ownership over what you create here.",
+    q: "Who owns the website I create?",
+    a: "You retain ownership of the original content you create with UseFrame, subject to our Terms of Service. Any third-party assets remain subject to their respective licences.",
   },
   {
-    q: "Do I need to know how to design or code?",
-    a: "Neither. If you can describe your product in a sentence, you can ship a page. If you do write code, the generated site is clean Next.js and Tailwind, so you can take it further yourself whenever you want.",
+    q: "Do I need design or coding experience?",
+    a: "No. Describe your business and what you want your website to achieve. UseFrame creates a starting point that you can review and refine through chat.",
   },
 ];
 
@@ -135,8 +135,8 @@ export const FaqSection = memo(function FaqSection() {
       <div className="relative mx-auto max-w-3xl">
         <SectionHeading
           eyebrow="FAQ"
-          title="Questions, answered"
-          description="Everything worth knowing before you ship your first page."
+          title="Frequently asked questions"
+          description="A practical guide to creating and publishing with UseFrame."
         />
 
         <div className="mt-10 flex flex-col gap-2.5">

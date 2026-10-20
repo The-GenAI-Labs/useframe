@@ -12,9 +12,9 @@ export const Hero = memo(function Hero({ serifClassName }: { serifClassName: str
         transition={{ duration: 0.7, ease: "easeOut" }}
         className={`${serifClassName} text-balance text-5xl leading-[0.98] tracking-tight text-slate-950 sm:text-7xl xl:text-8xl`}
       >
-        One portal for every
+        Turn your idea into a
         <br />
-        project &amp; client
+        website that works
       </motion.h1>
     </section>
   );

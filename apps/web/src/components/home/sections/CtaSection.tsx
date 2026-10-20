@@ -65,7 +65,7 @@ export const CtaSection = memo(function CtaSection() {
             Everything you need
           </p>
           <h2 className={`${serif.className} mb-12 text-[2.75rem] leading-[1.04] tracking-[-0.022em] text-slate-950 sm:text-5xl lg:text-[3rem]`}>
-            One Tool. Every Layer.
+            From idea to launch.
           </h2>
 
           <div className="flex flex-col">

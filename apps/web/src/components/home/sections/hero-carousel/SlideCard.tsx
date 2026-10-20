@@ -29,7 +29,7 @@ export function SlideCard({
           type="button"
           className="cursor-pointer rounded-full border border-white/40 px-5 py-2 text-xs font-semibold text-white/90 transition-all hover:border-white/70 hover:bg-white/10 active:scale-95"
         >
-          Know More
+          Learn more
         </button>
       </div>
     </div>
