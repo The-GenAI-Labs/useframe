@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 import { motion } from "framer-motion";
-import { serif } from "../fonts";
+import { landingFont as serif } from "../fonts";
 
 type SectionHeadingProps = {
   eyebrow: string;

@@ -4,7 +4,7 @@ import { memo, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { serif } from "../fonts";
+import { landingFont as serif } from "../fonts";
 import { FEATURES } from "./cta/features";
 
 export const CtaSection = memo(function CtaSection() {

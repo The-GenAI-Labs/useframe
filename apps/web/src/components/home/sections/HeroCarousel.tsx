@@ -2,7 +2,7 @@
 
 import { memo, useCallback, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { serif } from "../fonts";
+import { landingFont as serif } from "../fonts";
 import { FiveCornerBlob } from "./hero-carousel/FiveCornerBlob";
 import { WalletBlob } from "./hero-carousel/WalletBlob";
 import { ImageGallery } from "./hero-carousel/ImageGallery";

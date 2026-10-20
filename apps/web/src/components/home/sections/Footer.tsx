@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 import Link from "next/link";
-import { serif } from "../fonts";
+import { landingFont as serif } from "../fonts";
 
 const NAV_LINKS = [
   { label: "Privacy Policy", href: "/privacy" },

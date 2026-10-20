@@ -19,7 +19,7 @@ import { PricingSection } from "./sections/PricingSection";
 import { ShowcaseCarousel } from "./sections/ShowcaseCarousel";
 import { FaqSection } from "./sections/FaqSection";
 import { Footer } from "./sections/Footer";
-import { serif } from "./fonts";
+import { landingFont as serif } from "./fonts";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -75,7 +75,7 @@ function RevealSection({
 
 export const HomeView = memo(function HomeView() {
   return (
-    <div className="relative w-full overflow-x-clip">
+    <div className={`${serif.className} relative w-full overflow-x-clip`} style={{ fontOpticalSizing: "auto" }}>
 
       <Navbar serifClassName={serif.className} />
 
