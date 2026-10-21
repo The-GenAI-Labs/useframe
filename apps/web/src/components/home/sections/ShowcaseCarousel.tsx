@@ -31,11 +31,11 @@ export const ShowcaseCarousel = memo(function ShowcaseCarousel() {
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 z-20 w-[100px] bg-linear-to-r from-white via-white/85 to-transparent"
+        className="pointer-events-none absolute inset-y-0 left-0 z-20 w-[100px] bg-linear-to-r from-white via-white/95 to-transparent drop-shadow-[18px_0_20px_rgba(255,255,255,0.92)]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 z-20 w-[100px] bg-linear-to-l from-white via-white/85 to-transparent"
+        className="pointer-events-none absolute inset-y-0 right-0 z-20 w-[100px] bg-linear-to-l from-white via-white/95 to-transparent drop-shadow-[-18px_0_20px_rgba(255,255,255,0.92)]"
       />
       <div className="mt-0 space-y-3">
         <MarqueeRow images={ROW_TOP} />
