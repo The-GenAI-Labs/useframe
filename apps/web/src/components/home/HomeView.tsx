@@ -14,7 +14,7 @@ import { WorkspacePreview } from "./WorkspacePreview";
 import { QuickActions } from "./QuickActions";
 import { CtaSection } from "./sections/CtaSection";
 import { HeroCarousel } from "./sections/HeroCarousel";
-import { TemplatesSection } from "./sections/TemplatesSection";
+import { WatchDemoSection } from "./sections/WatchDemoSection";
 import { PricingSection } from "./sections/PricingSection";
 import { ShowcaseCarousel } from "./sections/ShowcaseCarousel";
 import { FaqSection } from "./sections/FaqSection";
@@ -97,13 +97,9 @@ export const HomeView = memo(function HomeView() {
           <CtaSection />
         </RevealSection>
 
-        <RevealSection depth={38} delay={0.04} yOffset={70}>
-          <HeroCarousel />
-        </RevealSection>
+        <HeroCarousel />
 
-        <RevealSection depth={28} delay={0.04} yOffset={65}>
-          <TemplatesSection />
-        </RevealSection>
+        <WatchDemoSection />
 
         <RevealSection depth={42} delay={0.04} yOffset={70}>
           <PricingSection />
