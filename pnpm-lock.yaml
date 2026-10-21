@@ -655,8 +655,8 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0
       '@hookform/resolvers':
-        specifier: ^3.9.1
-        version: 3.10.0(react-hook-form@7.76.0(react@19.2.0))
+        specifier: ^5.2.2
+        version: 5.2.2(react-hook-form@7.76.0(react@19.2.0))
       '@hugeicons/core-free-icons':
         specifier: ^4.1.4
         version: 4.1.4
@@ -733,7 +733,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.0(react@19.2.0)
       react-hook-form:
-        specifier: ^7.54.0
+        specifier: ^7.76.0
         version: 7.76.0(react@19.2.0)
       react-loading-skeleton:
         specifier: ^3.5.0
@@ -760,7 +760,7 @@ importers:
         specifier: ^8.18.0
         version: 8.20.1
       zod:
-        specifier: ^3.24.0
+        specifier: ^3.25.76
         version: 3.25.76
       zustand:
         specifier: ^5.0.3
@@ -2586,10 +2586,10 @@ packages:
     peerDependencies:
       hono: ^4
 
-  '@hookform/resolvers@3.10.0':
-    resolution: {integrity: sha512-79Dv+3mDF7i+2ajj7SkypSKHhl1cbln1OGavqrsF7p6mbUv11xpqpacPsGDCTRvCSjEEIez2ef1NveSVL3b0Ag==}
+  '@hookform/resolvers@5.2.2':
+    resolution: {integrity: sha512-A/IxlMLShx3KjV/HeTcTfaMxdwy690+L/ZADoeaTltLx+CVuzkeVIPuybK3jrRfw7YZnmdKsVVHAlEPIAEUNlA==}
     peerDependencies:
-      react-hook-form: ^7.0.0
+      react-hook-form: ^7.55.0
 
   '@hugeicons/core-free-icons@4.1.4':
     resolution: {integrity: sha512-vkMvlnW7Atqh7juhZCadYDvqABWcEeVAkavAK6HJBFbYkLCme5CN51Oc91D5j5ruDja+HQPjMfWkTxxulcwvAQ==}
@@ -4573,6 +4573,9 @@ packages:
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
+  '@standard-schema/utils@0.3.0':
+    resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
@@ -10607,8 +10610,9 @@ snapshots:
     dependencies:
       hono: 4.12.19
 
-  '@hookform/resolvers@3.10.0(react-hook-form@7.76.0(react@19.2.0))':
+  '@hookform/resolvers@5.2.2(react-hook-form@7.76.0(react@19.2.0))':
     dependencies:
+      '@standard-schema/utils': 0.3.0
       react-hook-form: 7.76.0(react@19.2.0)
 
   '@hugeicons/core-free-icons@4.1.4': {}
@@ -12505,6 +12509,8 @@ snapshots:
   '@stablelib/base64@1.0.1': {}
 
   '@standard-schema/spec@1.1.0': {}
+
+  '@standard-schema/utils@0.3.0': {}
 
   '@swc/helpers@0.5.15':
     dependencies:
