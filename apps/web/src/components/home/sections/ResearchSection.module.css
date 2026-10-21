@@ -1,0 +1,309 @@
+.section {
+  position: relative;
+  z-index: 10;
+  scroll-margin-top: 6rem;
+  padding: 1rem 0;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+}
+
+.frame {
+  --frame-color: #fff;
+  --corner: 24px;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: 68%;
+  margin-inline: auto;
+  border: 8px solid var(--frame-color);
+  border-radius: calc(var(--corner) + 8px);
+  background: var(--frame-color);
+  color: #1a1915;
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: var(--corner);
+}
+
+.parallax {
+  position: absolute;
+  inset: -32px 0;
+}
+.image,
+.shade {
+  position: absolute;
+  inset: 0;
+}
+.shade {
+  background: linear-gradient(
+    120deg,
+    rgb(8 29 45 / 68%),
+    rgb(8 29 45 / 12%) 85%
+  );
+}
+
+.actions {
+  grid-column: 2;
+  justify-self: end;
+  position: relative;
+  padding: 0 0 12px 12px;
+  border-bottom-left-radius: var(--corner);
+  background: var(--frame-color);
+}
+
+/* Quarter-circle cutouts join the panels to the photo using the same radius. */
+.actions::before,
+.actions::after,
+.featurePanel::before,
+.featurePanel::after {
+  content: "";
+  position: absolute;
+  width: var(--corner);
+  height: var(--corner);
+  pointer-events: none;
+  background: radial-gradient(
+    circle at bottom left,
+    transparent calc(var(--corner) - 0.5px),
+    var(--frame-color) var(--corner)
+  );
+}
+.actions::before {
+  right: 100%;
+  top: 0;
+}
+.actions::after {
+  right: 0;
+  top: 100%;
+}
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 180ms ease;
+}
+.primaryButton {
+  background: #1a1915;
+  color: white;
+}
+.primaryButton:hover {
+  background: #35342e;
+}
+.secondaryButton {
+  border: 1px solid #c8c7c0;
+}
+.secondaryButton:hover {
+  background: #e0ded8;
+}
+
+.heading {
+  grid-column: 1 / -1;
+  padding: 28px 40px 32px;
+  color: white;
+}
+.eyebrow,
+.cardLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.eyebrow {
+  margin-bottom: 16px;
+}
+.heading h3 {
+  font-size: clamp(2.4rem, 4.2vw, 5.5rem);
+  font-weight: 650;
+  line-height: 1.05;
+  letter-spacing: -0.065em;
+}
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.line > span {
+  display: block;
+}
+.intro {
+  max-width: 340px;
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgb(255 255 255 / 90%);
+}
+
+.featurePanel {
+  grid-column: 1;
+  position: relative;
+  width: 100%;
+  padding: 12px 12px 0 0;
+  border-top-right-radius: var(--corner);
+  background: var(--frame-color);
+}
+.featurePanel::before,
+.featurePanel::after {
+  background: radial-gradient(
+    circle at top right,
+    transparent calc(var(--corner) - 0.5px),
+    var(--frame-color) var(--corner)
+  );
+}
+.featurePanel::before {
+  bottom: 100%;
+  left: 0;
+}
+.featurePanel::after {
+  left: 100%;
+  bottom: 0;
+}
+.card {
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: 6rem;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--corner);
+  background: linear-gradient(135deg, #fff 0%, #dbeafe 45%, #60a5fa 100%);
+}
+.grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.24;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.cardContent {
+  position: relative;
+  padding: 20px;
+}
+.cardLabel {
+  margin-bottom: 12px;
+  color: #334155;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+.features {
+  display: grid;
+}
+.featureButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 4px;
+  border-bottom: 1px solid rgb(30 64 175 / 20%);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+.featureButton svg {
+  flex-shrink: 0;
+}
+.featureButton svg:last-child {
+  margin-left: auto;
+}
+.featureButton:hover,
+.featureButton[aria-pressed="true"] {
+  background: rgb(255 255 255 / 32%);
+}
+.description {
+  display: grid;
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #1e3a5f;
+}
+.tryLink {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding-block: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.tryLink:hover {
+  text-decoration: underline;
+}
+.section :is(a, button, [tabindex]):focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+@media (max-width: 1023px) {
+  .frame {
+    width: calc(100% - 40px);
+  }
+  .heading h3 {
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+  }
+}
+
+@media (max-width: 639px) {
+  .frame {
+    width: calc(100% - 24px);
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .photo {
+    bottom: auto;
+    height: 410px;
+  }
+  .actions {
+    grid-column: 1;
+  }
+  .primaryButton,
+  .secondaryButton {
+    padding-inline: 12px;
+    font-size: 11px;
+  }
+  .heading {
+    padding: 24px 22px 16px;
+  }
+  .heading h3 {
+    font-size: clamp(2rem, 7.7vw, 3rem);
+  }
+  .intro {
+    font-size: 12px;
+  }
+  .featurePanel {
+    grid-row: 3;
+    padding: 12px 0 0;
+    border-radius: var(--corner) var(--corner) 0 0;
+  }
+  .featurePanel::before,
+  .featurePanel::after {
+    display: none;
+  }
+  .cardContent {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section *,
+  .section *::before,
+  .section *::after {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

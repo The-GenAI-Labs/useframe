@@ -9,7 +9,7 @@ test("landing page loads without console errors and the main CTA leads to sign-i
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
   if (isMobile) await page.getByRole("button", { name: "Toggle menu" }).click();
-  await page.getByRole("link", { name: "Get Started" }).click();
+  await page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Get Started" }).click();
 
   await expect(page).toHaveURL(/\/signin$/);
   await expect(page.getByRole("heading", { name: "Welcome to UseFrame" })).toBeVisible();
