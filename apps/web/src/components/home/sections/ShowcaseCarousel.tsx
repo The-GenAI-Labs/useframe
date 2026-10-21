@@ -25,7 +25,18 @@ const ROW_BOTTOM = [
 
 export const ShowcaseCarousel = memo(function ShowcaseCarousel() {
   return (
-    <section aria-label="Design showcase" className="relative z-10 w-full overflow-hidden pt-8 pb-16">
+    <section
+      aria-label="Design showcase"
+      className="relative z-10 w-full overflow-hidden pt-8 pb-16"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-0 z-20 w-[100px] bg-linear-to-r from-white via-white/85 to-transparent"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 z-20 w-[100px] bg-linear-to-l from-white via-white/85 to-transparent"
+      />
       <div className="mt-0 space-y-3">
         <MarqueeRow images={ROW_TOP} />
         <MarqueeRow images={ROW_BOTTOM} reverse />
