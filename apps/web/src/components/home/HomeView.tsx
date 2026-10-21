@@ -1,12 +1,7 @@
 "use client";
 
 import { memo, useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { BackgroundClouds } from "./BackgroundClouds";
 import { Navbar } from "./Navbar";
 import { Hero } from "./Hero";
@@ -15,7 +10,6 @@ import { QuickActions } from "./QuickActions";
 import { CtaSection } from "./sections/CtaSection";
 import { HeroCarousel } from "./sections/HeroCarousel";
 import { WatchDemoSection } from "./sections/WatchDemoSection";
-import { PricingSection } from "./sections/PricingSection";
 import { ShowcaseCarousel } from "./sections/ShowcaseCarousel";
 import { FaqSection } from "./sections/FaqSection";
 import { Footer } from "./sections/Footer";
@@ -62,9 +56,9 @@ function RevealSection({
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.06 }}
         transition={{
-          opacity: { duration: 0.7,  delay, ease: EASE },
-          y:       { duration: 0.85, delay, ease: EASE },
-          scale:   { duration: 0.85, delay, ease: EASE },
+          opacity: { duration: 0.7, delay, ease: EASE },
+          y: { duration: 0.85, delay, ease: EASE },
+          scale: { duration: 0.85, delay, ease: EASE },
         }}
       >
         {children}
@@ -75,8 +69,10 @@ function RevealSection({
 
 export const HomeView = memo(function HomeView() {
   return (
-    <div className={`${serif.className} relative w-full overflow-x-clip`} style={{ fontOpticalSizing: "auto" }}>
-
+    <div
+      className={`${serif.className} relative w-full overflow-x-clip`}
+      style={{ fontOpticalSizing: "auto" }}
+    >
       <Navbar serifClassName={serif.className} />
 
       <div className="relative h-screen w-full">
@@ -92,27 +88,13 @@ export const HomeView = memo(function HomeView() {
       </div>
 
       <div className="relative z-10 -mt-px flex flex-col gap-16 bg-white sm:gap-24">
-
-        <RevealSection depth={18} delay={0}    yOffset={50}>
+        <RevealSection depth={18} delay={0} yOffset={50}>
           <CtaSection />
         </RevealSection>
 
         <HeroCarousel />
 
         <WatchDemoSection />
-
-        <RevealSection depth={42} delay={0.04} yOffset={70}>
-          <PricingSection />
-        </RevealSection>
-
-        <div
-          aria-hidden
-          className="pointer-events-none relative z-0 h-20 w-full sm:h-28"
-          style={{
-            background:
-              "linear-gradient(to bottom, transparent 0%, rgba(37,99,235,0.06) 50%, transparent 100%)",
-          }}
-        />
 
         <RevealSection depth={48} delay={0.04} yOffset={80}>
           <ShowcaseCarousel />

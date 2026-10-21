@@ -9,7 +9,8 @@ const NAV_LINKS = [
   { label: "Terms of Service", href: "/terms" },
   { label: "Contact", href: "/contact" },
   { label: "About", href: "/about" },
-  { label: "Research", href: "#research" },
+  { label: "Research", href: "/#research" },
+  { label: "Pricing", href: "/pricing" },
 ];
 
 const SOCIALS = [
@@ -54,7 +55,6 @@ const SOCIALS = [
 export const Footer = memo(function Footer() {
   return (
     <footer className="relative w-full bg-white">
-
       <div className="relative overflow-hidden px-6 py-8">
         <div
           aria-hidden
@@ -72,7 +72,9 @@ export const Footer = memo(function Footer() {
         />
 
         <div className="relative mx-auto flex max-w-2xl flex-col items-center text-center">
-          <p className={`${serif.className} text-4xl tracking-tight text-slate-950 sm:text-5xl`}>
+          <p
+            className={`${serif.className} text-4xl tracking-tight text-slate-950 sm:text-5xl`}
+          >
             UseFrame
           </p>
         </div>
@@ -90,7 +92,10 @@ export const Footer = memo(function Footer() {
                   {l.label}
                 </Link>
                 {i < NAV_LINKS.length - 1 && (
-                  <span className="mx-2 size-1 rounded-full bg-slate-300" aria-hidden />
+                  <span
+                    className="mx-2 size-1 rounded-full bg-slate-300"
+                    aria-hidden
+                  />
                 )}
               </div>
             ))}
@@ -125,7 +130,6 @@ export const Footer = memo(function Footer() {
           draggable={false}
         />
       </div>
-
     </footer>
   );
 });

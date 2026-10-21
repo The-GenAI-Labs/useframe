@@ -5,5 +5,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   if (!isIndexableDeployment) return [];
 
   // Legal pages are drafts; workspace and finding URLs are not indexing targets.
-  return [{ url: `${SITE_URL}/` }];
+  return [{ url: `${SITE_URL}/` }, { url: `${SITE_URL}/pricing` }];
 }

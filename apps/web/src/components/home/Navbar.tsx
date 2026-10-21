@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
 
-const NAV_LINKS = [
-  { label: "Research", href: "#research" },
-  { label: "Pricing", href: "#pricing" },
+const NAV_LINKS: { label: string; href: string; sectionId?: string }[] = [
+  { label: "Research", href: "/#research", sectionId: "research" },
+  { label: "Pricing", href: "/pricing" },
 ];
 
 const smoothScrollTo = (id: string) => {
@@ -15,7 +15,11 @@ const smoothScrollTo = (id: string) => {
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
-export const Navbar = memo(function Navbar({ serifClassName }: { serifClassName: string }) {
+export const Navbar = memo(function Navbar({
+  serifClassName,
+}: {
+  serifClassName: string;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -27,10 +31,10 @@ export const Navbar = memo(function Navbar({ serifClassName }: { serifClassName:
   }, []);
 
   const handleNavClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      if (href.startsWith("#")) {
+    (e: React.MouseEvent<HTMLAnchorElement>, sectionId?: string) => {
+      if (sectionId && window.location.pathname === "/") {
         e.preventDefault();
-        smoothScrollTo(href);
+        smoothScrollTo(sectionId);
         setMobileOpen(false);
       }
     },
@@ -73,12 +77,14 @@ export const Navbar = memo(function Navbar({ serifClassName }: { serifClassName:
 
           <div className="flex-1" />
 
-          <div className={`hidden shrink-0 items-center md:flex ${scrolled ? "mr-5 gap-6" : "mr-4 gap-5"}`}>
+          <div
+            className={`hidden shrink-0 items-center md:flex ${scrolled ? "mr-5 gap-6" : "mr-4 gap-5"}`}
+          >
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
+                onClick={(e) => handleNavClick(e, link.sectionId)}
                 className="cursor-pointer text-[13px] font-medium text-slate-700 transition-colors hover:text-slate-950"
               >
                 {link.label}
@@ -103,7 +109,11 @@ export const Navbar = memo(function Navbar({ serifClassName }: { serifClassName:
               className="flex cursor-pointer items-center justify-center rounded-lg p-2 text-slate-700 transition-colors hover:bg-white/40 md:hidden"
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+              {mobileOpen ? (
+                <X className="size-5" />
+              ) : (
+                <Menu className="size-5" />
+              )}
             </button>
           </div>
         </nav>
@@ -115,7 +125,7 @@ export const Navbar = memo(function Navbar({ serifClassName }: { serifClassName:
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
+                    onClick={(e) => handleNavClick(e, link.sectionId)}
                     className="block cursor-pointer rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 transition-colors hover:bg-white/60"
                   >
                     {link.label}
