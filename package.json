@@ -44,5 +44,9 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,mjs,cjs}": "eslint --fix --no-warn-ignored"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^6.0.0",
+    "zod": "^4.4.3"
   }
 }
