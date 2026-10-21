@@ -87,7 +87,7 @@ export const Footer = memo(function Footer() {
               <div key={l.label} className="flex items-center">
                 <Link
                   href={l.href}
-                  className="text-xs font-medium text-slate-500 transition-colors hover:text-slate-800"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center text-xs font-medium text-slate-500 transition-colors hover:text-slate-800 sm:min-h-0 sm:min-w-0"
                 >
                   {l.label}
                 </Link>
@@ -108,7 +108,7 @@ export const Footer = memo(function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="flex size-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-900"
+                className="flex size-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-900 sm:size-8"
               >
                 {s.icon}
               </a>
@@ -148,7 +148,7 @@ export const Footer = memo(function Footer() {
         <img
           src="/useframe footer.png"
           alt="UseFrame footer"
-          className="-mb-2 w-full object-cover object-top"
+          className="-mb-2 w-full object-cover object-top sm:-mb-4 lg:-mb-16"
           draggable={false}
         />
       </div>

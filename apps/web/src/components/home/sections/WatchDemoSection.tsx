@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useId, useRef, useState } from "react";
+import { memo, useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import {
   motion,
@@ -212,7 +212,12 @@ function FloatingCard({
 export const WatchDemoSection = memo(function WatchDemoSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const playRef = useRef<HTMLButtonElement>(null);
-  const reduced = useReducedMotion() ?? false;
+  const prefersReducedMotion = useReducedMotion();
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    setReduced(prefersReducedMotion ?? false);
+  }, [prefersReducedMotion]);
   const [hovered, setHovered] = useState<string | null>(null);
   const [focused, setFocused] = useState<string | null>(null);
   const [playing, setPlaying] = useState(false);

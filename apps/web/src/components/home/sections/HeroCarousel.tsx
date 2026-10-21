@@ -1,12 +1,17 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { landingFont as serif } from "../fonts";
 import { ResearchSection } from "./ResearchSection";
 
 export const HeroCarousel = memo(function HeroCarousel() {
-  const reduced = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    setReduced(prefersReducedMotion ?? false);
+  }, [prefersReducedMotion]);
   return (
     <section
       id="research"

@@ -66,7 +66,11 @@ const FaqItem = memo(function FaqItem({
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: Math.min(index * 0.04, 0.2), ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.5,
+        delay: Math.min(index * 0.04, 0.2),
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className={`group overflow-hidden rounded-2xl border transition-colors duration-300 ${
         isOpen
           ? "border-blue-200 bg-blue-50/40"
@@ -122,7 +126,10 @@ export const FaqSection = memo(function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative z-10 w-full scroll-mt-24 overflow-hidden px-6 py-8">
+    <section
+      id="faq"
+      className="relative z-10 w-full scroll-mt-24 overflow-hidden px-6 py-8"
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -162,7 +169,7 @@ export const FaqSection = memo(function FaqSection() {
           Still have a question?{" "}
           <a
             href="mailto:hello@useframe.in"
-            className="font-medium text-blue-600 underline underline-offset-2 transition-colors hover:text-blue-500"
+            className="inline-flex min-h-12 items-center font-medium text-blue-600 underline underline-offset-2 transition-colors hover:text-blue-500"
           >
             Get in touch
           </a>

@@ -1,25 +1,44 @@
 "use client";
 
-import { memo, useRef, useState, useCallback } from "react";
+import { memo, useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
-import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { landingFont as serif } from "../fonts";
 import { FEATURES } from "./cta/features";
 
 export const CtaSection = memo(function CtaSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const rightRef   = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = useReducedMotion();
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    setReducedMotion(prefersReducedMotion ?? false);
+  }, [prefersReducedMotion]);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  const rawCard = useTransform(scrollYProgress, [0, 1], [130, -130]);
-  const cardY   = useSpring(rawCard, { stiffness: 18, damping: 14, mass: 1.2 });
-
+  const cardOffset = reducedMotion ? 0 : isMobile ? 28 : 130;
+  const rawCard = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [cardOffset, -cardOffset],
+  );
+  const cardY = useSpring(rawCard, { stiffness: 18, damping: 14, mass: 1.2 });
 
   const feat = FEATURES[active];
   const handleEnter = useCallback((i: number) => setActive(i), []);
@@ -50,8 +69,10 @@ export const CtaSection = memo(function CtaSection() {
         aria-hidden
         className="pointer-events-none absolute inset-y-0 left-0 z-0 w-1/2"
         style={{
-          maskImage: "linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)",
+          maskImage:
+            "linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)",
           backgroundImage:
             "linear-gradient(rgba(37,99,235,0.18) 1px, transparent 1px)," +
             "linear-gradient(90deg, rgba(37,99,235,0.18) 1px, transparent 1px)",
@@ -64,7 +85,9 @@ export const CtaSection = memo(function CtaSection() {
           <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.24em] text-blue-500">
             Everything you need
           </p>
-          <h2 className={`${serif.className} mb-12 text-[2.75rem] leading-[1.04] tracking-[-0.022em] text-slate-950 sm:text-5xl lg:text-[3rem]`}>
+          <h2
+            className={`${serif.className} mb-12 text-[2.75rem] leading-[1.04] tracking-[-0.022em] text-slate-950 sm:text-5xl lg:text-[3rem]`}
+          >
             From idea to launch.
           </h2>
 
@@ -73,12 +96,10 @@ export const CtaSection = memo(function CtaSection() {
               const Icon = f.icon;
               const isActive = active === i;
               return (
-                <button
+                <div
                   key={f.id}
-                  type="button"
                   onMouseEnter={() => handleEnter(i)}
-                  onClick={() => handleEnter(i)}
-                  className={`group relative flex cursor-pointer items-center gap-4 border-b py-4 text-left last:border-0 transition-colors duration-200 ${
+                  className={`group relative flex flex-wrap items-center gap-4 border-b py-4 text-left last:border-0 transition-colors duration-200 min-[380px]:flex-nowrap ${
                     isActive ? "border-slate-200" : "border-slate-100/80"
                   }`}
                 >
@@ -90,35 +111,52 @@ export const CtaSection = memo(function CtaSection() {
                       opacity: isActive ? 1 : 0,
                     }}
                   />
-                  <span
-                    className="w-7 shrink-0 font-mono text-[11px] tabular-nums transition-colors duration-200"
-                    style={{ color: isActive ? `rgb(${f.accentRgb})` : "rgb(203,213,225)" }}
+                  <button
+                    type="button"
+                    onClick={() => handleEnter(i)}
+                    onFocus={() => handleEnter(i)}
+                    className="flex min-h-12 min-w-0 cursor-pointer items-center gap-4 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-500"
                   >
-                    {f.number}
-                  </span>
-                  <Icon
-                    className="size-4 shrink-0 transition-colors duration-200"
-                    style={{ color: isActive ? "rgb(71,85,105)" : "rgb(203,213,225)" }}
-                  />
-                  <span
-                    className="whitespace-nowrap text-[15px] font-medium tracking-tight transition-colors duration-200"
-                    style={{ color: isActive ? "rgb(2,6,23)" : "rgb(148,163,184)" }}
+                    <span
+                      className="w-7 shrink-0 font-mono text-[11px] tabular-nums transition-colors duration-200"
+                      style={{
+                        color: isActive
+                          ? `rgb(${f.accentRgb})`
+                          : "rgb(203,213,225)",
+                      }}
+                    >
+                      {f.number}
+                    </span>
+                    <Icon
+                      className="size-4 shrink-0 transition-colors duration-200"
+                      style={{
+                        color: isActive ? "rgb(71,85,105)" : "rgb(203,213,225)",
+                      }}
+                    />
+                    <span
+                      className="text-[15px] font-medium tracking-tight transition-colors duration-200 min-[380px]:whitespace-nowrap"
+                      style={{
+                        color: isActive ? "rgb(2,6,23)" : "rgb(148,163,184)",
+                      }}
+                    >
+                      {f.label}
+                    </span>
+                  </button>
+                  <div
+                    className={`${isActive ? "flex" : "hidden min-[380px]:flex"} basis-full items-center justify-start gap-2 pl-11 min-[380px]:ml-auto min-[380px]:w-[168px] min-[380px]:basis-auto min-[380px]:justify-end min-[380px]:pl-0`}
                   >
-                    {f.label}
-                  </span>
-                  <div className="ml-auto flex w-[168px] shrink-0 items-center justify-end gap-2">
                     {isActive ? (
                       <div className="flex items-center gap-1.5">
                         <Link
                           href="/research"
-                          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium text-slate-600"
+                          className="inline-flex min-h-12 items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 text-[11px] font-medium text-slate-600 min-[380px]:px-2.5"
                         >
                           <BookOpen className="size-3 text-slate-400" />
                           Research
                         </Link>
                         <Link
                           href="/signin"
-                          className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-[11px] font-semibold text-white"
+                          className="inline-flex min-h-12 items-center gap-1 rounded-lg px-3 text-[11px] font-semibold text-white min-[380px]:px-2.5"
                           style={{
                             background: `linear-gradient(135deg, rgb(${f.accentRgb}), rgba(${f.accentRgb},0.65))`,
                           }}
@@ -138,7 +176,7 @@ export const CtaSection = memo(function CtaSection() {
                       </div>
                     )}
                   </div>
-                </button>
+                </div>
               );
             })}
           </div>
@@ -147,21 +185,46 @@ export const CtaSection = memo(function CtaSection() {
         <motion.div ref={rightRef} style={{ y: cardY }} className="relative">
           <div
             className="relative overflow-hidden rounded-[2rem] border-[10px] border-white shadow-[0_28px_80px_-20px_rgba(37,99,235,0.55),0_0_0_1px_rgba(37,99,235,0.15)]"
-            style={{ background: "linear-gradient(135deg, #1d4ed8 0%, #3b82f6 40%, #1e40af 75%, #1e3a8a 100%)" }}
+            style={{
+              background:
+                "linear-gradient(135deg, #1d4ed8 0%, #3b82f6 40%, #1e40af 75%, #1e3a8a 100%)",
+            }}
           >
             <div
               aria-hidden
               className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-[1.4rem]"
-              style={{ background: "linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 100%)" }}
+              style={{
+                background:
+                  "linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 100%)",
+              }}
             />
             <svg
               aria-hidden
               className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.28]"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <filter id="ctaGrain" x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
-                <feTurbulence type="fractalNoise" baseFrequency="0.72 0.68" numOctaves="4" seed="5" stitchTiles="stitch" result="noise" />
-                <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise" />
+              <filter
+                id="ctaGrain"
+                x="-5%"
+                y="-5%"
+                width="110%"
+                height="110%"
+                colorInterpolationFilters="sRGB"
+              >
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.72 0.68"
+                  numOctaves="4"
+                  seed="5"
+                  stitchTiles="stitch"
+                  result="noise"
+                />
+                <feColorMatrix
+                  type="saturate"
+                  values="0"
+                  in="noise"
+                  result="grayNoise"
+                />
                 <feComponentTransfer in="grayNoise" result="contrastNoise">
                   <feFuncR type="linear" slope="4" intercept="-1.5" />
                   <feFuncG type="linear" slope="4" intercept="-1.5" />
@@ -179,7 +242,9 @@ export const CtaSection = memo(function CtaSection() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
                 className="pointer-events-none absolute -right-20 -top-20 size-72 rounded-full blur-3xl"
-                style={{ background: `radial-gradient(circle, rgba(${feat.accentRgb},0.13) 0%, transparent 70%)` }}
+                style={{
+                  background: `radial-gradient(circle, rgba(${feat.accentRgb},0.13) 0%, transparent 70%)`,
+                }}
               />
             </AnimatePresence>
 
@@ -194,11 +259,15 @@ export const CtaSection = memo(function CtaSection() {
                 >
                   <span
                     className="inline-block rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white"
-                    style={{ background: `linear-gradient(135deg, rgb(${feat.accentRgb}), rgba(${feat.accentRgb},0.6))` }}
+                    style={{
+                      background: `linear-gradient(135deg, rgb(${feat.accentRgb}), rgba(${feat.accentRgb},0.6))`,
+                    }}
                   >
                     {feat.tag}
                   </span>
-                  <h3 className={`${serif.className} mt-5 whitespace-nowrap text-[1.75rem] leading-[1.08] tracking-[-0.018em] text-white sm:text-[2rem]`}>
+                  <h3
+                    className={`${serif.className} mt-5 text-[1.75rem] leading-[1.08] tracking-[-0.018em] text-white sm:whitespace-nowrap sm:text-[2rem]`}
+                  >
                     {feat.headline}
                   </h3>
                   <p className="mt-3 text-[13px] leading-[1.72] tracking-[0.004em] text-blue-100">
@@ -218,24 +287,73 @@ export const CtaSection = memo(function CtaSection() {
                   transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
                   className="relative overflow-hidden rounded-xl border border-slate-100/80 shadow-[0_6px_28px_-6px_rgba(0,0,0,0.09)]"
                 >
-                  <div aria-hidden className="pointer-events-none absolute inset-0 z-10">
-                    <svg className="absolute left-2.5 top-2.5" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <path d="M0 9 L0 0 L9 0" stroke="rgba(148,163,184,0.45)" strokeWidth="1" />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 z-10"
+                  >
+                    <svg
+                      className="absolute left-2.5 top-2.5"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M0 9 L0 0 L9 0"
+                        stroke="rgba(148,163,184,0.45)"
+                        strokeWidth="1"
+                      />
                     </svg>
-                    <svg className="absolute right-2.5 top-2.5" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <path d="M18 9 L18 0 L9 0" stroke="rgba(148,163,184,0.45)" strokeWidth="1" />
+                    <svg
+                      className="absolute right-2.5 top-2.5"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M18 9 L18 0 L9 0"
+                        stroke="rgba(148,163,184,0.45)"
+                        strokeWidth="1"
+                      />
                     </svg>
-                    <svg className="absolute bottom-2.5 left-2.5" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <path d="M0 9 L0 18 L9 18" stroke="rgba(148,163,184,0.45)" strokeWidth="1" />
+                    <svg
+                      className="absolute bottom-2.5 left-2.5"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M0 9 L0 18 L9 18"
+                        stroke="rgba(148,163,184,0.45)"
+                        strokeWidth="1"
+                      />
                     </svg>
-                    <svg className="absolute bottom-2.5 right-2.5" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <path d="M18 9 L18 18 L9 18" stroke="rgba(148,163,184,0.45)" strokeWidth="1" />
+                    <svg
+                      className="absolute bottom-2.5 right-2.5"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
+                      <path
+                        d="M18 9 L18 18 L9 18"
+                        stroke="rgba(148,163,184,0.45)"
+                        strokeWidth="1"
+                      />
                     </svg>
                   </div>
-                  <img src={feat.image} alt={feat.label} className="aspect-[16/9] w-full object-cover" />
+                  <img
+                    src={feat.image}
+                    alt={feat.label}
+                    className="aspect-[16/9] w-full object-cover"
+                  />
                   <div
                     className="absolute inset-x-0 bottom-0 h-1/3"
-                    style={{ background: `linear-gradient(to top, rgba(${feat.accentRgb},0.07), transparent)` }}
+                    style={{
+                      background: `linear-gradient(to top, rgba(${feat.accentRgb},0.07), transparent)`,
+                    }}
                   />
                 </motion.div>
               </AnimatePresence>

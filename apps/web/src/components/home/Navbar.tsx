@@ -106,7 +106,7 @@ export const Navbar = memo(function Navbar({
             <button
               type="button"
               onClick={toggleMobile}
-              className="flex cursor-pointer items-center justify-center rounded-lg p-2 text-slate-700 transition-colors hover:bg-white/40 md:hidden"
+              className="flex size-11 cursor-pointer items-center justify-center rounded-lg text-slate-700 transition-colors hover:bg-white/40 md:hidden"
               aria-label="Toggle menu"
             >
               {mobileOpen ? (

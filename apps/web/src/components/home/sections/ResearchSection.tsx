@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useId, useRef, useState } from "react";
+import { memo, useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -42,8 +42,13 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export const ResearchSection = memo(function ResearchSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const grainId = useId();
-  const reducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
+  const [reducedMotion, setReducedMotion] = useState(false);
   const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    setReducedMotion(prefersReducedMotion ?? false);
+  }, [prefersReducedMotion]);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
