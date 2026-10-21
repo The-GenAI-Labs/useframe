@@ -98,12 +98,15 @@ describe("page metadata indexing policy", () => {
     expect(isIndexableDeployment).toBe(false);
   });
 
-  it("serves only the public canonical homepage in the production sitemap", async () => {
+  it("serves the public canonical pages in the production sitemap", async () => {
     const { SITE_URL } = await metadataFor("production", "production", "true");
     const { default: sitemap } = await import("../../app/sitemap");
     const { default: robots } = await import("../../app/robots");
 
-    expect(sitemap()).toEqual([{ url: `${SITE_URL}/` }]);
+    expect(sitemap()).toEqual([
+      { url: `${SITE_URL}/` },
+      { url: `${SITE_URL}/pricing` },
+    ]);
     expect(robots()).toEqual({
       rules: { userAgent: "*", allow: "/", disallow: "/api/" },
       sitemap: `${SITE_URL}/sitemap.xml`,
