@@ -141,6 +141,10 @@ export const Footer = memo(function Footer() {
               "linear-gradient(to top, black 62%, transparent 100%)",
           }}
         />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-14 bg-linear-to-t from-white via-white/95 to-transparent drop-shadow-[0_-30px_42px_rgba(255,255,255,0.98)] sm:h-24 lg:h-[150px]"
+        />
         <img
           src="/useframe footer.png"
           alt="UseFrame footer"
