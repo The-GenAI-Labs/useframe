@@ -148,7 +148,7 @@ export const Footer = memo(function Footer() {
         <img
           src="/useframe footer.png"
           alt="UseFrame footer"
-          className="-mb-2 w-full object-cover object-top sm:-mb-4 lg:-mb-16"
+          className="-mb-2 w-full object-cover object-top"
           draggable={false}
         />
       </div>
