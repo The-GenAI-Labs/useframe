@@ -11,7 +11,6 @@ export const FEATURES = [
     description:
       "Turn a short brief into a landing page with a clear structure, focused copy, and purposeful calls to action. Refine the result through chat.",
     accentRgb: "37,99,235",
-    image: "/chat/useframecloud.jpg",
   },
   {
     id: "seo",
@@ -23,7 +22,6 @@ export const FEATURES = [
     description:
       "Review your website SEO and identify improvements to content, metadata, and page structure before you publish.",
     accentRgb: "5,150,105",
-    image: "/chat/useframecloud.jpg",
   },
   {
     id: "domain",
@@ -35,7 +33,6 @@ export const FEATURES = [
     description:
       "Publish on a UseFrame subdomain. Custom domain support is subject to availability and requires domain verification.",
     accentRgb: "124,58,237",
-    image: "/chat/useframecloud.jpg",
   },
   {
     id: "deployment",
@@ -47,7 +44,6 @@ export const FEATURES = [
     description:
       "Preview your website, review your changes, and publish when you are ready. Keep previous versions available as your site evolves.",
     accentRgb: "225,29,72",
-    image: "/chat/useframecloud.jpg",
   },
   {
     id: "score",
@@ -59,6 +55,5 @@ export const FEATURES = [
     description:
       "Assess design, accessibility, content, SEO, and performance. Use clear recommendations to prioritise your next improvements.",
     accentRgb: "245,158,11",
-    image: "/chat/useframecloud.jpg",
   },
 ] as const;

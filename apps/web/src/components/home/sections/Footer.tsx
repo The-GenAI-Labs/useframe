@@ -56,21 +56,6 @@ export const Footer = memo(function Footer() {
   return (
     <footer className="relative w-full bg-white">
       <div className="relative overflow-hidden px-6 py-8">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-full"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(37,99,235,0.07) 1px, transparent 1px)," +
-              "linear-gradient(90deg, rgba(37,99,235,0.07) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-            maskImage:
-              "radial-gradient(ellipse 70% 90% at 50% 50%, transparent 30%, rgba(0,0,0,0.4) 65%, rgba(0,0,0,0.7) 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 70% 90% at 50% 50%, transparent 30%, rgba(0,0,0,0.4) 65%, rgba(0,0,0,0.7) 100%)",
-          }}
-        />
-
         <div className="relative mx-auto flex max-w-2xl flex-col items-center text-center">
           <p
             className={`${serif.className} text-4xl tracking-tight text-slate-950 sm:text-5xl`}

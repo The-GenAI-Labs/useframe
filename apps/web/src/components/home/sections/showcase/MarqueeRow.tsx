@@ -49,7 +49,7 @@ export const MarqueeRow = memo(function MarqueeRow({
             {images.map((src) => (
               <div
                 key={`${copyIndex}-${src}`}
-                className="relative aspect-4/3 w-64 shrink-0 overflow-hidden rounded-[25px] bg-linear-to-br from-blue-50 via-blue-100 to-blue-300 p-[10px] shadow-[0_14px_34px_-12px_rgba(30,64,175,0.35)] sm:w-72"
+                className="relative aspect-4/3 w-64 shrink-0 overflow-hidden rounded-[25px] bg-linear-to-br from-blue-50 via-blue-100 to-blue-300 p-[10px] sm:w-72"
               >
                 <svg
                   aria-hidden

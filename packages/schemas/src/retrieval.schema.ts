@@ -11,6 +11,7 @@ export const ResearchCategoryEnum = z.enum([
   "ACCESSIBILITY",
   "AGE_GROUP",
   "INDUSTRY",
+  "MOTION",
   "OTHER",
 ])
 export type ResearchCategory = z.infer<typeof ResearchCategoryEnum>

@@ -249,6 +249,7 @@ export const ResearchCategory = {
   ACCESSIBILITY: 'ACCESSIBILITY',
   AGE_GROUP: 'AGE_GROUP',
   INDUSTRY: 'INDUSTRY',
+  MOTION: 'MOTION',
   OTHER: 'OTHER'
 } as const
 

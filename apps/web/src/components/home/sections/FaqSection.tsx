@@ -73,7 +73,7 @@ const FaqItem = memo(function FaqItem({
       }}
       className={`group overflow-hidden rounded-2xl border transition-colors duration-300 ${
         isOpen
-          ? "border-blue-200 bg-blue-50/40"
+          ? "border-blue-200 bg-white"
           : "border-slate-200 bg-white hover:border-slate-300"
       }`}
     >
@@ -130,15 +130,6 @@ export const FaqSection = memo(function FaqSection() {
       id="faq"
       className="relative z-10 w-full scroll-mt-24 overflow-hidden px-6 py-8"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(37,99,235,0.06) 0%, transparent 70%)",
-        }}
-      />
-
       <div className="relative mx-auto max-w-3xl">
         <SectionHeading
           eyebrow="FAQ"

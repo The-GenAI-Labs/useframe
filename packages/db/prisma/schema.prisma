@@ -192,6 +192,7 @@ enum ResearchCategory {
   ACCESSIBILITY
   AGE_GROUP
   INDUSTRY
+  MOTION
   OTHER
 }
 

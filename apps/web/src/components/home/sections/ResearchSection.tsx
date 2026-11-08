@@ -11,6 +11,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { ArrowUpRight, BarChart3, FileSearch, Globe } from "lucide-react";
+import { landingFont } from "../fonts";
 import styles from "./ResearchSection.module.css";
 
 const FEATURES = [
@@ -73,11 +74,11 @@ export const ResearchSection = memo(function ResearchSection() {
               transition={{ duration: reducedMotion ? 0 : 1.4, ease: EASE }}
             >
               <Image
-                src="/chat/useframecloud.jpg"
+                src="/useframe%20research.png"
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 68vw, 94vw"
-                className="object-cover"
+                className="object-cover object-[78%_center]"
               />
             </motion.div>
           </motion.div>
@@ -106,7 +107,10 @@ export const ResearchSection = memo(function ResearchSection() {
 
         <div className={styles.heading}>
           <p className={styles.eyebrow}>UseFrame / Research</p>
-          <h3 aria-label="Know the market before you build">
+          <h3
+            className={landingFont.className}
+            aria-label="Know the market before you build"
+          >
             {["Know the market", "before you build."].map((line, index) => (
               <span key={line} className={styles.line} aria-hidden="true">
                 <motion.span

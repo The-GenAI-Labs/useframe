@@ -1,0 +1,682 @@
+{
+  "findings": [
+    {
+      "claim": "Fixture claim one says the first sample treatment shifted preference toward the cooler variant.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2021,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://doi.org/10.1000/example.one",
+      "field": "color_psychology",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "a",
+          "label": "Option A",
+          "fits": [
+            "trust",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Option B",
+          "fits": [
+            "energy",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "c",
+          "label": "Option C",
+          "fits": [
+            "trust"
+          ]
+        },
+        {
+          "value": "d",
+          "label": "Option D",
+          "fits": [
+            "luxury"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": true
+    },
+    {
+      "claim": "Fixture claim two says the second sample treatment improved reading speed for the serif variant.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2022,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://example.org/papers/two#section-3",
+      "field": "typography",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "body_font",
+      "options": [
+        {
+          "value": "a",
+          "label": "Option A",
+          "fits": [
+            "trust",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Option B",
+          "fits": [
+            "energy",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "c",
+          "label": "Option C",
+          "fits": [
+            "trust"
+          ]
+        },
+        {
+          "value": "d",
+          "label": "Option D",
+          "fits": [
+            "luxury"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": true
+    },
+    {
+      "claim": "Fixture claim three says the third sample treatment reduced scanning time in the grid variant.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2023,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://example.org/papers/three/",
+      "field": "layout",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "grid_density",
+      "options": [
+        {
+          "value": "a",
+          "label": "Option A",
+          "fits": [
+            "trust",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Option B",
+          "fits": [
+            "energy",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "c",
+          "label": "Option C",
+          "fits": [
+            "trust"
+          ]
+        },
+        {
+          "value": "d",
+          "label": "Option D",
+          "fits": [
+            "luxury"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": true
+    },
+    {
+      "claim": "Fixture claim four says the fourth sample treatment raised completion in the short form variant.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2020,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12345678/",
+      "field": "conversion",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "form_length",
+      "options": [
+        {
+          "value": "a",
+          "label": "Option A",
+          "fits": [
+            "trust",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Option B",
+          "fits": [
+            "energy",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "c",
+          "label": "Option C",
+          "fits": [
+            "trust"
+          ]
+        },
+        {
+          "value": "d",
+          "label": "Option D",
+          "fits": [
+            "luxury"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": true
+    },
+    {
+      "claim": "Fixture claim five says the fifth sample treatment improved legibility in the high contrast variant.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2021,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://example.org/papers/five",
+      "field": "accessibility",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "contrast_level",
+      "options": [
+        {
+          "value": "a",
+          "label": "Option A",
+          "fits": [
+            "trust",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Option B",
+          "fits": [
+            "energy",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "c",
+          "label": "Option C",
+          "fits": [
+            "trust"
+          ]
+        },
+        {
+          "value": "d",
+          "label": "Option D",
+          "fits": [
+            "luxury"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": false
+    },
+    {
+      "claim": "Fixture claim six says the sixth sample treatment lowered perceived wait with the subtle motion variant.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2022,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://example.org/papers/not-in-any-article",
+      "field": "motion",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "loading_motion",
+      "options": [
+        {
+          "value": "a",
+          "label": "Option A",
+          "fits": [
+            "trust",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Option B",
+          "fits": [
+            "energy",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "c",
+          "label": "Option C",
+          "fits": [
+            "trust"
+          ]
+        },
+        {
+          "value": "d",
+          "label": "Option D",
+          "fits": [
+            "luxury"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": true
+    },
+    {
+      "claim": "Fixture claim seven says the seventh sample treatment changed navigation depth with the flat menu variant.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2023,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://example.org/papers/seven",
+      "field": "layout",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "menu_structure",
+      "options": [
+        {
+          "value": "a",
+          "label": "Flat menu",
+          "fits": [
+            "simple"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Nested menu",
+          "fits": [
+            "complex"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": true
+    },
+    {
+      "claim": "Fixture claim eight says the eighth sample treatment altered recall for the large heading variant.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2020,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://example.org/papers/dup",
+      "field": "typography",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "heading_size",
+      "options": [
+        {
+          "value": "a",
+          "label": "Option A",
+          "fits": [
+            "trust",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Option B",
+          "fits": [
+            "energy",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "c",
+          "label": "Option C",
+          "fits": [
+            "trust"
+          ]
+        },
+        {
+          "value": "d",
+          "label": "Option D",
+          "fits": [
+            "luxury"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": true
+    },
+    {
+      "claim": "Fixture claim nine says a different sample treatment cut abandonment with the inline error variant.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2021,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://pubmed.ncbi.nlm.nih.gov/12345678/",
+      "field": "conversion",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "error_display",
+      "options": [
+        {
+          "value": "a",
+          "label": "Option A",
+          "fits": [
+            "trust",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Option B",
+          "fits": [
+            "energy",
+            "calm_brand"
+          ]
+        },
+        {
+          "value": "c",
+          "label": "Option C",
+          "fits": [
+            "trust"
+          ]
+        },
+        {
+          "value": "d",
+          "label": "Option D",
+          "fits": [
+            "luxury"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": true
+    },
+    {
+      "claim": "Fixture claim ten says the tenth sample treatment broadened appeal across many contexts.",
+      "authors": [
+        "Placeholder, A.",
+        "Sample, B."
+      ],
+      "publicationYear": 2022,
+      "publishedIn": "Journal of Placeholder Studies",
+      "publicationType": "journal_article",
+      "sourceUrl": "https://doi.org/10.1000/example.ten",
+      "field": "color_psychology",
+      "appliesTo": [
+        "landing_page",
+        "pricing_page"
+      ],
+      "audience": [
+        "general_adults"
+      ],
+      "decision": "accent_color",
+      "options": [
+        {
+          "value": "a",
+          "label": "Wide A",
+          "fits": [
+            "fit_a",
+            "fit_b",
+            "fit_c",
+            "fit_d",
+            "fit_e",
+            "fit_a"
+          ]
+        },
+        {
+          "value": "b",
+          "label": "Wide B",
+          "fits": [
+            "fit_d",
+            "fit_e",
+            "fit_f",
+            "fit_g",
+            "fit_h",
+            "fit_i"
+          ]
+        },
+        {
+          "value": "c",
+          "label": "Wide C",
+          "fits": [
+            "fit_h",
+            "fit_i",
+            "fit_j",
+            "fit_k",
+            "fit_l",
+            "fit_m",
+            "fit_n"
+          ]
+        },
+        {
+          "value": "d",
+          "label": "Wide D",
+          "fits": [
+            "fit_a",
+            "fit_n"
+          ]
+        }
+      ],
+      "contextHeader": "Placeholder context header",
+      "verified": true
+    }
+  ],
+  "articles": [
+    {
+      "title": "Fixture Article One",
+      "category": "color_psychology",
+      "summary": "A placeholder summary for the first fixture article.",
+      "sections": [
+        {
+          "heading": "Overview",
+          "body": "Placeholder body for the overview section."
+        },
+        {
+          "heading": "Details",
+          "body": "Placeholder body for the details section."
+        }
+      ],
+      "body": "Placeholder full body for the first fixture article.",
+      "tags": [
+        "color",
+        "sample"
+      ],
+      "references": [
+        {
+          "authors": [
+            "Placeholder, A."
+          ],
+          "title": "Placeholder Study One",
+          "publishedIn": "Journal of Placeholder Studies",
+          "year": 2021,
+          "publicationType": "journal_article",
+          "url": "https://doi.org/10.1000/example.one"
+        },
+        {
+          "authors": [
+            "Placeholder, A."
+          ],
+          "title": "Placeholder Study Two",
+          "publishedIn": "Journal of Placeholder Studies",
+          "year": 2021,
+          "publicationType": "journal_article",
+          "url": "https://example.org/papers/two"
+        },
+        {
+          "authors": [
+            "Placeholder, A."
+          ],
+          "title": "Placeholder Study Three",
+          "publishedIn": "Journal of Placeholder Studies",
+          "year": 2021,
+          "publicationType": "journal_article",
+          "url": "https://example.org/papers/three"
+        }
+      ]
+    },
+    {
+      "title": "Fixture Article Two",
+      "category": "typography",
+      "summary": "A placeholder summary for the second fixture article.",
+      "sections": [
+        {
+          "heading": "Overview",
+          "body": "Placeholder body."
+        }
+      ],
+      "body": "Placeholder full body for the second fixture article.",
+      "tags": [
+        "type"
+      ],
+      "references": [
+        {
+          "authors": [
+            "Placeholder, A."
+          ],
+          "title": "Placeholder Study Four",
+          "publishedIn": "Journal of Placeholder Studies",
+          "year": 2021,
+          "publicationType": "journal_article",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12345678/"
+        },
+        {
+          "authors": [
+            "Placeholder, A."
+          ],
+          "title": "Placeholder Duplicate Source Alpha",
+          "publishedIn": "Journal of Placeholder Studies",
+          "year": 2021,
+          "publicationType": "journal_article",
+          "url": "https://example.org/papers/dup"
+        },
+        {
+          "authors": [
+            "Placeholder, A."
+          ],
+          "title": "Placeholder Orphan Reference",
+          "publishedIn": "Journal of Placeholder Studies",
+          "year": 2021,
+          "publicationType": "journal_article",
+          "url": "https://example.org/papers/orphan"
+        }
+      ]
+    },
+    {
+      "title": "Fixture Article Three",
+      "category": "motion",
+      "summary": "A placeholder summary for the third fixture article.",
+      "sections": [
+        {
+          "heading": "Overview",
+          "body": "Placeholder body."
+        }
+      ],
+      "body": "Placeholder full body for the third fixture article.",
+      "tags": [
+        "motion",
+        "sample"
+      ],
+      "references": [
+        {
+          "authors": [
+            "Placeholder, A."
+          ],
+          "title": "Placeholder Duplicate Source Beta",
+          "publishedIn": "Journal of Placeholder Studies",
+          "year": 2021,
+          "publicationType": "journal_article",
+          "url": "https://example.org/papers/dup"
+        },
+        {
+          "authors": [
+            "Placeholder, A."
+          ],
+          "title": "Placeholder Study Five",
+          "publishedIn": "Journal of Placeholder Studies",
+          "year": 2021,
+          "publicationType": "journal_article",
+          "url": "https://example.org/papers/five"
+        }
+      ]
+    }
+  ]
+}

@@ -10,6 +10,8 @@
     "typecheck": "turbo run typecheck",
     "db:seed:styles": "pnpm --filter @repo/research-config seed:styles",
     "corpus:validate": "pnpm --filter @repo/rag cli validate",
+    "corpus:convert": "pnpm --filter @repo/rag convert",
+    "corpus:import-articles": "pnpm --filter @repo/rag import-articles",
     "corpus:ingest": "pnpm --filter @repo/rag cli ingest",
     "corpus:reembed": "pnpm --filter @repo/rag cli reembed",
     "corpus:reconcile": "pnpm --filter @repo/rag cli reconcile",

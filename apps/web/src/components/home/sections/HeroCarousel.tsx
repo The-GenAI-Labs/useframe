@@ -18,20 +18,6 @@ export const HeroCarousel = memo(function HeroCarousel() {
       aria-labelledby="research-heading"
       className="relative w-full scroll-mt-24 py-8 sm:py-10"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 z-0 w-1/2 overflow-hidden"
-        style={{
-          maskImage:
-            "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 35%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 35%, transparent 100%)",
-          backgroundImage:
-            "linear-gradient(rgba(37,99,235,0.40) 1px, transparent 1px)," +
-            "linear-gradient(90deg, rgba(37,99,235,0.40) 1px, transparent 1px)",
-          backgroundSize: "30px 30px",
-        }}
-      />
       <div className="relative z-10 px-6">
         <motion.div
           initial={{ opacity: reduced ? 1 : 0, y: reduced ? 0 : 24 }}

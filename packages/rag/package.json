@@ -9,7 +9,8 @@
     "./ingestion": "./dist/ingestion.js",
     "./storage": "./dist/storage.js",
     "./config": "./dist/config.js",
-    "./hyde": "./dist/hyde.js"
+    "./hyde": "./dist/hyde.js",
+    "./labels": "./dist/labels.js"
   },
   "files": [
     "dist"
@@ -19,6 +20,8 @@
     "check-types": "tsc --noEmit",
     "test": "vitest run",
     "cli": "tsx src/cli.ts",
+    "convert": "tsx --env-file-if-exists=.env src/convertCli.ts convert",
+    "import-articles": "tsx --env-file-if-exists=.env src/convertCli.ts import-articles",
     "check:migrations": "node scripts/check-migrations.mjs",
     "test:integration": "node --env-file=../db/.env ./node_modules/vitest/vitest.mjs run src/integration.test.ts",
     "lint": "eslint .",

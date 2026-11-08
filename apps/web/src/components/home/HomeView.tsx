@@ -16,6 +16,7 @@ import { WorkspacePreview } from "./WorkspacePreview";
 import { QuickActions } from "./QuickActions";
 import { CtaSection } from "./sections/CtaSection";
 import { HeroCarousel } from "./sections/HeroCarousel";
+import { ReplicateSection } from "./sections/ReplicateSection";
 import { WatchDemoSection } from "./sections/WatchDemoSection";
 import { ShowcaseCarousel } from "./sections/ShowcaseCarousel";
 import { FaqSection } from "./sections/FaqSection";
@@ -127,40 +128,70 @@ export const HomeView = memo(function HomeView() {
         </main>
       </div>
 
-      <div className="relative z-10 -mt-px flex flex-col gap-16 bg-white sm:gap-24">
-        <RevealSection
-          depth={18}
-          delay={0}
-          yOffset={50}
-          reducedMotion={reducedMotion}
-          isMobile={isMobile}
-        >
-          <CtaSection />
-        </RevealSection>
+      <div className="relative z-10 -mt-px flex flex-col gap-16 bg-white pt-14 sm:gap-24 sm:pt-20">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 -top-28 z-10 h-28 bg-linear-to-t from-white via-white/80 to-transparent"
+        />
+        <div className="relative flex flex-col gap-16 sm:gap-24">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(37,99,235,0.08) 1px, transparent 1px)," +
+                "linear-gradient(90deg, rgba(37,99,235,0.08) 1px, transparent 1px)",
+              backgroundSize: "14px 14px",
+              maskImage:
+                "linear-gradient(to right, #000 0%, #000 6%, transparent 33.3%, transparent 66.7%, #000 94%, #000 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, #000 0%, #000 6%, transparent 33.3%, transparent 66.7%, #000 94%, #000 100%)",
+            }}
+          />
+          <RevealSection
+            depth={18}
+            delay={0}
+            yOffset={50}
+            reducedMotion={reducedMotion}
+            isMobile={isMobile}
+          >
+            <CtaSection />
+          </RevealSection>
 
-        <HeroCarousel />
+          <RevealSection
+            depth={24}
+            delay={0.02}
+            yOffset={60}
+            reducedMotion={reducedMotion}
+            isMobile={isMobile}
+          >
+            <ReplicateSection />
+          </RevealSection>
 
-        <WatchDemoSection />
+          <HeroCarousel />
 
-        <RevealSection
-          depth={48}
-          delay={0.04}
-          yOffset={80}
-          reducedMotion={reducedMotion}
-          isMobile={isMobile}
-        >
-          <ShowcaseCarousel />
-        </RevealSection>
+          <WatchDemoSection />
 
-        <RevealSection
-          depth={30}
-          delay={0.04}
-          yOffset={70}
-          reducedMotion={reducedMotion}
-          isMobile={isMobile}
-        >
-          <FaqSection />
-        </RevealSection>
+          <RevealSection
+            depth={48}
+            delay={0.04}
+            yOffset={80}
+            reducedMotion={reducedMotion}
+            isMobile={isMobile}
+          >
+            <ShowcaseCarousel />
+          </RevealSection>
+
+          <RevealSection
+            depth={30}
+            delay={0.04}
+            yOffset={70}
+            reducedMotion={reducedMotion}
+            isMobile={isMobile}
+          >
+            <FaqSection />
+          </RevealSection>
+        </div>
 
         <Footer />
       </div>

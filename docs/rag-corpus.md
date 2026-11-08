@@ -91,6 +91,39 @@ Read `_reports/findings/<slug>.result.json` and `corpus_ingestion_logs` for outc
 
 Reports are a latest-attempt convenience view; database logs retain individual outcomes. If report delivery fails after a database commit, the retry is safe and may report SKIPPED_UNCHANGED. Check the preceding SUCCESS log when diagnosing this case.
 
+## Adding research
+
+Raw research batches are converted into Phase 2 finding files and `ResearchArticle` rows. The converter never calls an LLM for research content. The statement is the claim verbatim plus a fixed options block. The only model call writes the finding title and slug, which are labels. It goes through the orchestrator's cheap model in batches of 20 and sends the claim only.
+
+Folders (repository root): `corpus/raw/` (pasted batches, committed), `corpus/findings/` (generated, committed), `corpus/articles/` (generated, committed), `corpus/_labels.json` (label cache, committed), `corpus/_review/` (reports).
+
+1. **Paste.** Save each batch as `corpus/raw/<name>.json` in the shape `{ "findings": [...], "articles": [...] }`. Markdown code fences around the JSON are stripped.
+2. **Convert.** Run from the repository root:
+
+   ```sh
+   pnpm corpus:convert --dry-run   # preview, writes nothing
+   pnpm corpus:convert             # write findings, articles, labels and reports
+   pnpm corpus:convert --offline   # no model call: title is the claim cut at a word boundary
+   pnpm corpus:convert --check-urls  # also HEAD/GET each sourceUrl (8 s timeout, 3 at a time)
+   ```
+
+   Labels come from the orchestrator (`INTERNAL_SERVICE_SECRET` and `ORCHESTRATOR_URL` in `packages/rag/.env`, orchestrator running). Without the secret, or if a call fails, those findings get offline labels and a warning; offline labels are not cached. The exit code is non-zero only for parse errors, schema failures, or a `field` / `category` with no `ResearchCategory` member (add the enum value in an additive migration; never use OTHER). Warnings never fail the run.
+
+3. **Read `corpus/_review/`.** `summary.md` lists every finding (slug, title, status, category, source title, flags). `problems.md` lists errors, findings downgraded to DRAFT and why, findings with fewer than 3 options, `sourceUrl`s matching several reference titles, duplicate or near-identical claims, shared sources, article references that match no finding, files the converter changed (with a diff) or left alone, and URL warnings. Nothing is auto-fixed.
+4. **Fix labels or the raw text.** Edit `title` / `slug` in `corpus/_labels.json` (your edit wins on the next run; a slug collision gets `-2`, `-3` in claim-hash order), or fix the text in `corpus/raw/` and convert again. A finding is a VERIFIED file only when `verified` is true, a reference title matches `sourceUrl` (exact, then ignoring `#fragment` and a trailing slash) and a URL or DOI exists. The converter never replaces a differing file that was not produced from the same claim and source; delete it or change the slug.
+5. **Validate.** `pnpm` runs the CLI from `packages/rag`, so pass an absolute path:
+
+   ```sh
+   pnpm corpus:validate "$PWD/corpus/findings"      # bash
+   pnpm corpus:validate "$PWD\corpusindings"      # PowerShell
+   ```
+
+6. **Ingest a few.** Copy 2-3 files into a scratch directory and run `pnpm corpus:ingest <absolute scratch path>` against a non-production database, then check the Research tab and `corpus_ingestion_logs`.
+7. **Upload.** `gcloud storage rsync ./corpus/findings gs://$GCS_RESEARCH_CORPUS_BUCKET/findings/` (see the recovery notes above for what ingestion then does).
+8. **Import articles.** `pnpm corpus:import-articles --dry-run`, then `pnpm corpus:import-articles`. It upserts `ResearchArticle` by slug using `DATABASE_URL` (`packages/rag/.env`), prints created / updated / unchanged counts, is idempotent, and never changes `publishedAt` after creation. Articles do not go through the finding pipeline. Article slugs come from the title (cached in `_labels.json`), so renaming an article title creates a new article unless you pin the slug there.
+
+Tests for the converter use a synthetic fixture and a fake label provider: `pnpm --filter @repo/rag test`.
+
 ## Verification and evaluation
 
 ```sh
