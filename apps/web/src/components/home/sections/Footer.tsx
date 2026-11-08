@@ -105,38 +105,6 @@ export const Footer = memo(function Footer() {
           © {new Date().getFullYear()} UseFrame, Inc. All rights reserved.
         </p>
       </div>
-
-      <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-16 bg-linear-to-b from-white to-transparent" />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 z-20 w-[72px] bg-linear-to-r from-white via-white/95 to-transparent drop-shadow-[28px_0_36px_rgba(255,255,255,0.98)] sm:w-[140px] lg:w-[210px]"
-          style={{
-            maskImage: "linear-gradient(to top, black 62%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to top, black 62%, transparent 100%)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 z-20 w-[72px] bg-linear-to-l from-white via-white/95 to-transparent drop-shadow-[-28px_0_36px_rgba(255,255,255,0.98)] sm:w-[140px] lg:w-[210px]"
-          style={{
-            maskImage: "linear-gradient(to top, black 62%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to top, black 62%, transparent 100%)",
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-14 bg-linear-to-t from-white via-white/95 to-transparent drop-shadow-[0_-30px_42px_rgba(255,255,255,0.98)] sm:h-24 lg:h-[150px]"
-        />
-        <img
-          src="/useframe footer.png"
-          alt="UseFrame footer"
-          className="-mb-2 w-full object-cover object-top"
-          draggable={false}
-        />
-      </div>
     </footer>
   );
 });
