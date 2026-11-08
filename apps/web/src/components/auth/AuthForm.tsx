@@ -19,7 +19,7 @@ const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 const OAUTH_ERROR_MESSAGES: Record<string, string> = {
     oauth: "Something went wrong signing you in. Please try again.",
     oauth_not_configured: "sign-in isn't set up yet — use email instead, or try a different provider.",
-    terms_required: "Please accept the Terms of Service before continuing.",
+    terms_required: "Please accept the Terms & Conditions before continuing.",
 };
 
 function oauthErrorMessage(error: string, provider: string | null): string {
@@ -100,7 +100,7 @@ export default function AuthForm() {
         }
 
         if (!agreedToTerms) {
-            setServerError("Please accept the Terms of Service to continue.");
+            setServerError("Please accept the Terms & Conditions to continue.");
             return;
         }
         if (!turnstileToken) {
@@ -185,11 +185,11 @@ export default function AuthForm() {
                 />
                 <span>
                     I agree to the{" "}
-                    <Link href="/terms" target="_blank" className="underline hover:text-zinc-700 transition-colors">
-                        Terms of Service
+                    <Link href="/terms" className="underline hover:text-zinc-700 transition-colors">
+                        Terms &amp; Conditions
                     </Link>{" "}
                     and{" "}
-                    <Link href="/privacy" target="_blank" className="underline hover:text-zinc-700 transition-colors">
+                    <Link href="/privacy" className="underline hover:text-zinc-700 transition-colors">
                         Privacy Policy
                     </Link>
                 </span>

@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { Check, ExternalLink } from "lucide-react";
 import { SectionHeading } from "../ui/SectionHeading";
 import { Parallax } from "../ui/Parallax";
+import { RefundNotice } from "@/components/legal/RefundNotice";
 
 function PlanCardSkeleton() {
   return (
@@ -235,6 +236,7 @@ export const PricingSection = memo(function PricingSection() {
               ))}
             </div>
           )}
+          <RefundNotice className="mt-5 text-center text-xs text-slate-600" />
         </Parallax>
 
         <Parallax offset={40} className="mt-6">

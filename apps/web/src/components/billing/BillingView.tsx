@@ -7,6 +7,7 @@ import { creditsApi } from "@/lib/api/services/credits.service";
 import { billingApi } from "@/lib/api/services/billing.service";
 import { serif } from "@/components/home/fonts";
 import { CrossLineBackground } from "@/components/web-score/CrossLineBackground";
+import { RefundNotice } from "@/components/legal/RefundNotice";
 import {
     CUSTOM_MAX_AMOUNT_CENTS,
     CUSTOM_MIN_AMOUNT_CENTS,
@@ -356,6 +357,7 @@ export default function BillingView() {
                                             ? `Continue — ${selectedPlan.name}, ${formatPlanPrice(selectedPlan)}`
                                             : "Choose a plan"}
                                 </button>
+                                <RefundNotice className="text-[11.5px] text-sec text-center" />
                             </div>
                         </>
                     )}

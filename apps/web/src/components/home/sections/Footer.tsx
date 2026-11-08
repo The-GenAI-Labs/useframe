@@ -2,16 +2,44 @@
 
 import { memo } from "react";
 import Link from "next/link";
+import { LEGAL, LEGAL_PAGE_LIST } from "@/lib/legal";
 import { landingFont as serif } from "../fonts";
 
-const NAV_LINKS = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms of Service", href: "/terms" },
-  { label: "Contact", href: "/contact" },
+type FooterLink = { label: string; href: string };
+
+const NAV_LINKS: FooterLink[] = [
   { label: "About", href: "/about" },
   { label: "Research", href: "/#research" },
   { label: "Pricing", href: "/pricing" },
 ];
+
+const LEGAL_LINKS: FooterLink[] = LEGAL_PAGE_LIST.map((page) => ({
+  label: page.label,
+  href: page.path,
+}));
+
+const linkFocus =
+  "rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600";
+
+function LinkRow({ links }: { links: FooterLink[] }) {
+  return (
+    <ul className="flex flex-wrap items-center justify-center gap-x-1 gap-y-2">
+      {links.map((l, i) => (
+        <li key={l.href} className="flex items-center">
+          <Link
+            href={l.href}
+            className={`inline-flex min-h-11 min-w-11 items-center justify-center text-xs font-medium text-slate-600 transition-colors hover:text-slate-900 sm:min-h-0 sm:min-w-0 ${linkFocus}`}
+          >
+            {l.label}
+          </Link>
+          {i < links.length - 1 && (
+            <span className="mx-2 size-1 rounded-full bg-slate-300" aria-hidden />
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 const SOCIALS = [
   {
@@ -43,7 +71,7 @@ const SOCIALS = [
   },
   {
     label: "Email",
-    href: "mailto:hello@useframe.in",
+    href: `mailto:${LEGAL.supportEmail}`,
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="size-4">
         <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
@@ -67,24 +95,9 @@ export const Footer = memo(function Footer() {
         <div className="relative mx-auto mt-8 max-w-2xl h-px bg-slate-200" />
 
         <div className="relative mx-auto mt-6 flex max-w-2xl flex-col items-center justify-between gap-4 sm:flex-row">
-          <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-2">
-            {NAV_LINKS.map((l, i) => (
-              <div key={l.label} className="flex items-center">
-                <Link
-                  href={l.href}
-                  className="inline-flex min-h-11 min-w-11 items-center justify-center text-xs font-medium text-slate-500 transition-colors hover:text-slate-800 sm:min-h-0 sm:min-w-0"
-                >
-                  {l.label}
-                </Link>
-                {i < NAV_LINKS.length - 1 && (
-                  <span
-                    className="mx-2 size-1 rounded-full bg-slate-300"
-                    aria-hidden
-                  />
-                )}
-              </div>
-            ))}
-          </div>
+          <nav aria-label="Footer">
+            <LinkRow links={NAV_LINKS} />
+          </nav>
           <div className="flex shrink-0 items-center gap-2">
             {SOCIALS.map((s) => (
               <a
@@ -93,7 +106,7 @@ export const Footer = memo(function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="flex size-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-900 sm:size-8"
+                className={`flex size-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-900 sm:size-8 ${linkFocus}`}
               >
                 {s.icon}
               </a>
@@ -101,8 +114,27 @@ export const Footer = memo(function Footer() {
           </div>
         </div>
 
-        <p className="relative mt-3 text-center text-[11px] text-slate-400">
-          © {new Date().getFullYear()} UseFrame, Inc. All rights reserved.
+        <nav
+          aria-labelledby="footer-legal"
+          className="relative mx-auto mt-5 flex max-w-2xl flex-col items-center gap-2 sm:flex-row sm:gap-4"
+        >
+          <span
+            id="footer-legal"
+            className="text-[11px] font-semibold tracking-wide text-slate-500 uppercase"
+          >
+            Legal
+          </span>
+          <LinkRow links={LEGAL_LINKS} />
+        </nav>
+
+        <p className="relative mt-5 text-center text-[11px] text-slate-500">
+          © {new Date().getFullYear()} {LEGAL.brandName} ·{" "}
+          <a
+            href={`mailto:${LEGAL.supportEmail}`}
+            className={`underline-offset-2 hover:text-slate-900 hover:underline ${linkFocus}`}
+          >
+            {LEGAL.supportEmail}
+          </a>
         </p>
       </div>
     </footer>

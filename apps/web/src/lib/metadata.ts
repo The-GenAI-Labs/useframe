@@ -22,10 +22,14 @@ const shareImage = {
 export function pageMetadata(
   title: string,
   description: string,
-  { path, indexable = false }: { path?: string; indexable?: boolean } = {},
+  {
+    path,
+    indexable = false,
+    fullTitle,
+  }: { path?: string; indexable?: boolean; fullTitle?: string } = {},
 ): Metadata {
   const canIndex = indexable && isIndexableDeployment;
-  const shareTitle = `${title} | ${SITE_NAME}`;
+  const shareTitle = fullTitle ?? `${title} | ${SITE_NAME}`;
 
   return {
     title: { absolute: shareTitle },

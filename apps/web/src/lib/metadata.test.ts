@@ -5,6 +5,7 @@ import { readFileSync } from "node:fs";
 afterEach(() => {
   vi.unstubAllEnvs();
   vi.doUnmock("@/lib/metadata");
+  vi.doUnmock("@/lib/legal");
   vi.resetModules();
 });
 
@@ -17,6 +18,7 @@ async function metadataFor(
   vi.stubEnv("VERCEL_ENV", vercelEnv);
   vi.stubEnv("SITE_INDEXING_ENABLED", indexingEnabled);
   vi.doMock("@/lib/metadata", async () => import("./metadata"));
+  vi.doMock("@/lib/legal", async () => import("./legal"));
   return import("./metadata");
 }
 
@@ -74,6 +76,16 @@ describe("page metadata indexing policy", () => {
     });
   });
 
+  it("uses an exact title on every surface when one is given", async () => {
+    const { pageMetadata } = await metadataFor("production");
+    const metadata = pageMetadata("Contact", "Reach us.", {
+      fullTitle: "Contact UseFrame",
+    });
+    expect(metadata.title).toEqual({ absolute: "Contact UseFrame" });
+    expect(metadata.openGraph).toMatchObject({ title: "Contact UseFrame" });
+    expect(metadata.twitter).toMatchObject({ title: "Contact UseFrame" });
+  });
+
   it.each(["false", "", "invalid"])(
     "disables production indexing when the override is %j",
     async (indexingEnabled) => {
@@ -103,9 +115,19 @@ describe("page metadata indexing policy", () => {
     const { default: sitemap } = await import("../../app/sitemap");
     const { default: robots } = await import("../../app/robots");
 
+    const legalPage = (path: string) => ({
+      url: `${SITE_URL}${path}`,
+      lastModified: "2026-11-09",
+      priority: 0.3,
+    });
     expect(sitemap()).toEqual([
       { url: `${SITE_URL}/` },
       { url: `${SITE_URL}/pricing` },
+      legalPage("/privacy"),
+      legalPage("/terms"),
+      legalPage("/refund-policy"),
+      legalPage("/delivery-policy"),
+      legalPage("/contact"),
     ]);
     expect(robots()).toEqual({
       rules: { userAgent: "*", allow: "/", disallow: "/api/" },
