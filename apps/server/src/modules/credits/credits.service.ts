@@ -2,6 +2,7 @@ import { prisma, type Prisma } from "@useframe/db"
 import { Queue } from "bullmq"
 import { QUEUES } from "@repo/events"
 import type { AutoReloadJobPayload } from "@repo/events"
+import { env } from "@/config/env.js"
 import { redis } from "@/lib/redis.js"
 import { AppError } from "@/middleware/errorHandler.js"
 
@@ -53,7 +54,9 @@ export const CreditsService = {
       },
     })
 
-    const autoReload = await tx.autoReloadSetting.findUnique({ where: { userId } })
+    const autoReload = env.AUTO_RELOAD_ENABLED
+      ? await tx.autoReloadSetting.findUnique({ where: { userId } })
+      : null
     const crossedThreshold =
       !!autoReload?.enabled && updated.balance * 50 < autoReload.thresholdCents
 

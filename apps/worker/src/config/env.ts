@@ -37,6 +37,10 @@ const envSchema = z
 
     RAZORPAY_KEY_ID: z.string().min(1, "RAZORPAY_KEY_ID is required"),
     RAZORPAY_KEY_SECRET: z.string().min(1, "RAZORPAY_KEY_SECRET is required"),
+    AUTO_RELOAD_ENABLED: z
+      .string()
+      .default("false")
+      .transform((v) => v === "true"),
   })
   .merge(CorpusEnvSchema)
   .refine(

@@ -3,6 +3,7 @@ import type { Job } from "bullmq"
 import { prisma } from "@useframe/db"
 import { QUEUES } from "@repo/events"
 import type { AutoReloadJobPayload, EmailJobPayload } from "@repo/events"
+import { env } from "../config/env.js"
 import { redis } from "../lib/redis.js"
 import { razorpay } from "../lib/razorpay.js"
 // Auto-reload is a custom-amount top-up, so it prices at the custom rate.
@@ -10,8 +11,14 @@ import { creditsForCustomAmount } from "@repo/schemas"
 
 const emailQueue = new Queue<EmailJobPayload>(QUEUES.EMAIL, { connection: redis })
 
-async function processAutoReload(job: Job<AutoReloadJobPayload>): Promise<void> {
+export async function processAutoReload(job: Job<AutoReloadJobPayload>): Promise<void> {
   const { userId, topUpToCents } = job.data
+
+  // Jobs queued before the flag was turned off must not charge anyone.
+  if (!env.AUTO_RELOAD_ENABLED) {
+    console.warn(`[autoReload] Disabled, dropping job ${job.id} for user ${userId} without charging`)
+    return
+  }
 
   const user = await prisma.user.findUniqueOrThrow({
     where: { id: userId },

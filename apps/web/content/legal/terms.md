@@ -39,9 +39,9 @@ one-time packs; there is no subscription and nothing renews automatically.
 
 ## 4. Payments
 
-Payments are processed by Razorpay. You authorise us and Razorpay to charge the payment method you use.
-The price and any taxes are shown at checkout before you pay. You confirm that you are allowed to use
-the payment method.
+Payments are processed by Razorpay. You authorise us and Razorpay to charge the payment method you use
+for each purchase you confirm. The price and any taxes are shown at checkout before you pay. You
+confirm that you are allowed to use the payment method.
 
 ## 5. Your content and the results
 

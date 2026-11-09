@@ -3,7 +3,7 @@ import type { AutoReloadSetting } from "./billing.service"
 
 export type CreditsSummary = {
   balance: number
-  autoReload: AutoReloadSetting
+  autoReload: AutoReloadSetting | null
 }
 
 export const creditsApi = {

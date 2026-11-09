@@ -120,6 +120,11 @@ const envSchema = z.object({
   REVIEWER_EMAIL: z.string().trim().toLowerCase().default(""),
   REVIEWER_PASSWORD_HASH: z.string().trim().default(""),
   REVIEWER_STARTING_CREDITS: z.coerce.number().int().min(0).max(1000).default(20),
+  // Off-session card top-ups; also set it in apps/worker, which makes the charge.
+  AUTO_RELOAD_ENABLED: z
+    .string()
+    .default("false")
+    .transform((v) => v === "true"),
 }).superRefine((value, ctx) => {
   if (!value.REVIEWER_LOGIN_ENABLED) return;
   if (!z.string().email().safeParse(value.REVIEWER_EMAIL).success) {

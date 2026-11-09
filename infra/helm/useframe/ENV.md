@@ -74,6 +74,7 @@ Every workload also gets `NODE_ENV=production` from `global.env`.
 | `REVIEWER_EMAIL`                  | if enabled | `""`                                           | no     | Secret                                                   |
 | `REVIEWER_PASSWORD_HASH`          | if enabled | `""` (bcrypt hash from `pnpm reviewer:hash`)   | yes    | Secret (no quotes in a Secret or `--from-env-file`)       |
 | `REVIEWER_STARTING_CREDITS`       | no       | `20` (granted once)                              | no     | Secret or values                                         |
+| `AUTO_RELOAD_ENABLED`             | no       | `false` (auto-reload and saved-card routes 404)  | no     | values (also `apps/worker`, which makes the charge)      |
 
 ## orchestrator-service (`services.orchestrator-service`, Secret `orchestrator-service-secrets`)
 

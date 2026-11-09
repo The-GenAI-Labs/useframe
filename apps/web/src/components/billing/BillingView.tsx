@@ -399,7 +399,7 @@ export default function BillingView() {
                     </div>
                 </section>
 
-                {/* ---------- Auto-reload ---------- */}
+                {summary?.autoReload && (
                 <section className="flex flex-col gap-4 p-5 rounded-3xl border border-base bg-surface shadow-sm">
                     <div className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-3">
@@ -485,9 +485,10 @@ export default function BillingView() {
                         {addCardError && <p className="text-[12.5px] text-red-500 mt-2">{addCardError}</p>}
                     </div>
                 </section>
+                )}
 
                 <p className="relative text-center text-[11.5px] text-mut">
-                    Credits never expire. Cancel auto-reload anytime — no subscription lock-in.
+                    Credits don&apos;t expire while your account is active. No subscription.
                 </p>
                 </div>
             </div>

@@ -25,8 +25,9 @@ const MAGIC_LINK_TTL_MS = 15 * 60 * 1000
 
 // Bump this string whenever the ToS/Privacy Policy is materially revised —
 // acceptedTermsVersion on each User row records which version they agreed
-// to, so we can tell who's on stale terms if it's ever disputed.
-export const TERMS_VERSION = "2026-09-v1"
+// to, so we can tell who's on stale terms if it's ever disputed. It must equal
+// LEGAL.lastUpdatedISO in apps/web/src/lib/legal.ts (a web test enforces it).
+export const TERMS_VERSION = "2026-11-09"
 
 export type Attribution = {
     referralSource?: string | null

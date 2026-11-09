@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import {
   LEGAL,
@@ -78,6 +80,36 @@ describe("legal documents", () => {
     expect(() => parseLegalDocument(doc("## 3. A\n\n## 3. A\n"))).toThrow(
       /duplicate headings/,
     );
+  });
+
+  it("keeps the server's TERMS_VERSION equal to the policies' last-updated date", () => {
+    const authService = readFileSync(
+      fileURLToPath(new URL("../../../server/src/modules/auth/auth.service.ts", import.meta.url)),
+      "utf8",
+    );
+    const version = authService.match(/export const TERMS_VERSION = "([^"]+)"/)?.[1];
+    expect(version).toBe(LEGAL.lastUpdatedISO);
+  });
+
+  it("names the providers that receive personal data and none that are off", () => {
+    const flat = loadLegalDocument("privacy").body.replace(/\s+/g, " ");
+    expect(flat).toContain(
+      "Search and ranking providers (Voyage AI, Cohere) and Brave Search receive text derived from your project description to find relevant research and similar websites.",
+    );
+    expect(flat).toContain(
+      "We visit publicly available competitor websites to learn about their design. This does not involve your personal data.",
+    );
+    for (const provider of ["Anthropic", "DeepSeek", "OpenAI", "Moonshot AI", "Razorpay", "Resend", "Google Cloud", "Vercel", "Neon", "Upstash", "Cloudflare", "StackBlitz"]) {
+      expect(flat).toContain(provider);
+    }
+    expect(flat).not.toMatch(/Runware|Langfuse|IPQualityScore|IP-reputation|auto-?reload/i);
+  });
+
+  it("never mentions auto-reload or recurring charges", () => {
+    for (const page of LEGAL_PAGE_LIST) {
+      const flat = loadLegalDocument(page.slug).body.replace(/\s+/g, " ");
+      expect(flat).not.toMatch(/auto-?reload|top[- ]?up automatically|recurring (charge|payment)|saved card/i);
+    }
   });
 
   it("parses CRLF files", () => {

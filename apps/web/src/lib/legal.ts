@@ -13,6 +13,7 @@ export const LEGAL = {
   grievanceOfficerName: "Rishabh Chaudhary",
   registeredAddress: null as string | null,
   lastUpdated: "9 November 2026",
+  // Must equal TERMS_VERSION in apps/server/src/modules/auth/auth.service.ts.
   lastUpdatedISO: "2026-11-09",
 } as const;
 

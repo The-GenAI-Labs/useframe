@@ -51,7 +51,7 @@ export async function upsertUser(email: string, name: string): Promise<string> {
     select: { userId: true },
   });
   // acceptedTermsAt makes sign-in skip consent capture and signup risk scoring.
-  const profile = { name, acceptedTermsAt: new Date(), acceptedTermsVersion: "2026-09-v1", signupRiskDecision: "ALLOW" };
+  const profile = { name, acceptedTermsAt: new Date(), acceptedTermsVersion: "2026-11-09", signupRiskDecision: "ALLOW" };
   if (identity) {
     await prisma.user.update({ where: { id: identity.userId }, data: profile });
     return identity.userId;

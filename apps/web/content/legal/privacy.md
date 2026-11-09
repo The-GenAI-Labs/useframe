@@ -30,6 +30,9 @@ prevent abuse.
 checks (Cloudflare Turnstile). We do not use cookies for advertising. If we add analytics in the future,
 we will update this policy.
 
+**Public websites.** We visit publicly available competitor websites to learn about their design. This
+does not involve your personal data.
+
 ## 2. How we use your information
 
 - To provide the service: research, website generation, images and videos, previews, edits and hosting.
@@ -45,11 +48,13 @@ We do not sell your personal information.
 ## 3. AI processing
 
 To create your results we send the information needed for each task to AI model providers. This
-includes the text you entered, extracted details from your documents or links, and images or videos
-you uploaded when they are needed for the task. Depending on the task, these providers include
-Anthropic, DeepSeek, OpenAI and Runware (which runs video models). Each provider processes data under
-its own terms and privacy policy. Please do not enter sensitive personal data, such as government ID
-numbers, health records or financial account numbers, into your projects.
+includes the text you entered, extracted details from your documents or links, and images you uploaded
+when they are needed for the task. Depending on the task and the model you choose, these providers are
+Anthropic, DeepSeek, OpenAI and Moonshot AI (Kimi). Search and ranking providers (Voyage AI, Cohere)
+and Brave Search receive text derived from your project description to find relevant research and
+similar websites. Each provider processes data under its own terms and privacy policy. Please do not
+enter sensitive personal data, such as government ID numbers, health records or financial account
+numbers, into your projects.
 
 Generated results can be inaccurate. You are responsible for checking them before you publish them.
 
@@ -59,10 +64,13 @@ We use trusted service providers to run {{brandName}}. They only receive what th
 
 - **Payments:** Razorpay.
 - **Email delivery:** Resend.
-- **Hosting and infrastructure:** Google Cloud, Cloudflare (including storage and the hosting of your
-  published sites) and Vercel.
-- **AI providers:** as listed in section 3.
-- **Security and fraud prevention:** Cloudflare and IP-reputation services.
+- **Hosting and infrastructure:** Google Cloud (our servers), Vercel (this website), Neon (our
+  database), Upstash (temporary data and job queues) and Cloudflare (file storage and the hosting of
+  your published sites).
+- **Website previews:** StackBlitz, whose WebContainers technology runs the preview of your site in your
+  browser.
+- **AI, search and ranking providers:** as listed in section 3.
+- **Security and fraud prevention:** Cloudflare (Turnstile bot checks).
 
 We may also share information if the law requires it, to protect our rights and users, or as part of a
 business transfer, in which case we will tell you.
