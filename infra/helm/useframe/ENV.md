@@ -70,6 +70,10 @@ Every workload also gets `NODE_ENV=production` from `global.env`.
 | `MEDIA_PUBLIC_BASE_URL`           | no       | `http://localhost:4000`                          | no     | values (production: `https://api.useframe.in`)           |
 | `MEDIA_CORS_ORIGINS`              | no       | `""` (CLIENT_URL and FRONTEND_URL always allowed) | no    | values                                                   |
 | `MEDIA_SIGNED_URL_TTL_SECONDS`, `MEDIA_FREE_*`, `MEDIA_PAID_*`, `MEDIA_MAX_AUTOPLAY_VIDEOS_PER_PAGE` | no | see `apps/server/.env.example` | no | values |
+| `REVIEWER_LOGIN_ENABLED`          | no       | `false` (reviewer login answers 404)             | no     | Secret (with the two below; only during payment review)  |
+| `REVIEWER_EMAIL`                  | if enabled | `""`                                           | no     | Secret                                                   |
+| `REVIEWER_PASSWORD_HASH`          | if enabled | `""` (bcrypt hash from `pnpm reviewer:hash`)   | yes    | Secret (no quotes in a Secret or `--from-env-file`)       |
+| `REVIEWER_STARTING_CREDITS`       | no       | `20` (granted once)                              | no     | Secret or values                                         |
 
 ## orchestrator-service (`services.orchestrator-service`, Secret `orchestrator-service-secrets`)
 

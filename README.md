@@ -122,6 +122,8 @@ Configuration points:
 - Some credentials are required at startup even when you are not using that feature. The worker, for example, requires Vercel and Razorpay credentials.
 - Never commit real secrets. Only public browser configuration belongs in `NEXT_PUBLIC_*` variables.
 
+Reviewer login: `/reviewer-login` (unlinked, `noindex`) signs in one account, `REVIEWER_EMAIL`, with a password, so Razorpay's reviewers can test the site. Every other account stays passwordless. Run `pnpm reviewer:hash` and put the printed bcrypt hash in `apps/server/.env` as `REVIEWER_PASSWORD_HASH`, wrapped in single quotes. Set `REVIEWER_LOGIN_ENABLED=true` and restart the API. The first sign-in grants `REVIEWER_STARTING_CREDITS` (default 20) once. Enable only while Razorpay reviews the account; set REVIEWER_LOGIN_ENABLED=false after approval.
+
 Example frontend configuration:
 
 ```dotenv

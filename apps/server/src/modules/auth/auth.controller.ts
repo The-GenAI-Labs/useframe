@@ -1,10 +1,16 @@
 import type { Request, Response, NextFunction } from "express"
 import type { AuthenticatedRequest } from "@/types/index.js"
 import { AuthService } from "./auth.service.js"
+import { ReviewerAuthService } from "./reviewer.service.js"
 import { readOAuthStateCookies, clearOAuthStateCookies } from "./oauth.state.js"
 import { env } from "@/config/env.js"
 import { readRefreshTokenCookie } from "@/lib/cookie.js"
-import type { MagicLinkInput, MagicLinkVerifyInput, ExchangeTicketInput } from "./auth.schema.js"
+import type {
+    MagicLinkInput,
+    MagicLinkVerifyInput,
+    ExchangeTicketInput,
+    ReviewerLoginInput,
+} from "./auth.schema.js"
 
 // Placeholder values ship in .env.example / are left unfilled in dev; zod's
 // min(1) check lets them pass since it only checks for a non-empty string.
@@ -114,6 +120,25 @@ export const AuthController = {
         try {
             const { token } = req.body as MagicLinkVerifyInput
             const result = await AuthService.verifyMagicLink(token, res)
+            res.status(200).json({ success: true, message: "Signed in", data: result })
+        } catch (err) {
+            next(err)
+        }
+    },
+
+    reviewerLoginStatus: (_req: Request, res: Response): void => {
+        res.status(204).end()
+    },
+
+    reviewerLogin: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const { email, password } = req.body as ReviewerLoginInput
+            const result = await ReviewerAuthService.login(
+                email,
+                password,
+                { ip: req.ip ?? "unknown", userAgent: req.get("user-agent") },
+                res
+            )
             res.status(200).json({ success: true, message: "Signed in", data: result })
         } catch (err) {
             next(err)

@@ -42,6 +42,15 @@ export const exchangeTicketSchema = z.object({
     deviceFingerprint: deviceFingerprintSchema,
 })
 
+export const reviewerLoginSchema = z.object({
+    email: z.string().email("Invalid email address").toLowerCase().trim(),
+    password: z.string().min(1, "Password is required").max(200),
+    acceptedTerms: z.literal(true, {
+        errorMap: () => ({ message: "You must accept the Terms of Service to continue" }),
+    }),
+})
+
 export type MagicLinkInput = z.infer<typeof magicLinkSchema>
 export type MagicLinkVerifyInput = z.infer<typeof magicLinkVerifySchema>
 export type ExchangeTicketInput = z.infer<typeof exchangeTicketSchema>
+export type ReviewerLoginInput = z.infer<typeof reviewerLoginSchema>

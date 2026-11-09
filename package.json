@@ -27,6 +27,7 @@
     "test:e2e": "pnpm --filter @useframe/tests test:e2e",
     "test:load": "pnpm --filter @useframe/tests test:load",
     "test:security": "pnpm --filter @useframe/tests test:security",
+    "reviewer:hash": "pnpm --silent --filter @useframe/server reviewer:hash",
     "security:deps": "pnpm audit --prod --audit-level=high",
     "prepare": "husky || true"
   },

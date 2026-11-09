@@ -521,6 +521,18 @@ export const AuthService = {
         return { accessToken, user }
     },
 
+    // For a caller that has already authenticated the email itself (the
+    // reviewer login); same identity and consent steps as verifyMagicLink.
+    async findOrCreateEmailUser(email: string, signupMeta: { ip: string }): Promise<SafeUser> {
+        const user = await findOrCreateUserByIdentity("EMAIL", email, email, null, null)
+        await recordConsentAndAttribution(user.id, undefined, { email, ip: signupMeta.ip })
+        return user
+    },
+
+    issueSession(user: SafeUser, res: Response): Promise<{ accessToken: string }> {
+        return issueTokenPair(user, res)
+    },
+
     async rotateRefreshToken(rawToken: string | undefined, res: Response) {
         if (!rawToken) throw new AppError("No refresh token", 401)
 

@@ -14,6 +14,8 @@ const tokenExpiry = z.custom<NonNullable<SignOptions["expiresIn"]>>(
   "Token expiry must be a valid duration, such as 15m or 7d",
 );
 
+const BCRYPT_HASH = /^\$2[aby]\$(0[4-9]|[12]\d|3[01])\$[./A-Za-z0-9]{53}$/;
+
 const envSchema = z.object({
   NODE_ENV: z
     .enum(["development", "production", "test"])
@@ -108,6 +110,32 @@ const envSchema = z.object({
   MEDIA_PAID_MAX_VIDEO_BYTES: z.coerce.number().int().positive().default(157286400),
   MEDIA_PAID_TOTAL_BYTES: z.coerce.number().int().positive().default(5368709120),
   MEDIA_MAX_AUTOPLAY_VIDEOS_PER_PAGE: z.coerce.number().int().positive().default(3),
+
+  // Hidden email + password login for payment-provider reviewers only
+  // (POST /api/auth/reviewer-login). Off unless exactly "true".
+  REVIEWER_LOGIN_ENABLED: z
+    .string()
+    .default("false")
+    .transform((v) => v === "true"),
+  REVIEWER_EMAIL: z.string().trim().toLowerCase().default(""),
+  REVIEWER_PASSWORD_HASH: z.string().trim().default(""),
+  REVIEWER_STARTING_CREDITS: z.coerce.number().int().min(0).max(1000).default(20),
+}).superRefine((value, ctx) => {
+  if (!value.REVIEWER_LOGIN_ENABLED) return;
+  if (!z.string().email().safeParse(value.REVIEWER_EMAIL).success) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["REVIEWER_EMAIL"],
+      message: "REVIEWER_EMAIL must be an email address when REVIEWER_LOGIN_ENABLED=true",
+    });
+  }
+  if (!BCRYPT_HASH.test(value.REVIEWER_PASSWORD_HASH)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["REVIEWER_PASSWORD_HASH"],
+      message: "REVIEWER_PASSWORD_HASH must be a bcrypt hash from `pnpm reviewer:hash`",
+    });
+  }
 });
 
 const parsed = envSchema.safeParse(process.env);

@@ -1,11 +1,23 @@
-import { Router } from "express"
+import { Router, type NextFunction, type Request, type Response } from "express"
+import { env } from "@/config/env.js"
 import { AuthController } from "./auth.controller.js"
 import { validate } from "@/middleware/validator.js"
 import { authenticate } from "@/middleware/authenticate.js"
 import { dailyRateLimitByIp } from "@/middleware/rateLimit.js"
-import { magicLinkSchema, magicLinkVerifySchema, exchangeTicketSchema } from "./auth.schema.js"
+import {
+    magicLinkSchema,
+    magicLinkVerifySchema,
+    exchangeTicketSchema,
+    reviewerLoginSchema,
+} from "./auth.schema.js"
 
 const router: Router = Router()
+
+// Same body as the app's catch-all 404, so a disabled reviewer login looks like no route at all.
+function reviewerLoginEnabled(_req: Request, res: Response, next: NextFunction): void {
+    if (env.REVIEWER_LOGIN_ENABLED) return next()
+    res.status(404).json({ success: false, message: "Route not found" })
+}
 
 router.get(
     "/check-email",
@@ -34,6 +46,14 @@ router.post(
     "/magic-link/verify",
     validate(magicLinkVerifySchema),
     AuthController.magicLinkVerify
+)
+
+router.get("/reviewer-login", reviewerLoginEnabled, AuthController.reviewerLoginStatus)
+router.post(
+    "/reviewer-login",
+    reviewerLoginEnabled,
+    validate(reviewerLoginSchema),
+    AuthController.reviewerLogin
 )
 
 router.post("/refresh", AuthController.refresh)

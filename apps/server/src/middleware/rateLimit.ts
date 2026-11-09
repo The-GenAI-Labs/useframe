@@ -7,7 +7,7 @@ const DAY_SECONDS = 24 * 60 * 60
 const HOUR_SECONDS = 60 * 60
 const MINUTE_SECONDS = 60
 
-async function checkAndIncrement(
+export async function checkAndIncrement(
     key: string,
     limit: number,
     windowSeconds: number = DAY_SECONDS,
