@@ -85,6 +85,7 @@ export async function startCorpusWorker() {
   );
   console.log("[corpus] Ingestion worker started");
   return {
+    isRunning: () => worker.isRunning(),
     async close() {
       await subscription?.close();
       await pubsub?.close();

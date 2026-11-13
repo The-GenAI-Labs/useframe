@@ -378,6 +378,7 @@ export function startValidationWorkers() {
     )
     .catch(console.error);
   return {
+    isRunning: () => [worker, mainWorker, cleanup].every((w) => w.isRunning()),
     close: async () => {
       await Promise.all([worker.close(), mainWorker.close(), cleanup.close()]);
       await Promise.all([

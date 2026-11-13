@@ -4,6 +4,7 @@ templates:
   - templates/ingress.yaml
   - templates/gke-resources.yaml
   - templates/migrate-job.yaml
+  - templates/NOTES.txt
 release: { name: useframe, namespace: useframe }
 values: [../values-production.yaml]
 set:
@@ -72,3 +73,100 @@ tests:
         template: templates/ingress.yaml
       - isKind: { of: Job }
         template: templates/migrate-job.yaml
+
+  - it: routes api and orchestrator hosts on one Ingress, plus the Razorpay webhook to billing
+    template: templates/ingress.yaml
+    asserts:
+      - equal:
+          path: spec.rules
+          value:
+            - host: api.useframe.in
+              http:
+                paths:
+                  - path: /webhooks/razorpay
+                    pathType: Prefix
+                    backend: { service: { name: useframe-billing-service, port: { number: 4002 } } }
+                  - path: /
+                    pathType: Prefix
+                    backend: { service: { name: useframe-server, port: { number: 4000 } } }
+            - host: orchestrator.useframe.in
+              http:
+                paths:
+                  - path: /
+                    pathType: Prefix
+                    backend: { service: { name: useframe-orchestrator-service, port: { number: 4001 } } }
+
+  - it: lists every public host on the one ManagedCertificate
+    template: templates/gke-resources.yaml
+    documentSelector: { path: kind, value: ManagedCertificate }
+    asserts:
+      - equal: { path: spec.domains, value: [api.useframe.in, orchestrator.useframe.in] }
+
+  - it: gives the orchestrator the SSE-length BackendConfig timeout and its own health check
+    template: templates/gke-resources.yaml
+    documentSelector:
+      path: $[?(@.kind == "BackendConfig" && @.metadata.name == "useframe-orchestrator-service")].kind
+      value: BackendConfig
+    asserts:
+      - equal: { path: spec.timeoutSec, value: 3600 }
+      - equal: { path: spec.healthCheck.requestPath, value: /health }
+      - equal: { path: spec.healthCheck.port, value: 4001 }
+
+  - it: attaches NEG and BackendConfig to the orchestrator Service
+    template: templates/workloads.yaml
+    documentSelector:
+      path: $[?(@.kind == "Service" && @.metadata.name == "useframe-orchestrator-service")].kind
+      value: Service
+    asserts:
+      - equal:
+          path: metadata.annotations
+          value:
+            cloud.google.com/neg: '{"ingress": true}'
+            cloud.google.com/backend-config: '{"default": "useframe-orchestrator-service"}'
+
+  - it: lets the browser origin call the orchestrator (CORS from CLIENT_URL)
+    template: templates/workloads.yaml
+    documentSelector:
+      path: $[?(@.kind == "ConfigMap" && @.metadata.name == "useframe-orchestrator-service-config")].kind
+      value: ConfigMap
+    asserts:
+      - equal: { path: data.CLIENT_URL, value: https://useframe.in }
+
+  - it: enables billing (2), scoring (1), media (1) and the BullMQ worker (1)
+    template: templates/workloads.yaml
+    asserts:
+      - equal: { path: spec.replicas, value: 2 }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-billing-service")].kind
+          value: Deployment
+      - equal: { path: spec.replicas, value: 1 }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-scoring-service")].kind
+          value: Deployment
+      - equal: { path: spec.replicas, value: 1 }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-media-service")].kind
+          value: Deployment
+      - equal: { path: spec.replicas, value: 1 }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-worker")].kind
+          value: Deployment
+      - equal:
+          path: spec.template.spec.containers[0].resources
+          value:
+            requests: { cpu: "1", memory: 2Gi }
+            limits: { memory: 3Gi }
+        documentSelector:
+          path: $[?(@.kind == "Deployment" && @.metadata.name == "useframe-worker")].kind
+          value: Deployment
+      - containsDocument:
+          kind: PodDisruptionBudget
+          apiVersion: policy/v1
+          name: useframe-billing-service
+          any: true
+
+  - it: prints a health check for every public host
+    template: templates/NOTES.txt
+    asserts:
+      - matchRegexRaw: { pattern: "curl -fsS https://api.useframe.in/health" }
+      - matchRegexRaw: { pattern: "curl -fsS https://orchestrator.useframe.in/health" }

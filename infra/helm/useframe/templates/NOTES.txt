@@ -11,7 +11,14 @@ Check the rollout:
   kubectl -n {{ .Release.Namespace }} rollout status deploy/{{ .Release.Name }}-server
 {{- if include "useframe.gce" . }}
   kubectl -n {{ .Release.Namespace }} describe managedcertificate {{ .Release.Name }}-ingress   # first issue: 15-60 min
-  curl -fsS https://{{ .Values.ingress.host }}/health
+{{- $hosts := list }}
+{{- range $key := include "useframe.exposedKeys" . | fromJsonArray }}
+{{- $w := include "useframe.workload" (dict "root" $ "svc" (index $.Values.services $key)) | fromYaml }}
+{{- $hosts = append $hosts ($w.ingress.host | default $.Values.ingress.host) }}
+{{- end }}
+{{- range $hosts | uniq | sortAlpha }}
+  curl -fsS https://{{ . }}/health
+{{- end }}
 {{- end }}
 
 Secrets are referenced, never created by this chart; a Secret change needs

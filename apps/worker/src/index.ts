@@ -10,6 +10,8 @@ import { startAutoReloadWorker } from "./processors/autoReload.processor.js";
 import { startDomainVerifyWorker } from "./processors/domainVerify.processor.js";
 import { startExpireCacheWorker } from "./processors/expireCache.processor.js";
 import { startResearchPdfWorker } from "./processors/researchPdf.processor.js";
+import { startHealthServer } from "./lib/health.js";
+import { redis } from "./lib/redis.js";
 
 async function main() {
   await prisma.$connect();
@@ -46,7 +48,31 @@ async function main() {
   const researchPdfWorker = startResearchPdfWorker();
   console.log("[worker] Research PDF worker started");
 
+  const workers = [
+    corpusWorker,
+    validationWorkers,
+    scanWorker,
+    scoreWorker,
+    seoAuditWorker,
+    webhookWorker,
+    autoReloadWorker,
+    domainVerifyWorker,
+    expireCacheWorker,
+    researchPdfWorker,
+  ].filter((w) => w !== undefined);
+  let shuttingDown = false;
+  if (env.HEALTH_PORT) {
+    // Draining after SIGTERM is expected, so it must not fail liveness.
+    startHealthServer(
+      env.HEALTH_PORT,
+      () =>
+        redis.status === "ready" &&
+        (shuttingDown || workers.every((w) => w.isRunning())),
+    );
+  }
+
   const shutdown = async () => {
+    shuttingDown = true;
     console.log("[worker] Shutting down...");
     await corpusWorker?.close();
     await validationWorkers?.close();

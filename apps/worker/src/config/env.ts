@@ -11,6 +11,7 @@ const envSchema = z
       .default("development"),
     DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
     REDIS_URL: z.string().default("redis://localhost:6379"),
+    HEALTH_PORT: z.coerce.number().int().min(1).max(65535).optional(),
 
     GCS_BUCKET: z.string().min(1).optional(),
     VALIDATION_PREVIEW_NAMESPACE: z.string().default("useframe-validation"),
