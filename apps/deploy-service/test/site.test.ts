@@ -41,6 +41,13 @@ describe("subdomain labels", () => {
     for (const label of RESERVED_LABELS) expect(isValidLabel(label)).toBe(false);
   });
 
+  it("reserves every platform host label", () => {
+    for (const label of ["orchestrator", "api", "www", "app", "admin", "billing", "mail", "status", "docs"]) {
+      expect(RESERVED_LABELS.has(label)).toBe(true);
+      expect(isValidLabel(label)).toBe(false);
+    }
+  });
+
   it("retries collisions and moves to a 4-char suffix", async () => {
     const created: string[] = [];
     const db = {

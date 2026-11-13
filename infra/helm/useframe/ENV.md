@@ -220,7 +220,7 @@ BullMQ processors in `apps/worker` (`apps/worker/src/config/env.ts`, plus `Corpu
 | `INTERNAL_SERVICE_SECRET`                                              | **yes**       | — (≥ 16 chars)                                                 | yes    | Secret (same value as every other Secret that has it)              |
 | `RAZORPAY_KEY_ID`                                                      | **yes**       | —                                                              | no     | Secret (kept with its secret; same account as billing)             |
 | `RAZORPAY_KEY_SECRET`                                                  | **yes**       | —                                                              | yes    | Secret (auto-reload charges)                                       |
-| `VERCEL_TOKEN`                                                         | **yes**\*     | —                                                              | yes    | Secret (\*schema requires a non-empty value; see below)            |
+| `VERCEL_TOKEN`                                                         | no            | unset                                                          | yes    | not set (legacy Vercel domain poll; see below)                     |
 | `VERCEL_TEAM_ID`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_NAME_PREFIX`        | no            | unset / unset / `useframe`                                     | no     | not set (legacy)                                                   |
 | `ANTHROPIC_API_KEY` / `OPENAI_API_KEY`                                 | one of 2\*\*  | unset                                                          | yes    | Secret (SEO audit analysis)                                        |
 | `DEEPSEEK_API_KEY`                                                     | no            | unset                                                          | yes    | not needed                                                         |
@@ -236,9 +236,8 @@ BullMQ processors in `apps/worker` (`apps/worker/src/config/env.ts`, plus `Corpu
 | `VOYAGE_API_KEY`                                                       | with corpus   | `""`                                                           | yes    | Secret (the corpus worker refuses to start without it)             |
 | `EMBEDDING_MODEL` / `EMBEDDING_DIMS`                                   | no            | `voyage-4` / `1024` (checked at startup)                       | no     | values (same as research-service)                                  |
 
-\* `VERCEL_TOKEN` is only used by the legacy Vercel domain poll, which does nothing for projects without
-a `vercelProjectId` (every Cloudflare-hosted project). The schema still requires a non-empty value, so
-a placeholder works until that requirement is removed from `apps/worker/src/config/env.ts`.
+`VERCEL_TOKEN` is only used by the legacy Vercel domain poll, which does nothing for projects without a
+`vercelProjectId` (every Cloudflare-hosted project); leave it out.
 
 \*\* Without either key, SEO audit jobs fail with "No LLM provider is configured"; other queues work.
 

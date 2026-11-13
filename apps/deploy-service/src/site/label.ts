@@ -22,6 +22,8 @@ export const RESERVED_LABELS = new Set([
   "fallback",
   "edge",
   "sites",
+  "orchestrator",
+  "billing",
 ]);
 
 export function slugifyName(name: string): string {

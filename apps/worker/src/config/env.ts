@@ -31,7 +31,7 @@ const envSchema = z
     DEEPSEEK_API_KEY: z.string().optional(),
     OPENAI_API_KEY: z.string().optional(),
 
-    VERCEL_TOKEN: z.string().min(1, "VERCEL_TOKEN is required"),
+    VERCEL_TOKEN: z.string().min(1).optional(),
     VERCEL_TEAM_ID: z.string().optional(),
     VERCEL_ORG_ID: z.string().optional(),
     VERCEL_PROJECT_NAME_PREFIX: z.string().default("useframe"),
