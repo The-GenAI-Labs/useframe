@@ -1,0 +1,31 @@
+{
+  "slug": "social-presence-and-trust-in-shopping-websites",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Social presence and trust in shopping websites",
+  "statement": "Adding socially rich text and images that increase perceived social presence can increase trust and favorable attitudes toward shopping websites, giving teams several ways to make a digital purchase experience feel more human. (ScienceDirect)\n\nOptions:\n- Named team members: team-portrait-and-name-card (fits: human, service led, relationship oriented)\n- Human support cue: support-agent-photo-and-name (fits: support focused, high touch, reassuring)\n- Customer story: customer-story-card (fits: community, social proof, relatable)\n- Warm interface language: human-centered-microcopy (fits: friendly, approachable, service led)\n- Contextual imagery: rich-lifestyle-product-imagery (fits: aspirational, emotional, experience led)",
+  "appliesWhen": "Applies to: ecommerce, online retail, travel, online services. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "service-led",
+    "approachable",
+    "aspirational",
+    "community",
+    "emotional",
+    "experience-led",
+    "friendly",
+    "high-touch",
+    "human",
+    "reassuring",
+    "relatable"
+  ],
+  "source": {
+    "title": "Manipulating perceived social presence through the web interface and its impact on attitude towards online shopping",
+    "authors": "Khaled Hassanein; Milena M. Head",
+    "year": 2007,
+    "venue": "International Journal of Human-Computer Studies",
+    "url": "https://doi.org/10.1016/j.ijhcs.2006.11.018",
+    "doi": "10.1016/j.ijhcs.2006.11.018"
+  },
+  "relations": []
+}

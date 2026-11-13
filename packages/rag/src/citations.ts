@@ -46,7 +46,7 @@ export async function saveCitations(
       if (touched.length)
         await tx.$executeRaw`UPDATE research_findings f SET "reuseCount" = (SELECT COUNT(DISTINCT "researchReportId")::int FROM research_report_citations c WHERE c."findingId" = f.id) WHERE f.id = ANY(${touched}::text[])`;
     },
-    { timeout: 30000 },
+    { maxWait: 10000, timeout: 30000 },
   );
 }
 export async function getProjectResearch(

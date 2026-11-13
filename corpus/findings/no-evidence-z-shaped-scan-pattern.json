@@ -1,0 +1,23 @@
+{
+  "slug": "no-evidence-z-shaped-scan-pattern",
+  "status": "DRAFT",
+  "category": "LAYOUT",
+  "title": "No evidence for Z-shaped web scan pattern",
+  "statement": "No web eyetracking study we could find establishes a Z-shaped scan pattern; Z-pattern layouts are a practitioner heuristic borrowed from the print-era Gutenberg diagram for sparse pages, so treat them as a composition guideline and give priority to evidence-backed cues such as left-side attention, clear headings and aligned images.\n\nOptions:\n- Z-composition as a heuristic: Z-shaped composition for a sparse page: logo left, CTA right in the header, hero visual on the diagonal, final CTA at the bottom right (heuristic, unverified) (fits: minimal, bold, promotional)\n- Evidence-backed left alignment: Left-aligned headline and CTA in the hero, supported by NN/g findings on left-biased attention rather than a Z path (fits: professional, clear, trustworthy)\n- Heading-led structure: Layer-cake structure with clear headings and chunked sections instead of a diagonal path (fits: editorial, organized, clear)\n- Aligned rows, sparing zigzag: Aligned image-text rows, with zigzag only for short sequences of informative images (fits: clean, calm, practical)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "layout",
+    "clear",
+    "bold",
+    "calm",
+    "clean",
+    "editorial",
+    "minimal",
+    "organized",
+    "practical",
+    "professional",
+    "promotional",
+    "trustworthy"
+  ],
+  "relations": []
+}

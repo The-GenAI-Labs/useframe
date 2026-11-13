@@ -1,0 +1,30 @@
+{
+  "slug": "above-fold-visibility-eyetracking",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Above-fold content viewed more than below-fold",
+  "statement": "NN/g's eyetracking analysis of 57,453 fixations found the 100 pixels just above the fold were viewed 102% more than the 100 pixels just below it (about an 84% average difference when combined with Google's ad-viewability data), so the most important content and calls to action should sit above the fold, with cues that encourage scrolling.\n\nOptions:\n- Design for each device's fold: Value proposition and primary CTA fully visible at each target breakpoint, designing for each device's own fold (fits: professional, clear, conversion-focused)\n- Signposts and anchors: Signposts near the top of long pages, such as anchor links or previews of what comes next (fits: organized, helpful, editorial)\n- Reward for scrolling: Interesting content or engaging imagery at and just below the fold that rewards scrolling and builds the story (fits: storytelling, warm, bold)\n- Avoid false floors: Visible cut-off content instead of a lone arrow, to avoid a false floor (fits: modern, clear, confident)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "layout",
+    "conversion-structure",
+    "clear",
+    "bold",
+    "confident",
+    "conversion-focused",
+    "editorial",
+    "helpful",
+    "modern",
+    "organized",
+    "professional",
+    "storytelling"
+  ],
+  "source": {
+    "title": "The Fold Manifesto: Why the Page Fold Still Matters",
+    "authors": "Amy Schade",
+    "year": 2015,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/page-fold-manifesto/"
+  },
+  "relations": []
+}

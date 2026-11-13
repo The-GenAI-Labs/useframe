@@ -1,0 +1,64 @@
+{
+  "slug": "focus-motion-and-moving-parts-keeping-landing-pages-usable",
+  "title": "Focus, Motion and Moving Parts: Keeping Landing Pages Usable",
+  "kind": "ARTICLE",
+  "category": "ACCESSIBILITY",
+  "summary": "Sticky headers, carousels, background video and parallax are popular landing page features and common barriers. Three W3C criteria explain how to keep them usable.",
+  "sections": [
+    {
+      "heading": "Sticky headers can hide the keyboard focus",
+      "body": "WCAG 2.2 SC 2.4.11 says a control receiving keyboard focus must not be entirely hidden by author-created content. Test by tabbing through the page and offset scroll positions so focused items land below fixed headers."
+    },
+    {
+      "heading": "Anything that moves by itself needs an off switch",
+      "body": "WCAG 2.2.2 requires a way to pause, stop or hide automatic motion that lasts more than five seconds. That covers auto-rotating carousels and background videos."
+    },
+    {
+      "heading": "Scroll effects can make people ill",
+      "body": "WCAG 2.3.3 (AAA) targets interaction-triggered motion such as parallax, which can trigger vestibular disorders. Honor the reduce-motion setting or offer a control."
+    }
+  ],
+  "body": "Modern landing pages love sticky headers, sliding carousels, looping videos and parallax scrolling. Each can be a barrier for someone. Three W3C criteria describe how.\n\n## Sticky headers can hide the keyboard focus\n\nPeople who use a keyboard move through a page with the Tab key, and a visible focus indicator shows where they are. WCAG 2.2 added Success Criterion 2.4.11, Focus Not Obscured (Minimum, Level AA): when a control receives keyboard focus it must not be entirely hidden by author-created content. Sticky headers, cookie banners and chat widgets are the usual culprits. If a fixed header covers the field you just tabbed into, you cannot see what you are typing into. Partial overlap is allowed at AA; the stricter AAA version (2.4.12) does not allow any overlap. In practice this means testing by tabbing forwards and backwards through the whole page, and offsetting scroll positions (for example with CSS scroll-padding) so focused items land below the header. Content the user opens themselves, such as a dialog they can dismiss with Esc, is treated more leniently.\n\n## Anything that moves by itself needs an off switch\n\nWCAG 2.2.2, Pause, Stop, Hide (Level A), applies to moving, blinking or scrolling content that starts automatically, lasts more than five seconds and appears alongside other content. Users must be able to pause, stop or hide it. Auto-updating content must also be controllable, and there is no five-second exception for it. The W3C explains why: moving content is a barrier for people who read slowly or have trouble tracking motion, it can cause problems for screen readers, and it can be a severe distraction for some people, including those with attention deficits. Auto-rotating hero carousels and background videos are the everyday examples. The simplest solutions are a static hero, or a visible, keyboard-operable pause button.\n\n## Scroll effects can make people ill\n\nWCAG 2.3.3, Animation from Interactions (Level AAA), is about motion triggered by the user's own actions, such as parallax scrolling where backgrounds move at a different speed from foregrounds. The W3C notes that such effects can trigger vestibular disorders, with dizziness, nausea and headaches, and that reactions can be severe. Non-essential animation should be avoidable: skip the effect, offer a control to turn it off, or honor the operating system's reduce-motion setting through the CSS prefers-reduced-motion media query. This criterion is Level AAA, which is above the AA level that many accessibility laws and policies refer to, but honoring reduced motion is cheap and increasingly expected.\n\n## A practical checklist\n\n- Tab through the page with a sticky header on, and confirm every focused item stays visible.\n- Give any auto-playing motion longer than five seconds a pause control, or remove the autoplay.\n- Wrap parallax and large transforms in a reduced-motion check, and fall back to a simple fade or no animation.\n\nNone of these ideas require giving up polish. They ask for control: the visitor decides what moves.",
+  "tags": [
+    "focus",
+    "sticky header",
+    "carousel",
+    "motion",
+    "reduced motion",
+    "vestibular",
+    "WCAG"
+  ],
+  "references": [
+    {
+      "title": "Understanding SC 2.4.11: Focus Not Obscured (Minimum), Web Content Accessibility Guidelines (WCAG) 2.2",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured.html",
+      "authors": [
+        "W3C Accessibility Guidelines Working Group"
+      ],
+      "publishedIn": "W3C",
+      "year": 2023,
+      "publicationType": "standard_specification"
+    },
+    {
+      "title": "Understanding SC 2.2.2: Pause, Stop, Hide, Web Content Accessibility Guidelines (WCAG) 2.2",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide",
+      "authors": [
+        "W3C Accessibility Guidelines Working Group"
+      ],
+      "publishedIn": "W3C",
+      "year": 2023,
+      "publicationType": "standard_specification"
+    },
+    {
+      "title": "Understanding SC 2.3.3: Animation from Interactions, Web Content Accessibility Guidelines (WCAG) 2.1",
+      "url": "https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions",
+      "authors": [
+        "W3C Accessibility Guidelines Working Group"
+      ],
+      "publishedIn": "W3C",
+      "year": 2023,
+      "publicationType": "standard_specification"
+    }
+  ],
+  "isPublished": true
+}

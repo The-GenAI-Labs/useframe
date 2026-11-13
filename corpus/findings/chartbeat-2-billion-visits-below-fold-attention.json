@@ -1,0 +1,30 @@
+{
+  "slug": "chartbeat-2-billion-visits-below-fold-attention",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Chartbeat 2 billion visits and below-the-fold attention",
+  "statement": "Chartbeat's analysis of about 2 billion visits, mostly to media and news sites, found roughly 66% of attention on a normal media page was spent below the fold, so on content-led pages where the opening earns interest, sections below the fold deserve real design investment rather than being treated as dead space.\n\nOptions:\n- Earn the scroll: Compelling first screen that gives a clear reason to scroll, followed by deeper sections that keep holding attention (fits: storytelling, editorial, warm)\n- Substantive lower sections: Below-the-fold sections that continue the story with substantive content instead of filler or branding-only bands (fits: authoritative, informative, trustworthy)\n- Measure your own scroll depth: Check scroll-depth and engagement analytics on your own page before deciding where the main CTA goes, because this data covers article pages, not landing pages (fits: data-driven, practical, technical)\n- Long-form with anchors: Long-form scroll with anchored sections for content-led or story-driven products (fits: editorial, premium, calm)",
+  "appliesWhen": "Applies to: media publishing. Audience: general.",
+  "tags": [
+    "layout",
+    "conversion-structure",
+    "editorial",
+    "authoritative",
+    "calm",
+    "data-driven",
+    "informative",
+    "practical",
+    "premium",
+    "storytelling",
+    "technical",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "What You Think You Know About the Web Is Wrong",
+    "authors": "Tony Haile",
+    "year": 2014,
+    "venue": "Time (Time.com), reporting Chartbeat data",
+    "url": "https://time.com/12933/what-you-think-you-know-about-the-web-is-wrong/"
+  },
+  "relations": []
+}

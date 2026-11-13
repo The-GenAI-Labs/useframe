@@ -1,0 +1,27 @@
+{
+  "slug": "visual-feedback-timing-0-1-seconds",
+  "status": "VERIFIED",
+  "category": "MOTION",
+  "title": "Visual feedback timing of 0.1 seconds",
+  "statement": "Visual feedback must occur within 0.1 seconds (100ms) for a user to perceive the system's response as instantaneous and directly tied to their physical action.\n\nOptions:\n- Instantaneous Feel: < 100ms duration (fits: hover states, switch toggles, microinteractions)\n- Flowing Transition: 200ms - 300ms duration (fits: modal entrances, menu expansions)\n- Deliberate Pacing: > 500ms duration (fits: splash screens, success celebrations)",
+  "appliesWhen": "Applies to: button states, hover effects, toggles. Audience: general.",
+  "tags": [
+    "motion",
+    "hover-states",
+    "menu-expansions",
+    "microinteractions",
+    "modal-entrances",
+    "splash-screens",
+    "success-celebrations",
+    "switch-toggles"
+  ],
+  "source": {
+    "title": "Response time in man-computer conversational transactions",
+    "authors": "Robert B. Miller",
+    "year": 1968,
+    "venue": "Proceedings of the December 9-11, 1968, fall joint computer conference, part I (AFIPS '68)",
+    "url": "https://dl.acm.org/doi/10.1145/1476589.1476628",
+    "doi": "10.1145/1476589.1476628"
+  },
+  "relations": []
+}

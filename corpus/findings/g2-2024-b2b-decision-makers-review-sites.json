@@ -1,0 +1,21 @@
+{
+  "slug": "g2-2024-b2b-decision-makers-review-sites",
+  "status": "DRAFT",
+  "category": "CONVERSION",
+  "title": "G2 2024 survey of 1,940 B2B decision-makers on review sites",
+  "statement": "G2's 2024 survey of 1,940 B2B decision-makers found that public product-review websites were the most consulted information source for 31% of buyers and that independent review sites were considered more valuable than analyst firms across every reported buying stage, supporting third-party peer evidence alongside vendor claims. (Sell G2)\n\nOptions:\n- Review excerpt: third_party_review_snippet_with_source_link (fits: peer led, credible)\n- Review rating: aggregate_review_rating_with_source_link (fits: efficient, evidence led)\n- Peer community quote: independent_community_quote_with_role (fits: human, community led)\n- Verified reviewer: verified_reviewer_profile (fits: expert, transparent)",
+  "appliesWhen": "Applies to: b2b saas, enterprise software. Audience: b2b buyers.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "community-led",
+    "credible",
+    "efficient",
+    "evidence-led",
+    "expert",
+    "human",
+    "peer-led",
+    "transparent"
+  ],
+  "relations": []
+}

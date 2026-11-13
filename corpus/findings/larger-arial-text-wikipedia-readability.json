@@ -1,0 +1,26 @@
+{
+  "slug": "larger-arial-text-wikipedia-readability",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Larger Arial text and Wikipedia readability in eye-tracking study",
+  "statement": "In an eye-tracking study of Wikipedia, larger Arial text improved objective readability and comprehension was significantly better at 18pt and 26pt than at smaller sizes, supporting 18–26pt as evidence-based options for text-heavy reading interfaces.\n\nOptions:\n- Evidence-backed large: 18pt (fits: comfortable, editorial)\n- More spacious: 20pt (fits: friendly, access-first)\n- Reading mode: 22pt (fits: editorial, minimal)\n- Maximum tested: 26pt (fits: access-first, reading mode)",
+  "appliesWhen": "Applies to: content sites, documentation, knowledge bases, web apps. Audience: adults, general.",
+  "tags": [
+    "typography",
+    "access-first",
+    "editorial",
+    "comfortable",
+    "friendly",
+    "minimal",
+    "reading-mode"
+  ],
+  "source": {
+    "title": "Make It Big!: The Effect of Font Size and Line Spacing on Online Readability",
+    "authors": "Luz Rello; Martin Pielot; Mari-Carmen Marcos",
+    "year": 2016,
+    "venue": "Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems",
+    "url": "https://doi.org/10.1145/2858036.2858204",
+    "doi": "10.1145/2858036.2858204"
+  },
+  "relations": []
+}

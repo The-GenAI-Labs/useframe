@@ -1,0 +1,31 @@
+{
+  "slug": "review-helpfulness-extreme-ratings-experience-goods",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Review helpfulness, extreme ratings, and experience goods",
+  "statement": "Detailed review text can increase perceived helpfulness, while very extreme ratings are less helpful for experience goods than more moderate ratings, so review interfaces can offer both depth and context instead of emphasizing only star averages. (AIS eLibrary)\n\nOptions:\n- Full review text: full-review-text-with-expand (fits: high consideration, research oriented, comparison shopping)\n- Structured review detail: pros-and-cons-review-prompts (fits: scannable, comparison friendly, utility first)\n- Rating + excerpt: rating-plus-text-preview (fits: compact, mobile first, high scan speed)\n- Balanced review view: balanced-review-distribution (fits: transparent, credibility first, experience goods)",
+  "appliesWhen": "Applies to: ecommerce, online retail, consumer goods, experience goods. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "compact",
+    "comparison-friendly",
+    "comparison-shopping",
+    "credibility-first",
+    "experience-goods",
+    "high-consideration",
+    "high-scan-speed",
+    "mobile-first",
+    "research-oriented",
+    "scannable",
+    "transparent"
+  ],
+  "source": {
+    "title": "What Makes a Helpful Online Review? A Study of Customer Reviews on Amazon.com",
+    "authors": "Susan M. Mudambi; David Schuff",
+    "year": 2010,
+    "venue": "MIS Quarterly",
+    "url": "https://doi.org/10.2307/20721420",
+    "doi": "10.2307/20721420"
+  },
+  "relations": []
+}

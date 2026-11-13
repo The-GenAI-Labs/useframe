@@ -1,0 +1,29 @@
+{
+  "slug": "all-caps-vs-mixed-case-reading",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "All-caps versus mixed-case text for low-vision and standard reading",
+  "statement": "While all-caps text is slightly more legible at the absolute threshold of visual acuity for low-vision users, mixed-case text is read significantly faster at standard web sizes due to distinct word shapes.\n\nOptions:\n- Body Text Standard: Mixed-case (Sentence case) (fits: paragraphs, long form content, fast reading)\n- Short Labels & Acronyms: All-caps (UPPERCASE) (fits: button labels, navigation items, alerts)\n- Headings: Title Case (fits: hero headers, article titles)\n- Stylistic UI: Lower-case only (fits: modern branding, minimalist design)",
+  "appliesWhen": "Applies to: web, mobile, print. Audience: general, seniors, adults.",
+  "tags": [
+    "typography",
+    "alerts",
+    "article-titles",
+    "button-labels",
+    "fast-reading",
+    "hero-headers",
+    "long-form-content",
+    "minimalist-design",
+    "modern-branding",
+    "navigation-items",
+    "paragraphs"
+  ],
+  "source": {
+    "title": "Letter case and text legibility in normal and low vision",
+    "authors": "Aries Arditi; Jianna Cho",
+    "year": 2007,
+    "venue": "Vision Research",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/17675131/"
+  },
+  "relations": []
+}

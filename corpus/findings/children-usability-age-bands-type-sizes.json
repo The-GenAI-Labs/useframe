@@ -1,0 +1,30 @@
+{
+  "slug": "children-usability-age-bands-type-sizes",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Age bands for children's usability and type sizes",
+  "statement": "Children's usability needs change so sharply with age that designs should target narrow bands (at minimum 3–5, 6–8 and 9–12): the youngest do not read and should not be asked to scroll, early readers read tentatively and need larger type (about 14 pt), older children scan text (about 12 pt) and tolerate some scrolling, and content pitched even one school grade off a child's own level is rejected.\n\nOptions:\n- Pre-reader layout: Ages 3–5: icon- and character-led screens, audio/visual instructions instead of reading, no scrolling, any text at ~14 pt (~19 px) (fits: playful, gentle, nurturing)\n- Early-reader layout: Ages 6–8: short single-screen sections, copy for tentative readers at ~14 pt (~19 px), minimal scrolling, one navigation system only (fits: friendly, curious, encouraging)\n- Older-child layout: Ages 9–12: scannable copy at ~12 pt (~16 px), some vertical scrolling, richer navigation and exploration (fits: adventurous, confident, bold)\n- Parent links in text footer: Parent/buyer links (pricing, privacy, contact) placed in a text-only footer that children are unlikely to click (fits: trustworthy, safe, family friendly)",
+  "appliesWhen": "Applies to: kids websites, kids apps, educational products, children media and toys, kids corner sections. Audience: children under 10.",
+  "tags": [
+    "layout",
+    "adventurous",
+    "bold",
+    "confident",
+    "curious",
+    "encouraging",
+    "family-friendly",
+    "friendly",
+    "gentle",
+    "nurturing",
+    "playful",
+    "safe"
+  ],
+  "source": {
+    "title": "Children's UX: Usability Issues in Designing for Young People",
+    "authors": "Katie Sherwin; Jakob Nielsen",
+    "year": 2019,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/childrens-websites-usability-issues/"
+  },
+  "relations": []
+}

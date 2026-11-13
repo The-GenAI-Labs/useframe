@@ -1,0 +1,78 @@
+{
+  "slug": "structure-labels-and-forms-that-work-with-assistive",
+  "title": "Structure, Labels and Forms That Work With Assistive Technology",
+  "kind": "ARTICLE",
+  "category": "ACCESSIBILITY",
+  "summary": "Screen readers, voice control and keyboards depend on the code behind the design. The biggest audit of the web shows the same handful of gaps year after year, and they are mostly design decisions.",
+  "sections": [
+    {
+      "heading": "What the biggest audit finds",
+      "body": "WebAIM's 2026 analysis of one million home pages found six error types account for 96% of detected failures: low contrast, missing alt text, missing form labels, empty links, empty buttons and missing page language."
+    },
+    {
+      "heading": "Decide what every image is for",
+      "body": "The W3C sorts images into informative, decorative, functional and complex, each with a different text alternative. Icon-only links and buttons need alt text describing the action."
+    },
+    {
+      "heading": "Headings are how screen reader users navigate",
+      "body": "In WebAIM's 2024 survey, 71.6% of screen reader users first navigate long pages by headings. Use real heading elements in a logical order with descriptive text."
+    },
+    {
+      "heading": "Placeholders are not labels",
+      "body": "NN/g's testing shows placeholder-as-label strains memory, hides errors and is often low contrast or unread. Use visible labels outside the field."
+    }
+  ],
+  "body": "Screen readers, voice control and keyboards all depend on the code behind the design. Four sources show where landing pages most often fall short and what to do about it.\n\n## What the biggest audit finds\n\nWebAIM, the accessibility group at Utah State University, analyzes the home pages of the top million websites every year. Its 2026 report found detectable WCAG failures on 95.9% of pages, and six error types made up 96% of everything it detected: low-contrast text (83.9% of pages), missing alternative text on images (53.1%), missing form labels (51%), empty links (46.3%), empty buttons (30.6%) and a missing page language (13.5%). These are the same six categories as in each of the previous seven years. WebAIM also found that pages using ARIA averaged 59.1 detected errors against 42 for pages without, and that popular carousel libraries were associated with more errors than average, though it cautions that these pages are also more complex, so the link is correlational.\n\nNothing in that list requires a redesign. It requires a few deliberate decisions in the design system.\n\n## Decide what every image is for\n\nThe W3C's images tutorial (which supports WCAG 1.1.1) sorts images into four kinds. Informative images need a short description of the essential information. Decorative images get an empty alt attribute so screen readers skip them. Functional images, such as an icon inside a button or link, need alt text that describes the action, for example 'View pricing', rather than the picture. Complex images such as charts need a short description plus the underlying information nearby. In WebAIM's data, 16.2% of all images lacked alt text, and 45% of those were linked images, which leaves links without a meaningful name.\n\n## Headings are how screen reader users navigate\n\nIn WebAIM's Screen Reader User Survey #10 (1,539 respondents, collected in December 2023 and January 2024), 71.6% said that on a long page they first navigate through the headings, and 88.8% found heading levels very or somewhat useful. Only 3.7% started with landmarks. The sample was not controlled, so it may not represent all screen reader users, but the direction is clear: use real heading elements in a logical order, with descriptive text, so each section of the landing page can be found on its own. WebAIM's audit also shows how often this goes wrong: skipped heading levels appeared on 41.8% of pages.\n\n## Placeholders are not labels\n\nKatie Sherwin's Nielsen Norman Group article summarizes user testing showing that placeholder text used in place of a label strains memory, prevents people from checking their entries, is skipped as if it were pre-filled, and is often low contrast or not read aloud by screen readers. NN/g's best option is a visible label, with any hint, outside the field. Floating labels are an acceptable compromise where space is tight, but they do not fix every problem.\n\n## Takeaway\n\nGive every input a visible label, every icon-only control a name, every image a purpose, and every section a real heading. Those four habits cover a large share of the failures that automated audits find.",
+  "tags": [
+    "alt text",
+    "headings",
+    "screen readers",
+    "forms",
+    "labels",
+    "WebAIM",
+    "placeholders"
+  ],
+  "references": [
+    {
+      "title": "The WebAIM Million: The 2026 report on the accessibility of the top 1,000,000 home pages",
+      "url": "https://webaim.org/projects/million/",
+      "authors": [
+        "WebAIM (Web Accessibility In Mind), Utah State University"
+      ],
+      "publishedIn": "WebAIM, Utah State University",
+      "year": 2026,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "Images Tutorial",
+      "url": "https://www.w3.org/WAI/tutorials/images/",
+      "authors": [
+        "W3C Web Accessibility Initiative (WAI)"
+      ],
+      "publishedIn": "W3C Web Accessibility Initiative",
+      "year": 2023,
+      "publicationType": "standard_specification"
+    },
+    {
+      "title": "Screen Reader User Survey #10 Results",
+      "url": "https://webaim.org/projects/screenreadersurvey10/",
+      "authors": [
+        "WebAIM (Web Accessibility In Mind), Utah State University"
+      ],
+      "publishedIn": "WebAIM, Utah State University",
+      "year": 2024,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "Placeholders in Form Fields Are Harmful",
+      "url": "https://www.nngroup.com/articles/form-design-placeholders/",
+      "authors": [
+        "Katie Sherwin"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2014,
+      "publicationType": "industry_report"
+    }
+  ],
+  "isPublished": true
+}

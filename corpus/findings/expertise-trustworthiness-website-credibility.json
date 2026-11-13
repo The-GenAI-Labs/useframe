@@ -1,0 +1,31 @@
+{
+  "slug": "expertise-trustworthiness-website-credibility",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Expertise and trustworthiness markers for website credibility",
+  "statement": "Explicit expertise and trustworthiness markers such as credentials, citations, outside sources, and clear policies can strengthen website credibility, giving teams several substantiated ways to answer the objection 'Why should I believe you?'. (Simson)\n\nOptions:\n- Expert credentials: named-expert-credentials (fits: expert led, high consideration, professional)\n- Outside sources: third-party-source-links (fits: evidence led, research backed, high scrutiny)\n- Cited claims: cited-product-claims (fits: technical, evidence led, transparent)\n- Clear policies: plain-language-policy-links (fits: transparent, risk reducing, service led)\n- Detailed specifications: detailed-product-information (fits: technical, comparison shopping, high involvement)",
+  "appliesWhen": "Applies to: ecommerce, professional services, health information, expert led products. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "evidence-led",
+    "technical",
+    "transparent",
+    "comparison-shopping",
+    "expert-led",
+    "high-consideration",
+    "high-involvement",
+    "high-scrutiny",
+    "professional",
+    "research-backed"
+  ],
+  "source": {
+    "title": "What makes Web sites credible?: a report on a large quantitative study",
+    "authors": "B. J. Fogg; Jonathan Marshall; Othman Laraki; Alex Osipovich; Chris Varma; Nicholas Fang; Jyoti Paul; Akshay Rangnekar; John Shon; Preeti Swani; Marissa Treinen",
+    "year": 2001,
+    "venue": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI 2001), ACM",
+    "url": "https://doi.org/10.1145/365024.365037",
+    "doi": "10.1145/365024.365037"
+  },
+  "relations": []
+}

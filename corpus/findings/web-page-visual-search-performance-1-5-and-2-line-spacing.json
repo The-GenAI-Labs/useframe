@@ -1,0 +1,28 @@
+{
+  "slug": "web-page-visual-search-performance-1-5-and-2-line-spacing",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Web-page visual-search performance with 1.5 and 2 line spacing",
+  "statement": "In web-page visual-search experiments, 1.5-line and 2-line spacing produced better performance than single spacing, so 1.5 is a sensible content-reading baseline and 2 can be used when search accuracy matters more than density.\n\nOptions:\n- Dense: 1.0 (fits: high density, data rich)\n- Reading baseline: 1.5 (fits: balanced, editorial)\n- Search-friendly: 2.0 (fits: access-first, calm)\n- Middle ground: 1.7 (fits: comfortable, friendly)",
+  "appliesWhen": "Applies to: general web, web apps, content sites. Audience: adults, general.",
+  "tags": [
+    "typography",
+    "access-first",
+    "balanced",
+    "calm",
+    "comfortable",
+    "data-rich",
+    "editorial",
+    "friendly",
+    "high-density"
+  ],
+  "source": {
+    "title": "The influence of line spacing and text alignment on visual search of web pages",
+    "authors": "Jonathan Ling; Paul van Schaik",
+    "year": 2007,
+    "venue": "Displays",
+    "url": "https://doi.org/10.1016/j.displa.2007.04.003",
+    "doi": "10.1016/j.displa.2007.04.003"
+  },
+  "relations": []
+}

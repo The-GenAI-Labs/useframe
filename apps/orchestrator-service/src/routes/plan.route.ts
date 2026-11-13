@@ -12,6 +12,7 @@ import { findCompetitorUrls, enqueueCompetitorScans, waitForScans } from "@/tool
 import type { PlannerExtracted } from "@/prompts/planner.prompt.js"
 import { prisma, type Prisma } from "@useframe/db"
 import { loadBriefContext, plannerBriefVars, restrictLayout, writeResearchedFields } from "@/lib/briefPipeline.js"
+import { planCitations, reportFromAgent, reportFromBrief, retrieveCorpus, savePlanCitations } from "@/lib/planCitations.js"
 
 const router: Router = Router()
 
@@ -129,8 +130,20 @@ router.post("/plan", (req: Request, res: Response): void => {
         message: "Retrieving research findings...",
       })
 
-      const [{ results }, domainPattern, audienceModifier] = await Promise.all([
+      const [{ results }, corpus, domainPattern, audienceModifier] = await Promise.all([
         callRetrieve(DECISION_QUERIES(domain, audience), domain, audience),
+        retrieveCorpus({
+          projectId,
+          rawIdea: ideaText,
+          niche,
+          answers: {
+            targetAudience,
+            brandPersonality: extracted?.brandPersonality,
+            pricePositioning: extracted?.pricePositioning,
+            businessModel: extracted?.businessModel,
+            differentiator: extracted?.differentiator,
+          },
+        }),
         callDomainPattern(domain),
         callAudienceModifier(audience),
       ])
@@ -159,6 +172,7 @@ router.post("/plan", (req: Request, res: Response): void => {
       const plannerVars = {
         extracted: plannerExtracted,
         results,
+        corpus,
         domainPattern,
         audienceModifier,
         brief: plannerBriefVars(briefCtx),
@@ -214,16 +228,7 @@ router.post("/plan", (req: Request, res: Response): void => {
         await prisma.researchReport
           .upsert({
             where: { projectId },
-            create: {
-              projectId,
-              inputType: "FROM_SCRATCH",
-              ...researchReport,
-              colorPalette: researchReport.colorPalette as Prisma.InputJsonValue,
-              imageDirection: researchReport.imageDirection as Prisma.InputJsonValue,
-              seoKeywords: researchReport.seoKeywords as Prisma.InputJsonValue | undefined,
-              competitorInsights: researchReport.competitorInsights as Prisma.InputJsonValue,
-              citations: researchReport.citations as Prisma.InputJsonValue,
-            },
+            create: { projectId, ...reportFromAgent(researchReport) },
             update: {
               competitorInsights: researchReport.competitorInsights as Prisma.InputJsonValue,
             },
@@ -232,6 +237,14 @@ router.post("/plan", (req: Request, res: Response): void => {
             console.error("[plan] failed to persist competitorInsights:", err)
           })
       }
+
+      await savePlanCitations(
+        projectId,
+        planCitations(candidates ? [candidates.candidateA, candidates.candidateB] : [singleBrief!], results, corpus),
+        reportFromAgent(researchReport),
+      ).catch((err: unknown) => {
+        console.error("[plan] failed to save research citations:", err instanceof Error ? err.message : err)
+      })
 
       if (candidates) {
         sseWrite(res, {
@@ -340,26 +353,44 @@ router.post("/plan/sync", (req: Request, res: Response, next: NextFunction): voi
 
   Promise.all([
     callRetrieve(DECISION_QUERIES(domain, audience), domain, audience),
+    projectId
+      ? retrieveCorpus({
+          projectId,
+          rawIdea: startupIdea,
+          niche,
+          answers: { targetAudience, brandPersonality, pricePositioning, businessModel, differentiator },
+        })
+      : Promise.resolve([]),
     callDomainPattern(domain),
     callAudienceModifier(audience),
     projectId ? loadBriefContext(projectId, user.id) : Promise.resolve(null),
   ])
-    .then(async ([{ results }, domainPattern, audienceModifier, briefCtx]) => {
+    .then(async ([{ results }, corpus, domainPattern, audienceModifier, briefCtx]) => {
       // This sync path is the pre-existing DesignBrief-approval workflow's
       // dependency, not the new tier-gated generation flow, so it keeps its
       // original always-DeepSeek behavior rather than taking a tier param.
       const model = getModelForTier("free")
       const providerOptions = getProviderOptionsForTier("free")
       const raw = await runPlannerCandidatesAgent(
-        { extracted, results, domainPattern, audienceModifier, brief: plannerBriefVars(briefCtx) },
+        { extracted, results, corpus, domainPattern, audienceModifier, brief: plannerBriefVars(briefCtx) },
         model,
         providerOptions,
       )
-      return {
+      const candidates = {
         ...raw,
         candidateA: restrictLayout(raw.candidateA, briefCtx),
         candidateB: restrictLayout(raw.candidateB, briefCtx),
       }
+      if (projectId) {
+        await savePlanCitations(
+          projectId,
+          planCitations([candidates.candidateA, candidates.candidateB], results, corpus),
+          reportFromBrief(candidates.recommended === "A" ? candidates.candidateA : candidates.candidateB),
+        ).catch((err: unknown) => {
+          console.error("[plan/sync] failed to save research citations:", err instanceof Error ? err.message : err)
+        })
+      }
+      return candidates
     })
     .then((candidates) => {
       // `brief` is still returned (the recommended candidate) so any caller

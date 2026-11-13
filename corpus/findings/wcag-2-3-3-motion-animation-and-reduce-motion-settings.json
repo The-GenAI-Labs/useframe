@@ -1,0 +1,30 @@
+{
+  "slug": "wcag-2-3-3-motion-animation-and-reduce-motion-settings",
+  "status": "VERIFIED",
+  "category": "MOTION",
+  "title": "WCAG 2.3.3 motion animation and reduce-motion settings",
+  "statement": "WCAG 2.3.3 (Level AAA) says motion animation triggered by interaction, such as parallax scrolling, should be possible to disable because scroll-triggered movement can trigger vestibular disorders with dizziness, nausea and headaches, and honoring the operating system's reduce-motion setting is the standard route.\n\nOptions:\n- Reduced-motion media query: Parallax and large transforms wrapped in @media (prefers-reduced-motion: no-preference) so they are off for users who request reduced motion (fits: modern, technical, polished)\n- Fade instead of move: Opacity-only fades or static reveals instead of translation and parallax effects (fits: calm, minimal, premium)\n- Motion toggle: On-page 'reduce motion' toggle that disables non-essential animation site-wide (fits: accessible, respectful, careful)\n- Subtle micro-interactions only: Short, subtle micro-interactions (button states, hovers) kept separate from large scroll-linked effects (fits: professional, efficient, trustworthy)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "motion",
+    "accessible",
+    "calm",
+    "careful",
+    "efficient",
+    "minimal",
+    "modern",
+    "polished",
+    "premium",
+    "professional",
+    "respectful",
+    "technical"
+  ],
+  "source": {
+    "title": "Understanding SC 2.3.3: Animation from Interactions, Web Content Accessibility Guidelines (WCAG) 2.1",
+    "authors": "W3C Accessibility Guidelines Working Group",
+    "year": 2023,
+    "venue": "W3C WCAG 2.2 (SC 2.3.3 Animation from Interactions, Level AAA, introduced in WCAG 2.1 in 2018)",
+    "url": "https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions"
+  },
+  "relations": []
+}

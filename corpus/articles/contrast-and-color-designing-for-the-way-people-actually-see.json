@@ -1,0 +1,77 @@
+{
+  "slug": "contrast-and-color-designing-for-the-way-people-actually-see",
+  "title": "Contrast and Color: Designing for the Way People Actually See",
+  "kind": "ARTICLE",
+  "category": "ACCESSIBILITY",
+  "summary": "Good contrast is the single most common accessibility gap on the web. Here is where the WCAG numbers come from, why controls need contrast too, and why color must never work alone.",
+  "sections": [
+    {
+      "heading": "Text contrast: the 4.5:1 rule",
+      "body": "WCAG asks for 4.5:1 between text and background (3:1 for large text), with 7:1 at the stricter AAA level. The W3C explains that 4.5:1 compensates for the contrast loss of moderately low vision, color deficiencies and aging."
+    },
+    {
+      "heading": "Controls and icons need contrast too",
+      "body": "WCAG 1.4.11 asks for 3:1 for input borders, control states, focus rings and meaningful graphics. A pale gray border on a white page is the classic failure."
+    },
+    {
+      "heading": "Color must never work alone",
+      "body": "WCAG 1.4.1 says color cannot be the only way to convey meaning. Pair color with underlines, icons or words for links, errors, required fields and status."
+    },
+    {
+      "heading": "Why this is not a niche issue",
+      "body": "Birch's 2012 review found about 8% of men and 0.4% of women of European descent, and 4% to 6.5% of men of Chinese and Japanese ethnicity, have red-green color deficiency."
+    }
+  ],
+  "body": "Accessible color is not about making a page ugly. It is about making sure the people who visit can actually see what you built. Four sources set the ground rules.\n\n## Text contrast: the 4.5:1 rule and where it comes from\n\nThe W3C's Web Content Accessibility Guidelines (WCAG 2.2, 2023) require a contrast ratio of at least 4.5:1 between text and its background, with 3:1 allowed for large text. The W3C's own explanation of Success Criterion 1.4.3 says the 3:1 base figure comes from ISO 9241-3 and an older US standard, and that 4.5:1 compensates for the loss of contrast that comes with moderately low visual acuity (roughly 20/40), color deficiencies or aging. A stricter Level AAA criterion asks for 7:1, which corresponds to roughly 20/80 acuity. The rule applies to placeholder text and to text that appears on hover or focus, not only to headings and paragraphs, and real text placed over a photo is still measured against what sits behind it, so hero headlines need a solid or gradient panel behind them rather than hope.\n\nTo make this concrete: mid-gray #767676 on white just clears 4.5:1 (about 4.54:1), while #595959 on white reaches 7:1.\n\n## Controls and icons need contrast too\n\nWCAG 1.4.11 (added in WCAG 2.1) extends contrast to things that are not text. Visual information needed to identify a control or its state, such as an input border, a checkbox state or a focus ring, needs at least 3:1 against adjacent colors, and so do the parts of a graphic needed to understand it. The classic failure is a pale gray input border on a white page: the field is there, but a person with low vision may not find it. Inactive controls are exempt.\n\n## Color must never work alone\n\nWCAG 1.4.1 (Level A, the most basic tier) says color must not be the only way to convey information, indicate an action, prompt a response or distinguish an element. Typical failures include links in body text that differ only in color, errors shown only by a red outline, or required fields marked only by color. The W3C's technique for links is to give them at least 3:1 contrast with the surrounding text plus an extra cue on hover and focus, and underlining is the simplest way to avoid the problem altogether.\n\n## Why this is not a niche issue\n\nJennifer Birch's 2012 review in the Journal of the Optical Society of America A pulled together large population surveys of inherited red-green color deficiency. Among people of European descent, about 8% of men and 0.4% of women are affected, and among men of Chinese and Japanese ethnicity the figure is between 4% and 6.5%. Those numbers vary by population, and color deficiency is only one reason people miss color cues, since low vision, aging screens and bright sunlight all matter too.\n\n## Putting it together\n\nPick your palette by contrast first and hue second. Check every text and background pair, including text on images, placeholders and hover states. Give inputs and icons a visible 3:1 edge. And for anything that carries meaning, such as status, errors or plan tiers, pair the color with a word, an icon or a pattern.",
+  "tags": [
+    "contrast",
+    "WCAG",
+    "color vision deficiency",
+    "use of color",
+    "non-text contrast",
+    "accessibility"
+  ],
+  "references": [
+    {
+      "title": "Understanding SC 1.4.3: Contrast (Minimum), Web Content Accessibility Guidelines (WCAG) 2.2",
+      "url": "https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html",
+      "authors": [
+        "W3C Accessibility Guidelines Working Group"
+      ],
+      "publishedIn": "W3C",
+      "year": 2023,
+      "publicationType": "standard_specification"
+    },
+    {
+      "title": "Understanding SC 1.4.11: Non-text Contrast, Web Content Accessibility Guidelines (WCAG) 2.2",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast",
+      "authors": [
+        "W3C Accessibility Guidelines Working Group"
+      ],
+      "publishedIn": "W3C",
+      "year": 2023,
+      "publicationType": "standard_specification"
+    },
+    {
+      "title": "Understanding SC 1.4.1: Use of Color, Web Content Accessibility Guidelines (WCAG) 2.2",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
+      "authors": [
+        "W3C Accessibility Guidelines Working Group"
+      ],
+      "publishedIn": "W3C",
+      "year": 2023,
+      "publicationType": "standard_specification"
+    },
+    {
+      "title": "Worldwide prevalence of red-green color deficiency",
+      "url": "https://doi.org/10.1364/JOSAA.29.000313",
+      "authors": [
+        "Jennifer Birch"
+      ],
+      "publishedIn": "Journal of the Optical Society of America A, 29(3), 313-320",
+      "year": 2012,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

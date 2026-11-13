@@ -1,0 +1,62 @@
+{
+  "slug": "typography-for-cognitive-accessibility-and-dyslexia",
+  "title": "Typography for Cognitive Accessibility and Dyslexia",
+  "kind": "ARTICLE",
+  "category": "ACCESSIBILITY",
+  "summary": "Designing inclusive typography isn't just about size; it's about shape, spacing, and alignment. Research shows that specific font choices and layout adjustments can dramatically improve reading speed and comprehension for users with dyslexia or cognitive disabilities.",
+  "sections": [
+    {
+      "heading": "The Best Fonts for Dyslexic Readers",
+      "body": "When designing for neurodiversity, typeface selection is critical. In a comprehensive 2013 eyetracking and comprehension study presented at the ACM SIGACCESS Conference, researchers Luz Rello and Ricardo Baeza-Yates tested 48 dyslexic subjects across various typefaces. They found that sans-serif, monospaced, and roman fonts yielded the best reading performance. Specifically, Helvetica, Courier, Arial, and Verdana were the most effective. Conversely, italicized text significantly impaired reading speed and accuracy and should be avoided in accessible interfaces [1]."
+    },
+    {
+      "heading": "Text Spacing and Layout Control",
+      "body": "Cognitive accessibility requires giving text room to breathe. The W3C's WCAG 2.1 Success Criterion 1.4.12 officially codified the need for flexible text spacing. To ensure users with reading disabilities don't lose their place or experience visual crowding, interfaces must support line heights of at least 1.5 times the font size, and paragraph spacing of at least 2 times the font size. Furthermore, web developers must ensure that if a user applies custom CSS to increase letter spacing (up to 0.12em) or word spacing (up to 0.16em), the layout does not break or clip the content [2]."
+    },
+    {
+      "heading": "Avoid the 'Rivers of White'",
+      "body": "While fully justified text—where words align flush with both the left and right margins—looks clean in printed newspapers, it is highly detrimental on the web. As detailed in the WCAG 1.4.8 Visual Presentation standards, justifying HTML text creates inconsistent gaps between words. These unpredictable 'rivers of white' disrupt the saccadic rhythm of reading, causing users with cognitive or learning disabilities to lose their place. For left-to-right languages, text should always default to left-aligned (ragged-right) [3]."
+    }
+  ],
+  "body": "Designing inclusive typography isn't just about size; it's about shape, spacing, and alignment. Research shows that specific font choices and layout adjustments can dramatically improve reading speed and comprehension for users with dyslexia or cognitive disabilities.\n\n### The Best Fonts for Dyslexic Readers\n\nWhen designing for neurodiversity, typeface selection is critical. In a comprehensive 2013 eyetracking and comprehension study presented at the ACM SIGACCESS Conference, researchers Luz Rello and Ricardo Baeza-Yates tested 48 dyslexic subjects across various typefaces. They found that sans-serif, monospaced, and roman fonts yielded the best reading performance. Specifically, Helvetica, Courier, Arial, and Verdana were the most effective. Conversely, italicized text significantly impaired reading speed and accuracy and should be avoided in accessible interfaces [1].\n\n### Text Spacing and Layout Control\n\nCognitive accessibility requires giving text room to breathe. The W3C's WCAG 2.1 Success Criterion 1.4.12 officially codified the need for flexible text spacing. To ensure users with reading disabilities don't lose their place or experience visual crowding, interfaces must support line heights of at least 1.5 times the font size, and paragraph spacing of at least 2 times the font size. Furthermore, web developers must ensure that if a user applies custom CSS to increase letter spacing (up to 0.12em) or word spacing (up to 0.16em), the layout does not break or clip the content [2].\n\n### Avoid the 'Rivers of White'\n\nWhile fully justified text—where words align flush with both the left and right margins—looks clean in printed newspapers, it is highly detrimental on the web. As detailed in the WCAG 1.4.8 Visual Presentation standards, justifying HTML text creates inconsistent gaps between words. These unpredictable 'rivers of white' disrupt the saccadic rhythm of reading, causing users with cognitive or learning disabilities to lose their place. For left-to-right languages, text should always default to left-aligned (ragged-right) [3].",
+  "tags": [
+    "dyslexia",
+    "accessibility",
+    "wcag",
+    "typography"
+  ],
+  "references": [
+    {
+      "title": "Good Fonts for Dyslexia",
+      "url": "https://dl.acm.org/doi/10.1145/2513383.2513447",
+      "authors": [
+        "Luz Rello",
+        "Ricardo Baeza-Yates"
+      ],
+      "publishedIn": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility",
+      "year": 2013,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "WCAG 2.1 Specification: Success Criterion 1.4.12 Text Spacing",
+      "url": "https://www.w3.org/TR/WCAG21/#text-spacing",
+      "authors": [
+        "W3C Accessibility Guidelines Working Group"
+      ],
+      "publishedIn": "W3C",
+      "year": 2018,
+      "publicationType": "standard_specification"
+    },
+    {
+      "title": "Understanding Success Criterion 1.4.8 Visual Presentation",
+      "url": "https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html",
+      "authors": [
+        "W3C Web Content Accessibility Guidelines Working Group"
+      ],
+      "publishedIn": "W3C WCAG 2.0 Specification",
+      "year": 2008,
+      "publicationType": "standard_specification"
+    }
+  ],
+  "isPublished": true
+}

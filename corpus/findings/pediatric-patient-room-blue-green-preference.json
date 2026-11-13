@@ -1,0 +1,25 @@
+{
+  "slug": "pediatric-patient-room-blue-green-preference",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Pediatric patient-room blue and green preference over white",
+  "statement": "In pediatric patient-room and related design contexts, blue and green are preferred over white by both children and design professionals, supporting calm, non-clinical primary palettes for child-facing health interfaces.\n\nOptions:\n- Preferred blue: #4169E1 royal blue (fits: pediatric portal)\n- Preferred green: #3CB371 medium sea green (fits: child health app)\n- Least preferred: #FFFFFF pure white (fits: avoid as dominant)\n- Secondary warm: #FFD700 soft yellow (fits: accent only)",
+  "appliesWhen": "Applies to: health, kids. Audience: children under 10, parents.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "accent-only",
+    "avoid-as-dominant",
+    "child-health-app",
+    "pediatric-portal"
+  ],
+  "source": {
+    "title": "Design Professionals' Viewpoint on Color Application in the Design of Pediatric Patients' Rooms",
+    "authors": "Park et al.",
+    "year": 2026,
+    "venue": "Color Research & Application",
+    "url": "https://onlinelibrary.wiley.com/doi/10.1002/col.70008",
+    "doi": "10.1002/col.70008"
+  },
+  "relations": []
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "zigzag-image-text-layouts-fixations",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Zigzag image-text layouts and decorative image fixations",
+  "statement": "In an eyetracking study of four real pages with about 30-35 participants per variation, informational images were studied in both zigzag (alternating) and aligned image-text layouts, but decorative images in zigzag rows caused stumbling fixations, so alternate image placement only for meaningful imagery or short sequences and align decorative images down one side.\n\nOptions:\n- Aligned layout: Aligned two-column rows with all images on one side, for decorative or brand imagery (fits: clean, professional, calm)\n- Zigzag with informational images: Zigzag rows only when every image carries real product information (product photos, digestible screenshots) (fits: visual, playful, storytelling)\n- Short zigzag: Zigzag limited to two or three rows, where the short sequence keeps scanning easy (fits: modern, friendly, bold)\n- Top-aligned decorative images: Decorative images top-aligned with their corresponding text so the eye is not pulled ahead of the copy (fits: polished, clean, clear)\n- Left-first information: High-information content placed on the left side of the first row, where people start looking (fits: clear, practical, professional)",
+  "appliesWhen": "Applies to: consumer apps, consumer subscriptions. Audience: general.",
+  "tags": [
+    "layout",
+    "clean",
+    "clear",
+    "professional",
+    "bold",
+    "calm",
+    "friendly",
+    "modern",
+    "playful",
+    "polished",
+    "practical",
+    "storytelling"
+  ],
+  "source": {
+    "title": "Zigzag Image–Text Layouts Make Scanning Less Efficient",
+    "authors": "Kim Flaherty",
+    "year": 2017,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/zigzag-page-layout/"
+  },
+  "relations": []
+}

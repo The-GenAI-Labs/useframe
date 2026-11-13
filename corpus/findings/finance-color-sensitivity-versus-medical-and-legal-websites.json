@@ -1,0 +1,30 @@
+{
+  "slug": "finance-color-sensitivity-versus-medical-and-legal-websites",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Finance color sensitivity versus medical and legal websites",
+  "statement": "Color sensitivity was larger in finance websites than in medical or legal websites in the Alberts and van der Geest experiment, so fintech landing pages have stronger evidence-based reason to compare multiple primary color systems rather than treating brand color as a fixed visual detail. (ResearchGate)\n\nOptions:\n- Blue-first variant: blue-dominant (fits: trust, security, professional)\n- Green-first variant: green-dominant (fits: stability, growth, calm)\n- Red-first variant: red-dominant (fits: urgency, energy, action)\n- Black-first variant: black-dominant (fits: formal, dramatic, premium)",
+  "appliesWhen": "Applies to: fintech, health, legal. Audience: adults, b2b buyers, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "action",
+    "calm",
+    "dramatic",
+    "energy",
+    "formal",
+    "growth",
+    "premium",
+    "professional",
+    "security",
+    "stability"
+  ],
+  "source": {
+    "title": "Color matters: color as trustworthiness cue in web sites",
+    "authors": "Wouter A. Alberts; Thea van der Geest",
+    "year": 2011,
+    "venue": "Technical Communication",
+    "url": "http://www.ingentaconnect.com/content/stc/tc/2011/00000058/00000002/art00004"
+  },
+  "relations": []
+}

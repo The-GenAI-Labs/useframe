@@ -1,0 +1,17 @@
+{
+  "slug": "peripheral-motion-distraction-reading",
+  "status": "DRAFT",
+  "category": "MOTION",
+  "title": "Peripheral motion distraction during central reading",
+  "statement": "The human eye's peripheral vision is highly optimized for detecting motion, making even minor animated elements on the screen's edge highly distracting during central reading tasks.\n\nOptions:\n- Focus Preservation: Static peripheral elements (fits: documentation sidebars, blog layouts)\n- Intentional Disruption: Pulsing peripheral badge (fits: chat support prompts, urgent system warnings)\n- Severe Distraction: Auto-playing peripheral video (fits: avoid in content heavy apps)",
+  "appliesWhen": "Applies to: sidebars, floating action buttons, ad banners. Audience: general.",
+  "tags": [
+    "motion",
+    "avoid-in-content-heavy-apps",
+    "blog-layouts",
+    "chat-support-prompts",
+    "documentation-sidebars",
+    "urgent-system-warnings"
+  ],
+  "relations": []
+}

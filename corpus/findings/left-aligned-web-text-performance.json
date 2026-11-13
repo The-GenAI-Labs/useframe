@@ -1,0 +1,26 @@
+{
+  "slug": "left-aligned-web-text-performance",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Left-aligned web text performance versus fully justified text",
+  "statement": "Left-aligned web text produced better task performance than fully justified text in the tested visual-search tasks, although participants preferred justified text, so left alignment is the evidence-backed default while justification can remain a deliberate aesthetic choice.\n\nOptions:\n- Performance default: text-align: left (fits: professional, accessible)\n- Editorial justified: text-align: justify (fits: editorial, traditional)\n- Hybrid: left-aligned body + justified special sections (fits: luxury, editorial)\n- User choice: left-aligned body + user toggle (fits: accessible, customizable)",
+  "appliesWhen": "Applies to: general web, web apps, editorial. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "accessible",
+    "editorial",
+    "customizable",
+    "luxury",
+    "professional",
+    "traditional"
+  ],
+  "source": {
+    "title": "The influence of line spacing and text alignment on visual search of web pages",
+    "authors": "Jonathan Ling; Paul van Schaik",
+    "year": 2007,
+    "venue": "Displays",
+    "url": "https://doi.org/10.1016/j.displa.2007.04.003",
+    "doi": "10.1016/j.displa.2007.04.003"
+  },
+  "relations": []
+}

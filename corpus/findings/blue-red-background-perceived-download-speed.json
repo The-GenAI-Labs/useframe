@@ -1,0 +1,26 @@
+{
+  "slug": "blue-red-background-perceived-download-speed",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Blue versus red background color and perceived download speed",
+  "statement": "Blue background colors make web pages feel like they download faster compared to red backgrounds due to the relaxing properties of lower-arousal colors.\n\nOptions:\n- Low-arousal cooling: #E3F2FD (Light Blue) (fits: data heavy, long load times)\n- Neutral baseline: #FFFFFF (White) (fits: standard ui)\n- High-arousal alerting: #FFEBEE (Light Red) (fits: flash sales, urgent actions)",
+  "appliesWhen": "Applies to: ecommerce, saas, complex dashboards. Audience: general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "data-heavy",
+    "flash-sales",
+    "long-load-times",
+    "standard-ui",
+    "urgent-actions"
+  ],
+  "source": {
+    "title": "Waiting for the Web: How Screen Color Affects Time Perception",
+    "authors": "Gerald J. Gorn; Amitava Chattopadhyay; Jaideep Sengupta; Sanjay Tripathi",
+    "year": 2004,
+    "venue": "Journal of Marketing Research",
+    "url": "https://journals.sagepub.com/doi/10.1509/jmkr.41.2.215.28668",
+    "doi": "10.1509/jmkr.41.2.215.28668"
+  },
+  "relations": []
+}

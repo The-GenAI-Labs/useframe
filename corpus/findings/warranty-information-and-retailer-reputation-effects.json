@@ -1,0 +1,31 @@
+{
+  "slug": "warranty-information-and-retailer-reputation-effects",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Warranty information and retailer reputation effects",
+  "statement": "Warranty information can reduce perceived risk and improve perceived product quality and purchase intentions more for online retailers with strong reputations, while the effect is weaker for retailers with weak reputations, so the warranty presentation should be paired with appropriate reputation proof. (Wiley Online Library)\n\nOptions:\n- Warranty summary: prominent-warranty-summary (fits: strong brand, durable goods, high value)\n- Warranty + reputation: warranty-plus-reputation-proof (fits: less familiar brand, risk sensitive, high consideration)\n- Brand reassurance: brand-led-risk-reduction (fits: established brand, familiar, premium)\n- Detailed warranty: full-warranty-terms-link (fits: technical, transparent, comparison shopping)",
+  "appliesWhen": "Applies to: ecommerce, electronics, durable goods, online retail. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "comparison-shopping",
+    "durable-goods",
+    "established-brand",
+    "familiar",
+    "high-consideration",
+    "high-value",
+    "less-familiar-brand",
+    "premium",
+    "risk-sensitive",
+    "strong-brand"
+  ],
+  "source": {
+    "title": "Promises, Promises: How Consumers Respond to Warranties in Internet Retailing",
+    "authors": "May O. Lwin; Jerome D. Williams",
+    "year": 2006,
+    "venue": "Journal of Consumer Affairs",
+    "url": "https://doi.org/10.1111/j.1745-6606.2006.00057.x",
+    "doi": "10.1111/j.1745-6606.2006.00057.x"
+  },
+  "relations": []
+}

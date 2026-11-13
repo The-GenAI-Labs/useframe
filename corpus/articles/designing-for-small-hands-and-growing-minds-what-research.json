@@ -1,0 +1,84 @@
+{
+  "slug": "designing-for-small-hands-and-growing-minds-what-research",
+  "title": "Designing for Small Hands and Growing Minds: What Research Says About Kids' Interfaces",
+  "kind": "ARTICLE",
+  "category": "AGE_GROUP",
+  "summary": "Children are not small adults. Four bodies of research show how age changes what kids can tap, read, understand and follow on a screen.",
+  "sections": [
+    {
+      "heading": "'Kids' is not one audience",
+      "body": "Nielsen Norman Group's studies with 125 children found that at least three age bands matter: 3–5, 6–8 and 9–12. The youngest do not read, early readers read tentatively, and older children scan. Children notice when content is pitched even one grade off, and links for parents can sit in a plain text footer."
+    },
+    {
+      "heading": "Big targets, simple gestures",
+      "body": "Children under 9 do well with tapping and swiping but struggle with precise dragging. NN/g recommends touch targets of at least 2 cm × 2 cm for young children and offering two ways to do the same thing, such as tap or drag."
+    },
+    {
+      "heading": "Symbols adults see and children miss",
+      "body": "In a randomized trial with 34 preschoolers, progress bars and cartoon-hand demos were unusable for children under 3, and decorating them with themed imagery made them harder to understand."
+    },
+    {
+      "heading": "Say what to do, plainly",
+      "body": "Children take instructions literally. State the goal, avoid naming a specific device, make feedback big and explicit for under-sixes, and build on familiar ideas like a coloring book."
+    }
+  ],
+  "body": "Children are not small adults, and the research on how they use screens shows it. Four well-documented findings, from Nielsen Norman Group's usability studies and a randomized trial at the University of Washington, give designers a practical starting point.\n\n## 'Kids' is not one audience\n\nNielsen Norman Group's Katie Sherwin and Jakob Nielsen (2019) summarize three rounds of usability testing with 125 children aged 3 to 12, run in 2001, 2010 and 2018. Their conclusion is that there is no such thing as designing for children in general. At a minimum, separate ages 3–5, 6–8 and 9–12. The youngest children do not read, early readers read tentatively, and older children scan. NN/g suggests about 14-point text for young children and 12-point for older ones, and avoiding scrolling for the youngest. Children also noticed when content was aimed at a slightly younger or older group and reacted badly; one six-year-old dismissed a site as being for babies. A practical detail from the same research: links meant for parents can sit in a plain text footer, where children rarely click.\n\n## Big targets, simple gestures\n\nIn a companion piece, Feifei Liu (2018) reports that motor skills develop unevenly. Children under nine handle tapping and swiping well but struggle with precise dragging, especially with a mouse or trackpad. NN/g recommends touch targets of at least 2 cm × 2 cm for young children, four times the size suggested for adults, and designs that offer two ways to do the same thing, such as tapping a destination or dragging to it. In one test, a five-year-old gave up on a counting game that made a vegetable vanish unless it landed exactly on its circle.\n\n## Symbols that adults see and children miss\n\nProgress bars and cartoon-hand demonstrations seem harmless. But in a randomized controlled trial of 34 preschoolers aged 2 to 5, Alexis Hiniker and colleagues (2016) found that these symbolic elements were entirely inaccessible to children under 3 and needed careful design for ages 3–5. Their review of 94 popular preschool apps found that 44% used at least one of these techniques. Surprisingly, decorating a progress bar with themed imagery made it harder to understand, not easier. The four- and five-year-olds in the study all succeeded with a plain, minimal bar.\n\n## Say what to do, plainly\n\nLiu's second NN/g article (2018) looks at cognition. Children take instructions literally: when a game specifically told a seven-year-old to use the mouse, she abandoned the trackpad she preferred and got frustrated. Better wording is device-neutral, such as click or touch. Games that showed the goal and then how to reach it, with animation and audio, worked well; a game with no instructions left a five-year-old confused. Under-sixes missed subtle character reactions, so feedback should be big and explicit. Familiar metaphors helped too: in a coloring-book app, children reached for an eraser rather than an undo arrow.\n\n## What this means for your design\n\nPick an age band before you pick a style. Make targets large and forgiving. Prefer plain, direct progress cues to decorated ones. Write instructions that state the goal without naming a device. Keep the limits in mind: NN/g's studies are qualitative with small samples, and the trial included only 11 children between ages 2 and 3, so treat the numbers as starting points and test with real children in your audience.",
+  "tags": [
+    "children",
+    "kids UX",
+    "age-appropriate design",
+    "touch targets",
+    "onboarding",
+    "preschoolers",
+    "usability"
+  ],
+  "references": [
+    {
+      "title": "Children's UX: Usability Issues in Designing for Young People",
+      "url": "https://www.nngroup.com/articles/childrens-websites-usability-issues/",
+      "authors": [
+        "Katie Sherwin",
+        "Jakob Nielsen"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2019,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "Design for Kids Based on Their Stage of Physical Development",
+      "url": "https://www.nngroup.com/articles/children-ux-physical-development/",
+      "authors": [
+        "Feifei Liu"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2018,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "Hidden symbols: How informal symbolism in digital interfaces disrupts usability for preschoolers",
+      "url": "https://doi.org/10.1016/j.ijhcs.2016.03.006",
+      "authors": [
+        "Alexis Hiniker",
+        "Kiley Sobel",
+        "Sungsoo (Ray) Hong",
+        "Hyewon Suh",
+        "India Irish",
+        "Julie A. Kientz"
+      ],
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "year": 2016,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Designing for Kids: Cognitive Considerations",
+      "url": "https://www.nngroup.com/articles/kids-cognition/",
+      "authors": [
+        "Feifei Liu"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2018,
+      "publicationType": "industry_report"
+    }
+  ],
+  "isPublished": true
+}

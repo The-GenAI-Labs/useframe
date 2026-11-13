@@ -55,3 +55,13 @@ export function callGetProjectResearch(
     `/projects/${encodeURIComponent(projectId)}/research/citations`,
   );
 }
+
+export function callSaveCitations(
+  researchReportId: string,
+  citations: import("@repo/schemas").CitationToSave[],
+): Promise<null> {
+  return researchFetch("/citations", {
+    method: "POST",
+    body: JSON.stringify({ researchReportId, citations }),
+  });
+}

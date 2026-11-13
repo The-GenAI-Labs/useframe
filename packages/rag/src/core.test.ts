@@ -193,6 +193,7 @@ it("treats an exact-generation download removed during overwrite as stale", asyn
           throw new Error("Must not embed stale objects");
         },
         embedQuery: async () => [],
+        embedQueries: async () => [],
       },
     },
   );

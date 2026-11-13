@@ -1,0 +1,27 @@
+{
+  "slug": "green-exposure-open-mindedness-creative-performance",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Green exposure, open-mindedness, and creative performance",
+  "statement": "Exposure to the color green, even briefly, facilitates open-mindedness and enhances creative performance compared to white, gray, red, or blue.\n\nOptions:\n- Creative Facilitation: #4CAF50 (Standard Green) (fits: brainstorming apps, design tools)\n- Subtle Growth: #E8F5E9 (Light Green) (fits: learning management, writing tools)\n- Analytical Baseline: #FFFFFF (White) (fits: data entry, strict compliance)",
+  "appliesWhen": "Applies to: productivity tools, education tech. Audience: general, adults, children under 10.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "brainstorming-apps",
+    "data-entry",
+    "design-tools",
+    "learning-management",
+    "strict-compliance",
+    "writing-tools"
+  ],
+  "source": {
+    "title": "Fertile Green: Green Facilitates Creative Performance",
+    "authors": "Stephanie Lichtenfeld; Andrew J. Elliot; Markus A. Maier; Reinhard Pekrun",
+    "year": 2012,
+    "venue": "Personality and Social Psychology Bulletin",
+    "url": "https://journals.sagepub.com/doi/10.1177/0146167212436611",
+    "doi": "10.1177/0146167212436611"
+  },
+  "relations": []
+}

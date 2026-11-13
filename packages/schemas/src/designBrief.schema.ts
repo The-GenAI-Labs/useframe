@@ -57,3 +57,14 @@ export const DesignBriefCandidatesSchema = z.object({
 })
 
 export type DesignBriefCandidates = z.infer<typeof DesignBriefCandidatesSchema>
+
+// Finding ids a brief cites, from its citations list and per-decision citation fields.
+export function briefCitedFindingIds(brief: DesignBrief): string[] {
+  return [
+    ...new Set(
+      [...brief.citations.map((c) => c.id), brief.colors.citation, brief.typography.citation, brief.layout.citation]
+        .map((id) => id.trim())
+        .filter(Boolean),
+    ),
+  ]
+}

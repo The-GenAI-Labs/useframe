@@ -41,6 +41,7 @@ suite("PostgreSQL corpus integration (all fixture writes rolled back)", () => {
     dims: 1024,
     embedDocuments: vi.fn(async (texts: string[]) => texts.map(() => vector)),
     embedQuery: vi.fn(async () => vector),
+    embedQueries: vi.fn(async (texts: string[]) => texts.map(() => vector)),
   };
   const storage: CorpusStorage = {
     currentGeneration: async () => "1",
@@ -375,7 +376,7 @@ suite("PostgreSQL corpus integration (all fixture writes rolled back)", () => {
       ...deps,
       embedder: {
         ...embedder,
-        embedQuery: async () => {
+        embedQueries: async () => {
           throw new Error("unavailable");
         },
       },

@@ -1,0 +1,30 @@
+{
+  "slug": "nn-g-placeholder-text-usability-in-forms",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "NN/g placeholder text usability in forms",
+  "statement": "NN/g's user testing found placeholder text used as a field label or hint hurts usability (it disappears, strains memory, prevents checking entries, is skipped as if already filled in, and is often low-contrast or unread by screen readers), so lead-capture and sign-up forms should use visible labels and hints outside the field.\n\nOptions:\n- Label and hint outside: Visible label above each field, with any essential hint also visible outside the field (fits: clear, trustworthy, professional)\n- Label plus optional example: Label outside the field plus a placeholder used only for a non-essential example (fits: practical, friendly, modern)\n- Floating label compromise: Floating labels that move above the field on focus, as a space-saving compromise on mobile (still leaves some issues NN/g describes) (fits: minimal, mobile-first, modern)\n- Programmatically linked hints: Persistent helper text linked to the input with aria-describedby (fits: accessible, technical, careful)",
+  "appliesWhen": "Applies to: general web. Audience: general, seniors.",
+  "tags": [
+    "accessibility",
+    "modern",
+    "accessible",
+    "careful",
+    "clear",
+    "friendly",
+    "minimal",
+    "mobile-first",
+    "practical",
+    "professional",
+    "technical",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "Placeholders in Form Fields Are Harmful",
+    "authors": "Katie Sherwin",
+    "year": 2014,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/form-design-placeholders/"
+  },
+  "relations": []
+}

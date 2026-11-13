@@ -1,0 +1,25 @@
+{
+  "slug": "positive-polarity-versus-dark-mode-reading-performance",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Positive polarity versus dark mode reading performance",
+  "statement": "Positive polarity (dark text on light background) yields faster reading times and fewer errors under normal ambient lighting than negative polarity (dark mode).\n\nOptions:\n- High Ambient Legibility: Positive Polarity (Light Mode) (fits: daytime use, long reading)\n- Low Ambient Glare Reduction: Negative Polarity (Dark Mode) (fits: night use, developer tools)\n- Contextual Optimization: Adaptive Polarity (fits: system default sync)",
+  "appliesWhen": "Applies to: reading apps, typography, automotive ui. Audience: general, seniors.",
+  "tags": [
+    "accessibility",
+    "typography",
+    "daytime-use",
+    "developer-tools",
+    "long-reading",
+    "night-use",
+    "system-default-sync"
+  ],
+  "source": {
+    "title": "Effects of ambient illumination, contrast polarity, and letter size on text legibility",
+    "authors": "Jonathan Dobres; Nadine Chahine; Bruce Reimer; David Mehler",
+    "year": 2017,
+    "venue": "Applied Ergonomics",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/28169004/"
+  },
+  "relations": []
+}

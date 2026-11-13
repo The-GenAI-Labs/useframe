@@ -1,0 +1,21 @@
+{
+  "slug": "blue-healthcare-branding-primary-color",
+  "status": "DRAFT",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Blue as most frequent healthcare branding primary color",
+  "statement": "Blue is the most frequently used primary color in healthcare branding and interfaces because of its associations with trust, calm, and competence across age groups.\n\nOptions:\n- Standard health blue: #1E90FF mid-blue (fits: telehealth, clinic)\n- Healing teal: #20B2AA light sea green (fits: wellness, mental health)\n- Clean clinical: #F5F5F5 off-white + blue accent (fits: sterile, professional)\n- Nature health: #228B22 green primary (fits: holistic, recovery)",
+  "appliesWhen": "Applies to: health. Audience: adults, seniors, parents.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "clinic",
+    "holistic",
+    "mental-health",
+    "professional",
+    "recovery",
+    "sterile",
+    "telehealth",
+    "wellness"
+  ],
+  "relations": []
+}

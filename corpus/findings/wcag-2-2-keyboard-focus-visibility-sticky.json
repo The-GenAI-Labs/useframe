@@ -1,0 +1,30 @@
+{
+  "slug": "wcag-2-2-keyboard-focus-visibility-sticky",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "WCAG 2.2 keyboard focus visibility with sticky elements",
+  "statement": "WCAG 2.2 requires that a control receiving keyboard focus is not entirely hidden by author-created content such as sticky headers, cookie banners or chat widgets, so landing pages with fixed elements must keep the focused item visible when tabbing through the page.\n\nOptions:\n- Scroll-padding offset: Sticky header with CSS scroll-padding-top equal to the header height so focused elements scroll clear of it (fits: modern, technical, polished)\n- No sticky header: Static (non-sticky) header on long landing pages, with in-page anchor links for navigation (fits: minimal, calm, editorial)\n- Compact sticky bar: Compact sticky bar kept as short as practical to reduce the area that can cover focused items, tested by tabbing forwards and backwards (fits: efficient, modern, conversion-focused)\n- Dismissible banners: Cookie and consent banners that do not cover focusable content, or that the user can dismiss (for example with Esc) without moving focus (fits: respectful, trustworthy, careful)\n- Bottom bar with offset: Bottom sticky CTA bar paired with matching scroll-padding-bottom (fits: mobile-first, conversion-focused, modern)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "accessibility",
+    "modern",
+    "conversion-focused",
+    "calm",
+    "careful",
+    "editorial",
+    "efficient",
+    "minimal",
+    "mobile-first",
+    "polished",
+    "respectful",
+    "technical"
+  ],
+  "source": {
+    "title": "Understanding SC 2.4.11: Focus Not Obscured (Minimum), Web Content Accessibility Guidelines (WCAG) 2.2",
+    "authors": "W3C Accessibility Guidelines Working Group",
+    "year": 2023,
+    "venue": "W3C WCAG 2.2 (SC 2.4.11 Focus Not Obscured (Minimum), Level AA)",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured.html"
+  },
+  "relations": []
+}

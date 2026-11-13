@@ -1,0 +1,44 @@
+{
+  "slug": "luxury-color-strategy-why-muted-tones-signal-higher-status",
+  "title": "Luxury Color Strategy: Why Muted Tones Signal Higher Status",
+  "kind": "ARTICLE",
+  "category": "COLOR_PSYCHOLOGY",
+  "summary": "Lower saturation makes luxury products feel more prestigious by triggering associations with heritage and the passage of time. High saturation can reverse the effect for innovative brands.",
+  "sections": [
+    {
+      "heading": "The saturation-status link",
+      "body": "Zhou, Xiao, Yoon and Zhu (2025) published seven experimental and field studies in the Journal of Consumer Research. Lower color saturation increased perceived brand status for luxury goods. The mechanism is learned association: faded or muted colors feel older and therefore more continuous with heritage."
+    },
+    {
+      "heading": "When the effect flips",
+      "body": "The same paper showed the effect weakens if the brand emphasizes a recent founding year and reverses if the brand positions itself as innovative. High saturation then becomes a signal of modernity rather than a status deficit."
+    },
+    {
+      "heading": "Practical ranges for digital luxury",
+      "body": "For heritage or quiet-luxury positioning, keep primary product and UI colors below roughly 30% saturation. For disruptive or campaign work, higher saturation is acceptable and can even raise status when innovation is the explicit story."
+    }
+  ],
+  "body": "## Luxury Color Strategy: Why Muted Tones Signal Higher Status\n\nLuxury brands have long favored muted palettes. Recent experimental work explains why.\n\nIn the *Journal of Consumer Research* (2025), Zhou and colleagues ran seven studies measuring how color saturation affects status perceptions of luxury products. Low-saturation versions consistently scored higher on brand status. Mediation analysis pointed to \"continuity heritage\": consumers associate less saturated colors with the passage of time and therefore with longevity and provenance.\n\nBoundary conditions matter. When the brand highlighted a recent founding date, the advantage of low saturation shrank. When the brand was framed as innovative, high saturation actually produced higher status ratings. Extremely high saturation (around 90%) tended to lower status even for traditional brands.\n\nFor digital interfaces and product visualization, the practical rule is straightforward. Heritage and quiet-luxury experiences should live in the desaturated range—think dusty navy, muted burgundy, soft ivory. Campaign or innovation-focused experiences can push saturation higher provided the brand narrative supports modernity. Always pair color decisions with the story the brand is telling; saturation alone does not create status.",
+  "tags": [
+    "luxury",
+    "color saturation",
+    "brand status",
+    "heritage"
+  ],
+  "references": [
+    {
+      "title": "Color of Status: Color Saturation, Brand Heritage, and Perceived Status of Luxury Brands",
+      "url": "https://academic.oup.com/jcr/article/52/6/1232/8120421",
+      "authors": [
+        "Xinyue Zhou",
+        "Chunqu Xiao",
+        "Sunyee Yoon",
+        "Hong Zhu"
+      ],
+      "publishedIn": "Journal of Consumer Research",
+      "year": 2025,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

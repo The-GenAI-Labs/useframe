@@ -1,0 +1,28 @@
+{
+  "slug": "times-new-roman-arial-12-point-vs-10-point-legibility",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Times New Roman and Arial 12-point versus 10-point legibility",
+  "statement": "In a controlled computer-display study of Times New Roman and Arial, 12-point text was perceived as more legible than 10-point text, while objective accuracy differences were small, so web interfaces have evidence for choosing 12pt over 10pt when readability matters more than maximum density.\n\nOptions:\n- Dense: 10pt (fits: high density, technical)\n- Readability baseline: 12pt (fits: balanced, professional)\n- More comfortable: 14pt (fits: comfortable, friendly)\n- Large reading: 16pt (fits: editorial, access-first)",
+  "appliesWhen": "Applies to: general web, web apps, content sites. Audience: adults, general.",
+  "tags": [
+    "typography",
+    "access-first",
+    "balanced",
+    "comfortable",
+    "editorial",
+    "friendly",
+    "high-density",
+    "professional",
+    "technical"
+  ],
+  "source": {
+    "title": "Comparing the Effects of Text Size and Format on the Readability of Computer-Displayed Times New Roman and Arial Text",
+    "authors": "Michael L. Bernard; Barbara S. Chaparro; Melissa M. Mills; Charles G. Halcomb",
+    "year": 2003,
+    "venue": "International Journal of Human-Computer Studies",
+    "url": "https://doi.org/10.1016/S1071-5819(03)00121-6",
+    "doi": "10.1016/S1071-5819(03)00121-6"
+  },
+  "relations": []
+}

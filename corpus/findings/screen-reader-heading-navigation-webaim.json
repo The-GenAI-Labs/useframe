@@ -1,0 +1,29 @@
+{
+  "slug": "screen-reader-heading-navigation-webaim",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Screen reader heading navigation in WebAIM 2023-24 survey",
+  "statement": "In WebAIM's 2023-24 survey of 1,539 screen reader users, 71.6% said they first navigate through the headings when looking for information on a long page and 88.8% found heading levels very or somewhat useful, so landing page sections need real, hierarchical heading elements with descriptive text rather than merely styled text.\n\nOptions:\n- Clean heading hierarchy: One h1 stating the page's main value proposition, then an h2 per major section and h3 for sub-parts, with no skipped levels (fits: clear, professional, editorial)\n- Descriptive headings: Descriptive heading text that makes sense out of context (for example 'Pricing plans', not 'Learn more') (fits: clear, trustworthy, practical)\n- Headings plus landmarks: Landmark elements (header, nav, main, footer) in addition to headings, since 31.7% of respondents use landmarks often or always when present (fits: technical, organized, polished)\n- Skip link: A working skip link to main content at the top of the page (fits: accessible, careful, professional)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "accessibility",
+    "clear",
+    "professional",
+    "accessible",
+    "careful",
+    "editorial",
+    "organized",
+    "polished",
+    "practical",
+    "technical",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "Screen Reader User Survey #10 Results",
+    "authors": "WebAIM (Web Accessibility In Mind), Utah State University",
+    "year": 2024,
+    "venue": "WebAIM, Utah State University (Screen Reader User Survey #10)",
+    "url": "https://webaim.org/projects/screenreadersurvey10/"
+  },
+  "relations": []
+}

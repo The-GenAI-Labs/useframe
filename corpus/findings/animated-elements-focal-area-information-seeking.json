@@ -1,0 +1,25 @@
+{
+  "slug": "animated-elements-focal-area-information-seeking",
+  "status": "VERIFIED",
+  "category": "MOTION",
+  "title": "Animated elements outside focal area and information-seeking performance",
+  "statement": "Continuously animated elements outside the user's primary focal area significantly degrade performance on information-seeking tasks by constantly pulling visual attention.\n\nOptions:\n- Safe Initial Alert: Animate once, then static (fits: new feature tags, inbox unread badges)\n- High Focus: Strictly static UI (fits: long form reading, complex forms)\n- High Disruption (Use Sparingly): Continuous subtle pulsing (fits: live recording status, system outages)",
+  "appliesWhen": "Applies to: content pages, dashboards, reading apps. Audience: general, seniors.",
+  "tags": [
+    "motion",
+    "complex-forms",
+    "inbox-unread-badges",
+    "live-recording-status",
+    "long-form-reading",
+    "new-feature-tags",
+    "system-outages"
+  ],
+  "source": {
+    "title": "The effects of animation on information seeking performance on the World Wide Web",
+    "authors": "Ping Zhang",
+    "year": 2000,
+    "venue": "Journal of the Association for Information Systems",
+    "url": "https://aisel.aisnet.org/jais/vol1/iss1/1/"
+  },
+  "relations": []
+}

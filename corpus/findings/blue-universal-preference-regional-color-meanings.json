@@ -1,0 +1,26 @@
+{
+  "slug": "blue-universal-preference-regional-color-meanings",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Blue universal preference and regional color meanings",
+  "statement": "Blue is universally preferred across cultures and consistently signifies high quality, while colors like red and white vary drastically in meaning by region.\n\nOptions:\n- Universal Safety: #0D47A1 (Global Blue) (fits: international brands, global saas)\n- Prosperity (Asia) / Excitement (West): #B71C1C (Red) (fits: localized asian markets, western sales)\n- Luxury / Mourning: #000000 (Black) (fits: high end fashion)",
+  "appliesWhen": "Applies to: internationalization, global brands. Audience: general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "global-saas",
+    "high-end-fashion",
+    "international-brands",
+    "localized-asian-markets",
+    "western-sales"
+  ],
+  "source": {
+    "title": "Managing Images in Different Cultures: A Cross-National Study of Color Meanings and Preferences",
+    "authors": "Thomas J. Madden; Kelly Hewett; Martin S. Roth",
+    "year": 2000,
+    "venue": "Journal of International Marketing",
+    "url": "https://journals.sagepub.com/doi/10.1509/jimk.8.4.90.19795",
+    "doi": "10.1509/jimk.8.4.90.19795"
+  },
+  "relations": []
+}

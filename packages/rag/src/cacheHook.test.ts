@@ -48,6 +48,7 @@ function setup() {
       model: "fixture",
       dims: 1,
       embedQuery: vi.fn(async () => [1]),
+      embedQueries: vi.fn(async (texts: string[]) => texts.map(() => [1])),
       embedDocuments: async () => [],
     },
     hyde: async () => ({
@@ -72,7 +73,8 @@ it("mixed cached/fresh areas recompute tensions and a miss reuses the same embed
     return (await ctx.run()).findings;
   };
   const result = await createRetriever(deps)(input);
-  expect(deps.embedder.embedQuery).toHaveBeenCalledOnce();
+  expect(deps.embedder.embedQueries).toHaveBeenCalledOnce();
+  expect(deps.embedder.embedQuery).not.toHaveBeenCalled();
   expect(deps.dense).toHaveBeenCalledOnce();
   expect(deps.rerank).toHaveBeenCalledOnce();
   expect(result.areas[0]?.findings[0]?.findingId).toBe("cached");
@@ -81,12 +83,13 @@ it("mixed cached/fresh areas recompute tensions and a miss reuses the same embed
   ]);
   expect(conflicts).toHaveBeenCalledOnce();
 });
-it("no-cache bypasses every cache hook without changing pipeline operations", async () => {
+it("no-cache bypasses every cache hook and embeds all passages in one request", async () => {
   const { deps } = setup();
   deps.areaCache = vi.fn();
   await createRetriever(deps, { noCache: true })(input);
   expect(deps.areaCache).not.toHaveBeenCalled();
-  expect(deps.embedder.embedQuery).toHaveBeenCalledTimes(2);
+  expect(deps.embedder.embedQueries).toHaveBeenCalledOnce();
+  expect(deps.embedder.embedQueries).toHaveBeenCalledWith(["Needs", "Needs"]);
   expect(deps.dense).toHaveBeenCalledTimes(2);
 });
 it("provider fallback results are flagged as uncacheable", async () => {

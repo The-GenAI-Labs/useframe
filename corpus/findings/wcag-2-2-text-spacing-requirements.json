@@ -1,0 +1,25 @@
+{
+  "slug": "wcag-2-2-text-spacing-requirements",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "WCAG 2.2 text-spacing requirements",
+  "statement": "WCAG 2.2 requires content to survive user-applied text-spacing changes of at least 1.5× line height, 2× paragraph spacing, 0.12em letter spacing, and 0.16em word spacing, so production interfaces should avoid layouts that break when users substantially loosen text spacing.\n\nOptions:\n- WCAG threshold: 1.5 / 2 / 0.12em / 0.16em (fits: balanced, professional)\n- More airy: 1.6 / 2.2 / 0.14em / 0.18em (fits: comfortable, friendly)\n- Reading mode: 1.8 / 2.5 / 0.16em / 0.20em (fits: access-first, calm)",
+  "appliesWhen": "Applies to: general web, web apps, content sites, education. Audience: adults, children under 10, seniors, general.",
+  "tags": [
+    "accessibility",
+    "access-first",
+    "balanced",
+    "calm",
+    "comfortable",
+    "friendly",
+    "professional"
+  ],
+  "source": {
+    "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
+    "authors": "World Wide Web Consortium",
+    "year": 2023,
+    "venue": "W3C Web Content Accessibility Guidelines (WCAG) 2.2",
+    "url": "https://www.w3.org/TR/WCAG22/"
+  },
+  "relations": []
+}

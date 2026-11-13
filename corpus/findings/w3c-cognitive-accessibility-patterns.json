@@ -1,0 +1,30 @@
+{
+  "slug": "w3c-cognitive-accessibility-patterns",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "W3C cognitive accessibility patterns for reducing cognitive barriers",
+  "statement": "The W3C's cognitive accessibility Working Group Note recommends patterns that reduce cognitive barriers (a clear purpose heading per page, familiar layouts and conventional underlined links, important tasks near the top, visible labels, short chunks with white space, no unexpected movement, limited interruptions, plain literal wording and user control over moving content), so landing pages should favor familiar structure and controls over novelty.\n\nOptions:\n- Familiar layout and controls: Familiar layout with logo top-left, navigation at the top and prominent primary action, plus conventional underlined links and standard-looking buttons (fits: trustworthy, clear, professional)\n- Chunked, spacious sections: Chunked sections with generous white space, each opened by one clear heading (fits: calm, minimal, editorial)\n- Purpose and key task first: A first heading that states the page's purpose and the most important task visible near the top without scrolling (fits: clear, practical, conversion-focused)\n- Calm, controllable page: No auto-moving banners, unexpected pop-ups or shifting content; where motion is used, provide a control to stop it (fits: respectful, calm, accessible)\n- Plain-language copy: Plain, literal copy with short sentences and no idioms or metaphors that must be decoded (fits: friendly, approachable, inclusive)",
+  "appliesWhen": "Applies to: general web. Audience: general, seniors.",
+  "tags": [
+    "accessibility",
+    "calm",
+    "clear",
+    "accessible",
+    "approachable",
+    "conversion-focused",
+    "editorial",
+    "friendly",
+    "inclusive",
+    "minimal",
+    "practical",
+    "professional"
+  ],
+  "source": {
+    "title": "Making Content Usable for People with Cognitive and Learning Disabilities",
+    "authors": "Lisa Seeman-Horwitz; Rachael Bradley Montgomery; Steve Lee; Ruoxi Ran",
+    "year": 2021,
+    "venue": "W3C Working Group Note (Cognitive and Learning Disabilities Accessibility Task Force): Making Content Usable for People with Cognitive and Learning Disabilities",
+    "url": "https://www.w3.org/TR/coga-usable/"
+  },
+  "relations": []
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "online-bookseller-review-ratings-sales",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Online bookseller review ratings, one-star effects, and review length",
+  "statement": "For online booksellers, improvements in consumer review ratings were associated with increased relative sales, one-star reviews often had a stronger effect than five-star reviews, and review-length evidence suggested shoppers read review text rather than relying only on summary statistics. (Sage Journals)\n\nOptions:\n- Rating distribution: rating-distribution-with-counts (fits: transparent, comparison shopping, evidence led)\n- Easy access to negatives: negative-review-tab (fits: transparent, skeptical buyers, high trust need)\n- Review text near rating: review-text-above-or-near-summary (fits: evidence led, high consideration, content rich)\n- Summary + full text: review-summary-plus-full-text (fits: scannable, mobile first, research oriented)",
+  "appliesWhen": "Applies to: ecommerce, online bookstores, online retail. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "evidence-led",
+    "transparent",
+    "comparison-shopping",
+    "content-rich",
+    "high-consideration",
+    "high-trust-need",
+    "mobile-first",
+    "research-oriented",
+    "scannable",
+    "skeptical-buyers"
+  ],
+  "source": {
+    "title": "The Effect of Word of Mouth on Sales: Online Book Reviews",
+    "authors": "Judith A. Chevalier; Dina Mayzlin",
+    "year": 2006,
+    "venue": "Journal of Marketing Research",
+    "url": "https://doi.org/10.1509/jmkr.43.3.345",
+    "doi": "10.1509/jmkr.43.3.345"
+  },
+  "relations": []
+}

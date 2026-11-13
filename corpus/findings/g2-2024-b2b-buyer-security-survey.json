@@ -1,0 +1,20 @@
+{
+  "slug": "g2-2024-b2b-buyer-security-survey",
+  "status": "DRAFT",
+  "category": "CONVERSION",
+  "title": "G2 2024 B2B buyer survey on security history and assessments",
+  "statement": "G2's 2024 B2B buyer survey found that 81% of respondents considered a vendor's history of security breaches or incidents when evaluating software, while 48% reported closing purchases without a completed security or privacy assessment, supporting early, self-service security information rather than a badge-only signal. (Sell G2)\n\nOptions:\n- Trust Center: trust_center_in_primary_navigation (fits: enterprise, transparent)\n- Verified certifications: compliance_badges_with_verification_links (fits: compliance, procurement ready)\n- Security questionnaire: downloadable_security_questionnaire (fits: technical, procurement ready)\n- Security near CTA: security_overview_adjacent_to_enterprise_cta (fits: risk aware, conversion focused)",
+  "appliesWhen": "Applies to: b2b saas, enterprise software, security sensitive software. Audience: b2b buyers.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "procurement-ready",
+    "compliance",
+    "conversion-focused",
+    "enterprise",
+    "risk-aware",
+    "technical",
+    "transparent"
+  ],
+  "relations": []
+}

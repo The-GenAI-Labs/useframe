@@ -1,0 +1,31 @@
+{
+  "slug": "childrens-app-colors-saturation-223-apps",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Color saturation in 223 children's apps versus adult interfaces",
+  "statement": "A content analysis of 223 children's apps found that children's interfaces used higher saturation and brighter colors than adult interfaces, with multicolor educational apps tending toward cool colors such as blue and multicolor game apps toward warm colors such as red and orange. (Wiley Online Library)\n\nOptions:\n- Educational cool: high saturation + high brightness + cool palette (fits: learning, friendly, calm)\n- Game warm: high saturation + high brightness + warm palette (fits: playful, energetic, fun)\n- Colorful kids: bright multi-color palette (fits: engaging, expressive, playful)\n- Calmer hybrid: restrained adult-like palette (fits: serious, simple, parent-facing)",
+  "appliesWhen": "Applies to: kids, education, gaming. Audience: children under 10, parents.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "playful",
+    "calm",
+    "energetic",
+    "engaging",
+    "expressive",
+    "friendly",
+    "fun",
+    "learning",
+    "parent-facing",
+    "serious"
+  ],
+  "source": {
+    "title": "Color design in application interfaces for children",
+    "authors": "Fei Lyu; Rui Xi; Yujie Liu",
+    "year": 2022,
+    "venue": "Color Research and Application",
+    "url": "https://doi.org/10.1002/col.22726",
+    "doi": "10.1002/col.22726"
+  },
+  "relations": []
+}

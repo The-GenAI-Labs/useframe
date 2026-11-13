@@ -1,0 +1,29 @@
+{
+  "slug": "fully-justified-web-text-and-irregular-word-spacing",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Fully justified web text and irregular word spacing",
+  "statement": "Fully justified text on web pages causes irregular word spacing ('rivers of white') which severely disrupts reading flow for users with cognitive or visual impairments.\n\nOptions:\n- Ragged-Right (LTR Languages): text-align: left; (fits: standard web, accessible content, blogs)\n- Ragged-Left (RTL Languages): text-align: right; (fits: arabic localization, hebrew localization)\n- Full Justification (Avoid on Web): text-align: justify; (fits: print magazines, pdf reports)\n- Center Alignment: text-align: center; (fits: short headings, hero text, pull quotes)",
+  "appliesWhen": "Applies to: web, digital documents. Audience: general, adults, children under 10, seniors.",
+  "tags": [
+    "accessibility",
+    "accessible-content",
+    "arabic-localization",
+    "blogs",
+    "hebrew-localization",
+    "hero-text",
+    "pdf-reports",
+    "print-magazines",
+    "pull-quotes",
+    "short-headings",
+    "standard-web"
+  ],
+  "source": {
+    "title": "Understanding Success Criterion 1.4.8 Visual Presentation",
+    "authors": "W3C Web Content Accessibility Guidelines Working Group",
+    "year": 2008,
+    "venue": "W3C WCAG 2.0 Specification",
+    "url": "https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-visual-presentation.html"
+  },
+  "relations": []
+}

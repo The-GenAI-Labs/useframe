@@ -1,0 +1,46 @@
+{
+  "slug": "turn-accessibility-requirements-into-typography-requirements",
+  "title": "Turn Accessibility Requirements Into Typography Requirements",
+  "kind": "ARTICLE",
+  "category": "ACCESSIBILITY",
+  "summary": "WCAG 2.2 turns several readability concerns into concrete frontend requirements: sufficient text contrast, scalable text, and layouts that tolerate substantial spacing changes. These are especially valuable as production constraints because they can be tested in code and QA rather than treated as taste.",
+  "sections": [
+    {
+      "heading": "Contrast is a measurable requirement",
+      "body": "WCAG 2.2 sets a 4.5:1 minimum contrast ratio for ordinary text at Level AA and 3:1 for large text, while Level AAA raises the ordinary-text threshold to 7:1. Teams can therefore use contrast tokens as explicit engineering constraints instead of relying on visual judgment alone."
+    },
+    {
+      "heading": "Users must be able to enlarge text",
+      "body": "WCAG 2.2 requires text to remain usable when resized to 200% without loss of content or functionality. This makes responsive typography a product requirement: buttons, cards, navigation, labels, and text containers must continue to work as text grows."
+    },
+    {
+      "heading": "Spacing has to survive user preferences",
+      "body": "WCAG 2.2's text-spacing criterion requires content to remain functional when users apply at least 1.5× line height, 2× paragraph spacing, 0.12em letter spacing, and 0.16em word spacing. This is less about choosing those values as your default and more about refusing to build a layout that breaks when readers need them."
+    },
+    {
+      "heading": "Build for adaptation, not just the default screenshot",
+      "body": "The practical frontend lesson is to treat typography as a flexible system. Relative sizing, content-driven containers, wrapping controls, and resilient spacing are safer than fixed-height cards, clipped labels, or text embedded in images. The WCAG requirements are especially useful because they translate a readability concern into an implementation and QA test."
+    }
+  ],
+  "body": "## Turn Accessibility Requirements Into Typography Requirements\n\nAccessibility guidance is often discussed as a compliance layer added after the visual design is finished. For typography, that approach is risky. Several WCAG 2.2 requirements map directly onto frontend decisions about contrast, text size, spacing, and layout resilience.\n\n### Contrast is a measurable requirement\n\nThe World Wide Web Consortium's WCAG 2.2 specification requires a minimum contrast ratio of 4.5:1 for ordinary text at Level AA and allows 3:1 for large text. The higher Level AAA requirement is 7:1 for ordinary text (W3C, 2023). That makes text contrast an engineering variable, not just a visual preference.\n\nA design system can therefore expose contrast tokens and test them automatically. A softer gray may fit a restrained visual style, but it still needs to meet the applicable requirement. Higher contrast can be used when the product wants additional margin for difficult viewing conditions.\n\n### Users must be able to enlarge text\n\nWCAG 2.2 Success Criterion 1.4.4 requires text to be resizable up to 200% without loss of content or functionality (W3C, 2023). The requirement reaches beyond paragraph text. Controls, labels, navigation, dialogs, and other text-bearing interface elements have to survive enlargement.\n\nFor frontend teams, this means avoiding fixed heights that clip copy, containers that cannot expand, and responsive breakpoints that create broken layouts when text grows. A page that looks perfect at 100% but fails at 200% is not robust typography.\n\n### Spacing has to survive user preferences\n\nWCAG 2.2 also requires content to remain functional when users apply text-spacing changes equivalent to at least 1.5× line height, 2× paragraph spacing, 0.12em letter spacing, and 0.16em word spacing (W3C, 2023). These are not necessarily the values every product should use as its default. They are a resilience test.\n\nThat distinction is important. You can choose a denser visual style for a data-rich tool while still ensuring that users who need more breathing room do not lose information, controls, or structure.\n\n### Build for adaptation, not just the default screenshot\n\nThe strongest production pattern is therefore a typography system that can stretch. Use relative text sizing where practical, let containers grow with content, allow labels to wrap, and test extreme but realistic user settings. WCAG's concrete thresholds make useful QA cases because they turn “this should still be readable” into something a team can actually verify.\n\nIn practice, accessibility-friendly typography is less about making every interface look spacious and more about ensuring that users are allowed to make it spacious without breaking the product.\n\nReference: World Wide Web Consortium (2023), Web Content Accessibility Guidelines (WCAG) 2.2.",
+  "tags": [
+    "wcag",
+    "contrast",
+    "text-resize",
+    "text-spacing",
+    "responsive-typography"
+  ],
+  "references": [
+    {
+      "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "authors": [
+        "World Wide Web Consortium"
+      ],
+      "publishedIn": "World Wide Web Consortium (W3C)",
+      "year": 2023,
+      "publicationType": "standard_specification"
+    }
+  ],
+  "isPublished": true
+}

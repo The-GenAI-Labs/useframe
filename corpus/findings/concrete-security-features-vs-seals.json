@@ -1,0 +1,31 @@
+{
+  "slug": "concrete-security-features-vs-seals",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Concrete security features versus third-party seals and privacy statements",
+  "statement": "Consumers in an experimental e-commerce study valued concrete security features more than third-party privacy/security seals or privacy statements, so a seal can be treated as supporting evidence rather than the only visible answer to a security objection. (ScienceDirect)\n\nOptions:\n- Concrete security details: security-feature-explanation (fits: high risk, financial, privacy sensitive)\n- Security seal: third-party-security-seal (fits: supporting cue, compliance led, compact)\n- Privacy summary: privacy-policy-summary (fits: data sensitive, transparent, low clutter)\n- Layered trust block: layered-trust-panel (fits: high consideration, evidence led, dense information)",
+  "appliesWhen": "Applies to: ecommerce, online retail, online payments, privacy sensitive sites. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "compact",
+    "compliance-led",
+    "data-sensitive",
+    "dense-information",
+    "evidence-led",
+    "financial",
+    "high-consideration",
+    "high-risk",
+    "low-clutter",
+    "privacy-sensitive"
+  ],
+  "source": {
+    "title": "Trustworthiness in electronic commerce: the role of privacy, security, and site attributes",
+    "authors": "France Bélanger; Janine S. Hiller; Wanda J. Smith",
+    "year": 2002,
+    "venue": "The Journal of Strategic Information Systems",
+    "url": "https://doi.org/10.1016/S0963-8687(02)00018-5",
+    "doi": "10.1016/S0963-8687(02)00018-5"
+  },
+  "relations": []
+}

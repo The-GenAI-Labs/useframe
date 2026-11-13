@@ -1,0 +1,30 @@
+{
+  "slug": "guest-checkout-abandonment-and-prominence-in-baymard-2024",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Guest checkout abandonment and prominence in Baymard 2024",
+  "statement": "Guest checkout should be visibly available when account creation is not essential: Baymard's 2024 research found 18% of surveyed U.S. online shoppers had abandoned an order because they did not want to create an account, and 62% of benchmarked sites failed to make guest checkout the most prominent option. (Baymard Institute)\n\nOptions:\n- Guest as primary: guest-checkout-primary-button (fits: low friction, new customer, conversion focused)\n- Side-by-side choice: continue-as-guest-next-to-sign-in (fits: balanced, account optional, familiar)\n- Create account later: defer-account-creation-to-confirmation (fits: low friction, mobile first, task focused)\n- Optional account: account-optional-checkout (fits: privacy sensitive, customer control, low commitment)",
+  "appliesWhen": "Applies to: ecommerce, online retail, marketplaces, mobile commerce. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "low-friction",
+    "account-optional",
+    "balanced",
+    "conversion-focused",
+    "customer-control",
+    "familiar",
+    "low-commitment",
+    "mobile-first",
+    "new-customer",
+    "privacy-sensitive"
+  ],
+  "source": {
+    "title": "Checkout UX 2025: 10 Pitfalls and Best Practices",
+    "authors": "Kathryn Reeves",
+    "year": 2024,
+    "venue": "Baymard Institute",
+    "url": "https://baymard.com/research-articles/current-state-of-checkout-ux"
+  },
+  "relations": []
+}

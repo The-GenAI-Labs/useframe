@@ -49,6 +49,7 @@ export async function retrieveDecision(
 ): Promise<ScoredFinding[]> {
   const candidates: FindingRow[] = await prisma.researchFinding.findMany({
     where: {
+      status: "VERIFIED",
       decision,
       appliesTo: { has: domain },
       audience: { has: audience },
@@ -107,7 +108,7 @@ export async function retrieveDecision(
     relatedIds.length > 0
       ? (
           await prisma.researchFinding.findMany({
-            where: { id: { in: relatedIds } },
+            where: { id: { in: relatedIds }, status: "VERIFIED" },
             select: FINDING_SELECT,
           })
         ).map((row: FindingRow) => ({

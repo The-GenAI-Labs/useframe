@@ -1,0 +1,99 @@
+{
+  "slug": "z-patterns-zigzags-and-columns-what-the-evidence-says-about",
+  "title": "Z-Patterns, Zigzags and Columns: What the Evidence Says About Layout Shapes",
+  "kind": "ARTICLE",
+  "category": "LAYOUT",
+  "summary": "The Z-pattern is popular but has no web eyetracking evidence we could find, while zigzag layouts and two-column text have been tested. Here is what held up.",
+  "sections": [
+    {
+      "heading": "The Z-pattern: popular, but unsupported",
+      "body": "We could not trace the Z-pattern to any web eyetracking study. It appears to come from the print-era Gutenberg diagram. NN/g's research supports top and left attention, an F-shaped fallback on unformatted text, and efficient scanning when headings are clear."
+    },
+    {
+      "heading": "Zigzag layouts: tested, with a catch",
+      "body": "In NN/g's 2017 study, informational images were studied in both zigzag and aligned layouts. Decorative images were ignored, and in zigzag rows the eye kept stumbling onto them. Align decorative images and keep zigzags short."
+    },
+    {
+      "heading": "Columns: helpful, with limits",
+      "body": "A 2008 study found information in a second column got more fixations than the same information lower in a single column, and that the F-pattern appeared in the left column but not the right."
+    },
+    {
+      "heading": "Practical guidance",
+      "body": "Prefer aligned rows unless every image earns its place, use Z-shaped compositions as a heuristic rather than a rule, and place high-information content on the left."
+    }
+  ],
+  "body": "The F-pattern has decades of eyetracking behind it. Its cousins, the Z-pattern and the zigzag layout, are not on equal footing. Here is what we could and could not verify.\n\n## The Z-pattern: popular, but unsupported\n\nZ-pattern advice says that on sparse pages people scan from the top left to the top right, cut diagonally down to the bottom left, and then sweep to the bottom right, so you should put your logo, navigation and calls to action at the corners of that path. It is repeated across design blogs, but we could not trace it to any web eyetracking study. It appears to be borrowed from the print-era Gutenberg diagram, which was designed for evenly distributed text, not for modern pages. NN/g's eyetracking work instead supports a different picture: attention concentrated at the top and on the left (Fessenden, 2017), an F-shaped fallback on unformatted text (Nielsen, 2006; Pernice, 2017), and efficient scanning when clear headings exist (Pernice, 2019). So if you use a Z-shaped composition, treat it as a design heuristic that gives a page a tidy structure, not as research.\n\n## Zigzag layouts: tested, with a catch\n\nA layout that does have evidence is the zigzag: rows where an image alternates between the left and right side of the text. Kim Flaherty (2017, NN/g) compared zigzag and aligned versions of four real pages (Splitwise, Waze, HelloFresh and BoxyCharm), with about 30 to 35 participants per version.\n\nWhen images carried real information, such as product photos people needed to understand what they were buying, both layouts worked about equally well. People studied those images no matter where they sat. The trouble came with decorative images. Users learned quickly to ignore them, and in the zigzag layout their eyes kept stumbling onto the images as they scrolled, then jumping back to the text. NN/g argues that these accidental fixations add up like clutter in an untidy room. Overly complex images, such as screenshots full of tiny text, were also skipped when they appeared too early.\n\nNN/g's advice is to align decorative images down one side, top-align them with their text, keep zigzag for short sequences of two or three rows or for genuinely informative images, and put high-information content on the left of the first row.\n\n## Columns: helpful, with limits\n\nTwo-column text layouts show a related pattern. In a 2008 Wichita State study, Shrestha, Owens and Chaparro found that information in a second column got more fixations than the same information placed lower in a single column, and that the F-shaped pattern appeared in the left column but not the right. They also saw more fixations on ads among people who were browsing than among those searching for something. This was a short conference presentation on text pages, so it suggests rather than proves, but the takeaway is sensible: a second column can lift secondary content into view, yet it should not be expected to be scanned like the main column.\n\n## Practical guidance\n\nChoose aligned rows unless every image earns its place. Use zigzags sparingly, and check that each image tells the visitor something. Use a Z-shaped composition if you like how it looks, but do not rely on it to steer attention.",
+  "tags": [
+    "Z-pattern",
+    "zigzag layout",
+    "image-text layout",
+    "columns",
+    "Gutenberg diagram",
+    "eyetracking"
+  ],
+  "references": [
+    {
+      "title": "Zigzag Image–Text Layouts Make Scanning Less Efficient",
+      "url": "https://www.nngroup.com/articles/zigzag-page-layout/",
+      "authors": [
+        "Kim Flaherty"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2017,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "Eye Movements on a Single-Column and Double-Column Text Web Page",
+      "url": "https://portfolio.erau.edu/en/publications/eye-movements-on-a-single-column-and-double-column-text-web-page/",
+      "authors": [
+        "Sav Shrestha",
+        "Justin Owens",
+        "Barbara S. Chaparro"
+      ],
+      "publishedIn": "52nd Annual Meeting of the Human Factors and Ergonomics Society",
+      "year": 2008,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "Horizontal Attention Leans Left",
+      "url": "https://www.nngroup.com/articles/horizontal-attention-leans-left/",
+      "authors": [
+        "Therese Fessenden"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2017,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "F-Shaped Pattern For Reading Web Content (Original Study)",
+      "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/",
+      "authors": [
+        "Jakob Nielsen"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2006,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "F-Shaped Pattern of Reading on the Web: Misunderstood, But Still Relevant (Even on Mobile)",
+      "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/",
+      "authors": [
+        "Kara Pernice"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2017,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "The Layer-Cake Pattern of Scanning Content on the Web",
+      "url": "https://www.nngroup.com/articles/layer-cake-pattern-scanning/",
+      "authors": [
+        "Kara Pernice"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2019,
+      "publicationType": "industry_report"
+    }
+  ],
+  "isPublished": true
+}

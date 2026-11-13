@@ -1,4 +1,4 @@
-import { callGetFinding, callGetProjectResearch } from "@/lib/researchService.js"
+import { callGetFinding, callGetProjectResearch, callSaveCitations } from "@/lib/researchService.js"
 import { canOpenFinding } from "@/lib/researchAccess.js"
 import { Queue } from "bullmq"
 import { prisma, type Prisma } from "@useframe/db"
@@ -9,7 +9,7 @@ import { AppError } from "@/middleware/errorHandler.js"
 import { signAccessToken } from "@/lib/jwt.js"
 import { callPlan } from "@/lib/orchestrator.js"
 import { CreditsService } from "@/modules/credits/credits.service.js"
-import type { DesignBrief } from "@repo/schemas"
+import { DesignBriefSchema, briefCitedFindingIds, type DesignBrief } from "@repo/schemas"
 import type { PlanPdfInput, PlanSelectInput } from "./plan.schema.js"
 
 const RESEARCH_CREDIT_COST = 2
@@ -28,6 +28,38 @@ async function loadProjectWithPipeline(userId: string, slug: string) {
   if (!project.currentVersionId) throw new AppError("Project has no current version", 409)
   return project
 }
+
+// The plan saves citations for every candidate; once one is chosen, only its findings stay cited.
+export async function keepChosenBriefCitations(projectId: string, brief: unknown): Promise<void> {
+  const parsed = DesignBriefSchema.safeParse(brief)
+  if (!parsed.success) return
+  const report = await prisma.researchReport.findUnique({
+    where: { projectId },
+    select: {
+      id: true,
+      citationRows: {
+        select: {
+          findingId: true,
+          decisionArea: true,
+          rank: true,
+          rrfScore: true,
+          rerankScore: true,
+          viaRelation: true,
+          reasoning: true,
+        },
+      },
+    },
+  })
+  if (!report) return
+  const cited = new Set(briefCitedFindingIds(parsed.data))
+  const keep = report.citationRows.filter((row) => cited.has(row.findingId))
+  if (keep.length !== report.citationRows.length) await callSaveCitations(report.id, keep)
+}
+
+const trimCitations = (projectId: string, brief: unknown) =>
+  keepChosenBriefCitations(projectId, brief).catch((err: unknown) => {
+    console.error("[plan] failed to trim research citations:", err instanceof Error ? err.message : err)
+  })
 
 export const PlanService = {
   async getResearchCitations(user: { id: string }, projectId: string) {
@@ -146,16 +178,27 @@ export const PlanService = {
     // brief (the tab renders it while the user decides), but it is NOT the
     // committed choice — select() overwrites it with whichever candidate the
     // user actually picks.
-    await prisma.$transaction([
-      prisma.projectVersion.update({
-        where: { id: project.currentVersionId! },
-        data: { designBrief: planResult.brief as unknown as Prisma.InputJsonValue },
-      }),
-      prisma.pipelineState.update({
+    try {
+      await prisma.$transaction(
+        [
+          prisma.projectVersion.update({
+            where: { id: project.currentVersionId! },
+            data: { designBrief: planResult.brief as unknown as Prisma.InputJsonValue },
+          }),
+          prisma.pipelineState.update({
+            where: { projectId: project.id },
+            data: { researchStatus: "AWAITING_APPROVAL" },
+          }),
+        ],
+        { maxWait: 10000, timeout: 30000 }
+      )
+    } catch (err) {
+      await prisma.pipelineState.update({
         where: { projectId: project.id },
-        data: { researchStatus: "AWAITING_APPROVAL" },
-      }),
-    ])
+        data: { researchStatus: "PENDING" },
+      })
+      throw err
+    }
 
     return { brief: planResult.brief, candidates: planResult.candidates }
   },
@@ -213,6 +256,7 @@ export const PlanService = {
     if (result.autoReloadTopUpCents !== null) {
       await CreditsService.triggerAutoReload(user.id, result.autoReloadTopUpCents)
     }
+    await trimCitations(project.id, version.designBrief)
 
     return { pipelineState: result.pipelineState }
   },
@@ -280,6 +324,7 @@ export const PlanService = {
     if (result.autoReloadTopUpCents !== null) {
       await CreditsService.triggerAutoReload(user.id, result.autoReloadTopUpCents)
     }
+    await trimCitations(project.id, chosenBrief)
 
     return { pipelineState: result.pipelineState, brief: chosenBrief }
   },

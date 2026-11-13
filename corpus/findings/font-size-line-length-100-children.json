@@ -1,0 +1,30 @@
+{
+  "slug": "font-size-line-length-100-children",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Font size and line length effects in 100 children",
+  "statement": "In experiments with 100 children, second graders (still learning to read) understood passages less well when the font was smaller or the lines were longer, while fifth graders' comprehension did not drop (it actually rose) with smaller print, and line spacing affected neither group, so early-reader text needs larger type and shorter lines while fluent older children can handle standard sizes.\n\nOptions:\n- Large early-reader text: Large body text for early readers (≈ 14 pt / 19 px, consistent with NN/g's guideline for young children) (fits: friendly, nurturing, playful)\n- Short lines for beginners: Narrow text column with short line lengths for beginning readers (fits: clear, gentle, friendly)\n- Standard size for fluent readers: Standard 12 pt / 16 px body text for fluent readers (roughly fifth grade and up) (fits: confident, clean, adventurous)\n- Default line spacing: Comfortable default line-height (about 1.4–1.5); do not rely on extra line spacing to compensate for small type (fits: clean, simple, calm)",
+  "appliesWhen": "Applies to: educational products, reading apps, children content sites. Audience: children under 10.",
+  "tags": [
+    "typography",
+    "clean",
+    "friendly",
+    "adventurous",
+    "calm",
+    "clear",
+    "confident",
+    "gentle",
+    "nurturing",
+    "playful",
+    "simple"
+  ],
+  "source": {
+    "title": "The Effect of Font Size on Reading Comprehension on Second and Fifth Grade Children: Bigger Is Not Always Better",
+    "authors": "Tami Katzir; Shirley Hershko; Vered Halamish",
+    "year": 2013,
+    "venue": "PLoS ONE",
+    "url": "https://doi.org/10.1371/journal.pone.0074061",
+    "doi": "10.1371/journal.pone.0074061"
+  },
+  "relations": []
+}

@@ -1,0 +1,27 @@
+{
+  "slug": "context-dependent-psychological-effects-red",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Context-dependent psychological effects of red",
+  "statement": "The psychological effect of red is highly context-dependent, triggering avoidance/danger in achievement contexts, but approach/desire in mating or hedonic contexts.\n\nOptions:\n- Avoidance / Warning: #D32F2F (Red) (fits: destructive actions, error states)\n- Approach / Desire: #E91E63 (Pink/Red) (fits: dating, food delivery)\n- Safe Approach: #388E3C (Green) (fits: financial growth, success states)",
+  "appliesWhen": "Applies to: ecommerce, dating apps, fintech. Audience: general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "dating",
+    "destructive-actions",
+    "error-states",
+    "financial-growth",
+    "food-delivery",
+    "success-states"
+  ],
+  "source": {
+    "title": "Color Psychology: Effects of Perceiving Color on Psychological Functioning in Humans",
+    "authors": "Andrew J. Elliot; Markus A. Maier",
+    "year": 2014,
+    "venue": "Annual Review of Psychology",
+    "url": "https://www.annualreviews.org/doi/10.1146/annurev-psych-010213-115035",
+    "doi": "10.1146/annurev-psych-010213-115035"
+  },
+  "relations": []
+}

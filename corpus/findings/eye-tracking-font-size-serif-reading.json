@@ -1,0 +1,27 @@
+{
+  "slug": "eye-tracking-font-size-serif-reading",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Eye-tracking font size, serif status, and reading",
+  "statement": "Eye-tracking research on online reading found that smaller fonts produced longer visual fixations and somewhat slower reading, while serif versus sans-serif differences were not statistically significant, supporting a preference for adequately sized type over a typography rule based solely on serif status.\n\nOptions:\n- Compact body: 16px (fits: compact, professional)\n- Comfortable body: 18px (fits: comfortable, editorial)\n- Large body: 20px (fits: friendly, access-first)\n- Reading-first: 22px (fits: minimal, editorial)",
+  "appliesWhen": "Applies to: general web, web apps, content sites. Audience: adults, general.",
+  "tags": [
+    "typography",
+    "editorial",
+    "access-first",
+    "comfortable",
+    "compact",
+    "friendly",
+    "minimal",
+    "professional"
+  ],
+  "source": {
+    "title": "An Eye Tracking Study of How Font Size and Type Influence Online Reading",
+    "authors": "David Beymer; Daniel Russell; Peter Orton",
+    "year": 2008,
+    "venue": "People and Computers XXII: Culture, Creativity, Interaction (British HCI Group Annual Conference)",
+    "url": "https://doi.org/10.14236/ewic/HCI2008.23",
+    "doi": "10.14236/ewic/HCI2008.23"
+  },
+  "relations": []
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "lower-color-saturation-luxury-status",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Lower color saturation and perceived luxury brand status",
+  "statement": "For luxury branding, lower color saturation increased perceived brand status, with the effect especially apparent below roughly 20–30% saturation, while positioning a luxury brand as innovative reversed the direction and made higher saturation more favorable. (OUP Academic)\n\nOptions:\n- Heritage muted: 10–20% saturation (fits: timeless, quiet-luxury, heritage)\n- Refined middle: 30–40% saturation (fits: premium, balanced, contemporary)\n- Visible color: 50–60% saturation (fits: expressive, modern, confident)\n- Highly vivid: 70–90% saturation (fits: bold, campaign-led, high-energy)",
+  "appliesWhen": "Applies to: luxury. Audience: adults, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "balanced",
+    "bold",
+    "campaign-led",
+    "confident",
+    "contemporary",
+    "expressive",
+    "heritage",
+    "high-energy",
+    "modern",
+    "premium"
+  ],
+  "source": {
+    "title": "The Color of Status: Color Saturation, Brand Heritage, and Perceived Status of Luxury Brands",
+    "authors": "Xinyue Zhou; Chunqu Xiao; Sunyee Yoon; Hong Zhu",
+    "year": 2025,
+    "venue": "Journal of Consumer Research",
+    "url": "https://doi.org/10.1093/jcr/ucaf029",
+    "doi": "10.1093/jcr/ucaf029"
+  },
+  "relations": []
+}

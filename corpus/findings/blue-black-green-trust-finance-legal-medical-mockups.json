@@ -1,0 +1,30 @@
+{
+  "slug": "blue-black-green-trust-finance-legal-medical-mockups",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Blue, black, and green trust in finance, legal, and medical mockups",
+  "statement": "Across finance, legal and medical website mockups, blue was perceived as the most trustworthy tested color scheme and black as the least trustworthy, while green was the second-most-trusted choice in the finance and medical contexts. (Twente Research Info)\n\nOptions:\n- Trust blue: blue (fits: reliable, professional, secure)\n- Trust green: green (fits: calm, health-oriented, stable)\n- Warm red: red (fits: urgent, energetic, assertive)\n- Dark black: black (fits: formal, dramatic, luxury)",
+  "appliesWhen": "Applies to: fintech, health, legal. Audience: adults, general, b2b buyers.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "assertive",
+    "calm",
+    "dramatic",
+    "energetic",
+    "formal",
+    "health-oriented",
+    "luxury",
+    "professional",
+    "reliable",
+    "secure"
+  ],
+  "source": {
+    "title": "Color matters: color as trustworthiness cue in web sites",
+    "authors": "Wouter A. Alberts; Thea van der Geest",
+    "year": 2011,
+    "venue": "Technical Communication",
+    "url": "http://www.ingentaconnect.com/content/stc/tc/2011/00000058/00000002/art00004"
+  },
+  "relations": []
+}

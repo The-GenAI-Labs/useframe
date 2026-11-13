@@ -1,0 +1,30 @@
+{
+  "slug": "wcag-contrast-ratios-body-large-enhanced",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "WCAG 4.5:1 body-text contrast, 3:1 large text, and 7:1 enhanced level",
+  "statement": "WCAG requires body text to reach a 4.5:1 contrast ratio against its background (3:1 for large text) and the stricter enhanced level asks for 7:1, so every text and background pair in a landing page palette, including text over hero images, placeholders and hover or focus text, needs to be checked.\n\nOptions:\n- AA baseline for body text: Body text at 4.5:1 or higher, for example #767676 on #FFFFFF (about 4.54:1) (fits: professional, balanced, modern)\n- Enhanced 7:1 for low-vision and older audiences: Body text at 7:1 or higher (Level AAA), for example #595959 on #FFFFFF (about 7.0:1) or #212121 on #FFFFFF (about 16:1) (fits: clear, trustworthy, clinical)\n- Large-text 3:1 latitude: Large display headings (18pt or 14pt bold and above) may use 3:1 (fits: bold, expressive, editorial)\n- Scrim under hero text: Text over photos placed on a solid or gradient scrim so the worst-case pixel behind the text still reaches 4.5:1 (fits: premium, photographic, cinematic)\n- States and placeholders: Placeholder text and text revealed on hover or keyboard focus held to 4.5:1 as well (fits: polished, accessible, careful)",
+  "appliesWhen": "Applies to: general web. Audience: general, seniors.",
+  "tags": [
+    "accessibility",
+    "accessible",
+    "balanced",
+    "bold",
+    "careful",
+    "cinematic",
+    "clear",
+    "clinical",
+    "editorial",
+    "expressive",
+    "modern",
+    "photographic"
+  ],
+  "source": {
+    "title": "Understanding SC 1.4.3: Contrast (Minimum), Web Content Accessibility Guidelines (WCAG) 2.2",
+    "authors": "W3C Accessibility Guidelines Working Group",
+    "year": 2023,
+    "venue": "W3C WCAG 2.2 (SC 1.4.3 Contrast (Minimum), Level AA; SC 1.4.6 Contrast (Enhanced), Level AAA)",
+    "url": "https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html"
+  },
+  "relations": []
+}

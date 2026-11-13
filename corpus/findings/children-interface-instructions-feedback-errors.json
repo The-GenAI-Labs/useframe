@@ -1,0 +1,30 @@
+{
+  "slug": "children-interface-instructions-feedback-errors",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Children's interface instructions, feedback, and error prevention",
+  "statement": "Because children's reasoning, theory of mind and working memory are still developing, interfaces should state the goal and how to reach it in clear, specific instructions that avoid naming a particular device, use exaggerated rather than subtle feedback for children under 6, lean on familiar mental models such as a coloring book, and prevent errors (for example forgiving search).\n\nOptions:\n- Goal-first demo: Goal-first onboarding: show the finished state, then the starting state, then the required action, using animation plus audio (fits: guiding, playful, clear)\n- Device-neutral wording: Device-neutral instruction verbs ('touch the bucket', 'click the bucket') rather than 'use the mouse' (fits: inclusive, simple, friendly)\n- Explicit feedback cues: Exaggerated, explicit feedback for under-6s (large facial expressions or spoken cues such as 'Yum, I like carrots') (fits: warm, expressive, nurturing)\n- Familiar metaphors: Familiar real-world metaphors (coloring book and crayons, kitchen tools) with an eraser instead of abstract undo/redo arrows (fits: creative, familiar, playful)\n- Forgiving search: Error-preventing search and inputs: autocorrect and partial matching, with next-step suggestions instead of a bare 'no results' page (fits: helpful, forgiving, curious)",
+  "appliesWhen": "Applies to: kids apps, kids websites, onboarding flows, educational games. Audience: children under 10.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "playful",
+    "clear",
+    "creative",
+    "curious",
+    "expressive",
+    "familiar",
+    "forgiving",
+    "friendly",
+    "guiding",
+    "helpful"
+  ],
+  "source": {
+    "title": "Designing for Kids: Cognitive Considerations",
+    "authors": "Feifei Liu",
+    "year": 2018,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/kids-cognition/"
+  },
+  "relations": []
+}

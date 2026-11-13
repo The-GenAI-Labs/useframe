@@ -1,0 +1,30 @@
+{
+  "slug": "wcag-1-4-12-text-spacing-overrides",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "WCAG 1.4.12 text-spacing overrides and growing containers",
+  "statement": "WCAG 1.4.12 (Level AA) requires that no content or functionality is lost when users override line height to 1.5 times, paragraph spacing to 2 times, letter spacing to 0.12 times and word spacing to 0.16 times the font size, so containers, buttons and navigation items on a landing page must grow with their text.\n\nOptions:\n- Flexible-height components: Auto-height containers (min-height rather than fixed height) for cards, buttons and navigation items (fits: robust, technical, modern)\n- 1.5 line-height default: Default body line-height of 1.5 so user overrides change little (fits: accessible, calm, editorial)\n- Wrapping labels: Labels allowed to wrap (no white-space: nowrap on labels that can grow), so widened letter spacing does not clip tabs or nav items (fits: practical, careful, responsive)\n- Text-spacing test pass: Pre-launch check of hero, pricing cards and footer using a text-spacing bookmarklet or extension (fits: systematic, professional, polished)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "typography",
+    "accessible",
+    "calm",
+    "careful",
+    "editorial",
+    "modern",
+    "polished",
+    "practical",
+    "professional",
+    "responsive",
+    "robust",
+    "systematic"
+  ],
+  "source": {
+    "title": "Understanding SC 1.4.12: Text Spacing, Web Content Accessibility Guidelines (WCAG) 2.1",
+    "authors": "W3C Accessibility Guidelines Working Group",
+    "year": 2023,
+    "venue": "W3C WCAG 2.2 (SC 1.4.12 Text Spacing, Level AA, introduced in WCAG 2.1 in 2018)",
+    "url": "https://www.w3.org/WAI/WCAG21/Understanding/text-spacing"
+  },
+  "relations": []
+}

@@ -1,0 +1,27 @@
+{
+  "slug": "blue-competence-trust-red-excitement",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Blue competence, trust, and red excitement associations",
+  "statement": "The color blue is strongly associated with competence, trust, and functionality, while red is associated with excitement and hedonic value.\n\nOptions:\n- Competence & Trust: #1565C0 (Navy Blue) (fits: banking, corporate b2b)\n- Excitement: #D32F2F (Vibrant Red) (fits: entertainment, fast food)\n- Sincerity: #757575 (Neutral Grey) (fits: non profits, education)",
+  "appliesWhen": "Applies to: b2b saas, fintech, ecommerce. Audience: general, b2b buyers.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "banking",
+    "corporate-b2b",
+    "education",
+    "entertainment",
+    "fast-food",
+    "non-profits"
+  ],
+  "source": {
+    "title": "Exciting red and competent blue: the importance of color in marketing",
+    "authors": "Lauren I. Labrecque; George R. Milne",
+    "year": 2012,
+    "venue": "Journal of the Academy of Marketing Science",
+    "url": "https://link.springer.com/article/10.1007/s11747-010-0245-y",
+    "doi": "10.1007/s11747-010-0245-y"
+  },
+  "relations": []
+}

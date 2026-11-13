@@ -1,0 +1,30 @@
+{
+  "slug": "wikipedia-eye-tracking-18pt-font-line-spacing",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Wikipedia eye-tracking: 18-point font size, comprehension, and line spacing",
+  "statement": "In an eye-tracking study of 104 readers of Wikipedia text, readability improved significantly with font size up to 18 points and comprehension was best at 18 and 26 points, while the extreme line spacings tested (0.8 and 1.8 of default) marginally impaired readability, so text-heavy sections should use 18-point (about 24 CSS px) or larger text with ordinary line spacing.\n\nOptions:\n- Study-backed reading size: Body text at 18pt (about 24 CSS px, assuming points map to CSS points) with line-height 1.2 to 1.5 for long reading sections (fits: accessible, editorial, clear)\n- Larger for older audiences: 20-22pt (about 27-29 CSS px) body text for older or low-vision audiences, within the range tested where 26pt also gave strong comprehension (fits: warm, inclusive, trustworthy)\n- Fluid scale with a floor: Fluid type scale with a floor near 24 CSS px for long-form body text on desktop reading layouts (fits: modern, responsive, technical)\n- Smaller for short UI strings: Short interface labels, captions and metadata may be set smaller (roughly 14-16 CSS px), since the finding concerns continuous reading text (fits: efficient, compact, professional)",
+  "appliesWhen": "Applies to: general web. Audience: general, seniors.",
+  "tags": [
+    "typography",
+    "accessible",
+    "clear",
+    "compact",
+    "editorial",
+    "efficient",
+    "inclusive",
+    "modern",
+    "professional",
+    "responsive",
+    "technical",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "Make It Big!: The Effect of Font Size and Line Spacing on Online Readability",
+    "authors": "Luz Rello; Martin Pielot; Mari-Carmen Marcos",
+    "year": 2016,
+    "venue": "Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI '16), pp. 3637-3648",
+    "url": "https://dblp.uni-trier.de/pid/60/4144.html"
+  },
+  "relations": []
+}

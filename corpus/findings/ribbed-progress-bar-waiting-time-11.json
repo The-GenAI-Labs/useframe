@@ -1,0 +1,26 @@
+{
+  "slug": "ribbed-progress-bar-waiting-time-11",
+  "status": "VERIFIED",
+  "category": "MOTION",
+  "title": "Ribbed progress bar illusion reducing perceived waiting time by 11%",
+  "statement": "Adding backwards-moving, decelerating ribbed patterns to a progress bar creates a visual illusion that reduces perceived waiting time by up to 11%.\n\nOptions:\n- Faster Perceived Time: Backward-moving ripples with deceleration (fits: long wait times, heavy processing)\n- Neutral Baseline: Solid, smooth fill (fits: short wait times, standard ui)\n- Unknown Duration: Indeterminate looping spinner (fits: network requests, unpredictable loads)",
+  "appliesWhen": "Applies to: file uploads, system processes, loading screens. Audience: general.",
+  "tags": [
+    "motion",
+    "heavy-processing",
+    "long-wait-times",
+    "network-requests",
+    "short-wait-times",
+    "standard-ui",
+    "unpredictable-loads"
+  ],
+  "source": {
+    "title": "Rethinking the progress bar",
+    "authors": "Chris Harrison; Brian Amento; Stacey Kuznetsov; Robert Bell",
+    "year": 2007,
+    "venue": "Proceedings of the 20th annual ACM symposium on User interface software and technology (UIST '07)",
+    "url": "https://dl.acm.org/doi/10.1145/1294211.1294231",
+    "doi": "10.1145/1294211.1294231"
+  },
+  "relations": []
+}

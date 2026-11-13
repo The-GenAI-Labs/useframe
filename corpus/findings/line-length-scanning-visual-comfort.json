@@ -1,0 +1,28 @@
+{
+  "slug": "line-length-scanning-visual-comfort",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Line length tradeoff between scanning performance and visual comfort",
+  "statement": "Web visual-search studies found a tradeoff in line length: longer lines improved scanning performance while shorter lines produced better subjective outcomes, so line width can be chosen according to whether fast scanning or visual comfort is the dominant goal.\n\nOptions:\n- Comfort-focused: 55-65cpl (fits: comfortable, editorial)\n- Balanced: 65-75cpl (fits: balanced, professional)\n- Scan-friendly: 75-85cpl (fits: technical, high density)\n- Wide scan: 85-95cpl (fits: data rich, newsroom)",
+  "appliesWhen": "Applies to: general web, web apps, content sites. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "balanced",
+    "comfortable",
+    "data-rich",
+    "editorial",
+    "high-density",
+    "newsroom",
+    "professional",
+    "technical"
+  ],
+  "source": {
+    "title": "The influence of font type and line length on visual search and information retrieval in web pages",
+    "authors": "Jonathan Ling; Paul van Schaik",
+    "year": 2006,
+    "venue": "International Journal of Human-Computer Studies",
+    "url": "https://doi.org/10.1016/j.ijhcs.2005.08.015",
+    "doi": "10.1016/j.ijhcs.2005.08.015"
+  },
+  "relations": []
+}

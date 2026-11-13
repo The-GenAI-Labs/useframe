@@ -1,0 +1,30 @@
+{
+  "slug": "w3c-image-guidance-alt-categories",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "W3C image guidance for informative, decorative, functional, and complex images",
+  "statement": "W3C's images guidance sorts images into informative (a short description of the essential information), decorative (empty alt attribute), functional (describe the link or button action, not the picture) and complex (short alt plus a longer description nearby), so every hero image, icon and logo on a landing page needs a deliberate alt decision.\n\nOptions:\n- Informative alt: Hero photo or illustration that carries meaning: concise informative alt text describing the essential information (fits: clear, descriptive, editorial)\n- Empty alt for decoration: Decorative flourishes, background patterns and icons repeated beside a text label: alt=\"\" (fits: polished, minimal, modern)\n- Functional alt: Icon-only or image-only links and buttons: alt describing the destination or action (for example 'View pricing') (fits: practical, clear, professional)\n- Complex image support: Charts and infographics: short alt plus the underlying data or description in adjacent text (fits: data-driven, technical, analytical)\n- Avoid text in images: No text embedded in images; where unavoidable, alt contains the same text (fits: accessible, clean, responsive)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "accessibility",
+    "clear",
+    "accessible",
+    "analytical",
+    "clean",
+    "data-driven",
+    "descriptive",
+    "editorial",
+    "minimal",
+    "modern",
+    "polished",
+    "practical"
+  ],
+  "source": {
+    "title": "Images Tutorial",
+    "authors": "W3C Web Accessibility Initiative (WAI)",
+    "year": 2023,
+    "venue": "W3C WAI Images Tutorial, supporting WCAG 2.2 SC 1.1.1 Non-text Content",
+    "url": "https://www.w3.org/WAI/tutorials/images/"
+  },
+  "relations": []
+}

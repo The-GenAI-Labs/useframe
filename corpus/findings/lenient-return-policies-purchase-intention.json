@@ -1,0 +1,31 @@
+{
+  "slug": "lenient-return-policies-purchase-intention",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Lenient online return policies and purchase intention through trust",
+  "statement": "More lenient online return policies can increase purchase intention through consumer trust, making clear and usable return terms a defensible objection-handling element rather than merely a post-purchase service detail. (Hanken School of Economics)\n\nOptions:\n- 30-day return: 30-day-return-summary (fits: standard, low clutter, risk reducing)\n- 60-day return: 60-day-return-summary (fits: generous, high consideration, confidence building)\n- Free returns: free-return-shipping (fits: friction reducing, high return effort, risk reducing)\n- Easy policy access: one-click-return-policy-link (fits: transparent, mobile first, self service)\n- Policy near CTA: return-policy-card-near-cta (fits: high consideration, objection handling, conversion focused)",
+  "appliesWhen": "Applies to: ecommerce, online retail, consumer goods, marketplaces. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "high-consideration",
+    "risk-reducing",
+    "confidence-building",
+    "conversion-focused",
+    "friction-reducing",
+    "generous",
+    "high-return-effort",
+    "low-clutter",
+    "mobile-first",
+    "objection-handling"
+  ],
+  "source": {
+    "title": "Online purchase return policy leniency and purchase decision: Mediating role of consumer trust",
+    "authors": "Pejvak Oghazi; Stefan Karlsson; Daniel Hellström; Klas Hjort",
+    "year": 2018,
+    "venue": "Journal of Retailing and Consumer Services",
+    "url": "https://doi.org/10.1016/j.jretconser.2017.12.007",
+    "doi": "10.1016/j.jretconser.2017.12.007"
+  },
+  "relations": []
+}

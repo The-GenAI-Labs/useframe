@@ -1,0 +1,69 @@
+{
+  "slug": "use-reviews-as-evidence-not-decoration",
+  "title": "Use Reviews as Evidence, Not Decoration",
+  "kind": "ARTICLE",
+  "category": "LAYOUT",
+  "summary": "Reviews can reduce uncertainty, but a star average alone does not capture what shoppers use as evidence. Research supports showing enough text, context, and rating detail for people to inspect why a product received its score.",
+  "sections": [
+    {
+      "heading": "Human presence can increase trust",
+      "body": "Hassanein and Head found that socially rich text and pictures could increase perceived social presence, which positively affected trust and attitudes toward online shopping. Human-centered content can therefore be a trust signal when it is relevant to the product or service. (ScienceDirect)"
+    },
+    {
+      "heading": "Review depth matters",
+      "body": "Mudambi and Schuff analyzed 1,587 Amazon reviews and found that review depth had a positive effect on perceived helpfulness. For experience goods, however, extreme ratings were less helpful than moderate ratings. This supports interfaces that let shoppers see detailed review text while also giving enough context to interpret the rating distribution. (AIS eLibrary)"
+    },
+    {
+      "heading": "Do not hide negative evidence",
+      "body": "Chevalier and Mayzlin found that one-star reviews often had a greater impact on relative sales than five-star reviews in their online-book study. That makes easy access to negative reviews a defensible transparency pattern rather than something a design should automatically minimize. (Sage Journals)"
+    },
+    {
+      "heading": "Give shoppers both summaries and text",
+      "body": "The same study found evidence from review-length data that customers read review text rather than relying only on summary statistics. A useful range therefore includes rating distributions, review excerpts, searchable full text, or a summary-plus-detail pattern. (Sage Journals)"
+    }
+  ],
+  "body": "## Use Reviews as Evidence, Not Decoration\n\nA row of five-star icons looks persuasive, but reviews are more useful when shoppers can inspect the evidence behind the score. Research on online shopping suggests that trust can come from human presence, detailed review content, and transparent access to both positive and negative experiences.\n\n### Human presence can make an online store feel less anonymous\n\nKhaled Hassanein and Milena Head experimentally varied socially rich text and picture design elements on shopping websites. Higher perceived social presence was associated with higher perceived usefulness, trust, and enjoyment, which in turn produced more favorable attitudes toward the sites. For frontend teams, that creates a range of options: named support staff, team photographs, customer stories, human-centered interface language, or richer contextual product imagery. The appropriate choice depends on whether the purchase is primarily functional, service-led, or relationship-oriented. (ScienceDirect)\n\n### Detailed review content is part of the evidence\n\nSusan M. Mudambi and David Schuff studied 1,587 Amazon reviews across six products and found that review depth increased perceived helpfulness. They also found that for experience goods, extreme ratings were less helpful than moderate ratings. That suggests a review interface can be designed around inspection rather than spectacle: provide an excerpt for scanning, a clear way to expand the full review, and enough context to understand whether the reviewer is describing an actual use case. (AIS eLibrary)\n\n### Negative reviews can matter disproportionately\n\nJudith A. Chevalier and Dina Mayzlin studied consumer reviews on Amazon.com and Barnesandnoble.com and found that improvements in reviews were associated with higher relative sales. They also found that, for most samples, one-star reviews had a stronger impact than five-star reviews. That does not mean a storefront should spotlight negative reviews, but it does mean hiding them entirely can remove information that shoppers use in deciding whether the risk is acceptable. (Sage Journals)\n\n### Do not reduce the review system to an average\n\nChevalier and Mayzlin also found evidence from review-length data that customers read review text rather than relying only on summary statistics. A strong range of designs can therefore include a rating distribution, text excerpts, searchable or filterable reviews, or a summary-plus-full-text pattern. The exact presentation can vary with screen size and product complexity, while still preserving the ability to inspect the reasoning behind the rating. (Sage Journals)\n\nThe core design principle is evidence visibility. Reviews work as trust content when shoppers can understand who is speaking, what happened, and why the reviewer reached the conclusion they did.",
+  "tags": [
+    "reviews",
+    "social-proof",
+    "trust",
+    "transparency",
+    "customer-content"
+  ],
+  "references": [
+    {
+      "title": "Manipulating perceived social presence through the web interface and its impact on attitude towards online shopping",
+      "url": "https://doi.org/10.1016/j.ijhcs.2006.11.018",
+      "authors": [
+        "Khaled Hassanein",
+        "Milena M. Head"
+      ],
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "year": 2007,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "What Makes a Helpful Online Review? A Study of Customer Reviews on Amazon.com",
+      "url": "https://doi.org/10.2307/20721420",
+      "authors": [
+        "Susan M. Mudambi",
+        "David Schuff"
+      ],
+      "publishedIn": "MIS Quarterly",
+      "year": 2010,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "The Effect of Word of Mouth on Sales: Online Book Reviews",
+      "url": "https://doi.org/10.1509/jmkr.43.3.345",
+      "authors": [
+        "Judith A. Chevalier",
+        "Dina Mayzlin"
+      ],
+      "publishedIn": "Journal of Marketing Research",
+      "year": 2006,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

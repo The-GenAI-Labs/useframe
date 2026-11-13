@@ -14,6 +14,8 @@ export default defineConfig({
       "src/lib/docExtract.test.ts",
       "src/agents/mediaPlacement.test.ts",
       "src/lib/siteMedia.test.ts",
+      "src/lib/planCitations.test.ts",
+      "src/prompts/planner.prompt.test.ts",
     ],
   },
 });

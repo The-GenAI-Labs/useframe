@@ -1,0 +1,31 @@
+{
+  "slug": "brand-hue-personality-cues-for-landing-pages",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Brand hue personality cues for landing pages",
+  "statement": "For brand-led landing pages, hue can be used as a personality cue: red/orange/yellow were associated with excitement, blue/brown with competence, black/purple/pink with sophistication, and green/brown with ruggedness. (DOI)\n\nOptions:\n- Exciting red: red (fits: energetic, bold, urgent)\n- Warm orange: orange (fits: playful, energetic, approachable)\n- Competent blue: blue (fits: reliable, professional, technical)\n- Sophisticated black: black (fits: premium, formal, exclusive)\n- Rugged green: green (fits: natural, robust, grounded)",
+  "appliesWhen": "Applies to: general, fintech, health, luxury, b2b. Audience: adults, b2b buyers, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "energetic",
+    "approachable",
+    "bold",
+    "exclusive",
+    "formal",
+    "grounded",
+    "natural",
+    "playful",
+    "premium",
+    "professional"
+  ],
+  "source": {
+    "title": "Exciting red and competent blue: the importance of color in marketing",
+    "authors": "Lauren I. Labrecque; George R. Milne",
+    "year": 2012,
+    "venue": "Journal of the Academy of Marketing Science",
+    "url": "https://doi.org/10.1007/s11747-010-0245-y",
+    "doi": "10.1007/s11747-010-0245-y"
+  },
+  "relations": []
+}

@@ -1,0 +1,29 @@
+{
+  "slug": "positive-display-polarity-reading-accuracy",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Positive display polarity and reading speed and accuracy",
+  "statement": "Positive display polarity (dark text on a light background) yields faster and more accurate reading for both younger and older adults by reducing pupil size and increasing visual acuity.\n\nOptions:\n- Positive Polarity: Dark grey text (#333333) on white (#FFFFFF) (fits: standard web, ecommerce, editorial)\n- High Contrast Positive: Pure black text (#000000) on white (#FFFFFF) (fits: accessibility first, low vision tools)\n- Negative Polarity (Dark Mode): Light text on dark background (fits: developer tools, low light environments, aesthetic choice)\n- User-Selected Polarity: System-level prefers-color-scheme toggle (fits: modern web apps, SaaS)",
+  "appliesWhen": "Applies to: web, mobile apps, dark mode design. Audience: general, adults, seniors.",
+  "tags": [
+    "accessibility",
+    "accessibility-first",
+    "aesthetic-choice",
+    "developer-tools",
+    "ecommerce",
+    "editorial",
+    "low-light-environments",
+    "low-vision-tools",
+    "modern-web-apps",
+    "saas",
+    "standard-web"
+  ],
+  "source": {
+    "title": "Positive display polarity is advantageous for both younger and older adults",
+    "authors": "Cornelia Piepenbrock; Susanne Mayr; Axel Buchner",
+    "year": 2013,
+    "venue": "Ergonomics",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24059632/"
+  },
+  "relations": []
+}

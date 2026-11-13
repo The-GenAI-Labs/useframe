@@ -1,0 +1,30 @@
+{
+  "slug": "above-fold-fixations-face-entry-points",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Above-fold fixations and below-fold face entry points in eyetracking",
+  "statement": "In a 34-participant eye-tracking study of a financial-services homepage prototype, above-the-fold content drew the most fixations overall, but images of faces placed below the fold acted as entry points that drew fixations to the adjacent text, showing that visual hierarchy can pull attention outside the F-pattern.\n\nOptions:\n- Face as entry point: Face photo beside a below-fold section (for example expert or team insights) to draw fixations to the adjacent text (fits: human, trustworthy, warm)\n- Title-led entry points: Clear section titles as entry points where photography is not appropriate (titles were still fixated in the no-faces version) (fits: minimal, professional, clear)\n- Strong central hierarchy: Strong visual hierarchy in the central area of the page, which drew more fixations when people were browsing (fits: polished, premium, modern)\n- Clear navigation for searchers: Prominent, clear navigation for goal-directed visitors, who showed longer fixations on navigation and more scattered scanning (fits: practical, clear, friendly)",
+  "appliesWhen": "Applies to: finance. Audience: general.",
+  "tags": [
+    "layout",
+    "clear",
+    "friendly",
+    "human",
+    "minimal",
+    "modern",
+    "polished",
+    "practical",
+    "premium",
+    "professional",
+    "trustworthy",
+    "warm"
+  ],
+  "source": {
+    "title": "Tracking Users' Viewing Pattern",
+    "authors": "Soussan Djamasbi; Marisa Siegel; Tom Tullis; Rui Dai",
+    "year": 2009,
+    "venue": "SIGHCI 2009 Proceedings (Association for Information Systems Special Interest Group on Human-Computer Interaction)",
+    "url": "https://aisel.aisnet.org/sighci2009/16"
+  },
+  "relations": []
+}

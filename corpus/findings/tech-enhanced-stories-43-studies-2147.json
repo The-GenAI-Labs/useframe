@@ -1,0 +1,30 @@
+{
+  "slug": "tech-enhanced-stories-43-studies-2147",
+  "status": "VERIFIED",
+  "category": "MOTION",
+  "title": "Technology-enhanced stories in 43-study meta-analysis of 2,147 children",
+  "statement": "A meta-analysis of 43 studies with 2,147 children found technology-enhanced stories gave a small comprehension and vocabulary edge over traditional storybook reading, driven by multimedia features (animated pictures, music, sound effects) that helped, while interactive extras (hotspots, games, dictionaries) distracted and hurt, most strongly for children from less stimulating home environments.\n\nOptions:\n- Story-congruent animation: Narration-synchronized animation: motion that depicts what the story or instruction is saying (fits: imaginative, warm, nurturing)\n- Supportive sound and music: Music and sound effects tied to story events, supporting rather than competing with narration (fits: playful, immersive, warm)\n- Isolate interactive extras: Separate read and play modes: hotspots and games appear only after, or outside, the core content flow (fits: focused, educational, trustworthy)\n- Restrained motion: Restrained motion budget: one purposeful animation per screen instead of many tappable hot-zones (fits: calm, clean, focused)",
+  "appliesWhen": "Applies to: digital storybooks, reading apps, early literacy products. Audience: children under 10.",
+  "tags": [
+    "motion",
+    "focused",
+    "warm",
+    "calm",
+    "clean",
+    "educational",
+    "imaginative",
+    "immersive",
+    "nurturing",
+    "playful",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "Benefits and Pitfalls of Multimedia and Interactive Features in Technology-Enhanced Storybooks: A Meta-Analysis",
+    "authors": "Zsofia K. Takacs; Elise K. Swart; Adriana G. Bus",
+    "year": 2015,
+    "venue": "Review of Educational Research",
+    "url": "https://doi.org/10.3102/0034654314566989",
+    "doi": "10.3102/0034654314566989"
+  },
+  "relations": []
+}

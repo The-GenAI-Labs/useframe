@@ -1,0 +1,31 @@
+{
+  "slug": "online-shopping-trust-perceived-safety-familiar-interface",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Online shopping trust, perceived safety, and familiar interface",
+  "statement": "In online shopping, trust is supported by perceived safety mechanisms, a familiar interface, and ease of use, so checkout designs can use either a conventional interaction pattern or stronger explanatory trust cues while keeping the transaction flow familiar. (DOI)\n\nOptions:\n- Familiar checkout: conventional-checkout-pattern (fits: mainstream, low friction, general)\n- Security explanation: visible-security-mechanism-copy (fits: risk sensitive, high value, new customer)\n- Familiar controls: standardized-form-controls (fits: conventional, accessible, utility first)\n- Simple flow: minimal-step-checkout (fits: mobile first, fast, low complexity)\n- Payment trust details: trust-details-near-payment (fits: financial risk, high consideration, new customer)",
+  "appliesWhen": "Applies to: ecommerce, online retail, marketplaces, subscription checkout. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "new-customer",
+    "accessible",
+    "conventional",
+    "fast",
+    "financial-risk",
+    "general",
+    "high-consideration",
+    "high-value",
+    "low-complexity",
+    "low-friction"
+  ],
+  "source": {
+    "title": "Trust and TAM in Online Shopping: An Integrated Model",
+    "authors": "David Gefen; Elena Karahanna; Detmar W. Straub",
+    "year": 2003,
+    "venue": "MIS Quarterly",
+    "url": "https://doi.org/10.2307/30036519",
+    "doi": "10.2307/30036519"
+  },
+  "relations": []
+}

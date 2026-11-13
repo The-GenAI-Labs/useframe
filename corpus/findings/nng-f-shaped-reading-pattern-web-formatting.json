@@ -1,0 +1,30 @@
+{
+  "slug": "nng-f-shaped-reading-pattern-web-formatting",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "NN/g F-shaped reading pattern and web formatting",
+  "statement": "NN/g's follow-up eyetracking research found the F-shaped pattern appears when text has little web formatting and readers are efficiency-seeking rather than deeply committed (on desktop, on mobile, and mirrored in right-to-left languages), so landing page copy should use front-loaded key points, distinct headings, bold, bullets and grouping to steer scanning instead of relying on F-shaped reading.\n\nOptions:\n- Key points first: Important points in the first two paragraphs of any block of text (fits: clear, authoritative, professional)\n- Informative subheadings: Visually distinct subheadings that begin with information-carrying words (fits: editorial, organized, clear)\n- Visually grouped chunks: Small groups of related content set apart with a border or different background (fits: modern, organized, technical)\n- Bold and bulleted scan aids: Bold key phrases plus bulleted or numbered lists whose items start with varied, information-bearing words (repeated opening words tend to be skipped) (fits: practical, friendly, clear)\n- RTL mirroring: Mirrored layout for right-to-left languages, where the F-pattern is flipped (fits: localized, inclusive)",
+  "appliesWhen": "Applies to: general web, mobile web. Audience: general.",
+  "tags": [
+    "layout",
+    "clear",
+    "organized",
+    "authoritative",
+    "editorial",
+    "friendly",
+    "inclusive",
+    "localized",
+    "modern",
+    "practical",
+    "professional",
+    "technical"
+  ],
+  "source": {
+    "title": "F-Shaped Pattern of Reading on the Web: Misunderstood, But Still Relevant (Even on Mobile)",
+    "authors": "Kara Pernice",
+    "year": 2017,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/"
+  },
+  "relations": []
+}

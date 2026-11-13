@@ -1,0 +1,20 @@
+{
+  "slug": "web-credibility-elements-and-commercial-pressure",
+  "status": "DRAFT",
+  "category": "LAYOUT",
+  "title": "Web credibility elements and commercial pressure",
+  "statement": "In a large quantitative study of web credibility, elements conveying real-world presence, ease of use, expertise, trustworthiness, and tailoring increased perceived credibility, while commercial pressure and amateurish presentation reduced it. (DOI)\n\nOptions:\n- Real-world presence: real_world_context_block (fits: established, transparent)\n- Working product evidence: product_ui_evidence (fits: technical, pragmatic)\n- Named expertise: expert_attribution (fits: authoritative, expert)\n- Role-specific tailoring: role_specific_path (fits: focused, customer led)",
+  "appliesWhen": "Applies to: consumer websites, high consideration digital products. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "authoritative",
+    "customer-led",
+    "established",
+    "expert",
+    "focused",
+    "pragmatic",
+    "technical",
+    "transparent"
+  ],
+  "relations": []
+}

@@ -1,9 +1,14 @@
+import type { RetrievalResult } from "@repo/schemas"
+
 export type PlannerFinding = {
   id: string
   claim: string
   paper: string
   decision: string
   options: { value: string; label: string; fits: string[] }[]
+  rrfScore?: number
+  rerankScore?: number | null
+  viaRelation?: boolean
 }
 
 export type PlannerRetrievalResult = {
@@ -38,6 +43,7 @@ export type PlannerExtracted = {
 export type PlannerPromptVars = {
   extracted: PlannerExtracted
   results: PlannerRetrievalResult[]
+  corpus?: RetrievalResult["areas"]
   domainPattern: PlannerDomainPattern | null
   audienceModifier: PlannerAudienceModifier | null
   // Present when the project has an approved intake brief.
@@ -57,6 +63,24 @@ function formatFindings(results: PlannerRetrievalResult[]): string {
         )
         .join("\n")
       return `## Decision: ${decision}\n${findingsText}`
+    })
+    .join("\n\n")
+}
+
+const clip = (text: string, max: number) => (text.length > max ? `${text.slice(0, max)}…` : text)
+const CORPUS_FINDINGS_PER_AREA = 4
+
+export function formatCorpus(areas: RetrievalResult["areas"]): string {
+  const listed = new Set<string>()
+  return areas
+    .filter((a) => a.findings.length > 0)
+    .map(({ area, findings }) => {
+      const lines = findings.slice(0, CORPUS_FINDINGS_PER_AREA).map((f) => {
+        if (listed.has(f.findingId)) return `- findingId: "${f.findingId}" (listed above)`
+        listed.add(f.findingId)
+        return `- findingId: "${f.findingId}"\n  title: ${f.title}\n  finding: ${clip(f.statement, 500)}${f.appliesWhen ? `\n  applies when: ${clip(f.appliesWhen, 200)}` : ""}`
+      })
+      return `## ${area}\n${lines.join("\n")}`
     })
     .join("\n\n")
 }
@@ -93,13 +117,24 @@ ${JSON.stringify(v.audienceModifier.modifies, null, 2)}
 Retrieved research findings, grouped by the decision they inform:
 
 ${formatFindings(v.results)}
+${
+  v.corpus?.some((a) => a.findings.length > 0)
+    ? `
+Verified findings from the research library, grouped by decision area. They have no options; use them to
+justify and refine the decisions above:
 
+${formatCorpus(v.corpus)}
+`
+    : ""
+}
 RULES:
 1. For every decision that has retrieved findings, pick exactly ONE option from that finding's
    options array — do not invent a value that isn't one of the listed options.
 2. Choose the option whose "fits" tags best match the brand personality and price positioning.
 3. Cite the exact findingId for every decision in your output's citations array. Never invent a
-   citation or reference a findingId that wasn't given to you above.
+   citation or reference a findingId that wasn't given to you above. When a research library finding
+   shaped a decision, add it to citations with its exact findingId as id, its title, source
+   "Research library", and relevance saying how it shaped that decision.
 4. If two findings conflict, state which you prioritized and why in that field's rationale.
 5. If a decision had no findings retrieved, make a reasonable judgment call and say so plainly in
    the rationale — do not fabricate a citation for it.

@@ -1,0 +1,90 @@
+{
+  "slug": "type-color-motion-and-fair-play-the-look-and-ethics-of",
+  "title": "Type, Color, Motion and Fair Play: The Look and Ethics of Products for Young Children",
+  "kind": "ARTICLE",
+  "category": "AGE_GROUP",
+  "summary": "What a children's product looks like and how it behaves affects whether kids can use it and whether it treats them fairly. Four studies offer guidance on type, color, motion and persuasion.",
+  "sections": [
+    {
+      "heading": "Type: bigger helps beginners, not everyone",
+      "body": "In a study of 100 children, second graders understood text less when the type was smaller or the lines longer. Fifth graders were not hurt, and their scores rose with smaller type. Line spacing made no difference to either group."
+    },
+    {
+      "heading": "Color: bright feels happy",
+      "body": "Sixty children aged 5 and 6½ mostly linked bright colors like pink, blue and red with good feelings and dark colors like brown, black and gray with bad ones. The study is small and old, so treat it as a lean, not a rule."
+    },
+    {
+      "heading": "Motion: animate the story, not the distractions",
+      "body": "A review of 43 studies found that animation, music and sound effects helped children understand stories, while hotspots and games pulled attention away from them."
+    },
+    {
+      "heading": "Fair play: manipulative design is common",
+      "body": "Only about one in five apps used by 3- to 5-year-olds had no manipulative features. Avoiding pressure tactics is ethical and can be a genuine selling point for parents."
+    }
+  ],
+  "body": "What a children's product looks like, and how it behaves, shapes whether kids can use it and whether it treats them fairly. Four peer-reviewed studies offer guidance on type, color, motion and persuasion.\n\n## Type: bigger helps beginners, not everyone\n\nTami Katzir, Shirley Hershko and Vered Halamish (2013) tested 100 children in second and fifth grade with reading passages in different font sizes, line lengths and line spacing. For second graders, who are still learning to read, smaller type and longer lines lowered comprehension. Fifth graders were not hurt by smaller type; their scores actually rose. Line spacing made no difference to either group. In practice, give early readers larger type and short lines, and do not assume the same rules apply to confident readers. The experiments used reading passages rather than web pages, so treat any screen sizes as a starting point.\n\n## Color: bright feels happy\n\nChris Boyatzis and Reenu Varghese (1994) asked 60 children aged 5 and 6½ how nine colors made them feel. About 69% of responses were positive. Bright colors such as pink, blue and red brought positive feelings, while dark colors such as brown, black and gray brought negative ones. Positive reactions to bright colors grew with age, and girls favored brighter colors more than boys did, while boys were more likely to feel positively about dark colors. The study was small and is decades old, and it does not mean every child will react this way. Any hex codes in a palette are illustrative design choices, not values from the paper, and colors should not be assigned by gender.\n\n## Motion: animate the story, not the distractions\n\nA meta-analysis by Zsofia Takacs, Elise Swart and Adriana Bus (2015) pooled 43 studies with 2,147 children. Technology-enhanced stories gave a small benefit over traditional reading. Animated pictures, music and sound effects helped, while hotspots, games and dictionaries distracted. The harm from interactive extras was strongest for children from less stimulating home environments. The lesson for designers is to make motion serve the story or the task, and keep games away from the core content. The research covers digital storybooks, so apply it to other pages with caution.\n\n## Fair play: manipulative design is common\n\nJenny Radesky and colleagues (2022) examined apps used by 160 children aged 3 to 5 and found that only about one in five had no manipulative features. The tricks included characters pressuring children, fabricated time pressure, constrained navigation, tempting lures and pressure from ads. Apps used by children from lower socioeconomic households contained more of them. For a product aimed at families, avoiding these patterns is both ethical and a real point of difference, and worth stating plainly to parents.\n\n## Putting it together\n\nChoose larger type and shorter lines for beginners, bright but not overwhelming color, motion that has a job to do, and honest, pressure-free flows. As always, test with children in the age band you serve, because each of these studies covers a specific age range and setting.",
+  "tags": [
+    "children",
+    "typography",
+    "color",
+    "animation",
+    "dark patterns",
+    "manipulative design",
+    "reading"
+  ],
+  "references": [
+    {
+      "title": "The Effect of Font Size on Reading Comprehension on Second and Fifth Grade Children: Bigger Is Not Always Better",
+      "url": "https://doi.org/10.1371/journal.pone.0074061",
+      "authors": [
+        "Tami Katzir",
+        "Shirley Hershko",
+        "Vered Halamish"
+      ],
+      "publishedIn": "PLoS ONE",
+      "year": 2013,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Children's Emotional Associations with Colors",
+      "url": "https://doi.org/10.1080/00221325.1994.9914760",
+      "authors": [
+        "Chris J. Boyatzis",
+        "Reenu Varghese"
+      ],
+      "publishedIn": "The Journal of Genetic Psychology",
+      "year": 1994,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Benefits and Pitfalls of Multimedia and Interactive Features in Technology-Enhanced Storybooks: A Meta-Analysis",
+      "url": "https://doi.org/10.3102/0034654314566989",
+      "authors": [
+        "Zsofia K. Takacs",
+        "Elise K. Swart",
+        "Adriana G. Bus"
+      ],
+      "publishedIn": "Review of Educational Research",
+      "year": 2015,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Prevalence and Characteristics of Manipulative Design in Mobile Applications Used by Children",
+      "url": "https://doi.org/10.1001/jamanetworkopen.2022.17641",
+      "authors": [
+        "Jenny Radesky",
+        "Alexis Hiniker",
+        "Caroline McLaren",
+        "Eliz Akgun",
+        "Alexandria Schaller",
+        "Heidi M. Weeks",
+        "Scott Campbell",
+        "Ashley N. Gearhardt"
+      ],
+      "publishedIn": "JAMA Network Open",
+      "year": 2022,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

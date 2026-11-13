@@ -1,0 +1,31 @@
+{
+  "slug": "childrens-color-emotions-bright-dark-age",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Children's color emotions: bright versus dark colors and age effects",
+  "statement": "In a study of 60 children aged 5 and 6½, 69% of emotional responses to colors were positive; bright colors such as pink, blue and red drew positive feelings while dark colors such as brown, black and gray drew negative ones, and positive reactions to bright colors grew with age (girls favored bright colors most; boys were more likely to feel positively about dark ones), which supports bright, saturated colors over dark, muddy dominant colors on child-facing surfaces.\n\nOptions:\n- Bright blue (illustrative hex): #2F80ED (fits: trustworthy, friendly, calm)\n- Bright pink (illustrative hex): #FF5FA2 (fits: playful, warm, imaginative)\n- Bright red (illustrative hex): #F04E4E (fits: energetic, bold, exciting)\n- Bright multi-color, dark neutrals for text only (illustrative hex): #2F80ED + #FF5FA2 + #F04E4E accents, with near-black #222222 reserved for text only (fits: playful, energetic, inclusive)",
+  "appliesWhen": "Applies to: kids brands, kids apps, educational products, toys and entertainment. Audience: children under 10.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "energetic",
+    "playful",
+    "bold",
+    "calm",
+    "exciting",
+    "friendly",
+    "imaginative",
+    "inclusive",
+    "trustworthy",
+    "warm"
+  ],
+  "source": {
+    "title": "Children's Emotional Associations with Colors",
+    "authors": "Chris J. Boyatzis; Reenu Varghese",
+    "year": 1994,
+    "venue": "The Journal of Genetic Psychology",
+    "url": "https://doi.org/10.1080/00221325.1994.9914760",
+    "doi": "10.1080/00221325.1994.9914760"
+  },
+  "relations": []
+}

@@ -1,0 +1,27 @@
+{
+  "slug": "14-point-type-legibility-older-adults",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "14-point type legibility preference for older adults",
+  "statement": "For older adults reading online text, 14-point type was rated more legible and was preferred over 12-point type, so senior-facing interfaces should start around 14pt and consider larger sizes when density is less important.\n\nOptions:\n- Senior baseline: 14pt (fits: accessible, balanced)\n- Comfortable: 16pt (fits: comfortable, friendly)\n- Reading mode: 18pt (fits: access-first, editorial)\n- Large print: 20pt (fits: minimal, access-first)",
+  "appliesWhen": "Applies to: general web, web apps, content sites. Audience: seniors, general.",
+  "tags": [
+    "typography",
+    "access-first",
+    "accessible",
+    "balanced",
+    "comfortable",
+    "editorial",
+    "friendly",
+    "minimal"
+  ],
+  "source": {
+    "title": "The effects of font type and size on the legibility and reading time of online text by older adults",
+    "authors": "Michael L. Bernard; Chia Hui Liao; Melissa M. Mills",
+    "year": 2001,
+    "venue": "CHI '01 Extended Abstracts on Human Factors in Computing Systems",
+    "url": "https://doi.org/10.1145/634067.634173",
+    "doi": "10.1145/634067.634173"
+  },
+  "relations": []
+}
