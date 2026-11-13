@@ -135,7 +135,7 @@ export function renderProblems(
       "sourceUrl matches more than one reference title",
       p.multipleTitles.map(
         (d) =>
-          `- \`${d.slug}\`: ${d.titles.map((t) => `"${t}"`).join(" / ")} (first used)`,
+          `- \`${d.slug}\`: used "${d.used}" (${d.from === "publishedIn" ? "from publishedIn" : "no publishedIn, first title"}); reference titles: ${d.titles.map((t) => `"${t}"`).join(" / ")}`,
       ),
     ),
     section(

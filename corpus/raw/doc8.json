@@ -1,0 +1,833 @@
+{
+  "findings": [
+    {
+      "claim": "For older adults reading online text, 14-point type was rated more legible and was preferred over 12-point type, so senior-facing interfaces should start around 14pt and consider larger sizes when density is less important.",
+      "authors": ["Michael L. Bernard", "Chia Hui Liao", "Melissa M. Mills"],
+      "publicationYear": 2001,
+      "publishedIn": "CHI '01 Extended Abstracts on Human Factors in Computing Systems",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.1145/634067.634173",
+      "field": "typography",
+      "appliesTo": ["general_web", "web_apps", "content_sites"],
+      "audience": ["seniors", "general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "14pt",
+          "label": "Senior baseline",
+          "fits": ["accessible", "balanced"]
+        },
+        {
+          "value": "16pt",
+          "label": "Comfortable",
+          "fits": ["comfortable", "friendly"]
+        },
+        {
+          "value": "18pt",
+          "label": "Reading mode",
+          "fits": ["access-first", "editorial"]
+        },
+        {
+          "value": "20pt",
+          "label": "Large print",
+          "fits": ["minimal", "access-first"]
+        }
+      ],
+      "contextHeader": "Michael L. Bernard, Chia Hui Liao, and Melissa M. Mills (2001) reported in CHI '01 Extended Abstracts that 14-point online text was more legible and preferred than 12-point text among older adults, making the result directly relevant to senior-facing web UI sizing.",
+      "verified": true
+    },
+    {
+      "claim": "In a controlled computer-display study of Times New Roman and Arial, 12-point text was perceived as more legible than 10-point text, while objective accuracy differences were small, so web interfaces have evidence for choosing 12pt over 10pt when readability matters more than maximum density.",
+      "authors": [
+        "Michael L. Bernard",
+        "Barbara S. Chaparro",
+        "Melissa M. Mills",
+        "Charles G. Halcomb"
+      ],
+      "publicationYear": 2003,
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/S1071-5819(03)00121-6",
+      "field": "typography",
+      "appliesTo": ["general_web", "web_apps", "content_sites"],
+      "audience": ["adults", "general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "10pt",
+          "label": "Dense",
+          "fits": ["high_density", "technical"]
+        },
+        {
+          "value": "12pt",
+          "label": "Readability baseline",
+          "fits": ["balanced", "professional"]
+        },
+        {
+          "value": "14pt",
+          "label": "More comfortable",
+          "fits": ["comfortable", "friendly"]
+        },
+        {
+          "value": "16pt",
+          "label": "Large reading",
+          "fits": ["editorial", "access-first"]
+        }
+      ],
+      "contextHeader": "Michael L. Bernard, Barbara S. Chaparro, Melissa M. Mills, and Charles G. Halcomb (2003) found in the International Journal of Human-Computer Studies that 12-point Times New Roman and Arial were perceived as more legible than 10-point versions, with only limited objective performance differences.",
+      "verified": true
+    },
+    {
+      "claim": "Eye-tracking research on online reading found that smaller fonts produced longer visual fixations and somewhat slower reading, while serif versus sans-serif differences were not statistically significant, supporting a preference for adequately sized type over a typography rule based solely on serif status.",
+      "authors": ["David Beymer", "Daniel Russell", "Peter Orton"],
+      "publicationYear": 2008,
+      "publishedIn": "People and Computers XXII: Culture, Creativity, Interaction (British HCI Group Annual Conference)",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.14236/ewic/HCI2008.23",
+      "field": "typography",
+      "appliesTo": ["general_web", "web_apps", "content_sites"],
+      "audience": ["adults", "general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "16px",
+          "label": "Compact body",
+          "fits": ["compact", "professional"]
+        },
+        {
+          "value": "18px",
+          "label": "Comfortable body",
+          "fits": ["comfortable", "editorial"]
+        },
+        {
+          "value": "20px",
+          "label": "Large body",
+          "fits": ["friendly", "access-first"]
+        },
+        {
+          "value": "22px",
+          "label": "Reading-first",
+          "fits": ["minimal", "editorial"]
+        }
+      ],
+      "contextHeader": "David Beymer, Daniel Russell, and Peter Orton (2008) reported at the British HCI Group Annual Conference that smaller online font sizes created longer fixations and somewhat slower reading, while serif-versus-sans-serif differences were not statistically significant.",
+      "verified": true
+    },
+    {
+      "claim": "In an eye-tracking study of Wikipedia, larger Arial text improved objective readability and comprehension was significantly better at 18pt and 26pt than at smaller sizes, supporting 18–26pt as evidence-based options for text-heavy reading interfaces.",
+      "authors": ["Luz Rello", "Martin Pielot", "Mari-Carmen Marcos"],
+      "publicationYear": 2016,
+      "publishedIn": "Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.1145/2858036.2858204",
+      "field": "typography",
+      "appliesTo": [
+        "content_sites",
+        "documentation",
+        "knowledge_bases",
+        "web_apps"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "18pt",
+          "label": "Evidence-backed large",
+          "fits": ["comfortable", "editorial"]
+        },
+        {
+          "value": "20pt",
+          "label": "More spacious",
+          "fits": ["friendly", "access-first"]
+        },
+        {
+          "value": "22pt",
+          "label": "Reading mode",
+          "fits": ["editorial", "minimal"]
+        },
+        {
+          "value": "26pt",
+          "label": "Maximum tested",
+          "fits": ["access-first", "reading_mode"]
+        }
+      ],
+      "contextHeader": "Luz Rello, Martin Pielot, and Mari-Carmen Marcos (2016) reported at CHI that larger Arial text improved readability in Wikipedia, with significantly better comprehension at 18pt and 26pt, making those sizes directly relevant to text-heavy web interfaces.",
+      "verified": true
+    },
+    {
+      "claim": "A 2025 study of Chinese online-education interfaces with 161 children found 14px font size paired with 1.5 line spacing to optimize learning-related readability, reading speed, visual fatigue, and learning efficacy in that tested context.",
+      "authors": ["Ruichen Niu", "Wei Wu", "Qiang Li", "Yudong Fang"],
+      "publicationYear": 2025,
+      "publishedIn": "International Journal of Human-Computer Interaction",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1080/10447318.2025.2524495",
+      "field": "typography",
+      "appliesTo": ["education", "mobile_web", "web_apps"],
+      "audience": ["children_under_10", "general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "14px / 1.5",
+          "label": "Study-tested optimum",
+          "fits": ["educational", "balanced"]
+        },
+        {
+          "value": "16px / 1.5",
+          "label": "Larger reading",
+          "fits": ["friendly", "comfortable"]
+        },
+        {
+          "value": "18px / 1.5",
+          "label": "High readability",
+          "fits": ["access-first", "playful"]
+        },
+        {
+          "value": "16px / 1.6",
+          "label": "Extra airy",
+          "fits": ["calm", "friendly"]
+        }
+      ],
+      "contextHeader": "Ruichen Niu, Wei Wu, Qiang Li, and Yudong Fang (2025) reported in the International Journal of Human-Computer Interaction that 14px text with 1.5 line spacing was optimal in their 161-child study of Chinese online-education interfaces.",
+      "verified": true
+    },
+    {
+      "claim": "For online news articles, 95 characters per line produced the fastest reading among the 35, 55, 75, and 95 cpl conditions tested, so wider lines can be justified when reading speed is prioritized even though shorter lines may be preferred subjectively.",
+      "authors": ["A. Dawn Shaikh", "Barbara S. Chaparro"],
+      "publicationYear": 2005,
+      "publishedIn": "Proceedings of the Human Factors and Ergonomics Society Annual Meeting",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.1177/154193120504900514",
+      "field": "layout",
+      "appliesTo": ["editorial", "news", "content_sites"],
+      "audience": ["adults", "general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "55cpl",
+          "label": "Short",
+          "fits": ["comfortable", "editorial"]
+        },
+        {
+          "value": "75cpl",
+          "label": "Middle",
+          "fits": ["balanced", "professional"]
+        },
+        {
+          "value": "95cpl",
+          "label": "Fast-reading",
+          "fits": ["high_density", "newsroom"]
+        },
+        {
+          "value": "60-70cpl",
+          "label": "Compact editorial",
+          "fits": ["editorial", "calm"]
+        }
+      ],
+      "contextHeader": "A. Dawn Shaikh and Barbara S. Chaparro (2005) reported in the Human Factors and Ergonomics Society Annual Meeting proceedings that 95-character lines produced the fastest reading of online news articles, while shorter and longer extremes affected preference differently.",
+      "verified": true
+    },
+    {
+      "claim": "Web visual-search studies found a tradeoff in line length: longer lines improved scanning performance while shorter lines produced better subjective outcomes, so line width can be chosen according to whether fast scanning or visual comfort is the dominant goal.",
+      "authors": ["Jonathan Ling", "Paul van Schaik"],
+      "publicationYear": 2006,
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.ijhcs.2005.08.015",
+      "field": "layout",
+      "appliesTo": ["general_web", "web_apps", "content_sites"],
+      "audience": ["adults", "general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "55-65cpl",
+          "label": "Comfort-focused",
+          "fits": ["comfortable", "editorial"]
+        },
+        {
+          "value": "65-75cpl",
+          "label": "Balanced",
+          "fits": ["balanced", "professional"]
+        },
+        {
+          "value": "75-85cpl",
+          "label": "Scan-friendly",
+          "fits": ["technical", "high_density"]
+        },
+        {
+          "value": "85-95cpl",
+          "label": "Wide scan",
+          "fits": ["data_rich", "newsroom"]
+        }
+      ],
+      "contextHeader": "Jonathan Ling and Paul van Schaik (2006) reported in the International Journal of Human-Computer Studies that longer lines facilitated web scanning while shorter lines led to better subjective outcomes, making line width a goal-dependent design variable.",
+      "verified": true
+    },
+    {
+      "claim": "In web-page visual-search experiments, 1.5-line and 2-line spacing produced better performance than single spacing, so 1.5 is a sensible content-reading baseline and 2 can be used when search accuracy matters more than density.",
+      "authors": ["Jonathan Ling", "Paul van Schaik"],
+      "publicationYear": 2007,
+      "publishedIn": "Displays",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.displa.2007.04.003",
+      "field": "typography",
+      "appliesTo": ["general_web", "web_apps", "content_sites"],
+      "audience": ["adults", "general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "1.0",
+          "label": "Dense",
+          "fits": ["high_density", "data_rich"]
+        },
+        {
+          "value": "1.5",
+          "label": "Reading baseline",
+          "fits": ["balanced", "editorial"]
+        },
+        {
+          "value": "2.0",
+          "label": "Search-friendly",
+          "fits": ["access-first", "calm"]
+        },
+        {
+          "value": "1.7",
+          "label": "Middle ground",
+          "fits": ["comfortable", "friendly"]
+        }
+      ],
+      "contextHeader": "Jonathan Ling and Paul van Schaik (2007) found in Displays that wider line spacing improved accuracy and reaction time in web visual-search tasks, with performance ordered from single to 1.5 to double spacing.",
+      "verified": true
+    },
+    {
+      "claim": "Left-aligned web text produced better task performance than fully justified text in the tested visual-search tasks, although participants preferred justified text, so left alignment is the evidence-backed default while justification can remain a deliberate aesthetic choice.",
+      "authors": ["Jonathan Ling", "Paul van Schaik"],
+      "publicationYear": 2007,
+      "publishedIn": "Displays",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.displa.2007.04.003",
+      "field": "layout",
+      "appliesTo": ["general_web", "web_apps", "editorial"],
+      "audience": ["adults", "general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "text-align: left",
+          "label": "Performance default",
+          "fits": ["professional", "accessible"]
+        },
+        {
+          "value": "text-align: justify",
+          "label": "Editorial justified",
+          "fits": ["editorial", "traditional"]
+        },
+        {
+          "value": "left-aligned body + justified special sections",
+          "label": "Hybrid",
+          "fits": ["luxury", "editorial"]
+        },
+        {
+          "value": "left-aligned body + user toggle",
+          "label": "User choice",
+          "fits": ["accessible", "customizable"]
+        }
+      ],
+      "contextHeader": "Jonathan Ling and Paul van Schaik (2007) found in Displays that left-aligned web text supported better visual-search performance than justified text even though participants preferred the justified presentation.",
+      "verified": true
+    },
+    {
+      "claim": "Among adults with dyslexia who showed elevated visual crowding, increased letter, word, and line spacing improved reading speed, so spacing adjustments are especially defensible as an optional reading mode rather than as a one-size-fits-all default.",
+      "authors": [
+        "Sung Jun Joo",
+        "Alex L. White",
+        "Douglas J. Strodtman",
+        "Jason D. Yeatman"
+      ],
+      "publicationYear": 2018,
+      "publishedIn": "Cortex",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.cortex.2018.03.013",
+      "field": "accessibility",
+      "appliesTo": ["accessibility", "content_sites", "web_apps", "education"],
+      "audience": ["adults", "general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "standard spacing",
+          "label": "Default",
+          "fits": ["compact", "professional"]
+        },
+        {
+          "value": "letter-spacing: +0.05em; word-spacing: +0.08em; line-height: 1.5",
+          "label": "Expanded",
+          "fits": ["comfortable", "accessible"]
+        },
+        {
+          "value": "letter-spacing: +0.10em; word-spacing: +0.12em; line-height: 1.8",
+          "label": "Reading mode",
+          "fits": ["access-first", "calm"]
+        }
+      ],
+      "contextHeader": "Sung Jun Joo, Alex L. White, Douglas J. Strodtman, and Jason D. Yeatman (2018) reported in Cortex that a dyslexic subgroup with elevated visual crowding read faster when letter, word, and line spacing were increased.",
+      "verified": true
+    },
+    {
+      "claim": "For dyslexic readers in a screen-reading experiment, sans-serif, monospaced, and roman styles outperformed serif, proportional, and italic styles, supporting a font menu built from accessible options such as Arial, Helvetica, Verdana, and Courier rather than assuming one universal typeface.",
+      "authors": ["Luz Rello", "Ricardo Baeza-Yates"],
+      "publicationYear": 2013,
+      "publishedIn": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.1145/2513383.2513447",
+      "field": "accessibility",
+      "appliesTo": ["accessibility", "content_sites", "education", "web_apps"],
+      "audience": ["adults", "general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "Arial",
+          "label": "Accessible sans",
+          "fits": ["professional", "accessible"]
+        },
+        {
+          "value": "Helvetica",
+          "label": "Neutral sans",
+          "fits": ["minimal", "professional"]
+        },
+        {
+          "value": "Verdana",
+          "label": "Open sans",
+          "fits": ["friendly", "screen_first"]
+        },
+        {
+          "value": "Courier",
+          "label": "Monospaced",
+          "fits": ["technical", "utilitarian"]
+        },
+        {
+          "value": "Computer Modern Unicode",
+          "label": "Roman option",
+          "fits": ["academic", "editorial"]
+        }
+      ],
+      "contextHeader": "Luz Rello and Ricardo Baeza-Yates (2013) reported at ACM SIGACCESS ASSETS that sans-serif, monospaced, and roman font styles produced better reading performance than serif, proportional, and italic styles for their dyslexic participants.",
+      "verified": true
+    },
+    {
+      "claim": "In an e-commerce prototype, switching between serif and sans-serif versions of the same font family did not materially change reading speed, comprehension, task completion, or overall usability, so either style can be selected for brand personality when other variables are held constant.",
+      "authors": [
+        "Sara Vecino",
+        "Jonas Mehtali",
+        "Javier de Andrés",
+        "Martin Gonzalez-Rodriguez",
+        "Daniel Fernandez-Lanvin"
+      ],
+      "publicationYear": 2022,
+      "publishedIn": "PeerJ Computer Science",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.7717/peerj-cs.1139",
+      "field": "typography",
+      "appliesTo": ["ecommerce", "web_apps", "product_sites"],
+      "audience": ["adults", "b2b_buyers", "general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "serif",
+          "label": "Editorial serif",
+          "fits": ["traditional", "luxury"]
+        },
+        {
+          "value": "sans-serif",
+          "label": "Modern sans",
+          "fits": ["modern", "minimal"]
+        },
+        {
+          "value": "serif headings + sans body",
+          "label": "Classic hybrid",
+          "fits": ["editorial", "premium"]
+        },
+        {
+          "value": "sans headings + serif body",
+          "label": "Contemporary hybrid",
+          "fits": ["modern", "editorial"]
+        }
+      ],
+      "contextHeader": "Sara Vecino, Jonas Mehtali, Javier de Andrés, Martin Gonzalez-Rodriguez, and Daniel Fernandez-Lanvin (2022) reported in PeerJ Computer Science that serif versus sans-serif within the same font family did not materially affect usability in their e-commerce website experiment.",
+      "verified": true
+    },
+    {
+      "claim": "WCAG 2.2 requires ordinary text to meet at least a 4.5:1 contrast ratio, with 3:1 allowed for large text at Level AA and 7:1 required at Level AAA, so teams can choose higher contrast when visual comfort and robustness justify it.",
+      "authors": ["World Wide Web Consortium"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C Web Content Accessibility Guidelines (WCAG) 2.2",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/TR/WCAG22/",
+      "field": "accessibility",
+      "appliesTo": ["general_web", "web_apps", "ecommerce", "education"],
+      "audience": ["adults", "seniors", "children_under_10", "general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "4.5:1",
+          "label": "WCAG AA normal text",
+          "fits": ["balanced", "professional"]
+        },
+        {
+          "value": "3:1",
+          "label": "WCAG AA large text",
+          "fits": ["expressive", "display"]
+        },
+        {
+          "value": "7:1",
+          "label": "WCAG AAA",
+          "fits": ["access-first", "high_legibility"]
+        },
+        {
+          "value": "10:1",
+          "label": "Extra margin",
+          "fits": ["high_legibility", "utilitarian"]
+        }
+      ],
+      "contextHeader": "The World Wide Web Consortium's WCAG 2.2 specification (2023) sets minimum text contrast at 4.5:1 for ordinary text, 3:1 for large text at Level AA, and 7:1 at Level AAA.",
+      "verified": true
+    },
+    {
+      "claim": "WCAG 2.2 requires web text to remain usable when users enlarge it to 200% without losing content or functionality, so responsive interfaces should preserve readable text and controls throughout at least a 2× text-size increase.",
+      "authors": ["World Wide Web Consortium"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C Web Content Accessibility Guidelines (WCAG) 2.2",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/TR/WCAG22/",
+      "field": "accessibility",
+      "appliesTo": ["general_web", "web_apps", "responsive_web"],
+      "audience": ["adults", "seniors", "general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "200%",
+          "label": "WCAG baseline",
+          "fits": ["professional", "balanced"]
+        },
+        {
+          "value": "250%",
+          "label": "Extra headroom",
+          "fits": ["accessible", "robust"]
+        },
+        {
+          "value": "300%",
+          "label": "High enlargement",
+          "fits": ["access-first", "comfortable"]
+        },
+        {
+          "value": "400%",
+          "label": "Extreme zoom support",
+          "fits": ["maximum_access", "robust"]
+        }
+      ],
+      "contextHeader": "The World Wide Web Consortium's WCAG 2.2 specification (2023) requires rendered text to be resizable to 200% without loss of content or functionality, directly constraining responsive frontend typography and layout.",
+      "verified": true
+    },
+    {
+      "claim": "WCAG 2.2 requires content to survive user-applied text-spacing changes of at least 1.5× line height, 2× paragraph spacing, 0.12em letter spacing, and 0.16em word spacing, so production interfaces should avoid layouts that break when users substantially loosen text spacing.",
+      "authors": ["World Wide Web Consortium"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C Web Content Accessibility Guidelines (WCAG) 2.2",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/TR/WCAG22/",
+      "field": "accessibility",
+      "appliesTo": ["general_web", "web_apps", "content_sites", "education"],
+      "audience": ["adults", "children_under_10", "seniors", "general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "1.5 / 2 / 0.12em / 0.16em",
+          "label": "WCAG threshold",
+          "fits": ["balanced", "professional"]
+        },
+        {
+          "value": "1.6 / 2.2 / 0.14em / 0.18em",
+          "label": "More airy",
+          "fits": ["comfortable", "friendly"]
+        },
+        {
+          "value": "1.8 / 2.5 / 0.16em / 0.20em",
+          "label": "Reading mode",
+          "fits": ["access-first", "calm"]
+        }
+      ],
+      "contextHeader": "The World Wide Web Consortium's WCAG 2.2 specification (2023) requires content to remain functional when users apply 1.5× line height, 2× paragraph spacing, 0.12em letter spacing, and 0.16em word spacing.",
+      "verified": true
+    }
+  ],
+  "articles": [
+    {
+      "title": "How Big Should Interface Text Be?",
+      "category": "Typography",
+      "summary": "Research does not point to one universal font size, but it consistently shows that overly small text creates readability costs in several online-reading contexts. The strongest choices depend on audience, content density, and whether reading comfort or information density is the priority.",
+      "sections": [
+        {
+          "heading": "Small type is not free",
+          "body": "Bernard, Chaparro, Mills, and Halcomb found that 12-point text was perceived as more legible than 10-point text in a controlled computer-display experiment. Beymer, Russell, and Orton likewise found that smaller online fonts produced longer visual fixations and somewhat slower reading. These studies do not mean every interface should use very large text, but they do make very small body copy a deliberate tradeoff rather than a neutral default."
+        },
+        {
+          "heading": "Older readers need more room",
+          "body": "A study focused specifically on older adults found 14-point type more legible and more preferred than 12-point type. That result is useful because age changes the practical cost of small text. A senior-facing service, healthcare portal, public-service site, or financial interface can reasonably bias toward larger body copy even when a general-purpose product might accept a denser setting."
+        },
+        {
+          "heading": "Text-heavy pages benefit from larger sizes",
+          "body": "Rello, Pielot, and Marcos tested Wikipedia articles with Arial from 10 through 26 points. Readability improved as the type got larger, and comprehension was significantly better at 18 and 26 points. This is especially relevant to documentation, knowledge bases, long-form product education, and other screens where users are actually reading rather than scanning tiny labels."
+        },
+        {
+          "heading": "Children are a separate case",
+          "body": "A 2025 study by Niu, Wu, Li, and Fang examined 161 children using Chinese online-education interfaces. In that specific environment, 14px text with 1.5 line spacing optimized the tested combination of readability, reading speed, learning efficacy, and visual fatigue. It is a useful reminder not to copy adult typography rules into children's products without checking the target audience and language."
+        },
+        {
+          "heading": "Use a range, not a magic number",
+          "body": "Across these studies, sensible choices form a range: roughly 12–14pt for conventional computer text, around 14pt or larger for senior-focused experiences, and about 18–26pt for text-heavy reading modes where readability is the primary objective. The right choice depends on how much content must fit, how long users will read, and who the readers are. The important design move is to treat size as a meaningful usability variable, not merely as a branding detail."
+        }
+      ],
+      "body": "## How Big Should Interface Text Be?\n\nThere is no single font size that wins every web interface. The research instead shows a consistent pattern: once text becomes too small, readability starts paying a price, while larger type can improve comfort and, in some settings, comprehension.\n\n### Small type is not free\n\nIn a controlled computer-display experiment, Michael L. Bernard, Barbara S. Chaparro, Melissa M. Mills, and Charles G. Halcomb compared Times New Roman and Arial at 10 and 12 points. The researchers found that 12-point text was perceived as more legible than 10-point text, even though objective accuracy differences were limited (Bernard et al., 2003). A separate eye-tracking study by David Beymer, Daniel Russell, and Peter Orton found that smaller online fonts created longer fixations and somewhat slower reading (Beymer et al., 2008).\n\nThat does not prove that every product needs large type. It does mean that choosing tiny body copy solely to squeeze more content onto a screen is making a usability tradeoff.\n\n### Older readers need more room\n\nThe case becomes stronger when the audience is older. Michael L. Bernard, Chia Hui Liao, and Melissa M. Mills compared 12- and 14-point online text among older adults. The 14-point versions were judged more legible and were preferred (Bernard, Liao, & Mills, 2001). For services aimed at older people, larger body text is therefore an evidence-backed design direction rather than just a matter of taste.\n\n### Text-heavy pages benefit from larger sizes\n\nLuz Rello, Martin Pielot, and Mari-Carmen Marcos pushed the tested range much further in a Wikipedia eye-tracking study. They compared Arial text from 10 to 26 points and found that readability improved with larger size; comprehension questions produced significantly more correct answers at 18 and 26 points (Rello, Pielot, & Marcos, 2016). This matters for documentation, articles, help centers, knowledge bases, and other reading-first experiences.\n\n### Children are a separate case\n\nA more recent study also shows why audience matters. Ruichen Niu, Wei Wu, Qiang Li, and Yudong Fang tested 161 children in Chinese online-education interfaces and found 14px with 1.5 line spacing optimal in that specific study (Niu et al., 2025). That is useful evidence for children's products, but it should not be generalized blindly to every language, age range, or interface.\n\n### Use a range, not a magic number\n\nFor frontend teams, the research supports a practical range rather than one canonical token. A conventional content interface can start around 12–14pt, senior-oriented experiences can move toward 14–18pt, and reading-first modes can reasonably use 18–26pt. The correct choice depends on reading duration, audience, language, and density requirements. In other words, typography should be sized for the job the interface asks people to do.\n\nReferences: Bernard, Liao, & Mills (2001); Bernard, Chaparro, Mills, & Halcomb (2003); Beymer, Russell, & Orton (2008); Rello, Pielot, & Marcos (2016); Niu, Wu, Li, & Fang (2025).",
+      "tags": [
+        "font-size",
+        "readability",
+        "older-adults",
+        "children",
+        "long-form-reading"
+      ],
+      "references": [
+        {
+          "authors": [
+            "Michael L. Bernard",
+            "Chia Hui Liao",
+            "Melissa M. Mills"
+          ],
+          "title": "The effects of font type and size on the legibility and reading time of online text by older adults",
+          "publishedIn": "CHI '01 Extended Abstracts on Human Factors in Computing Systems",
+          "year": 2001,
+          "publicationType": "conference_paper",
+          "url": "https://doi.org/10.1145/634067.634173"
+        },
+        {
+          "authors": [
+            "Michael L. Bernard",
+            "Barbara S. Chaparro",
+            "Melissa M. Mills",
+            "Charles G. Halcomb"
+          ],
+          "title": "Comparing the Effects of Text Size and Format on the Readability of Computer-Displayed Times New Roman and Arial Text",
+          "publishedIn": "International Journal of Human-Computer Studies",
+          "year": 2003,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/S1071-5819(03)00121-6"
+        },
+        {
+          "authors": ["David Beymer", "Daniel Russell", "Peter Orton"],
+          "title": "An Eye Tracking Study of How Font Size and Type Influence Online Reading",
+          "publishedIn": "People and Computers XXII: Culture, Creativity, Interaction",
+          "year": 2008,
+          "publicationType": "conference_paper",
+          "url": "https://doi.org/10.14236/ewic/HCI2008.23"
+        },
+        {
+          "authors": ["Luz Rello", "Martin Pielot", "Mari-Carmen Marcos"],
+          "title": "Make It Big!: The Effect of Font Size and Line Spacing on Online Readability",
+          "publishedIn": "Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems",
+          "year": 2016,
+          "publicationType": "conference_paper",
+          "url": "https://doi.org/10.1145/2858036.2858204"
+        },
+        {
+          "authors": ["Ruichen Niu", "Wei Wu", "Qiang Li", "Yudong Fang"],
+          "title": "Evaluating the Effect of Font Size and Line Spacing in Chinese Online Education User Interfaces on Children’s Learning Experience",
+          "publishedIn": "International Journal of Human-Computer Interaction",
+          "year": 2025,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1080/10447318.2025.2524495"
+        }
+      ]
+    },
+    {
+      "title": "How Wide and Airy Should Reading Text Be?",
+      "category": "layout",
+      "summary": "Line length, line spacing, and alignment all involve tradeoffs between speed, scanning, accuracy, and subjective comfort. The research supports deliberate ranges rather than a single universally optimal layout.",
+      "sections": [
+        {
+          "heading": "Wide lines can be faster",
+          "body": "Shaikh and Chaparro found the fastest reading at 95 characters per line in their online-news experiment. Ling and van Schaik similarly found longer lines could facilitate visual scanning. These results matter for information-dense pages where users need to scan and retrieve facts quickly."
+        },
+        {
+          "heading": "Shorter lines can feel better",
+          "body": "The same body of research also shows why narrow columns remain common. Ling and van Schaik found shorter line lengths led to better subjective outcomes, while Shaikh and Chaparro reported mixed preference patterns across their tested widths. A line width that maximizes speed is not necessarily the line width that feels most comfortable."
+        },
+        {
+          "heading": "More vertical space helps task performance",
+          "body": "In a web visual-search study, single, 1.5, and double line spacing were compared. Accuracy and reaction-time performance improved as spacing widened, with double spacing outperforming 1.5 and 1.5 outperforming single spacing (Ling & van Schaik, 2007). That creates a useful product range: tighter spacing for dense tools, 1.5 for reading, and larger spacing for search-heavy or access-focused views."
+        },
+        {
+          "heading": "Alignment is another tradeoff",
+          "body": "The same study found that left-aligned text produced better performance than fully justified text, even though participants preferred justified text. This is a classic example of why performance and preference should both be measured. A left-aligned default is easier to defend for utility-oriented content, while a justified treatment may be appropriate where visual style is deliberately part of the experience."
+        },
+        {
+          "heading": "Spacing can be personalized",
+          "body": "Sung Jun Joo and colleagues found that adults with dyslexia and elevated visual crowding read faster when letter, word, and line spacing were increased. The result is strongest as an argument for adjustable reading modes, because the benefit was concentrated in a subgroup rather than applying equally to everyone."
+        }
+      ],
+      "body": "## How Wide and Airy Should Reading Text Be?\n\nReading layouts are full of tradeoffs. A wide text block can reduce the number of line breaks and speed scanning, while a narrower block can feel easier to follow. More line spacing can improve visual separation, but it also consumes vertical space. Good frontend typography therefore depends on the task, not on one universal number.\n\n### Wide lines can be faster\n\nA. Dawn Shaikh and Barbara S. Chaparro tested online news articles at 35, 55, 75, and 95 characters per line. The 95-character condition produced the fastest reading (Shaikh & Chaparro, 2005). Jonathan Ling and Paul van Schaik also found that longer lines facilitated visual scanning in web pages (Ling & van Schaik, 2006).\n\nFor dashboards, reference screens, search results, or fact-heavy content, that is relevant evidence. A wider measure can reduce the number of line changes users need to make while scanning.\n\n### Shorter lines can feel better\n\nSpeed is not the whole story. Ling and van Schaik found shorter line lengths produced better subjective outcomes even when longer lines helped scanning (Ling & van Schaik, 2006). Shaikh and Chaparro likewise found that preference did not map neatly onto the fastest condition (Shaikh & Chaparro, 2005).\n\nThat makes a range useful. A narrower column can suit article reading, a middle width can balance comfort and density, and a wider measure can support scanning-heavy tasks.\n\n### More vertical space helps task performance\n\nLing and van Schaik also tested one-line, 1.5-line, and double-line spacing. Where performance differences appeared, users did better with wider spacing: double spacing outperformed 1.5, and 1.5 outperformed single spacing (Ling & van Schaik, 2007). That gives product teams a defensible set of options rather than a single magic line-height token.\n\n### Alignment is a tradeoff too\n\nIn the same study, left-aligned text produced better performance than fully justified text, but participants preferred the justified version (Ling & van Schaik, 2007). A practical default is therefore left alignment for utility and reading interfaces, while justified text can be used intentionally when appearance is a stronger goal and the team has checked the result with real users.\n\n### Spacing can be personalized\n\nSung Jun Joo, Alex L. White, Douglas J. Strodtman, and Jason D. Yeatman found that a subgroup of adults with dyslexia and elevated visual crowding read faster when letter, word, and line spacing were increased (Joo et al., 2018). The most useful frontend implication is not “add lots of spacing for everybody.” It is “make room for a more spacious reading mode when the audience needs it.”\n\nReferences: Shaikh & Chaparro (2005); Ling & van Schaik (2006); Ling & van Schaik (2007); Joo et al. (2018).",
+      "tags": [
+        "line-length",
+        "line-height",
+        "alignment",
+        "text-spacing",
+        "reading-layout"
+      ],
+      "references": [
+        {
+          "authors": ["A. Dawn Shaikh", "Barbara S. Chaparro"],
+          "title": "The Effects of Line Length on Reading Performance of Online News Articles",
+          "publishedIn": "Proceedings of the Human Factors and Ergonomics Society Annual Meeting",
+          "year": 2005,
+          "publicationType": "conference_paper",
+          "url": "https://doi.org/10.1177/154193120504900514"
+        },
+        {
+          "authors": ["Jonathan Ling", "Paul van Schaik"],
+          "title": "The influence of font type and line length on visual search and information retrieval in web pages",
+          "publishedIn": "International Journal of Human-Computer Studies",
+          "year": 2006,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/j.ijhcs.2005.08.015"
+        },
+        {
+          "authors": ["Jonathan Ling", "Paul van Schaik"],
+          "title": "The influence of line spacing and text alignment on visual search of web pages",
+          "publishedIn": "Displays",
+          "year": 2007,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/j.displa.2007.04.003"
+        },
+        {
+          "authors": [
+            "Sung Jun Joo",
+            "Alex L. White",
+            "Douglas J. Strodtman",
+            "Jason D. Yeatman"
+          ],
+          "title": "Optimizing text for an individual's visual system: The contribution of visual crowding to reading difficulties",
+          "publishedIn": "Cortex",
+          "year": 2018,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/j.cortex.2018.03.013"
+        }
+      ]
+    },
+    {
+      "title": "Choosing a Typeface Without Falling for Typography Myths",
+      "category": "typography",
+      "summary": "Research does not support a universal rule that serif or sans-serif is inherently better for web interfaces. The more defensible approach is to choose among tested, readable styles and let branding, audience, and context determine the final family.",
+      "sections": [
+        {
+          "heading": "Serif versus sans-serif is not a universal winner",
+          "body": "Bernard and colleagues found meaningful effects of text size and presentation format, but their computer-display study did not establish a universal serif advantage. Beymer, Russell, and Orton likewise found no statistically significant serif-versus-sans-serif difference in online reading, although serif text was slightly faster in their sample."
+        },
+        {
+          "heading": "E-commerce evidence also leaves room for brand choice",
+          "body": "Vecino and colleagues tested serif and sans-serif versions of the same family in an e-commerce prototype with 246 participants. They found no meaningful effect on task completion, reading speed, comprehension, or overall usability. That makes typeface choice a legitimate place for brand personality to operate, provided size, spacing, contrast, and other usability variables remain sound."
+        },
+        {
+          "heading": "Accessibility research adds a useful constraint",
+          "body": "Rello and Baeza-Yates found better reading performance for sans-serif, monospaced, and roman styles than for serif, proportional, and italic styles among dyslexic readers. Their tested options included Helvetica, Courier, Arial, Verdana, and Computer Modern Unicode. This gives teams an evidence-based shortlist rather than a requirement to adopt one special “dyslexia font.”"
+        },
+        {
+          "heading": "Avoid treating italic as your only emphasis tool",
+          "body": "Because italic styles underperformed in the Rello and Baeza-Yates experiment, teams serving dyslexic readers can prefer weight, size, spacing, labels, or structural emphasis over relying heavily on italic text. This is particularly useful in navigation, instructions, form help, and long explanations where clarity is more important than typographic ornament."
+        }
+      ],
+      "body": "## Choosing a Typeface Without Falling for Typography Myths\n\nWeb typography advice often turns into slogans: serif is better for reading, sans-serif is better on screens, one font is “most readable,” or every accessible interface should use a special dyslexia font. The primary research is more nuanced.\n\n### Serif versus sans-serif is not a universal winner\n\nMichael L. Bernard, Barbara S. Chaparro, Melissa M. Mills, and Charles G. Halcomb studied Times New Roman and Arial at different sizes and display formats. Their results showed that size and rendering format affected perceived legibility, while objective accuracy differences were limited (Bernard et al., 2003). In a separate eye-tracking study, David Beymer, Daniel Russell, and Peter Orton found no statistically significant difference between serif and sans-serif fonts for online reading, although serif reading was slightly faster in their sample (Beymer et al., 2008).\n\nThat is not evidence for a universal winner. It is evidence that font size and overall text presentation can matter more than a simple serif-versus-sans rule.\n\n### E-commerce evidence also leaves room for brand choice\n\nSara Vecino, Jonas Mehtali, Javier de Andrés, Martin Gonzalez-Rodriguez, and Daniel Fernandez-Lanvin compared serif and sans-serif versions within the same font family in an e-commerce website prototype. With 246 participants, they found no meaningful effect on reading speed, comprehension, task completion, or overall usability (Vecino et al., 2022).\n\nFor product pages, checkout flows, and shopping experiences, this gives brands useful freedom. A serif system can communicate tradition or premium positioning; a sans-serif system can feel contemporary or utilitarian. The research does not require one of those directions.\n\n### Accessibility research adds a useful constraint\n\nLuz Rello and Ricardo Baeza-Yates tested 12 fonts with dyslexic readers and found better performance for sans-serif, monospaced, and roman styles than for serif, proportional, and italic styles (Rello & Baeza-Yates, 2013). Their results highlighted options including Helvetica, Courier, Arial, Verdana, and Computer Modern Unicode.\n\nThe implication is not that every interface should become monospaced or sans-serif. It is that an accessible type system can offer a strong, tested shortlist and avoid decorative choices that introduce unnecessary reading friction.\n\n### Avoid making italic your only emphasis tool\n\nThe same dyslexia-focused research found italic styles underperformed. That makes a case for using weight, size, spacing, headings, labels, or other structural signals when emphasis is important. It is a small implementation choice, but it can keep emphasis from depending on a typographic treatment that is harder for some readers.\n\nThe broader lesson is simple: choose the typeface for the brand, but choose the reading system for the user. Font family is only one variable; size, spacing, contrast, and layout determine much of the actual reading experience.\n\nReferences: Bernard et al. (2003); Beymer, Russell, & Orton (2008); Rello & Baeza-Yates (2013); Vecino et al. (2022).",
+      "tags": ["serif", "sans-serif", "font-choice", "branding", "dyslexia"],
+      "references": [
+        {
+          "authors": [
+            "Michael L. Bernard",
+            "Barbara S. Chaparro",
+            "Melissa M. Mills",
+            "Charles G. Halcomb"
+          ],
+          "title": "Comparing the Effects of Text Size and Format on the Readability of Computer-Displayed Times New Roman and Arial Text",
+          "publishedIn": "International Journal of Human-Computer Studies",
+          "year": 2003,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/S1071-5819(03)00121-6"
+        },
+        {
+          "authors": ["David Beymer", "Daniel Russell", "Peter Orton"],
+          "title": "An Eye Tracking Study of How Font Size and Type Influence Online Reading",
+          "publishedIn": "People and Computers XXII: Culture, Creativity, Interaction",
+          "year": 2008,
+          "publicationType": "conference_paper",
+          "url": "https://doi.org/10.14236/ewic/HCI2008.23"
+        },
+        {
+          "authors": ["Luz Rello", "Ricardo Baeza-Yates"],
+          "title": "Good fonts for dyslexia",
+          "publishedIn": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility",
+          "year": 2013,
+          "publicationType": "conference_paper",
+          "url": "https://doi.org/10.1145/2513383.2513447"
+        },
+        {
+          "authors": [
+            "Sara Vecino",
+            "Jonas Mehtali",
+            "Javier de Andrés",
+            "Martin Gonzalez-Rodriguez",
+            "Daniel Fernandez-Lanvin"
+          ],
+          "title": "How does serif vs sans serif typeface impact the usability of e-commerce websites?",
+          "publishedIn": "PeerJ Computer Science",
+          "year": 2022,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.7717/peerj-cs.1139"
+        }
+      ]
+    },
+    {
+      "title": "Turn Accessibility Requirements Into Typography Requirements",
+      "category": "Accessibility",
+      "summary": "WCAG 2.2 turns several readability concerns into concrete frontend requirements: sufficient text contrast, scalable text, and layouts that tolerate substantial spacing changes. These are especially valuable as production constraints because they can be tested in code and QA rather than treated as taste.",
+      "sections": [
+        {
+          "heading": "Contrast is a measurable requirement",
+          "body": "WCAG 2.2 sets a 4.5:1 minimum contrast ratio for ordinary text at Level AA and 3:1 for large text, while Level AAA raises the ordinary-text threshold to 7:1. Teams can therefore use contrast tokens as explicit engineering constraints instead of relying on visual judgment alone."
+        },
+        {
+          "heading": "Users must be able to enlarge text",
+          "body": "WCAG 2.2 requires text to remain usable when resized to 200% without loss of content or functionality. This makes responsive typography a product requirement: buttons, cards, navigation, labels, and text containers must continue to work as text grows."
+        },
+        {
+          "heading": "Spacing has to survive user preferences",
+          "body": "WCAG 2.2's text-spacing criterion requires content to remain functional when users apply at least 1.5× line height, 2× paragraph spacing, 0.12em letter spacing, and 0.16em word spacing. This is less about choosing those values as your default and more about refusing to build a layout that breaks when readers need them."
+        },
+        {
+          "heading": "Build for adaptation, not just the default screenshot",
+          "body": "The practical frontend lesson is to treat typography as a flexible system. Relative sizing, content-driven containers, wrapping controls, and resilient spacing are safer than fixed-height cards, clipped labels, or text embedded in images. The WCAG requirements are especially useful because they translate a readability concern into an implementation and QA test."
+        }
+      ],
+      "body": "## Turn Accessibility Requirements Into Typography Requirements\n\nAccessibility guidance is often discussed as a compliance layer added after the visual design is finished. For typography, that approach is risky. Several WCAG 2.2 requirements map directly onto frontend decisions about contrast, text size, spacing, and layout resilience.\n\n### Contrast is a measurable requirement\n\nThe World Wide Web Consortium's WCAG 2.2 specification requires a minimum contrast ratio of 4.5:1 for ordinary text at Level AA and allows 3:1 for large text. The higher Level AAA requirement is 7:1 for ordinary text (W3C, 2023). That makes text contrast an engineering variable, not just a visual preference.\n\nA design system can therefore expose contrast tokens and test them automatically. A softer gray may fit a restrained visual style, but it still needs to meet the applicable requirement. Higher contrast can be used when the product wants additional margin for difficult viewing conditions.\n\n### Users must be able to enlarge text\n\nWCAG 2.2 Success Criterion 1.4.4 requires text to be resizable up to 200% without loss of content or functionality (W3C, 2023). The requirement reaches beyond paragraph text. Controls, labels, navigation, dialogs, and other text-bearing interface elements have to survive enlargement.\n\nFor frontend teams, this means avoiding fixed heights that clip copy, containers that cannot expand, and responsive breakpoints that create broken layouts when text grows. A page that looks perfect at 100% but fails at 200% is not robust typography.\n\n### Spacing has to survive user preferences\n\nWCAG 2.2 also requires content to remain functional when users apply text-spacing changes equivalent to at least 1.5× line height, 2× paragraph spacing, 0.12em letter spacing, and 0.16em word spacing (W3C, 2023). These are not necessarily the values every product should use as its default. They are a resilience test.\n\nThat distinction is important. You can choose a denser visual style for a data-rich tool while still ensuring that users who need more breathing room do not lose information, controls, or structure.\n\n### Build for adaptation, not just the default screenshot\n\nThe strongest production pattern is therefore a typography system that can stretch. Use relative text sizing where practical, let containers grow with content, allow labels to wrap, and test extreme but realistic user settings. WCAG's concrete thresholds make useful QA cases because they turn “this should still be readable” into something a team can actually verify.\n\nIn practice, accessibility-friendly typography is less about making every interface look spacious and more about ensuring that users are allowed to make it spacious without breaking the product.\n\nReference: World Wide Web Consortium (2023), Web Content Accessibility Guidelines (WCAG) 2.2.",
+      "tags": [
+        "wcag",
+        "contrast",
+        "text-resize",
+        "text-spacing",
+        "responsive-typography"
+      ],
+      "references": [
+        {
+          "authors": ["World Wide Web Consortium"],
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
+          "publishedIn": "World Wide Web Consortium (W3C)",
+          "year": 2023,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/TR/WCAG22/"
+        }
+      ]
+    }
+  ]
+}

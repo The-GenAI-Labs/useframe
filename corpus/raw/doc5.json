@@ -1,0 +1,597 @@
+{
+  "findings": [
+    {
+      "claim": "NN/g's original eyetracking study of 232 users found that people often read web pages in an F-shaped pattern (a sweep across the top, a shorter second sweep, then a vertical scan down the left edge), so the first two paragraphs and the first words of subheads, paragraphs and bullets must carry the key information.",
+      "authors": ["Jakob Nielsen"],
+      "publicationYear": 2006,
+      "publishedIn": "Nielsen Norman Group",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/",
+      "field": "layout",
+      "appliesTo": [
+        "general_web",
+        "ecommerce",
+        "corporate_sites",
+        "search_results"
+      ],
+      "audience": ["general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "Put the most important claim in the first two paragraphs (or first two lines) of every text block",
+          "label": "Front-loaded copy",
+          "fits": ["clear", "authoritative", "professional"]
+        },
+        {
+          "value": "Start subheads, paragraphs and bullets with information-carrying words, since the first two words are read far more than the third",
+          "label": "Information-first openings",
+          "fits": ["clear", "technical", "editorial"]
+        },
+        {
+          "value": "Left-aligned text blocks with a strong left edge, so the vertical scan lands on meaningful first words",
+          "label": "Strong left edge",
+          "fits": ["editorial", "calm", "approachable"]
+        }
+      ],
+      "contextHeader": "Nielsen (2006, Nielsen Norman Group) recorded how 232 users looked at thousands of web pages, including an about-us article, an e-commerce product page and a search results page, and identified a dominant F-shaped reading pattern that informs how text-heavy landing page sections should be written and laid out.",
+      "verified": true
+    },
+    {
+      "claim": "NN/g's follow-up eyetracking research found the F-shaped pattern appears when text has little web formatting and readers are efficiency-seeking rather than deeply committed (on desktop, on mobile, and mirrored in right-to-left languages), so landing page copy should use front-loaded key points, distinct headings, bold, bullets and grouping to steer scanning instead of relying on F-shaped reading.",
+      "authors": ["Kara Pernice"],
+      "publicationYear": 2017,
+      "publishedIn": "Nielsen Norman Group",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/",
+      "field": "layout",
+      "appliesTo": ["general_web", "mobile_web"],
+      "audience": ["general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "Important points in the first two paragraphs of any block of text",
+          "label": "Key points first",
+          "fits": ["clear", "authoritative", "professional"]
+        },
+        {
+          "value": "Visually distinct subheadings that begin with information-carrying words",
+          "label": "Informative subheadings",
+          "fits": ["editorial", "organized", "clear"]
+        },
+        {
+          "value": "Small groups of related content set apart with a border or different background",
+          "label": "Visually grouped chunks",
+          "fits": ["modern", "organized", "technical"]
+        },
+        {
+          "value": "Bold key phrases plus bulleted or numbered lists whose items start with varied, information-bearing words (repeated opening words tend to be skipped)",
+          "label": "Bold and bulleted scan aids",
+          "fits": ["practical", "friendly", "clear"]
+        },
+        {
+          "value": "Mirrored layout for right-to-left languages, where the F-pattern is flipped",
+          "label": "RTL mirroring",
+          "fits": ["localized", "inclusive"]
+        }
+      ],
+      "contextHeader": "Pernice (2017, Nielsen Norman Group, last reviewed 2026) revisits the 2006 F-pattern with new desktop and mobile eyetracking research to clarify when it occurs, that it also appears on phones and is mirrored in Arabic, and how good formatting prevents it.",
+      "verified": true
+    },
+    {
+      "claim": "In an eyetracking study on an e-commerce site, the F-pattern was confirmed on text-based pages for both browsing and searching, while image-based pages produced a fairly uniform scan path with fixations on images dropping sharply near and below the fold, so the most important image-led content should sit at or above the fold.",
+      "authors": [
+        "Sav Shrestha",
+        "Kelsi Lenz",
+        "Justin Owens",
+        "Barbara Chaparro"
+      ],
+      "publicationYear": 2007,
+      "publishedIn": "51st Annual Meeting of the Human Factors and Ergonomics Society (HFES), Baltimore",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.1177/154193120705101831",
+      "field": "layout",
+      "appliesTo": ["ecommerce"],
+      "audience": ["general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "Text-heavy sections formatted for F-scanning: front-loaded copy with clear headings",
+          "label": "Text sections built for F-scanning",
+          "fits": ["editorial", "clear", "professional"]
+        },
+        {
+          "value": "Image-led sections (product grids, feature visuals) with the most important image at or above the fold",
+          "label": "Key image above the fold",
+          "fits": ["visual", "retail", "bold"]
+        },
+        {
+          "value": "Long image grids with the highest-priority items in the top rows, since fixations drop sharply near and below the fold",
+          "label": "Priority items in top rows",
+          "fits": ["retail", "practical", "organized"]
+        },
+        {
+          "value": "Clear category labels and navigation for goal-directed visitors, who used unique scan paths on image-based pages",
+          "label": "Support searchers with clear labelling",
+          "fits": ["practical", "clear", "friendly"]
+        }
+      ],
+      "contextHeader": "Shrestha, Lenz, Owens and Chaparro (2007, 51st Annual Meeting of the Human Factors and Ergonomics Society) tracked eye movements on one image-based and one text-based e-commerce page during browsing and searching tasks, extending Nielsen's 2006 F-pattern finding to image-heavy layouts.",
+      "verified": true
+    },
+    {
+      "claim": "In a 34-participant eye-tracking study of a financial-services homepage prototype, above-the-fold content drew the most fixations overall, but images of faces placed below the fold acted as entry points that drew fixations to the adjacent text, showing that visual hierarchy can pull attention outside the F-pattern.",
+      "authors": ["Soussan Djamasbi", "Marisa Siegel", "Tom Tullis", "Rui Dai"],
+      "publicationYear": 2009,
+      "publishedIn": "SIGHCI 2009 Proceedings (Association for Information Systems Special Interest Group on Human-Computer Interaction)",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://aisel.aisnet.org/sighci2009/16",
+      "field": "layout",
+      "appliesTo": ["finance"],
+      "audience": ["general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "Face photo beside a below-fold section (for example expert or team insights) to draw fixations to the adjacent text",
+          "label": "Face as entry point",
+          "fits": ["human", "trustworthy", "warm"]
+        },
+        {
+          "value": "Clear section titles as entry points where photography is not appropriate (titles were still fixated in the no-faces version)",
+          "label": "Title-led entry points",
+          "fits": ["minimal", "professional", "clear"]
+        },
+        {
+          "value": "Strong visual hierarchy in the central area of the page, which drew more fixations when people were browsing",
+          "label": "Strong central hierarchy",
+          "fits": ["polished", "premium", "modern"]
+        },
+        {
+          "value": "Prominent, clear navigation for goal-directed visitors, who showed longer fixations on navigation and more scattered scanning",
+          "label": "Clear navigation for searchers",
+          "fits": ["practical", "clear", "friendly"]
+        }
+      ],
+      "contextHeader": "Djamasbi, Siegel, Tullis and Dai (2009, SIGHCI 2009 Proceedings, Association for Information Systems) tracked 34 participants browsing or searching two prototypes of a financial company homepage that differed only in whether a below-the-fold section included faces; it is a small study reported as a short conference paper.",
+      "verified": true
+    },
+    {
+      "claim": "In an eyetracking study of text web pages, information in a second column received more fixations than the same information lower in a single column, and the F-pattern appeared in the left column but not the right, so a right-hand column can lift secondary content into view but should not be expected to be scanned like the main column.",
+      "authors": ["Sav Shrestha", "Justin Owens", "Barbara S. Chaparro"],
+      "publicationYear": 2008,
+      "publishedIn": "52nd Annual Meeting of the Human Factors and Ergonomics Society (HFES), New York",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://portfolio.erau.edu/en/publications/eye-movements-on-a-single-column-and-double-column-text-web-page/",
+      "field": "layout",
+      "appliesTo": ["media_publishing"],
+      "audience": ["general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "Single-column long text with clear headings (simple, mobile-friendly)",
+          "label": "Single column",
+          "fits": ["editorial", "calm", "simple"]
+        },
+        {
+          "value": "Two columns with the main story on the left and supporting facts or proof in a second column kept in view",
+          "label": "Main plus supporting column",
+          "fits": ["informational", "professional", "organized"]
+        },
+        {
+          "value": "Two self-contained columns, each with its own heading (for example a comparison), so neither depends on being scanned like the other",
+          "label": "Self-contained columns",
+          "fits": ["technical", "clear", "modern"]
+        },
+        {
+          "value": "Keep ads or promotional blocks out of columns that carry key content, since browsing viewers looked at ads more than searching viewers",
+          "label": "No ad neighbours",
+          "fits": ["trustworthy", "editorial"]
+        }
+      ],
+      "contextHeader": "Shrestha, Owens and Chaparro (2008, 52nd Annual Meeting of the Human Factors and Ergonomics Society) compared eye movements on single-column and double-column text web pages during browsing and searching, in a short lab study reported as a conference presentation.",
+      "verified": true
+    },
+    {
+      "claim": "In an eyetracking study of four real pages with about 30-35 participants per variation, informational images were studied in both zigzag (alternating) and aligned image-text layouts, but decorative images in zigzag rows caused stumbling fixations, so alternate image placement only for meaningful imagery or short sequences and align decorative images down one side.",
+      "authors": ["Kim Flaherty"],
+      "publicationYear": 2017,
+      "publishedIn": "Nielsen Norman Group",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://www.nngroup.com/articles/zigzag-page-layout/",
+      "field": "layout",
+      "appliesTo": ["consumer_apps", "consumer_subscriptions"],
+      "audience": ["general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "Aligned two-column rows with all images on one side, for decorative or brand imagery",
+          "label": "Aligned layout",
+          "fits": ["clean", "professional", "calm"]
+        },
+        {
+          "value": "Zigzag rows only when every image carries real product information (product photos, digestible screenshots)",
+          "label": "Zigzag with informational images",
+          "fits": ["visual", "playful", "storytelling"]
+        },
+        {
+          "value": "Zigzag limited to two or three rows, where the short sequence keeps scanning easy",
+          "label": "Short zigzag",
+          "fits": ["modern", "friendly", "bold"]
+        },
+        {
+          "value": "Decorative images top-aligned with their corresponding text so the eye is not pulled ahead of the copy",
+          "label": "Top-aligned decorative images",
+          "fits": ["polished", "clean", "clear"]
+        },
+        {
+          "value": "High-information content placed on the left side of the first row, where people start looking",
+          "label": "Left-first information",
+          "fits": ["clear", "practical", "professional"]
+        }
+      ],
+      "contextHeader": "Flaherty (2017, Nielsen Norman Group) ran an eyetracking study comparing zigzag and aligned image-text layouts on four live storytelling and how-it-works pages (Splitwise, Waze, HelloFresh, BoxyCharm), with about 30-35 participants seeing each variation.",
+      "verified": true
+    },
+    {
+      "claim": "No web eyetracking study we could find establishes a Z-shaped scan pattern; Z-pattern layouts are a practitioner heuristic borrowed from the print-era Gutenberg diagram for sparse pages, so treat them as a composition guideline and give priority to evidence-backed cues such as left-side attention, clear headings and aligned images.",
+      "authors": [],
+      "publicationYear": null,
+      "publishedIn": "No single citable source; practitioner design writing derived from the print-era Gutenberg diagram",
+      "publicationType": "practitioner_consensus",
+      "sourceUrl": null,
+      "field": "layout",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "Z-shaped composition for a sparse page: logo left, CTA right in the header, hero visual on the diagonal, final CTA at the bottom right (heuristic, unverified)",
+          "label": "Z-composition as a heuristic",
+          "fits": ["minimal", "bold", "promotional"]
+        },
+        {
+          "value": "Left-aligned headline and CTA in the hero, supported by NN/g findings on left-biased attention rather than a Z path",
+          "label": "Evidence-backed left alignment",
+          "fits": ["professional", "clear", "trustworthy"]
+        },
+        {
+          "value": "Layer-cake structure with clear headings and chunked sections instead of a diagonal path",
+          "label": "Heading-led structure",
+          "fits": ["editorial", "organized", "clear"]
+        },
+        {
+          "value": "Aligned image-text rows, with zigzag only for short sequences of informative images",
+          "label": "Aligned rows, sparing zigzag",
+          "fits": ["clean", "calm", "practical"]
+        }
+      ],
+      "contextHeader": "Z-pattern layout guidance has no identifiable primary study and circulates in practitioner design writing derived from the print-era Gutenberg diagram, whereas eyetracking research by Nielsen (2006), Fessenden (2017) and Pernice (2017) at Nielsen Norman Group supports left-biased, F-shaped scanning of unformatted content instead.",
+      "verified": false
+    },
+    {
+      "claim": "NN/g's eyetracking analysis of 57,453 fixations found the 100 pixels just above the fold were viewed 102% more than the 100 pixels just below it (about an 84% average difference when combined with Google's ad-viewability data), so the most important content and calls to action should sit above the fold, with cues that encourage scrolling.",
+      "authors": ["Amy Schade"],
+      "publicationYear": 2015,
+      "publishedIn": "Nielsen Norman Group",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://www.nngroup.com/articles/page-fold-manifesto/",
+      "field": "layout",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "Value proposition and primary CTA fully visible at each target breakpoint, designing for each device's own fold",
+          "label": "Design for each device's fold",
+          "fits": ["professional", "clear", "conversion-focused"]
+        },
+        {
+          "value": "Signposts near the top of long pages, such as anchor links or previews of what comes next",
+          "label": "Signposts and anchors",
+          "fits": ["organized", "helpful", "editorial"]
+        },
+        {
+          "value": "Interesting content or engaging imagery at and just below the fold that rewards scrolling and builds the story",
+          "label": "Reward for scrolling",
+          "fits": ["storytelling", "warm", "bold"]
+        },
+        {
+          "value": "Visible cut-off content instead of a lone arrow, to avoid a false floor",
+          "label": "Avoid false floors",
+          "fits": ["modern", "clear", "confident"]
+        }
+      ],
+      "contextHeader": "Schade (2015, Nielsen Norman Group) combined an eyetracking analysis of 57,453 fixations with Google's display-ad viewability data to estimate that users treat content above the fold about 84% differently from content below it, and argues the fold still applies on every screen size.",
+      "verified": true
+    },
+    {
+      "claim": "NN/g's 2018 eyetracking data show about 57% of viewing time above the fold (down from 80% in 2010) and 81% within the first three screenfuls, so the fold has moved down but attention still decays steeply, and important content belongs in the first one to two screenfuls.",
+      "authors": ["Therese Fessenden"],
+      "publicationYear": 2018,
+      "publishedIn": "Nielsen Norman Group",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://www.nngroup.com/articles/scrolling-and-attention/",
+      "field": "layout",
+      "appliesTo": ["general_web", "ecommerce", "media_publishing"],
+      "audience": ["general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "Primary CTA and value proposition in the first screenful",
+          "label": "CTA in screenful one",
+          "fits": ["confident", "professional", "conversion-focused"]
+        },
+        {
+          "value": "Second screenful (about 17% of viewing time) used for reinforcing proof and the next-most important content",
+          "label": "Proof in screenful two",
+          "fits": ["trustworthy", "authoritative"]
+        },
+        {
+          "value": "Essential content kept within the first three screenfuls, which held about 81% of viewing time",
+          "label": "Essentials within three screenfuls",
+          "fits": ["focused", "practical", "minimal"]
+        },
+        {
+          "value": "Repeat CTA near the end of the second or third screenful for people who keep scrolling",
+          "label": "Repeat CTA deeper down",
+          "fits": ["persuasive", "energetic"]
+        }
+      ],
+      "contextHeader": "Fessenden (2018, Nielsen Norman Group) analyzed more than 130,000 eye fixations from 120 participants on 1920x1080 screens and compared them with NN/g's 2010 findings, showing viewing time above the fold fell from 80% to 57% while the sharp drop-off after the fold remained.",
+      "verified": true
+    },
+    {
+      "claim": "Chartbeat's analysis of about 2 billion visits, mostly to media and news sites, found roughly 66% of attention on a normal media page was spent below the fold, so on content-led pages where the opening earns interest, sections below the fold deserve real design investment rather than being treated as dead space.",
+      "authors": ["Tony Haile"],
+      "publicationYear": 2014,
+      "publishedIn": "Time (Time.com), reporting Chartbeat data",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://time.com/12933/what-you-think-you-know-about-the-web-is-wrong/",
+      "field": "layout",
+      "appliesTo": ["media_publishing"],
+      "audience": ["general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "Compelling first screen that gives a clear reason to scroll, followed by deeper sections that keep holding attention",
+          "label": "Earn the scroll",
+          "fits": ["storytelling", "editorial", "warm"]
+        },
+        {
+          "value": "Below-the-fold sections that continue the story with substantive content instead of filler or branding-only bands",
+          "label": "Substantive lower sections",
+          "fits": ["authoritative", "informative", "trustworthy"]
+        },
+        {
+          "value": "Check scroll-depth and engagement analytics on your own page before deciding where the main CTA goes, because this data covers article pages, not landing pages",
+          "label": "Measure your own scroll depth",
+          "fits": ["data-driven", "practical", "technical"]
+        },
+        {
+          "value": "Long-form scroll with anchored sections for content-led or story-driven products",
+          "label": "Long-form with anchors",
+          "fits": ["editorial", "premium", "calm"]
+        }
+      ],
+      "contextHeader": "Haile (2014, Time.com, reporting Chartbeat data on about 2 billion visits, mostly to media sites) said roughly 66% of attention on a normal media page was spent below the fold, challenging the assumption that the top of the page gets most attention; the data concern article pages rather than landing pages.",
+      "verified": true
+    }
+  ],
+  "articles": [
+    {
+      "title": "The F-Pattern: When It Happens, and How to Design Around It",
+      "category": "Layout",
+      "summary": "The F-pattern is one of the most cited and most misunderstood findings in web usability. The research shows it is a fallback for badly formatted text, and that good design can steer attention elsewhere.",
+      "sections": [
+        {
+          "heading": "Where the F-pattern came from",
+          "body": "In 2006, Jakob Nielsen at Nielsen Norman Group reported an eyetracking study of 232 users. Heatmaps showed a sweep across the top, a shorter second sweep, then a scan down the left edge. His advice: put the key information in the first two paragraphs and start headings and bullets with informative words."
+        },
+        {
+          "heading": "It is a fallback, not a law",
+          "body": "Kara Pernice's 2017 follow-up found the pattern appears when text has little formatting, the reader is trying to be efficient, and the reader is not deeply committed. It also showed up on mobile, and it was mirrored in Arabic. NN/g calls it bad for users and businesses because people skip content without knowing it."
+        },
+        {
+          "heading": "Other researchers found the same limits",
+          "body": "A 2007 Wichita State study confirmed the F-pattern on text pages but found image-based pages produced a more uniform scan, with fixations on images dropping sharply near and below the fold. A small 2009 study found faces below the fold drew attention to nearby text."
+        },
+        {
+          "heading": "What to do on a landing page",
+          "body": "Treat the F-pattern as a warning sign, not a template. Front-load and format running text, put the most informative images high, and give the eye a visible entry point where you want attention below the fold."
+        }
+      ],
+      "body": "If you have read anything about landing page design, you have met the F-pattern. It is one of the most cited findings in web usability, and one of the most misunderstood. Here is what the research actually says.\n\n## Where the F-pattern came from\n\nIn 2006, Jakob Nielsen at Nielsen Norman Group (NN/g) reported an eyetracking study of 232 users looking at thousands of web pages. Heatmaps of an about-us article, an e-commerce product page and a search results page all showed a similar shape: a horizontal sweep across the top of the content, a shorter second sweep lower down, and then a vertical scan along the left edge. Nielsen's advice was practical: put the most important information in the first two paragraphs, and start subheads, paragraphs and bullets with information-carrying words, because people read the first couple of words much more than the third.\n\n## It is a fallback, not a law\n\nKara Pernice's 2017 follow-up, based on new eyetracking research, corrected common misreadings. People do not always scan in an F. NN/g found the pattern appears when three things are true at once: the text has little web formatting (a wall of text with no bold, bullets or subheadings), the reader is trying to be efficient, and the reader is not so interested that they will read every word. In other words, the F is what people fall back on when the page gives their eyes no better cues. It appeared on mobile screens too, and in Arabic, a right-to-left language, it was mirrored.\n\nPernice also calls the F-pattern bad for both users and businesses, because people skip large chunks of content, often including things that matter, without knowing it. Her recommended antidotes are ordinary good formatting: key points in the first two paragraphs, visible subheadings that start with informative words, grouped content, bold key phrases, and bullets or numbers for lists.\n\n## Other researchers found the same limits\n\nA 2007 study from Wichita State University's usability lab (Shrestha, Lenz, Owens and Chaparro) tracked eyes on text-based and image-based pages of an e-commerce site. The F-pattern showed up on text pages during both browsing and searching. On image-based pages, browsers followed a fairly uniform scan path and looked more at images above the fold, with fixations dropping sharply on images near and below the fold.\n\nA 2009 study by Soussan Djamasbi and colleagues went further. They gave 34 participants two versions of a financial company's homepage prototype that differed in one below-the-fold section: one included images of faces, the other did not. Content above the fold still drew the most fixations overall, but the faces acted as entry points, pulling fixations to the text beside them even below the fold. Their conclusion was that a richer visual hierarchy can guide attention outside the F. The study was small, and it was a short conference paper, so treat it as a promising signal rather than settled fact.\n\n## What to do on a landing page\n\nUse the F-pattern as a warning sign rather than a template. Where you have running text, front-load it and format it so people can find their way. Where you have images, make sure the most informative ones sit high on the page. And where you want attention below the fold, give the eye a visible entry point, such as a clear heading or a relevant image, instead of hoping people will read down the left edge.",
+      "tags": [
+        "F-pattern",
+        "eyetracking",
+        "scanning",
+        "formatting",
+        "visual hierarchy",
+        "above the fold"
+      ],
+      "references": [
+        {
+          "authors": ["Jakob Nielsen"],
+          "title": "F-Shaped Pattern For Reading Web Content (Original Study)",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2006,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/"
+        },
+        {
+          "authors": ["Kara Pernice"],
+          "title": "F-Shaped Pattern of Reading on the Web: Misunderstood, But Still Relevant (Even on Mobile)",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2017,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/"
+        },
+        {
+          "authors": [
+            "Sav Shrestha",
+            "Kelsi Lenz",
+            "Justin Owens",
+            "Barbara Chaparro"
+          ],
+          "title": "\"F\" Pattern Scanning of Text and Images in Web Pages",
+          "publishedIn": "51st Annual Meeting of the Human Factors and Ergonomics Society",
+          "year": 2007,
+          "publicationType": "conference_paper",
+          "url": "https://doi.org/10.1177/154193120705101831"
+        },
+        {
+          "authors": [
+            "Soussan Djamasbi",
+            "Marisa Siegel",
+            "Tom Tullis",
+            "Rui Dai"
+          ],
+          "title": "Tracking Users' Viewing Pattern",
+          "publishedIn": "SIGHCI 2009 Proceedings, Association for Information Systems",
+          "year": 2009,
+          "publicationType": "conference_paper",
+          "url": "https://aisel.aisnet.org/sighci2009/16"
+        }
+      ]
+    },
+    {
+      "title": "Z-Patterns, Zigzags and Columns: What the Evidence Says About Layout Shapes",
+      "category": "Layout",
+      "summary": "The Z-pattern is popular but has no web eyetracking evidence we could find, while zigzag layouts and two-column text have been tested. Here is what held up.",
+      "sections": [
+        {
+          "heading": "The Z-pattern: popular, but unsupported",
+          "body": "We could not trace the Z-pattern to any web eyetracking study. It appears to come from the print-era Gutenberg diagram. NN/g's research supports top and left attention, an F-shaped fallback on unformatted text, and efficient scanning when headings are clear."
+        },
+        {
+          "heading": "Zigzag layouts: tested, with a catch",
+          "body": "In NN/g's 2017 study, informational images were studied in both zigzag and aligned layouts. Decorative images were ignored, and in zigzag rows the eye kept stumbling onto them. Align decorative images and keep zigzags short."
+        },
+        {
+          "heading": "Columns: helpful, with limits",
+          "body": "A 2008 study found information in a second column got more fixations than the same information lower in a single column, and that the F-pattern appeared in the left column but not the right."
+        },
+        {
+          "heading": "Practical guidance",
+          "body": "Prefer aligned rows unless every image earns its place, use Z-shaped compositions as a heuristic rather than a rule, and place high-information content on the left."
+        }
+      ],
+      "body": "The F-pattern has decades of eyetracking behind it. Its cousins, the Z-pattern and the zigzag layout, are not on equal footing. Here is what we could and could not verify.\n\n## The Z-pattern: popular, but unsupported\n\nZ-pattern advice says that on sparse pages people scan from the top left to the top right, cut diagonally down to the bottom left, and then sweep to the bottom right, so you should put your logo, navigation and calls to action at the corners of that path. It is repeated across design blogs, but we could not trace it to any web eyetracking study. It appears to be borrowed from the print-era Gutenberg diagram, which was designed for evenly distributed text, not for modern pages. NN/g's eyetracking work instead supports a different picture: attention concentrated at the top and on the left (Fessenden, 2017), an F-shaped fallback on unformatted text (Nielsen, 2006; Pernice, 2017), and efficient scanning when clear headings exist (Pernice, 2019). So if you use a Z-shaped composition, treat it as a design heuristic that gives a page a tidy structure, not as research.\n\n## Zigzag layouts: tested, with a catch\n\nA layout that does have evidence is the zigzag: rows where an image alternates between the left and right side of the text. Kim Flaherty (2017, NN/g) compared zigzag and aligned versions of four real pages (Splitwise, Waze, HelloFresh and BoxyCharm), with about 30 to 35 participants per version.\n\nWhen images carried real information, such as product photos people needed to understand what they were buying, both layouts worked about equally well. People studied those images no matter where they sat. The trouble came with decorative images. Users learned quickly to ignore them, and in the zigzag layout their eyes kept stumbling onto the images as they scrolled, then jumping back to the text. NN/g argues that these accidental fixations add up like clutter in an untidy room. Overly complex images, such as screenshots full of tiny text, were also skipped when they appeared too early.\n\nNN/g's advice is to align decorative images down one side, top-align them with their text, keep zigzag for short sequences of two or three rows or for genuinely informative images, and put high-information content on the left of the first row.\n\n## Columns: helpful, with limits\n\nTwo-column text layouts show a related pattern. In a 2008 Wichita State study, Shrestha, Owens and Chaparro found that information in a second column got more fixations than the same information placed lower in a single column, and that the F-shaped pattern appeared in the left column but not the right. They also saw more fixations on ads among people who were browsing than among those searching for something. This was a short conference presentation on text pages, so it suggests rather than proves, but the takeaway is sensible: a second column can lift secondary content into view, yet it should not be expected to be scanned like the main column.\n\n## Practical guidance\n\nChoose aligned rows unless every image earns its place. Use zigzags sparingly, and check that each image tells the visitor something. Use a Z-shaped composition if you like how it looks, but do not rely on it to steer attention.",
+      "tags": [
+        "Z-pattern",
+        "zigzag layout",
+        "image-text layout",
+        "columns",
+        "Gutenberg diagram",
+        "eyetracking"
+      ],
+      "references": [
+        {
+          "authors": ["Kim Flaherty"],
+          "title": "Zigzag Image–Text Layouts Make Scanning Less Efficient",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2017,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/zigzag-page-layout/"
+        },
+        {
+          "authors": ["Sav Shrestha", "Justin Owens", "Barbara S. Chaparro"],
+          "title": "Eye Movements on a Single-Column and Double-Column Text Web Page",
+          "publishedIn": "52nd Annual Meeting of the Human Factors and Ergonomics Society",
+          "year": 2008,
+          "publicationType": "conference_paper",
+          "url": "https://portfolio.erau.edu/en/publications/eye-movements-on-a-single-column-and-double-column-text-web-page/"
+        },
+        {
+          "authors": ["Therese Fessenden"],
+          "title": "Horizontal Attention Leans Left",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2017,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/horizontal-attention-leans-left/"
+        },
+        {
+          "authors": ["Jakob Nielsen"],
+          "title": "F-Shaped Pattern For Reading Web Content (Original Study)",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2006,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/"
+        },
+        {
+          "authors": ["Kara Pernice"],
+          "title": "F-Shaped Pattern of Reading on the Web: Misunderstood, But Still Relevant (Even on Mobile)",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2017,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/"
+        },
+        {
+          "authors": ["Kara Pernice"],
+          "title": "The Layer-Cake Pattern of Scanning Content on the Web",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2019,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/layer-cake-pattern-scanning/"
+        }
+      ]
+    },
+    {
+      "title": "The Fold: Where Attention Really Drops Off",
+      "category": "Layout",
+      "summary": "Lab eyetracking says attention falls sharply at the fold, while analytics from news sites say readers spend most of their time below it. Both are true, and together they give a workable rule for the first screen.",
+      "sections": [
+        {
+          "heading": "The case that the fold still matters",
+          "body": "Amy Schade's 2015 analysis of 57,453 eyetracking fixations found the 100 pixels just above the fold were viewed 102% more than the 100 pixels just below. Combined with Google's ad-viewability data, NN/g estimated an average difference of about 84%."
+        },
+        {
+          "heading": "Scrolling has grown, but attention still decays",
+          "body": "In 2018, NN/g found 57% of viewing time above the fold, down from 80% in 2010, and 81% within the first three screenfuls. The sharp drop after the fold remained."
+        },
+        {
+          "heading": "The counterpoint from analytics",
+          "body": "Chartbeat's 2014 data on about 2 billion visits, mostly to media sites, showed about 66% of attention on a normal media page below the fold. It measures article pages and reader engagement, not lab tasks or landing pages."
+        },
+        {
+          "heading": "What it means for landing pages",
+          "body": "Put your value proposition and main call to action on the first screen, but treat lower sections as real estate that has to earn the next scroll. Check your own analytics."
+        }
+      ],
+      "body": "'Above the fold' is a newspaper term that has been declared dead and alive again several times. The evidence explains why both camps sound convincing.\n\n## The case that the fold still matters\n\nAmy Schade's 2015 'Fold Manifesto' at Nielsen Norman Group (NN/g) argued that the fold still exists on every device, even though its exact position varies. In an analysis of 57,453 eyetracking fixations, the 100 pixels just above the fold were viewed 102% more than the 100 pixels just below it. She also cited Google's analysis of display ads, where ads just above the fold were viewable 73% of the time and ads just below only 44%, a 66% drop. NN/g took the midpoint of the two and concluded that users treat content above and below the fold about 84% differently. The reasoning is about effort: what is visible costs nothing to see, while what needs scrolling costs a little effort, so people scroll only when the top of the page gives them a reason.\n\n## Scrolling has grown, but attention still decays\n\nTherese Fessenden's 2018 update at NN/g analyzed more than 130,000 fixations from 120 participants on larger screens. About 57% of viewing time was above the fold, down from 80% in 2010, and 74% fell within the first two screenfuls. In effect the barrier had moved: 81% of viewing time was spent within the first three screenfuls, and people rarely went beyond that. The pattern of sharp drop-off after the fold was the same as in 2010. Her recommendations were to reserve the top for key business and user goals, keep major calls to action above the fold, and beware 'false floors' that make a page look finished.\n\n## The counterpoint from analytics\n\nIn 2014, Chartbeat CEO Tony Haile wrote in Time that, across roughly 2 billion visits, about 66% of attention on a normal media page was spent below the fold. This seems to contradict NN/g, but the two measure different things and different pages. Chartbeat's data comes from analytics on mostly news and media article pages, where a likely reason for deep scrolling is that readers who have chosen a story keep reading it. NN/g's data comes from lab eyetracking across tasks and site types, where visitors are still deciding whether the page is relevant. Neither dataset is about landing pages specifically.\n\n## What it means for landing pages\n\nReconciling the sources gives a sensible working rule. The first screen decides whether people keep going, so it needs your value proposition and your main call to action. But below the fold is not dead space: visitors who are interested will scroll, and they will spend real time there if the page keeps giving them reasons. Design each section to earn the next scroll, use signposts such as anchor links on long pages, and check your own analytics, because your visitors may behave differently from news readers or lab participants.",
+      "tags": [
+        "above the fold",
+        "scrolling",
+        "fold",
+        "eyetracking",
+        "call to action",
+        "engagement"
+      ],
+      "references": [
+        {
+          "authors": ["Amy Schade"],
+          "title": "The Fold Manifesto: Why the Page Fold Still Matters",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2015,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/page-fold-manifesto/"
+        },
+        {
+          "authors": ["Therese Fessenden"],
+          "title": "Scrolling and Attention",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2018,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/scrolling-and-attention/"
+        },
+        {
+          "authors": ["Tony Haile"],
+          "title": "What You Think You Know About the Web Is Wrong",
+          "publishedIn": "Time (Time.com), reporting Chartbeat data",
+          "year": 2014,
+          "publicationType": "industry_report",
+          "url": "https://time.com/12933/what-you-think-you-know-about-the-web-is-wrong/"
+        }
+      ]
+    }
+  ]
+}

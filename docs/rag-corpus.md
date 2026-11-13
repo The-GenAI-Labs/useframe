@@ -95,13 +95,13 @@ Reports are a latest-attempt convenience view; database logs retain individual o
 
 Raw research batches are converted into Phase 2 finding files and `ResearchArticle` rows. The converter never calls an LLM for research content. The statement is the claim verbatim plus a fixed options block. The only model call writes the finding title and slug, which are labels. It goes through the orchestrator's cheap model in batches of 20 and sends the claim only.
 
-Folders (repository root): `corpus/raw/` (pasted batches, committed), `corpus/findings/` (generated, committed), `corpus/articles/` (generated, committed), `corpus/_labels.json` (label cache, committed), `corpus/_review/` (reports).
+Folders (repository root): `corpus/raw/` (pasted batches, committed), `corpus/findings/` (generated, committed), `corpus/articles/` (generated, committed), `corpus/_labels.json` (label cache, committed), `corpus/_review/` (reports, gitignored).
 
 1. **Paste.** Save each batch as `corpus/raw/<name>.json` in the shape `{ "findings": [...], "articles": [...] }`. Markdown code fences around the JSON are stripped.
 2. **Convert.** Run from the repository root:
 
    ```sh
-   pnpm corpus:convert --dry-run   # preview, writes nothing
+   pnpm corpus:convert --dry-run   # preview, writes only corpus/_review/
    pnpm corpus:convert             # write findings, articles, labels and reports
    pnpm corpus:convert --offline   # no model call: title is the claim cut at a word boundary
    pnpm corpus:convert --check-urls  # also HEAD/GET each sourceUrl (8 s timeout, 3 at a time)
@@ -110,7 +110,7 @@ Folders (repository root): `corpus/raw/` (pasted batches, committed), `corpus/fi
    Labels come from the orchestrator (`INTERNAL_SERVICE_SECRET` and `ORCHESTRATOR_URL` in `packages/rag/.env`, orchestrator running). Without the secret, or if a call fails, those findings get offline labels and a warning; offline labels are not cached. The exit code is non-zero only for parse errors, schema failures, or a `field` / `category` with no `ResearchCategory` member (add the enum value in an additive migration; never use OTHER). Warnings never fail the run.
 
 3. **Read `corpus/_review/`.** `summary.md` lists every finding (slug, title, status, category, source title, flags). `problems.md` lists errors, findings downgraded to DRAFT and why, findings with fewer than 3 options, `sourceUrl`s matching several reference titles, duplicate or near-identical claims, shared sources, article references that match no finding, files the converter changed (with a diff) or left alone, and URL warnings. Nothing is auto-fixed.
-4. **Fix labels or the raw text.** Edit `title` / `slug` in `corpus/_labels.json` (your edit wins on the next run; a slug collision gets `-2`, `-3` in claim-hash order), or fix the text in `corpus/raw/` and convert again. A finding is a VERIFIED file only when `verified` is true, a reference title matches `sourceUrl` (exact, then ignoring `#fragment` and a trailing slash) and a URL or DOI exists. The converter never replaces a differing file that was not produced from the same claim and source; delete it or change the slug.
+4. **Fix labels or the raw text.** Edit `title` / `slug` in `corpus/_labels.json` (your edit wins on the next run; a slug collision gets `-2`, `-3` in claim-hash order), or fix the text in `corpus/raw/` and convert again. A finding is a VERIFIED file only when `verified` is true, a reference title matches `sourceUrl` (exact, then ignoring `#fragment` and a trailing slash) and a URL or DOI exists. A missing or null `sourceUrl` makes it a DRAFT, not an error. When one `sourceUrl` matches several reference titles, the source title is the finding's `publishedIn` (the first reference title only if `publishedIn` is empty), because `SourceDocument.url` is unique. The converter never replaces a differing file that was not produced from the same claim and source; delete it or change the slug.
 5. **Validate.** `pnpm` runs the CLI from `packages/rag`, so pass an absolute path:
 
    ```sh

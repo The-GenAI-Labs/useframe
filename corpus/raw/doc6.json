@@ -1,0 +1,1130 @@
+{
+  "meta": {
+    "asOf": "2026-09-19",
+    "howToRead": "Each domain/audience object has the requested fields plus 'evidence' (strength + what is sourced vs inferred) and 'sourceIds' pointing into the 'sources' array. 'Strong' means directly supported by named research or a named benchmark. 'Moderate' means partly sourced and partly synthesized. 'Thin' means mostly synthesized from adjacent sources.",
+    "cautions": [
+      "Conversion benchmarks (Unbounce, First Page Sage, RevenueCat) are vendor datasets from their own customers' pages or apps, not random samples. Use them for relative comparison, not as targets.",
+      "Several figures were reachable only through secondary summaries of the original report. Those are labeled 'via' in the source list.",
+      "typicalSections, toneRange and proofTypes are synthesized patterns. The sources support the direction of each pattern, not every item on the list."
+    ]
+  },
+  "domains": [
+    {
+      "domain": "fitness",
+      "typicalSections": [
+        "hero",
+        "social_proof_strip",
+        "benefits_outcomes",
+        "how_it_works",
+        "workout_or_class_preview",
+        "transformation_stories",
+        "coach_credentials",
+        "pricing_plans_with_trial",
+        "faq_cancellation_equipment_time",
+        "final_cta"
+      ],
+      "toneRange": [
+        "energetic",
+        "motivating",
+        "supportive",
+        "competitive",
+        "clinical_for_rehab_or_medical_fitness"
+      ],
+      "conversionPattern": "free_trial or free_workout_sample > paid_plan; the first session must deliver a workout, because trial cancellations concentrate on Day 0",
+      "commonObjections": [
+        "Too expensive: 41% of former US gym members who cancelled cited cost, the top reason",
+        "No time (23%) or life change (25%)",
+        "I can get results on my own (19%)",
+        "Fear of paying for something I will not use: in a study of 7,752 members, people on flat monthly fees over $70 attended about 4.3 times a month",
+        "Will this work for someone like me? (inferred; results credibility)"
+      ],
+      "proofTypes": [
+        "transformation_stories_with_realistic_timelines",
+        "coach_certifications",
+        "member_counts_and_ratings",
+        "free_trial_or_money_back_guarantee",
+        "class_or_workout_previews",
+        "community_features"
+      ],
+      "evidence": {
+        "strength": "moderate",
+        "note": "Objections are sourced (YouGov, DellaVigna & Malmendier). The trial pattern is sourced to app-store data (RevenueCat), which may differ from web-only funnels. Unbounce (2020) found fitness and nutrition pages were the wordiest of 16 industries, which describes what marketers do, not what converts. Section list and proof types are inferred."
+      },
+      "sourceIds": ["S2", "S3", "S4", "S5"]
+    },
+    {
+      "domain": "health_wellness",
+      "typicalSections": [
+        "hero",
+        "credibility_bar",
+        "problem_and_benefits",
+        "how_it_works_or_method",
+        "evidence_and_citations",
+        "clinician_or_expert_profiles",
+        "peer_stories",
+        "whats_included_pricing",
+        "privacy_and_safety",
+        "faq",
+        "cta_assessment_or_consultation"
+      ],
+      "toneRange": [
+        "reassuring",
+        "empathetic",
+        "credible",
+        "calm",
+        "supportive",
+        "clinical",
+        "aspirational_for_wellness"
+      ],
+      "conversionPattern": "learn_more > assessment_or_consultation_or_free_trial > subscription_or_purchase; the 2024 Unbounce median for health and wellness pages is 5.1%",
+      "commonObjections": [
+        "Can I trust this source? In a longitudinal study, users quickly rejected sales sites and sometimes rejected good content because of poor design",
+        "Is it safe, and will my doctor agree? Participants still treated the physician as the primary authority",
+        "Is this for someone like me? Personalized stories from like-minded others raised trust",
+        "What happens to my data (inferred; no source retrieved)",
+        "Cost and commitment"
+      ],
+      "proofTypes": [
+        "clinician_credentials",
+        "peer_stories_from_similar_people",
+        "cited_evidence",
+        "independent_certifications_or_affiliations",
+        "named_authorship",
+        "physician_endorsement"
+      ],
+      "evidence": {
+        "strength": "moderate",
+        "note": "Trust mechanics come from Sillence et al. (n=15 women, one health topic) and Fogg et al. (n=2,684; design look cited in 46.1% of credibility comments; a companion expert study covered health and finance sites). The conversion pattern is inferred."
+      },
+      "sourceIds": ["S1", "S6", "S7"]
+    },
+    {
+      "domain": "fintech",
+      "typicalSections": [
+        "hero",
+        "trust_and_regulatory_strip",
+        "key_benefits",
+        "how_it_works_with_steps_and_required_info",
+        "pricing_and_fees",
+        "security_and_privacy",
+        "product_demo_or_screens",
+        "ratings_and_social_proof",
+        "faq",
+        "legal_disclosures_footer",
+        "cta"
+      ],
+      "toneRange": [
+        "trustworthy",
+        "clear",
+        "precise",
+        "calm",
+        "confident",
+        "formal_for_institutional",
+        "friendly_for_consumer"
+      ],
+      "conversionPattern": "sign_up (short form, progressive data requests) > funded_account_or_first_transaction; for B2B fintech: demo > pilot > contract. The 2024 Unbounce median for financial services pages is 8.3%",
+      "commonObjections": [
+        "Do I trust this site with payment or personal data? 17–25% of US checkout abandoners cited this in Baymard's surveys",
+        "Hidden fees and unclear total cost (extra costs is the top checkout abandonment reason at 39–48%)",
+        "How long will this take and what documents do I need? (inferred)",
+        "Can I reach a human if something goes wrong? A Ferpection benchmark of 10 French banking sites found human contact a core trust factor",
+        "Is this company legitimate and regulated? (inferred)"
+      ],
+      "proofTypes": [
+        "regulatory_licences_and_insurance_statements",
+        "security_certifications",
+        "ratings_and_reviews",
+        "partner_and_press_logos",
+        "transparent_fee_tables",
+        "named_leadership_and_company_details"
+      ],
+      "evidence": {
+        "strength": "thin",
+        "note": "I found no fintech-specific pattern library or peer-reviewed conversion study. The domain is triangulated from Fogg et al. (finance was one of 10 tested categories), Baymard (payment trust), Unbounce (median rate) and a vendor benchmark. Regulatory-badge conventions are practice, not researched here."
+      },
+      "sourceIds": ["S1", "S7", "S8", "S24"]
+    },
+    {
+      "domain": "saas_b2b",
+      "typicalSections": [
+        "hero_with_outcome_and_dual_cta",
+        "customer_logo_bar",
+        "problem_to_solution",
+        "feature_benefit_blocks_with_product_visuals",
+        "how_it_works_and_integrations",
+        "use_cases_by_role",
+        "case_studies_with_metrics",
+        "security_and_compliance",
+        "pricing_or_price_ranges",
+        "faq",
+        "final_cta"
+      ],
+      "toneRange": [
+        "clear",
+        "confident",
+        "professional",
+        "plain_language",
+        "technical_for_developer_tools"
+      ],
+      "conversionPattern": "opt_in_free_trial or freemium > demo_request > contact_sales; in First Page Sage's data, visitor-to-trial is 8.5% with 18.2% trial-to-paid (opt-in), versus 2.5% and 48.8% for opt-out (card required), and 13.3% and 2.6% for freemium",
+      "commonObjections": [
+        "Where is the pricing? NN/g found pricing was the most-wanted B2B information and users left sites that hid it",
+        "Will it integrate, and is it secure and compliant?",
+        "Internal buy-in: buying groups typically involve 6–10 stakeholders and need a business justification",
+        "Is the website consistent with what sales says? 69% of surveyed B2B buyers reported discrepancies (Gartner)",
+        "Switching cost and time to value (inferred)"
+      ],
+      "proofTypes": [
+        "customer_logos",
+        "case_studies_with_quantified_results",
+        "third_party_review_sites",
+        "security_and_compliance_certifications",
+        "customer_references",
+        "roi_calculators",
+        "documentation_and_product_demo"
+      ],
+      "evidence": {
+        "strength": "strong",
+        "note": "Best-evidenced domain: NN/g B2B research (293 sites tested), Gartner buyer surveys, and multiple benchmarks. Trial-model numbers come from one vendor's dataset via a secondary summary; other summaries with different figures exist, so treat them as directional. SaaS was the hardest-to-read industry in Unbounce's 2020 analysis."
+      },
+      "sourceIds": ["S1", "S2", "S10", "S11", "S12", "S13"]
+    },
+    {
+      "domain": "ecommerce",
+      "typicalSections": [
+        "hero_or_collection_banner",
+        "value_props_shipping_returns_payment",
+        "featured_or_best_selling_products",
+        "product_detail_images_specs_size_guide",
+        "reviews_and_ratings",
+        "shipping_and_returns_summary",
+        "payment_methods_and_security_cues",
+        "cross_sell",
+        "faq",
+        "sticky_add_to_cart_or_cta"
+      ],
+      "toneRange": [
+        "friendly",
+        "clear",
+        "benefit_led",
+        "playful",
+        "urgent_lite",
+        "brand_dependent"
+      ],
+      "conversionPattern": "product_view > add_to_cart > guest_checkout > optional account after purchase; Baymard puts average cart abandonment near 70% and estimates about 35% conversion upside from checkout redesign at an average large site",
+      "commonObjections": [
+        "Extra costs at checkout (39–48% of abandoners, depending on survey year)",
+        "Forced account creation (19–26%)",
+        "Do not trust the site with my card (17–25%)",
+        "Delivery too slow (21–24%)",
+        "Checkout too long or complicated (17–22%)",
+        "Cannot see total cost up front (14–21%)",
+        "Returns policy unsatisfactory (12–18%)"
+      ],
+      "proofTypes": [
+        "ratings_and_reviews_at_least_five_per_product",
+        "verified_buyer_labels",
+        "customer_photos",
+        "clear_returns_policy",
+        "secure_payment_indicators",
+        "press_mentions"
+      ],
+      "evidence": {
+        "strength": "strong",
+        "note": "Baymard percentages vary by survey year and by which secondary source reports them, hence the ranges. Spiegel Research Center (Northwestern): a product with five reviews had 270% higher purchase likelihood than one with none (380% for higher-priced products, 190% for lower-priced), and purchase likelihood peaked at ratings of 4.0–4.7, not 5.0. Unbounce's 2024 ecommerce median is 4.2%, and its per-industry medians are known here only through Backlinko's summary."
+      },
+      "sourceIds": ["S1", "S8", "S9"]
+    },
+    {
+      "domain": "food_lifestyle",
+      "typicalSections": [
+        "hero_with_real_food_or_lifestyle_imagery_and_primary_action",
+        "menu_or_product_range_with_prices",
+        "how_it_works_for_delivery_or_subscription",
+        "location_hours_delivery_area",
+        "photo_gallery",
+        "short_story_or_sourcing",
+        "reviews",
+        "offers",
+        "faq"
+      ],
+      "toneRange": [
+        "warm",
+        "sensory",
+        "inviting",
+        "playful",
+        "local_authentic",
+        "relaxed"
+      ],
+      "conversionPattern": "order_or_reserve (one tap) > repeat_order_or_subscription > loyalty; reduce friction at the first three points users struggle with",
+      "commonObjections": [
+        "Where is it, and is it open? Finding a location was one of the top three problems in ordering usability tests",
+        "Starting an order and selecting menu items were the other two top problems (MeasuringU, 180 participants across major chains)",
+        "Delivery fees and price (inferred)",
+        "Dietary and allergen information (inferred)",
+        "Can I skip or cancel a subscription easily? (inferred)"
+      ],
+      "proofTypes": [
+        "real_food_photography",
+        "reviews_and_ratings",
+        "sourcing_or_certification_labels",
+        "press_mentions",
+        "founder_or_chef_story",
+        "hygiene_or_quality_ratings"
+      ],
+      "evidence": {
+        "strength": "thin",
+        "note": "Only the ordering-friction findings (MeasuringU) and the copy-simplicity observation (Unbounce 2020: catering and restaurant pages had the simplest copy of 16 industries) are directly sourced. Section list, tone and proof types are largely inferred. A DoorDash merchant blog claims 87% of consumers chose a dish based on an appealing photo. That is a vendor claim I could not trace to a study, so I have not relied on it."
+      },
+      "sourceIds": ["S2", "S21"]
+    },
+    {
+      "domain": "education",
+      "typicalSections": [
+        "hero_with_outcome_and_primary_cta",
+        "program_or_course_finder_with_key_facts",
+        "curriculum_or_what_you_will_learn",
+        "outcomes_and_completion_or_placement_data",
+        "instructors_or_faculty",
+        "cost_financial_aid_scholarship_calculator",
+        "student_stories_and_community",
+        "video_and_virtual_tour",
+        "how_to_apply_or_enroll",
+        "faq",
+        "contact_form"
+      ],
+      "toneRange": [
+        "aspirational",
+        "supportive",
+        "credible",
+        "clear",
+        "encouraging",
+        "playful_for_children"
+      ],
+      "conversionPattern": "request_info_form or scholarship_calculator > visit_or_tour_or_free_preview > apply_or_enroll; the 2024 Unbounce median for education pages is 8.4%",
+      "commonObjections": [
+        "Cost and financial aid (top content sought after academics in RNL's surveys)",
+        "Cannot find information about the program I want: about 1 in 4 prospective students reported this (RNL 2025; 22% in 2023)",
+        "Will it lead to an outcome such as a job or degree? (inferred)",
+        "Is it credible and accredited? (inferred)",
+        "Does it fit my life and schedule? (inferred)"
+      ],
+      "proofTypes": [
+        "accreditation",
+        "outcome_statistics",
+        "alumni_and_student_stories",
+        "instructor_credentials",
+        "virtual_tours_and_videos",
+        "rankings_and_recognition"
+      ],
+      "evidence": {
+        "strength": "moderate",
+        "note": "Strong for higher-ed recruitment (RNL E-Expectations surveys: 1,500+ US high-school students in 2025, 2,000+ in 2023; 91–93% use college websites; top contact route is a website form; students are willing to share email, name, cell, and parent contact details; 82% watch videos; 73% use virtual tours). Evidence for online-course marketplaces and edtech is not covered by these sources."
+      },
+      "sourceIds": ["S1", "S14"]
+    },
+    {
+      "domain": "gaming",
+      "typicalSections": [
+        "hero_media_trailer_or_gameplay_first",
+        "one_line_pitch_and_short_description",
+        "key_features",
+        "screenshots_or_gifs",
+        "platforms_and_system_requirements",
+        "reviews_press_quotes_awards",
+        "editions_and_pricing",
+        "wishlist_follow_or_community_cta",
+        "faq",
+        "footer_links"
+      ],
+      "toneRange": [
+        "energetic",
+        "immersive",
+        "bold",
+        "playful",
+        "cozy_or_dark_by_genre"
+      ],
+      "conversionPattern": "wishlist_or_follow > demo_or_playtest > purchase_or_download; a Steam-style page is judged in seconds from the capsule image, a short trailer or gif, the short description and the first few screenshots",
+      "commonObjections": [
+        "What kind of game is this, and what do I do in it? The capsule and short description must answer immediately",
+        "Does the gameplay look and feel good? (screenshots and trailer carry this)",
+        "Will it run on my machine? (system requirements; inferred)",
+        "Is it worth the price? Reviews and negative reviews get skimmed (Zukowski)",
+        "Monetization or bug concerns such as pay-to-win or early access (inferred)"
+      ],
+      "proofTypes": [
+        "player_review_scores",
+        "press_quotes_and_awards",
+        "gameplay_footage_not_cinematics",
+        "player_or_wishlist_counts",
+        "creator_and_streamer_clips",
+        "demo_availability"
+      ],
+      "evidence": {
+        "strength": "thin",
+        "note": "Directional only. Valve's Steamworks documentation defines page structure (capsules, short description, longer 'About This Game' lower on the page, keep image text minimal because it must be localized). Zukowski's Game Developer article (2019) describes one observed Steam session in which a user wishlisted after the capsule, watched about 13 seconds of an animated preview, read 12 words of the short description, skipped the trailer, and looked at 4 screenshots in about 5.5 seconds. That is an illustrative case, not a population average. I found no rigorous conversion benchmark for game pages, and Unbounce's 'events and entertainment' median (12.3%) is not a games benchmark."
+      },
+      "sourceIds": ["S2", "S15", "S16"]
+    },
+    {
+      "domain": "luxury",
+      "typicalSections": [
+        "full_bleed_editorial_hero",
+        "brand_story_heritage_craftsmanship",
+        "curated_collection_few_products",
+        "product_detail_with_materials_and_provenance",
+        "services_personalization_appointments_delivery_aftercare",
+        "boutiques_or_client_advisors",
+        "editorial_or_lookbook",
+        "private_access_or_newsletter",
+        "minimal_footer"
+      ],
+      "toneRange": [
+        "refined",
+        "understated",
+        "exclusive",
+        "editorial",
+        "calm",
+        "confident"
+      ],
+      "conversionPattern": "brand_immersion > book_appointment_or_contact_client_advisor > purchase (online or in boutique); three in four luxury purchases are influenced by online activity even when completed in store",
+      "commonObjections": [
+        "Authenticity and counterfeit risk (inferred)",
+        "Does buying online cheapen the experience? (inferred from the tension between exclusivity and online availability discussed in the luxury digital literature)",
+        "Price justification: one lab study found displaying prices can raise perceived luxury in the premium segment, contrary to folk wisdom",
+        "Service, delivery and after-care: product information, convenience and responsive customer service influenced revisit intent on luxury fashion sites (Korean sample, n=292)"
+      ],
+      "proofTypes": [
+        "heritage_and_craft_provenance",
+        "authenticity_certification",
+        "editorial_and_press_features",
+        "ambassadors_or_clients_by_reference",
+        "service_guarantees",
+        "boutique_network"
+      ],
+      "evidence": {
+        "strength": "thin",
+        "note": "Sourced: McKinsey/Altagamma digital influence figures; an IJRDM 2013 study of 81 luxury homepages (darker backgrounds, large or full-screen stage content, horizontal navigation, substantially fewer elements; lab experiment showed perceived luxury effects, but no conversion measured; I could not confirm the author list); Choi, Kim & Lee (2015). The price-display study is a single experiment. Everything else is synthesis. Spiegel's review data suggests reviews matter more at higher prices, but luxury brands often omit reviews, so I do not list them as a standard luxury proof type."
+      },
+      "sourceIds": ["S17", "S18", "S19", "S20"]
+    },
+    {
+      "domain": "other_general",
+      "typicalSections": [
+        "hero_with_headline_subhead_primary_cta_visual",
+        "three_or_four_benefits",
+        "how_it_works",
+        "social_proof",
+        "feature_or_detail_blocks",
+        "objection_handling_faq",
+        "repeat_of_primary_cta",
+        "footer_with_contact_and_policies"
+      ],
+      "toneRange": [
+        "clear",
+        "plain_language",
+        "friendly_professional",
+        "brand_dependent"
+      ],
+      "conversionPattern": "single_primary_cta > low_friction_form_or_click_through; keep the promise and the first screen aligned, since 57% of viewing time is above the fold and 74% falls within the first two screenfuls",
+      "commonObjections": [
+        "What is this, and why should I care? (inferred)",
+        "Can I trust it? Design look was cited in 46.1% of credibility judgments in Fogg et al.",
+        "What does it cost, and how much effort is it? (inferred)"
+      ],
+      "proofTypes": [
+        "testimonials",
+        "customer_or_partner_logos",
+        "specific_numbers",
+        "guarantees",
+        "clear_contact_and_about_information"
+      ],
+      "evidence": {
+        "strength": "moderate",
+        "note": "NN/g eyetracking (about 130,000 fixations, 120 participants) supports the above-the-fold pattern. Unbounce data (as summarized by Apexure) reports pages written at a 5th–7th grade reading level converting at about 11% versus 5% for 'professional' copy. That is a vendor finding via a secondary source. Overall Unbounce 2024 median is 6.6% across industries."
+      },
+      "sourceIds": ["S1", "S7", "S25"]
+    }
+  ],
+  "audiences": [
+    {
+      "audience": "children_under_10",
+      "modifies": {
+        "density": "low",
+        "motion": "medium",
+        "contrast": "high",
+        "fontSizeMin": "19px",
+        "buyer": "Parent or guardian. NN/g likens this to B2B, where purchasers and decision makers are not the users",
+        "trustSignals": [
+          "Clear statement of no ads and no in-app purchases in the child's flow",
+          "Age-appropriate design and privacy defaults (UK ICO Children's Code: high-privacy defaults, no nudging children to give data)",
+          "Evidence-based learning claims (active, engaging, meaningful, socially interactive)",
+          "Parental controls and time limits",
+          "Age band stated (3–5, 6–8, 9–12)"
+        ],
+        "avoid": [
+          "Manipulative design: about 80% of apps used by 3–5-year-olds in one study had at least one such feature",
+          "Ads or promos indistinguishable from content",
+          "Touch targets under about 2 cm x 2 cm and precision dragging",
+          "Long instructional text, redundant navigation, and required scrolling for the youngest",
+          "Content pitched even one school grade off the child's level",
+          "Decorated symbols such as progress bars for under-4s",
+          "Motion that is decorative rather than tied to the story or task"
+        ]
+      },
+      "evidence": {
+        "strength": "strong",
+        "note": "Detailed in the earlier children's findings: NN/g (125 children tested across 2001, 2010, 2018), Takacs et al. meta-analysis, Radesky et al., Hiniker et al., ICO Code. Motion is 'medium' because children like animation and sound but distracting extras hurt comprehension. 'High' contrast is a design judgment (bright, saturated colors plus at least AA text contrast), not a directly tested value."
+      },
+      "sourceIds": ["S22", "S23", "S26", "S27", "S28", "S29", "S37"]
+    },
+    {
+      "audience": "teens",
+      "modifies": {
+        "density": "low",
+        "motion": "medium",
+        "contrast": "medium",
+        "fontSizeMin": "16px",
+        "buyer": "Teens research and influence, but a parent or other adult typically holds the payment method (NN/g: teens visit ecommerce sites to research products and build wish lists for credit-card-carrying adults)",
+        "trustSignals": [
+          "Real content and stories from other teens",
+          "Visible privacy control with no forced public profiles",
+          "Professional, non-childish look",
+          "Fast loading",
+          "A 'copy link' share option"
+        ],
+        "avoid": [
+          "The word 'kid' or condescending, babyish tone",
+          "Pop-ups and long waits",
+          "Dense text; NN/g found teens read poorly and prefer scannable, visual content",
+          "Precision interactions on touch devices such as dropdowns, drag-and-drop, rollovers and small click zones",
+          "Glitzy blinking graphics and pointless multimedia",
+          "Forced registration that makes a profile public",
+          "Tiny fonts, which bothered teens as much as adults"
+        ]
+      },
+      "evidence": {
+        "strength": "strong",
+        "note": "NN/g research with 100 teens over three rounds, 210 websites and 30 apps. Teen task success was below adults' in the older 2005 study, partly due to reading skill, research strategy and patience. The 16px minimum is inferred from NN/g's finding that teens dislike small type like adults do."
+      },
+      "sourceIds": ["S30"]
+    },
+    {
+      "audience": "adults",
+      "modifies": {
+        "density": "medium",
+        "motion": "low",
+        "contrast": "medium",
+        "fontSizeMin": "16px",
+        "buyer": "The visitor themselves (or a household decision); assumed default when no other decision maker is indicated",
+        "trustSignals": [
+          "Total price visible before checkout",
+          "Reviews with verified-buyer labels",
+          "Visible payment security",
+          "Clear returns and contact information"
+        ],
+        "avoid": [
+          "Forced account creation before purchase",
+          "Autoplay sound and animation",
+          "Pop-ups and heavy promotions (NN/g: adults avoid ads and view promos skeptically)",
+          "Long text without scan support (adults scan)",
+          "Hidden costs"
+        ]
+      },
+      "evidence": {
+        "strength": "moderate",
+        "note": "NN/g's age comparison tables give 12 pt (16 px) type, scanning behavior, dislike of animation and sound, and ad avoidance. Trust signals are drawn from Baymard and Spiegel and apply mainly to shopping contexts."
+      },
+      "sourceIds": ["S8", "S9", "S22", "S30"]
+    },
+    {
+      "audience": "seniors",
+      "modifies": {
+        "density": "low",
+        "motion": "low",
+        "contrast": "high",
+        "fontSizeMin": "19px",
+        "buyer": "The older adult, who is typically self-directed in the NN/g tasks (banking, shopping, health, travel). Influence from adult children or caregivers is plausible but was not evidenced in the sources reviewed",
+        "trustSignals": [
+          "Phone number and human help clearly visible",
+          "Plain language with technical terms defined",
+          "Stable, familiar navigation",
+          "Clear fees",
+          "Minimal data requests, since today's older users delete accounts that collect too much"
+        ],
+        "avoid": [
+          "Tiny text and low-contrast text (aim for at least 4.5:1, ideally 7:1)",
+          "Pull-down and hierarchical hover menus",
+          "Unlabeled icons",
+          "Unforgiving forms and vague error messages",
+          "Pop-ups and autoplay sound",
+          "Drastic navigation changes",
+          "Auto-advancing carousels and heavy page clutter",
+          "Framing older people as a niche"
+        ]
+      },
+      "evidence": {
+        "strength": "strong",
+        "note": "Detailed in the earlier seniors findings: Bernard et al. (14 pt), Jin et al. (touch targets), WCAG contrast rationale (20/40 acuity near age 80), NN/g (Nielsen 2013; Kane 2019), W3C WAI-AGE. NN/g's own floor for senior sites is 12 pt; 19 px reflects the 14 pt result in Bernard et al."
+      },
+      "sourceIds": ["S31", "S32", "S33", "S34", "S35", "S36"]
+    },
+    {
+      "audience": "parents",
+      "modifies": {
+        "density": "medium",
+        "motion": "low",
+        "contrast": "medium",
+        "fontSizeMin": "16px",
+        "buyer": "The parent, who acts as purchaser and gatekeeper for products used by children; they often consult a doctor (61% in Pew's survey of parents of children 11 or younger) and other parents (55%) before deciding",
+        "trustSignals": [
+          "Explicit no-ads and no-in-app-purchase statements",
+          "Privacy and age-appropriateness information",
+          "Evidence-based claims rather than generic 'educational' labels",
+          "Educator or clinician endorsement",
+          "Reviews from other parents",
+          "Time-limit and parental-control features"
+        ],
+        "avoid": [
+          "Unsupported 'educational' claims",
+          "Manipulative design aimed at the child",
+          "Hidden subscription terms (inferred)",
+          "Fear-based or guilt-based marketing (inferred; parents are already anxious: 71% of parents of children under 12 in Pew's survey were at least somewhat concerned about too much screen time)"
+        ]
+      },
+      "evidence": {
+        "strength": "moderate",
+        "note": "Buyer role and anxiety are sourced (NN/g Life Online research with 100+ participants in 6 cities; Pew survey of 3,640 US parents, 2020). NN/g cautions its study does not show whether device overuse harms children. Density, motion, contrast and font size are inferred general-adult defaults, since I found no parent-specific tests."
+      },
+      "sourceIds": ["S24", "S27", "S38", "S39", "S40"]
+    },
+    {
+      "audience": "b2b_buyers",
+      "modifies": {
+        "density": "high",
+        "motion": "low",
+        "contrast": "medium",
+        "fontSizeMin": "16px",
+        "buyer": "A buying group, typically 6–10 stakeholders, not one person; per Gartner, buyers spend only about 17% of the purchase journey meeting suppliers and 67% prefer a rep-free experience",
+        "trustSignals": [
+          "Transparent pricing or price ranges",
+          "Case studies with quantified outcomes",
+          "Security and compliance documentation",
+          "Customer references",
+          "Integration and implementation detail",
+          "Consistency between website claims and what sales says"
+        ],
+        "avoid": [
+          "Hiding pricing entirely",
+          "Forcing a sales conversation for basic information",
+          "Vague, jargon-heavy copy and incomplete product descriptions",
+          "Pushy tactics such as constant promotions, which NN/g linked to distrust",
+          "Inconsistent information between website and sellers (69% of surveyed buyers reported this)"
+        ]
+      },
+      "evidence": {
+        "strength": "strong",
+        "note": "NN/g B2B study and Gartner surveys. Gartner figures other than the March 2026 survey (nearly 650 buyers) and the 69% discrepancy finding were reached through secondary summaries."
+      },
+      "sourceIds": ["S10", "S11", "S12"]
+    },
+    {
+      "audience": "developers",
+      "modifies": {
+        "density": "high",
+        "motion": "low",
+        "contrast": "medium",
+        "fontSizeMin": "16px",
+        "buyer": "An individual developer or tech lead who evaluates first (usually via a free trial), then an engineering manager or procurement; peer recommendation weighs heavily (Stack Overflow's survey: about 72–75% evaluate by starting a free trial, about 68–73% ask peers, about 61–63% use communities)",
+        "trustSignals": [
+          "Complete, findable documentation (lack of documentation was the top obstacle to consuming APIs in Postman's surveys, 52–55%)",
+          "Quickstart and code samples",
+          "Transparent pricing and limits",
+          "Reliability and security information (Postman: more than 7 in 10 cited reliability, security, performance and documentation as top pre-integration factors)",
+          "Community and peer references"
+        ],
+        "avoid": [
+          "Marketing fluff in place of technical detail",
+          "Sign-up walls in front of documentation",
+          "Contact-sales-only pricing for basic tiers",
+          "Black-box claims (developers report low trust in unverified outputs)",
+          "Autoplay media and pop-ups (inferred)"
+        ]
+      },
+      "evidence": {
+        "strength": "moderate",
+        "note": "Stack Overflow Developer Survey figures are taken from Stack Overflow's own marketer-facing summaries, which cite two survey years with slightly different percentages. Postman figures come from press releases and third-party write-ups of its State of the API reports (2020, 2021, 2023). Density, motion, contrast and font size are inferred."
+      },
+      "sourceIds": ["S41", "S42"]
+    },
+    {
+      "audience": "general",
+      "modifies": {
+        "density": "medium",
+        "motion": "low",
+        "contrast": "medium",
+        "fontSizeMin": "16px",
+        "buyer": "The individual visitor; default assumption when no specific audience is known",
+        "trustSignals": [
+          "Clean, professional visual design (46.1% of credibility comments in Fogg et al.)",
+          "Clear about, contact and policy pages",
+          "Testimonials or reviews",
+          "Text contrast of at least 4.5:1 and targets of at least 24 x 24 CSS px (WCAG 2.2 AA)"
+        ],
+        "avoid": [
+          "Burying the value proposition below the fold: about 57% of viewing time is above the fold and 74% in the first two screenfuls",
+          "Text-heavy blocks",
+          "Small tap targets and low-contrast text",
+          "Autoplay media and intrusive pop-ups"
+        ]
+      },
+      "evidence": {
+        "strength": "moderate",
+        "note": "Grounded in NN/g eyetracking, Fogg et al. and W3C standards. WCAG defines accessibility floors, not conversion outcomes."
+      },
+      "sourceIds": ["S7", "S25", "S34", "S43"]
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "authors": ["Unbounce"],
+      "title": "Conversion Benchmark Report 2024 (57M+ conversions, 41K+ landing pages)",
+      "publisher": "Unbounce",
+      "year": 2024,
+      "type": "industry_report",
+      "url": "https://unbounce.com/conversion-benchmark-report/",
+      "note": "Vendor data from Unbounce customers. Nine-industry medians (SaaS 3.8%, ecommerce 4.2%, health and wellness 5.1%, financial services 8.3%, education 8.4%, events and entertainment 12.3%, overall 6.6%) reached via Backlinko's summary: https://backlinko.com/landing-page-stats. The 5th–7th grade reading-level finding reached via Apexure's summary: https://www.apexure.com/blog/landing-page-conversion-rate-benchmarks-by-industry"
+    },
+    {
+      "id": "S2",
+      "authors": ["Unbounce"],
+      "title": "Conversion Benchmark Report 2020 (16 industries, 34K landing pages)",
+      "publisher": "Unbounce",
+      "year": 2020,
+      "type": "industry_report",
+      "url": "https://unbounce.com/conversion-benchmark-report/",
+      "note": "SaaS pages hardest to read; catering and restaurants simplest; fitness and nutrition wordiest; media and entertainment fewest words; median SaaS conversion 3.0%."
+    },
+    {
+      "id": "S3",
+      "authors": ["RevenueCat"],
+      "title": "State of Subscription Apps 2025 / 2026",
+      "publisher": "RevenueCat",
+      "year": 2026,
+      "type": "industry_report",
+      "url": "https://www.revenuecat.com/blog/growth/subscription-app-trends-benchmarks-2026",
+      "note": "Day-35 hard paywall conversion about 10.7% vs freemium about 2.1%; 55% of 3-day-trial cancellations occur on Day 0 (via SaaStr summary: https://www.saastr.com/the-top-10-learnings-from-revenuecats-state-of-subscription-apps/). The 'health and fitness wins with trial-inclusive' claim is via Airbridge's summary. App-store data, not web landing pages."
+    },
+    {
+      "id": "S4",
+      "authors": ["YouGov"],
+      "title": "Why do consumers turn their backs on gym memberships? (YouGov Profiles, US)",
+      "publisher": "YouGov",
+      "year": 2024,
+      "type": "industry_report",
+      "url": "https://business.yougov.com/content/49804-us-why-do-consumers-turn-their-backs-on-gym-memberships"
+    },
+    {
+      "id": "S5",
+      "authors": ["Stefano DellaVigna", "Ulrike Malmendier"],
+      "title": "Paying Not to Go to the Gym",
+      "publisher": "American Economic Review, 96(3)",
+      "year": 2006,
+      "type": "peer_reviewed_journal",
+      "url": "https://doi.org/10.1257/aer.96.3.694",
+      "note": "I retrieved the abstract via a blog quoting it; authors, journal and DOI are from my knowledge of the citation rather than a fetched page."
+    },
+    {
+      "id": "S6",
+      "authors": [
+        "Elizabeth Sillence",
+        "Pam Briggs",
+        "Peter R. Harris",
+        "Lesley Fishwick"
+      ],
+      "title": "How do patients evaluate and make use of online health information?",
+      "publisher": "Social Science & Medicine, 64(9)",
+      "year": 2007,
+      "type": "peer_reviewed_journal",
+      "url": "https://doi.org/10.1016/j.socscimed.2007.01.012"
+    },
+    {
+      "id": "S7",
+      "authors": [
+        "B. J. Fogg",
+        "Cathy Soohoo",
+        "David Danielson",
+        "Leslie Marable",
+        "Julianne Stanford",
+        "Ellen R. Tauber"
+      ],
+      "title": "How Do People Evaluate a Web Site's Credibility? Results from a Large Study",
+      "publisher": "Stanford Persuasive Technology Lab / Consumer WebWatch",
+      "year": 2002,
+      "type": "industry_report",
+      "url": "https://advocacy.consumerreports.org/research/how-do-people-evaluate-a-web-sites-credibility"
+    },
+    {
+      "id": "S8",
+      "authors": ["Baymard Institute"],
+      "title": "Cart Abandonment Rate Statistics / Reasons for Abandonment During Checkout",
+      "publisher": "Baymard Institute",
+      "year": 2025,
+      "type": "industry_report",
+      "url": "https://baymard.com/lists/cart-abandonment-rate",
+      "note": "Figures reached through several secondary reproductions of Baymard's survey results that differ by survey year (2023–2025); shown as ranges."
+    },
+    {
+      "id": "S9",
+      "authors": [
+        "Spiegel Research Center (Northwestern University Medill) with PowerReviews"
+      ],
+      "title": "How Online Reviews Influence Sales",
+      "publisher": "Spiegel Research Center",
+      "year": 2017,
+      "type": "industry_report",
+      "url": "https://spiegel.medill.northwestern.edu/How-Online-Reviews-Influence-Sales"
+    },
+    {
+      "id": "S10",
+      "authors": ["Nielsen Norman Group"],
+      "title": "B2B Website Usability for Converting Users into Leads and Customers (3rd ed.; 293 B2B sites tested in US, UK, Singapore)",
+      "publisher": "Nielsen Norman Group",
+      "year": 2013,
+      "type": "industry_report",
+      "url": "https://www.nngroup.com/reports/b2b-websites-usability/",
+      "note": "The 2006 finding of 58% B2B task success vs 66% for consumer ecommerce, and pricing as the most-wanted information, reached via DestinationCRM: https://www.destinationcrm.com/Articles/CRM-News/CRM-Featured-Articles/B2B-Web-Sites-Are-Dropping-the-Ball-42449.aspx. Edition year not confirmed in retrieved text."
+    },
+    {
+      "id": "S11",
+      "authors": ["Gartner"],
+      "title": "Gartner survey: 67% of B2B buyers prefer a rep-free experience (nearly 650 buyers, March 2026)",
+      "publisher": "Gartner, via Demand Gen Report",
+      "year": 2026,
+      "type": "industry_report",
+      "url": "https://demandgenreport.com/industry-news/news-brief/gartner-67-of-b2b-buyers-prefer-a-rep-free-experience/52142",
+      "note": "The 17% of purchase time with suppliers and 6–10 stakeholder figures are Gartner findings reached via secondary summaries (e.g., https://komo.ai/glossary/buyer-journey)."
+    },
+    {
+      "id": "S12",
+      "authors": ["Gartner"],
+      "title": "Gartner survey reveals B2B buyers' preference for rep-free experience (69% report discrepancies between vendor websites and sellers)",
+      "publisher": "Gartner, via mi-3",
+      "year": 2025,
+      "type": "industry_report",
+      "url": "https://www.mi-3.com.au/04-07-2025/gartner-survey-reveals-b2b-buyers-preference-rep-free-experience"
+    },
+    {
+      "id": "S13",
+      "authors": ["First Page Sage"],
+      "title": "SaaS Free Trial Conversion Rate Benchmarks (86 SaaS companies, Q1 2022–Q3 2025)",
+      "publisher": "First Page Sage, via Powered by Search",
+      "year": 2025,
+      "type": "industry_report",
+      "url": "https://www.poweredbysearch.com/learn/b2b-saas-trial-conversion-rate-benchmarks/",
+      "note": "Single-vendor dataset; other secondary summaries quote different figures."
+    },
+    {
+      "id": "S14",
+      "authors": ["Ruffalo Noel Levitz (RNL)", "Modern Campus", "Halda"],
+      "title": "E-Expectations Trend Report (2023 and 2025)",
+      "publisher": "RNL",
+      "year": 2025,
+      "type": "industry_report",
+      "url": "https://www.ruffalonl.com/about-ruffalo-noel-levitz/press-releases/digital-misalignment-with-prospective-students-could-be-costing-colleges-millions-new-rnl-study-warns/",
+      "note": "2023 report: https://learn.ruffalonl.com/rs/395-EOG-977/images/2023_E-Expectations_Report.pdf"
+    },
+    {
+      "id": "S15",
+      "authors": ["Chris Zukowski"],
+      "title": "How Steam users see your game",
+      "publisher": "Game Developer",
+      "year": 2019,
+      "type": "industry_report",
+      "url": "https://gamedeveloper.com/business/how-steam-users-see-your-game"
+    },
+    {
+      "id": "S16",
+      "authors": ["Valve"],
+      "title": "Steamworks Documentation: Store Page Written Description; Store Graphical Assets",
+      "publisher": "Valve Corporation",
+      "year": null,
+      "type": "standard_specification",
+      "url": "https://partner.steamgames.com/doc/store/page/description",
+      "note": "Platform documentation, not research. Assets page: https://partner.steamgames.com/doc/store/assets/standard"
+    },
+    {
+      "id": "S17",
+      "authors": ["Nathalie Remy", "Marco Catena", "Benjamin Durand-Servoingt"],
+      "title": "Digital inside: Get wired for the ultimate luxury experience",
+      "publisher": "McKinsey & Company with Altagamma Foundation",
+      "year": 2015,
+      "type": "industry_report",
+      "url": "https://www.mckinsey.com/~/media/McKinsey/Business%20Functions/Marketing%20and%20Sales/Our%20Insights/Digital%20inside%20Get%20wired%20for%20the%20ultimate%20luxury%20experience/DLE%202015%20Final%20Global%20report.pdf"
+    },
+    {
+      "id": "S18",
+      "authors": [],
+      "title": "Luxury web atmospherics: an examination of homepage design",
+      "publisher": "International Journal of Retail & Distribution Management, 41(11/12)",
+      "year": 2013,
+      "type": "peer_reviewed_journal",
+      "url": "https://www.emerald.com/insight/content/doi/10.1108/IJRDM-01-2013-0013/full/html",
+      "note": "Author names were not confirmed in retrieved material."
+    },
+    {
+      "id": "S19",
+      "authors": ["Yun Jung Choi", "Hyeonsoo Kim", "Yuri Lee"],
+      "title": "Web atmospheric qualities in luxury fashion brand web sites",
+      "publisher": "Journal of Fashion Marketing and Management, 19(4), 384–401",
+      "year": 2015,
+      "type": "peer_reviewed_journal",
+      "url": "https://hdl.handle.net/10371/95194"
+    },
+    {
+      "id": "S20",
+      "authors": [],
+      "title": "How price display influences consumer luxury perceptions",
+      "publisher": "CERAG working paper (HAL archive)",
+      "year": null,
+      "type": "peer_reviewed_journal",
+      "url": "https://hal-ecp.archives-ouvertes.fr/CERAG/halshs-01374021",
+      "note": "Authors, year and final venue not confirmed in retrieved material; treat as a single experiment."
+    },
+    {
+      "id": "S21",
+      "authors": ["MeasuringU"],
+      "title": "The UX of Restaurant Websites (300-person perception study; 180-person online ordering usability study)",
+      "publisher": "MeasuringU",
+      "year": null,
+      "type": "industry_report",
+      "url": "https://measuringu.com/?p=508",
+      "note": "Publication year not shown in retrieved excerpt."
+    },
+    {
+      "id": "S22",
+      "authors": ["Katie Sherwin", "Jakob Nielsen"],
+      "title": "Children's UX: Usability Issues in Designing for Young People",
+      "publisher": "Nielsen Norman Group",
+      "year": 2019,
+      "type": "industry_report",
+      "url": "https://www.nngroup.com/articles/childrens-websites-usability-issues/"
+    },
+    {
+      "id": "S23",
+      "authors": ["Feifei Liu"],
+      "title": "Design for Kids Based on Their Stage of Physical Development",
+      "publisher": "Nielsen Norman Group",
+      "year": 2018,
+      "type": "industry_report",
+      "url": "https://www.nngroup.com/articles/children-ux-physical-development/"
+    },
+    {
+      "id": "S24",
+      "authors": [
+        "Jenny Radesky",
+        "Alexis Hiniker",
+        "Caroline McLaren",
+        "Eliz Akgun",
+        "Alexandria Schaller",
+        "Heidi M. Weeks",
+        "Scott Campbell",
+        "Ashley N. Gearhardt"
+      ],
+      "title": "Prevalence and Characteristics of Manipulative Design in Mobile Applications Used by Children",
+      "publisher": "JAMA Network Open",
+      "year": 2022,
+      "type": "peer_reviewed_journal",
+      "url": "https://doi.org/10.1001/jamanetworkopen.2022.17641"
+    },
+    {
+      "id": "S25",
+      "authors": ["Therese Fessenden"],
+      "title": "Scrolling and Attention",
+      "publisher": "Nielsen Norman Group",
+      "year": 2018,
+      "type": "industry_report",
+      "url": "https://www.nngroup.com/articles/scrolling-and-attention/",
+      "note": "Findings retrieved via secondary summaries; author attribution from my knowledge of the article."
+    },
+    {
+      "id": "S26",
+      "authors": ["Zsofia K. Takacs", "Elise K. Swart", "Adriana G. Bus"],
+      "title": "Benefits and Pitfalls of Multimedia and Interactive Features in Technology-Enhanced Storybooks: A Meta-Analysis",
+      "publisher": "Review of Educational Research",
+      "year": 2015,
+      "type": "peer_reviewed_journal",
+      "url": "https://doi.org/10.3102/0034654314566989"
+    },
+    {
+      "id": "S27",
+      "authors": ["Information Commissioner's Office (UK)"],
+      "title": "Age appropriate design: a code of practice for online services",
+      "publisher": "ICO",
+      "year": 2020,
+      "type": "standard_specification",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/childrens-information/childrens-code-guidance-and-resources/age-appropriate-design-a-code-of-practice-for-online-services/"
+    },
+    {
+      "id": "S28",
+      "authors": ["Chris J. Boyatzis", "Reenu Varghese"],
+      "title": "Children's Emotional Associations with Colors",
+      "publisher": "The Journal of Genetic Psychology",
+      "year": 1994,
+      "type": "peer_reviewed_journal",
+      "url": "https://doi.org/10.1080/00221325.1994.9914760"
+    },
+    {
+      "id": "S29",
+      "authors": [
+        "Kathy Hirsh-Pasek",
+        "Jennifer M. Zosh",
+        "Roberta Michnick Golinkoff",
+        "James H. Gray",
+        "Michael B. Robb",
+        "Jordy Kaufman"
+      ],
+      "title": "Putting Education in 'Educational' Apps: Lessons From the Science of Learning",
+      "publisher": "Psychological Science in the Public Interest, 16(1)",
+      "year": 2015,
+      "type": "peer_reviewed_journal",
+      "url": "https://doi.org/10.1177/1529100615569721"
+    },
+    {
+      "id": "S30",
+      "authors": ["Alita Kendrick", "Jakob Nielsen"],
+      "title": "Teenager's UX: Designing for Teens",
+      "publisher": "Nielsen Norman Group",
+      "year": 2019,
+      "type": "industry_report",
+      "url": "https://www.nngroup.com/articles/usability-of-websites-for-teenagers/"
+    },
+    {
+      "id": "S31",
+      "authors": ["Jakob Nielsen"],
+      "title": "Usability for Senior Citizens: Improved, But Still Lacking",
+      "publisher": "Nielsen Norman Group",
+      "year": 2013,
+      "type": "industry_report",
+      "url": "https://www.nngroup.com/articles/usability-seniors-improvements/"
+    },
+    {
+      "id": "S32",
+      "authors": ["Lexie Kane"],
+      "title": "Usability for Older Adults: Challenges and Changes",
+      "publisher": "Nielsen Norman Group",
+      "year": 2019,
+      "type": "industry_report",
+      "url": "https://www.nngroup.com/articles/usability-for-senior-citizens/"
+    },
+    {
+      "id": "S33",
+      "authors": ["Michael L. Bernard", "Chia Hui Liao", "Melissa M. Mills"],
+      "title": "The effects of font type and size on the legibility and reading time of online text by older adults",
+      "publisher": "CHI '01 Extended Abstracts (ACM)",
+      "year": 2001,
+      "type": "conference_paper",
+      "url": "https://doi.org/10.1145/634067.634173"
+    },
+    {
+      "id": "S34",
+      "authors": ["W3C Accessibility Guidelines Working Group"],
+      "title": "Understanding SC 1.4.3 Contrast (Minimum), WCAG 2.1",
+      "publisher": "W3C",
+      "year": 2018,
+      "type": "standard_specification",
+      "url": "https://w3.org/WAI/WCAG21/Understanding/contrast-minimum.html"
+    },
+    {
+      "id": "S35",
+      "authors": ["Zhao Xia Jin", "Tom Plocher", "Liana M. Kiff"],
+      "title": "Touch Screen User Interfaces for Older Adults: Button Size and Spacing",
+      "publisher": "UAHCI 2007, Springer LNCS 4554",
+      "year": 2007,
+      "type": "conference_paper",
+      "url": "https://doi.org/10.1007/978-3-540-73279-2_104"
+    },
+    {
+      "id": "S36",
+      "authors": ["Andrew Arch", "Shadi Abou-Zahra", "Shawn Lawton Henry"],
+      "title": "Older Users Online: WAI Guidelines Address Older Users Web Experience",
+      "publisher": "User Experience Magazine 8(1), W3C WAI-AGE",
+      "year": 2009,
+      "type": "industry_report",
+      "url": "https://www.w3.org/WAI/posts/2009/older-users-online.html"
+    },
+    {
+      "id": "S37",
+      "authors": ["Feifei Liu"],
+      "title": "Designing for Kids: Cognitive Considerations",
+      "publisher": "Nielsen Norman Group",
+      "year": 2018,
+      "type": "industry_report",
+      "url": "https://www.nngroup.com/articles/kids-cognition/"
+    },
+    {
+      "id": "S38",
+      "authors": [
+        "Brooke Auxier",
+        "Monica Anderson",
+        "Andrew Perrin",
+        "Erica Turner"
+      ],
+      "title": "Parenting Children in the Age of Screens",
+      "publisher": "Pew Research Center",
+      "year": 2020,
+      "type": "industry_report",
+      "url": "https://www.pewresearch.org/internet/2020/07/28/parenting-children-in-the-age-of-screens/"
+    },
+    {
+      "id": "S39",
+      "authors": ["Kim Flaherty", "Kate Moran"],
+      "title": "Children's Exposure to Digital Technology Causes Parental Anxiety",
+      "publisher": "Nielsen Norman Group",
+      "year": null,
+      "type": "industry_report",
+      "url": "https://www.nngroup.com/articles/parental-anxiety/",
+      "note": "Publication year not confirmed in retrieved excerpt; the Life Online project involved 100+ participants in 6 cities."
+    },
+    {
+      "id": "S40",
+      "authors": ["Stack Overflow"],
+      "title": "Insights to Impact: Takeaways from the Stack Overflow Developer Survey for B2B Tech Marketers",
+      "publisher": "Stack Overflow",
+      "year": 2023,
+      "type": "industry_report",
+      "url": "https://stackoverflow.co/advertising/resources/stack-overflow-developer-survey-for-b2b-tech-marketers/insight-1/",
+      "note": "Reports free trial as the most common evaluation method (72–75% depending on survey year)."
+    },
+    {
+      "id": "S41",
+      "authors": ["Postman"],
+      "title": "State of the API Report (2020, 2021, 2023 editions)",
+      "publisher": "Postman",
+      "year": 2020,
+      "type": "industry_report",
+      "url": "https://www.businesswire.com/news/home/20200924005190/en/2020-Postman-State-of-the-API-Reveals-API-Investments-Will-Remain-Strong",
+      "note": "Lack of documentation: 54.3% (2020), about 55% (2021), 52% (2023) as top obstacle to consuming APIs; later years reached via third-party summaries."
+    },
+    {
+      "id": "S42",
+      "authors": ["Ferpection"],
+      "title": "UX Benchmark: what are the trends for banking websites?",
+      "publisher": "Ferpection",
+      "year": 2021,
+      "type": "industry_report",
+      "url": "https://blog.ferpection.com/en/ux-benchmark-what-are-the-trends-for-banking-websites",
+      "note": "User tests on 10 French banking sites; vendor benchmark."
+    },
+    {
+      "id": "S43",
+      "authors": ["W3C Accessibility Guidelines Working Group"],
+      "title": "Understanding SC 2.5.8 Target Size (Minimum), WCAG 2.2",
+      "publisher": "W3C",
+      "year": 2023,
+      "type": "standard_specification",
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"
+    }
+  ]
+}

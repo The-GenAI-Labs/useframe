@@ -490,6 +490,8 @@ model Plan {
   priceMinor                Int      @default(0)
   credits                   Int      @default(0)
   highlighted               Boolean  @default(false)
+  // A completed payment for this plan opens the whole research library (hasFullResearchAccess).
+  unlocksFullResearch       Boolean  @default(false)
   createdAt                 DateTime @default(now())
   updatedAt                 DateTime @default(now()) @updatedAt
 

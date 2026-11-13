@@ -1,4 +1,5 @@
-import { callGetProjectResearch } from "@/lib/researchService.js"
+import { callGetFinding, callGetProjectResearch } from "@/lib/researchService.js"
+import { canOpenFinding } from "@/lib/researchAccess.js"
 import { Queue } from "bullmq"
 import { prisma, type Prisma } from "@useframe/db"
 import { QUEUES } from "@repo/events"
@@ -37,6 +38,17 @@ export const PlanService = {
     if (!project) throw new AppError("Project not found", 404)
     return callGetProjectResearch(project.id)
   },
+  async getFinding(user: { id: string }, slug: string, findingId: string) {
+    const project = await prisma.project.findFirst({
+      where: { slug, userId: user.id, deletedAt: null },
+      select: { id: true },
+    })
+    if (!project) throw new AppError("Project not found", 404)
+    if (!(await canOpenFinding(user.id, findingId)))
+      throw new AppError("This finding is part of the full research library", 403, "RESEARCH_LOCKED")
+    return callGetFinding(findingId)
+  },
+
   async get(user: { id: string; email: string; plan: string }, slug: string) {
     const project = await prisma.project.findFirst({
       where: { slug, userId: user.id, deletedAt: null },

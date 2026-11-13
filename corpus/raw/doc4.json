@@ -1,0 +1,859 @@
+{
+  "findings": [
+    {
+      "claim": "WCAG requires body text to reach a 4.5:1 contrast ratio against its background (3:1 for large text) and the stricter enhanced level asks for 7:1, so every text and background pair in a landing page palette, including text over hero images, placeholders and hover or focus text, needs to be checked.",
+      "authors": ["W3C Accessibility Guidelines Working Group"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C WCAG 2.2 (SC 1.4.3 Contrast (Minimum), Level AA; SC 1.4.6 Contrast (Enhanced), Level AAA)",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general", "seniors"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Body text at 4.5:1 or higher, for example #767676 on #FFFFFF (about 4.54:1)",
+          "label": "AA baseline for body text",
+          "fits": ["professional", "balanced", "modern"]
+        },
+        {
+          "value": "Body text at 7:1 or higher (Level AAA), for example #595959 on #FFFFFF (about 7.0:1) or #212121 on #FFFFFF (about 16:1)",
+          "label": "Enhanced 7:1 for low-vision and older audiences",
+          "fits": ["clear", "trustworthy", "clinical"]
+        },
+        {
+          "value": "Large display headings (18pt or 14pt bold and above) may use 3:1",
+          "label": "Large-text 3:1 latitude",
+          "fits": ["bold", "expressive", "editorial"]
+        },
+        {
+          "value": "Text over photos placed on a solid or gradient scrim so the worst-case pixel behind the text still reaches 4.5:1",
+          "label": "Scrim under hero text",
+          "fits": ["premium", "photographic", "cinematic"]
+        },
+        {
+          "value": "Placeholder text and text revealed on hover or keyboard focus held to 4.5:1 as well",
+          "label": "States and placeholders",
+          "fits": ["polished", "accessible", "careful"]
+        }
+      ],
+      "contextHeader": "The W3C Accessibility Guidelines Working Group (2023, WCAG 2.2) sets 4.5:1 minimum text contrast (SC 1.4.3) and 7:1 enhanced contrast (SC 1.4.6), explaining that 4.5:1 compensates for the contrast loss of moderately low visual acuity (about 20/40), color deficiencies and aging, and 7:1 for about 20/80 acuity.",
+      "verified": true
+    },
+    {
+      "claim": "WCAG 1.4.11 requires the visual information needed to identify user interface components and their states (input borders, checkbox states, focus indicators) and the meaningful parts of graphics to reach 3:1 against adjacent colors, so pale-gray field borders on white and low-contrast icons fail.",
+      "authors": ["W3C Accessibility Guidelines Working Group"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C WCAG 2.2 (SC 1.4.11 Non-text Contrast, Level AA, introduced in WCAG 2.1 in 2018)",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Input borders at 3:1 or more against the page background, for example a #767676 border on #FFFFFF (about 4.54:1)",
+          "label": "Visible field borders",
+          "fits": ["clear", "professional", "trustworthy"]
+        },
+        {
+          "value": "Solid button fills that reach 3:1 against their surroundings, or an outline that does (button text still needs 4.5:1)",
+          "label": "Button fill or outline contrast",
+          "fits": ["bold", "confident", "modern"]
+        },
+        {
+          "value": "Focus ring of 2px or thicker with at least 3:1 contrast against adjacent colors, for example #005FCC on white (about 6:1)",
+          "label": "Strong focus ring",
+          "fits": ["accessible", "technical", "polished"]
+        },
+        {
+          "value": "Icons that carry meaning without a text label at 3:1 or more; purely decorative icons are exempt",
+          "label": "Meaningful icons at 3:1",
+          "fits": ["minimal", "clear", "friendly"]
+        },
+        {
+          "value": "Chart parts distinguished by direct labels, markers or patterns as well as color, with the required graphic parts at 3:1",
+          "label": "Chart legibility",
+          "fits": ["data-driven", "technical", "analytical"]
+        }
+      ],
+      "contextHeader": "The W3C Accessibility Guidelines Working Group (2023, WCAG 2.2) requires 3:1 contrast for user interface components, their states and essential parts of graphics in SC 1.4.11, extending text-contrast rules to controls and icons for people with moderately low vision.",
+      "verified": true
+    },
+    {
+      "claim": "WCAG 1.4.1 (Level A) requires that color is not the only visual means of conveying information, indicating an action, prompting a response or distinguishing an element, so links in body text, error and required-field states and status badges need a second cue such as an underline, icon or text.",
+      "authors": ["W3C Accessibility Guidelines Working Group"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C WCAG 2.2 (SC 1.4.1 Use of Color, Level A)",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Underlined links in running text; if links are not underlined, give them at least 3:1 contrast with surrounding text plus an added cue on hover and focus (WCAG technique G183)",
+          "label": "Underlined or cued links",
+          "fits": ["clear", "trustworthy", "editorial"]
+        },
+        {
+          "value": "Error states shown with a red border plus an error icon and message text",
+          "label": "Errors beyond red",
+          "fits": ["friendly", "clear", "professional"]
+        },
+        {
+          "value": "Required fields marked with an asterisk or the word 'required' in addition to any color",
+          "label": "Required-field marker",
+          "fits": ["practical", "clear", "corporate"]
+        },
+        {
+          "value": "Plan or status badges that carry a text label or icon (for example a 'Popular' tag) rather than a colored ring alone",
+          "label": "Labelled badges",
+          "fits": ["modern", "saas", "clear"]
+        },
+        {
+          "value": "Charts and legends with direct labels, patterns or marker shapes in addition to color",
+          "label": "Non-color chart cues",
+          "fits": ["data-driven", "technical", "analytical"]
+        }
+      ],
+      "contextHeader": "The W3C Accessibility Guidelines Working Group (2023, WCAG 2.2) states in SC 1.4.1 that color must not be the sole way of conveying meaning, listing failures such as links visible only through color and error or required fields identified by color alone.",
+      "verified": true
+    },
+    {
+      "claim": "Population surveys show inherited red-green color deficiency affects about 8% of men and 0.4% of women of European descent and 4% to 6.5% of men of Chinese and Japanese ethnicity, so red versus green status coding and low-luminance hue pairs will be misread by a meaningful share of visitors and color must not carry meaning alone.",
+      "authors": ["Jennifer Birch"],
+      "publicationYear": 2012,
+      "publishedIn": "Journal of the Optical Society of America A, 29(3), 313-320",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1364/JOSAA.29.000313",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Status colors always paired with an icon and a text label (for example a check mark and the word 'Success')",
+          "label": "Color plus icon plus word",
+          "fits": ["clear", "trustworthy", "professional"]
+        },
+        {
+          "value": "Blue and orange (or blue and yellow) for two-state emphasis instead of red and green, still combined with labels",
+          "label": "Blue-orange state palette",
+          "fits": ["modern", "confident", "calm"]
+        },
+        {
+          "value": "Palette pairs that differ in lightness as well as hue, verified in a red-green color deficiency simulator before sign-off",
+          "label": "Luminance-differentiated pairs",
+          "fits": ["technical", "careful", "polished"]
+        },
+        {
+          "value": "Pricing tiers, charts and legends identified by direct labels or patterns, not by hue alone",
+          "label": "Direct labels over hue",
+          "fits": ["data-driven", "clear", "analytical"]
+        }
+      ],
+      "contextHeader": "Birch (2012, Journal of the Optical Society of America A) reviewed large random population surveys of inherited red-green color deficiency and reported prevalence of about 8% in European Caucasian men, about 0.4% in women and 4% to 6.5% in men of Chinese and Japanese ethnicity, which informs why color-only cues fail for many web users.",
+      "verified": true
+    },
+    {
+      "claim": "WCAG 2.2 requires that a control receiving keyboard focus is not entirely hidden by author-created content such as sticky headers, cookie banners or chat widgets, so landing pages with fixed elements must keep the focused item visible when tabbing through the page.",
+      "authors": ["W3C Accessibility Guidelines Working Group"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C WCAG 2.2 (SC 2.4.11 Focus Not Obscured (Minimum), Level AA)",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured.html",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Sticky header with CSS scroll-padding-top equal to the header height so focused elements scroll clear of it",
+          "label": "Scroll-padding offset",
+          "fits": ["modern", "technical", "polished"]
+        },
+        {
+          "value": "Static (non-sticky) header on long landing pages, with in-page anchor links for navigation",
+          "label": "No sticky header",
+          "fits": ["minimal", "calm", "editorial"]
+        },
+        {
+          "value": "Compact sticky bar kept as short as practical to reduce the area that can cover focused items, tested by tabbing forwards and backwards",
+          "label": "Compact sticky bar",
+          "fits": ["efficient", "modern", "conversion-focused"]
+        },
+        {
+          "value": "Cookie and consent banners that do not cover focusable content, or that the user can dismiss (for example with Esc) without moving focus",
+          "label": "Dismissible banners",
+          "fits": ["respectful", "trustworthy", "careful"]
+        },
+        {
+          "value": "Bottom sticky CTA bar paired with matching scroll-padding-bottom",
+          "label": "Bottom bar with offset",
+          "fits": ["mobile-first", "conversion-focused", "modern"]
+        }
+      ],
+      "contextHeader": "The W3C Accessibility Guidelines Working Group (2023, WCAG 2.2) added SC 2.4.11 Focus Not Obscured (Minimum), which fails a page when a keyboard-focused component is entirely hidden by author-created content such as a sticky header.",
+      "verified": true
+    },
+    {
+      "claim": "WCAG 2.2.2 (Level A) requires a mechanism to pause, stop or hide any moving, blinking or scrolling content that starts automatically, lasts more than five seconds and sits alongside other content, and to pause, stop, hide or control the frequency of auto-updating content, which covers auto-rotating carousels, background videos and animated tickers.",
+      "authors": ["W3C Accessibility Guidelines Working Group"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C WCAG 2.2 (SC 2.2.2 Pause, Stop, Hide, Level A)",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide",
+      "field": "motion",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "motion",
+      "options": [
+        {
+          "value": "Static hero with no automatic motion",
+          "label": "Static hero",
+          "fits": ["calm", "minimal", "premium"]
+        },
+        {
+          "value": "Auto-rotating carousel with a visible, keyboard-operable pause/play button",
+          "label": "Carousel with pause control",
+          "fits": ["promotional", "retail", "informational"]
+        },
+        {
+          "value": "Background video that stops within five seconds or loops with a visible pause control",
+          "label": "Short or pausable video",
+          "fits": ["cinematic", "energetic", "brand-led"]
+        },
+        {
+          "value": "Carousel that advances only on user action, with no auto-advance",
+          "label": "User-advanced carousel",
+          "fits": ["respectful", "clear", "editorial"]
+        },
+        {
+          "value": "Autoplay skipped when the operating system's reduced-motion preference is set (prefers-reduced-motion: reduce)",
+          "label": "Respect reduced motion",
+          "fits": ["accessible", "polished", "modern"]
+        }
+      ],
+      "contextHeader": "The W3C Accessibility Guidelines Working Group (2023, WCAG 2.2) requires in SC 2.2.2 that automatically starting motion lasting over five seconds can be paused, stopped or hidden, noting that moving content can be a severe distraction for people with cognitive disabilities and attention deficits and a barrier for anyone who reads slowly or has trouble tracking motion.",
+      "verified": true
+    },
+    {
+      "claim": "WCAG 2.3.3 (Level AAA) says motion animation triggered by interaction, such as parallax scrolling, should be possible to disable because scroll-triggered movement can trigger vestibular disorders with dizziness, nausea and headaches, and honoring the operating system's reduce-motion setting is the standard route.",
+      "authors": ["W3C Accessibility Guidelines Working Group"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C WCAG 2.2 (SC 2.3.3 Animation from Interactions, Level AAA, introduced in WCAG 2.1 in 2018)",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions",
+      "field": "motion",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "motion",
+      "options": [
+        {
+          "value": "Parallax and large transforms wrapped in @media (prefers-reduced-motion: no-preference) so they are off for users who request reduced motion",
+          "label": "Reduced-motion media query",
+          "fits": ["modern", "technical", "polished"]
+        },
+        {
+          "value": "Opacity-only fades or static reveals instead of translation and parallax effects",
+          "label": "Fade instead of move",
+          "fits": ["calm", "minimal", "premium"]
+        },
+        {
+          "value": "On-page 'reduce motion' toggle that disables non-essential animation site-wide",
+          "label": "Motion toggle",
+          "fits": ["accessible", "respectful", "careful"]
+        },
+        {
+          "value": "Short, subtle micro-interactions (button states, hovers) kept separate from large scroll-linked effects",
+          "label": "Subtle micro-interactions only",
+          "fits": ["professional", "efficient", "trustworthy"]
+        }
+      ],
+      "contextHeader": "The W3C Accessibility Guidelines Working Group (2023, WCAG 2.2, carrying forward SC 2.3.3 from WCAG 2.1) explains that scroll-triggered movement such as parallax can trigger vestibular disorders and that non-essential interaction animation should be avoidable through design, a control or the reduce-motion setting.",
+      "verified": true
+    },
+    {
+      "claim": "W3C's images guidance sorts images into informative (a short description of the essential information), decorative (empty alt attribute), functional (describe the link or button action, not the picture) and complex (short alt plus a longer description nearby), so every hero image, icon and logo on a landing page needs a deliberate alt decision.",
+      "authors": ["W3C Web Accessibility Initiative (WAI)"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C WAI Images Tutorial, supporting WCAG 2.2 SC 1.1.1 Non-text Content",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/WAI/tutorials/images/",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Hero photo or illustration that carries meaning: concise informative alt text describing the essential information",
+          "label": "Informative alt",
+          "fits": ["clear", "descriptive", "editorial"]
+        },
+        {
+          "value": "Decorative flourishes, background patterns and icons repeated beside a text label: alt=\"\"",
+          "label": "Empty alt for decoration",
+          "fits": ["polished", "minimal", "modern"]
+        },
+        {
+          "value": "Icon-only or image-only links and buttons: alt describing the destination or action (for example 'View pricing')",
+          "label": "Functional alt",
+          "fits": ["practical", "clear", "professional"]
+        },
+        {
+          "value": "Charts and infographics: short alt plus the underlying data or description in adjacent text",
+          "label": "Complex image support",
+          "fits": ["data-driven", "technical", "analytical"]
+        },
+        {
+          "value": "No text embedded in images; where unavoidable, alt contains the same text",
+          "label": "Avoid text in images",
+          "fits": ["accessible", "clean", "responsive"]
+        }
+      ],
+      "contextHeader": "The W3C Web Accessibility Initiative (2023, Images Tutorial aligned with WCAG 2.2 SC 1.1.1) classifies images as informative, decorative, functional or complex and prescribes a different text alternative for each, including an empty alt attribute for purely decorative images.",
+      "verified": true
+    },
+    {
+      "claim": "WebAIM's 2026 analysis of one million home pages found 95.9% with detectable WCAG failures and six error types accounting for 96% of errors (low-contrast text on 83.9% of pages, missing image alt text 53.1%, missing form labels 51%, empty links 46.3%, empty buttons 30.6%, missing document language 13.5%), so getting those six right in a landing page design system avoids most detectable barriers.",
+      "authors": ["WebAIM (Web Accessibility In Mind), Utah State University"],
+      "publicationYear": 2026,
+      "publishedIn": "WebAIM, Utah State University (The WebAIM Million, 2026 report)",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://webaim.org/projects/million/",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Design-system color tokens pre-checked for at least 4.5:1 text contrast and 3:1 UI contrast",
+          "label": "Pre-checked color tokens",
+          "fits": ["systematic", "professional", "polished"]
+        },
+        {
+          "value": "Every input has a visible label and every icon-only button or link has an accessible name",
+          "label": "Labels and names by default",
+          "fits": ["clear", "practical", "trustworthy"]
+        },
+        {
+          "value": "Image component that forces an alt decision (descriptive or empty) at build time",
+          "label": "Alt required at build",
+          "fits": ["systematic", "technical", "careful"]
+        },
+        {
+          "value": "html lang set on every page and descriptive link text instead of 'click here' or 'more' (15.2% of pages had ambiguous link text)",
+          "label": "Language and link text",
+          "fits": ["clear", "editorial", "professional"]
+        },
+        {
+          "value": "Native HTML controls and simple components in place of heavy ARIA widgets or slider libraries (pages with ARIA averaged 59.1 detected errors versus 42 without, and pages using Slick, OWL Carousel or Swiper averaged 26-32% more; correlational)",
+          "label": "Native and simple over heavy",
+          "fits": ["minimal", "technical", "efficient"]
+        }
+      ],
+      "contextHeader": "WebAIM at Utah State University (2026, The WebAIM Million) ran automated WAVE accessibility tests on the home pages of the top 1,000,000 websites in February 2026, reporting 95.9% with detectable WCAG 2 failures and six recurring error types making up 96% of detected errors; automated testing detects only a subset of real barriers.",
+      "verified": true
+    },
+    {
+      "claim": "In WebAIM's 2023-24 survey of 1,539 screen reader users, 71.6% said they first navigate through the headings when looking for information on a long page and 88.8% found heading levels very or somewhat useful, so landing page sections need real, hierarchical heading elements with descriptive text rather than merely styled text.",
+      "authors": ["WebAIM (Web Accessibility In Mind), Utah State University"],
+      "publicationYear": 2024,
+      "publishedIn": "WebAIM, Utah State University (Screen Reader User Survey #10)",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://webaim.org/projects/screenreadersurvey10/",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "One h1 stating the page's main value proposition, then an h2 per major section and h3 for sub-parts, with no skipped levels",
+          "label": "Clean heading hierarchy",
+          "fits": ["clear", "professional", "editorial"]
+        },
+        {
+          "value": "Descriptive heading text that makes sense out of context (for example 'Pricing plans', not 'Learn more')",
+          "label": "Descriptive headings",
+          "fits": ["clear", "trustworthy", "practical"]
+        },
+        {
+          "value": "Landmark elements (header, nav, main, footer) in addition to headings, since 31.7% of respondents use landmarks often or always when present",
+          "label": "Headings plus landmarks",
+          "fits": ["technical", "organized", "polished"]
+        },
+        {
+          "value": "A working skip link to main content at the top of the page",
+          "label": "Skip link",
+          "fits": ["accessible", "careful", "professional"]
+        }
+      ],
+      "contextHeader": "WebAIM (2024, Screen Reader User Survey #10) surveyed 1,539 screen reader users in December 2023 and January 2024 and found headings were the most common first strategy for finding information on long pages; the sample was not controlled and may not represent all screen reader users.",
+      "verified": true
+    },
+    {
+      "claim": "NN/g's user testing found placeholder text used as a field label or hint hurts usability (it disappears, strains memory, prevents checking entries, is skipped as if already filled in, and is often low-contrast or unread by screen readers), so lead-capture and sign-up forms should use visible labels and hints outside the field.",
+      "authors": ["Katie Sherwin"],
+      "publicationYear": 2014,
+      "publishedIn": "Nielsen Norman Group",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://www.nngroup.com/articles/form-design-placeholders/",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general", "seniors"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Visible label above each field, with any essential hint also visible outside the field",
+          "label": "Label and hint outside",
+          "fits": ["clear", "trustworthy", "professional"]
+        },
+        {
+          "value": "Label outside the field plus a placeholder used only for a non-essential example",
+          "label": "Label plus optional example",
+          "fits": ["practical", "friendly", "modern"]
+        },
+        {
+          "value": "Floating labels that move above the field on focus, as a space-saving compromise on mobile (still leaves some issues NN/g describes)",
+          "label": "Floating label compromise",
+          "fits": ["minimal", "mobile-first", "modern"]
+        },
+        {
+          "value": "Persistent helper text linked to the input with aria-describedby",
+          "label": "Programmatically linked hints",
+          "fits": ["accessible", "technical", "careful"]
+        }
+      ],
+      "contextHeader": "Sherwin (2014, Nielsen Norman Group, last reviewed 2018) summarizes user-testing evidence that placeholders in form fields often hurt usability and accessibility more than they help, and recommends clear visible labels placed outside empty form fields.",
+      "verified": true
+    },
+    {
+      "claim": "WCAG 1.4.12 (Level AA) requires that no content or functionality is lost when users override line height to 1.5 times, paragraph spacing to 2 times, letter spacing to 0.12 times and word spacing to 0.16 times the font size, so containers, buttons and navigation items on a landing page must grow with their text.",
+      "authors": ["W3C Accessibility Guidelines Working Group"],
+      "publicationYear": 2023,
+      "publishedIn": "W3C WCAG 2.2 (SC 1.4.12 Text Spacing, Level AA, introduced in WCAG 2.1 in 2018)",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/WAI/WCAG21/Understanding/text-spacing",
+      "field": "typography",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "Auto-height containers (min-height rather than fixed height) for cards, buttons and navigation items",
+          "label": "Flexible-height components",
+          "fits": ["robust", "technical", "modern"]
+        },
+        {
+          "value": "Default body line-height of 1.5 so user overrides change little",
+          "label": "1.5 line-height default",
+          "fits": ["accessible", "calm", "editorial"]
+        },
+        {
+          "value": "Labels allowed to wrap (no white-space: nowrap on labels that can grow), so widened letter spacing does not clip tabs or nav items",
+          "label": "Wrapping labels",
+          "fits": ["practical", "careful", "responsive"]
+        },
+        {
+          "value": "Pre-launch check of hero, pricing cards and footer using a text-spacing bookmarklet or extension",
+          "label": "Text-spacing test pass",
+          "fits": ["systematic", "professional", "polished"]
+        }
+      ],
+      "contextHeader": "The W3C Accessibility Guidelines Working Group (2023, WCAG 2.2, carrying forward SC 1.4.12 from WCAG 2.1) requires pages to survive user-applied text spacing of 1.5x line height, 2x paragraph spacing, 0.12x letter spacing and 0.16x word spacing, which people with low vision or dyslexia often apply through extensions or style sheets.",
+      "verified": true
+    },
+    {
+      "claim": "In an eye-tracking study of 48 people with dyslexia reading 12 fonts, sans serif, monospaced and roman font styles improved reading performance over serif, proportional and italic styles (Helvetica, Courier, Arial, Verdana and Computer Modern Unicode performed best, and the specially designed OpenDyslexic showed no advantage), so a plain sans serif body font without italics is a defensible default.",
+      "authors": ["Luz Rello", "Ricardo Baeza-Yates"],
+      "publicationYear": 2013,
+      "publishedIn": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS '13)",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.1145/2513383.2513447",
+      "field": "typography",
+      "appliesTo": ["general_web"],
+      "audience": ["general"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "Arial or Helvetica (or a comparable neutral sans serif) for body text, roman style only",
+          "label": "Neutral sans serif body",
+          "fits": ["professional", "clear", "modern"]
+        },
+        {
+          "value": "Verdana for wider, more open letterforms in long on-screen reading",
+          "label": "Open-letterform sans",
+          "fits": ["friendly", "practical", "approachable"]
+        },
+        {
+          "value": "System sans-serif font stack (system-ui, Segoe UI, Arial, sans-serif) as a low-risk default",
+          "label": "System sans stack",
+          "fits": ["efficient", "minimal", "technical"]
+        },
+        {
+          "value": "No italics for long passages; use bold or a distinct color-neutral treatment for emphasis instead",
+          "label": "Avoid long italics",
+          "fits": ["accessible", "clean", "careful"]
+        },
+        {
+          "value": "Standard sans serif rather than a specialty dyslexia font, since OpenDyslexic gave no measurable advantage in this study",
+          "label": "No special font required",
+          "fits": ["pragmatic", "professional", "inclusive"]
+        }
+      ],
+      "contextHeader": "Rello and Baeza-Yates (2013, ACM ASSETS) used eye tracking with 48 participants with dyslexia reading 12 fonts and found sans serif, monospaced and roman styles improved reading performance, although the study did not control letter spacing across fonts so part of the effect may reflect spacing.",
+      "verified": true
+    },
+    {
+      "claim": "In an eye-tracking study of 104 readers of Wikipedia text, readability improved significantly with font size up to 18 points and comprehension was best at 18 and 26 points, while the extreme line spacings tested (0.8 and 1.8 of default) marginally impaired readability, so text-heavy sections should use 18-point (about 24 CSS px) or larger text with ordinary line spacing.",
+      "authors": ["Luz Rello", "Martin Pielot", "Mari-Carmen Marcos"],
+      "publicationYear": 2016,
+      "publishedIn": "Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI '16), pp. 3637-3648",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://dblp.uni-trier.de/pid/60/4144.html",
+      "field": "typography",
+      "appliesTo": ["general_web"],
+      "audience": ["general", "seniors"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "Body text at 18pt (about 24 CSS px, assuming points map to CSS points) with line-height 1.2 to 1.5 for long reading sections",
+          "label": "Study-backed reading size",
+          "fits": ["accessible", "editorial", "clear"]
+        },
+        {
+          "value": "20-22pt (about 27-29 CSS px) body text for older or low-vision audiences, within the range tested where 26pt also gave strong comprehension",
+          "label": "Larger for older audiences",
+          "fits": ["warm", "inclusive", "trustworthy"]
+        },
+        {
+          "value": "Fluid type scale with a floor near 24 CSS px for long-form body text on desktop reading layouts",
+          "label": "Fluid scale with a floor",
+          "fits": ["modern", "responsive", "technical"]
+        },
+        {
+          "value": "Short interface labels, captions and metadata may be set smaller (roughly 14-16 CSS px), since the finding concerns continuous reading text",
+          "label": "Smaller for short UI strings",
+          "fits": ["efficient", "compact", "professional"]
+        }
+      ],
+      "contextHeader": "Rello, Pielot and Marcos (2016, ACM CHI) ran an eye-tracking experiment with 104 participants aged 14 to 54 reading Wikipedia articles at font sizes from 10 to 26 points and line spacings from 0.8 to 1.8 of default, recommending fonts of 18 points or larger with default line spacing for text-heavy websites.",
+      "verified": true
+    },
+    {
+      "claim": "The W3C's cognitive accessibility Working Group Note recommends patterns that reduce cognitive barriers (a clear purpose heading per page, familiar layouts and conventional underlined links, important tasks near the top, visible labels, short chunks with white space, no unexpected movement, limited interruptions, plain literal wording and user control over moving content), so landing pages should favor familiar structure and controls over novelty.",
+      "authors": [
+        "Lisa Seeman-Horwitz",
+        "Rachael Bradley Montgomery",
+        "Steve Lee",
+        "Ruoxi Ran"
+      ],
+      "publicationYear": 2021,
+      "publishedIn": "W3C Working Group Note (Cognitive and Learning Disabilities Accessibility Task Force): Making Content Usable for People with Cognitive and Learning Disabilities",
+      "publicationType": "standard_specification",
+      "sourceUrl": "https://www.w3.org/TR/coga-usable/",
+      "field": "accessibility",
+      "appliesTo": ["general_web"],
+      "audience": ["general", "seniors"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Familiar layout with logo top-left, navigation at the top and prominent primary action, plus conventional underlined links and standard-looking buttons",
+          "label": "Familiar layout and controls",
+          "fits": ["trustworthy", "clear", "professional"]
+        },
+        {
+          "value": "Chunked sections with generous white space, each opened by one clear heading",
+          "label": "Chunked, spacious sections",
+          "fits": ["calm", "minimal", "editorial"]
+        },
+        {
+          "value": "A first heading that states the page's purpose and the most important task visible near the top without scrolling",
+          "label": "Purpose and key task first",
+          "fits": ["clear", "practical", "conversion-focused"]
+        },
+        {
+          "value": "No auto-moving banners, unexpected pop-ups or shifting content; where motion is used, provide a control to stop it",
+          "label": "Calm, controllable page",
+          "fits": ["respectful", "calm", "accessible"]
+        },
+        {
+          "value": "Plain, literal copy with short sentences and no idioms or metaphors that must be decoded",
+          "label": "Plain-language copy",
+          "fits": ["friendly", "approachable", "inclusive"]
+        }
+      ],
+      "contextHeader": "Seeman-Horwitz, Bradley Montgomery, Lee and Ran (2021, W3C Working Group Note from the Cognitive and Learning Disabilities Accessibility Task Force) provide informative supplemental guidance beyond WCAG 2 with objectives and design patterns for making web content usable for people with cognitive and learning disabilities; the note is not a normative standard.",
+      "verified": true
+    }
+  ],
+  "articles": [
+    {
+      "title": "Contrast and Color: Designing for the Way People Actually See",
+      "category": "Accessibility",
+      "summary": "Good contrast is the single most common accessibility gap on the web. Here is where the WCAG numbers come from, why controls need contrast too, and why color must never work alone.",
+      "sections": [
+        {
+          "heading": "Text contrast: the 4.5:1 rule",
+          "body": "WCAG asks for 4.5:1 between text and background (3:1 for large text), with 7:1 at the stricter AAA level. The W3C explains that 4.5:1 compensates for the contrast loss of moderately low vision, color deficiencies and aging."
+        },
+        {
+          "heading": "Controls and icons need contrast too",
+          "body": "WCAG 1.4.11 asks for 3:1 for input borders, control states, focus rings and meaningful graphics. A pale gray border on a white page is the classic failure."
+        },
+        {
+          "heading": "Color must never work alone",
+          "body": "WCAG 1.4.1 says color cannot be the only way to convey meaning. Pair color with underlines, icons or words for links, errors, required fields and status."
+        },
+        {
+          "heading": "Why this is not a niche issue",
+          "body": "Birch's 2012 review found about 8% of men and 0.4% of women of European descent, and 4% to 6.5% of men of Chinese and Japanese ethnicity, have red-green color deficiency."
+        }
+      ],
+      "body": "Accessible color is not about making a page ugly. It is about making sure the people who visit can actually see what you built. Four sources set the ground rules.\n\n## Text contrast: the 4.5:1 rule and where it comes from\n\nThe W3C's Web Content Accessibility Guidelines (WCAG 2.2, 2023) require a contrast ratio of at least 4.5:1 between text and its background, with 3:1 allowed for large text. The W3C's own explanation of Success Criterion 1.4.3 says the 3:1 base figure comes from ISO 9241-3 and an older US standard, and that 4.5:1 compensates for the loss of contrast that comes with moderately low visual acuity (roughly 20/40), color deficiencies or aging. A stricter Level AAA criterion asks for 7:1, which corresponds to roughly 20/80 acuity. The rule applies to placeholder text and to text that appears on hover or focus, not only to headings and paragraphs, and real text placed over a photo is still measured against what sits behind it, so hero headlines need a solid or gradient panel behind them rather than hope.\n\nTo make this concrete: mid-gray #767676 on white just clears 4.5:1 (about 4.54:1), while #595959 on white reaches 7:1.\n\n## Controls and icons need contrast too\n\nWCAG 1.4.11 (added in WCAG 2.1) extends contrast to things that are not text. Visual information needed to identify a control or its state, such as an input border, a checkbox state or a focus ring, needs at least 3:1 against adjacent colors, and so do the parts of a graphic needed to understand it. The classic failure is a pale gray input border on a white page: the field is there, but a person with low vision may not find it. Inactive controls are exempt.\n\n## Color must never work alone\n\nWCAG 1.4.1 (Level A, the most basic tier) says color must not be the only way to convey information, indicate an action, prompt a response or distinguish an element. Typical failures include links in body text that differ only in color, errors shown only by a red outline, or required fields marked only by color. The W3C's technique for links is to give them at least 3:1 contrast with the surrounding text plus an extra cue on hover and focus, and underlining is the simplest way to avoid the problem altogether.\n\n## Why this is not a niche issue\n\nJennifer Birch's 2012 review in the Journal of the Optical Society of America A pulled together large population surveys of inherited red-green color deficiency. Among people of European descent, about 8% of men and 0.4% of women are affected, and among men of Chinese and Japanese ethnicity the figure is between 4% and 6.5%. Those numbers vary by population, and color deficiency is only one reason people miss color cues, since low vision, aging screens and bright sunlight all matter too.\n\n## Putting it together\n\nPick your palette by contrast first and hue second. Check every text and background pair, including text on images, placeholders and hover states. Give inputs and icons a visible 3:1 edge. And for anything that carries meaning, such as status, errors or plan tiers, pair the color with a word, an icon or a pattern.",
+      "tags": [
+        "contrast",
+        "WCAG",
+        "color vision deficiency",
+        "use of color",
+        "non-text contrast",
+        "accessibility"
+      ],
+      "references": [
+        {
+          "authors": ["W3C Accessibility Guidelines Working Group"],
+          "title": "Understanding SC 1.4.3: Contrast (Minimum), Web Content Accessibility Guidelines (WCAG) 2.2",
+          "publishedIn": "W3C",
+          "year": 2023,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html"
+        },
+        {
+          "authors": ["W3C Accessibility Guidelines Working Group"],
+          "title": "Understanding SC 1.4.11: Non-text Contrast, Web Content Accessibility Guidelines (WCAG) 2.2",
+          "publishedIn": "W3C",
+          "year": 2023,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast"
+        },
+        {
+          "authors": ["W3C Accessibility Guidelines Working Group"],
+          "title": "Understanding SC 1.4.1: Use of Color, Web Content Accessibility Guidelines (WCAG) 2.2",
+          "publishedIn": "W3C",
+          "year": 2023,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html"
+        },
+        {
+          "authors": ["Jennifer Birch"],
+          "title": "Worldwide prevalence of red-green color deficiency",
+          "publishedIn": "Journal of the Optical Society of America A, 29(3), 313-320",
+          "year": 2012,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1364/JOSAA.29.000313"
+        }
+      ]
+    },
+    {
+      "title": "Focus, Motion and Moving Parts: Keeping Landing Pages Usable",
+      "category": "Accessibility",
+      "summary": "Sticky headers, carousels, background video and parallax are popular landing page features and common barriers. Three W3C criteria explain how to keep them usable.",
+      "sections": [
+        {
+          "heading": "Sticky headers can hide the keyboard focus",
+          "body": "WCAG 2.2 SC 2.4.11 says a control receiving keyboard focus must not be entirely hidden by author-created content. Test by tabbing through the page and offset scroll positions so focused items land below fixed headers."
+        },
+        {
+          "heading": "Anything that moves by itself needs an off switch",
+          "body": "WCAG 2.2.2 requires a way to pause, stop or hide automatic motion that lasts more than five seconds. That covers auto-rotating carousels and background videos."
+        },
+        {
+          "heading": "Scroll effects can make people ill",
+          "body": "WCAG 2.3.3 (AAA) targets interaction-triggered motion such as parallax, which can trigger vestibular disorders. Honor the reduce-motion setting or offer a control."
+        }
+      ],
+      "body": "Modern landing pages love sticky headers, sliding carousels, looping videos and parallax scrolling. Each can be a barrier for someone. Three W3C criteria describe how.\n\n## Sticky headers can hide the keyboard focus\n\nPeople who use a keyboard move through a page with the Tab key, and a visible focus indicator shows where they are. WCAG 2.2 added Success Criterion 2.4.11, Focus Not Obscured (Minimum, Level AA): when a control receives keyboard focus it must not be entirely hidden by author-created content. Sticky headers, cookie banners and chat widgets are the usual culprits. If a fixed header covers the field you just tabbed into, you cannot see what you are typing into. Partial overlap is allowed at AA; the stricter AAA version (2.4.12) does not allow any overlap. In practice this means testing by tabbing forwards and backwards through the whole page, and offsetting scroll positions (for example with CSS scroll-padding) so focused items land below the header. Content the user opens themselves, such as a dialog they can dismiss with Esc, is treated more leniently.\n\n## Anything that moves by itself needs an off switch\n\nWCAG 2.2.2, Pause, Stop, Hide (Level A), applies to moving, blinking or scrolling content that starts automatically, lasts more than five seconds and appears alongside other content. Users must be able to pause, stop or hide it. Auto-updating content must also be controllable, and there is no five-second exception for it. The W3C explains why: moving content is a barrier for people who read slowly or have trouble tracking motion, it can cause problems for screen readers, and it can be a severe distraction for some people, including those with attention deficits. Auto-rotating hero carousels and background videos are the everyday examples. The simplest solutions are a static hero, or a visible, keyboard-operable pause button.\n\n## Scroll effects can make people ill\n\nWCAG 2.3.3, Animation from Interactions (Level AAA), is about motion triggered by the user's own actions, such as parallax scrolling where backgrounds move at a different speed from foregrounds. The W3C notes that such effects can trigger vestibular disorders, with dizziness, nausea and headaches, and that reactions can be severe. Non-essential animation should be avoidable: skip the effect, offer a control to turn it off, or honor the operating system's reduce-motion setting through the CSS prefers-reduced-motion media query. This criterion is Level AAA, which is above the AA level that many accessibility laws and policies refer to, but honoring reduced motion is cheap and increasingly expected.\n\n## A practical checklist\n\n- Tab through the page with a sticky header on, and confirm every focused item stays visible.\n- Give any auto-playing motion longer than five seconds a pause control, or remove the autoplay.\n- Wrap parallax and large transforms in a reduced-motion check, and fall back to a simple fade or no animation.\n\nNone of these ideas require giving up polish. They ask for control: the visitor decides what moves.",
+      "tags": [
+        "focus",
+        "sticky header",
+        "carousel",
+        "motion",
+        "reduced motion",
+        "vestibular",
+        "WCAG"
+      ],
+      "references": [
+        {
+          "authors": ["W3C Accessibility Guidelines Working Group"],
+          "title": "Understanding SC 2.4.11: Focus Not Obscured (Minimum), Web Content Accessibility Guidelines (WCAG) 2.2",
+          "publishedIn": "W3C",
+          "year": 2023,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured.html"
+        },
+        {
+          "authors": ["W3C Accessibility Guidelines Working Group"],
+          "title": "Understanding SC 2.2.2: Pause, Stop, Hide, Web Content Accessibility Guidelines (WCAG) 2.2",
+          "publishedIn": "W3C",
+          "year": 2023,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide"
+        },
+        {
+          "authors": ["W3C Accessibility Guidelines Working Group"],
+          "title": "Understanding SC 2.3.3: Animation from Interactions, Web Content Accessibility Guidelines (WCAG) 2.1",
+          "publishedIn": "W3C",
+          "year": 2023,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions"
+        }
+      ]
+    },
+    {
+      "title": "Structure, Labels and Forms That Work With Assistive Technology",
+      "category": "Accessibility",
+      "summary": "Screen readers, voice control and keyboards depend on the code behind the design. The biggest audit of the web shows the same handful of gaps year after year, and they are mostly design decisions.",
+      "sections": [
+        {
+          "heading": "What the biggest audit finds",
+          "body": "WebAIM's 2026 analysis of one million home pages found six error types account for 96% of detected failures: low contrast, missing alt text, missing form labels, empty links, empty buttons and missing page language."
+        },
+        {
+          "heading": "Decide what every image is for",
+          "body": "The W3C sorts images into informative, decorative, functional and complex, each with a different text alternative. Icon-only links and buttons need alt text describing the action."
+        },
+        {
+          "heading": "Headings are how screen reader users navigate",
+          "body": "In WebAIM's 2024 survey, 71.6% of screen reader users first navigate long pages by headings. Use real heading elements in a logical order with descriptive text."
+        },
+        {
+          "heading": "Placeholders are not labels",
+          "body": "NN/g's testing shows placeholder-as-label strains memory, hides errors and is often low contrast or unread. Use visible labels outside the field."
+        }
+      ],
+      "body": "Screen readers, voice control and keyboards all depend on the code behind the design. Four sources show where landing pages most often fall short and what to do about it.\n\n## What the biggest audit finds\n\nWebAIM, the accessibility group at Utah State University, analyzes the home pages of the top million websites every year. Its 2026 report found detectable WCAG failures on 95.9% of pages, and six error types made up 96% of everything it detected: low-contrast text (83.9% of pages), missing alternative text on images (53.1%), missing form labels (51%), empty links (46.3%), empty buttons (30.6%) and a missing page language (13.5%). These are the same six categories as in each of the previous seven years. WebAIM also found that pages using ARIA averaged 59.1 detected errors against 42 for pages without, and that popular carousel libraries were associated with more errors than average, though it cautions that these pages are also more complex, so the link is correlational.\n\nNothing in that list requires a redesign. It requires a few deliberate decisions in the design system.\n\n## Decide what every image is for\n\nThe W3C's images tutorial (which supports WCAG 1.1.1) sorts images into four kinds. Informative images need a short description of the essential information. Decorative images get an empty alt attribute so screen readers skip them. Functional images, such as an icon inside a button or link, need alt text that describes the action, for example 'View pricing', rather than the picture. Complex images such as charts need a short description plus the underlying information nearby. In WebAIM's data, 16.2% of all images lacked alt text, and 45% of those were linked images, which leaves links without a meaningful name.\n\n## Headings are how screen reader users navigate\n\nIn WebAIM's Screen Reader User Survey #10 (1,539 respondents, collected in December 2023 and January 2024), 71.6% said that on a long page they first navigate through the headings, and 88.8% found heading levels very or somewhat useful. Only 3.7% started with landmarks. The sample was not controlled, so it may not represent all screen reader users, but the direction is clear: use real heading elements in a logical order, with descriptive text, so each section of the landing page can be found on its own. WebAIM's audit also shows how often this goes wrong: skipped heading levels appeared on 41.8% of pages.\n\n## Placeholders are not labels\n\nKatie Sherwin's Nielsen Norman Group article summarizes user testing showing that placeholder text used in place of a label strains memory, prevents people from checking their entries, is skipped as if it were pre-filled, and is often low contrast or not read aloud by screen readers. NN/g's best option is a visible label, with any hint, outside the field. Floating labels are an acceptable compromise where space is tight, but they do not fix every problem.\n\n## Takeaway\n\nGive every input a visible label, every icon-only control a name, every image a purpose, and every section a real heading. Those four habits cover a large share of the failures that automated audits find.",
+      "tags": [
+        "alt text",
+        "headings",
+        "screen readers",
+        "forms",
+        "labels",
+        "WebAIM",
+        "placeholders"
+      ],
+      "references": [
+        {
+          "authors": [
+            "WebAIM (Web Accessibility In Mind), Utah State University"
+          ],
+          "title": "The WebAIM Million: The 2026 report on the accessibility of the top 1,000,000 home pages",
+          "publishedIn": "WebAIM, Utah State University",
+          "year": 2026,
+          "publicationType": "industry_report",
+          "url": "https://webaim.org/projects/million/"
+        },
+        {
+          "authors": ["W3C Web Accessibility Initiative (WAI)"],
+          "title": "Images Tutorial",
+          "publishedIn": "W3C Web Accessibility Initiative",
+          "year": 2023,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/WAI/tutorials/images/"
+        },
+        {
+          "authors": [
+            "WebAIM (Web Accessibility In Mind), Utah State University"
+          ],
+          "title": "Screen Reader User Survey #10 Results",
+          "publishedIn": "WebAIM, Utah State University",
+          "year": 2024,
+          "publicationType": "industry_report",
+          "url": "https://webaim.org/projects/screenreadersurvey10/"
+        },
+        {
+          "authors": ["Katie Sherwin"],
+          "title": "Placeholders in Form Fields Are Harmful",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2014,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/form-design-placeholders/"
+        }
+      ]
+    },
+    {
+      "title": "Text People Can Read: Spacing, Fonts, Size and Cognitive Load",
+      "category": "Accessibility",
+      "summary": "Readable text is spacing, letterforms, size and how much you ask people to hold in their heads. Four sources give concrete guidance, with honest limits.",
+      "sections": [
+        {
+          "heading": "Let people change the spacing",
+          "body": "WCAG 1.4.12 requires nothing to break when readers override line height, paragraph, letter and word spacing. Buttons with fixed heights and non-wrapping labels are the usual failures."
+        },
+        {
+          "heading": "Fonts: sans serif helped in one dyslexia study",
+          "body": "Rello and Baeza-Yates (2013) found sans serif, monospaced and roman styles improved reading for 48 people with dyslexia, and OpenDyslexic showed no advantage. Letter spacing was not controlled."
+        },
+        {
+          "heading": "Size: bigger than most designers set it",
+          "body": "Rello, Pielot and Marcos (2016) found readability improved up to 18 points and comprehension was best at 18 and 26 points. The study covered long desktop reading, not small interface labels."
+        },
+        {
+          "heading": "Cognitive load: familiar beats clever",
+          "body": "The W3C's cognitive accessibility note recommends clear page purpose, familiar layouts, short chunks, plain wording and no unexpected movement. It is supplemental guidance, not a WCAG requirement."
+        }
+      ],
+      "body": "Readable text is not one setting. It is spacing, letterforms, size and how much you ask people to hold in their heads. Four sources give concrete guidance.\n\n## Let people change the spacing\n\nWCAG 1.4.12 (Level AA) does not tell you to set your text a particular way. It says nothing should break when a reader overrides the spacing: line height up to 1.5 times the font size, paragraph spacing to 2 times, letter spacing to 0.12 times and word spacing to 0.16 times. People with low vision or dyslexia often use extensions or style sheets to do exactly this. The usual failures are buttons with fixed heights that clip their labels, tab labels that overflow and cards whose text is hidden. The fix is to let containers grow: use minimum heights, allow wrapping and test with a text-spacing bookmarklet.\n\n## Fonts: sans serif helped in one dyslexia study\n\nLuz Rello and Ricardo Baeza-Yates (2013, ACM ASSETS) used eye tracking with 48 people with dyslexia reading 12 fonts. Sans serif, monospaced and roman styles improved reading performance compared with serif, proportional and italic ones. Helvetica, Courier, Arial, Verdana and Computer Modern Unicode came out best, and the specially designed OpenDyslexic font gave no advantage in this study. The caveat: the study did not control how far apart each font sets its letters, so some of the effect may come from spacing. The practical reading is modest and useful: a plain sans serif body font without italics is a safe default, and you do not need a specialty font.\n\n## Size: bigger than most designers set it\n\nRello, Pielot and Marcos (2016, ACM CHI) ran an eye-tracking study with 104 participants reading Wikipedia text at six sizes from 10 to 26 points. Readability and comprehension improved up to 18 points, and comprehension questions were answered best at 18 and 26 points. Extreme line spacings (0.8 and 1.8 times default) marginally hurt readability, while ordinary variations made little difference. Their advice for text-heavy pages is 18-point text or larger with default line spacing. The study covered desktop reading of long articles by people aged 14 to 54, so treat it as evidence for continuous reading text, not for small interface labels.\n\n## Cognitive load: familiar beats clever\n\nThe W3C's cognitive accessibility note, Making Content Usable for People with Cognitive and Learning Disabilities (2021), is supplemental guidance rather than a requirement of WCAG. Its patterns are practical: state the purpose of each page clearly, use familiar layouts and standard-looking links and buttons, put the most important tasks near the top, use short chunks of content with white space, avoid content that moves unexpectedly, and use plain, literal wording. It also asks that users can control content that moves or changes. The note says these patterns help many people, including those under stress or new to the web, and are essential for some.\n\n## Putting it together\n\nSet body text generously, use a neutral sans serif, and make the layout tolerant of user overrides. Then keep the page itself calm and predictable.",
+      "tags": [
+        "text spacing",
+        "dyslexia",
+        "font size",
+        "readability",
+        "cognitive accessibility",
+        "typography"
+      ],
+      "references": [
+        {
+          "authors": ["W3C Accessibility Guidelines Working Group"],
+          "title": "Understanding SC 1.4.12: Text Spacing, Web Content Accessibility Guidelines (WCAG) 2.1",
+          "publishedIn": "W3C",
+          "year": 2023,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/WAI/WCAG21/Understanding/text-spacing"
+        },
+        {
+          "authors": ["Luz Rello", "Ricardo Baeza-Yates"],
+          "title": "Good fonts for dyslexia",
+          "publishedIn": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS '13)",
+          "year": 2013,
+          "publicationType": "conference_paper",
+          "url": "https://doi.org/10.1145/2513383.2513447"
+        },
+        {
+          "authors": ["Luz Rello", "Martin Pielot", "Mari-Carmen Marcos"],
+          "title": "Make It Big!: The Effect of Font Size and Line Spacing on Online Readability",
+          "publishedIn": "Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI '16)",
+          "year": 2016,
+          "publicationType": "conference_paper",
+          "url": "https://dblp.uni-trier.de/pid/60/4144.html"
+        },
+        {
+          "authors": [
+            "Lisa Seeman-Horwitz",
+            "Rachael Bradley Montgomery",
+            "Steve Lee",
+            "Ruoxi Ran"
+          ],
+          "title": "Making Content Usable for People with Cognitive and Learning Disabilities",
+          "publishedIn": "W3C Working Group Note (Cognitive and Learning Disabilities Accessibility Task Force)",
+          "year": 2021,
+          "publicationType": "standard_specification",
+          "url": "https://www.w3.org/TR/coga-usable/"
+        }
+      ]
+    }
+  ]
+}

@@ -62,6 +62,7 @@ export type PlanMinAggregateOutputType = {
   priceMinor: number | null
   credits: number | null
   highlighted: boolean | null
+  unlocksFullResearch: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -82,6 +83,7 @@ export type PlanMaxAggregateOutputType = {
   priceMinor: number | null
   credits: number | null
   highlighted: boolean | null
+  unlocksFullResearch: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -103,6 +105,7 @@ export type PlanCountAggregateOutputType = {
   priceMinor: number
   credits: number
   highlighted: number
+  unlocksFullResearch: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -145,6 +148,7 @@ export type PlanMinAggregateInputType = {
   priceMinor?: true
   credits?: true
   highlighted?: true
+  unlocksFullResearch?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -165,6 +169,7 @@ export type PlanMaxAggregateInputType = {
   priceMinor?: true
   credits?: true
   highlighted?: true
+  unlocksFullResearch?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -186,6 +191,7 @@ export type PlanCountAggregateInputType = {
   priceMinor?: true
   credits?: true
   highlighted?: true
+  unlocksFullResearch?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -294,6 +300,7 @@ export type PlanGroupByOutputType = {
   priceMinor: number
   credits: number
   highlighted: boolean
+  unlocksFullResearch: boolean
   createdAt: Date
   updatedAt: Date
   _count: PlanCountAggregateOutputType | null
@@ -338,6 +345,7 @@ export type PlanWhereInput = {
   priceMinor?: Prisma.IntFilter<"Plan"> | number
   credits?: Prisma.IntFilter<"Plan"> | number
   highlighted?: Prisma.BoolFilter<"Plan"> | boolean
+  unlocksFullResearch?: Prisma.BoolFilter<"Plan"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Plan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Plan"> | Date | string
   orders?: Prisma.OrderListRelationFilter
@@ -362,6 +370,7 @@ export type PlanOrderByWithRelationInput = {
   priceMinor?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   highlighted?: Prisma.SortOrder
+  unlocksFullResearch?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   orders?: Prisma.OrderOrderByRelationAggregateInput
@@ -389,6 +398,7 @@ export type PlanWhereUniqueInput = Prisma.AtLeast<{
   priceMinor?: Prisma.IntFilter<"Plan"> | number
   credits?: Prisma.IntFilter<"Plan"> | number
   highlighted?: Prisma.BoolFilter<"Plan"> | boolean
+  unlocksFullResearch?: Prisma.BoolFilter<"Plan"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Plan"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Plan"> | Date | string
   orders?: Prisma.OrderListRelationFilter
@@ -413,6 +423,7 @@ export type PlanOrderByWithAggregationInput = {
   priceMinor?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   highlighted?: Prisma.SortOrder
+  unlocksFullResearch?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PlanCountOrderByAggregateInput
@@ -442,6 +453,7 @@ export type PlanScalarWhereWithAggregatesInput = {
   priceMinor?: Prisma.IntWithAggregatesFilter<"Plan"> | number
   credits?: Prisma.IntWithAggregatesFilter<"Plan"> | number
   highlighted?: Prisma.BoolWithAggregatesFilter<"Plan"> | boolean
+  unlocksFullResearch?: Prisma.BoolWithAggregatesFilter<"Plan"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Plan"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Plan"> | Date | string
 }
@@ -463,6 +475,7 @@ export type PlanCreateInput = {
   priceMinor?: number
   credits?: number
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutPlanInput
@@ -487,6 +500,7 @@ export type PlanUncheckedCreateInput = {
   priceMinor?: number
   credits?: number
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutPlanInput
@@ -511,6 +525,7 @@ export type PlanUpdateInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutPlanNestedInput
@@ -535,6 +550,7 @@ export type PlanUncheckedUpdateInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutPlanNestedInput
@@ -559,6 +575,7 @@ export type PlanCreateManyInput = {
   priceMinor?: number
   credits?: number
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -580,6 +597,7 @@ export type PlanUpdateManyMutationInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -601,6 +619,7 @@ export type PlanUncheckedUpdateManyInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -622,6 +641,7 @@ export type PlanCountOrderByAggregateInput = {
   priceMinor?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   highlighted?: Prisma.SortOrder
+  unlocksFullResearch?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -652,6 +672,7 @@ export type PlanMaxOrderByAggregateInput = {
   priceMinor?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   highlighted?: Prisma.SortOrder
+  unlocksFullResearch?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -672,6 +693,7 @@ export type PlanMinOrderByAggregateInput = {
   priceMinor?: Prisma.SortOrder
   credits?: Prisma.SortOrder
   highlighted?: Prisma.SortOrder
+  unlocksFullResearch?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -757,6 +779,7 @@ export type PlanCreateWithoutOrdersInput = {
   priceMinor?: number
   credits?: number
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutPlanInput
@@ -780,6 +803,7 @@ export type PlanUncheckedCreateWithoutOrdersInput = {
   priceMinor?: number
   credits?: number
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutPlanInput
@@ -819,6 +843,7 @@ export type PlanUpdateWithoutOrdersInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutPlanNestedInput
@@ -842,6 +867,7 @@ export type PlanUncheckedUpdateWithoutOrdersInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutPlanNestedInput
@@ -865,6 +891,7 @@ export type PlanCreateWithoutSubscriptionsInput = {
   priceMinor?: number
   credits?: number
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutPlanInput
@@ -888,6 +915,7 @@ export type PlanUncheckedCreateWithoutSubscriptionsInput = {
   priceMinor?: number
   credits?: number
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutPlanInput
@@ -927,6 +955,7 @@ export type PlanUpdateWithoutSubscriptionsInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutPlanNestedInput
@@ -950,6 +979,7 @@ export type PlanUncheckedUpdateWithoutSubscriptionsInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutPlanNestedInput
@@ -973,6 +1003,7 @@ export type PlanCreateWithoutPaymentsInput = {
   priceMinor?: number
   credits?: number
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrderCreateNestedManyWithoutPlanInput
@@ -996,6 +1027,7 @@ export type PlanUncheckedCreateWithoutPaymentsInput = {
   priceMinor?: number
   credits?: number
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutPlanInput
@@ -1035,6 +1067,7 @@ export type PlanUpdateWithoutPaymentsInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUpdateManyWithoutPlanNestedInput
@@ -1058,6 +1091,7 @@ export type PlanUncheckedUpdateWithoutPaymentsInput = {
   priceMinor?: Prisma.IntFieldUpdateOperationsInput | number
   credits?: Prisma.IntFieldUpdateOperationsInput | number
   highlighted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  unlocksFullResearch?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orders?: Prisma.OrderUncheckedUpdateManyWithoutPlanNestedInput
@@ -1130,6 +1164,7 @@ export type PlanSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   priceMinor?: boolean
   credits?: boolean
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   orders?: boolean | Prisma.Plan$ordersArgs<ExtArgs>
@@ -1155,6 +1190,7 @@ export type PlanSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   priceMinor?: boolean
   credits?: boolean
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["plan"]>
@@ -1176,6 +1212,7 @@ export type PlanSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   priceMinor?: boolean
   credits?: boolean
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["plan"]>
@@ -1197,11 +1234,12 @@ export type PlanSelectScalar = {
   priceMinor?: boolean
   credits?: boolean
   highlighted?: boolean
+  unlocksFullResearch?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "rank" | "priceMonthly" | "priceYearly" | "currency" | "creditAllowance" | "monthlyGenerationQuota" | "requiresPhoneVerification" | "features" | "isActive" | "priceMinor" | "credits" | "highlighted" | "createdAt" | "updatedAt", ExtArgs["result"]["plan"]>
+export type PlanOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "rank" | "priceMonthly" | "priceYearly" | "currency" | "creditAllowance" | "monthlyGenerationQuota" | "requiresPhoneVerification" | "features" | "isActive" | "priceMinor" | "credits" | "highlighted" | "unlocksFullResearch" | "createdAt" | "updatedAt", ExtArgs["result"]["plan"]>
 export type PlanInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orders?: boolean | Prisma.Plan$ordersArgs<ExtArgs>
   subscriptions?: boolean | Prisma.Plan$subscriptionsArgs<ExtArgs>
@@ -1235,6 +1273,7 @@ export type $PlanPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     priceMinor: number
     credits: number
     highlighted: boolean
+    unlocksFullResearch: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["plan"]>
@@ -1679,6 +1718,7 @@ export interface PlanFieldRefs {
   readonly priceMinor: Prisma.FieldRef<"Plan", 'Int'>
   readonly credits: Prisma.FieldRef<"Plan", 'Int'>
   readonly highlighted: Prisma.FieldRef<"Plan", 'Boolean'>
+  readonly unlocksFullResearch: Prisma.FieldRef<"Plan", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Plan", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Plan", 'DateTime'>
 }

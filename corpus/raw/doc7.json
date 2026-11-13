@@ -1,0 +1,519 @@
+{
+  "findings": [
+    {
+      "claim": "Children's usability needs change so sharply with age that designs should target narrow bands (at minimum 3–5, 6–8 and 9–12): the youngest do not read and should not be asked to scroll, early readers read tentatively and need larger type (about 14 pt), older children scan text (about 12 pt) and tolerate some scrolling, and content pitched even one school grade off a child's own level is rejected.",
+      "authors": ["Katie Sherwin", "Jakob Nielsen"],
+      "publicationYear": 2019,
+      "publishedIn": "Nielsen Norman Group",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://www.nngroup.com/articles/childrens-websites-usability-issues/",
+      "field": "layout",
+      "appliesTo": [
+        "kids_websites",
+        "kids_apps",
+        "educational_products",
+        "children_media_and_toys",
+        "kids_corner_sections"
+      ],
+      "audience": ["children_under_10"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "Ages 3–5: icon- and character-led screens, audio/visual instructions instead of reading, no scrolling, any text at ~14 pt (~19 px)",
+          "label": "Pre-reader layout",
+          "fits": ["playful", "gentle", "nurturing"]
+        },
+        {
+          "value": "Ages 6–8: short single-screen sections, copy for tentative readers at ~14 pt (~19 px), minimal scrolling, one navigation system only",
+          "label": "Early-reader layout",
+          "fits": ["friendly", "curious", "encouraging"]
+        },
+        {
+          "value": "Ages 9–12: scannable copy at ~12 pt (~16 px), some vertical scrolling, richer navigation and exploration",
+          "label": "Older-child layout",
+          "fits": ["adventurous", "confident", "bold"]
+        },
+        {
+          "value": "Parent/buyer links (pricing, privacy, contact) placed in a text-only footer that children are unlikely to click",
+          "label": "Parent links in text footer",
+          "fits": ["trustworthy", "safe", "family_friendly"]
+        }
+      ],
+      "contextHeader": "Sherwin and Nielsen (2019, Nielsen Norman Group), summarizing the firm's own three rounds of usability studies with 125 children aged 3–12 (2001, 2010, 2018), report that children's websites and apps must be designed for narrow age bands rather than for 'kids' generally, which applies to layout, type size, scrolling and navigation decisions on child-facing pages.",
+      "verified": true
+    },
+    {
+      "claim": "For touchscreen designs aimed at children under 9, use big targets (NN/g recommends at least 2 cm × 2 cm for young children, four times the 1 cm × 1 cm adult guideline), rely on tapping and swiping, offer more than one way to complete an action (for example tap or drag), and avoid precision dragging or scrolling with a mouse or trackpad, which children in this age group found hard.",
+      "authors": ["Feifei Liu"],
+      "publicationYear": 2018,
+      "publishedIn": "Nielsen Norman Group",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://www.nngroup.com/articles/children-ux-physical-development/",
+      "field": "accessibility",
+      "appliesTo": [
+        "kids_apps",
+        "kids_websites",
+        "mobile_web",
+        "educational_games"
+      ],
+      "audience": ["children_under_10"],
+      "decision": "accessibility",
+      "options": [
+        {
+          "value": "Primary tap targets of at least 2 cm × 2 cm (≈ 76 × 76 CSS px) for children under 9",
+          "label": "2 cm minimum targets",
+          "fits": ["playful", "friendly", "bold"]
+        },
+        {
+          "value": "Dual-input actions: every drag interaction also works by tapping the destination or a large arrow button",
+          "label": "Tap-or-drag flexibility",
+          "fits": ["inclusive", "forgiving", "playful"]
+        },
+        {
+          "value": "One large single-button primary action per screen (for example a single big Play button)",
+          "label": "Single big button",
+          "fits": ["simple", "calm", "gentle"]
+        },
+        {
+          "value": "Desktop: click-only or simple keyboard-arrow interactions for under-9s; no long-distance dragging, scroll-dependent tasks or small-target clicking",
+          "label": "Click-only desktop",
+          "fits": ["simple", "accessible", "friendly"]
+        },
+        {
+          "value": "Reduce navigation by recommending related content after each item instead of sending children back to a homepage",
+          "label": "Recommend, don't navigate",
+          "fits": ["curious", "engaging", "playful"]
+        }
+      ],
+      "contextHeader": "Feifei Liu (2018, Nielsen Norman Group) reports from usability testing with children aged 3–12 in the US and China that motor-skill development determines which gestures and target sizes work, guiding touch-target size and interaction-type decisions for child-facing web and app interfaces.",
+      "verified": true
+    },
+    {
+      "claim": "Symbolic interface elements that adults read effortlessly, such as progress bars and on-screen cartoon-hand gesture demos, were entirely inaccessible to children under 3 in a randomized controlled trial, needed deliberate design for ages 3–5, and became harder (not easier) to understand when decorated with thematic visual detail.",
+      "authors": [
+        "Alexis Hiniker",
+        "Kiley Sobel",
+        "Sungsoo (Ray) Hong",
+        "Hyewon Suh",
+        "India Irish",
+        "Julie A. Kientz"
+      ],
+      "publicationYear": 2016,
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.ijhcs.2016.03.006",
+      "field": "layout",
+      "appliesTo": [
+        "kids_apps",
+        "early_learning_products",
+        "onboarding_flows",
+        "progress_indicators"
+      ],
+      "audience": ["children_under_10"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "Object-continuity progress: show progress through the items the child manipulates (for example a transparent cup that visibly fills) instead of a separate meter",
+          "label": "Direct progress (under 4)",
+          "fits": ["gentle", "nurturing", "playful"]
+        },
+        {
+          "value": "Plain, undecorated, clearly segmented progress bar for ages 4–5",
+          "label": "Minimal progress bar",
+          "fits": ["simple", "clean", "calm"]
+        },
+        {
+          "value": "Pair any symbol with an explicit statement of the link, such as 'I'll add a star each time you finish a letter!'",
+          "label": "Explain the symbol",
+          "fits": ["warm", "guiding", "friendly"]
+        },
+        {
+          "value": "Use symbols that visually resemble what they stand for (a demo hand that looks like a hand and mirrors the gesture)",
+          "label": "Look-alike symbols",
+          "fits": ["clear", "literal", "friendly"]
+        },
+        {
+          "value": "No symbolic demos for under-3s: replace them with direct cause-and-effect feedback",
+          "label": "Direct feedback for toddlers",
+          "fits": ["gentle", "simple", "nurturing"]
+        }
+      ],
+      "contextHeader": "Hiniker, Sobel, Hong, Suh, Irish and Kientz (2016, International Journal of Human-Computer Studies) ran a randomized controlled trial with 34 preschoolers aged 2–5 and reviewed 94 popular preschool apps (44% used at least one such technique), showing that common symbolic UI elements like progress bars and cartoon-hand demos are inaccessible or hard for young children.",
+      "verified": true
+    },
+    {
+      "claim": "Because children's reasoning, theory of mind and working memory are still developing, interfaces should state the goal and how to reach it in clear, specific instructions that avoid naming a particular device, use exaggerated rather than subtle feedback for children under 6, lean on familiar mental models such as a coloring book, and prevent errors (for example forgiving search).",
+      "authors": ["Feifei Liu"],
+      "publicationYear": 2018,
+      "publishedIn": "Nielsen Norman Group",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://www.nngroup.com/articles/kids-cognition/",
+      "field": "conversion",
+      "appliesTo": [
+        "kids_apps",
+        "kids_websites",
+        "onboarding_flows",
+        "educational_games"
+      ],
+      "audience": ["children_under_10"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "Goal-first onboarding: show the finished state, then the starting state, then the required action, using animation plus audio",
+          "label": "Goal-first demo",
+          "fits": ["guiding", "playful", "clear"]
+        },
+        {
+          "value": "Device-neutral instruction verbs ('touch the bucket', 'click the bucket') rather than 'use the mouse'",
+          "label": "Device-neutral wording",
+          "fits": ["inclusive", "simple", "friendly"]
+        },
+        {
+          "value": "Exaggerated, explicit feedback for under-6s (large facial expressions or spoken cues such as 'Yum, I like carrots')",
+          "label": "Explicit feedback cues",
+          "fits": ["warm", "expressive", "nurturing"]
+        },
+        {
+          "value": "Familiar real-world metaphors (coloring book and crayons, kitchen tools) with an eraser instead of abstract undo/redo arrows",
+          "label": "Familiar metaphors",
+          "fits": ["creative", "familiar", "playful"]
+        },
+        {
+          "value": "Error-preventing search and inputs: autocorrect and partial matching, with next-step suggestions instead of a bare 'no results' page",
+          "label": "Forgiving search",
+          "fits": ["helpful", "forgiving", "curious"]
+        }
+      ],
+      "contextHeader": "Feifei Liu (2018, Nielsen Norman Group) draws on usability testing with children aged 3–12 in the US and China, interpreted through Piaget's developmental stages, to show how instructions, feedback cues and mental-model reuse should be tailored to children's cognitive development in onboarding and task flows.",
+      "verified": true
+    },
+    {
+      "claim": "In experiments with 100 children, second graders (still learning to read) understood passages less well when the font was smaller or the lines were longer, while fifth graders' comprehension did not drop (it actually rose) with smaller print, and line spacing affected neither group, so early-reader text needs larger type and shorter lines while fluent older children can handle standard sizes.",
+      "authors": ["Tami Katzir", "Shirley Hershko", "Vered Halamish"],
+      "publicationYear": 2013,
+      "publishedIn": "PLoS ONE",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1371/journal.pone.0074061",
+      "field": "typography",
+      "appliesTo": [
+        "educational_products",
+        "reading_apps",
+        "children_content_sites"
+      ],
+      "audience": ["children_under_10"],
+      "decision": "typography",
+      "options": [
+        {
+          "value": "Large body text for early readers (≈ 14 pt / 19 px, consistent with NN/g's guideline for young children)",
+          "label": "Large early-reader text",
+          "fits": ["friendly", "nurturing", "playful"]
+        },
+        {
+          "value": "Narrow text column with short line lengths for beginning readers",
+          "label": "Short lines for beginners",
+          "fits": ["clear", "gentle", "friendly"]
+        },
+        {
+          "value": "Standard 12 pt / 16 px body text for fluent readers (roughly fifth grade and up)",
+          "label": "Standard size for fluent readers",
+          "fits": ["confident", "clean", "adventurous"]
+        },
+        {
+          "value": "Comfortable default line-height (about 1.4–1.5); do not rely on extra line spacing to compensate for small type",
+          "label": "Default line spacing",
+          "fits": ["clean", "simple", "calm"]
+        }
+      ],
+      "contextHeader": "Katzir, Hershko and Halamish (2013, PLoS ONE) manipulated font size, line length and line spacing for 100 second- and fifth-grade children and found the effect on reading comprehension depends on reading fluency, informing type-size and line-length decisions for child-facing text (the experiments used reading passages rather than web pages).",
+      "verified": true
+    },
+    {
+      "claim": "In a study of 60 children aged 5 and 6½, 69% of emotional responses to colors were positive; bright colors such as pink, blue and red drew positive feelings while dark colors such as brown, black and gray drew negative ones, and positive reactions to bright colors grew with age (girls favored bright colors most; boys were more likely to feel positively about dark ones), which supports bright, saturated colors over dark, muddy dominant colors on child-facing surfaces.",
+      "authors": ["Chris J. Boyatzis", "Reenu Varghese"],
+      "publicationYear": 1994,
+      "publishedIn": "The Journal of Genetic Psychology",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1080/00221325.1994.9914760",
+      "field": "color_psychology",
+      "appliesTo": [
+        "kids_brands",
+        "kids_apps",
+        "educational_products",
+        "toys_and_entertainment"
+      ],
+      "audience": ["children_under_10"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "#2F80ED",
+          "label": "Bright blue (illustrative hex)",
+          "fits": ["trustworthy", "friendly", "calm"]
+        },
+        {
+          "value": "#FF5FA2",
+          "label": "Bright pink (illustrative hex)",
+          "fits": ["playful", "warm", "imaginative"]
+        },
+        {
+          "value": "#F04E4E",
+          "label": "Bright red (illustrative hex)",
+          "fits": ["energetic", "bold", "exciting"]
+        },
+        {
+          "value": "#2F80ED + #FF5FA2 + #F04E4E accents, with near-black #222222 reserved for text only",
+          "label": "Bright multi-color, dark neutrals for text only (illustrative hex)",
+          "fits": ["playful", "energetic", "inclusive"]
+        }
+      ],
+      "contextHeader": "Boyatzis and Varghese (1994, The Journal of Genetic Psychology) asked 60 children aged 5 and 6½ how each of nine colors made them feel, finding positive associations with bright colors and negative associations with dark colors, informing primary-color choices for child-facing brands (small, older sample; the hex values are illustrative implementations, not from the study).",
+      "verified": true
+    },
+    {
+      "claim": "A meta-analysis of 43 studies with 2,147 children found technology-enhanced stories gave a small comprehension and vocabulary edge over traditional storybook reading, driven by multimedia features (animated pictures, music, sound effects) that helped, while interactive extras (hotspots, games, dictionaries) distracted and hurt, most strongly for children from less stimulating home environments.",
+      "authors": ["Zsofia K. Takacs", "Elise K. Swart", "Adriana G. Bus"],
+      "publicationYear": 2015,
+      "publishedIn": "Review of Educational Research",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.3102/0034654314566989",
+      "field": "motion",
+      "appliesTo": [
+        "digital_storybooks",
+        "reading_apps",
+        "early_literacy_products"
+      ],
+      "audience": ["children_under_10"],
+      "decision": "motion",
+      "options": [
+        {
+          "value": "Narration-synchronized animation: motion that depicts what the story or instruction is saying",
+          "label": "Story-congruent animation",
+          "fits": ["imaginative", "warm", "nurturing"]
+        },
+        {
+          "value": "Music and sound effects tied to story events, supporting rather than competing with narration",
+          "label": "Supportive sound and music",
+          "fits": ["playful", "immersive", "warm"]
+        },
+        {
+          "value": "Separate read and play modes: hotspots and games appear only after, or outside, the core content flow",
+          "label": "Isolate interactive extras",
+          "fits": ["focused", "educational", "trustworthy"]
+        },
+        {
+          "value": "Restrained motion budget: one purposeful animation per screen instead of many tappable hot-zones",
+          "label": "Restrained motion",
+          "fits": ["calm", "clean", "focused"]
+        }
+      ],
+      "contextHeader": "Takacs, Swart and Bus (2015, Review of Educational Research) meta-analyzed 43 studies (2,147 children) of technology-enhanced storybooks and found that story-supporting multimedia helped while interactive hotspots and games distracted, informing animation and interactivity decisions in children's reading and story products (findings concern digital storybooks, so extension to other page types is an extrapolation).",
+      "verified": true
+    },
+    {
+      "claim": "In an analysis of apps played by 160 children aged 3–5, about 80% contained at least one manipulative design feature (parasocial relationship pressure, fabricated time pressure, navigation constraints, attractive lures, or ad-based pressure), and children from lower socioeconomic households played apps with more of them, so child-facing products that avoid these patterns are a real and communicable differentiator.",
+      "authors": [
+        "Jenny Radesky",
+        "Alexis Hiniker",
+        "Caroline McLaren",
+        "Eliz Akgun",
+        "Alexandria Schaller",
+        "Heidi M. Weeks",
+        "Scott Campbell",
+        "Ashley N. Gearhardt"
+      ],
+      "publicationYear": 2022,
+      "publishedIn": "JAMA Network Open",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1001/jamanetworkopen.2022.17641",
+      "field": "conversion",
+      "appliesTo": [
+        "kids_apps",
+        "kids_games",
+        "family_subscription_products",
+        "educational_products"
+      ],
+      "audience": ["children_under_10", "parents"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "No fabricated urgency: no fake countdowns, 'come back tomorrow' pressure or expiring rewards aimed at the child",
+          "label": "No artificial time pressure",
+          "fits": ["trustworthy", "calm", "family_friendly"]
+        },
+        {
+          "value": "Characters never nag or guilt an idle child; no parasocial pressure prompts",
+          "label": "No character pressure",
+          "fits": ["gentle", "nurturing", "respectful"]
+        },
+        {
+          "value": "Purchases and ads confined to a parent-only area, never pitched by a character inside the child's flow",
+          "label": "Parent-only commerce",
+          "fits": ["trustworthy", "safe", "transparent"]
+        },
+        {
+          "value": "Always-visible, child-reachable back and exit controls (no navigation traps)",
+          "label": "Free navigation",
+          "fits": ["respectful", "simple", "friendly"]
+        },
+        {
+          "value": "Landing-page statement to parents on whether the product has ads or in-app purchases, with the page design matching that promise",
+          "label": "Plain promise to parents",
+          "fits": ["transparent", "trustworthy", "family_friendly"]
+        }
+      ],
+      "contextHeader": "Radesky, Hiniker, McLaren, Akgun, Schaller, Weeks, Campbell and Gearhardt (2022, JAMA Network Open) analyzed apps used by 160 children aged 3–5 and found manipulative design features in most of them (only 20% had none), informing conversion and engagement-mechanic decisions for child-facing products.",
+      "verified": true
+    }
+  ],
+  "articles": [
+    {
+      "title": "Designing for Small Hands and Growing Minds: What Research Says About Kids' Interfaces",
+      "category": "age_group",
+      "summary": "Children are not small adults. Four bodies of research show how age changes what kids can tap, read, understand and follow on a screen.",
+      "sections": [
+        {
+          "heading": "'Kids' is not one audience",
+          "body": "Nielsen Norman Group's studies with 125 children found that at least three age bands matter: 3–5, 6–8 and 9–12. The youngest do not read, early readers read tentatively, and older children scan. Children notice when content is pitched even one grade off, and links for parents can sit in a plain text footer."
+        },
+        {
+          "heading": "Big targets, simple gestures",
+          "body": "Children under 9 do well with tapping and swiping but struggle with precise dragging. NN/g recommends touch targets of at least 2 cm × 2 cm for young children and offering two ways to do the same thing, such as tap or drag."
+        },
+        {
+          "heading": "Symbols adults see and children miss",
+          "body": "In a randomized trial with 34 preschoolers, progress bars and cartoon-hand demos were unusable for children under 3, and decorating them with themed imagery made them harder to understand."
+        },
+        {
+          "heading": "Say what to do, plainly",
+          "body": "Children take instructions literally. State the goal, avoid naming a specific device, make feedback big and explicit for under-sixes, and build on familiar ideas like a coloring book."
+        }
+      ],
+      "body": "Children are not small adults, and the research on how they use screens shows it. Four well-documented findings, from Nielsen Norman Group's usability studies and a randomized trial at the University of Washington, give designers a practical starting point.\n\n## 'Kids' is not one audience\n\nNielsen Norman Group's Katie Sherwin and Jakob Nielsen (2019) summarize three rounds of usability testing with 125 children aged 3 to 12, run in 2001, 2010 and 2018. Their conclusion is that there is no such thing as designing for children in general. At a minimum, separate ages 3–5, 6–8 and 9–12. The youngest children do not read, early readers read tentatively, and older children scan. NN/g suggests about 14-point text for young children and 12-point for older ones, and avoiding scrolling for the youngest. Children also noticed when content was aimed at a slightly younger or older group and reacted badly; one six-year-old dismissed a site as being for babies. A practical detail from the same research: links meant for parents can sit in a plain text footer, where children rarely click.\n\n## Big targets, simple gestures\n\nIn a companion piece, Feifei Liu (2018) reports that motor skills develop unevenly. Children under nine handle tapping and swiping well but struggle with precise dragging, especially with a mouse or trackpad. NN/g recommends touch targets of at least 2 cm × 2 cm for young children, four times the size suggested for adults, and designs that offer two ways to do the same thing, such as tapping a destination or dragging to it. In one test, a five-year-old gave up on a counting game that made a vegetable vanish unless it landed exactly on its circle.\n\n## Symbols that adults see and children miss\n\nProgress bars and cartoon-hand demonstrations seem harmless. But in a randomized controlled trial of 34 preschoolers aged 2 to 5, Alexis Hiniker and colleagues (2016) found that these symbolic elements were entirely inaccessible to children under 3 and needed careful design for ages 3–5. Their review of 94 popular preschool apps found that 44% used at least one of these techniques. Surprisingly, decorating a progress bar with themed imagery made it harder to understand, not easier. The four- and five-year-olds in the study all succeeded with a plain, minimal bar.\n\n## Say what to do, plainly\n\nLiu's second NN/g article (2018) looks at cognition. Children take instructions literally: when a game specifically told a seven-year-old to use the mouse, she abandoned the trackpad she preferred and got frustrated. Better wording is device-neutral, such as click or touch. Games that showed the goal and then how to reach it, with animation and audio, worked well; a game with no instructions left a five-year-old confused. Under-sixes missed subtle character reactions, so feedback should be big and explicit. Familiar metaphors helped too: in a coloring-book app, children reached for an eraser rather than an undo arrow.\n\n## What this means for your design\n\nPick an age band before you pick a style. Make targets large and forgiving. Prefer plain, direct progress cues to decorated ones. Write instructions that state the goal without naming a device. Keep the limits in mind: NN/g's studies are qualitative with small samples, and the trial included only 11 children between ages 2 and 3, so treat the numbers as starting points and test with real children in your audience.",
+      "tags": [
+        "children",
+        "kids UX",
+        "age-appropriate design",
+        "touch targets",
+        "onboarding",
+        "preschoolers",
+        "usability"
+      ],
+      "references": [
+        {
+          "authors": ["Katie Sherwin", "Jakob Nielsen"],
+          "title": "Children's UX: Usability Issues in Designing for Young People",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2019,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/childrens-websites-usability-issues/"
+        },
+        {
+          "authors": ["Feifei Liu"],
+          "title": "Design for Kids Based on Their Stage of Physical Development",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2018,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/children-ux-physical-development/"
+        },
+        {
+          "authors": [
+            "Alexis Hiniker",
+            "Kiley Sobel",
+            "Sungsoo (Ray) Hong",
+            "Hyewon Suh",
+            "India Irish",
+            "Julie A. Kientz"
+          ],
+          "title": "Hidden symbols: How informal symbolism in digital interfaces disrupts usability for preschoolers",
+          "publishedIn": "International Journal of Human-Computer Studies",
+          "year": 2016,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/j.ijhcs.2016.03.006"
+        },
+        {
+          "authors": ["Feifei Liu"],
+          "title": "Designing for Kids: Cognitive Considerations",
+          "publishedIn": "Nielsen Norman Group",
+          "year": 2018,
+          "publicationType": "industry_report",
+          "url": "https://www.nngroup.com/articles/kids-cognition/"
+        }
+      ]
+    },
+    {
+      "title": "Type, Color, Motion and Fair Play: The Look and Ethics of Products for Young Children",
+      "category": "age_group",
+      "summary": "What a children's product looks like and how it behaves affects whether kids can use it and whether it treats them fairly. Four studies offer guidance on type, color, motion and persuasion.",
+      "sections": [
+        {
+          "heading": "Type: bigger helps beginners, not everyone",
+          "body": "In a study of 100 children, second graders understood text less when the type was smaller or the lines longer. Fifth graders were not hurt, and their scores rose with smaller type. Line spacing made no difference to either group."
+        },
+        {
+          "heading": "Color: bright feels happy",
+          "body": "Sixty children aged 5 and 6½ mostly linked bright colors like pink, blue and red with good feelings and dark colors like brown, black and gray with bad ones. The study is small and old, so treat it as a lean, not a rule."
+        },
+        {
+          "heading": "Motion: animate the story, not the distractions",
+          "body": "A review of 43 studies found that animation, music and sound effects helped children understand stories, while hotspots and games pulled attention away from them."
+        },
+        {
+          "heading": "Fair play: manipulative design is common",
+          "body": "Only about one in five apps used by 3- to 5-year-olds had no manipulative features. Avoiding pressure tactics is ethical and can be a genuine selling point for parents."
+        }
+      ],
+      "body": "What a children's product looks like, and how it behaves, shapes whether kids can use it and whether it treats them fairly. Four peer-reviewed studies offer guidance on type, color, motion and persuasion.\n\n## Type: bigger helps beginners, not everyone\n\nTami Katzir, Shirley Hershko and Vered Halamish (2013) tested 100 children in second and fifth grade with reading passages in different font sizes, line lengths and line spacing. For second graders, who are still learning to read, smaller type and longer lines lowered comprehension. Fifth graders were not hurt by smaller type; their scores actually rose. Line spacing made no difference to either group. In practice, give early readers larger type and short lines, and do not assume the same rules apply to confident readers. The experiments used reading passages rather than web pages, so treat any screen sizes as a starting point.\n\n## Color: bright feels happy\n\nChris Boyatzis and Reenu Varghese (1994) asked 60 children aged 5 and 6½ how nine colors made them feel. About 69% of responses were positive. Bright colors such as pink, blue and red brought positive feelings, while dark colors such as brown, black and gray brought negative ones. Positive reactions to bright colors grew with age, and girls favored brighter colors more than boys did, while boys were more likely to feel positively about dark colors. The study was small and is decades old, and it does not mean every child will react this way. Any hex codes in a palette are illustrative design choices, not values from the paper, and colors should not be assigned by gender.\n\n## Motion: animate the story, not the distractions\n\nA meta-analysis by Zsofia Takacs, Elise Swart and Adriana Bus (2015) pooled 43 studies with 2,147 children. Technology-enhanced stories gave a small benefit over traditional reading. Animated pictures, music and sound effects helped, while hotspots, games and dictionaries distracted. The harm from interactive extras was strongest for children from less stimulating home environments. The lesson for designers is to make motion serve the story or the task, and keep games away from the core content. The research covers digital storybooks, so apply it to other pages with caution.\n\n## Fair play: manipulative design is common\n\nJenny Radesky and colleagues (2022) examined apps used by 160 children aged 3 to 5 and found that only about one in five had no manipulative features. The tricks included characters pressuring children, fabricated time pressure, constrained navigation, tempting lures and pressure from ads. Apps used by children from lower socioeconomic households contained more of them. For a product aimed at families, avoiding these patterns is both ethical and a real point of difference, and worth stating plainly to parents.\n\n## Putting it together\n\nChoose larger type and shorter lines for beginners, bright but not overwhelming color, motion that has a job to do, and honest, pressure-free flows. As always, test with children in the age band you serve, because each of these studies covers a specific age range and setting.",
+      "tags": [
+        "children",
+        "typography",
+        "color",
+        "animation",
+        "dark patterns",
+        "manipulative design",
+        "reading"
+      ],
+      "references": [
+        {
+          "authors": ["Tami Katzir", "Shirley Hershko", "Vered Halamish"],
+          "title": "The Effect of Font Size on Reading Comprehension on Second and Fifth Grade Children: Bigger Is Not Always Better",
+          "publishedIn": "PLoS ONE",
+          "year": 2013,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1371/journal.pone.0074061"
+        },
+        {
+          "authors": ["Chris J. Boyatzis", "Reenu Varghese"],
+          "title": "Children's Emotional Associations with Colors",
+          "publishedIn": "The Journal of Genetic Psychology",
+          "year": 1994,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1080/00221325.1994.9914760"
+        },
+        {
+          "authors": ["Zsofia K. Takacs", "Elise K. Swart", "Adriana G. Bus"],
+          "title": "Benefits and Pitfalls of Multimedia and Interactive Features in Technology-Enhanced Storybooks: A Meta-Analysis",
+          "publishedIn": "Review of Educational Research",
+          "year": 2015,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.3102/0034654314566989"
+        },
+        {
+          "authors": [
+            "Jenny Radesky",
+            "Alexis Hiniker",
+            "Caroline McLaren",
+            "Eliz Akgun",
+            "Alexandria Schaller",
+            "Heidi M. Weeks",
+            "Scott Campbell",
+            "Ashley N. Gearhardt"
+          ],
+          "title": "Prevalence and Characteristics of Manipulative Design in Mobile Applications Used by Children",
+          "publishedIn": "JAMA Network Open",
+          "year": 2022,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1001/jamanetworkopen.2022.17641"
+        }
+      ]
+    }
+  ]
+}

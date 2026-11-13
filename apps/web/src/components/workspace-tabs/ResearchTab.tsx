@@ -112,7 +112,7 @@ function ImageryResearch({ projectId }: { projectId: string }) {
       <ul className="mt-1.5 flex flex-col gap-1 text-[12px]">
         {findings.map((f) => (
           <li key={f.findingId}>
-            <Link href={`/research/${f.findingId}`} className="font-medium text-sec underline underline-offset-2 hover:text-pri">
+            <Link href={`/research/library/${f.slug}`} className="font-medium text-sec underline underline-offset-2 hover:text-pri">
               {f.title}
             </Link>
           </li>

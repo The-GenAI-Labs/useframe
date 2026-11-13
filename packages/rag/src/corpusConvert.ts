@@ -31,7 +31,11 @@ export const RawFindingSchema = z
     publicationYear: year,
     publishedIn: z.string().nullish(),
     publicationType: z.string().nullish(),
-    sourceUrl: z.string().trim().min(1),
+    sourceUrl: z
+      .string()
+      .trim()
+      .nullish()
+      .transform((v) => v ?? ""),
     field: z.string().trim().min(1),
     appliesTo: z.array(z.string()).default([]),
     audience: z.array(z.string()).default([]),
@@ -324,7 +328,12 @@ export interface Problems {
   nearDuplicates: Array<{ a: string; b: string; similarity: number }>;
   downgraded: Array<{ slug: string; reasons: string[] }>;
   fewOptions: Array<{ slug: string; count: number }>;
-  multipleTitles: Array<{ slug: string; titles: string[] }>;
+  multipleTitles: Array<{
+    slug: string;
+    titles: string[];
+    used: string;
+    from: "publishedIn" | "first title";
+  }>;
   unmatchedReferences: Array<{ article: string; reference: string }>;
 }
 export interface ConvertResult {
@@ -498,18 +507,28 @@ export async function convertCorpus(
       );
       continue;
     }
-    const match = matchReference(raw.sourceUrl, references);
+    const hasUrl = raw.sourceUrl.length > 0;
+    const match = hasUrl
+      ? matchReference(raw.sourceUrl, references)
+      : { title: null, titles: [] };
     const doi = extractDoi(raw.sourceUrl);
     const validUrl = z.string().url().safeParse(raw.sourceUrl).success;
     const reasons: string[] = [];
     if (raw.verified !== true) reasons.push("verified flag is not true");
-    if (!match.title) reasons.push("no article reference matches sourceUrl");
-    if (!validUrl && !doi)
-      reasons.push("sourceUrl is not a valid URL and has no DOI");
-    const canSource = !!match.title && (validUrl || !!doi);
+    if (!hasUrl) reasons.push("sourceUrl is missing");
+    else {
+      if (!match.title) reasons.push("no article reference matches sourceUrl");
+      if (!validUrl && !doi)
+        reasons.push("sourceUrl is not a valid URL and has no DOI");
+    }
+    // SourceDocument.url is unique, so a URL cited under several titles takes the venue name.
+    const publishedIn = raw.publishedIn?.trim();
+    const sourceTitle =
+      match.titles.length > 1 && publishedIn ? publishedIn : match.title;
+    const canSource = !!sourceTitle && (validUrl || !!doi);
     const source = canSource
       ? {
-          title: match.title!,
+          title: sourceTitle!,
           ...(raw.authors.length ? { authors: raw.authors.join("; ") } : {}),
           ...(raw.publishedIn ? { venue: raw.publishedIn } : {}),
           ...(typeof raw.publicationYear === "number" &&
@@ -550,7 +569,12 @@ export async function convertCorpus(
       flags.push(`${raw.options.length} options`);
     }
     if (match.titles.length > 1) {
-      problems.multipleTitles.push({ slug, titles: match.titles });
+      problems.multipleTitles.push({
+        slug,
+        titles: match.titles,
+        used: sourceTitle!,
+        from: publishedIn ? "publishedIn" : "first title",
+      });
       flags.push("multiple reference titles");
     }
     if ((duplicateFiles.get(key)?.length ?? 0) > 1)
@@ -564,7 +588,7 @@ export async function convertCorpus(
       title: label.title,
       labelSource: label.source,
       output,
-      sourceTitle: match.title,
+      sourceTitle,
       reasons,
       flags,
       sourceUrl: raw.sourceUrl,
@@ -575,6 +599,7 @@ export async function convertCorpus(
 
   const bySource = new Map<string, string[]>();
   for (const f of findings) {
+    if (!f.sourceUrl) continue;
     const url = normalizeUrl(f.sourceUrl);
     bySource.set(url, [...(bySource.get(url) ?? []), f.slug]);
   }
@@ -616,7 +641,9 @@ export async function convertCorpus(
   );
   const articles: ConvertedArticle[] = [];
   const findingUrls = new Set(
-    [...unique.values()].map(({ raw }) => normalizeUrl(raw.sourceUrl)),
+    [...unique.values()].flatMap(({ raw }) =>
+      raw.sourceUrl ? [normalizeUrl(raw.sourceUrl)] : [],
+    ),
   );
   for (const [key, { file, raw }] of uniqueArticles) {
     const slug = articleSlugs.get(key)!;

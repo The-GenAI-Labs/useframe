@@ -1,7 +1,9 @@
 "use client"
 
 import { useState, useCallback, useEffect } from "react"
+import Link from "next/link"
 import { researchApi, type ResearchFinding } from "@/lib/api/services/research.service"
+import { isResearchLocked } from "@/lib/api/services/researchLibrary.service"
 
 type Props = {
     slug: string
@@ -14,6 +16,7 @@ export function BriefFieldEditor({ slug, citation, onPick, onClose }: Props) {
     const [state, setState] = useState<
         | { status: "loading" }
         | { status: "ready"; finding: ResearchFinding }
+        | { status: "locked" }
         | { status: "error" }
     >({ status: "loading" })
 
@@ -24,8 +27,8 @@ export function BriefFieldEditor({ slug, citation, onPick, onClose }: Props) {
             .then((finding) => {
                 if (!cancelled) setState({ status: "ready", finding })
             })
-            .catch(() => {
-                if (!cancelled) setState({ status: "error" })
+            .catch((err: unknown) => {
+                if (!cancelled) setState({ status: isResearchLocked(err) ? "locked" : "error" })
             })
         return () => {
             cancelled = true
@@ -44,6 +47,14 @@ export function BriefFieldEditor({ slug, citation, onPick, onClose }: Props) {
         <div className="flex flex-col gap-2 p-3 rounded-xl border border-base bg-tertiary">
             {state.status === "loading" && (
                 <p className="text-[11.5px] text-mut">Loading options…</p>
+            )}
+            {state.status === "locked" && (
+                <p className="text-[11.5px] text-sec leading-relaxed">
+                    This finding is part of the full research library.{" "}
+                    <Link href="/pricing" className="font-medium text-blue-500 hover:underline">
+                        See plans
+                    </Link>
+                </p>
             )}
             {state.status === "error" && (
                 <p className="text-[11.5px] text-mut">Couldn&apos;t load options for this finding.</p>
