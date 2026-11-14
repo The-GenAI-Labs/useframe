@@ -135,6 +135,27 @@ describe("status rules", () => {
     ]);
     expect(result.findings[0]!.output.source).toBeUndefined();
   });
+  it("keeps a finding with a null or empty sourceUrl as a DRAFT without a source", async () => {
+    const parsed = parseRawBatch(
+      JSON.stringify({
+        findings: [
+          { ...fixture.findings[0], sourceUrl: null },
+          { ...fixture.findings[1], sourceUrl: "  " },
+        ],
+        articles: [],
+      }),
+    );
+    if (!parsed.ok) throw new Error(parsed.error);
+    expect(parsed.errors).toEqual([]);
+    const result = await run([{ file: "x.json", ...parsed }]);
+    expect(result.errors).toEqual([]);
+    for (const f of result.findings) {
+      expect(f.output.status).toBe("DRAFT");
+      expect(f.reasons).toEqual(["sourceUrl is missing"]);
+      expect(f.output.source).toBeUndefined();
+    }
+    expect(result.problems.sharedSources).toEqual([]);
+  });
   it("never invents bibliographic fields and omits Phase 2 extras", async () => {
     const f = bySlug(await run(), "one").output;
     expect(f.source).toEqual({
@@ -201,8 +222,30 @@ describe("source matching and DOI", () => {
           "Placeholder Duplicate Source Alpha",
           "Placeholder Duplicate Source Beta",
         ],
+        used: "Journal of Placeholder Studies",
+        from: "publishedIn",
       },
     ]);
+    expect(bySlug(result, "eight").output.source?.title).toBe(
+      "Journal of Placeholder Studies",
+    );
+  });
+  it("falls back to the first reference title when a shared url has no publishedIn", async () => {
+    const eight = fixture.findings[7]!;
+    const result = await run([
+      {
+        file: "a.json",
+        findings: [{ ...eight, publishedIn: null }],
+        articles: fixture.articles,
+      },
+    ]);
+    expect(result.findings[0]!.output.source?.title).toBe(
+      "Placeholder Duplicate Source Alpha",
+    );
+    expect(result.problems.multipleTitles[0]).toMatchObject({
+      used: "Placeholder Duplicate Source Alpha",
+      from: "first title",
+    });
   });
   it.each([
     ["https://doi.org/10.1145/3290605.3300233", "10.1145/3290605.3300233"],
@@ -644,11 +687,15 @@ describe("files on disk", () => {
       JSON.parse(await readFile(join(dir, "_labels.json"), "utf8")).articles,
     ).toBeTruthy();
   });
-  it("is idempotent and writes nothing in a dry run", async () => {
+  it("is idempotent and writes only the review reports in a dry run", async () => {
     const dir = await setup();
     const dry = await runConvert(options(dir, { dryRun: true }));
     expect(dry.exitCode).toBe(0);
     await expect(readdir(join(dir, "findings"))).rejects.toThrow();
+    await expect(readdir(join(dir, "articles"))).rejects.toThrow();
+    await expect(readFile(join(dir, "_labels.json"), "utf8")).rejects.toThrow();
+    expect(await readFile(join(dir, "_review", "summary.md"), "utf8")).toBe(dry.summary);
+    expect(await readFile(join(dir, "_review", "problems.md"), "utf8")).toBe(dry.problems);
     await runConvert(options(dir));
     const again = await runConvert(options(dir, { provider: null }));
     expect(again.changes.every((c) => c.action === "unchanged")).toBe(true);

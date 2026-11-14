@@ -231,6 +231,7 @@ async function seedPlans() {
       credits: plan.credits,
       features: plan.features,
       highlighted: plan.highlighted,
+      unlocksFullResearch: plan.unlocksFullResearch,
       rank: plan.sortOrder,
       isActive: true,
     };

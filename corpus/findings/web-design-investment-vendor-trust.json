@@ -1,0 +1,20 @@
+{
+  "slug": "web-design-investment-vendor-trust",
+  "status": "DRAFT",
+  "category": "LAYOUT",
+  "title": "Web-design investment as vendor trust and purchase-intention signal",
+  "statement": "Web-design investment can signal a vendor's ability to deliver, and the effect on trust and purchase intention was strongest when people were searching deliberately or when the purchase involved risk. (Sage Journals)\n\nOptions:\n- Interactive product proof: interactive_product_preview (fits: product led, hands on)\n- Technical depth: technical_documentation_hub (fits: technical, expert)\n- Implementation detail: implementation_architecture_section (fits: enterprise, practical)\n- Operational evidence: live_status_and_operational_detail (fits: transparent, mature)",
+  "appliesWhen": "Applies to: high risk online purchases, digital services. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "enterprise",
+    "expert",
+    "hands-on",
+    "mature",
+    "practical",
+    "product-led",
+    "technical",
+    "transparent"
+  ],
+  "relations": []
+}

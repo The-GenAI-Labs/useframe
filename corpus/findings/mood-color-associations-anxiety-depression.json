@@ -1,0 +1,27 @@
+{
+  "slug": "mood-color-associations-anxiety-depression",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Mood-color associations in anxiety and depression",
+  "statement": "Individuals with anxiety or depression more frequently associate their mood with grey shades, while healthy individuals more often associate mood with yellow.\n\nOptions:\n- Positive mood yellow: #FFD700 soft yellow (fits: wellness, optimistic)\n- Neutral-to-negative grey: #808080 mid-grey (fits: avoid for mood support)\n- Calm favourite blue: #87CEEB sky blue (fits: mental health app)\n- Restorative green: #90EE90 light green (fits: recovery, balance)",
+  "appliesWhen": "Applies to: health. Audience: adults, seniors.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "avoid-for-mood-support",
+    "balance",
+    "mental-health-app",
+    "optimistic",
+    "recovery",
+    "wellness"
+  ],
+  "source": {
+    "title": "The Manchester Color Wheel: development of a novel way of identifying color choice and its validation in healthy, anxious and depressed individuals",
+    "authors": "Helen R. Carruthers; Julie Morris; Nicholas Tarrier; Peter J. Whorwell",
+    "year": 2010,
+    "venue": "BMC Medical Research Methodology",
+    "url": "https://link.springer.com/article/10.1186/1471-2288-10-12",
+    "doi": "10.1186/1471-2288-10-12"
+  },
+  "relations": []
+}

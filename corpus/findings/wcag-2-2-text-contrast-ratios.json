@@ -1,0 +1,26 @@
+{
+  "slug": "wcag-2-2-text-contrast-ratios",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "WCAG 2.2 text contrast ratios at AA and AAA",
+  "statement": "WCAG 2.2 requires ordinary text to meet at least a 4.5:1 contrast ratio, with 3:1 allowed for large text at Level AA and 7:1 required at Level AAA, so teams can choose higher contrast when visual comfort and robustness justify it.\n\nOptions:\n- WCAG AA normal text: 4.5:1 (fits: balanced, professional)\n- WCAG AA large text: 3:1 (fits: expressive, display)\n- WCAG AAA: 7:1 (fits: access-first, high legibility)\n- Extra margin: 10:1 (fits: high legibility, utilitarian)",
+  "appliesWhen": "Applies to: general web, web apps, ecommerce, education. Audience: adults, seniors, children under 10, general.",
+  "tags": [
+    "accessibility",
+    "high-legibility",
+    "access-first",
+    "balanced",
+    "display",
+    "expressive",
+    "professional",
+    "utilitarian"
+  ],
+  "source": {
+    "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
+    "authors": "World Wide Web Consortium",
+    "year": 2023,
+    "venue": "W3C Web Content Accessibility Guidelines (WCAG) 2.2",
+    "url": "https://www.w3.org/TR/WCAG22/"
+  },
+  "relations": []
+}

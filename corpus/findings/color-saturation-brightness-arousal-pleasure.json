@@ -1,0 +1,27 @@
+{
+  "slug": "color-saturation-brightness-arousal-pleasure",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Color saturation and brightness effects on arousal and pleasure",
+  "statement": "Color saturation and brightness exert a much stronger influence on human emotional arousal and pleasure than the actual hue itself.\n\nOptions:\n- High Arousal: High Saturation / High Brightness (fits: gaming, promotions)\n- Calming / Relaxed: Low Saturation / High Brightness (fits: health tech, productivity)\n- Dominance / Luxury: High Saturation / Low Brightness (fits: premium brands, fashion)",
+  "appliesWhen": "Applies to: all digital products. Audience: general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "fashion",
+    "gaming",
+    "health-tech",
+    "premium-brands",
+    "productivity",
+    "promotions"
+  ],
+  "source": {
+    "title": "Effects of Color on Emotions",
+    "authors": "Patricia Valdez; Albert Mehrabian",
+    "year": 1994,
+    "venue": "Journal of Experimental Psychology: General",
+    "url": "https://psycnet.apa.org/doi/10.1037/0096-3445.123.4.394",
+    "doi": "10.1037/0096-3445.123.4.394"
+  },
+  "relations": []
+}

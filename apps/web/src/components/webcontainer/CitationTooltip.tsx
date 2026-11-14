@@ -21,18 +21,19 @@ type Props = {
 export function CitationTooltip({ citationIds, citations, rect }: Props) {
     const primaryId = citationIds[0]
     const citation = citations.find((c) => c.id === primaryId)
-    const [verified, setVerified] = useState<boolean | null>(null)
+    const [verifiedSlug, setVerifiedSlug] = useState<string | null>(null)
 
     useEffect(() => {
         if (!primaryId) return
         let cancelled = false
+        setVerifiedSlug(null)
         findingsApi
             .get(primaryId)
             .then((finding) => {
-                if (!cancelled) setVerified(finding.verified)
+                if (!cancelled) setVerifiedSlug(finding.slug)
             })
             .catch(() => {
-                if (!cancelled) setVerified(null)
+                if (!cancelled) setVerifiedSlug(null)
             })
         return () => {
             cancelled = true
@@ -59,12 +60,12 @@ export function CitationTooltip({ citationIds, citations, rect }: Props) {
                     <div className="flex items-center gap-1.5 mb-1.5">
                         <span
                             className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${
-                                verified
+                                verifiedSlug
                                     ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400"
                                     : "bg-tertiary text-mut"
                             }`}
                         >
-                            {verified === null ? "Research citation" : verified ? "Science-proved" : "AI-inferred"}
+                            {verifiedSlug ? "Science-proved" : "Research citation"}
                         </span>
                         {citationIds.length > 1 && (
                             <span className="text-[10px] text-mut">+{citationIds.length - 1} more</span>
@@ -73,7 +74,7 @@ export function CitationTooltip({ citationIds, citations, rect }: Props) {
                     <p className="text-[12px] text-sec leading-relaxed">{citation.title}</p>
                     <p className="text-[11px] text-mut italic mt-1">{citation.source}</p>
                     <a
-                        href={`/research/${primaryId}`}
+                        href={verifiedSlug ? `/research/library/${verifiedSlug}` : `/research/${primaryId}`}
                         target="_blank"
                         rel="noreferrer"
                         className="text-[11px] font-medium text-blue-500 hover:text-blue-600 mt-1.5 inline-block"

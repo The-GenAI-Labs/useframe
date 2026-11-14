@@ -1,0 +1,31 @@
+{
+  "slug": "money-back-guarantee-branding-privacy-trust",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Money-back guarantee, branding, and privacy statement as trust signals",
+  "statement": "An experiment on Internet commerce found that an unconditional money-back guarantee, branding, and a privacy statement could each function as trust signals, allowing landing pages to combine financial protection, familiar identity, and information privacy cues. (Macquarie University)\n\nOptions:\n- Money-back guarantee: unconditional-money-back-guarantee (fits: risk reducing, trial friendly, new customer)\n- Brand signal: brand-recognition-block (fits: familiar, premium, identity led)\n- Privacy statement: privacy-statement-near-form (fits: data sensitive, transparent, form heavy)\n- Combined trust row: combined-trust-signal-row (fits: compact, high consideration, evidence led)",
+  "appliesWhen": "Applies to: ecommerce, online retail, new brands, high uncertainty purchases. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "compact",
+    "data-sensitive",
+    "evidence-led",
+    "familiar",
+    "form-heavy",
+    "high-consideration",
+    "identity-led",
+    "new-customer",
+    "premium",
+    "risk-reducing"
+  ],
+  "source": {
+    "title": "Lemons on the Web: A signalling approach to the problem of trust in Internet commerce",
+    "authors": "Boon Chye Lee; Lawrence Ang; Chris Dubelaar",
+    "year": 2005,
+    "venue": "Journal of Economic Psychology",
+    "url": "https://doi.org/10.1016/j.joep.2005.01.001",
+    "doi": "10.1016/j.joep.2005.01.001"
+  },
+  "relations": []
+}

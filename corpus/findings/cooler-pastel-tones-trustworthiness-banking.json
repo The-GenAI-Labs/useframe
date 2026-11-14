@@ -1,0 +1,31 @@
+{
+  "slug": "cooler-pastel-tones-trustworthiness-banking",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Cooler pastel tones and trustworthiness in cyber-banking interfaces",
+  "statement": "In a cyber-banking interface study, cooler tones and a moderate pastel main color with lower brightness produced stronger reported trustworthiness than a bright primary-color alternative, supporting restrained cool palettes for trust-oriented banking UI. (ScienceDirect)\n\nOptions:\n- Trust-oriented cool: cool tone + moderate pastel + low brightness (fits: secure, calm, reliable)\n- Balanced cool: cool tone + moderate pastel + medium brightness (fits: modern, approachable, professional)\n- Warm restrained: warm tone + moderate pastel + low brightness (fits: human, friendly, distinctive)\n- Bright primary: bright primary colors (fits: energetic, youthful, attention-seeking)",
+  "appliesWhen": "Applies to: fintech. Audience: adults, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "approachable",
+    "attention-seeking",
+    "calm",
+    "distinctive",
+    "energetic",
+    "friendly",
+    "human",
+    "modern",
+    "professional",
+    "reliable"
+  ],
+  "source": {
+    "title": "Designing towards emotional usability in customer interfaces—trustworthiness of cyber-banking system interfaces",
+    "authors": "Jinwoo Kim; Jae Yun Moon",
+    "year": 1998,
+    "venue": "Interacting with Computers",
+    "url": "https://doi.org/10.1016/S0953-5438(97)00037-4",
+    "doi": "10.1016/S0953-5438(97)00037-4"
+  },
+  "relations": []
+}

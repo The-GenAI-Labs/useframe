@@ -1,19 +1,15 @@
 import { api } from "../axios"
 
-export type PublicFinding = {
+// The public lookup returns only VERIFIED findings, and only their slug and title.
+export type PublicFindingRef = {
   id: string
-  claim: string
-  paper: string
-  field: string
-  decision: string
-  options: { value: string; label: string; fits: string[] }[]
-  contextHeader: string
-  verified: boolean
+  slug: string
+  title: string
 }
 
 export const findingsApi = {
   get: async (id: string) => {
-    const { data } = await api.get<{ success: true; data: PublicFinding }>(`/findings/${id}`)
+    const { data } = await api.get<{ success: true; data: PublicFindingRef }>(`/findings/${id}`)
     return data.data
   },
 }

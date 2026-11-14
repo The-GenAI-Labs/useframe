@@ -1,0 +1,27 @@
+{
+  "slug": "dyslexia-sans-serif-monospaced-roman-fonts",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Sans-serif, monospaced, and roman fonts versus serif and italic for dyslexia",
+  "statement": "For readers with dyslexia, sans-serif, monospaced, and roman fonts (such as Helvetica, Courier, and Arial) significantly outperform serif and italic fonts in reading speed and objective legibility.\n\nOptions:\n- Optimal Sans-Serifs: Helvetica / Arial (fits: universal design, corporate communication)\n- Wide Sans-Serif: Verdana (fits: accessibility first, educational platforms)\n- Optimal Monospace: Courier (fits: code blocks, specialized dyslexia modes)\n- No Slanted Text: Avoid Italics (fits: all accessible designs)",
+  "appliesWhen": "Applies to: web, edtech, reading apps. Audience: children under 10, adults, general.",
+  "tags": [
+    "typography",
+    "accessibility-first",
+    "all-accessible-designs",
+    "code-blocks",
+    "corporate-communication",
+    "educational-platforms",
+    "specialized-dyslexia-modes",
+    "universal-design"
+  ],
+  "source": {
+    "title": "Good Fonts for Dyslexia",
+    "authors": "Luz Rello; Ricardo Baeza-Yates",
+    "year": 2013,
+    "venue": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS '13)",
+    "url": "https://dl.acm.org/doi/10.1145/2513383.2513447",
+    "doi": "10.1145/2513383.2513447"
+  },
+  "relations": []
+}

@@ -1,0 +1,68 @@
+{
+  "slug": "trust-starts-before-the-buy-button",
+  "title": "Trust Starts Before the Buy Button",
+  "kind": "ARTICLE",
+  "category": "LAYOUT",
+  "summary": "People often judge a website's credibility from the experience of using it, not just from explicit trust badges. Research points to a practical range: show signs of a real organization, keep the interface professional and familiar, and make expertise easy to verify.",
+  "sections": [
+    {
+      "heading": "Make the business feel real",
+      "body": "Fogg and colleagues found that real-world-feel elements such as a physical address, phone number, email address, team photos, and responsive customer service increased perceived Web credibility. The useful design lesson is not that every site needs every item; it is that buyers benefit when the organization looks reachable and accountable. (Simson)"
+    },
+    {
+      "heading": "Professional does not mean complicated",
+      "body": "The same study found that professional design and a sensible arrangement supported credibility, while slow downloads and difficult navigation hurt it. That leaves room for different visual directions: a restrained single-column landing page can work, but so can a richer brand-led page when navigation and performance remain clear. (Simson)"
+    },
+    {
+      "heading": "Give people reasons to believe the claims",
+      "body": "Markers of expertise included author credentials and citations, while trustworthiness cues included links to outside materials and clear statements about content. For expert-led products, professional services, or technical products, a small evidence section can answer skepticism more directly than generic phrases such as 'trusted' or 'best in class.' (Simson)"
+    },
+    {
+      "heading": "Keep the interaction familiar",
+      "body": "Gefen, Karahanna, and Straub found that online trust was important alongside usefulness and ease of use, with perceived safety mechanisms and a typical, easy-to-use interface contributing to trust. In practice, that supports familiar controls, conventional checkout behavior, and security explanations placed where a shopper is making a risky decision. (DOI)"
+    }
+  ],
+  "body": "## Trust Starts Before the Buy Button\n\nTrust is often treated as a small strip of badges underneath a headline or beside a checkout button. The research paints a broader picture: shoppers can form credibility judgments from the website itself. That means the trust layer can be designed as part of the core experience rather than added at the end.\n\n### Make the business feel real\n\nIn a large quantitative CHI study, B. J. Fogg and colleagues tested more than 1,400 participants and found that 'real-world feel' was the strongest of the credibility factors they identified. Elements such as a physical address, contact phone number, email address, photos of organization members, and responsive customer service all received positive credibility evaluations. The implication for a landing page is flexible rather than prescriptive: a local retailer might emphasize a physical location, while a software company might emphasize real support contacts and identifiable staff. (DOI)\n\n### Professional does not mean visually heavy\n\nFogg's study also found that professional design and logical arrangement helped credibility, while difficult navigation and slow downloads hurt it. This is useful because it avoids a false choice between 'beautiful' and 'simple.' A product page can use strong photography, rich brand expression, or a restrained editorial layout, provided the structure remains understandable and the page performs well. (Simson)\n\n### Make expertise inspectable\n\nCredibility is also helped by signals that let a shopper verify who is speaking and where the information comes from. Fogg and colleagues specifically tested author credentials, citations, references, links to outside materials, and content policies as credibility cues. For expert-led services, technical products, or high-consideration purchases, this supports concrete evidence blocks, expert bios, source links, or detailed specifications. (Simson)\n\n### Familiar interaction is itself a trust cue\n\nGefen, Karahanna, and Straub found that online shopping trust mattered alongside perceived usefulness and ease of use, and that trust was associated with perceived safety mechanisms and a typical, easy-to-use interface. A shopper therefore does not have to choose between trust signals and usability. Familiar controls, predictable checkout structure, and clearly explained security practices can work together. (DOI)\n\nThe practical range is broad: real-world contact information, professional presentation, verifiable expertise, and familiar interaction patterns can all occupy different roles. The strongest combination depends on what the buyer is being asked to risk and what kind of organization is making the promise.",
+  "tags": [
+    "trust",
+    "credibility",
+    "website-design",
+    "proof",
+    "landing-pages"
+  ],
+  "references": [
+    {
+      "title": "What makes Web sites credible?: a report on a large quantitative study",
+      "url": "https://doi.org/10.1145/365024.365037",
+      "authors": [
+        "B. J. Fogg",
+        "Jonathan Marshall",
+        "Othman Laraki",
+        "Alex Osipovich",
+        "Chris Varma",
+        "Nicholas Fang",
+        "Jyoti Paul",
+        "Akshay Rangnekar",
+        "John Shon",
+        "Preeti Swani",
+        "Marissa Treinen"
+      ],
+      "publishedIn": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI 2001), ACM",
+      "year": 2001,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "Trust and TAM in Online Shopping: An Integrated Model",
+      "url": "https://doi.org/10.2307/30036519",
+      "authors": [
+        "David Gefen",
+        "Elena Karahanna",
+        "Detmar W. Straub"
+      ],
+      "publishedIn": "MIS Quarterly",
+      "year": 2003,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

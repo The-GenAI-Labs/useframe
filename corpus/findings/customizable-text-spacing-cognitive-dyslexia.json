@@ -1,0 +1,27 @@
+{
+  "slug": "customizable-text-spacing-cognitive-dyslexia",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Customizable text spacing for cognitive disability and dyslexia readability",
+  "statement": "Providing customizable text spacing, specifically allowing line-height to reach 1.5x and paragraph spacing to 2x, is essential for readability among users with cognitive disabilities and dyslexia.\n\nOptions:\n- WCAG 2.1 Minimum Spacing: line-height: 1.5; margin-bottom: 2em; (fits: accessible web, government sites)\n- Enhanced Spacing: line-height: 1.6; margin-bottom: 2.2em; (fits: educational content, dyslexia support)\n- Horizontal Spacing Target: letter-spacing: 0.12em; word-spacing: 0.16em; (fits: learning management systems, reading apps)\n- Dense UI Spacing: line-height: 1.2; (fits: data tables, dashboards)",
+  "appliesWhen": "Applies to: web, digital documents. Audience: general, adults, children under 10.",
+  "tags": [
+    "typography",
+    "accessible-web",
+    "dashboards",
+    "data-tables",
+    "dyslexia-support",
+    "educational-content",
+    "government-sites",
+    "learning-management-systems",
+    "reading-apps"
+  ],
+  "source": {
+    "title": "WCAG 2.1 Specification: Success Criterion 1.4.12 Text Spacing",
+    "authors": "W3C Accessibility Guidelines Working Group",
+    "year": 2018,
+    "venue": "W3C WCAG 2.1 Specification",
+    "url": "https://www.w3.org/TR/WCAG21/#text-spacing"
+  },
+  "relations": []
+}

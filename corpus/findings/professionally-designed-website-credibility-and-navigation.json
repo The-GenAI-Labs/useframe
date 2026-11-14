@@ -1,0 +1,31 @@
+{
+  "slug": "professionally-designed-website-credibility-and-navigation",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Professionally designed website credibility and navigation",
+  "statement": "A professionally designed, logically arranged, easy-to-navigate website supports credibility, while slow loading and difficult navigation can damage it, so landing pages can choose between richer presentation and a simpler interface without sacrificing usability. (Simson)\n\nOptions:\n- Simple page structure: clear-sectioned-single-column-layout (fits: minimal, calm, high clarity)\n- Persistent navigation: persistent-primary-navigation (fits: information rich, exploratory, large catalog)\n- Visible search: prominent-site-search (fits: catalog heavy, utility first, repeat users)\n- Lightweight hero: fast-loading-static-hero (fits: performance first, mobile first, conversion focused)\n- Polished visual system: visual-brand-system (fits: premium, editorial, brand led)",
+  "appliesWhen": "Applies to: ecommerce, online retail, corporate websites, online services. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "brand-led",
+    "calm",
+    "catalog-heavy",
+    "conversion-focused",
+    "editorial",
+    "exploratory",
+    "high-clarity",
+    "information-rich",
+    "large-catalog",
+    "minimal",
+    "mobile-first"
+  ],
+  "source": {
+    "title": "What makes Web sites credible?: a report on a large quantitative study",
+    "authors": "B. J. Fogg; Jonathan Marshall; Othman Laraki; Alex Osipovich; Chris Varma; Nicholas Fang; Jyoti Paul; Akshay Rangnekar; John Shon; Preeti Swani; Marissa Treinen",
+    "year": 2001,
+    "venue": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI 2001), ACM",
+    "url": "https://doi.org/10.1145/365024.365037",
+    "doi": "10.1145/365024.365037"
+  },
+  "relations": []
+}

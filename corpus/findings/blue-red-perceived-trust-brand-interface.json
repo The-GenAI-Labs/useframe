@@ -1,0 +1,28 @@
+{
+  "slug": "blue-red-perceived-trust-brand-interface",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Blue versus red for perceived trust in brand and interface contexts",
+  "statement": "Blue increases perceived trust more than red in brand and interface contexts, supported by both implicit and explicit measures.\n\nOptions:\n- Institutional blue: #003366 navy (fits: legacy bank, hospital brand)\n- Modern trust blue: #007BFF bright blue (fits: fintech app, telehealth)\n- Alert red: #DC143C crimson (fits: error state, urgent CTA)\n- Competent blue: #4169E1 royal blue (fits: professional services)",
+  "appliesWhen": "Applies to: fintech, health. Audience: adults, b2b buyers, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "error-state",
+    "fintech-app",
+    "hospital-brand",
+    "legacy-bank",
+    "professional-services",
+    "telehealth",
+    "urgent-cta"
+  ],
+  "source": {
+    "title": "Trustworthy Blue or Untrustworthy Red: The Influence of Colors on Trust",
+    "authors": "Lixun Su; Michael Walsh",
+    "year": 2019,
+    "venue": "Journal of Marketing Theory and Practice",
+    "url": "https://www.tandfonline.com/doi/full/10.1080/10696679.2019.1616560",
+    "doi": "10.1080/10696679.2019.1616560"
+  },
+  "relations": []
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "real-world-identifiers-website-credibility",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Real-world identifiers and perceived website credibility",
+  "statement": "Showing real-world identifiers such as a physical address, phone number, contact email, and team photographs can increase perceived website credibility, so the trust section can use the subset that is credible and appropriate for the business model. (Simson)\n\nOptions:\n- Physical address: physical-address-block (fits: established business, local presence, high consideration)\n- Visible phone number: phone-number-in-header-or-footer (fits: service led, human support, high trust need)\n- Direct contact email: named-support-email (fits: accessible, support focused, professional)\n- Team photographs: team-photo-grid (fits: human, expert led, relationship oriented)\n- Support-response commitment: customer-service-response-promise (fits: service led, accountable, high touch)",
+  "appliesWhen": "Applies to: ecommerce, online retail, corporate websites, online services. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "service-led",
+    "accessible",
+    "accountable",
+    "established-business",
+    "expert-led",
+    "high-consideration",
+    "high-touch",
+    "high-trust-need",
+    "human",
+    "human-support",
+    "local-presence"
+  ],
+  "source": {
+    "title": "What makes Web sites credible?: a report on a large quantitative study",
+    "authors": "B. J. Fogg; Jonathan Marshall; Othman Laraki; Alex Osipovich; Chris Varma; Nicholas Fang; Jyoti Paul; Akshay Rangnekar; John Shon; Preeti Swani; Marissa Treinen",
+    "year": 2001,
+    "venue": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI 2001), ACM",
+    "url": "https://doi.org/10.1145/365024.365037",
+    "doi": "10.1145/365024.365037"
+  },
+  "relations": []
+}

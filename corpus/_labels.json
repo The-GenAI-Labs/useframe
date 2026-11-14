@@ -1,0 +1,623 @@
+{
+  "findings": {
+    "002d34f8ceb417a6b3861ec3688277e0f113a641f202e52c23dd18ecc88f6f20": {
+      "title": "Left-aligned web text performance versus fully justified text",
+      "slug": "left-aligned-web-text-performance"
+    },
+    "0281bada8dc1e79395f7c1ff350e629361c702660a3e8c601ce215a65d8ee91d": {
+      "title": "Color norms in product categories and brand equity differentiation",
+      "slug": "color-norms-product-categories-brand-equity"
+    },
+    "029cad4717b8ed4a5f74455b707fb2db9115b1f994383a88ecda636d2a2c7082": {
+      "title": "Web-design investment as vendor trust and purchase-intention signal",
+      "slug": "web-design-investment-vendor-trust"
+    },
+    "074afccf683f35c3d79fe17d61ad79bdfe47d15d2ca714283e6bc3ffed079dd0": {
+      "title": "User-triggered motion animation and vestibular disorder symptoms",
+      "slug": "user-triggered-motion-animation-vestibular"
+    },
+    "08618b892ed2d43643a7ca7e26a3673eb477bf1310ee34acc99d2ff9d436ae8e": {
+      "title": "Text contrast ratios of 4.5:1 and 3:1 for low vision",
+      "slug": "text-contrast-ratios-low-vision"
+    },
+    "0877eec61388c9f4fb10fa4fdacfb81615dff98b21a25657a6c64badb80ea871": {
+      "title": "G2 2024 B2B buyer survey on security history and assessments",
+      "slug": "g2-2024-b2b-buyer-security-survey"
+    },
+    "0878782b629ed9131a50aacbb1887993ee663a6847a0671c1b6990cd8d6e3e4e": {
+      "title": "Customizable text spacing for cognitive disability and dyslexia readability",
+      "slug": "customizable-text-spacing-cognitive-dyslexia"
+    },
+    "106e932839bf1fa83c1a18a7d92f977c09d637d470045fa7cf13173a17a804af": {
+      "title": "G2 2024 survey of 1,940 B2B decision-makers on review sites",
+      "slug": "g2-2024-b2b-decision-makers-review-sites"
+    },
+    "10f15fb32663a578eeb1f9132781ba7a0dd64de6f1e487e5aee371db444bae72": {
+      "title": "Cool blue/green versus warm red/orange UI colors in healthcare and finance apps",
+      "slug": "cool-blue-green-warm-red-orange-ui-colors"
+    },
+    "155e1a5383fbdec5febb29a9c83df6652027618786bdd5d314d8e606d493ac87": {
+      "title": "Real-world identifiers and perceived website credibility",
+      "slug": "real-world-identifiers-website-credibility"
+    },
+    "17ad274fc6dd7168cbf8b0683e7eed1f4c5c3002336edf31afbd13532d824789": {
+      "title": "Principal hues and positive emotional responses",
+      "slug": "principal-hues-positive-emotional-responses"
+    },
+    "19eedc469ec7ea740058b72aac70cab38c28f2fc741fac6aa5c98fd87bf40075": {
+      "title": "Visual standout via color or contrast and memory interaction",
+      "slug": "visual-standout-color-contrast-memory"
+    },
+    "1b303d0adc7338be1a9c5085fc7a0465c14155a34e0cc60538a5371bfd383d1a": {
+      "title": "Blue versus red for perceived trust in brand and interface contexts",
+      "slug": "blue-red-perceived-trust-brand-interface"
+    },
+    "202efbb847f74be5a9c018e54aad2851738f0b24d5a5ab15ac16fdd4bf81b3cf": {
+      "title": "Larger Arial text and Wikipedia readability in eye-tracking study",
+      "slug": "larger-arial-text-wikipedia-readability"
+    },
+    "212f3ec20c055f7ef002415bf3877a40e7256e540ff27e10d70626e833a6c537": {
+      "title": "Font styles for dyslexic readers in screen-reading experiment",
+      "slug": "font-styles-dyslexic-screen-reading"
+    },
+    "239bb23d5233072da5d07bbfedc91c6d0ecf16dff8c8bfc880e4dd2fdd143b97": {
+      "title": "WebAIM 2026 one-million-home-page WCAG failure analysis",
+      "slug": "webaim-2026-wcag-failure-analysis"
+    },
+    "24d813ccc2e39b185d562e3ff1ec08bd0cd40cdbf18d5ddb1ac690504c5979d6": {
+      "title": "Money-back guarantee, branding, and privacy statement as trust signals",
+      "slug": "money-back-guarantee-branding-privacy-trust"
+    },
+    "24ff6e4ddcd1ebaa5f0307c5d0eea336a2bf83f0111b82686d0e62723fa5bda4": {
+      "title": "Concrete security features versus third-party seals and privacy statements",
+      "slug": "concrete-security-features-vs-seals"
+    },
+    "287a695f13f3c66a4d2c3156b38f6b2ff7969ccae7e8624b403b3ec7f41224f0": {
+      "title": "Blue versus red background color and perceived download speed",
+      "slug": "blue-red-background-perceived-download-speed"
+    },
+    "296d2116a53ee61d99b4dbf16d31ec96d63d9df834132cc86fe5e39b999e7aa3": {
+      "title": "Medium or demi-bold typeface stroke widths for low-vision legibility",
+      "slug": "medium-demi-bold-stroke-low-vision-legibility"
+    },
+    "2b592db76777f419da2bbe76480f683321f9b9c1ad5061d1c0cde247b7ab4973": {
+      "title": "14-point type legibility preference for older adults",
+      "slug": "14-point-type-legibility-older-adults"
+    },
+    "2d93639f63756d91948acddc89838fc564d3855657f58c122d0107f0493b7fc4": {
+      "title": "Sans serif fonts for dyslexia reading performance",
+      "slug": "sans-serif-fonts-dyslexia-reading"
+    },
+    "2ec4b2e70b01cd2be8c29923f8ab7cbf65784a45b055ef6cb6147a00b91a25fe": {
+      "title": "55 to 70 character line length for reading",
+      "slug": "55-70-character-line-length"
+    },
+    "32a73f82d66bb62ff32ed0821f502bd6b549b5f8353f27841e373564b5e310af": {
+      "title": "Lower color saturation and luxury brand status",
+      "slug": "lower-saturation-luxury-brand-status"
+    },
+    "32e1ebb88c48c08483c43cf3da20e0696a0901075f17f3fdf274e59b626ba03c": {
+      "title": "WCAG 1.4.11 3:1 contrast for UI components",
+      "slug": "wcag-1-4-11-3-1-contrast-ui"
+    },
+    "33b5289e7358a6265d60c3c32b5836c7900d854e0c7a8d64d3bdc321eef323ea": {
+      "title": "Saturation and value as brand-personality controls",
+      "slug": "saturation-value-brand-personality"
+    },
+    "375eea0fbb518ea5b3a15dd5a13be89dd2bab2d8a5c5688a28642412b1d508d9": {
+      "title": "Peripheral motion distraction during central reading",
+      "slug": "peripheral-motion-distraction-reading"
+    },
+    "3a31dd919c5cde11a219eb642ecb683aaea34921b035588e049333719920c44d": {
+      "title": "Pause stop hide for content over five seconds",
+      "slug": "pause-stop-hide-five-seconds"
+    },
+    "3bf33eae1bc22cb05281938a629a78be68481d1e05b5350d8d7822bb265c6eb3": {
+      "title": "Above-fold content viewed more than below-fold",
+      "slug": "above-fold-visibility-eyetracking"
+    },
+    "3d1d8cae8ba2e6362c0e20fc9fed959177711dc6c9b4ec8e1773eadf9a86f261": {
+      "title": "No evidence for Z-shaped web scan pattern",
+      "slug": "no-evidence-z-shaped-scan-pattern"
+    },
+    "3f30d02f2442f30afa23600399dfa69fda95c2b7640ecf74cec2d15592f10413": {
+      "title": "Concrete security features valued over trust seals",
+      "slug": "security-features-over-trust-seals"
+    },
+    "423b0ab19e4b56fe550d7ece2c74a91fbd1b8194e6a056e728d7a9e3c677a4b4": {
+      "title": "Age bands for children's usability and type sizes",
+      "slug": "children-usability-age-bands-type-sizes"
+    },
+    "4383a4169050c55adb4af6c30c88cf553e72a7882e26d555091b51ae25a73124": {
+      "title": "WCAG 2.2.2 pause stop hide moving content",
+      "slug": "wcag-2-2-2-pause-stop-hide"
+    },
+    "45736c615fa6e91011b1a202612500bc8a590e759d14b3ac095ac17e344bb9ce": {
+      "title": "Zigzag image-text layouts and decorative image fixations",
+      "slug": "zigzag-image-text-layouts-fixations"
+    },
+    "45a2c018c73dccc040504b2eaed90d2990f689c508da0e3a948676505582fa54": {
+      "title": "Mood-color associations in anxiety and depression",
+      "slug": "mood-color-associations-anxiety-depression"
+    },
+    "49e1667198671d75f297ab277a69dee6d499afac4b444680018058de31708971": {
+      "title": "Looming motion captures visual attention fastest",
+      "slug": "looming-motion-visual-attention"
+    },
+    "4c7dc089264ebfb03056a287376886018720327644af93679040059520217224": {
+      "title": "Return-policy generosity by retailer familiarity",
+      "slug": "return-policy-generosity-retailer-familiarity"
+    },
+    "4db6ff6c1e7ef09ff7f0fbb2527a505508f440960d3b4e56af08f5fb02f8faf5": {
+      "title": "F-shaped reading pattern in NN/g eyetracking",
+      "slug": "f-shaped-reading-pattern-nn-g"
+    },
+    "4dc83b3bd051920846fbaac10d4d6a63e55b0675835181e855d285119582aef8": {
+      "title": "39% checkout abandonment from additional costs",
+      "slug": "39-percent-checkout-abandonment-costs"
+    },
+    "4fcec5b4e1c6698cf4743b2fc58f3fbcc50c260b41e1a31c14f886000e183b26": {
+      "title": "Blue as most frequent healthcare branding primary color",
+      "slug": "blue-healthcare-branding-primary-color"
+    },
+    "50ffe515f66dfe2e0499b13e952d66f9cc66038499e3be3a3bfea33f7340b9e8": {
+      "title": "Second-column fixations and F-pattern in text-page eyetracking",
+      "slug": "second-column-fixations-f-pattern"
+    },
+    "520f1e2e209645914bb6766d6651f4957624f013586a192966e5b026631d1013": {
+      "title": "Above-fold fixations and below-fold face entry points in eyetracking",
+      "slug": "above-fold-fixations-face-entry-points"
+    },
+    "540761df8ea696099a373156fe7c29c19595febf860c78eaafea7e1fbae93bbf": {
+      "title": "Font size and line length effects in 100 children",
+      "slug": "font-size-line-length-100-children"
+    },
+    "556caa402843c24b4b1e5e605c12830f188e65a4b441996e491abe306d65311e": {
+      "title": "Meaningful UI animation directing eye and reducing cognitive load",
+      "slug": "meaningful-ui-animation-cognitive-load"
+    },
+    "5c7c6e82a402699e6e4dbfda8da6097b09dea5da87cc07fc5224b5b18e96e976": {
+      "title": "Context-dependent psychological effects of red",
+      "slug": "context-dependent-psychological-effects-red"
+    },
+    "5eb53d46e8c63f133f91dccf80318cb494afd313c632c4817f0067a44a89add1": {
+      "title": "Vendor size and reputation effects on trust and patronage",
+      "slug": "vendor-size-reputation-trust-patronage"
+    },
+    "5fe7fa7c2a8f20922125d8c57f57379a4aa4fa8e205f7226c3eb4e6c02a08211": {
+      "title": "Blue competence, trust, and red excitement associations",
+      "slug": "blue-competence-trust-red-excitement"
+    },
+    "65f3e48acca4c472b891af4ac708be681a5a94235c97b914814631ccd67ab132": {
+      "title": "Lower color saturation and perceived luxury brand status",
+      "slug": "lower-color-saturation-luxury-status"
+    },
+    "671bb9855f39928420e88b7a3a2c60390bb8ed99c1539111be63555629d4f962": {
+      "title": "Animated transitions and mental models of spatial relationships",
+      "slug": "animated-transitions-mental-model-spatial"
+    },
+    "6767e4bcbc34da01d3a55832e8c1bd4333615f731248c080eacf729233ce4a97": {
+      "title": "Ribbed progress bar illusion reducing perceived waiting time by 11%",
+      "slug": "ribbed-progress-bar-waiting-time-11"
+    },
+    "69b171b577e9e52cf4fd384ac63f8f672a91e5c4dadc139ad4b08636d2caa326": {
+      "title": "Expertise and trustworthiness markers for website credibility",
+      "slug": "expertise-trustworthiness-website-credibility"
+    },
+    "6b89a6aa76dff47fa47912d8f977d029989b685ff4a5fcf5a3582929b320d179": {
+      "title": "Screen reader heading navigation in WebAIM 2023-24 survey",
+      "slug": "screen-reader-heading-navigation-webaim"
+    },
+    "6ce68576b29dfa65e2e527cad4e67a802e6a0c058e0be4818cb0ff09cd818e15": {
+      "title": "Context-dependent effect of high color saturation on trustworthiness",
+      "slug": "high-color-saturation-trustworthiness-context"
+    },
+    "6fa2c5900f2fa7cf976fbabc7319f18e401eba7fefdce4d44e1fc2e95aa1adf5": {
+      "title": "Online bookseller review ratings, one-star effects, and review length",
+      "slug": "online-bookseller-review-ratings-sales"
+    },
+    "70d18bbafab23499eead90de2199b891b48e15036daf66c27bc2f2489b2852d1": {
+      "title": "Lenient online return policies and purchase intention through trust",
+      "slug": "lenient-return-policies-purchase-intention"
+    },
+    "711490e456d846178308a5b304bcda1732318cb916476a1abaf782b8f9a02a18": {
+      "title": "Color saturation in 223 children's apps versus adult interfaces",
+      "slug": "childrens-app-colors-saturation-223-apps"
+    },
+    "74875c7df275247d9dfb0a3d95472b83eb4f6c66651e12fe8c46b8c60750491e": {
+      "title": "Positive display polarity and reading speed and accuracy",
+      "slug": "positive-display-polarity-reading-accuracy"
+    },
+    "75e303483734edadf0c79938356b21bbd1117c2212065f82216a6c2ea14fbf23": {
+      "title": "Symbolic interface elements for children under 3 and ages 3–5",
+      "slug": "symbolic-interface-elements-young-children"
+    },
+    "77a184d1519e0eb374d967d98f5d0a88425ae6b9e4b6b4c571dd23446690f2e5": {
+      "title": "Line length tradeoff between scanning performance and visual comfort",
+      "slug": "line-length-scanning-visual-comfort"
+    },
+    "79c99b2667775c8b3dcb3896bcfa546852b3f7b0fd0868fea9eced37af6ad969": {
+      "title": "Technology-enhanced stories in 43-study meta-analysis of 2,147 children",
+      "slug": "tech-enhanced-stories-43-studies-2147"
+    },
+    "7a32d26a640a74f51cbc2b91e391e3c004c14bfca4716e603f12dc8c916d5eb0": {
+      "title": "WCAG 1.4.1 color-only information second cues",
+      "slug": "wcag-1-4-1-color-only-information-second-cues"
+    },
+    "7ad74243c96537c07ccef089788dbc769e7ba5ff407e855710b1352f0b3c3d4c": {
+      "title": "Brand hue personality cues for landing pages",
+      "slug": "brand-hue-personality-cues-for-landing-pages"
+    },
+    "7b4ae4697177447410509035a957f561fdf1b942b99205d50cdf360d75aa25d7": {
+      "title": "Warranty information and retailer reputation effects",
+      "slug": "warranty-information-and-retailer-reputation-effects"
+    },
+    "8033e6156c818c921d92f24e4a7e62e9ca071fb32bd46cebf1631c78206ca817": {
+      "title": "Manipulative design in apps for children aged 3–5",
+      "slug": "manipulative-design-in-apps-for-children-aged-3-5"
+    },
+    "8081e34c67ccd52d9fca5f67ba97c6c7d66dceb4c8c48a99e4745ec7db759a71": {
+      "title": "Website design and e-trust across genders",
+      "slug": "website-design-and-e-trust-across-genders"
+    },
+    "81ffaf40497bbc44bca8e9a21da3ca5acc1a0bf1d7f52e4bcec49d2ae6b312ad": {
+      "title": "Finance color sensitivity versus medical and legal websites",
+      "slug": "finance-color-sensitivity-versus-medical-and-legal-websites"
+    },
+    "839b2bfad599fc0786501136a20d845aeeea47d22d8e0cbcc76e20c92d012e65": {
+      "title": "Professionally designed website credibility and navigation",
+      "slug": "professionally-designed-website-credibility-and-navigation"
+    },
+    "85594f44452a1243593d367755172df5773e7df701dc074aab9485a5f8f5d6a9": {
+      "title": "NN/g placeholder text usability in forms",
+      "slug": "nn-g-placeholder-text-usability-in-forms"
+    },
+    "88cb924c7421f851843061de0c81860da5adef6a1838ad31c9b65fa639fd011a": {
+      "title": "Positive polarity versus dark mode reading performance",
+      "slug": "positive-polarity-versus-dark-mode-reading-performance"
+    },
+    "897cb0f5f3421fab4f6a84248c0a227c357760955f6de3fbd282c8ecce0d6d2a": {
+      "title": "Guest checkout abandonment and prominence in Baymard 2024",
+      "slug": "guest-checkout-abandonment-and-prominence-in-baymard-2024"
+    },
+    "89ef3d6e1583c6b3db5cb2bce69e4905d2008398f2b975e64f0d82a17675e87d": {
+      "title": "Blue competence and red excitement in brand personality",
+      "slug": "blue-competence-and-red-excitement-in-brand-personality"
+    },
+    "8c253dced1c168badaa08c3c4d6a2b84f22ab680715d1e8697833b89d05139f7": {
+      "title": "WCAG 2.2 text resizing to 200 percent",
+      "slug": "wcag-2-2-text-resizing-to-200-percent"
+    },
+    "8cc2be957f38e95c443381151fbbe3894f029eae409651c480e58f5359769ac1": {
+      "title": "Fully justified web text and irregular word spacing",
+      "slug": "fully-justified-web-text-and-irregular-word-spacing"
+    },
+    "8e1f4bc67bf6f7d87d0ffe189d58e8a561bde76a807bef27f02c8c4d471ac801": {
+      "title": "WCAG 2.3.3 motion animation and reduce-motion settings",
+      "slug": "wcag-2-3-3-motion-animation-and-reduce-motion-settings"
+    },
+    "8ebfa5c043d9d88251a7a3d8c6d8ea0b3b37b90142a89cc0c72fdac7fff3544a": {
+      "title": "Social presence and trust in shopping websites",
+      "slug": "social-presence-and-trust-in-shopping-websites"
+    },
+    "916bcdbaf8753d8a8774d75240a356cddbe7c68812310d8885f59a2f4d52347f": {
+      "title": "Third-party assurance seals and initial trust",
+      "slug": "third-party-assurance-seals-and-initial-trust"
+    },
+    "918d1f6d4cb2991ad091352fc1c0e3a8f84ba6f91b024806e9ceb09557e1249d": {
+      "title": "Web credibility elements and commercial pressure",
+      "slug": "web-credibility-elements-and-commercial-pressure"
+    },
+    "91a02b776e86e5cc5c8a3b2d1210cff1e0be62cfdccb947f67607afb107dd9f7": {
+      "title": "Sex differences in reddish-purple color preference",
+      "slug": "sex-differences-in-reddish-purple-color-preference"
+    },
+    "960642bd6cddd84be72ab31ba77eaeb895da085f7a2e5066a42699a4155275c8": {
+      "title": "Serif versus sans-serif usability in an e-commerce prototype",
+      "slug": "serif-versus-sans-serif-usability-in-an-e-commerce-prototype"
+    },
+    "996bb4670b98930016e4c273bbc7e871a70d4cb8fc04edcab60425369fbc18b9": {
+      "title": "Times New Roman and Arial 12-point versus 10-point legibility",
+      "slug": "times-new-roman-arial-12-point-vs-10-point-legibility"
+    },
+    "99bd26190e8d9a39ec93248e4cd7a88dff99399a53cf28b5cfd0854e99834d46": {
+      "title": "Green exposure, open-mindedness, and creative performance",
+      "slug": "green-exposure-open-mindedness-creative-performance"
+    },
+    "9d6e3f1bc49696a82af9d32ae183cf54de85cc7b36305d313bee240e501e8d97": {
+      "title": "Website colorfulness and visual complexity in first impressions",
+      "slug": "website-colorfulness-visual-complexity"
+    },
+    "9e78c378c4767dd0e09fef0b43e8d0dbddafc7b658d5942191010ddde8621bef": {
+      "title": "W3C cognitive accessibility patterns for reducing cognitive barriers",
+      "slug": "w3c-cognitive-accessibility-patterns"
+    },
+    "a44cccc9ef872db8df5940f963570807af99963d03d88bb70c8e908d0423b925": {
+      "title": "Black exclusivity and luxury versus yellow affordability and youth",
+      "slug": "black-exclusivity-luxury-yellow-affordability-youth"
+    },
+    "a5886054e776d27d68de11c1e885a9b9a4c2d57fe8c85a929ec77e43e014fba7": {
+      "title": "Red and blue effects on physiological arousal",
+      "slug": "red-blue-physiological-arousal"
+    },
+    "a73a57689eb698b1facdd5b1fbc02dbd343d57bca10b1957167b11e105d84f7d": {
+      "title": "Online shopping trust, perceived safety, and familiar interface",
+      "slug": "online-shopping-trust-perceived-safety-familiar-interface"
+    },
+    "a9b5fb35a129edfacd87a0763cc30bf77e978b286362e516c02592ddbecea779": {
+      "title": "Wikipedia eye-tracking: 18-point font size, comprehension, and line spacing",
+      "slug": "wikipedia-eye-tracking-18pt-font-line-spacing"
+    },
+    "aa134de8d4775a29d8b1661575a78b115438b0dad056cf8671147a89432d5bd4": {
+      "title": "Luminance contrast versus chromatic contrast for reading speed and legibility",
+      "slug": "luminance-contrast-reading-speed-legibility"
+    },
+    "abc583dae14427827166d8a287fb51277d104c1b5d41d2b3cac8c537d008662a": {
+      "title": "Dyslexia, visual crowding, and increased letter, word, and line spacing",
+      "slug": "dyslexia-visual-crowding-spacing-reading-speed"
+    },
+    "aef3f7fd0b859449d3936b0afa03068ac9d78c8171f04d3cd249d2f8d2ff2fc2": {
+      "title": "Classical animation principles for physical, predictable interface motion",
+      "slug": "classical-animation-principles-interface-motion"
+    },
+    "afcd11defec77594fbce6e62b16f57402949b3f56d58a46fc0fb6a05a44d0b82": {
+      "title": "Sans-serif, monospaced, and roman fonts versus serif and italic for dyslexia",
+      "slug": "dyslexia-sans-serif-monospaced-roman-fonts"
+    },
+    "afd113e8952f32288a93bcd5689465a7eb4ad3ae5d5ba12173270a622e9f5fc2": {
+      "title": "WCAG 4.5:1 body-text contrast, 3:1 large text, and 7:1 enhanced level",
+      "slug": "wcag-contrast-ratios-body-large-enhanced"
+    },
+    "b0af781f8a659b66a5fe2bb14de48fb8c6af1c6500e8c969085767b23a8471f4": {
+      "title": "Online news reading speed at 95 characters per line",
+      "slug": "online-news-95-characters-per-line"
+    },
+    "b202715b300ce465351cd4cc1b2c3e13acd25a8c90b6e573c066e7c49988a910": {
+      "title": "Pediatric patient-room blue and green preference over white",
+      "slug": "pediatric-patient-room-blue-green-preference"
+    },
+    "b26c31c7d65379ec8920bbeca704c7298c70e98085c442d48a7cef1a851af874": {
+      "title": "High saturation and low brightness for physiological arousal and attention",
+      "slug": "high-saturation-low-brightness-arousal-attention"
+    },
+    "b2ae0455823500fe94ec272a3bc8c1c12e995881dfe00507fda2c5f1944ebf92": {
+      "title": "NN/g F-shaped reading pattern and web formatting",
+      "slug": "nng-f-shaped-reading-pattern-web-formatting"
+    },
+    "b8d6c0ab1475d1a165cee170c841f3e9bb56393a81948d63e22441b8b4dd72da": {
+      "title": "Children's color emotions: bright versus dark colors and age effects",
+      "slug": "childrens-color-emotions-bright-dark-age"
+    },
+    "bbdbf4aab1661b170176e1c28074b840ab5581747ef58b0df1c45be127d64194": {
+      "title": "WCAG 1.4.12 text-spacing overrides and growing containers",
+      "slug": "wcag-1-4-12-text-spacing-overrides"
+    },
+    "bf7b5a2e5527dd717c1a34fd406a45bf546cd02298eec377bb2f2c2b0bb2be37": {
+      "title": "All-caps versus mixed-case text for low-vision and standard reading",
+      "slug": "all-caps-vs-mixed-case-reading"
+    },
+    "c303300c7ddebb9bb8316bad92558eb717955802db47176a6e11ca66798639a5": {
+      "title": "Red-green color vision deficiency and blue/orange palettes",
+      "slug": "red-green-color-vision-deficiency-blue-orange-palettes"
+    },
+    "c47fb429db3444cc901567c8584f5f44b783c54e09116478003f071fb6d6e03c": {
+      "title": "Visual feedback timing of 0.1 seconds",
+      "slug": "visual-feedback-timing-0-1-seconds"
+    },
+    "c75642c870c01741d55e407da3a34e2599646038e48c2a6cfa879663fe52a395": {
+      "title": "Color saturation and brightness effects on arousal and pleasure",
+      "slug": "color-saturation-brightness-arousal-pleasure"
+    },
+    "cd002c36a0dfd4ed846d72bb860ee1ae160b3ac0bd72d15e844b99262e7c6c2c": {
+      "title": "Children's app interface saturation, brightness, and hue use",
+      "slug": "children-app-interface-saturation-brightness-hue"
+    },
+    "cdae1e6b534c10518f50f1f1957d9ccf589ad6cc0a38942cee9f5de6a919606b": {
+      "title": "Blue universal preference and regional color meanings",
+      "slug": "blue-universal-preference-regional-color-meanings"
+    },
+    "cdd703e7e68486d77de1d9264c38141510fc769487f769620bce8452bc81674a": {
+      "title": "14-point font reading speed and older-adult preference",
+      "slug": "14-point-font-reading-speed-older-adults"
+    },
+    "d12376217938e42fbbd81b1a299253a73d02cef5899c90f4e985a379c2b18e8d": {
+      "title": "Animated elements outside focal area and information-seeking performance",
+      "slug": "animated-elements-focal-area-information-seeking"
+    },
+    "d3aa3e23dbf3bf997c75077686f964b58225795acc501711beb12d173b3cf8f2": {
+      "title": "2025 Chinese online-education study of 14px font and 1.5 line spacing",
+      "slug": "2025-chinese-education-14px-font-1-5-spacing"
+    },
+    "d53b04953fc35e32b91244e2cf82d07d93eeb27c7f76eefb57c74e5d24ba6d0a": {
+      "title": "W3C image guidance for informative, decorative, functional, and complex images",
+      "slug": "w3c-image-guidance-alt-categories"
+    },
+    "db947abecfa1420f2bd2b47551c8111b4bb7621bd387b3b9568081dabe3b2864": {
+      "title": "WCAG 2.2 text-spacing requirements",
+      "slug": "wcag-2-2-text-spacing-requirements"
+    },
+    "dc4c722696fdb4080cb06a8eb6da4e5a00afa9d30c586d95536871c5565c5f90": {
+      "title": "WCAG 2.2 text contrast ratios at AA and AAA",
+      "slug": "wcag-2-2-text-contrast-ratios"
+    },
+    "de6d64f2af24926da30aa72a8178057c55e802cb780f1c3e0dc8b9f362446ad5": {
+      "title": "Children's interface instructions, feedback, and error prevention",
+      "slug": "children-interface-instructions-feedback-errors"
+    },
+    "e0feca4f8a169195c50f50da4e2802bc273101c63cbe8239a19cbc44ede6a478": {
+      "title": "Online trust and perceived risk in purchasing decisions",
+      "slug": "online-trust-perceived-risk-purchasing"
+    },
+    "e1404e41633434a624ddcbb025a2a479f60117e2082b7a09270f511ca7f478e9": {
+      "title": "Eyetracking F-pattern on text and image-based pages",
+      "slug": "eyetracking-f-pattern-text-image-pages"
+    },
+    "e2c44d5e685ab23ebad933d8d4c281e579a1b5e7ed747eb17d1e5fc1496a551d": {
+      "title": "Cooler pastel tones and trustworthiness in cyber-banking interfaces",
+      "slug": "cooler-pastel-tones-trustworthiness-banking"
+    },
+    "e6a82ba7c64f070c2034dd2c5abbca4ac522a054d25113b80a415898665810c9": {
+      "title": "WCAG 2.2 keyboard focus visibility with sticky elements",
+      "slug": "wcag-2-2-keyboard-focus-visibility-sticky"
+    },
+    "e9177687bcdc5ee55413d46bb0e8ffcf82ee538b44122146c084e42c15f06d28": {
+      "title": "Gartner 2024 B2B rep-free buying and self-service purchase regret",
+      "slug": "gartner-2024-b2b-rep-free-self-service-regret"
+    },
+    "e94805f996ee7e553b0930c349e59f7378dadc52b662cd89ceb086e83be2223c": {
+      "title": "Chartbeat 2 billion visits and below-the-fold attention",
+      "slug": "chartbeat-2-billion-visits-below-fold-attention"
+    },
+    "e9ac89771b7e4b67fcac4d97549af478fbd1de5f2b29166b20e5a43354de0317": {
+      "title": "Eye-tracking font size, serif status, and reading",
+      "slug": "eye-tracking-font-size-serif-reading"
+    },
+    "ee1db2c4cae3035f3744d453ce220c8d7b45723fdc1283439b4d025af4d315df": {
+      "title": "2,684 website credibility evaluations and visual design comments",
+      "slug": "2684-website-credibility-visual-design"
+    },
+    "ef819fcc9759dc37f27cbfbdbccb6ddf0b319eabd9beb6a0edc1bf70ac3692ab": {
+      "title": "F-shaped scanning and text formatting with headings and bullets",
+      "slug": "f-shaped-scanning-text-formatting-headings-bullets"
+    },
+    "f267280eca6cbbdf9f630eb1fd1609f494721b1748b0c98af42de55cac722822": {
+      "title": "Red-green color deficiency prevalence and color-only coding risk",
+      "slug": "red-green-color-deficiency-prevalence-color-only-coding-risk"
+    },
+    "f750c1c68c1518c1e2d647bfd2792b36bb216308a9ea9e704c959590e2799872": {
+      "title": "Touchscreen design guidelines for children under 9",
+      "slug": "touchscreen-design-guidelines-for-children-under-9"
+    },
+    "f7a40c081fe13ef2d46c012c825bdd3c7fb769140968485f24df1dc881f52661": {
+      "title": "2018 eyetracking attention above fold and first screenfuls",
+      "slug": "2018-eyetracking-attention-above-fold-first-screenfuls"
+    },
+    "f7b050df257282413e38fdc4f3d65c4ec6cc417bb9f243f9d02adb90d9d9d161": {
+      "title": "Website color appeal and trust in Canada, Germany, and Japan",
+      "slug": "website-color-appeal-trust-canada-germany-japan"
+    },
+    "f958190f9d926b525b249b855824520b1a5b6e20de8c27db7be2c8f18d4cfae6": {
+      "title": "Larger font sizes and reading speed for children aged 7 to 9",
+      "slug": "larger-font-sizes-reading-speed-children-aged-7-to-9"
+    },
+    "fbf3bc52178cb50e7b389f38e1d017d57aefce3f1cfe95776ca3a9b31b76debc": {
+      "title": "Web-page visual-search performance with 1.5 and 2 line spacing",
+      "slug": "web-page-visual-search-performance-1-5-and-2-line-spacing"
+    },
+    "fcb539506ffe95fc9eb49d678deb94afd02121a0f8fce3fb8e332df3691a3062": {
+      "title": "Blue, black, and green trust in finance, legal, and medical mockups",
+      "slug": "blue-black-green-trust-finance-legal-medical-mockups"
+    },
+    "fff5f265586c244496bff8ff0ea4dd8e8421f89afbd22de3acc9e22558efaef3": {
+      "title": "Review helpfulness, extreme ratings, and experience goods",
+      "slug": "review-helpfulness-extreme-ratings-experience-goods"
+    }
+  },
+  "articles": {
+    "01d35d30a0c40605890e7342a64d5e51dc88e353a89cb12820d392d087e1d11c": {
+      "slug": "use-reviews-as-evidence-not-decoration"
+    },
+    "090b3bf4be2e020ff96998b420e008526d27094c5b59ae9d851116227ba37c52": {
+      "slug": "color-choices-for-trust-sensitive-health-and-fintech-pages"
+    },
+    "0eae29fe830a226bcb559e6b3d56b3e50b8c74c47cc62de2e4cb70c6dac51075": {
+      "slug": "trust-starts-before-the-buy-button"
+    },
+    "0fe687c640e700e008c87224c16cb406f09c101c792b603582d636db72227790": {
+      "slug": "the-f-pattern-when-it-happens-and-how-to-design-around-it"
+    },
+    "3167568e7a6bfed25f8293ef6df3d6725e4c1bd9289c33de4d5e98f42463ef45": {
+      "slug": "designing-text-for-seniors-and-children-age-responsive"
+    },
+    "3cc1abe6de8463a3ec802def441101e3376bc2d01fda6ffb2a16919497baa6cc": {
+      "slug": "optimizing-reading-speed-and-scannability-on-the-web"
+    },
+    "3d969e01cbccbeba16d025c19fa043194139640e6368339467c43d2317f54188": {
+      "slug": "choosing-a-typeface-without-falling-for-typography-myths"
+    },
+    "48891a2ead08c61c32b87eccc6360557a0786daf092887004c615e0434810aa2": {
+      "slug": "answer-the-risks-that-stop-the-purchase"
+    },
+    "48c21d2b303c7c876df4abb9e1c3919ac679bb4bd5923f6b97fb30598096cfb2": {
+      "slug": "structure-labels-and-forms-that-work-with-assistive"
+    },
+    "4e321a7632b8aa1443b3890b9c77389046694f3c1432d2dc7ceec30485506cfb": {
+      "slug": "trust-signals-work-best-when-they-explain-risk"
+    },
+    "4fd88d0ebc6aee13d6c5aac993714882006003a35ef006062a8593de5655c68f": {
+      "slug": "the-fold-where-attention-really-drops-off"
+    },
+    "58e8cc66ad13678eeb421c8720efa32a6c439929ceadbc261d19b334f6587f26": {
+      "slug": "how-big-should-interface-text-be"
+    },
+    "58ead226a1e2f60fe040dff4a8d90a5d34063155fa7134d8635826909afb8759": {
+      "slug": "how-wide-and-airy-should-reading-text-be"
+    },
+    "5a715c090acb056f5288ed09ef80ae1d2fc1e11526e1a5455352d3b5b00ed238": {
+      "slug": "design-for-the-b2b-buyer-who-wants-to-research-alone"
+    },
+    "6eef2d9b98e282d9ebde05aba3e9357b921297d7c8efaae887ca204a1d585d8a": {
+      "slug": "text-people-can-read-spacing-fonts-size-and-cognitive-load"
+    },
+    "85c339652a82dbe7a6ccf561b61a0d983e3eed781060e780d890eec84fad8296": {
+      "slug": "designing-for-small-hands-and-growing-minds-what-research"
+    },
+    "8cc2d546ef2f2f48572fe451b7fb205119dfe2d1c502a60af20318e88c44584c": {
+      "slug": "contrast-and-color-designing-for-the-way-people-actually-see"
+    },
+    "8ee6f6507ca28587bd44c0a3ddec562f3c62dbae516f580b30bc9fe5f20d0c91": {
+      "slug": "luxury-color-strategy-why-muted-tones-signal-higher-status"
+    },
+    "8f38b6834fe78e79b5e2d492ef5316f041ddd43e9a36f8e5ec2d35f2d31d9ade": {
+      "slug": "z-patterns-zigzags-and-columns-what-the-evidence-says-about"
+    },
+    "99619347c82053e7f91ee8b73abb9c387d4f4b7c272cee35605e37da5f57308b": {
+      "slug": "context-and-culture-when-rules-of-color-change"
+    },
+    "99e6ebc103b14125d185b277ee4bdcf654045c8c816e392d2edc41ee44ba0665": {
+      "slug": "the-primal-palette-how-saturation-and-hue-drive-ui-emotions"
+    },
+    "9f2409bab8cf2b70a010c67d5cf1743ee81e096cabc68966331a316bea707746": {
+      "slug": "why-cool-blues-and-greens-build-trust-in-health-and-fintech"
+    },
+    "a115ed5b3f93c78754fe239bb326130a04f39f5c72c8813bd6456e7f200543e7": {
+      "slug": "credibility-starts-with-the-interface"
+    },
+    "aa5f91008bd527cbb9ec657f7ebfad6b4fb10b3d0c298246445df06de37c0146": {
+      "slug": "type-color-motion-and-fair-play-the-look-and-ethics-of"
+    },
+    "b10d72354084f5f6eaf79f66d92c97e6123b67d33f3d827a77af5a259f71f628": {
+      "slug": "designing-for-every-eye-accessibility-and-legibility"
+    },
+    "b4539619429e685ed1bf2c60b5ae1a7126bfcbfe32ac2d71d4538a9111da30d6": {
+      "slug": "typography-for-cognitive-accessibility-and-dyslexia"
+    },
+    "b61e563fb083bd612776a6139aef644b9e7ca1515edfff663b2b98be0a25f8a3": {
+      "slug": "attention-distraction-and-accessibility-managing-motion"
+    },
+    "c2ed9226ec2e407d9b2497f55812dbef3b6eee5f05fd11edb4c16049980357bd": {
+      "slug": "color-for-children-culture-and-first-impressions"
+    },
+    "c9bd6277b3680df133a9fcd89e50f58c746fb17e632212c7a092517c40a66629": {
+      "slug": "focus-motion-and-moving-parts-keeping-landing-pages-usable"
+    },
+    "d9cb9d1b23ed9ee7cc836cdd865eab7d1c319a42e1c38b6f7ef6b0ce6abd3d97": {
+      "slug": "returns-and-checkout-friction-are-part-of-the-sales-message"
+    },
+    "dc133b8dd0eb98e6640804cd5169ff57691ae746085619721e56202f9c93f0ee": {
+      "slug": "turn-accessibility-requirements-into-typography-requirements"
+    },
+    "e656054f0465b8b62aaf3da0c92ae7b8689cae9a29e29d5ca4407eee027bed7e": {
+      "slug": "using-color-to-build-brand-personality-and-luxury-cues"
+    },
+    "e88e2c85bdd18aa609fa6b664c2b5e680bea5ffed7dc6136a62fb51887d9b205": {
+      "slug": "strategic-color-in-branding-and-conversion"
+    },
+    "f1bcdb03e2685e0bce3c2fc47af7903f4d20dc42e42addf0da97ce55a91244d5": {
+      "slug": "designing-color-for-kids-higher-saturation-cool-for-learning"
+    },
+    "f9dc2a6cf55d4b542e8af14a0274568758663fcd5a5756755727416cafaf0eb5": {
+      "slug": "the-psychology-of-ui-animation-physics-time-and-mental"
+    }
+  }
+}

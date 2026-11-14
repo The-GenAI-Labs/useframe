@@ -1,0 +1,28 @@
+{
+  "slug": "f-shaped-scanning-text-formatting-headings-bullets",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "F-shaped scanning and text formatting with headings and bullets",
+  "statement": "Users scan web pages in an 'F-shaped' pattern when text lacks formatting, causing them to miss critical content; designers must use headings, bolding, and bullets to force a 'layer-cake' scanning pattern.\n\nOptions:\n- Scannable Headings: Layer-cake layout (heavy use of descriptive H2s/H3s) (fits: blogs, long form articles, documentation)\n- Keyword Emphasis: Spotted scanning layout (bolded keywords and distinct links) (fits: product descriptions, specifications)\n- Data Chunking: Bulleted list grouping (fits: pricing features, how to guides)\n- F-Pattern Trigger (Avoid): Unformatted wall of text (fits: legal disclaimers, terms of service)",
+  "appliesWhen": "Applies to: web, landing pages, content sites. Audience: general, b2b buyers, adults.",
+  "tags": [
+    "layout",
+    "blogs",
+    "documentation",
+    "how-to-guides",
+    "legal-disclaimers",
+    "long-form-articles",
+    "pricing-features",
+    "product-descriptions",
+    "specifications",
+    "terms-of-service"
+  ],
+  "source": {
+    "title": "F-Shaped Pattern of Reading on the Web: Misunderstood, But Still Relevant (Even on Mobile)",
+    "authors": "Kara Pernice",
+    "year": 2017,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/"
+  },
+  "relations": []
+}

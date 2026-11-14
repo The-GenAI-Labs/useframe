@@ -1,0 +1,19 @@
+{
+  "slug": "visual-standout-color-contrast-memory",
+  "status": "DRAFT",
+  "category": "CONVERSION",
+  "title": "Visual standout via color or contrast and memory interaction",
+  "statement": "Items that stand out visually from their peers (via distinct color or high contrast) are significantly more likely to be remembered and interacted with.\n\nOptions:\n- Maximum Isolation: Complementary Color (fits: primary cta, buy buttons)\n- Brand-aligned Isolation: Monochromatic Bold (fits: secondary actions, form submissions)\n- Negative Isolation: Ghost / Outline (fits: cancel actions, tertiary links)",
+  "appliesWhen": "Applies to: landing pages, checkout flows. Audience: general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "buy-buttons",
+    "cancel-actions",
+    "form-submissions",
+    "primary-cta",
+    "secondary-actions",
+    "tertiary-links"
+  ],
+  "relations": []
+}

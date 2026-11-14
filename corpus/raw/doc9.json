@@ -1,0 +1,947 @@
+{
+  "findings": [
+    {
+      "claim": "Showing real-world identifiers such as a physical address, phone number, contact email, and team photographs can increase perceived website credibility, so the trust section can use the subset that is credible and appropriate for the business model. (Simson)",
+      "authors": [
+        "B. J. Fogg",
+        "Jonathan Marshall",
+        "Othman Laraki",
+        "Alex Osipovich",
+        "Chris Varma",
+        "Nicholas Fang",
+        "Jyoti Paul",
+        "Akshay Rangnekar",
+        "John Shon",
+        "Preeti Swani",
+        "Marissa Treinen"
+      ],
+      "publicationYear": 2001,
+      "publishedIn": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI 2001), ACM",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.1145/365024.365037",
+      "field": "layout",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "corporate_websites",
+        "online_services"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "physical-address-block",
+          "label": "Physical address",
+          "fits": [
+            "established_business",
+            "local_presence",
+            "high_consideration"
+          ]
+        },
+        {
+          "value": "phone-number-in-header-or-footer",
+          "label": "Visible phone number",
+          "fits": ["service_led", "human_support", "high_trust_need"]
+        },
+        {
+          "value": "named-support-email",
+          "label": "Direct contact email",
+          "fits": ["accessible", "support_focused", "professional"]
+        },
+        {
+          "value": "team-photo-grid",
+          "label": "Team photographs",
+          "fits": ["human", "expert_led", "relationship_oriented"]
+        },
+        {
+          "value": "customer-service-response-promise",
+          "label": "Support-response commitment",
+          "fits": ["service_led", "accountable", "high_touch"]
+        }
+      ],
+      "contextHeader": "B. J. Fogg and colleagues' 2001 CHI study of more than 1,400 participants found that real-world-feel elements such as physical address, phone, email, staff photos, and responsive customer service increased perceived Web credibility. (DOI)",
+      "verified": true
+    },
+    {
+      "claim": "A professionally designed, logically arranged, easy-to-navigate website supports credibility, while slow loading and difficult navigation can damage it, so landing pages can choose between richer presentation and a simpler interface without sacrificing usability. (Simson)",
+      "authors": [
+        "B. J. Fogg",
+        "Jonathan Marshall",
+        "Othman Laraki",
+        "Alex Osipovich",
+        "Chris Varma",
+        "Nicholas Fang",
+        "Jyoti Paul",
+        "Akshay Rangnekar",
+        "John Shon",
+        "Preeti Swani",
+        "Marissa Treinen"
+      ],
+      "publicationYear": 2001,
+      "publishedIn": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI 2001), ACM",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.1145/365024.365037",
+      "field": "layout",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "corporate_websites",
+        "online_services"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "clear-sectioned-single-column-layout",
+          "label": "Simple page structure",
+          "fits": ["minimal", "calm", "high_clarity"]
+        },
+        {
+          "value": "persistent-primary-navigation",
+          "label": "Persistent navigation",
+          "fits": ["information_rich", "exploratory", "large_catalog"]
+        },
+        {
+          "value": "prominent-site-search",
+          "label": "Visible search",
+          "fits": ["catalog_heavy", "utility_first", "repeat_users"]
+        },
+        {
+          "value": "fast-loading-static-hero",
+          "label": "Lightweight hero",
+          "fits": ["performance_first", "mobile_first", "conversion_focused"]
+        },
+        {
+          "value": "visual-brand-system",
+          "label": "Polished visual system",
+          "fits": ["premium", "editorial", "brand_led"]
+        }
+      ],
+      "contextHeader": "B. J. Fogg and colleagues' 2001 CHI study found ease-of-use factors, including professional design and sensible arrangement, increased Web credibility, while slow downloads and difficult navigation reduced it. (Simson)",
+      "verified": true
+    },
+    {
+      "claim": "Explicit expertise and trustworthiness markers such as credentials, citations, outside sources, and clear policies can strengthen website credibility, giving teams several substantiated ways to answer the objection 'Why should I believe you?'. (Simson)",
+      "authors": [
+        "B. J. Fogg",
+        "Jonathan Marshall",
+        "Othman Laraki",
+        "Alex Osipovich",
+        "Chris Varma",
+        "Nicholas Fang",
+        "Jyoti Paul",
+        "Akshay Rangnekar",
+        "John Shon",
+        "Preeti Swani",
+        "Marissa Treinen"
+      ],
+      "publicationYear": 2001,
+      "publishedIn": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI 2001), ACM",
+      "publicationType": "conference_paper",
+      "sourceUrl": "https://doi.org/10.1145/365024.365037",
+      "field": "conversion",
+      "appliesTo": [
+        "ecommerce",
+        "professional_services",
+        "health_information",
+        "expert_led_products"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "named-expert-credentials",
+          "label": "Expert credentials",
+          "fits": ["expert_led", "high_consideration", "professional"]
+        },
+        {
+          "value": "third-party-source-links",
+          "label": "Outside sources",
+          "fits": ["evidence_led", "research_backed", "high_scrutiny"]
+        },
+        {
+          "value": "cited-product-claims",
+          "label": "Cited claims",
+          "fits": ["technical", "evidence_led", "transparent"]
+        },
+        {
+          "value": "plain-language-policy-links",
+          "label": "Clear policies",
+          "fits": ["transparent", "risk_reducing", "service_led"]
+        },
+        {
+          "value": "detailed-product-information",
+          "label": "Detailed specifications",
+          "fits": ["technical", "comparison_shopping", "high_involvement"]
+        }
+      ],
+      "contextHeader": "B. J. Fogg and colleagues' 2001 CHI study found that markers of expertise such as author credentials and citations, plus markers of trustworthiness such as outside sources and clear content policies, were positive contributors to Web credibility. (Simson)",
+      "verified": true
+    },
+    {
+      "claim": "In online shopping, trust is supported by perceived safety mechanisms, a familiar interface, and ease of use, so checkout designs can use either a conventional interaction pattern or stronger explanatory trust cues while keeping the transaction flow familiar. (DOI)",
+      "authors": ["David Gefen", "Elena Karahanna", "Detmar W. Straub"],
+      "publicationYear": 2003,
+      "publishedIn": "MIS Quarterly",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.2307/30036519",
+      "field": "conversion",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "marketplaces",
+        "subscription_checkout"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "conventional-checkout-pattern",
+          "label": "Familiar checkout",
+          "fits": ["mainstream", "low_friction", "general"]
+        },
+        {
+          "value": "visible-security-mechanism-copy",
+          "label": "Security explanation",
+          "fits": ["risk_sensitive", "high_value", "new_customer"]
+        },
+        {
+          "value": "standardized-form-controls",
+          "label": "Familiar controls",
+          "fits": ["conventional", "accessible", "utility_first"]
+        },
+        {
+          "value": "minimal-step-checkout",
+          "label": "Simple flow",
+          "fits": ["mobile_first", "fast", "low_complexity"]
+        },
+        {
+          "value": "trust-details-near-payment",
+          "label": "Payment trust details",
+          "fits": ["financial_risk", "high_consideration", "new_customer"]
+        }
+      ],
+      "contextHeader": "David Gefen, Elena Karahanna, and Detmar W. Straub's 2003 MIS Quarterly study found that online trust mattered alongside usefulness and ease of use and was built partly through perceived safety mechanisms and a typical, easy-to-use interface. (DOI)",
+      "verified": true
+    },
+    {
+      "claim": "Because online trust and perceived risk both have strong effects on purchasing decisions, landing pages should address concrete risk drivers such as company reputation, security, privacy, information quality, and vendor reputation rather than relying on generic reassurance. (ScienceDirect)",
+      "authors": ["Dan J. Kim", "Donald L. Ferrin", "H. Raghav Rao"],
+      "publicationYear": 2008,
+      "publishedIn": "Decision Support Systems",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.dss.2007.07.001",
+      "field": "conversion",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "marketplaces",
+        "high_consideration_products"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "company-reputation-proof",
+          "label": "Reputation evidence",
+          "fits": ["new_brand", "high_consideration", "credibility_first"]
+        },
+        {
+          "value": "security-practice-explanation",
+          "label": "Security details",
+          "fits": ["financial_risk", "privacy_sensitive", "high_value"]
+        },
+        {
+          "value": "plain-language-privacy-policy",
+          "label": "Privacy explanation",
+          "fits": ["data_sensitive", "transparent", "compliance_aware"]
+        },
+        {
+          "value": "detailed-product-information",
+          "label": "Information depth",
+          "fits": ["technical", "comparison_shopping", "high_involvement"]
+        },
+        {
+          "value": "vendor-identity-section",
+          "label": "Vendor identity",
+          "fits": ["unfamiliar_brand", "human", "accountable"]
+        }
+      ],
+      "contextHeader": "Dan J. Kim, Donald L. Ferrin, and H. Raghav Rao's 2008 Decision Support Systems study found that trust and perceived risk strongly affected Internet purchasing decisions and that reputation, privacy, security, information quality, and company reputation were important antecedents of trust. (ScienceDirect)",
+      "verified": true
+    },
+    {
+      "claim": "Consumers in an experimental e-commerce study valued concrete security features more than third-party privacy/security seals or privacy statements, so a seal can be treated as supporting evidence rather than the only visible answer to a security objection. (ScienceDirect)",
+      "authors": ["France Bélanger", "Janine S. Hiller", "Wanda J. Smith"],
+      "publicationYear": 2002,
+      "publishedIn": "The Journal of Strategic Information Systems",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/S0963-8687(02)00018-5",
+      "field": "conversion",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "online_payments",
+        "privacy_sensitive_sites"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "security-feature-explanation",
+          "label": "Concrete security details",
+          "fits": ["high_risk", "financial", "privacy_sensitive"]
+        },
+        {
+          "value": "third-party-security-seal",
+          "label": "Security seal",
+          "fits": ["supporting_cue", "compliance_led", "compact"]
+        },
+        {
+          "value": "privacy-policy-summary",
+          "label": "Privacy summary",
+          "fits": ["data_sensitive", "transparent", "low_clutter"]
+        },
+        {
+          "value": "layered-trust-panel",
+          "label": "Layered trust block",
+          "fits": ["high_consideration", "evidence_led", "dense_information"]
+        }
+      ],
+      "contextHeader": "France Bélanger, Janine S. Hiller, and Wanda J. Smith's 2002 Journal of Strategic Information Systems study found that consumers ranked concrete security features above several commonly used trust indices, including privacy statements and third-party seals. (ScienceDirect)",
+      "verified": true
+    },
+    {
+      "claim": "An experiment on Internet commerce found that an unconditional money-back guarantee, branding, and a privacy statement could each function as trust signals, allowing landing pages to combine financial protection, familiar identity, and information privacy cues. (Macquarie University)",
+      "authors": ["Boon Chye Lee", "Lawrence Ang", "Chris Dubelaar"],
+      "publicationYear": 2005,
+      "publishedIn": "Journal of Economic Psychology",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.joep.2005.01.001",
+      "field": "conversion",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "new_brands",
+        "high_uncertainty_purchases"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "unconditional-money-back-guarantee",
+          "label": "Money-back guarantee",
+          "fits": ["risk_reducing", "trial_friendly", "new_customer"]
+        },
+        {
+          "value": "brand-recognition-block",
+          "label": "Brand signal",
+          "fits": ["familiar", "premium", "identity_led"]
+        },
+        {
+          "value": "privacy-statement-near-form",
+          "label": "Privacy statement",
+          "fits": ["data_sensitive", "transparent", "form_heavy"]
+        },
+        {
+          "value": "combined-trust-signal-row",
+          "label": "Combined trust row",
+          "fits": ["compact", "high_consideration", "evidence_led"]
+        }
+      ],
+      "contextHeader": "Boon Chye Lee, Lawrence Ang, and Chris Dubelaar's 2005 Journal of Economic Psychology experiment found that unconditional money-back guarantees, branding, and privacy statements could signal trustworthiness in Internet commerce. (Macquarie University)",
+      "verified": true
+    },
+    {
+      "claim": "Warranty information can reduce perceived risk and improve perceived product quality and purchase intentions more for online retailers with strong reputations, while the effect is weaker for retailers with weak reputations, so the warranty presentation should be paired with appropriate reputation proof. (Wiley Online Library)",
+      "authors": ["May O. Lwin", "Jerome D. Williams"],
+      "publicationYear": 2006,
+      "publishedIn": "Journal of Consumer Affairs",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1111/j.1745-6606.2006.00057.x",
+      "field": "conversion",
+      "appliesTo": [
+        "ecommerce",
+        "electronics",
+        "durable_goods",
+        "online_retail"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "prominent-warranty-summary",
+          "label": "Warranty summary",
+          "fits": ["strong_brand", "durable_goods", "high_value"]
+        },
+        {
+          "value": "warranty-plus-reputation-proof",
+          "label": "Warranty + reputation",
+          "fits": [
+            "less_familiar_brand",
+            "risk_sensitive",
+            "high_consideration"
+          ]
+        },
+        {
+          "value": "brand-led-risk-reduction",
+          "label": "Brand reassurance",
+          "fits": ["established_brand", "familiar", "premium"]
+        },
+        {
+          "value": "full-warranty-terms-link",
+          "label": "Detailed warranty",
+          "fits": ["technical", "transparent", "comparison_shopping"]
+        }
+      ],
+      "contextHeader": "May O. Lwin and Jerome D. Williams' 2006 Journal of Consumer Affairs study found warranty information reduced perceived risk and improved perceived product quality and purchase intentions more when the online retailer already had a strong reputation. (Wiley Online Library)",
+      "verified": true
+    },
+    {
+      "claim": "More lenient online return policies can increase purchase intention through consumer trust, making clear and usable return terms a defensible objection-handling element rather than merely a post-purchase service detail. (Hanken School of Economics)",
+      "authors": [
+        "Pejvak Oghazi",
+        "Stefan Karlsson",
+        "Daniel Hellström",
+        "Klas Hjort"
+      ],
+      "publicationYear": 2018,
+      "publishedIn": "Journal of Retailing and Consumer Services",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.jretconser.2017.12.007",
+      "field": "conversion",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "consumer_goods",
+        "marketplaces"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "30-day-return-summary",
+          "label": "30-day return",
+          "fits": ["standard", "low_clutter", "risk_reducing"]
+        },
+        {
+          "value": "60-day-return-summary",
+          "label": "60-day return",
+          "fits": ["generous", "high_consideration", "confidence_building"]
+        },
+        {
+          "value": "free-return-shipping",
+          "label": "Free returns",
+          "fits": ["friction_reducing", "high_return_effort", "risk_reducing"]
+        },
+        {
+          "value": "one-click-return-policy-link",
+          "label": "Easy policy access",
+          "fits": ["transparent", "mobile_first", "self_service"]
+        },
+        {
+          "value": "return-policy-card-near-cta",
+          "label": "Policy near CTA",
+          "fits": [
+            "high_consideration",
+            "objection_handling",
+            "conversion_focused"
+          ]
+        }
+      ],
+      "contextHeader": "Pejvak Oghazi, Stefan Karlsson, Daniel Hellström, and Klas Hjort's 2018 Journal of Retailing and Consumer Services study of 730 online consumers found that perceived return-policy leniency increased purchase intention through consumer trust. (Hanken School of Economics)",
+      "verified": true
+    },
+    {
+      "claim": "Return-policy generosity is not equally valuable in every context: lesser-known retailers can benefit more from generous policies for products with high return effort, while well-known retailers benefit more where return effort is low. (IDEAS/RePEc)",
+      "authors": ["Shih-Ping Jeng"],
+      "publicationYear": 2017,
+      "publishedIn": "Journal of Retailing and Consumer Services",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.jretconser.2017.08.013",
+      "field": "conversion",
+      "appliesTo": ["ecommerce", "online_retail", "fashion", "consumer_goods"],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "generous-returns-plus-brand-proof",
+          "label": "Generous + credibility",
+          "fits": [
+            "less_known_brand",
+            "high_return_effort",
+            "high_consideration"
+          ]
+        },
+        {
+          "value": "free-return-shipping",
+          "label": "Free return shipping",
+          "fits": ["physical_returns", "high_effort", "friction_reducing"]
+        },
+        {
+          "value": "extended-return-window",
+          "label": "Extended window",
+          "fits": [
+            "considered_purchase",
+            "uncertainty_reducing",
+            "less_known_brand"
+          ]
+        },
+        {
+          "value": "standard-return-policy-with-clear-terms",
+          "label": "Standard clear policy",
+          "fits": ["well_known_brand", "low_return_effort", "low_clutter"]
+        }
+      ],
+      "contextHeader": "Shih-Ping Jeng's 2017 Journal of Retailing and Consumer Services experiment found that return-policy generosity affected purchase intention differently depending on retailer brand familiarity and the effort required to return the product. (IDEAS/RePEc)",
+      "verified": true
+    },
+    {
+      "claim": "Late-disclosed fees are a major checkout objection: Baymard reported in 2026 that 39% of surveyed shoppers had abandoned a checkout because of additional costs, supporting upfront full-cost or clearly explained estimated-cost presentation. (Baymard Institute)",
+      "authors": ["Carl MacDonald"],
+      "publicationYear": 2026,
+      "publishedIn": "Baymard Institute",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://baymard.com/blog/reduce-cart-abandonment",
+      "field": "conversion",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "marketplaces",
+        "subscription_checkout"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "full-landed-price-on-product-page",
+          "label": "Upfront total",
+          "fits": ["transparent", "price_sensitive", "high_trust_need"]
+        },
+        {
+          "value": "itemized-cart-cost-summary",
+          "label": "Itemized cart total",
+          "fits": ["complex_pricing", "transparent", "comparison_shopping"]
+        },
+        {
+          "value": "shipping-cost-calculator-before-checkout",
+          "label": "Early shipping estimate",
+          "fits": ["location_dependent", "mobile_first", "risk_reducing"]
+        },
+        {
+          "value": "estimated-total-with-explanation",
+          "label": "Explained estimate",
+          "fits": ["variable_fees", "transparent", "service_based"]
+        }
+      ],
+      "contextHeader": "Carl MacDonald's 2026 Baymard Institute research article reports that 39% of surveyed shoppers abandoned a checkout because of additional costs such as delivery charges and taxes and recommends showing the full cost or a clearly explained estimate earlier. (Baymard Institute)",
+      "verified": true
+    },
+    {
+      "claim": "Guest checkout should be visibly available when account creation is not essential: Baymard's 2024 research found 18% of surveyed U.S. online shoppers had abandoned an order because they did not want to create an account, and 62% of benchmarked sites failed to make guest checkout the most prominent option. (Baymard Institute)",
+      "authors": ["Kathryn Reeves"],
+      "publicationYear": 2024,
+      "publishedIn": "Baymard Institute",
+      "publicationType": "industry_report",
+      "sourceUrl": "https://baymard.com/research-articles/current-state-of-checkout-ux",
+      "field": "conversion",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "marketplaces",
+        "mobile_commerce"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "guest-checkout-primary-button",
+          "label": "Guest as primary",
+          "fits": ["low_friction", "new_customer", "conversion_focused"]
+        },
+        {
+          "value": "continue-as-guest-next-to-sign-in",
+          "label": "Side-by-side choice",
+          "fits": ["balanced", "account_optional", "familiar"]
+        },
+        {
+          "value": "defer-account-creation-to-confirmation",
+          "label": "Create account later",
+          "fits": ["low_friction", "mobile_first", "task_focused"]
+        },
+        {
+          "value": "account-optional-checkout",
+          "label": "Optional account",
+          "fits": ["privacy_sensitive", "customer_control", "low_commitment"]
+        }
+      ],
+      "contextHeader": "Kathryn Reeves' 2024 Baymard Institute checkout research found that 18% of surveyed U.S. online shoppers had abandoned an order because they did not want to create an account and that 62% of benchmarked sites failed to make Guest Checkout the most prominent option. (Baymard Institute)",
+      "verified": true
+    },
+    {
+      "claim": "Adding socially rich text and images that increase perceived social presence can increase trust and favorable attitudes toward shopping websites, giving teams several ways to make a digital purchase experience feel more human. (ScienceDirect)",
+      "authors": ["Khaled Hassanein", "Milena M. Head"],
+      "publicationYear": 2007,
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1016/j.ijhcs.2006.11.018",
+      "field": "layout",
+      "appliesTo": ["ecommerce", "online_retail", "travel", "online_services"],
+      "audience": ["adults", "general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "team-portrait-and-name-card",
+          "label": "Named team members",
+          "fits": ["human", "service_led", "relationship_oriented"]
+        },
+        {
+          "value": "support-agent-photo-and-name",
+          "label": "Human support cue",
+          "fits": ["support_focused", "high_touch", "reassuring"]
+        },
+        {
+          "value": "customer-story-card",
+          "label": "Customer story",
+          "fits": ["community", "social_proof", "relatable"]
+        },
+        {
+          "value": "human-centered-microcopy",
+          "label": "Warm interface language",
+          "fits": ["friendly", "approachable", "service_led"]
+        },
+        {
+          "value": "rich-lifestyle-product-imagery",
+          "label": "Contextual imagery",
+          "fits": ["aspirational", "emotional", "experience_led"]
+        }
+      ],
+      "contextHeader": "Khaled Hassanein and Milena Head's 2007 International Journal of Human-Computer Studies experiment found that richer text and picture design elements that increased perceived social presence positively affected perceived usefulness, trust, enjoyment, and attitudes toward online shopping. (ScienceDirect)",
+      "verified": true
+    },
+    {
+      "claim": "Detailed review text can increase perceived helpfulness, while very extreme ratings are less helpful for experience goods than more moderate ratings, so review interfaces can offer both depth and context instead of emphasizing only star averages. (AIS eLibrary)",
+      "authors": ["Susan M. Mudambi", "David Schuff"],
+      "publicationYear": 2010,
+      "publishedIn": "MIS Quarterly",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.2307/20721420",
+      "field": "layout",
+      "appliesTo": [
+        "ecommerce",
+        "online_retail",
+        "consumer_goods",
+        "experience_goods"
+      ],
+      "audience": ["adults", "general"],
+      "decision": "layout",
+      "options": [
+        {
+          "value": "full-review-text-with-expand",
+          "label": "Full review text",
+          "fits": [
+            "high_consideration",
+            "research_oriented",
+            "comparison_shopping"
+          ]
+        },
+        {
+          "value": "pros-and-cons-review-prompts",
+          "label": "Structured review detail",
+          "fits": ["scannable", "comparison_friendly", "utility_first"]
+        },
+        {
+          "value": "rating-plus-text-preview",
+          "label": "Rating + excerpt",
+          "fits": ["compact", "mobile_first", "high_scan_speed"]
+        },
+        {
+          "value": "balanced-review-distribution",
+          "label": "Balanced review view",
+          "fits": ["transparent", "credibility_first", "experience_goods"]
+        }
+      ],
+      "contextHeader": "Susan M. Mudambi and David Schuff's 2010 MIS Quarterly analysis of 1,587 Amazon reviews found that review depth increased helpfulness, while for experience goods extreme ratings were less helpful than moderate ratings. (AIS eLibrary)",
+      "verified": true
+    },
+    {
+      "claim": "For online booksellers, improvements in consumer review ratings were associated with increased relative sales, one-star reviews often had a stronger effect than five-star reviews, and review-length evidence suggested shoppers read review text rather than relying only on summary statistics. (Sage Journals)",
+      "authors": ["Judith A. Chevalier", "Dina Mayzlin"],
+      "publicationYear": 2006,
+      "publishedIn": "Journal of Marketing Research",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://doi.org/10.1509/jmkr.43.3.345",
+      "field": "conversion",
+      "appliesTo": ["ecommerce", "online_bookstores", "online_retail"],
+      "audience": ["adults", "general"],
+      "decision": "conversion_structure",
+      "options": [
+        {
+          "value": "rating-distribution-with-counts",
+          "label": "Rating distribution",
+          "fits": ["transparent", "comparison_shopping", "evidence_led"]
+        },
+        {
+          "value": "negative-review-tab",
+          "label": "Easy access to negatives",
+          "fits": ["transparent", "skeptical_buyers", "high_trust_need"]
+        },
+        {
+          "value": "review-text-above-or-near-summary",
+          "label": "Review text near rating",
+          "fits": ["evidence_led", "high_consideration", "content_rich"]
+        },
+        {
+          "value": "review-summary-plus-full-text",
+          "label": "Summary + full text",
+          "fits": ["scannable", "mobile_first", "research_oriented"]
+        }
+      ],
+      "contextHeader": "Judith A. Chevalier and Dina Mayzlin's 2006 Journal of Marketing Research study of Amazon.com and Barnesandnoble.com found that better reviews were associated with higher relative sales and that customers appeared to use review text, with one-star reviews often exerting a larger effect than five-star reviews. (Sage Journals)",
+      "verified": true
+    }
+  ],
+  "articles": [
+    {
+      "title": "Trust Starts Before the Buy Button",
+      "category": "Layout",
+      "summary": "People often judge a website's credibility from the experience of using it, not just from explicit trust badges. Research points to a practical range: show signs of a real organization, keep the interface professional and familiar, and make expertise easy to verify.",
+      "sections": [
+        {
+          "heading": "Make the business feel real",
+          "body": "Fogg and colleagues found that real-world-feel elements such as a physical address, phone number, email address, team photos, and responsive customer service increased perceived Web credibility. The useful design lesson is not that every site needs every item; it is that buyers benefit when the organization looks reachable and accountable. (Simson)"
+        },
+        {
+          "heading": "Professional does not mean complicated",
+          "body": "The same study found that professional design and a sensible arrangement supported credibility, while slow downloads and difficult navigation hurt it. That leaves room for different visual directions: a restrained single-column landing page can work, but so can a richer brand-led page when navigation and performance remain clear. (Simson)"
+        },
+        {
+          "heading": "Give people reasons to believe the claims",
+          "body": "Markers of expertise included author credentials and citations, while trustworthiness cues included links to outside materials and clear statements about content. For expert-led products, professional services, or technical products, a small evidence section can answer skepticism more directly than generic phrases such as 'trusted' or 'best in class.' (Simson)"
+        },
+        {
+          "heading": "Keep the interaction familiar",
+          "body": "Gefen, Karahanna, and Straub found that online trust was important alongside usefulness and ease of use, with perceived safety mechanisms and a typical, easy-to-use interface contributing to trust. In practice, that supports familiar controls, conventional checkout behavior, and security explanations placed where a shopper is making a risky decision. (DOI)"
+        }
+      ],
+      "body": "## Trust Starts Before the Buy Button\n\nTrust is often treated as a small strip of badges underneath a headline or beside a checkout button. The research paints a broader picture: shoppers can form credibility judgments from the website itself. That means the trust layer can be designed as part of the core experience rather than added at the end.\n\n### Make the business feel real\n\nIn a large quantitative CHI study, B. J. Fogg and colleagues tested more than 1,400 participants and found that 'real-world feel' was the strongest of the credibility factors they identified. Elements such as a physical address, contact phone number, email address, photos of organization members, and responsive customer service all received positive credibility evaluations. The implication for a landing page is flexible rather than prescriptive: a local retailer might emphasize a physical location, while a software company might emphasize real support contacts and identifiable staff. (DOI)\n\n### Professional does not mean visually heavy\n\nFogg's study also found that professional design and logical arrangement helped credibility, while difficult navigation and slow downloads hurt it. This is useful because it avoids a false choice between 'beautiful' and 'simple.' A product page can use strong photography, rich brand expression, or a restrained editorial layout, provided the structure remains understandable and the page performs well. (Simson)\n\n### Make expertise inspectable\n\nCredibility is also helped by signals that let a shopper verify who is speaking and where the information comes from. Fogg and colleagues specifically tested author credentials, citations, references, links to outside materials, and content policies as credibility cues. For expert-led services, technical products, or high-consideration purchases, this supports concrete evidence blocks, expert bios, source links, or detailed specifications. (Simson)\n\n### Familiar interaction is itself a trust cue\n\nGefen, Karahanna, and Straub found that online shopping trust mattered alongside perceived usefulness and ease of use, and that trust was associated with perceived safety mechanisms and a typical, easy-to-use interface. A shopper therefore does not have to choose between trust signals and usability. Familiar controls, predictable checkout structure, and clearly explained security practices can work together. (DOI)\n\nThe practical range is broad: real-world contact information, professional presentation, verifiable expertise, and familiar interaction patterns can all occupy different roles. The strongest combination depends on what the buyer is being asked to risk and what kind of organization is making the promise.",
+      "tags": [
+        "trust",
+        "credibility",
+        "website-design",
+        "proof",
+        "landing-pages"
+      ],
+      "references": [
+        {
+          "authors": [
+            "B. J. Fogg",
+            "Jonathan Marshall",
+            "Othman Laraki",
+            "Alex Osipovich",
+            "Chris Varma",
+            "Nicholas Fang",
+            "Jyoti Paul",
+            "Akshay Rangnekar",
+            "John Shon",
+            "Preeti Swani",
+            "Marissa Treinen"
+          ],
+          "title": "What makes Web sites credible?: a report on a large quantitative study",
+          "publishedIn": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI 2001), ACM",
+          "year": 2001,
+          "publicationType": "conference_paper",
+          "url": "https://doi.org/10.1145/365024.365037"
+        },
+        {
+          "authors": ["David Gefen", "Elena Karahanna", "Detmar W. Straub"],
+          "title": "Trust and TAM in Online Shopping: An Integrated Model",
+          "publishedIn": "MIS Quarterly",
+          "year": 2003,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.2307/30036519"
+        }
+      ]
+    },
+    {
+      "title": "Answer the Risks That Stop the Purchase",
+      "category": "Conversion",
+      "summary": "Trust objections are often specific: 'Can I get my money back?', 'Is my payment safe?', 'Who is behind this site?', or 'What happens if I change my mind?'. Research supports answering those objections with concrete evidence rather than generic reassurance.",
+      "sections": [
+        {
+          "heading": "Treat trust and risk as part of the purchase decision",
+          "body": "Kim, Ferrin, and Rao found strong effects of both trust and perceived risk on online purchasing decisions. Their model also connected trust to reputation, privacy, security, information quality, and company reputation, creating a useful checklist for objection handling. (ScienceDirect)"
+        },
+        {
+          "heading": "Show mechanisms, not just badges",
+          "body": "Bélanger, Hiller, and Smith found that consumers valued concrete security features more than several third-party seals and statements in their experiment. Seals can still be a compact supporting cue, but the evidence supports giving visible space to what the security mechanism actually does. (ScienceDirect)"
+        },
+        {
+          "heading": "Use guarantees, warranties, and privacy cues strategically",
+          "body": "Lee, Ang, and Dubelaar experimentally tested unconditional money-back guarantees, branding, and privacy statements as Internet-commerce trust signals. Lwin and Williams found warranty effects were stronger when the retailer already had a strong reputation. (Macquarie University)"
+        },
+        {
+          "heading": "Match the signal to the actual objection",
+          "body": "A refund promise addresses financial uncertainty; a security explanation addresses payment and privacy concerns; a warranty addresses product-failure risk; and reputation proof helps unfamiliar sellers. The research does not support one universal trust widget, but it does support choosing signals according to the risk a shopper is deciding whether to accept. (InK)"
+        }
+      ],
+      "body": "## Answer the Risks That Stop the Purchase\n\nA buyer who hesitates at a landing page is not always asking the same question. One person may wonder whether a new brand is legitimate. Another may worry about payment security. Another may be unsure what happens if the product is damaged or simply does not work out. The design opportunity is to answer the specific objection with evidence that matches it.\n\n### Trust and risk are connected to purchase decisions\n\nDan J. Kim, Donald L. Ferrin, and H. Raghav Rao developed and tested a trust-based model of electronic commerce and found that both trust and perceived risk had strong effects on purchasing decisions. Their findings also linked trust to factors including reputation, privacy concerns, security concerns, website information quality, and company reputation. That makes a generic line such as 'shop with confidence' much less useful than evidence tied to a real concern. (ScienceDirect)\n\n### Explain security instead of relying only on symbols\n\nFrance Bélanger, Janine S. Hiller, and Wanda J. Smith compared several trust indices, including privacy and security seals, privacy statements, and concrete security features. Consumers ranked the concrete security features more highly in their experiment. A trust badge can still be useful because it is compact, but it should not have to carry the whole credibility burden. A layered approach can combine a concise security explanation, a link to more detail, and a recognizable certification or seal where relevant. (ScienceDirect)\n\n### Use financial guarantees when financial risk is the objection\n\nBoon Chye Lee, Lawrence Ang, and Chris Dubelaar experimentally examined an unconditional money-back guarantee, branding, and a privacy statement as trust signals in Internet commerce. These are different kinds of signals, which is exactly why they are useful as a range: a guarantee addresses money risk, branding addresses identity and familiarity, and a privacy statement addresses information handling. (Macquarie University)\n\n### A warranty works best in the right credibility context\n\nMay O. Lwin and Jerome D. Williams found that warranty information could make a positive difference for online retailers with strong reputations, including effects on perceived risk, perceived product quality, and purchase intentions. They also found that the effect was weaker with weak-reputation retailers. That suggests an unfamiliar seller may need to place warranty information alongside stronger identity and reputation evidence rather than showing the warranty in isolation. (Wiley Online Library)\n\nThe broader lesson is simple: trust content works best when it answers a recognizable question. Security details, privacy explanations, refunds, warranties, reputation evidence, and clear product information are not interchangeable; they address different forms of uncertainty.",
+      "tags": ["risk", "security", "privacy", "guarantee", "warranty"],
+      "references": [
+        {
+          "authors": ["Dan J. Kim", "Donald L. Ferrin", "H. Raghav Rao"],
+          "title": "A trust-based consumer decision-making model in electronic commerce: The role of trust, perceived risk, and their antecedents",
+          "publishedIn": "Decision Support Systems",
+          "year": 2008,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/j.dss.2007.07.001"
+        },
+        {
+          "authors": ["France Bélanger", "Janine S. Hiller", "Wanda J. Smith"],
+          "title": "Trustworthiness in electronic commerce: the role of privacy, security, and site attributes",
+          "publishedIn": "The Journal of Strategic Information Systems",
+          "year": 2002,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/S0963-8687(02)00018-5"
+        },
+        {
+          "authors": ["Boon Chye Lee", "Lawrence Ang", "Chris Dubelaar"],
+          "title": "Lemons on the Web: A signalling approach to the problem of trust in Internet commerce",
+          "publishedIn": "Journal of Economic Psychology",
+          "year": 2005,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/j.joep.2005.01.001"
+        },
+        {
+          "authors": ["May O. Lwin", "Jerome D. Williams"],
+          "title": "Promises, Promises: How Consumers Respond to Warranties in Internet Retailing",
+          "publishedIn": "Journal of Consumer Affairs",
+          "year": 2006,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1111/j.1745-6606.2006.00057.x"
+        }
+      ]
+    },
+    {
+      "title": "Returns and Checkout Friction Are Part of the Sales Message",
+      "category": "Conversion",
+      "summary": "Many objections are operational rather than emotional: hidden costs, unwanted account creation, and uncertainty about returns can interrupt a purchase even when the product itself is compelling. Research supports making those details visible before the shopper is forced to commit.",
+      "sections": [
+        {
+          "heading": "Returns can build trust before the sale",
+          "body": "Oghazi and colleagues found that perceived return-policy leniency increased purchase intention through consumer trust among 730 online consumers of fast-moving consumer goods in Sweden. A return policy can therefore be presented as part of the purchase proposition, not buried as legal text. (Hanken School of Economics)"
+        },
+        {
+          "heading": "More generous is not automatically more useful",
+          "body": "Shih-Ping Jeng found that the value of generous return policies depended on retailer brand familiarity and the effort required to return the product. Lesser-known retailers benefited more for higher-return-effort products, while established retailers benefited more when return effort was low. (IDEAS/RePEc)"
+        },
+        {
+          "heading": "Show the real price early",
+          "body": "Baymard's 2026 research reported that 39% of surveyed shoppers had abandoned a checkout because of additional costs such as taxes and delivery charges. The research recommends showing the full cost, or an explained estimate when an exact total is not yet possible, earlier in the purchase path. (Baymard Institute)"
+        },
+        {
+          "heading": "Let people buy without creating an account",
+          "body": "Baymard's 2024 checkout research found that 18% of surveyed U.S. online shoppers had abandoned an order because they did not want to create an account; 62% of benchmarked sites did not make guest checkout the most prominent option. The choice can therefore be presented as Guest Checkout, Continue as Guest, or account creation after purchase. (Baymard Institute)"
+        }
+      ],
+      "body": "## Returns and Checkout Friction Are Part of the Sales Message\n\nA landing page can persuade someone to want a product and still lose the purchase when the practical questions arrive. What will the final price be? Can I return it? Do I have to create an account? How hard will this be on my phone? These are not side issues. They are part of the perceived risk of completing the transaction.\n\n### Returns can build trust before the sale\n\nPejvak Oghazi, Stefan Karlsson, Daniel Hellström, and Klas Hjort studied 730 online consumers of fast-moving consumer goods in Sweden and found that perceived return-policy leniency increased purchase intention through consumer trust. That supports putting a concise returns message near a product decision or call to action when uncertainty about the purchase is high. It does not imply that every brand needs the same return window; the value comes from reducing uncertainty. (Hanken School of Economics)\n\n### The right return policy depends on the product and the brand\n\nShih-Ping Jeng's experiment adds an important qualification. Return-policy generosity had different effects depending on retailer brand familiarity and the effort required to return a product. Lesser-known retailers benefited more when products were costly or difficult to return, while well-known retailers benefited more for products where return effort was relatively low. A design system can therefore offer several legitimate patterns: generous free returns for unfamiliar brands selling high-effort-to-return goods, or a simpler standard policy for established brands and easy-to-return products. (IDEAS/RePEc)\n\n### Hidden charges are a preventable objection\n\nBaymard's 2026 research found that 39% of surveyed shoppers abandoned a checkout because of additional costs such as delivery charges and taxes. The institute recommends showing the full order cost in the cart and giving users a clear estimate with an explanation when the exact amount cannot yet be calculated. For a frontend team, that creates several valid options: an all-in price on the product page, an itemized cart summary, an early shipping calculator, or a clear estimated-total component. (Baymard Institute)\n\n### Account creation can be another avoidable barrier\n\nBaymard's 2024 research found that 18% of surveyed U.S. online shoppers had abandoned an order because they did not want to create an account. It also found that 62% of benchmarked sites failed to make guest checkout the most prominent option. The appropriate UI can vary, but the core choice should be easy to discover: make Guest Checkout primary, place Continue as Guest beside sign-in, or defer account creation until after the order is complete. (Baymard Institute)\n\nThe common thread is timing. Information that resolves a purchase objection is most useful before the shopper has to commit to the risky step.",
+      "tags": ["returns", "checkout", "pricing", "guest-checkout", "friction"],
+      "references": [
+        {
+          "authors": [
+            "Pejvak Oghazi",
+            "Stefan Karlsson",
+            "Daniel Hellström",
+            "Klas Hjort"
+          ],
+          "title": "Online purchase return policy leniency and purchase decision: Mediating role of consumer trust",
+          "publishedIn": "Journal of Retailing and Consumer Services",
+          "year": 2018,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/j.jretconser.2017.12.007"
+        },
+        {
+          "authors": ["Shih-Ping Jeng"],
+          "title": "Increasing customer purchase intention through product return policies: The pivotal impacts of retailer brand familiarity and product categories",
+          "publishedIn": "Journal of Retailing and Consumer Services",
+          "year": 2017,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/j.jretconser.2017.08.013"
+        },
+        {
+          "authors": ["Carl MacDonald"],
+          "title": "How to Reduce Cart Abandonment (Data-Backed UX Strategies)",
+          "publishedIn": "Baymard Institute",
+          "year": 2026,
+          "publicationType": "industry_report",
+          "url": "https://baymard.com/blog/reduce-cart-abandonment"
+        },
+        {
+          "authors": ["Kathryn Reeves"],
+          "title": "Checkout UX 2025: 10 Pitfalls and Best Practices",
+          "publishedIn": "Baymard Institute",
+          "year": 2024,
+          "publicationType": "industry_report",
+          "url": "https://baymard.com/research-articles/current-state-of-checkout-ux"
+        }
+      ]
+    },
+    {
+      "title": "Use Reviews as Evidence, Not Decoration",
+      "category": "Layout",
+      "summary": "Reviews can reduce uncertainty, but a star average alone does not capture what shoppers use as evidence. Research supports showing enough text, context, and rating detail for people to inspect why a product received its score.",
+      "sections": [
+        {
+          "heading": "Human presence can increase trust",
+          "body": "Hassanein and Head found that socially rich text and pictures could increase perceived social presence, which positively affected trust and attitudes toward online shopping. Human-centered content can therefore be a trust signal when it is relevant to the product or service. (ScienceDirect)"
+        },
+        {
+          "heading": "Review depth matters",
+          "body": "Mudambi and Schuff analyzed 1,587 Amazon reviews and found that review depth had a positive effect on perceived helpfulness. For experience goods, however, extreme ratings were less helpful than moderate ratings. This supports interfaces that let shoppers see detailed review text while also giving enough context to interpret the rating distribution. (AIS eLibrary)"
+        },
+        {
+          "heading": "Do not hide negative evidence",
+          "body": "Chevalier and Mayzlin found that one-star reviews often had a greater impact on relative sales than five-star reviews in their online-book study. That makes easy access to negative reviews a defensible transparency pattern rather than something a design should automatically minimize. (Sage Journals)"
+        },
+        {
+          "heading": "Give shoppers both summaries and text",
+          "body": "The same study found evidence from review-length data that customers read review text rather than relying only on summary statistics. A useful range therefore includes rating distributions, review excerpts, searchable full text, or a summary-plus-detail pattern. (Sage Journals)"
+        }
+      ],
+      "body": "## Use Reviews as Evidence, Not Decoration\n\nA row of five-star icons looks persuasive, but reviews are more useful when shoppers can inspect the evidence behind the score. Research on online shopping suggests that trust can come from human presence, detailed review content, and transparent access to both positive and negative experiences.\n\n### Human presence can make an online store feel less anonymous\n\nKhaled Hassanein and Milena Head experimentally varied socially rich text and picture design elements on shopping websites. Higher perceived social presence was associated with higher perceived usefulness, trust, and enjoyment, which in turn produced more favorable attitudes toward the sites. For frontend teams, that creates a range of options: named support staff, team photographs, customer stories, human-centered interface language, or richer contextual product imagery. The appropriate choice depends on whether the purchase is primarily functional, service-led, or relationship-oriented. (ScienceDirect)\n\n### Detailed review content is part of the evidence\n\nSusan M. Mudambi and David Schuff studied 1,587 Amazon reviews across six products and found that review depth increased perceived helpfulness. They also found that for experience goods, extreme ratings were less helpful than moderate ratings. That suggests a review interface can be designed around inspection rather than spectacle: provide an excerpt for scanning, a clear way to expand the full review, and enough context to understand whether the reviewer is describing an actual use case. (AIS eLibrary)\n\n### Negative reviews can matter disproportionately\n\nJudith A. Chevalier and Dina Mayzlin studied consumer reviews on Amazon.com and Barnesandnoble.com and found that improvements in reviews were associated with higher relative sales. They also found that, for most samples, one-star reviews had a stronger impact than five-star reviews. That does not mean a storefront should spotlight negative reviews, but it does mean hiding them entirely can remove information that shoppers use in deciding whether the risk is acceptable. (Sage Journals)\n\n### Do not reduce the review system to an average\n\nChevalier and Mayzlin also found evidence from review-length data that customers read review text rather than relying only on summary statistics. A strong range of designs can therefore include a rating distribution, text excerpts, searchable or filterable reviews, or a summary-plus-full-text pattern. The exact presentation can vary with screen size and product complexity, while still preserving the ability to inspect the reasoning behind the rating. (Sage Journals)\n\nThe core design principle is evidence visibility. Reviews work as trust content when shoppers can understand who is speaking, what happened, and why the reviewer reached the conclusion they did.",
+      "tags": [
+        "reviews",
+        "social-proof",
+        "trust",
+        "transparency",
+        "customer-content"
+      ],
+      "references": [
+        {
+          "authors": ["Khaled Hassanein", "Milena M. Head"],
+          "title": "Manipulating perceived social presence through the web interface and its impact on attitude towards online shopping",
+          "publishedIn": "International Journal of Human-Computer Studies",
+          "year": 2007,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1016/j.ijhcs.2006.11.018"
+        },
+        {
+          "authors": ["Susan M. Mudambi", "David Schuff"],
+          "title": "What Makes a Helpful Online Review? A Study of Customer Reviews on Amazon.com",
+          "publishedIn": "MIS Quarterly",
+          "year": 2010,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.2307/20721420"
+        },
+        {
+          "authors": ["Judith A. Chevalier", "Dina Mayzlin"],
+          "title": "The Effect of Word of Mouth on Sales: Online Book Reviews",
+          "publishedIn": "Journal of Marketing Research",
+          "year": 2006,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://doi.org/10.1509/jmkr.43.3.345"
+        }
+      ]
+    }
+  ]
+}

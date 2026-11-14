@@ -1,0 +1,19 @@
+{
+  "slug": "color-norms-product-categories-brand-equity",
+  "status": "DRAFT",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Color norms in product categories and brand equity differentiation",
+  "statement": "Color norms exist within product categories; differentiation from category color norms can help or harm brand equity depending on involvement and presence of a dominant leader.\n\nOptions:\n- Conform to norm: category-norm blue (fits: high involvement, trust category)\n- Mild differentiation: differentiated teal (fits: challenger brand)\n- Strong differentiation: category-atypical warm (fits: low involvement, disruptive)\n- Norm with accent: norm + accent contrast (fits: balanced equity)",
+  "appliesWhen": "Applies to: fintech, health, luxury. Audience: adults, b2b buyers.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "balanced-equity",
+    "challenger-brand",
+    "disruptive",
+    "high-involvement",
+    "low-involvement",
+    "trust-category"
+  ],
+  "relations": []
+}

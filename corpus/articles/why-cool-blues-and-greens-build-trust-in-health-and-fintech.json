@@ -1,0 +1,67 @@
+{
+  "slug": "why-cool-blues-and-greens-build-trust-in-health-and-fintech",
+  "title": "Why Cool Blues and Greens Build Trust in Health and Fintech Interfaces",
+  "kind": "ARTICLE",
+  "category": "COLOR_PSYCHOLOGY",
+  "summary": "Research shows cooler color combinations outperform warmer ones for trust and calm in healthcare and finance apps. Here's how to choose the right shade for your product.",
+  "sections": [
+    {
+      "heading": "Cool vs warm in serious domains",
+      "body": "A 2026 mixed-methods study published in The Design Journal tested cool blue/green versus warm red/orange interfaces across healthcare, finance, and education apps. Participants rated cool combinations higher on trust, calmness, and comfort, especially in health and finance contexts. Warm schemes felt urgent or alarming when the stakes were high."
+    },
+    {
+      "heading": "Blue specifically elevates trust",
+      "body": "Su and Walsh (2019) confirmed in the Journal of Marketing Theory and Practice that blue increases trust more than red on both implicit and explicit measures. This aligns with decades of banking and medical branding that trained users to read blue as reliable."
+    },
+    {
+      "heading": "Practical palette ranges",
+      "body": "For traditional institutions, navy or mid-blue works. Fintech and telehealth challengers can use brighter or teal variants while staying inside the cool family. Reserve warm reds and oranges for alerts and high-energy moments so they retain their signal value."
+    },
+    {
+      "heading": "Physiological backing",
+      "body": "Classic observations by Kurt Goldstein (1942) noted that red raises heart rate and blood pressure while blue lowers them. Modern reviews continue to treat these directional effects as useful starting points for calming versus stimulating UI decisions."
+    }
+  ],
+  "body": "## Why Cool Blues and Greens Build Trust in Health and Fintech Interfaces\n\nWhen users open a banking or health app, they are often already anxious. Color is one of the fastest ways to signal safety or risk.\n\nA 2026 study in *The Design Journal* asked 100 adults to evaluate app interfaces that used either cool blue/green combinations or warm red/orange combinations. Cool schemes produced higher ratings of trust, calmness, and comfort, particularly in healthcare and finance contexts. Participants said they would be more willing to use the cool-toned products. Warm schemes felt professional only when the domain expected urgency; otherwise they created tension.\n\nComplementing that finding, Su and Walsh (2019) published in the *Journal of Marketing Theory and Practice* three studies showing blue elevates trust relative to red on both implicit association tests and explicit ratings. Blue has become the default for banks and hospitals partly because the association is now culturally reinforced.\n\nPhysiological observations go back further. Kurt Goldstein reported in 1942 that red stimulation increased heart rate and blood pressure while blue reduced them. Although methods have advanced, the directional pattern still guides designers who want calming primary surfaces for login, account overview, or patient-portal screens.\n\n**Design takeaway:** Anchor primary UI chrome and key CTAs in the cool range (mid-blues around #1E90FF or teals around #20B2AA). Keep high-saturation warm colors for true alerts and success states so the emotional contrast remains clear. Test saturation levels carefully—overly vivid cool colors can still feel aggressive in clinical or financial settings.\n\nThis approach is not universal. Education and entertainment products can safely use warmer, higher-energy palettes. But for trust-critical domains, cool remains the evidence-backed default.",
+  "tags": [
+    "color psychology",
+    "trust",
+    "healthcare UX",
+    "fintech UX",
+    "blue"
+  ],
+  "references": [
+    {
+      "title": "Colour psychology in UI and UX design: Eliciting emotional responses through colour combination choices",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/14606925.2026.2663037",
+      "authors": [
+        "Design Journal 2026 study"
+      ],
+      "publishedIn": "The Design Journal",
+      "year": 2026,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Trustworthy Blue or Untrustworthy Red: The Influence of Colors on Trust",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/10696679.2019.1616560",
+      "authors": [
+        "Lixun Su",
+        "Michael Walsh"
+      ],
+      "publishedIn": "Journal of Marketing Theory and Practice",
+      "year": 2019,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Some experimental observations concerning the influence of colors on the function of the organism",
+      "url": null,
+      "authors": [
+        "Kurt Goldstein"
+      ],
+      "publishedIn": "Occupational Therapy & Rehabilitation",
+      "year": 1942,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

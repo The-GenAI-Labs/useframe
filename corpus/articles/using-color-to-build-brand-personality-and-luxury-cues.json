@@ -1,0 +1,92 @@
+{
+  "slug": "using-color-to-build-brand-personality-and-luxury-cues",
+  "title": "Using color to build brand personality and luxury cues",
+  "kind": "ARTICLE",
+  "category": "COLOR_PSYCHOLOGY",
+  "summary": "Research supports using hue, saturation and brightness as separate branding controls. The same idea creates different outcomes for an energetic mass-market brand and a heritage-oriented luxury brand.",
+  "sections": [
+    {
+      "heading": "Choose hue around the personality you want",
+      "body": "Labrecque and Milne found systematic links between color and the five major brand-personality dimensions they examined. Red, orange and yellow were linked to excitement; blue and brown to competence; black, purple and pink to sophistication; and green and brown to ruggedness. The implication for a landing page is to begin with the personality signal you want, then select a color family that reinforces it instead of starting from a favorite hex value. (DOI)"
+    },
+    {
+      "heading": "Saturation changes the emotional volume",
+      "body": "The same study showed that saturation mattered independently of hue. Higher saturation strengthened excitement, competence and ruggedness, while lower saturation aligned more with sincerity and sophistication. This gives a designer a second control after choosing hue: make the same blue more vivid for energy, or more muted for a calmer, more refined identity. (Scribd)"
+    },
+    {
+      "heading": "Do not maximize saturation everywhere",
+      "body": "Website-specific research complicates the idea that vivid color is automatically better. Skulmowski and colleagues found that high saturation could reduce trustworthiness and perceived usability for some website contents. Reinecke and colleagues also found that colorfulness contributed to first-impression appeal but visual complexity was the stronger visual feature in their model. Together, these findings support using vividness selectively rather than flooding the whole page with saturated color. (ScienceDirect)"
+    },
+    {
+      "heading": "Luxury needs a different range",
+      "body": "A 2025 Journal of Consumer Research study by Zhou, Xiao, Yoon and Zhu found that lower saturation increased perceived status for luxury brands. Their first study used nine saturation levels from 10% to 90% and found an inflection around 20–30%; additional experiments used low saturation around 10–20% and high saturation around 50–60%. The effect was weakened by emphasizing a recent founding date and reversed when innovation was the positioning. (OUP Academic)"
+    }
+  ],
+  "body": "# Using color to build brand personality and luxury cues\n\nA common mistake in color psychology is treating every color as if it has one fixed meaning. The stronger research view is more flexible: hue, saturation and brightness work together, and the right choice depends on what the brand is trying to communicate.\n\n## Choose hue around the personality you want\n\nLabrecque and Milne found systematic links between color and the five major brand-personality dimensions they examined. Red, orange and yellow were linked to excitement; blue and brown to competence; black, purple and pink to sophistication; and green and brown to ruggedness. The implication for a landing page is to begin with the personality signal you want, then select a color family that reinforces it instead of starting from a favorite hex value. (DOI)\n\nThat makes color a brand-positioning tool. A startup selling developer infrastructure might explore blue because competence fits the desired signal. A consumer app built around energy and spontaneity might explore red or orange. A premium fashion site might investigate black or purple. The point is not that these colors force a specific perception, but that the study gives designers a defensible range of associations to test.\n\n## Saturation changes the emotional volume\n\nThe same study showed that saturation mattered independently of hue. Higher saturation strengthened excitement, competence and ruggedness, while lower saturation aligned more with sincerity and sophistication. This gives a designer a second control after choosing hue: make the same blue more vivid for energy, or more muted for a calmer, more refined identity. (Scribd)\n\nThis distinction is useful in modern UI because two websites can both be \"blue\" while feeling completely different. A highly saturated electric blue can act as a strong visual signal, while a muted navy or dusty blue can feel quieter. The evidence therefore argues against naming a single winning hue without specifying how vivid and how bright that hue is.\n\n## Do not maximize saturation everywhere\n\nWebsite-specific research complicates the idea that vivid color is automatically better. Skulmowski and colleagues found that high saturation could reduce trustworthiness and perceived usability for some website contents. Reinecke and colleagues also found that colorfulness contributed to first-impression appeal but visual complexity was the stronger visual feature in their model. Together, these findings support using vividness selectively rather than flooding the whole page with saturated color. (ScienceDirect)\n\nA practical landing-page system can therefore use a restrained base, one moderate accent family, or a vivid accent reserved for calls to action and hero moments. Those are implementation choices, not claims that the exact values were experimentally optimized.\n\n## Luxury needs a different range\n\nA 2025 Journal of Consumer Research study by Zhou, Xiao, Yoon and Zhu found that lower saturation increased perceived status for luxury brands. Their first study used nine saturation levels from 10% to 90% and found an inflection around 20–30%; additional experiments used low saturation around 10–20% and high saturation around 50–60%. The effect was weakened by emphasizing a recent founding date and reversed when innovation was the positioning. (OUP Academic)\n\nThat creates a useful design fork for luxury landing pages. A heritage-oriented brand can investigate very muted color. A contemporary premium brand can use a middle range. A luxury brand explicitly selling innovation can justify a much more vivid direction. The research supports having those choices available rather than assuming that \"luxury\" always means beige, black or low saturation.",
+  "tags": [
+    "brand personality",
+    "luxury design",
+    "saturation",
+    "color theory",
+    "premium UX",
+    "landing pages"
+  ],
+  "references": [
+    {
+      "title": "Exciting red and competent blue: the importance of color in marketing",
+      "url": "https://doi.org/10.1007/s11747-010-0245-y",
+      "authors": [
+        "Lauren I. Labrecque",
+        "George R. Milne"
+      ],
+      "publishedIn": "Journal of the Academy of Marketing Science",
+      "year": 2012,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "The negative impact of saturation on website trustworthiness and appeal: A temporal model of aesthetic website perception",
+      "url": "https://doi.org/10.1016/j.chb.2016.03.054",
+      "authors": [
+        "Alexander Skulmowski",
+        "Yannik Augustin",
+        "Simon Pradel",
+        "Steve Nebel",
+        "Sascha Schneider",
+        "Günter Daniel Rey"
+      ],
+      "publishedIn": "Computers in Human Behavior",
+      "year": 2016,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Predicting users' first impressions of website aesthetics with a quantification of perceived visual complexity and colorfulness",
+      "url": "https://doi.org/10.1145/2470654.2481281",
+      "authors": [
+        "Katharina Reinecke",
+        "Tom Yeh",
+        "Luke Miratrix",
+        "Rahmatri Mardiko",
+        "Yuechen Zhao",
+        "Jenny Liu",
+        "Krzysztof Z. Gajos"
+      ],
+      "publishedIn": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems",
+      "year": 2013,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "The Color of Status: Color Saturation, Brand Heritage, and Perceived Status of Luxury Brands",
+      "url": "https://doi.org/10.1093/jcr/ucaf029",
+      "authors": [
+        "Xinyue Zhou",
+        "Chunqu Xiao",
+        "Sunyee Yoon",
+        "Hong Zhu"
+      ],
+      "publishedIn": "Journal of Consumer Research",
+      "year": 2025,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

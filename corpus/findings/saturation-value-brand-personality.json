@@ -1,0 +1,31 @@
+{
+  "slug": "saturation-value-brand-personality",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Saturation and value as brand-personality controls",
+  "statement": "Saturation and value should be treated as separate brand-personality controls: higher saturation strengthened excitement, competence and ruggedness while lower saturation was associated with greater sincerity and sophistication, and lower value strengthened competence and ruggedness. (Scribd)\n\nOptions:\n- Soft and light: low saturation (~42%) + high value (~100%) (fits: sincere, refined, approachable)\n- Muted and deep: low saturation (~42%) + low value (~58%) (fits: competent, grounded, quiet)\n- Bold and deep: high saturation (100%) + low value (~58%) (fits: energetic, rugged, strong)\n- Bright and vivid: high saturation (100%) + high value (~100%) (fits: energetic, youthful, expressive)",
+  "appliesWhen": "Applies to: general, fintech, health, luxury, b2b. Audience: adults, b2b buyers, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "energetic",
+    "approachable",
+    "competent",
+    "expressive",
+    "grounded",
+    "quiet",
+    "refined",
+    "rugged",
+    "sincere",
+    "strong"
+  ],
+  "source": {
+    "title": "Exciting red and competent blue: the importance of color in marketing",
+    "authors": "Lauren I. Labrecque; George R. Milne",
+    "year": 2012,
+    "venue": "Journal of the Academy of Marketing Science",
+    "url": "https://doi.org/10.1007/s11747-010-0245-y",
+    "doi": "10.1007/s11747-010-0245-y"
+  },
+  "relations": []
+}

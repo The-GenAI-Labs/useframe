@@ -1,7 +1,6 @@
 import type { Response, NextFunction } from "express"
 import type { AuthenticatedRequest } from "@/types/index.js"
 import { PlanService } from "./plan.service.js"
-import { callGetFinding } from "@/lib/researchService.js"
 import type {
   PlanGenerateInput,
   PlanPdfInput,
@@ -119,7 +118,7 @@ export const PlanController = {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const finding = await callGetFinding(req.params.findingId!)
+      const finding = await PlanService.getFinding(req.user!, req.params.slug!, req.params.findingId!)
       res.status(200).json({ success: true, data: finding })
     } catch (err) {
       next(err)

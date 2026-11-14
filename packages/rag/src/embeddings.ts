@@ -8,6 +8,7 @@ export interface EmbeddingProvider {
   dims: number;
   embedDocuments(texts: string[]): Promise<number[][]>;
   embedQuery(text: string): Promise<number[]>;
+  embedQueries(texts: string[]): Promise<number[][]>;
 }
 export function voyageProvider(
   config: RagConfig = ragConfig(),
@@ -17,11 +18,11 @@ export function voyageProvider(
     if (!config.VOYAGE_API_KEY)
       throw new ProviderError("VOYAGE_API_KEY is required", false);
     const vectors: number[][] = [];
-    // A UTF-8 byte budget conservatively bounds tokens without another tokenizer dependency.
+    // Voyage allows 1000 inputs and 120K tokens (voyage-4-large) per request; UTF-8 bytes bound tokens from above.
     for (let offset = 0; offset < texts.length; ) {
       const batch: string[] = [];
       let bytes = 0;
-      while (offset < texts.length && batch.length < 128) {
+      while (offset < texts.length && batch.length < 1000) {
         const text = texts[offset]!;
         const size = Buffer.byteLength(text);
         if (size > 30000)
@@ -29,7 +30,7 @@ export function voyageProvider(
             "Embedding input exceeds the conservative token budget",
             false,
           );
-        if (batch.length && bytes + size > 100000) break;
+        if (batch.length && bytes + size > 120000) break;
         batch.push(text);
         bytes += size;
         offset++;
@@ -73,6 +74,20 @@ export function voyageProvider(
     dims,
     embedDocuments: (texts) => embed(texts, "document"),
     embedQuery: async (text) => (await embed([text], "query"))[0]!,
+    embedQueries: (texts) => embed(texts, "query"),
+  };
+}
+// Serves vectors embedded ahead of time in one batch and falls back to the provider for anything else.
+export function prefetchedEmbedder(
+  base: EmbeddingProvider,
+  vectors: Map<string, number[]>,
+): EmbeddingProvider {
+  return {
+    ...base,
+    embedDocuments: async (texts) =>
+      texts.every((t) => vectors.has(t))
+        ? texts.map((t) => vectors.get(t)!)
+        : base.embedDocuments(texts),
   };
 }
 export async function assertEmbeddingDimensions(dims: number): Promise<void> {

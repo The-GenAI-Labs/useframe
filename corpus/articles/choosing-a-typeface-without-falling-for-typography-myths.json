@@ -1,0 +1,86 @@
+{
+  "slug": "choosing-a-typeface-without-falling-for-typography-myths",
+  "title": "Choosing a Typeface Without Falling for Typography Myths",
+  "kind": "ARTICLE",
+  "category": "TYPOGRAPHY",
+  "summary": "Research does not support a universal rule that serif or sans-serif is inherently better for web interfaces. The more defensible approach is to choose among tested, readable styles and let branding, audience, and context determine the final family.",
+  "sections": [
+    {
+      "heading": "Serif versus sans-serif is not a universal winner",
+      "body": "Bernard and colleagues found meaningful effects of text size and presentation format, but their computer-display study did not establish a universal serif advantage. Beymer, Russell, and Orton likewise found no statistically significant serif-versus-sans-serif difference in online reading, although serif text was slightly faster in their sample."
+    },
+    {
+      "heading": "E-commerce evidence also leaves room for brand choice",
+      "body": "Vecino and colleagues tested serif and sans-serif versions of the same family in an e-commerce prototype with 246 participants. They found no meaningful effect on task completion, reading speed, comprehension, or overall usability. That makes typeface choice a legitimate place for brand personality to operate, provided size, spacing, contrast, and other usability variables remain sound."
+    },
+    {
+      "heading": "Accessibility research adds a useful constraint",
+      "body": "Rello and Baeza-Yates found better reading performance for sans-serif, monospaced, and roman styles than for serif, proportional, and italic styles among dyslexic readers. Their tested options included Helvetica, Courier, Arial, Verdana, and Computer Modern Unicode. This gives teams an evidence-based shortlist rather than a requirement to adopt one special “dyslexia font.”"
+    },
+    {
+      "heading": "Avoid treating italic as your only emphasis tool",
+      "body": "Because italic styles underperformed in the Rello and Baeza-Yates experiment, teams serving dyslexic readers can prefer weight, size, spacing, labels, or structural emphasis over relying heavily on italic text. This is particularly useful in navigation, instructions, form help, and long explanations where clarity is more important than typographic ornament."
+    }
+  ],
+  "body": "## Choosing a Typeface Without Falling for Typography Myths\n\nWeb typography advice often turns into slogans: serif is better for reading, sans-serif is better on screens, one font is “most readable,” or every accessible interface should use a special dyslexia font. The primary research is more nuanced.\n\n### Serif versus sans-serif is not a universal winner\n\nMichael L. Bernard, Barbara S. Chaparro, Melissa M. Mills, and Charles G. Halcomb studied Times New Roman and Arial at different sizes and display formats. Their results showed that size and rendering format affected perceived legibility, while objective accuracy differences were limited (Bernard et al., 2003). In a separate eye-tracking study, David Beymer, Daniel Russell, and Peter Orton found no statistically significant difference between serif and sans-serif fonts for online reading, although serif reading was slightly faster in their sample (Beymer et al., 2008).\n\nThat is not evidence for a universal winner. It is evidence that font size and overall text presentation can matter more than a simple serif-versus-sans rule.\n\n### E-commerce evidence also leaves room for brand choice\n\nSara Vecino, Jonas Mehtali, Javier de Andrés, Martin Gonzalez-Rodriguez, and Daniel Fernandez-Lanvin compared serif and sans-serif versions within the same font family in an e-commerce website prototype. With 246 participants, they found no meaningful effect on reading speed, comprehension, task completion, or overall usability (Vecino et al., 2022).\n\nFor product pages, checkout flows, and shopping experiences, this gives brands useful freedom. A serif system can communicate tradition or premium positioning; a sans-serif system can feel contemporary or utilitarian. The research does not require one of those directions.\n\n### Accessibility research adds a useful constraint\n\nLuz Rello and Ricardo Baeza-Yates tested 12 fonts with dyslexic readers and found better performance for sans-serif, monospaced, and roman styles than for serif, proportional, and italic styles (Rello & Baeza-Yates, 2013). Their results highlighted options including Helvetica, Courier, Arial, Verdana, and Computer Modern Unicode.\n\nThe implication is not that every interface should become monospaced or sans-serif. It is that an accessible type system can offer a strong, tested shortlist and avoid decorative choices that introduce unnecessary reading friction.\n\n### Avoid making italic your only emphasis tool\n\nThe same dyslexia-focused research found italic styles underperformed. That makes a case for using weight, size, spacing, headings, labels, or other structural signals when emphasis is important. It is a small implementation choice, but it can keep emphasis from depending on a typographic treatment that is harder for some readers.\n\nThe broader lesson is simple: choose the typeface for the brand, but choose the reading system for the user. Font family is only one variable; size, spacing, contrast, and layout determine much of the actual reading experience.\n\nReferences: Bernard et al. (2003); Beymer, Russell, & Orton (2008); Rello & Baeza-Yates (2013); Vecino et al. (2022).",
+  "tags": [
+    "serif",
+    "sans-serif",
+    "font-choice",
+    "branding",
+    "dyslexia"
+  ],
+  "references": [
+    {
+      "title": "Comparing the Effects of Text Size and Format on the Readability of Computer-Displayed Times New Roman and Arial Text",
+      "url": "https://doi.org/10.1016/S1071-5819(03)00121-6",
+      "authors": [
+        "Michael L. Bernard",
+        "Barbara S. Chaparro",
+        "Melissa M. Mills",
+        "Charles G. Halcomb"
+      ],
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "year": 2003,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "An Eye Tracking Study of How Font Size and Type Influence Online Reading",
+      "url": "https://doi.org/10.14236/ewic/HCI2008.23",
+      "authors": [
+        "David Beymer",
+        "Daniel Russell",
+        "Peter Orton"
+      ],
+      "publishedIn": "People and Computers XXII: Culture, Creativity, Interaction",
+      "year": 2008,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "Good fonts for dyslexia",
+      "url": "https://doi.org/10.1145/2513383.2513447",
+      "authors": [
+        "Luz Rello",
+        "Ricardo Baeza-Yates"
+      ],
+      "publishedIn": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility",
+      "year": 2013,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "How does serif vs sans serif typeface impact the usability of e-commerce websites?",
+      "url": "https://doi.org/10.7717/peerj-cs.1139",
+      "authors": [
+        "Sara Vecino",
+        "Jonas Mehtali",
+        "Javier de Andrés",
+        "Martin Gonzalez-Rodriguez",
+        "Daniel Fernandez-Lanvin"
+      ],
+      "publishedIn": "PeerJ Computer Science",
+      "year": 2022,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

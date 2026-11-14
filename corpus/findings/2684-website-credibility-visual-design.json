@@ -1,0 +1,20 @@
+{
+  "slug": "2684-website-credibility-visual-design",
+  "status": "DRAFT",
+  "category": "LAYOUT",
+  "title": "2,684 website credibility evaluations and visual design comments",
+  "statement": "When 2,684 people evaluated live websites for credibility, comments about the site's visual design were the most frequent category at 46.1%, followed by information structure and information focus, so visual polish and information organization should be treated as part of credibility design rather than mere decoration. (ResearchGate)\n\nOptions:\n- Structured grid: 12_column_grid_1200px_max_width (fits: enterprise, organized)\n- Editorial clarity: single_column_760px_editorial (fits: calm, focused)\n- Evidence-first hero: evidence_first_two_column_hero (fits: technical, proof led)\n- Scannable structure: section_headings_with_jump_navigation (fits: efficient, information rich)",
+  "appliesWhen": "Applies to: consumer websites, landing pages. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "calm",
+    "efficient",
+    "enterprise",
+    "focused",
+    "information-rich",
+    "organized",
+    "proof-led",
+    "technical"
+  ],
+  "relations": []
+}

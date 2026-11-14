@@ -1,0 +1,18 @@
+{
+  "slug": "animated-transitions-mental-model-spatial",
+  "status": "DRAFT",
+  "category": "MOTION",
+  "title": "Animated transitions and mental models of spatial relationships",
+  "statement": "Animating transitions between application states helps users maintain a coherent mental model of spatial relationships within the interface.\n\nOptions:\n- Continuous Context: Shared element morph (fits: gallery to detail, card expansion)\n- Spatial Hierarchy: Smooth height expansion (fits: accordions, dropdown menus)\n- Speed over Context: Instant cut (0ms) (fits: tab switching, expert tools)",
+  "appliesWhen": "Applies to: navigation, accordions, page transitions. Audience: general.",
+  "tags": [
+    "motion",
+    "accordions",
+    "card-expansion",
+    "dropdown-menus",
+    "expert-tools",
+    "gallery-to-detail",
+    "tab-switching"
+  ],
+  "relations": []
+}

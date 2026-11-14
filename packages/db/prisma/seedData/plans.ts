@@ -15,6 +15,8 @@ export type PlanSeed = {
   credits: number
   features: string[]
   highlighted: boolean
+  // A completed purchase opens the full research library.
+  unlocksFullResearch: boolean
   sortOrder: number
 }
 
@@ -33,6 +35,7 @@ export const PLAN_SEEDS: PlanSeed[] = [
       "Research-backed design citations",
     ],
     highlighted: false,
+    unlocksFullResearch: false,
     sortOrder: 1,
   },
   {
@@ -50,6 +53,7 @@ export const PLAN_SEEDS: PlanSeed[] = [
       "Priority support",
     ],
     highlighted: true,
+    unlocksFullResearch: false,
     sortOrder: 2,
   },
   {
@@ -67,6 +71,7 @@ export const PLAN_SEEDS: PlanSeed[] = [
       "Priority support, front of the queue",
     ],
     highlighted: false,
+    unlocksFullResearch: true,
     sortOrder: 3,
   },
 ]

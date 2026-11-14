@@ -91,6 +91,12 @@ function fallbackCandidates(v: PlannerPromptVars): DesignBriefCandidates {
   }
 }
 
+// DeepSeek's thinking mode rejects tool mode's forced tool_choice and counts reasoning against
+// maxTokens; Anthropic has no JSON mode, so it keeps tool mode.
+function objectMode(model: LanguageModelV1) {
+  return model.provider.startsWith("anthropic") ? {} : { mode: "json" as const, maxTokens: 16000 }
+}
+
 // Two distinct directions from one set of findings, for the candidate picker.
 // The single-brief runPlannerAgent below is kept for /plan/sync, which has no
 // picker and just needs one brief.
@@ -108,6 +114,7 @@ export async function runPlannerCandidatesAgent(
       system: CANDIDATES_SYSTEM_PROMPT,
       prompt,
       providerOptions,
+      ...objectMode(model),
       experimental_telemetry: { isEnabled: true, functionId: "planner-candidates-agent" },
     })
     return object
@@ -130,6 +137,7 @@ export async function runPlannerAgent(
       schema: DesignBriefSchema,
       prompt,
       providerOptions,
+      ...objectMode(model),
       experimental_telemetry: { isEnabled: true, functionId: "planner-agent" },
     })
     return object

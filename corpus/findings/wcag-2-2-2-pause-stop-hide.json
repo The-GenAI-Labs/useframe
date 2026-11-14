@@ -1,0 +1,30 @@
+{
+  "slug": "wcag-2-2-2-pause-stop-hide",
+  "status": "VERIFIED",
+  "category": "MOTION",
+  "title": "WCAG 2.2.2 pause stop hide moving content",
+  "statement": "WCAG 2.2.2 (Level A) requires a mechanism to pause, stop or hide any moving, blinking or scrolling content that starts automatically, lasts more than five seconds and sits alongside other content, and to pause, stop, hide or control the frequency of auto-updating content, which covers auto-rotating carousels, background videos and animated tickers.\n\nOptions:\n- Static hero: Static hero with no automatic motion (fits: calm, minimal, premium)\n- Carousel with pause control: Auto-rotating carousel with a visible, keyboard-operable pause/play button (fits: promotional, retail, informational)\n- Short or pausable video: Background video that stops within five seconds or loops with a visible pause control (fits: cinematic, energetic, brand-led)\n- User-advanced carousel: Carousel that advances only on user action, with no auto-advance (fits: respectful, clear, editorial)\n- Respect reduced motion: Autoplay skipped when the operating system's reduced-motion preference is set (prefers-reduced-motion: reduce) (fits: accessible, polished, modern)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "motion",
+    "accessible",
+    "brand-led",
+    "calm",
+    "cinematic",
+    "clear",
+    "editorial",
+    "energetic",
+    "informational",
+    "minimal",
+    "modern",
+    "polished"
+  ],
+  "source": {
+    "title": "Understanding SC 2.2.2: Pause, Stop, Hide, Web Content Accessibility Guidelines (WCAG) 2.2",
+    "authors": "W3C Accessibility Guidelines Working Group",
+    "year": 2023,
+    "venue": "W3C WCAG 2.2 (SC 2.2.2 Pause, Stop, Hide, Level A)",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide"
+  },
+  "relations": []
+}

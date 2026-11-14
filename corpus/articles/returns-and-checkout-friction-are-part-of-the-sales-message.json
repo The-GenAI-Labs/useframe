@@ -1,0 +1,79 @@
+{
+  "slug": "returns-and-checkout-friction-are-part-of-the-sales-message",
+  "title": "Returns and Checkout Friction Are Part of the Sales Message",
+  "kind": "ARTICLE",
+  "category": "CONVERSION",
+  "summary": "Many objections are operational rather than emotional: hidden costs, unwanted account creation, and uncertainty about returns can interrupt a purchase even when the product itself is compelling. Research supports making those details visible before the shopper is forced to commit.",
+  "sections": [
+    {
+      "heading": "Returns can build trust before the sale",
+      "body": "Oghazi and colleagues found that perceived return-policy leniency increased purchase intention through consumer trust among 730 online consumers of fast-moving consumer goods in Sweden. A return policy can therefore be presented as part of the purchase proposition, not buried as legal text. (Hanken School of Economics)"
+    },
+    {
+      "heading": "More generous is not automatically more useful",
+      "body": "Shih-Ping Jeng found that the value of generous return policies depended on retailer brand familiarity and the effort required to return the product. Lesser-known retailers benefited more for higher-return-effort products, while established retailers benefited more when return effort was low. (IDEAS/RePEc)"
+    },
+    {
+      "heading": "Show the real price early",
+      "body": "Baymard's 2026 research reported that 39% of surveyed shoppers had abandoned a checkout because of additional costs such as taxes and delivery charges. The research recommends showing the full cost, or an explained estimate when an exact total is not yet possible, earlier in the purchase path. (Baymard Institute)"
+    },
+    {
+      "heading": "Let people buy without creating an account",
+      "body": "Baymard's 2024 checkout research found that 18% of surveyed U.S. online shoppers had abandoned an order because they did not want to create an account; 62% of benchmarked sites did not make guest checkout the most prominent option. The choice can therefore be presented as Guest Checkout, Continue as Guest, or account creation after purchase. (Baymard Institute)"
+    }
+  ],
+  "body": "## Returns and Checkout Friction Are Part of the Sales Message\n\nA landing page can persuade someone to want a product and still lose the purchase when the practical questions arrive. What will the final price be? Can I return it? Do I have to create an account? How hard will this be on my phone? These are not side issues. They are part of the perceived risk of completing the transaction.\n\n### Returns can build trust before the sale\n\nPejvak Oghazi, Stefan Karlsson, Daniel Hellström, and Klas Hjort studied 730 online consumers of fast-moving consumer goods in Sweden and found that perceived return-policy leniency increased purchase intention through consumer trust. That supports putting a concise returns message near a product decision or call to action when uncertainty about the purchase is high. It does not imply that every brand needs the same return window; the value comes from reducing uncertainty. (Hanken School of Economics)\n\n### The right return policy depends on the product and the brand\n\nShih-Ping Jeng's experiment adds an important qualification. Return-policy generosity had different effects depending on retailer brand familiarity and the effort required to return a product. Lesser-known retailers benefited more when products were costly or difficult to return, while well-known retailers benefited more for products where return effort was relatively low. A design system can therefore offer several legitimate patterns: generous free returns for unfamiliar brands selling high-effort-to-return goods, or a simpler standard policy for established brands and easy-to-return products. (IDEAS/RePEc)\n\n### Hidden charges are a preventable objection\n\nBaymard's 2026 research found that 39% of surveyed shoppers abandoned a checkout because of additional costs such as delivery charges and taxes. The institute recommends showing the full order cost in the cart and giving users a clear estimate with an explanation when the exact amount cannot yet be calculated. For a frontend team, that creates several valid options: an all-in price on the product page, an itemized cart summary, an early shipping calculator, or a clear estimated-total component. (Baymard Institute)\n\n### Account creation can be another avoidable barrier\n\nBaymard's 2024 research found that 18% of surveyed U.S. online shoppers had abandoned an order because they did not want to create an account. It also found that 62% of benchmarked sites failed to make guest checkout the most prominent option. The appropriate UI can vary, but the core choice should be easy to discover: make Guest Checkout primary, place Continue as Guest beside sign-in, or defer account creation until after the order is complete. (Baymard Institute)\n\nThe common thread is timing. Information that resolves a purchase objection is most useful before the shopper has to commit to the risky step.",
+  "tags": [
+    "returns",
+    "checkout",
+    "pricing",
+    "guest-checkout",
+    "friction"
+  ],
+  "references": [
+    {
+      "title": "Online purchase return policy leniency and purchase decision: Mediating role of consumer trust",
+      "url": "https://doi.org/10.1016/j.jretconser.2017.12.007",
+      "authors": [
+        "Pejvak Oghazi",
+        "Stefan Karlsson",
+        "Daniel Hellström",
+        "Klas Hjort"
+      ],
+      "publishedIn": "Journal of Retailing and Consumer Services",
+      "year": 2018,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Increasing customer purchase intention through product return policies: The pivotal impacts of retailer brand familiarity and product categories",
+      "url": "https://doi.org/10.1016/j.jretconser.2017.08.013",
+      "authors": [
+        "Shih-Ping Jeng"
+      ],
+      "publishedIn": "Journal of Retailing and Consumer Services",
+      "year": 2017,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "How to Reduce Cart Abandonment (Data-Backed UX Strategies)",
+      "url": "https://baymard.com/blog/reduce-cart-abandonment",
+      "authors": [
+        "Carl MacDonald"
+      ],
+      "publishedIn": "Baymard Institute",
+      "year": 2026,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "Checkout UX 2025: 10 Pitfalls and Best Practices",
+      "url": "https://baymard.com/research-articles/current-state-of-checkout-ux",
+      "authors": [
+        "Kathryn Reeves"
+      ],
+      "publishedIn": "Baymard Institute",
+      "year": 2024,
+      "publicationType": "industry_report"
+    }
+  ],
+  "isPublished": true
+}

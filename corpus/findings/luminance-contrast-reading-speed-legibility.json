@@ -1,0 +1,25 @@
+{
+  "slug": "luminance-contrast-reading-speed-legibility",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Luminance contrast versus chromatic contrast for reading speed and legibility",
+  "statement": "Reading speed and legibility depend almost entirely on luminance contrast rather than chromatic contrast (hue differences) between text and background.\n\nOptions:\n- Optimal Reading: High Luminance Contrast (fits: articles, documentation)\n- Poor Legibility (Avoid): Pure Chromatic Contrast (fits: art projects only)\n- Reduced Eye Strain: Moderate Luminance Contrast (fits: dashboards, long form reading)",
+  "appliesWhen": "Applies to: typography, content heavy sites. Audience: general, seniors.",
+  "tags": [
+    "accessibility",
+    "typography",
+    "art-projects-only",
+    "articles",
+    "dashboards",
+    "documentation",
+    "long-form-reading"
+  ],
+  "source": {
+    "title": "Psychophysics of reading. XI. Comparing color contrast and luminance contrast",
+    "authors": "Gordon E. Legge; Denis G. Pelli; S. S. Rubin; R. A. Schleske",
+    "year": 1990,
+    "venue": "Journal of the Optical Society of America A",
+    "url": "https://opg.optica.org/josaa/abstract.cfm?uri=josaa-7-10-2002"
+  },
+  "relations": []
+}

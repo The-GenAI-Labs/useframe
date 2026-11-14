@@ -1,0 +1,30 @@
+{
+  "slug": "wcag-1-4-1-color-only-information-second-cues",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "WCAG 1.4.1 color-only information second cues",
+  "statement": "WCAG 1.4.1 (Level A) requires that color is not the only visual means of conveying information, indicating an action, prompting a response or distinguishing an element, so links in body text, error and required-field states and status badges need a second cue such as an underline, icon or text.\n\nOptions:\n- Underlined or cued links: Underlined links in running text; if links are not underlined, give them at least 3:1 contrast with surrounding text plus an added cue on hover and focus (WCAG technique G183) (fits: clear, trustworthy, editorial)\n- Errors beyond red: Error states shown with a red border plus an error icon and message text (fits: friendly, clear, professional)\n- Required-field marker: Required fields marked with an asterisk or the word 'required' in addition to any color (fits: practical, clear, corporate)\n- Labelled badges: Plan or status badges that carry a text label or icon (for example a 'Popular' tag) rather than a colored ring alone (fits: modern, saas, clear)\n- Non-color chart cues: Charts and legends with direct labels, patterns or marker shapes in addition to color (fits: data-driven, technical, analytical)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "accessibility",
+    "clear",
+    "analytical",
+    "corporate",
+    "data-driven",
+    "editorial",
+    "friendly",
+    "modern",
+    "practical",
+    "professional",
+    "saas",
+    "technical"
+  ],
+  "source": {
+    "title": "Understanding SC 1.4.1: Use of Color, Web Content Accessibility Guidelines (WCAG) 2.2",
+    "authors": "W3C Accessibility Guidelines Working Group",
+    "year": 2023,
+    "venue": "W3C WCAG 2.2 (SC 1.4.1 Use of Color, Level A)",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html"
+  },
+  "relations": []
+}

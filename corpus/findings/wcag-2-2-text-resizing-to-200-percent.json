@@ -1,0 +1,26 @@
+{
+  "slug": "wcag-2-2-text-resizing-to-200-percent",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "WCAG 2.2 text resizing to 200 percent",
+  "statement": "WCAG 2.2 requires web text to remain usable when users enlarge it to 200% without losing content or functionality, so responsive interfaces should preserve readable text and controls throughout at least a 2× text-size increase.\n\nOptions:\n- WCAG baseline: 200% (fits: professional, balanced)\n- Extra headroom: 250% (fits: accessible, robust)\n- High enlargement: 300% (fits: access-first, comfortable)\n- Extreme zoom support: 400% (fits: maximum access, robust)",
+  "appliesWhen": "Applies to: general web, web apps, responsive web. Audience: adults, seniors, general.",
+  "tags": [
+    "accessibility",
+    "robust",
+    "access-first",
+    "accessible",
+    "balanced",
+    "comfortable",
+    "maximum-access",
+    "professional"
+  ],
+  "source": {
+    "title": "Web Content Accessibility Guidelines (WCAG) 2.2",
+    "authors": "World Wide Web Consortium",
+    "year": 2023,
+    "venue": "W3C Web Content Accessibility Guidelines (WCAG) 2.2",
+    "url": "https://www.w3.org/TR/WCAG22/"
+  },
+  "relations": []
+}

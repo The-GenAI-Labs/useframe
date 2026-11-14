@@ -1,0 +1,29 @@
+{
+  "slug": "55-70-character-line-length",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "55 to 70 character line length for reading",
+  "statement": "A medium line length of 55 to 70 characters per line provides the optimal balance for reading speed and comprehension, minimizing saccadic fatigue from returning to the start of new lines.\n\nOptions:\n- Optimal Body Text: 55 - 75 characters per line (max-width: 65ch) (fits: blogs, news sites, documentation)\n- Complex / Technical Reading: 45 - 55 characters per line (fits: academic journals, reference material)\n- Mobile Layout / Columns: 35 - 45 characters per line (fits: mobile web, multi column news)\n- Full-width Fluid (Avoid): 80+ characters per line (fits: data tables, code editors)",
+  "appliesWhen": "Applies to: web, desktop reading, tablet. Audience: general, adults, b2b buyers.",
+  "tags": [
+    "layout",
+    "academic-journals",
+    "blogs",
+    "code-editors",
+    "data-tables",
+    "documentation",
+    "mobile-web",
+    "multi-column-news",
+    "news-sites",
+    "reference-material"
+  ],
+  "source": {
+    "title": "The influence of reading speed and line length on the effectiveness of reading from screen",
+    "authors": "Mary C. Dyson; Mark Haselgrove",
+    "year": 2001,
+    "venue": "International Journal of Human-Computer Studies",
+    "url": "https://dl.acm.org/doi/10.1006/ijhc.2001.0458",
+    "doi": "10.1006/ijhc.2001.0458"
+  },
+  "relations": []
+}

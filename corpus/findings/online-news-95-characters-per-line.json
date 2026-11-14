@@ -1,0 +1,27 @@
+{
+  "slug": "online-news-95-characters-per-line",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Online news reading speed at 95 characters per line",
+  "statement": "For online news articles, 95 characters per line produced the fastest reading among the 35, 55, 75, and 95 cpl conditions tested, so wider lines can be justified when reading speed is prioritized even though shorter lines may be preferred subjectively.\n\nOptions:\n- Short: 55cpl (fits: comfortable, editorial)\n- Middle: 75cpl (fits: balanced, professional)\n- Fast-reading: 95cpl (fits: high density, newsroom)\n- Compact editorial: 60-70cpl (fits: editorial, calm)",
+  "appliesWhen": "Applies to: editorial, news, content sites. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "editorial",
+    "balanced",
+    "calm",
+    "comfortable",
+    "high-density",
+    "newsroom",
+    "professional"
+  ],
+  "source": {
+    "title": "The Effects of Line Length on Reading Performance of Online News Articles",
+    "authors": "A. Dawn Shaikh; Barbara S. Chaparro",
+    "year": 2005,
+    "venue": "Proceedings of the Human Factors and Ergonomics Society Annual Meeting",
+    "url": "https://doi.org/10.1177/154193120504900514",
+    "doi": "10.1177/154193120504900514"
+  },
+  "relations": []
+}

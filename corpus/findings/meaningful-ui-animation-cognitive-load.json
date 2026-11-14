@@ -1,0 +1,24 @@
+{
+  "slug": "meaningful-ui-animation-cognitive-load",
+  "status": "VERIFIED",
+  "category": "MOTION",
+  "title": "Meaningful UI animation directing eye and reducing cognitive load",
+  "statement": "Meaningful UI animation reduces cognitive load by actively directing the user's eye to the exact location of a new or updated element, preventing visual search.\n\nOptions:\n- Eye Guide: Directed spatial slide-in (fits: new list items, incoming messages)\n- In-place Update: Subtle background color flash (fits: data table refreshes, stock tickers)\n- High Cognitive Load: No animation (Instant snap) (fits: avoid for partial updates)",
+  "appliesWhen": "Applies to: list updates, shopping carts, notifications. Audience: general.",
+  "tags": [
+    "motion",
+    "avoid-for-partial-updates",
+    "data-table-refreshes",
+    "incoming-messages",
+    "new-list-items",
+    "stock-tickers"
+  ],
+  "source": {
+    "title": "Animation for Attention and Comprehension",
+    "authors": "Aurora Bedford",
+    "year": 2017,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/animation-usability/"
+  },
+  "relations": []
+}

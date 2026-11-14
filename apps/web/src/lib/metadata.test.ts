@@ -4,8 +4,10 @@ import { readFileSync } from "node:fs";
 
 afterEach(() => {
   vi.unstubAllEnvs();
+  vi.unstubAllGlobals();
   vi.doUnmock("@/lib/metadata");
   vi.doUnmock("@/lib/legal");
+  vi.doUnmock("@/lib/researchArticles");
   vi.resetModules();
 });
 
@@ -19,6 +21,7 @@ async function metadataFor(
   vi.stubEnv("SITE_INDEXING_ENABLED", indexingEnabled);
   vi.doMock("@/lib/metadata", async () => import("./metadata"));
   vi.doMock("@/lib/legal", async () => import("./legal"));
+  vi.doMock("@/lib/researchArticles", async () => import("./researchArticles"));
   return import("./metadata");
 }
 
@@ -112,6 +115,15 @@ describe("page metadata indexing policy", () => {
 
   it("serves the public canonical pages in the production sitemap", async () => {
     const { SITE_URL } = await metadataFor("production", "production", "true");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () =>
+        Response.json({
+          success: true,
+          data: [{ slug: "colour-basics", title: "Colour", category: "COLOR_PSYCHOLOGY", summary: "s", tags: [], publishedAt: "2026-11-01T00:00:00.000Z" }],
+        }),
+      ),
+    );
     const { default: sitemap } = await import("../../app/sitemap");
     const { default: robots } = await import("../../app/robots");
 
@@ -120,9 +132,11 @@ describe("page metadata indexing policy", () => {
       lastModified: "2026-11-09",
       priority: 0.3,
     });
-    expect(sitemap()).toEqual([
+    expect(await sitemap()).toEqual([
       { url: `${SITE_URL}/` },
       { url: `${SITE_URL}/pricing` },
+      { url: `${SITE_URL}/research`, priority: 0.6 },
+      { url: `${SITE_URL}/research/colour-basics`, lastModified: "2026-11-01T00:00:00.000Z", priority: 0.5 },
       legalPage("/privacy"),
       legalPage("/terms"),
       legalPage("/refund-policy"),
@@ -146,7 +160,7 @@ describe("page metadata indexing policy", () => {
       const { default: sitemap } = await import("../../app/sitemap");
       const { default: robots } = await import("../../app/robots");
 
-      expect(sitemap()).toEqual([]);
+      expect(await sitemap()).toEqual([]);
       expect(robots()).toEqual({
         rules: { userAgent: "*", disallow: "/" },
       });

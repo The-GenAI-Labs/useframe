@@ -1,0 +1,67 @@
+{
+  "slug": "designing-color-for-kids-higher-saturation-cool-for-learning",
+  "title": "Designing Color for Kids: Higher Saturation, Cool for Learning, Warm for Play",
+  "kind": "ARTICLE",
+  "category": "COLOR_PSYCHOLOGY",
+  "summary": "Children's apps reliably use brighter, more saturated colors than adult apps. Educational interfaces lean cool; game interfaces lean warm. Matching these patterns improves engagement.",
+  "sections": [
+    {
+      "heading": "What the data show",
+      "body": "Lyu, Xi and Liu (2022) analyzed 223 popular children's applications from the Apple App Store across three age bands (3–5, 6–8, 9–11) plus adult comparison apps. Children's interfaces showed higher saturation and brightness frequencies. Educational apps more often used cool hues such as blue; game apps more often used warm hues such as red and orange."
+    },
+    {
+      "heading": "Pediatric preference for blue and green",
+      "body": "A 2026 study in Color Research & Application compared color preferences for pediatric patient rooms among healthy children, outpatients, inpatients, and design professionals. Blue and green ranked highest; white ranked lowest across groups."
+    },
+    {
+      "heading": "Mood color signals for health products",
+      "body": "The Manchester Color Wheel research (Carruthers et al., 2010) found that healthy participants more often linked yellow to current mood while anxious and depressed participants more often chose grey. For child-facing wellness tools, avoiding dominant grey and offering positive warm or cool accents can support emotional tone."
+    }
+  ],
+  "body": "## Designing Color for Kids: Higher Saturation, Cool for Learning, Warm for Play\n\nChildren's digital products look different from adult products for good reason.\n\nIn *Color Research & Application* (2022), Lyu and colleagues extracted color statistics from 223 children's apps and 58 adult apps. Children's interfaces used high-saturation and high-brightness colors more frequently. Educational apps skewed toward cool hues (blue), while game apps skewed toward warm hues (red, orange). These patterns align with traditional developmental color-preference findings and give designers concrete defaults.\n\nA later 2026 study in the same journal examined pediatric patient-room color preferences. Across healthy children, outpatients, inpatients, and design professionals, blue and green were most preferred and white least preferred. This suggests that purely clinical white-heavy interfaces may feel less welcoming to child users even when the product is medical.\n\nMood-color research adds another layer. Carruthers et al. (2010) developed and validated the Manchester Color Wheel and found grey more strongly associated with anxious or depressed mood and yellow with healthy mood. For wellness or mental-health features aimed at families, dominant greys are best avoided; soft yellows or clear blues and greens provide safer emotional framing.\n\n**Practical ranges:** For educational kids' products use high-brightness cool primaries. For games use high-saturation warm primaries. For pediatric health interfaces prefer blue or green over stark white. Always pair color with clear icons and text for accessibility.",
+  "tags": [
+    "children",
+    "kids UX",
+    "educational apps",
+    "game design",
+    "pediatric"
+  ],
+  "references": [
+    {
+      "title": "Color design in application interfaces for children",
+      "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/col.22726",
+      "authors": [
+        "F. Lyu",
+        "R. Xi",
+        "Y. Liu"
+      ],
+      "publishedIn": "Color Research & Application",
+      "year": 2022,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "The Manchester Color Wheel: development of a novel way of identifying color choice and its validation in healthy, anxious and depressed individuals",
+      "url": "https://link.springer.com/article/10.1186/1471-2288-10-12",
+      "authors": [
+        "Helen R. Carruthers",
+        "Julie Morris",
+        "Nicholas Tarrier",
+        "Peter J. Whorwell"
+      ],
+      "publishedIn": "BMC Medical Research Methodology",
+      "year": 2010,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Design Professionals' Viewpoint on Color Application in the Design of Pediatric Patients' Rooms",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/col.70008",
+      "authors": [
+        "Park et al."
+      ],
+      "publishedIn": "Color Research & Application",
+      "year": 2026,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

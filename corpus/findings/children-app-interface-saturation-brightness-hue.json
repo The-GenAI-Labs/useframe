@@ -1,0 +1,28 @@
+{
+  "slug": "children-app-interface-saturation-brightness-hue",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Children's app interface saturation, brightness, and hue use",
+  "statement": "Children's application interfaces use higher saturation and brightness than adult interfaces; educational apps favor cool hues while game apps favor warm hues.\n\nOptions:\n- Cool educational: high-sat blue #00BFFF (fits: edtech, learning app)\n- Warm playful: high-sat red/orange #FF4500 (fits: game app, entertainment)\n- Child-bright: bright pastels high brightness (fits: preschool, fun)\n- Mature kid: lower-sat adult-like palette (fits: older children 9-11)",
+  "appliesWhen": "Applies to: kids. Audience: children under 10, parents.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "edtech",
+    "entertainment",
+    "fun",
+    "game-app",
+    "learning-app",
+    "older-children-9-11",
+    "preschool"
+  ],
+  "source": {
+    "title": "Color design in application interfaces for children",
+    "authors": "F. Lyu; R. Xi; Y. Liu",
+    "year": 2022,
+    "venue": "Color Research & Application",
+    "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/col.22726",
+    "doi": "10.1002/col.22726"
+  },
+  "relations": []
+}

@@ -1,0 +1,83 @@
+{
+  "slug": "text-people-can-read-spacing-fonts-size-and-cognitive-load",
+  "title": "Text People Can Read: Spacing, Fonts, Size and Cognitive Load",
+  "kind": "ARTICLE",
+  "category": "ACCESSIBILITY",
+  "summary": "Readable text is spacing, letterforms, size and how much you ask people to hold in their heads. Four sources give concrete guidance, with honest limits.",
+  "sections": [
+    {
+      "heading": "Let people change the spacing",
+      "body": "WCAG 1.4.12 requires nothing to break when readers override line height, paragraph, letter and word spacing. Buttons with fixed heights and non-wrapping labels are the usual failures."
+    },
+    {
+      "heading": "Fonts: sans serif helped in one dyslexia study",
+      "body": "Rello and Baeza-Yates (2013) found sans serif, monospaced and roman styles improved reading for 48 people with dyslexia, and OpenDyslexic showed no advantage. Letter spacing was not controlled."
+    },
+    {
+      "heading": "Size: bigger than most designers set it",
+      "body": "Rello, Pielot and Marcos (2016) found readability improved up to 18 points and comprehension was best at 18 and 26 points. The study covered long desktop reading, not small interface labels."
+    },
+    {
+      "heading": "Cognitive load: familiar beats clever",
+      "body": "The W3C's cognitive accessibility note recommends clear page purpose, familiar layouts, short chunks, plain wording and no unexpected movement. It is supplemental guidance, not a WCAG requirement."
+    }
+  ],
+  "body": "Readable text is not one setting. It is spacing, letterforms, size and how much you ask people to hold in their heads. Four sources give concrete guidance.\n\n## Let people change the spacing\n\nWCAG 1.4.12 (Level AA) does not tell you to set your text a particular way. It says nothing should break when a reader overrides the spacing: line height up to 1.5 times the font size, paragraph spacing to 2 times, letter spacing to 0.12 times and word spacing to 0.16 times. People with low vision or dyslexia often use extensions or style sheets to do exactly this. The usual failures are buttons with fixed heights that clip their labels, tab labels that overflow and cards whose text is hidden. The fix is to let containers grow: use minimum heights, allow wrapping and test with a text-spacing bookmarklet.\n\n## Fonts: sans serif helped in one dyslexia study\n\nLuz Rello and Ricardo Baeza-Yates (2013, ACM ASSETS) used eye tracking with 48 people with dyslexia reading 12 fonts. Sans serif, monospaced and roman styles improved reading performance compared with serif, proportional and italic ones. Helvetica, Courier, Arial, Verdana and Computer Modern Unicode came out best, and the specially designed OpenDyslexic font gave no advantage in this study. The caveat: the study did not control how far apart each font sets its letters, so some of the effect may come from spacing. The practical reading is modest and useful: a plain sans serif body font without italics is a safe default, and you do not need a specialty font.\n\n## Size: bigger than most designers set it\n\nRello, Pielot and Marcos (2016, ACM CHI) ran an eye-tracking study with 104 participants reading Wikipedia text at six sizes from 10 to 26 points. Readability and comprehension improved up to 18 points, and comprehension questions were answered best at 18 and 26 points. Extreme line spacings (0.8 and 1.8 times default) marginally hurt readability, while ordinary variations made little difference. Their advice for text-heavy pages is 18-point text or larger with default line spacing. The study covered desktop reading of long articles by people aged 14 to 54, so treat it as evidence for continuous reading text, not for small interface labels.\n\n## Cognitive load: familiar beats clever\n\nThe W3C's cognitive accessibility note, Making Content Usable for People with Cognitive and Learning Disabilities (2021), is supplemental guidance rather than a requirement of WCAG. Its patterns are practical: state the purpose of each page clearly, use familiar layouts and standard-looking links and buttons, put the most important tasks near the top, use short chunks of content with white space, avoid content that moves unexpectedly, and use plain, literal wording. It also asks that users can control content that moves or changes. The note says these patterns help many people, including those under stress or new to the web, and are essential for some.\n\n## Putting it together\n\nSet body text generously, use a neutral sans serif, and make the layout tolerant of user overrides. Then keep the page itself calm and predictable.",
+  "tags": [
+    "text spacing",
+    "dyslexia",
+    "font size",
+    "readability",
+    "cognitive accessibility",
+    "typography"
+  ],
+  "references": [
+    {
+      "title": "Understanding SC 1.4.12: Text Spacing, Web Content Accessibility Guidelines (WCAG) 2.1",
+      "url": "https://www.w3.org/WAI/WCAG21/Understanding/text-spacing",
+      "authors": [
+        "W3C Accessibility Guidelines Working Group"
+      ],
+      "publishedIn": "W3C",
+      "year": 2023,
+      "publicationType": "standard_specification"
+    },
+    {
+      "title": "Good fonts for dyslexia",
+      "url": "https://doi.org/10.1145/2513383.2513447",
+      "authors": [
+        "Luz Rello",
+        "Ricardo Baeza-Yates"
+      ],
+      "publishedIn": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS '13)",
+      "year": 2013,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "Make It Big!: The Effect of Font Size and Line Spacing on Online Readability",
+      "url": "https://dblp.uni-trier.de/pid/60/4144.html",
+      "authors": [
+        "Luz Rello",
+        "Martin Pielot",
+        "Mari-Carmen Marcos"
+      ],
+      "publishedIn": "Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems (CHI '16)",
+      "year": 2016,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "Making Content Usable for People with Cognitive and Learning Disabilities",
+      "url": "https://www.w3.org/TR/coga-usable/",
+      "authors": [
+        "Lisa Seeman-Horwitz",
+        "Rachael Bradley Montgomery",
+        "Steve Lee",
+        "Ruoxi Ran"
+      ],
+      "publishedIn": "W3C Working Group Note (Cognitive and Learning Disabilities Accessibility Task Force)",
+      "year": 2021,
+      "publicationType": "standard_specification"
+    }
+  ],
+  "isPublished": true
+}

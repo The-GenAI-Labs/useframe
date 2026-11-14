@@ -1,0 +1,26 @@
+{
+  "slug": "classical-animation-principles-interface-motion",
+  "status": "VERIFIED",
+  "category": "MOTION",
+  "title": "Classical animation principles for physical, predictable interface motion",
+  "statement": "Applying classical animation principles like anticipation and slow-in/slow-out makes interface objects feel physical, predictable, and natural to users.\n\nOptions:\n- Natural Physics: Ease-in / Ease-out (Cubic Bezier) (fits: standard ui transitions, modals)\n- Playful / Heavy Physics: Anticipation (Slight pullback before move) (fits: gamified ui, drag interactions)\n- Mechanical Physics: Linear timing (fits: color fades, opacity changes)",
+  "appliesWhen": "Applies to: microinteractions, drag and drop, gestures. Audience: general.",
+  "tags": [
+    "motion",
+    "color-fades",
+    "drag-interactions",
+    "gamified-ui",
+    "modals",
+    "opacity-changes",
+    "standard-ui-transitions"
+  ],
+  "source": {
+    "title": "Animation: From cartoons to the user interface",
+    "authors": "Bay-Wei Chang; David Ungar",
+    "year": 1993,
+    "venue": "Proceedings of the 6th annual ACM symposium on User interface software and technology (UIST '93)",
+    "url": "https://dl.acm.org/doi/10.1145/168642.168647",
+    "doi": "10.1145/168642.168647"
+  },
+  "relations": []
+}

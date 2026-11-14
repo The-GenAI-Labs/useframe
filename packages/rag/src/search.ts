@@ -95,7 +95,7 @@ export async function cohereRerank(
             top_n: config.PER_AREA_TOP_K,
           }),
         },
-        2,
+        3,
       ),
     );
   return result.results;

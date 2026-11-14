@@ -1,0 +1,102 @@
+{
+  "slug": "how-big-should-interface-text-be",
+  "title": "How Big Should Interface Text Be?",
+  "kind": "ARTICLE",
+  "category": "TYPOGRAPHY",
+  "summary": "Research does not point to one universal font size, but it consistently shows that overly small text creates readability costs in several online-reading contexts. The strongest choices depend on audience, content density, and whether reading comfort or information density is the priority.",
+  "sections": [
+    {
+      "heading": "Small type is not free",
+      "body": "Bernard, Chaparro, Mills, and Halcomb found that 12-point text was perceived as more legible than 10-point text in a controlled computer-display experiment. Beymer, Russell, and Orton likewise found that smaller online fonts produced longer visual fixations and somewhat slower reading. These studies do not mean every interface should use very large text, but they do make very small body copy a deliberate tradeoff rather than a neutral default."
+    },
+    {
+      "heading": "Older readers need more room",
+      "body": "A study focused specifically on older adults found 14-point type more legible and more preferred than 12-point type. That result is useful because age changes the practical cost of small text. A senior-facing service, healthcare portal, public-service site, or financial interface can reasonably bias toward larger body copy even when a general-purpose product might accept a denser setting."
+    },
+    {
+      "heading": "Text-heavy pages benefit from larger sizes",
+      "body": "Rello, Pielot, and Marcos tested Wikipedia articles with Arial from 10 through 26 points. Readability improved as the type got larger, and comprehension was significantly better at 18 and 26 points. This is especially relevant to documentation, knowledge bases, long-form product education, and other screens where users are actually reading rather than scanning tiny labels."
+    },
+    {
+      "heading": "Children are a separate case",
+      "body": "A 2025 study by Niu, Wu, Li, and Fang examined 161 children using Chinese online-education interfaces. In that specific environment, 14px text with 1.5 line spacing optimized the tested combination of readability, reading speed, learning efficacy, and visual fatigue. It is a useful reminder not to copy adult typography rules into children's products without checking the target audience and language."
+    },
+    {
+      "heading": "Use a range, not a magic number",
+      "body": "Across these studies, sensible choices form a range: roughly 12–14pt for conventional computer text, around 14pt or larger for senior-focused experiences, and about 18–26pt for text-heavy reading modes where readability is the primary objective. The right choice depends on how much content must fit, how long users will read, and who the readers are. The important design move is to treat size as a meaningful usability variable, not merely as a branding detail."
+    }
+  ],
+  "body": "## How Big Should Interface Text Be?\n\nThere is no single font size that wins every web interface. The research instead shows a consistent pattern: once text becomes too small, readability starts paying a price, while larger type can improve comfort and, in some settings, comprehension.\n\n### Small type is not free\n\nIn a controlled computer-display experiment, Michael L. Bernard, Barbara S. Chaparro, Melissa M. Mills, and Charles G. Halcomb compared Times New Roman and Arial at 10 and 12 points. The researchers found that 12-point text was perceived as more legible than 10-point text, even though objective accuracy differences were limited (Bernard et al., 2003). A separate eye-tracking study by David Beymer, Daniel Russell, and Peter Orton found that smaller online fonts created longer fixations and somewhat slower reading (Beymer et al., 2008).\n\nThat does not prove that every product needs large type. It does mean that choosing tiny body copy solely to squeeze more content onto a screen is making a usability tradeoff.\n\n### Older readers need more room\n\nThe case becomes stronger when the audience is older. Michael L. Bernard, Chia Hui Liao, and Melissa M. Mills compared 12- and 14-point online text among older adults. The 14-point versions were judged more legible and were preferred (Bernard, Liao, & Mills, 2001). For services aimed at older people, larger body text is therefore an evidence-backed design direction rather than just a matter of taste.\n\n### Text-heavy pages benefit from larger sizes\n\nLuz Rello, Martin Pielot, and Mari-Carmen Marcos pushed the tested range much further in a Wikipedia eye-tracking study. They compared Arial text from 10 to 26 points and found that readability improved with larger size; comprehension questions produced significantly more correct answers at 18 and 26 points (Rello, Pielot, & Marcos, 2016). This matters for documentation, articles, help centers, knowledge bases, and other reading-first experiences.\n\n### Children are a separate case\n\nA more recent study also shows why audience matters. Ruichen Niu, Wei Wu, Qiang Li, and Yudong Fang tested 161 children in Chinese online-education interfaces and found 14px with 1.5 line spacing optimal in that specific study (Niu et al., 2025). That is useful evidence for children's products, but it should not be generalized blindly to every language, age range, or interface.\n\n### Use a range, not a magic number\n\nFor frontend teams, the research supports a practical range rather than one canonical token. A conventional content interface can start around 12–14pt, senior-oriented experiences can move toward 14–18pt, and reading-first modes can reasonably use 18–26pt. The correct choice depends on reading duration, audience, language, and density requirements. In other words, typography should be sized for the job the interface asks people to do.\n\nReferences: Bernard, Liao, & Mills (2001); Bernard, Chaparro, Mills, & Halcomb (2003); Beymer, Russell, & Orton (2008); Rello, Pielot, & Marcos (2016); Niu, Wu, Li, & Fang (2025).",
+  "tags": [
+    "font-size",
+    "readability",
+    "older-adults",
+    "children",
+    "long-form-reading"
+  ],
+  "references": [
+    {
+      "title": "The effects of font type and size on the legibility and reading time of online text by older adults",
+      "url": "https://doi.org/10.1145/634067.634173",
+      "authors": [
+        "Michael L. Bernard",
+        "Chia Hui Liao",
+        "Melissa M. Mills"
+      ],
+      "publishedIn": "CHI '01 Extended Abstracts on Human Factors in Computing Systems",
+      "year": 2001,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "Comparing the Effects of Text Size and Format on the Readability of Computer-Displayed Times New Roman and Arial Text",
+      "url": "https://doi.org/10.1016/S1071-5819(03)00121-6",
+      "authors": [
+        "Michael L. Bernard",
+        "Barbara S. Chaparro",
+        "Melissa M. Mills",
+        "Charles G. Halcomb"
+      ],
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "year": 2003,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "An Eye Tracking Study of How Font Size and Type Influence Online Reading",
+      "url": "https://doi.org/10.14236/ewic/HCI2008.23",
+      "authors": [
+        "David Beymer",
+        "Daniel Russell",
+        "Peter Orton"
+      ],
+      "publishedIn": "People and Computers XXII: Culture, Creativity, Interaction",
+      "year": 2008,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "Make It Big!: The Effect of Font Size and Line Spacing on Online Readability",
+      "url": "https://doi.org/10.1145/2858036.2858204",
+      "authors": [
+        "Luz Rello",
+        "Martin Pielot",
+        "Mari-Carmen Marcos"
+      ],
+      "publishedIn": "Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems",
+      "year": 2016,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "Evaluating the Effect of Font Size and Line Spacing in Chinese Online Education User Interfaces on Children’s Learning Experience",
+      "url": "https://doi.org/10.1080/10447318.2025.2524495",
+      "authors": [
+        "Ruichen Niu",
+        "Wei Wu",
+        "Qiang Li",
+        "Yudong Fang"
+      ],
+      "publishedIn": "International Journal of Human-Computer Interaction",
+      "year": 2025,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

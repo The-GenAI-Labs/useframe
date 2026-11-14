@@ -1,0 +1,31 @@
+{
+  "slug": "return-policy-generosity-retailer-familiarity",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Return-policy generosity by retailer familiarity",
+  "statement": "Return-policy generosity is not equally valuable in every context: lesser-known retailers can benefit more from generous policies for products with high return effort, while well-known retailers benefit more where return effort is low. (IDEAS/RePEc)\n\nOptions:\n- Generous + credibility: generous-returns-plus-brand-proof (fits: less known brand, high return effort, high consideration)\n- Free return shipping: free-return-shipping (fits: physical returns, high effort, friction reducing)\n- Extended window: extended-return-window (fits: considered purchase, uncertainty reducing, less known brand)\n- Standard clear policy: standard-return-policy-with-clear-terms (fits: well known brand, low return effort, low clutter)",
+  "appliesWhen": "Applies to: ecommerce, online retail, fashion, consumer goods. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "less-known-brand",
+    "considered-purchase",
+    "friction-reducing",
+    "high-consideration",
+    "high-effort",
+    "high-return-effort",
+    "low-clutter",
+    "low-return-effort",
+    "physical-returns",
+    "uncertainty-reducing"
+  ],
+  "source": {
+    "title": "Increasing customer purchase intention through product return policies: The pivotal impacts of retailer brand familiarity and product categories",
+    "authors": "Shih-Ping Jeng",
+    "year": 2017,
+    "venue": "Journal of Retailing and Consumer Services",
+    "url": "https://doi.org/10.1016/j.jretconser.2017.08.013",
+    "doi": "10.1016/j.jretconser.2017.08.013"
+  },
+  "relations": []
+}

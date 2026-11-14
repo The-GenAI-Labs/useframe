@@ -1,0 +1,26 @@
+{
+  "slug": "serif-versus-sans-serif-usability-in-an-e-commerce-prototype",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Serif versus sans-serif usability in an e-commerce prototype",
+  "statement": "In an e-commerce prototype, switching between serif and sans-serif versions of the same font family did not materially change reading speed, comprehension, task completion, or overall usability, so either style can be selected for brand personality when other variables are held constant.\n\nOptions:\n- Editorial serif: serif (fits: traditional, luxury)\n- Modern sans: sans-serif (fits: modern, minimal)\n- Classic hybrid: serif headings + sans body (fits: editorial, premium)\n- Contemporary hybrid: sans headings + serif body (fits: modern, editorial)",
+  "appliesWhen": "Applies to: ecommerce, web apps, product sites. Audience: adults, b2b buyers, general.",
+  "tags": [
+    "typography",
+    "editorial",
+    "modern",
+    "luxury",
+    "minimal",
+    "premium",
+    "traditional"
+  ],
+  "source": {
+    "title": "How does serif vs sans serif typeface impact the usability of e-commerce websites?",
+    "authors": "Sara Vecino; Jonas Mehtali; Javier de Andrés; Martin Gonzalez-Rodriguez; Daniel Fernandez-Lanvin",
+    "year": 2022,
+    "venue": "PeerJ Computer Science",
+    "url": "https://doi.org/10.7717/peerj-cs.1139",
+    "doi": "10.7717/peerj-cs.1139"
+  },
+  "relations": []
+}

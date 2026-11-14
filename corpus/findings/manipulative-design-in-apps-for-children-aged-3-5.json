@@ -1,0 +1,31 @@
+{
+  "slug": "manipulative-design-in-apps-for-children-aged-3-5",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Manipulative design in apps for children aged 3–5",
+  "statement": "In an analysis of apps played by 160 children aged 3–5, about 80% contained at least one manipulative design feature (parasocial relationship pressure, fabricated time pressure, navigation constraints, attractive lures, or ad-based pressure), and children from lower socioeconomic households played apps with more of them, so child-facing products that avoid these patterns are a real and communicable differentiator.\n\nOptions:\n- No artificial time pressure: No fabricated urgency: no fake countdowns, 'come back tomorrow' pressure or expiring rewards aimed at the child (fits: trustworthy, calm, family friendly)\n- No character pressure: Characters never nag or guilt an idle child; no parasocial pressure prompts (fits: gentle, nurturing, respectful)\n- Parent-only commerce: Purchases and ads confined to a parent-only area, never pitched by a character inside the child's flow (fits: trustworthy, safe, transparent)\n- Free navigation: Always-visible, child-reachable back and exit controls (no navigation traps) (fits: respectful, simple, friendly)\n- Plain promise to parents: Landing-page statement to parents on whether the product has ads or in-app purchases, with the page design matching that promise (fits: transparent, trustworthy, family friendly)",
+  "appliesWhen": "Applies to: kids apps, kids games, family subscription products, educational products. Audience: children under 10, parents.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "trustworthy",
+    "family-friendly",
+    "respectful",
+    "transparent",
+    "calm",
+    "friendly",
+    "gentle",
+    "nurturing",
+    "safe",
+    "simple"
+  ],
+  "source": {
+    "title": "Prevalence and Characteristics of Manipulative Design in Mobile Applications Used by Children",
+    "authors": "Jenny Radesky; Alexis Hiniker; Caroline McLaren; Eliz Akgun; Alexandria Schaller; Heidi M. Weeks; Scott Campbell; Ashley N. Gearhardt",
+    "year": 2022,
+    "venue": "JAMA Network Open",
+    "url": "https://doi.org/10.1001/jamanetworkopen.2022.17641",
+    "doi": "10.1001/jamanetworkopen.2022.17641"
+  },
+  "relations": []
+}

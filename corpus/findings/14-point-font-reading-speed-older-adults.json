@@ -1,0 +1,30 @@
+{
+  "slug": "14-point-font-reading-speed-older-adults",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "14-point font reading speed and older-adult preference",
+  "statement": "14-point fonts (roughly equivalent to 18-21px on modern screens) are read significantly faster and preferred by older adults over standard 12-point sizes.\n\nOptions:\n- Accessible Baseline: 18px - 21px minimum body size (fits: inclusive design, accessibility, senior focused)\n- Dedicated Senior UI: 24px+ body size (fits: healthcare, assisted living apps, specialized tools)\n- Standard Web Default: 16px body size (fits: general audience, dense information)\n- Adaptive Sizing: User-adjustable font scaling toggle (fits: news portals, long form content)",
+  "appliesWhen": "Applies to: web, mobile, desktop software. Audience: seniors, general.",
+  "tags": [
+    "typography",
+    "accessibility",
+    "assisted-living-apps",
+    "dense-information",
+    "general-audience",
+    "healthcare",
+    "inclusive-design",
+    "long-form-content",
+    "news-portals",
+    "senior-focused",
+    "specialized-tools"
+  ],
+  "source": {
+    "title": "The effects of font type and size on the reading performance of older adults",
+    "authors": "Michael Bernard; B.S. Liao; Melissa Mills",
+    "year": 2001,
+    "venue": "Proceedings of the Human Factors and Ergonomics Society Annual Meeting",
+    "url": "https://journals.sagepub.com/doi/10.1177/154193120104500407",
+    "doi": "10.1177/154193120104500407"
+  },
+  "relations": []
+}

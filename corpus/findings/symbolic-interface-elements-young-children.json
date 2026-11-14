@@ -1,0 +1,31 @@
+{
+  "slug": "symbolic-interface-elements-young-children",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Symbolic interface elements for children under 3 and ages 3–5",
+  "statement": "Symbolic interface elements that adults read effortlessly, such as progress bars and on-screen cartoon-hand gesture demos, were entirely inaccessible to children under 3 in a randomized controlled trial, needed deliberate design for ages 3–5, and became harder (not easier) to understand when decorated with thematic visual detail.\n\nOptions:\n- Direct progress (under 4): Object-continuity progress: show progress through the items the child manipulates (for example a transparent cup that visibly fills) instead of a separate meter (fits: gentle, nurturing, playful)\n- Minimal progress bar: Plain, undecorated, clearly segmented progress bar for ages 4–5 (fits: simple, clean, calm)\n- Explain the symbol: Pair any symbol with an explicit statement of the link, such as 'I'll add a star each time you finish a letter!' (fits: warm, guiding, friendly)\n- Look-alike symbols: Use symbols that visually resemble what they stand for (a demo hand that looks like a hand and mirrors the gesture) (fits: clear, literal, friendly)\n- Direct feedback for toddlers: No symbolic demos for under-3s: replace them with direct cause-and-effect feedback (fits: gentle, simple, nurturing)",
+  "appliesWhen": "Applies to: kids apps, early learning products, onboarding flows, progress indicators. Audience: children under 10.",
+  "tags": [
+    "layout",
+    "friendly",
+    "gentle",
+    "nurturing",
+    "simple",
+    "calm",
+    "clean",
+    "clear",
+    "guiding",
+    "literal",
+    "playful",
+    "warm"
+  ],
+  "source": {
+    "title": "Hidden symbols: How informal symbolism in digital interfaces disrupts usability for preschoolers",
+    "authors": "Alexis Hiniker; Kiley Sobel; Sungsoo (Ray) Hong; Hyewon Suh; India Irish; Julie A. Kientz",
+    "year": 2016,
+    "venue": "International Journal of Human-Computer Studies",
+    "url": "https://doi.org/10.1016/j.ijhcs.2016.03.006",
+    "doi": "10.1016/j.ijhcs.2016.03.006"
+  },
+  "relations": []
+}

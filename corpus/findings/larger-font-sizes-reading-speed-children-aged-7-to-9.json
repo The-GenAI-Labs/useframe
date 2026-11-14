@@ -1,0 +1,27 @@
+{
+  "slug": "larger-font-sizes-reading-speed-children-aged-7-to-9",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Larger font sizes and reading speed for children aged 7 to 9",
+  "statement": "Children aged 7 to 9 read and comprehend text up to 9% faster when it is presented in larger font sizes (e.g., 26pt / 5.0mm x-height) than standard early-reader defaults.\n\nOptions:\n- Early Readers (Ages 7-9): 24px - 28px (High x-height) (fits: edtech platforms, childrens ebooks)\n- Intermediate Readers (Ages 10-12): 18px - 22px (fits: middle school education, learning management)\n- Adult Standard: 16px default (fits: general audience, parent dashboards)\n- Child-friendly Typefaces: Verdana / Sassoon fonts (fits: primary education)",
+  "appliesWhen": "Applies to: edtech, educational games, web. Audience: children under 10, parents.",
+  "tags": [
+    "typography",
+    "childrens-ebooks",
+    "edtech-platforms",
+    "general-audience",
+    "learning-management",
+    "middle-school-education",
+    "parent-dashboards",
+    "primary-education"
+  ],
+  "source": {
+    "title": "Typography for children may be inappropriately designed",
+    "authors": "Arnold Wilkins; Roanna Cleave; Nicola Grayson; Louise Wilson",
+    "year": 2009,
+    "venue": "Journal of Research in Reading",
+    "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-9817.2009.01392.x",
+    "doi": "10.1111/j.1467-9817.2009.01392.x"
+  },
+  "relations": []
+}

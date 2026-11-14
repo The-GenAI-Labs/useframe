@@ -1,0 +1,19 @@
+{
+  "slug": "principal-hues-positive-emotional-responses",
+  "status": "DRAFT",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Principal hues and positive emotional responses",
+  "statement": "Principal hues (red, yellow, green, blue) elicit significantly higher positive emotional responses than intermediate or achromatic hues.\n\nOptions:\n- High Emotion / Energetic: Principal Hues (Pure RGB/Y) (fits: social media, kids apps)\n- Neutral / Somber: Achromatic (Black/Grey) (fits: news, luxury)\n- Complex / Muted: Intermediate Hues (fits: lifestyle brands, wellness)",
+  "appliesWhen": "Applies to: consumer apps, marketing sites. Audience: general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "kids-apps",
+    "lifestyle-brands",
+    "luxury",
+    "news",
+    "social-media",
+    "wellness"
+  ],
+  "relations": []
+}

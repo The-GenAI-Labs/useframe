@@ -1,0 +1,30 @@
+{
+  "slug": "website-color-appeal-trust-canada-germany-japan",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Website color appeal and trust in Canada, Germany, and Japan",
+  "statement": "Website color appeal affected trust and satisfaction in a study spanning Canada, Germany and Japan, but preferred schemes differed by culture: Germans showed the strongest preference for blue, Canadians appreciated grey more, and yellow was broadly disliked as a website color scheme. (Milena Head)\n\nOptions:\n- German-market blue: blue-dominant (fits: professional, functional, trusted)\n- Canadian-market grey: grey-dominant (fits: neutral, understated, functional)\n- Cross-market blend: blue-grey system (fits: neutral, global, professional)\n- Yellow test variant: yellow-dominant (fits: bright, optimistic, experimental)",
+  "appliesWhen": "Applies to: general, ecommerce, b2b. Audience: adults, b2b buyers, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "functional",
+    "neutral",
+    "professional",
+    "bright",
+    "experimental",
+    "global",
+    "optimistic",
+    "trusted",
+    "understated"
+  ],
+  "source": {
+    "title": "Colour appeal in website design within and across cultures: A multi-method evaluation",
+    "authors": "Dianne Cyr; Milena Head; Hector Larios",
+    "year": 2010,
+    "venue": "International Journal of Human-Computer Studies",
+    "url": "https://doi.org/10.1016/j.ijhcs.2009.08.005",
+    "doi": "10.1016/j.ijhcs.2009.08.005"
+  },
+  "relations": []
+}

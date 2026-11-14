@@ -1,0 +1,26 @@
+{
+  "slug": "looming-motion-visual-attention",
+  "status": "VERIFIED",
+  "category": "MOTION",
+  "title": "Looming motion captures visual attention fastest",
+  "statement": "Motion that simulates an object approaching the viewer (looming) captures visual attention significantly faster and more reliably than receding or lateral motion.\n\nOptions:\n- High Priority Attention: Scale up from 0.8x to 1.0x (Looming) (fits: critical errors, urgent alerts)\n- Standard Introduction: Lateral slide-in (fits: toast messages, side drawers)\n- Dismissal / Exit: Scale down from 1.0x to 0.8x (Receding) (fits: closing modals, deleting items)",
+  "appliesWhen": "Applies to: notifications, error states, modals. Audience: general.",
+  "tags": [
+    "motion",
+    "closing-modals",
+    "critical-errors",
+    "deleting-items",
+    "side-drawers",
+    "toast-messages",
+    "urgent-alerts"
+  ],
+  "source": {
+    "title": "Moving and looming stimuli capture attention",
+    "authors": "Steven L. Franconeri; Daniel J. Simons",
+    "year": 2003,
+    "venue": "Perception & Psychophysics",
+    "url": "https://link.springer.com/article/10.3758/BF03194833",
+    "doi": "10.3758/BF03194833"
+  },
+  "relations": []
+}

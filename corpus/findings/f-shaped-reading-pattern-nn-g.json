@@ -1,0 +1,26 @@
+{
+  "slug": "f-shaped-reading-pattern-nn-g",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "F-shaped reading pattern in NN/g eyetracking",
+  "statement": "NN/g's original eyetracking study of 232 users found that people often read web pages in an F-shaped pattern (a sweep across the top, a shorter second sweep, then a vertical scan down the left edge), so the first two paragraphs and the first words of subheads, paragraphs and bullets must carry the key information.\n\nOptions:\n- Front-loaded copy: Put the most important claim in the first two paragraphs (or first two lines) of every text block (fits: clear, authoritative, professional)\n- Information-first openings: Start subheads, paragraphs and bullets with information-carrying words, since the first two words are read far more than the third (fits: clear, technical, editorial)\n- Strong left edge: Left-aligned text blocks with a strong left edge, so the vertical scan lands on meaningful first words (fits: editorial, calm, approachable)",
+  "appliesWhen": "Applies to: general web, ecommerce, corporate sites, search results. Audience: general.",
+  "tags": [
+    "layout",
+    "clear",
+    "editorial",
+    "approachable",
+    "authoritative",
+    "calm",
+    "professional",
+    "technical"
+  ],
+  "source": {
+    "title": "F-Shaped Pattern For Reading Web Content (Original Study)",
+    "authors": "Jakob Nielsen",
+    "year": 2006,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/"
+  },
+  "relations": []
+}

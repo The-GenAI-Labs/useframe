@@ -1,0 +1,25 @@
+{
+  "slug": "text-contrast-ratios-low-vision",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Text contrast ratios of 4.5:1 and 3:1 for low vision",
+  "statement": "To ensure digital text is readable by users with low vision, a minimum contrast ratio of 4.5:1 is required for normal text, and 3:1 for large text.\n\nOptions:\n- Maximum Accessibility: 7:1 Ratio (AAA) (fits: government, healthcare)\n- Standard Compliance: 4.5:1 Ratio (AA) (fits: ecommerce, saas)\n- Large Text / UI Elements: 3:1 Ratio (fits: headings, icons)",
+  "appliesWhen": "Applies to: all digital products. Audience: general, seniors.",
+  "tags": [
+    "accessibility",
+    "ecommerce",
+    "government",
+    "headings",
+    "healthcare",
+    "icons",
+    "saas"
+  ],
+  "source": {
+    "title": "Web Content Accessibility Guidelines (WCAG) 2.1",
+    "authors": "World Wide Web Consortium (W3C); Accessibility Guidelines Working Group",
+    "year": 2018,
+    "venue": "Web Content Accessibility Guidelines (WCAG) 2.1",
+    "url": "https://www.w3.org/TR/WCAG21/"
+  },
+  "relations": []
+}

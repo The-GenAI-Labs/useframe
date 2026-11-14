@@ -1,0 +1,31 @@
+{
+  "slug": "online-trust-perceived-risk-purchasing",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "Online trust and perceived risk in purchasing decisions",
+  "statement": "Because online trust and perceived risk both have strong effects on purchasing decisions, landing pages should address concrete risk drivers such as company reputation, security, privacy, information quality, and vendor reputation rather than relying on generic reassurance. (ScienceDirect)\n\nOptions:\n- Reputation evidence: company-reputation-proof (fits: new brand, high consideration, credibility first)\n- Security details: security-practice-explanation (fits: financial risk, privacy sensitive, high value)\n- Privacy explanation: plain-language-privacy-policy (fits: data sensitive, transparent, compliance aware)\n- Information depth: detailed-product-information (fits: technical, comparison shopping, high involvement)\n- Vendor identity: vendor-identity-section (fits: unfamiliar brand, human, accountable)",
+  "appliesWhen": "Applies to: ecommerce, online retail, marketplaces, high consideration products. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "accountable",
+    "comparison-shopping",
+    "compliance-aware",
+    "credibility-first",
+    "data-sensitive",
+    "financial-risk",
+    "high-consideration",
+    "high-involvement",
+    "high-value",
+    "human"
+  ],
+  "source": {
+    "title": "A trust-based consumer decision-making model in electronic commerce: The role of trust, perceived risk, and their antecedents",
+    "authors": "Dan J. Kim; Donald L. Ferrin; H. Raghav Rao",
+    "year": 2008,
+    "venue": "Decision Support Systems",
+    "url": "https://doi.org/10.1016/j.dss.2007.07.001",
+    "doi": "10.1016/j.dss.2007.07.001"
+  },
+  "relations": []
+}

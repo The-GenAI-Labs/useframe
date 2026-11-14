@@ -1,0 +1,31 @@
+{
+  "slug": "red-green-color-deficiency-prevalence-color-only-coding-risk",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Red-green color deficiency prevalence and color-only coding risk",
+  "statement": "Population surveys show inherited red-green color deficiency affects about 8% of men and 0.4% of women of European descent and 4% to 6.5% of men of Chinese and Japanese ethnicity, so red versus green status coding and low-luminance hue pairs will be misread by a meaningful share of visitors and color must not carry meaning alone.\n\nOptions:\n- Color plus icon plus word: Status colors always paired with an icon and a text label (for example a check mark and the word 'Success') (fits: clear, trustworthy, professional)\n- Blue-orange state palette: Blue and orange (or blue and yellow) for two-state emphasis instead of red and green, still combined with labels (fits: modern, confident, calm)\n- Luminance-differentiated pairs: Palette pairs that differ in lightness as well as hue, verified in a red-green color deficiency simulator before sign-off (fits: technical, careful, polished)\n- Direct labels over hue: Pricing tiers, charts and legends identified by direct labels or patterns, not by hue alone (fits: data-driven, clear, analytical)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "accessibility",
+    "clear",
+    "analytical",
+    "calm",
+    "careful",
+    "confident",
+    "data-driven",
+    "modern",
+    "polished",
+    "professional",
+    "technical",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "Worldwide prevalence of red-green color deficiency",
+    "authors": "Jennifer Birch",
+    "year": 2012,
+    "venue": "Journal of the Optical Society of America A, 29(3), 313-320",
+    "url": "https://doi.org/10.1364/JOSAA.29.000313",
+    "doi": "10.1364/JOSAA.29.000313"
+  },
+  "relations": []
+}

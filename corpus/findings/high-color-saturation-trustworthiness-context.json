@@ -1,0 +1,31 @@
+{
+  "slug": "high-color-saturation-trustworthiness-context",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Context-dependent effect of high color saturation on trustworthiness",
+  "statement": "Higher color saturation can hurt perceived trustworthiness and usability on websites depending on the content domain, so high-saturation palettes should be treated as a contextual choice rather than a universal engagement rule. (ScienceDirect)\n\nOptions:\n- Muted base: desaturated palette (fits: trust-focused, calm, serious)\n- Balanced saturation: moderate saturation (fits: versatile, modern, professional)\n- Selective vividness: high-saturation accents only (fits: energetic, attention-seeking, controlled)\n- Vivid system: high-saturation full palette (fits: playful, bold, expressive)",
+  "appliesWhen": "Applies to: general, fintech, health, b2b, ecommerce. Audience: adults, b2b buyers, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "attention-seeking",
+    "bold",
+    "calm",
+    "controlled",
+    "energetic",
+    "expressive",
+    "modern",
+    "playful",
+    "professional",
+    "serious"
+  ],
+  "source": {
+    "title": "The negative impact of saturation on website trustworthiness and appeal: A temporal model of aesthetic website perception",
+    "authors": "Alexander Skulmowski; Yannik Augustin; Simon Pradel; Steve Nebel; Sascha Schneider; Günter Daniel Rey",
+    "year": 2016,
+    "venue": "Computers in Human Behavior",
+    "url": "https://doi.org/10.1016/j.chb.2016.03.054",
+    "doi": "10.1016/j.chb.2016.03.054"
+  },
+  "relations": []
+}

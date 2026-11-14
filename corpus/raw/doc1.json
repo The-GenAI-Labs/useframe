@@ -1,0 +1,775 @@
+{
+  "findings": [
+    {
+      "claim": "Adding backwards-moving, decelerating ribbed patterns to a progress bar creates a visual illusion that reduces perceived waiting time by up to 11%.",
+
+      "authors": [
+        "Chris Harrison",
+
+        "Brian Amento",
+
+        "Stacey Kuznetsov",
+
+        "Robert Bell"
+      ],
+
+      "publicationYear": 2007,
+
+      "publishedIn": "Proceedings of the 20th annual ACM symposium on User interface software and technology (UIST '07)",
+
+      "publicationType": "conference_paper",
+
+      "sourceUrl": "https://dl.acm.org/doi/10.1145/1294211.1294231",
+
+      "field": "motion",
+
+      "appliesTo": ["file_uploads", "system_processes", "loading_screens"],
+
+      "audience": ["general"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "Backward-moving ripples with deceleration",
+
+          "label": "Faster Perceived Time",
+
+          "fits": ["long_wait_times", "heavy_processing"]
+        },
+
+        {
+          "value": "Solid, smooth fill",
+
+          "label": "Neutral Baseline",
+
+          "fits": ["short_wait_times", "standard_ui"]
+        },
+
+        {
+          "value": "Indeterminate looping spinner",
+
+          "label": "Unknown Duration",
+
+          "fits": ["network_requests", "unpredictable_loads"]
+        }
+      ],
+
+      "contextHeader": "Harrison et al. (2007) demonstrated that animating progress bars with backwards-moving ripples creates a visual illusion that reduces users' perceived waiting time.",
+
+      "verified": true
+    },
+
+    {
+      "claim": "Motion that simulates an object approaching the viewer (looming) captures visual attention significantly faster and more reliably than receding or lateral motion.",
+
+      "authors": ["Steven L. Franconeri", "Daniel J. Simons"],
+
+      "publicationYear": 2003,
+
+      "publishedIn": "Perception & Psychophysics",
+
+      "publicationType": "peer_reviewed_journal",
+
+      "sourceUrl": "https://link.springer.com/article/10.3758/BF03194833",
+
+      "field": "motion",
+
+      "appliesTo": ["notifications", "error_states", "modals"],
+
+      "audience": ["general"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "Scale up from 0.8x to 1.0x (Looming)",
+
+          "label": "High Priority Attention",
+
+          "fits": ["critical_errors", "urgent_alerts"]
+        },
+
+        {
+          "value": "Lateral slide-in",
+
+          "label": "Standard Introduction",
+
+          "fits": ["toast_messages", "side_drawers"]
+        },
+
+        {
+          "value": "Scale down from 1.0x to 0.8x (Receding)",
+
+          "label": "Dismissal / Exit",
+
+          "fits": ["closing_modals", "deleting_items"]
+        }
+      ],
+
+      "contextHeader": "Franconeri and Simons (2003) proved that looming motion, which simulates an object approaching the user, inherently hijacks visual attention over other motion paths.",
+
+      "verified": true
+    },
+
+    {
+      "claim": "Continuously animated elements outside the user's primary focal area significantly degrade performance on information-seeking tasks by constantly pulling visual attention.",
+
+      "authors": ["Ping Zhang"],
+
+      "publicationYear": 2000,
+
+      "publishedIn": "Journal of the Association for Information Systems",
+
+      "publicationType": "peer_reviewed_journal",
+
+      "sourceUrl": "https://aisel.aisnet.org/jais/vol1/iss1/1/",
+
+      "field": "motion",
+
+      "appliesTo": ["content_pages", "dashboards", "reading_apps"],
+
+      "audience": ["general", "seniors"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "Animate once, then static",
+
+          "label": "Safe Initial Alert",
+
+          "fits": ["new_feature_tags", "inbox_unread_badges"]
+        },
+
+        {
+          "value": "Strictly static UI",
+
+          "label": "High Focus",
+
+          "fits": ["long_form_reading", "complex_forms"]
+        },
+
+        {
+          "value": "Continuous subtle pulsing",
+
+          "label": "High Disruption (Use Sparingly)",
+
+          "fits": ["live_recording_status", "system_outages"]
+        }
+      ],
+
+      "contextHeader": "Zhang (2000) found that continuous background animations interfere with primary reading tasks, forcing the brain to constantly evaluate the motion.",
+
+      "verified": true
+    },
+
+    {
+      "claim": "Animating transitions between application states helps users maintain a coherent mental model of spatial relationships within the interface.",
+
+      "authors": ["Ronald Baecker", "Ian Small"],
+
+      "publicationYear": 1990,
+
+      "publishedIn": "The Art of Human-Computer Interface Design (Addison-Wesley)",
+
+      "publicationType": "book",
+
+      "sourceUrl": null,
+
+      "field": "motion",
+
+      "appliesTo": ["navigation", "accordions", "page_transitions"],
+
+      "audience": ["general"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "Shared element morph",
+
+          "label": "Continuous Context",
+
+          "fits": ["gallery_to_detail", "card_expansion"]
+        },
+
+        {
+          "value": "Smooth height expansion",
+
+          "label": "Spatial Hierarchy",
+
+          "fits": ["accordions", "dropdown_menus"]
+        },
+
+        {
+          "value": "Instant cut (0ms)",
+
+          "label": "Speed over Context",
+
+          "fits": ["tab_switching", "expert_tools"]
+        }
+      ],
+
+      "contextHeader": "Baecker and Small (1990) established that UI animation is not just decorative, but structural, providing necessary cues for users to map spatial relationships.",
+
+      "verified": true
+    },
+
+    {
+      "claim": "Any moving, blinking, or scrolling information that starts automatically and lasts longer than five seconds must include a mechanism for the user to pause, stop, or hide it.",
+
+      "authors": ["World Wide Web Consortium (W3C)"],
+
+      "publicationYear": 2008,
+
+      "publishedIn": "Web Content Accessibility Guidelines (WCAG) 2.0",
+
+      "publicationType": "standard_specification",
+
+      "sourceUrl": "https://www.w3.org/TR/WCAG20/",
+
+      "field": "accessibility",
+
+      "appliesTo": ["carousels", "video_backgrounds", "tickers"],
+
+      "audience": ["general"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "Visible Play/Pause button",
+
+          "label": "Explicit Control",
+
+          "fits": ["hero_carousels", "background_videos"]
+        },
+
+        {
+          "value": "Auto-stop after 4 seconds",
+
+          "label": "Passive Compliance",
+
+          "fits": ["toast_notifications", "success_animations"]
+        },
+
+        {
+          "value": "Hover/Focus to pause",
+
+          "label": "Interactive Pausing",
+
+          "fits": ["news_tickers", "scrolling_logos"]
+        }
+      ],
+
+      "contextHeader": "The W3C WCAG 2.0 (2008) specification legally mandates that automatic animations lasting over five seconds provide a pause or hide mechanism.",
+
+      "verified": true
+    },
+
+    {
+      "claim": "Motion animation triggered by user interaction can trigger nausea or dizziness in users with vestibular disorders, requiring an option to disable non-essential motion.",
+
+      "authors": ["World Wide Web Consortium (W3C)"],
+
+      "publicationYear": 2018,
+
+      "publishedIn": "Web Content Accessibility Guidelines (WCAG) 2.1",
+
+      "publicationType": "standard_specification",
+
+      "sourceUrl": "https://www.w3.org/TR/WCAG21/",
+
+      "field": "accessibility",
+
+      "appliesTo": [
+        "parallax_effects",
+
+        "scroll_animations",
+
+        "page_transitions"
+      ],
+
+      "audience": ["general"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "Query @media (prefers-reduced-motion)",
+
+          "label": "OS-Level Respect",
+
+          "fits": ["all_websites", "compliance_standards"]
+        },
+
+        {
+          "value": "Replace movement with crossfade",
+
+          "label": "Vestibular-Safe Fallback",
+
+          "fits": ["page_routing", "modal_opens"]
+        },
+
+        {
+          "value": "High-velocity parallax",
+
+          "label": "High Vestibular Risk",
+
+          "fits": ["use_only_if_opt_in"]
+        }
+      ],
+
+      "contextHeader": "The W3C WCAG 2.1 (2018) specification highlights the medical risk of interactive motion for vestibular disorder sufferers, requiring reduced-motion fallbacks.",
+
+      "verified": true
+    },
+
+    {
+      "claim": "Visual feedback must occur within 0.1 seconds (100ms) for a user to perceive the system's response as instantaneous and directly tied to their physical action.",
+
+      "authors": ["Robert B. Miller"],
+
+      "publicationYear": 1968,
+
+      "publishedIn": "Proceedings of the December 9-11, 1968, fall joint computer conference, part I (AFIPS '68)",
+
+      "publicationType": "conference_paper",
+
+      "sourceUrl": "https://dl.acm.org/doi/10.1145/1476589.1476628",
+
+      "field": "motion",
+
+      "appliesTo": ["button_states", "hover_effects", "toggles"],
+
+      "audience": ["general"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "< 100ms duration",
+
+          "label": "Instantaneous Feel",
+
+          "fits": ["hover_states", "switch_toggles", "microinteractions"]
+        },
+
+        {
+          "value": "200ms - 300ms duration",
+
+          "label": "Flowing Transition",
+
+          "fits": ["modal_entrances", "menu_expansions"]
+        },
+
+        {
+          "value": "> 500ms duration",
+
+          "label": "Deliberate Pacing",
+
+          "fits": ["splash_screens", "success_celebrations"]
+        }
+      ],
+
+      "contextHeader": "Miller (1968) defined the psychophysical limits of human-computer interaction, proving that UI reactions slower than 100ms break the illusion of direct physical manipulation.",
+
+      "verified": true
+    },
+
+    {
+      "claim": "Meaningful UI animation reduces cognitive load by actively directing the user's eye to the exact location of a new or updated element, preventing visual search.",
+
+      "authors": ["Aurora Bedford"],
+
+      "publicationYear": 2017,
+
+      "publishedIn": "Nielsen Norman Group",
+
+      "publicationType": "industry_report",
+
+      "sourceUrl": "https://www.nngroup.com/articles/animation-usability/",
+
+      "field": "motion",
+
+      "appliesTo": ["list_updates", "shopping_carts", "notifications"],
+
+      "audience": ["general"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "Directed spatial slide-in",
+
+          "label": "Eye Guide",
+
+          "fits": ["new_list_items", "incoming_messages"]
+        },
+
+        {
+          "value": "Subtle background color flash",
+
+          "label": "In-place Update",
+
+          "fits": ["data_table_refreshes", "stock_tickers"]
+        },
+
+        {
+          "value": "No animation (Instant snap)",
+
+          "label": "High Cognitive Load",
+
+          "fits": ["avoid_for_partial_updates"]
+        }
+      ],
+
+      "contextHeader": "Bedford (2017) at the Nielsen Norman Group documented that animating state changes choreographs user attention, saving the mental effort required to visually rescan the screen.",
+
+      "verified": true
+    },
+
+    {
+      "claim": "The human eye's peripheral vision is highly optimized for detecting motion, making even minor animated elements on the screen's edge highly distracting during central reading tasks.",
+
+      "authors": ["Colin Ware"],
+
+      "publicationYear": 2012,
+
+      "publishedIn": "Information Visualization: Perception for Design (Morgan Kaufmann)",
+
+      "publicationType": "book",
+
+      "sourceUrl": null,
+
+      "field": "motion",
+
+      "appliesTo": ["sidebars", "floating_action_buttons", "ad_banners"],
+
+      "audience": ["general"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "Static peripheral elements",
+
+          "label": "Focus Preservation",
+
+          "fits": ["documentation_sidebars", "blog_layouts"]
+        },
+
+        {
+          "value": "Pulsing peripheral badge",
+
+          "label": "Intentional Disruption",
+
+          "fits": ["chat_support_prompts", "urgent_system_warnings"]
+        },
+
+        {
+          "value": "Auto-playing peripheral video",
+
+          "label": "Severe Distraction",
+
+          "fits": ["avoid_in_content_heavy_apps"]
+        }
+      ],
+
+      "contextHeader": "Ware (2012) explains the evolutionary biology of human vision, showing why peripheral UI motion involuntarily hijacks cognitive processing away from central tasks.",
+
+      "verified": true
+    },
+
+    {
+      "claim": "Applying classical animation principles like anticipation and slow-in/slow-out makes interface objects feel physical, predictable, and natural to users.",
+
+      "authors": ["Bay-Wei Chang", "David Ungar"],
+
+      "publicationYear": 1993,
+
+      "publishedIn": "Proceedings of the 6th annual ACM symposium on User interface software and technology (UIST '93)",
+
+      "publicationType": "conference_paper",
+
+      "sourceUrl": "https://dl.acm.org/doi/10.1145/168642.168647",
+
+      "field": "motion",
+
+      "appliesTo": ["microinteractions", "drag_and_drop", "gestures"],
+
+      "audience": ["general"],
+
+      "decision": "motion",
+
+      "options": [
+        {
+          "value": "Ease-in / Ease-out (Cubic Bezier)",
+
+          "label": "Natural Physics",
+
+          "fits": ["standard_ui_transitions", "modals"]
+        },
+
+        {
+          "value": "Anticipation (Slight pullback before move)",
+
+          "label": "Playful / Heavy Physics",
+
+          "fits": ["gamified_ui", "drag_interactions"]
+        },
+
+        {
+          "value": "Linear timing",
+
+          "label": "Mechanical Physics",
+
+          "fits": ["color_fades", "opacity_changes"]
+        }
+      ],
+
+      "contextHeader": "Chang and Ungar (1993) pioneered the adaptation of Disney animation principles to UI, proving that simulating physical mass and momentum makes digital interfaces feel intuitive.",
+
+      "verified": true
+    }
+  ],
+
+  "articles": [
+    {
+      "title": "The Psychology of UI Animation: Physics, Time, and Mental Models",
+
+      "category": "motion",
+
+      "summary": "Animation in UI isn't just decoration. It is a structural tool that governs how users perceive time, space, and the physical reality of your application.",
+
+      "sections": [
+        {
+          "heading": "The Need for Speed",
+
+          "body": "When a user clicks a button or flips a toggle, they expect the interface to react exactly like a physical object. Miller (1968) defined the psychophysical limits of this interaction, establishing that visual feedback must occur within 100 milliseconds (0.1 seconds) for a user to perceive the system's response as instantaneous. If an animation takes longer than this to begin, the illusion of direct physical manipulation is broken, and the user feels the system is sluggish."
+        },
+
+        {
+          "heading": "Adding Physical Realism",
+
+          "body": "To maintain that illusion of physical reality, digital objects must obey the laws of physics. Chang and Ungar (1993) famously adapted classical animation principles for user interfaces. They demonstrated that applying concepts like 'ease-in/ease-out' (simulating acceleration and deceleration) or 'anticipation' makes digital objects feel as though they possess mass and momentum. A linear animation feels robotic; an eased animation feels natural and predictable."
+        },
+
+        {
+          "heading": "Building Mental Models",
+
+          "body": "Beyond physics, motion provides spatial context. Baecker and Small (1990) established that animating the transitions between application states is critical for helping users build mental models. When a user clicks a card and it smoothly expands into a full-screen view, the motion tells the user exactly where they are and how to get back. An instant cut, by contrast, forces the brain to completely remap the screen's spatial hierarchy from scratch."
+        },
+
+        {
+          "heading": "Hacking Perceived Time",
+
+          "body": "When wait times are unavoidable, motion can literally alter time perception. Harrison et al. (2007) conducted fascinating research on progress bars, finding that the specific design of the animation changes how fast time seems to pass. By adding backwards-moving, decelerating ribbed patterns to a progress bar, designers can create a visual illusion that reduces the user's perceived waiting time by up to 11%. Animation, in this sense, is an active psychological mitigation strategy for system latency."
+        }
+      ],
+
+      "body": "# The Psychology of UI Animation: Physics, Time, and Mental Models\n\nAnimation in UI isn't just decoration. It is a structural tool that governs how users perceive time, space, and the physical reality of your application.\n\n## The Need for Speed\n\nWhen a user clicks a button or flips a toggle, they expect the interface to react exactly like a physical object. Miller (1968) defined the psychophysical limits of this interaction, establishing that visual feedback must occur within 100 milliseconds (0.1 seconds) for a user to perceive the system's response as instantaneous. If an animation takes longer than this to begin, the illusion of direct physical manipulation is broken, and the user feels the system is sluggish or unresponsive.\n\n## Adding Physical Realism\n\nTo maintain that illusion of physical reality, digital objects must obey the laws of physics. Chang and Ungar (1993) famously adapted classical Disney animation principles for user interfaces. They demonstrated that applying concepts like 'ease-in/ease-out' (simulating natural acceleration and deceleration) makes digital objects feel as though they possess mass and momentum. A linear animation feels robotic and harsh; an eased animation feels natural, intuitive, and predictable.\n\n## Building Mental Models\n\nBeyond physics, motion provides crucial spatial context. Baecker and Small (1990) established that animating the transitions between application states is critical for helping users build mental models. When a user clicks a summary card and it smoothly expands into a full-screen detail view, the motion tells the user exactly where they are, where the data came from, and how to get back. An instant cut (0ms transition), by contrast, forces the brain to completely remap the screen's spatial hierarchy from scratch, increasing cognitive load.\n\n## Hacking Perceived Time\n\nWhen wait times are unavoidable due to heavy processing or network latency, motion can literally alter time perception. Harrison et al. (2007) conducted fascinating research on progress bars, finding that the specific design of an animation changes how fast time seems to pass. By adding backwards-moving, decelerating ribbed patterns to a progress bar, designers can create a visual illusion that reduces the user's perceived waiting time by up to 11%. Animation, in this sense, serves as an active psychological mitigation strategy for system latency.",
+
+      "tags": [
+        "physics",
+
+        "time perception",
+
+        "mental models",
+
+        "microinteractions"
+      ],
+
+      "references": [
+        {
+          "authors": ["Robert B. Miller"],
+
+          "title": "Response time in man-computer conversational transactions",
+
+          "publishedIn": "Fall Joint Computer Conference",
+
+          "year": 1968,
+
+          "publicationType": "conference_paper",
+
+          "url": "https://dl.acm.org/doi/10.1145/1476589.1476628"
+        },
+
+        {
+          "authors": ["Bay-Wei Chang", "David Ungar"],
+
+          "title": "Animation: From cartoons to the user interface",
+
+          "publishedIn": "UIST '93",
+
+          "year": 1993,
+
+          "publicationType": "conference_paper",
+
+          "url": "https://dl.acm.org/doi/10.1145/168642.168647"
+        },
+
+        {
+          "authors": ["Ronald Baecker", "Ian Small"],
+
+          "title": "Animation at the Interface",
+
+          "publishedIn": "The Art of Human-Computer Interface Design",
+
+          "year": 1990,
+
+          "publicationType": "book",
+
+          "url": null
+        },
+
+        {
+          "authors": [
+            "Chris Harrison",
+
+            "Brian Amento",
+
+            "Stacey Kuznetsov",
+
+            "Robert Bell"
+          ],
+
+          "title": "Rethinking the progress bar",
+
+          "publishedIn": "UIST '07",
+
+          "year": 2007,
+
+          "publicationType": "conference_paper",
+
+          "url": "https://dl.acm.org/doi/10.1145/1294211.1294231"
+        }
+      ]
+    },
+
+    {
+      "title": "Attention, Distraction, and Accessibility: Managing Motion Safely",
+
+      "category": "accessibility",
+
+      "summary": "Motion is the strongest tool in a designer's arsenal for capturing attention, but misused, it causes cognitive overload and even physical illness.",
+
+      "sections": [
+        {
+          "heading": "Choreographing Attention vs. Distraction",
+
+          "body": "Human vision is evolutionary wired to detect movement. Bedford (2017) notes that this makes animation incredibly useful for choreographing attention. Sliding a new item into a list saves the user the cognitive effort of visually searching the screen to find what changed. However, Zhang (2000) proved that continuous, irrelevant animation severely degrades task performance. If an element pulses or spins while a user is trying to read, their brain is forced to constantly evaluate the motion, causing cognitive fatigue."
+        },
+
+        {
+          "heading": "The Power of Peripheral and Looming Motion",
+
+          "body": "Not all motion commands attention equally. Franconeri and Simons (2003) demonstrated that looming motion—an object scaling up to appear as if it is moving toward the viewer—hijacks attention far more aggressively than lateral sliding. Furthermore, Ware (2012) explains that our peripheral vision is highly sensitive to motion. A small animated ad in the sidebar of a blog is disproportionately distracting precisely because our peripheral vision is optimized to detect movement on the edges of our sight."
+        },
+
+        {
+          "heading": "The Five-Second Rule for Focus",
+
+          "body": "Because motion is so demanding of human attention, it must be controllable. The W3C WCAG 2.0 (2008) guidelines legally require that any moving, scrolling, or blinking element that starts automatically and lasts longer than five seconds must have a pause, stop, or hide control. Auto-advancing carousels and looping background videos fall directly under this mandate to protect users with cognitive disabilities."
+        },
+
+        {
+          "heading": "The Vestibular Threat",
+
+          "body": "For some users, motion isn't just distracting; it is physically dangerous. The W3C WCAG 2.1 (2018) specification added strict guidelines around interactive motion, noting that scroll-triggered parallax effects and sweeping page transitions can induce severe nausea or dizziness in users with vestibular disorders. Modern interfaces must respect the OS-level prefers-reduced-motion query, substituting aggressive movement with simple crossfades."
+        }
+      ],
+
+      "body": "# Attention, Distraction, and Accessibility: Managing Motion Safely\n\nMotion is the strongest tool in a designer's arsenal for capturing attention, but misused, it causes cognitive overload and even physical illness. Knowing when to stop animating is just as important as knowing how to animate.\n\n## Choreographing Attention vs. Distraction\n\nHuman vision is evolutionary wired to detect movement. Bedford (2017) notes that this makes animation incredibly useful for choreographing attention. Sliding a new item into a list or gently bouncing an error message saves the user the cognitive effort of visually searching the screen to find what changed. However, this power has a dark side. Zhang (2000) proved that continuous, irrelevant animation severely degrades task performance. If a background element pulses or spins while a user is trying to read, their brain is forced to constantly re-evaluate the motion, causing rapid cognitive fatigue.\n\n## The Power of Peripheral and Looming Motion\n\nNot all motion commands attention equally. Franconeri and Simons (2003) demonstrated that looming motion—an object scaling up to appear as if it is physically moving toward the viewer's face—hijacks attention far more aggressively than lateral sliding or fading. This makes it ideal for critical system alerts, but abusive if used for marketing pop-ups. Furthermore, Ware (2012) explains that our peripheral vision is uniquely highly sensitive to motion. A small animated widget in the sidebar of a dashboard is disproportionately distracting precisely because our peripheral vision is biologically optimized to detect movement on the edges of our sight.\n\n## The Five-Second Rule for Focus\n\nBecause motion is so demanding of human attention, it must be strictly controllable. The W3C WCAG 2.0 (2008) guidelines legally require that any moving, scrolling, or blinking element that starts automatically and lasts longer than five seconds must have a visible pause, stop, or hide control. Auto-advancing hero carousels and looping background videos fall directly under this mandate. Without a pause button, users with ADHD or cognitive disabilities may find it impossible to read the rest of the page.\n\n## The Vestibular Threat\n\nFor some users, motion isn't just an annoyance; it is physically dangerous. The W3C WCAG 2.1 (2018) specification added strict guidelines around interactive motion, noting that scroll-triggered parallax effects, 3D panning, and sweeping page transitions can induce severe nausea, vertigo, or dizziness in users with vestibular disorders. Modern digital products are required to respect the OS-level prefers-reduced-motion CSS query, ensuring that aggressive movement is substituted with safe, simple crossfades.",
+
+      "tags": ["accessibility", "attention", "wcag", "cognitive load"],
+
+      "references": [
+        {
+          "authors": ["Aurora Bedford"],
+
+          "title": "Animation for Attention and Comprehension",
+
+          "publishedIn": "Nielsen Norman Group",
+
+          "year": 2017,
+
+          "publicationType": "industry_report",
+
+          "url": "https://www.nngroup.com/articles/animation-usability/"
+        },
+
+        {
+          "authors": ["Ping Zhang"],
+
+          "title": "The effects of animation on information seeking performance on the World Wide Web",
+
+          "publishedIn": "Journal of the Association for Information Systems",
+
+          "year": 2000,
+
+          "publicationType": "peer_reviewed_journal",
+
+          "url": "https://aisel.aisnet.org/jais/vol1/iss1/1/"
+        },
+
+        {
+          "authors": ["Steven L. Franconeri", "Daniel J. Simons"],
+
+          "title": "Moving and looming stimuli capture attention",
+
+          "publishedIn": "Perception & Psychophysics",
+
+          "year": 2003,
+
+          "publicationType": "peer_reviewed_journal",
+
+          "url": "https://link.springer.com/article/10.3758/BF03194833"
+        },
+
+        {
+          "authors": ["Colin Ware"],
+
+          "title": "Information Visualization: Perception for Design",
+
+          "publishedIn": "Morgan Kaufmann",
+
+          "year": 2012,
+
+          "publicationType": "book",
+
+          "url": null
+        },
+
+        {
+          "authors": ["World Wide Web Consortium (W3C)"],
+
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.0",
+
+          "publishedIn": "W3C",
+
+          "year": 2008,
+
+          "publicationType": "standard_specification",
+
+          "url": "https://www.w3.org/TR/WCAG20/"
+        },
+
+        {
+          "authors": ["World Wide Web Consortium (W3C)"],
+
+          "title": "Web Content Accessibility Guidelines (WCAG) 2.1",
+
+          "publishedIn": "W3C",
+
+          "year": 2018,
+
+          "publicationType": "standard_specification",
+
+          "url": "https://www.w3.org/TR/WCAG21/"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "wcag-1-4-11-3-1-contrast-ui",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "WCAG 1.4.11 3:1 contrast for UI components",
+  "statement": "WCAG 1.4.11 requires the visual information needed to identify user interface components and their states (input borders, checkbox states, focus indicators) and the meaningful parts of graphics to reach 3:1 against adjacent colors, so pale-gray field borders on white and low-contrast icons fail.\n\nOptions:\n- Visible field borders: Input borders at 3:1 or more against the page background, for example a #767676 border on #FFFFFF (about 4.54:1) (fits: clear, professional, trustworthy)\n- Button fill or outline contrast: Solid button fills that reach 3:1 against their surroundings, or an outline that does (button text still needs 4.5:1) (fits: bold, confident, modern)\n- Strong focus ring: Focus ring of 2px or thicker with at least 3:1 contrast against adjacent colors, for example #005FCC on white (about 6:1) (fits: accessible, technical, polished)\n- Meaningful icons at 3:1: Icons that carry meaning without a text label at 3:1 or more; purely decorative icons are exempt (fits: minimal, clear, friendly)\n- Chart legibility: Chart parts distinguished by direct labels, markers or patterns as well as color, with the required graphic parts at 3:1 (fits: data-driven, technical, analytical)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "accessibility",
+    "clear",
+    "technical",
+    "accessible",
+    "analytical",
+    "bold",
+    "confident",
+    "data-driven",
+    "friendly",
+    "minimal",
+    "modern",
+    "polished"
+  ],
+  "source": {
+    "title": "Understanding SC 1.4.11: Non-text Contrast, Web Content Accessibility Guidelines (WCAG) 2.2",
+    "authors": "W3C Accessibility Guidelines Working Group",
+    "year": 2023,
+    "venue": "W3C WCAG 2.2 (SC 1.4.11 Non-text Contrast, Level AA, introduced in WCAG 2.1 in 2018)",
+    "url": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast"
+  },
+  "relations": []
+}

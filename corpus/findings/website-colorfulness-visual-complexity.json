@@ -1,0 +1,31 @@
+{
+  "slug": "website-colorfulness-visual-complexity",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Website colorfulness and visual complexity in first impressions",
+  "statement": "Website colorfulness contributes to first-impression appeal, but perceived visual complexity was the more salient visual predictor in the study, so landing pages should tune colorfulness together with overall visual complexity rather than simply maximizing the number or intensity of colors. (Krzysztof Gajos)\n\nOptions:\n- Restrained palette: low colorfulness (fits: minimal, serious, premium)\n- Single accent: low colorfulness + one accent (fits: focused, functional, clean)\n- Balanced palette: medium colorfulness (fits: versatile, modern, approachable)\n- Vivid palette: high colorfulness (fits: expressive, playful, high-energy)",
+  "appliesWhen": "Applies to: general, b2b, fintech, health, luxury. Audience: adults, b2b buyers, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "approachable",
+    "clean",
+    "expressive",
+    "focused",
+    "functional",
+    "high-energy",
+    "minimal",
+    "modern",
+    "playful",
+    "premium"
+  ],
+  "source": {
+    "title": "Predicting users' first impressions of website aesthetics with a quantification of perceived visual complexity and colorfulness",
+    "authors": "Katharina Reinecke; Tom Yeh; Luke Miratrix; Rahmatri Mardiko; Yuechen Zhao; Jenny Liu; Krzysztof Z. Gajos",
+    "year": 2013,
+    "venue": "Proceedings of the SIGCHI Conference on Human Factors in Computing Systems",
+    "url": "https://doi.org/10.1145/2470654.2481281",
+    "doi": "10.1145/2470654.2481281"
+  },
+  "relations": []
+}

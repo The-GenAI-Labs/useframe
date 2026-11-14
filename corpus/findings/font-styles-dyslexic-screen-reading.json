@@ -1,0 +1,30 @@
+{
+  "slug": "font-styles-dyslexic-screen-reading",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Font styles for dyslexic readers in screen-reading experiment",
+  "statement": "For dyslexic readers in a screen-reading experiment, sans-serif, monospaced, and roman styles outperformed serif, proportional, and italic styles, supporting a font menu built from accessible options such as Arial, Helvetica, Verdana, and Courier rather than assuming one universal typeface.\n\nOptions:\n- Accessible sans: Arial (fits: professional, accessible)\n- Neutral sans: Helvetica (fits: minimal, professional)\n- Open sans: Verdana (fits: friendly, screen first)\n- Monospaced: Courier (fits: technical, utilitarian)\n- Roman option: Computer Modern Unicode (fits: academic, editorial)",
+  "appliesWhen": "Applies to: accessibility, content sites, education, web apps. Audience: adults, general.",
+  "tags": [
+    "accessibility",
+    "typography",
+    "professional",
+    "academic",
+    "accessible",
+    "editorial",
+    "friendly",
+    "minimal",
+    "screen-first",
+    "technical",
+    "utilitarian"
+  ],
+  "source": {
+    "title": "Good fonts for dyslexia",
+    "authors": "Luz Rello; Ricardo Baeza-Yates",
+    "year": 2013,
+    "venue": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility",
+    "url": "https://doi.org/10.1145/2513383.2513447",
+    "doi": "10.1145/2513383.2513447"
+  },
+  "relations": []
+}

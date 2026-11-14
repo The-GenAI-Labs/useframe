@@ -1,0 +1,31 @@
+{
+  "slug": "sans-serif-fonts-dyslexia-reading",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "Sans serif fonts for dyslexia reading performance",
+  "statement": "In an eye-tracking study of 48 people with dyslexia reading 12 fonts, sans serif, monospaced and roman font styles improved reading performance over serif, proportional and italic styles (Helvetica, Courier, Arial, Verdana and Computer Modern Unicode performed best, and the specially designed OpenDyslexic showed no advantage), so a plain sans serif body font without italics is a defensible default.\n\nOptions:\n- Neutral sans serif body: Arial or Helvetica (or a comparable neutral sans serif) for body text, roman style only (fits: professional, clear, modern)\n- Open-letterform sans: Verdana for wider, more open letterforms in long on-screen reading (fits: friendly, practical, approachable)\n- System sans stack: System sans-serif font stack (system-ui, Segoe UI, Arial, sans-serif) as a low-risk default (fits: efficient, minimal, technical)\n- Avoid long italics: No italics for long passages; use bold or a distinct color-neutral treatment for emphasis instead (fits: accessible, clean, careful)\n- No special font required: Standard sans serif rather than a specialty dyslexia font, since OpenDyslexic gave no measurable advantage in this study (fits: pragmatic, professional, inclusive)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "typography",
+    "professional",
+    "accessible",
+    "approachable",
+    "careful",
+    "clean",
+    "clear",
+    "efficient",
+    "friendly",
+    "inclusive",
+    "minimal",
+    "modern"
+  ],
+  "source": {
+    "title": "Good fonts for dyslexia",
+    "authors": "Luz Rello; Ricardo Baeza-Yates",
+    "year": 2013,
+    "venue": "Proceedings of the 15th International ACM SIGACCESS Conference on Computers and Accessibility (ASSETS '13)",
+    "url": "https://doi.org/10.1145/2513383.2513447",
+    "doi": "10.1145/2513383.2513447"
+  },
+  "relations": []
+}

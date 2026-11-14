@@ -1,0 +1,67 @@
+{
+  "slug": "the-fold-where-attention-really-drops-off",
+  "title": "The Fold: Where Attention Really Drops Off",
+  "kind": "ARTICLE",
+  "category": "LAYOUT",
+  "summary": "Lab eyetracking says attention falls sharply at the fold, while analytics from news sites say readers spend most of their time below it. Both are true, and together they give a workable rule for the first screen.",
+  "sections": [
+    {
+      "heading": "The case that the fold still matters",
+      "body": "Amy Schade's 2015 analysis of 57,453 eyetracking fixations found the 100 pixels just above the fold were viewed 102% more than the 100 pixels just below. Combined with Google's ad-viewability data, NN/g estimated an average difference of about 84%."
+    },
+    {
+      "heading": "Scrolling has grown, but attention still decays",
+      "body": "In 2018, NN/g found 57% of viewing time above the fold, down from 80% in 2010, and 81% within the first three screenfuls. The sharp drop after the fold remained."
+    },
+    {
+      "heading": "The counterpoint from analytics",
+      "body": "Chartbeat's 2014 data on about 2 billion visits, mostly to media sites, showed about 66% of attention on a normal media page below the fold. It measures article pages and reader engagement, not lab tasks or landing pages."
+    },
+    {
+      "heading": "What it means for landing pages",
+      "body": "Put your value proposition and main call to action on the first screen, but treat lower sections as real estate that has to earn the next scroll. Check your own analytics."
+    }
+  ],
+  "body": "'Above the fold' is a newspaper term that has been declared dead and alive again several times. The evidence explains why both camps sound convincing.\n\n## The case that the fold still matters\n\nAmy Schade's 2015 'Fold Manifesto' at Nielsen Norman Group (NN/g) argued that the fold still exists on every device, even though its exact position varies. In an analysis of 57,453 eyetracking fixations, the 100 pixels just above the fold were viewed 102% more than the 100 pixels just below it. She also cited Google's analysis of display ads, where ads just above the fold were viewable 73% of the time and ads just below only 44%, a 66% drop. NN/g took the midpoint of the two and concluded that users treat content above and below the fold about 84% differently. The reasoning is about effort: what is visible costs nothing to see, while what needs scrolling costs a little effort, so people scroll only when the top of the page gives them a reason.\n\n## Scrolling has grown, but attention still decays\n\nTherese Fessenden's 2018 update at NN/g analyzed more than 130,000 fixations from 120 participants on larger screens. About 57% of viewing time was above the fold, down from 80% in 2010, and 74% fell within the first two screenfuls. In effect the barrier had moved: 81% of viewing time was spent within the first three screenfuls, and people rarely went beyond that. The pattern of sharp drop-off after the fold was the same as in 2010. Her recommendations were to reserve the top for key business and user goals, keep major calls to action above the fold, and beware 'false floors' that make a page look finished.\n\n## The counterpoint from analytics\n\nIn 2014, Chartbeat CEO Tony Haile wrote in Time that, across roughly 2 billion visits, about 66% of attention on a normal media page was spent below the fold. This seems to contradict NN/g, but the two measure different things and different pages. Chartbeat's data comes from analytics on mostly news and media article pages, where a likely reason for deep scrolling is that readers who have chosen a story keep reading it. NN/g's data comes from lab eyetracking across tasks and site types, where visitors are still deciding whether the page is relevant. Neither dataset is about landing pages specifically.\n\n## What it means for landing pages\n\nReconciling the sources gives a sensible working rule. The first screen decides whether people keep going, so it needs your value proposition and your main call to action. But below the fold is not dead space: visitors who are interested will scroll, and they will spend real time there if the page keeps giving them reasons. Design each section to earn the next scroll, use signposts such as anchor links on long pages, and check your own analytics, because your visitors may behave differently from news readers or lab participants.",
+  "tags": [
+    "above the fold",
+    "scrolling",
+    "fold",
+    "eyetracking",
+    "call to action",
+    "engagement"
+  ],
+  "references": [
+    {
+      "title": "The Fold Manifesto: Why the Page Fold Still Matters",
+      "url": "https://www.nngroup.com/articles/page-fold-manifesto/",
+      "authors": [
+        "Amy Schade"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2015,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "Scrolling and Attention",
+      "url": "https://www.nngroup.com/articles/scrolling-and-attention/",
+      "authors": [
+        "Therese Fessenden"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2018,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "What You Think You Know About the Web Is Wrong",
+      "url": "https://time.com/12933/what-you-think-you-know-about-the-web-is-wrong/",
+      "authors": [
+        "Tony Haile"
+      ],
+      "publishedIn": "Time (Time.com), reporting Chartbeat data",
+      "year": 2014,
+      "publicationType": "industry_report"
+    }
+  ],
+  "isPublished": true
+}

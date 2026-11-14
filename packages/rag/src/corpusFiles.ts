@@ -171,7 +171,7 @@ export async function runConvert(options: ConvertOptions) {
   let urlChecks: UrlCheck[] | undefined;
   if (options.checkUrls)
     urlChecks = await checkUrls(
-      result.findings.map((f) => f.sourceUrl),
+      result.findings.flatMap((f) => (f.sourceUrl ? [f.sourceUrl] : [])),
       { fetchImpl: options.fetchImpl },
     );
   const context = {
@@ -206,13 +206,11 @@ export async function runConvert(options: ConvertOptions) {
         articles: sorted(result.cache.articles),
       }),
     );
-    await mkdir(join(options.corpusDir, "_review"), { recursive: true });
-    await writeFile(join(options.corpusDir, "_review", "summary.md"), summary);
-    await writeFile(
-      join(options.corpusDir, "_review", "problems.md"),
-      problems,
-    );
   }
+  // The review reports are written on dry runs too: they are what a dry run is for.
+  await mkdir(join(options.corpusDir, "_review"), { recursive: true });
+  await writeFile(join(options.corpusDir, "_review", "summary.md"), summary);
+  await writeFile(join(options.corpusDir, "_review", "problems.md"), problems);
 
   const errorCount = inputErrors.length + result.errors.length;
   const counts = reportCounts(result, files.length, errorCount);
@@ -224,7 +222,7 @@ export async function runConvert(options: ConvertOptions) {
   for (const error of result.errors) console.error(error);
   for (const warning of result.warnings) console.warn(`warning: ${warning}`);
   if (options.dryRun) log(`\n${problems}`);
-  else log(`Reports: ${join(options.corpusDir, "_review")}`);
+  log(`Reports: ${join(options.corpusDir, "_review")}`);
   return { exitCode: errorCount ? 1 : 0, result, changes, summary, problems };
 }
 

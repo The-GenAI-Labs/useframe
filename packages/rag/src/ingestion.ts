@@ -52,6 +52,11 @@ export function isTransient(error: unknown): boolean {
       : "";
   if (["P2002", "P2003", "P2025", "400", "401", "403"].includes(code))
     return false;
+  if (
+    error instanceof Error &&
+    error.message.includes("Unable to start a transaction in the given time")
+  )
+    return true;
   return (
     [
       "P2034",
@@ -76,6 +81,42 @@ export function isTransient(error: unknown): boolean {
   );
 }
 const newer = (a: string, b: string) => BigInt(a) > BigInt(b);
+function embeddingStale(
+  previous: {
+    embeddingHash: string;
+    chunks: { embeddingModel: string }[];
+  } | null,
+  embeddingHash: string,
+  model: string,
+) {
+  return (
+    !previous ||
+    previous.embeddingHash !== embeddingHash ||
+    !previous.chunks.length ||
+    previous.chunks.some((c) => c.embeddingModel !== model)
+  );
+}
+function chunkTexts(file: FindingFile) {
+  const chunks = chunkStatement(file.statement);
+  return { chunks, texts: chunks.map((c) => embeddingText(file, c.chunkText)) };
+}
+export async function pendingEmbeddingTexts(
+  file: FindingFile,
+  embedder: EmbeddingProvider,
+  db: typeof prisma = prisma,
+): Promise<string[]> {
+  const previous = await db.researchFinding.findUnique({
+    where: { slug: file.slug },
+    select: {
+      embeddingHash: true,
+      chunks: { select: { embeddingModel: true } },
+    },
+  });
+  const { embeddingHash } = findingHashes(file, embedder.model, embedder.dims);
+  return embeddingStale(previous, embeddingHash, embedder.model)
+    ? chunkTexts(file).texts
+    : [];
+}
 
 async function saveSource(
   tx: Prisma.TransactionClient,
@@ -176,7 +217,7 @@ export async function ingestFinding(
           await tx.$executeRaw`UPDATE corpus_version SET version = version + 1 WHERE id = 1`;
           return { outcome: "RETIRED", findingId: row.id };
         },
-        { timeout: 30000 },
+        { maxWait: 10000, timeout: 30000 },
       );
     }
     if (!options.localText) {
@@ -240,17 +281,13 @@ export async function ingestFinding(
       return { outcome: "SKIPPED_STALE_GENERATION" };
     const needsEmbedding =
       options.forceReembed ||
-      !previous ||
-      previous.embeddingHash !== hashes.embeddingHash ||
-      !previous.chunks.length ||
-      previous.chunks.some((c) => c.embeddingModel !== embedder.model);
-    const chunks = await trace.span(
+      embeddingStale(previous, hashes.embeddingHash, embedder.model);
+    const { chunks, texts } = await trace.span(
       "chunk",
       {},
-      async () => chunkStatement(file.statement),
-      (chunks) => ({ count: chunks.length }),
+      async () => chunkTexts(file),
+      (r) => ({ count: r.chunks.length }),
     );
-    const texts = chunks.map((c) => embeddingText(file, c.chunkText));
     const vectors = needsEmbedding
       ? await trace.span(
           "embed",
@@ -434,7 +471,7 @@ export async function ingestFinding(
             chunkCount: chunks.length,
           };
         },
-        { timeout: 30000 },
+        { maxWait: 10000, timeout: 30000 },
       ),
     );
   }

@@ -1,0 +1,83 @@
+{
+  "slug": "the-f-pattern-when-it-happens-and-how-to-design-around-it",
+  "title": "The F-Pattern: When It Happens, and How to Design Around It",
+  "kind": "ARTICLE",
+  "category": "LAYOUT",
+  "summary": "The F-pattern is one of the most cited and most misunderstood findings in web usability. The research shows it is a fallback for badly formatted text, and that good design can steer attention elsewhere.",
+  "sections": [
+    {
+      "heading": "Where the F-pattern came from",
+      "body": "In 2006, Jakob Nielsen at Nielsen Norman Group reported an eyetracking study of 232 users. Heatmaps showed a sweep across the top, a shorter second sweep, then a scan down the left edge. His advice: put the key information in the first two paragraphs and start headings and bullets with informative words."
+    },
+    {
+      "heading": "It is a fallback, not a law",
+      "body": "Kara Pernice's 2017 follow-up found the pattern appears when text has little formatting, the reader is trying to be efficient, and the reader is not deeply committed. It also showed up on mobile, and it was mirrored in Arabic. NN/g calls it bad for users and businesses because people skip content without knowing it."
+    },
+    {
+      "heading": "Other researchers found the same limits",
+      "body": "A 2007 Wichita State study confirmed the F-pattern on text pages but found image-based pages produced a more uniform scan, with fixations on images dropping sharply near and below the fold. A small 2009 study found faces below the fold drew attention to nearby text."
+    },
+    {
+      "heading": "What to do on a landing page",
+      "body": "Treat the F-pattern as a warning sign, not a template. Front-load and format running text, put the most informative images high, and give the eye a visible entry point where you want attention below the fold."
+    }
+  ],
+  "body": "If you have read anything about landing page design, you have met the F-pattern. It is one of the most cited findings in web usability, and one of the most misunderstood. Here is what the research actually says.\n\n## Where the F-pattern came from\n\nIn 2006, Jakob Nielsen at Nielsen Norman Group (NN/g) reported an eyetracking study of 232 users looking at thousands of web pages. Heatmaps of an about-us article, an e-commerce product page and a search results page all showed a similar shape: a horizontal sweep across the top of the content, a shorter second sweep lower down, and then a vertical scan along the left edge. Nielsen's advice was practical: put the most important information in the first two paragraphs, and start subheads, paragraphs and bullets with information-carrying words, because people read the first couple of words much more than the third.\n\n## It is a fallback, not a law\n\nKara Pernice's 2017 follow-up, based on new eyetracking research, corrected common misreadings. People do not always scan in an F. NN/g found the pattern appears when three things are true at once: the text has little web formatting (a wall of text with no bold, bullets or subheadings), the reader is trying to be efficient, and the reader is not so interested that they will read every word. In other words, the F is what people fall back on when the page gives their eyes no better cues. It appeared on mobile screens too, and in Arabic, a right-to-left language, it was mirrored.\n\nPernice also calls the F-pattern bad for both users and businesses, because people skip large chunks of content, often including things that matter, without knowing it. Her recommended antidotes are ordinary good formatting: key points in the first two paragraphs, visible subheadings that start with informative words, grouped content, bold key phrases, and bullets or numbers for lists.\n\n## Other researchers found the same limits\n\nA 2007 study from Wichita State University's usability lab (Shrestha, Lenz, Owens and Chaparro) tracked eyes on text-based and image-based pages of an e-commerce site. The F-pattern showed up on text pages during both browsing and searching. On image-based pages, browsers followed a fairly uniform scan path and looked more at images above the fold, with fixations dropping sharply on images near and below the fold.\n\nA 2009 study by Soussan Djamasbi and colleagues went further. They gave 34 participants two versions of a financial company's homepage prototype that differed in one below-the-fold section: one included images of faces, the other did not. Content above the fold still drew the most fixations overall, but the faces acted as entry points, pulling fixations to the text beside them even below the fold. Their conclusion was that a richer visual hierarchy can guide attention outside the F. The study was small, and it was a short conference paper, so treat it as a promising signal rather than settled fact.\n\n## What to do on a landing page\n\nUse the F-pattern as a warning sign rather than a template. Where you have running text, front-load it and format it so people can find their way. Where you have images, make sure the most informative ones sit high on the page. And where you want attention below the fold, give the eye a visible entry point, such as a clear heading or a relevant image, instead of hoping people will read down the left edge.",
+  "tags": [
+    "F-pattern",
+    "eyetracking",
+    "scanning",
+    "formatting",
+    "visual hierarchy",
+    "above the fold"
+  ],
+  "references": [
+    {
+      "title": "F-Shaped Pattern For Reading Web Content (Original Study)",
+      "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/",
+      "authors": [
+        "Jakob Nielsen"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2006,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "F-Shaped Pattern of Reading on the Web: Misunderstood, But Still Relevant (Even on Mobile)",
+      "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/",
+      "authors": [
+        "Kara Pernice"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2017,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "\"F\" Pattern Scanning of Text and Images in Web Pages",
+      "url": "https://doi.org/10.1177/154193120705101831",
+      "authors": [
+        "Sav Shrestha",
+        "Kelsi Lenz",
+        "Justin Owens",
+        "Barbara Chaparro"
+      ],
+      "publishedIn": "51st Annual Meeting of the Human Factors and Ergonomics Society",
+      "year": 2007,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "Tracking Users' Viewing Pattern",
+      "url": "https://aisel.aisnet.org/sighci2009/16",
+      "authors": [
+        "Soussan Djamasbi",
+        "Marisa Siegel",
+        "Tom Tullis",
+        "Rui Dai"
+      ],
+      "publishedIn": "SIGHCI 2009 Proceedings, Association for Information Systems",
+      "year": 2009,
+      "publicationType": "conference_paper"
+    }
+  ],
+  "isPublished": true
+}

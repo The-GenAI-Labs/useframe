@@ -1,0 +1,29 @@
+{
+  "slug": "medium-demi-bold-stroke-low-vision-legibility",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Medium or demi-bold typeface stroke widths for low-vision legibility",
+  "statement": "For individuals with low vision, using typefaces with medium or demi-bold stroke widths significantly improves legibility compared to regular or light/thin sans-serif fonts.\n\nOptions:\n- Optimal Low Vision Body: Medium or Demi-Bold weights (500-600) (fits: accessibility first design, medical portals)\n- Standard Vision Default: Regular weights (400) (fits: general audience web, dense dashboards)\n- Emphasis & Headings: Bold weights (700) (fits: alerts, marketing callouts)\n- Aesthetic Display (Avoid): Light/Thin weights (100-300) (fits: fashion branding, large hero text only)",
+  "appliesWhen": "Applies to: web, mobile, assistive tech. Audience: seniors, general.",
+  "tags": [
+    "accessibility",
+    "typography",
+    "accessibility-first-design",
+    "alerts",
+    "dense-dashboards",
+    "fashion-branding",
+    "general-audience-web",
+    "large-hero-text-only",
+    "marketing-callouts",
+    "medical-portals"
+  ],
+  "source": {
+    "title": "The legibility of typefaces for readers with low vision: A research review",
+    "authors": "K. Russell-Minda; J.W. Jutai; J.G. Strong; K.A. Bradley; P.E. Goddard; L. Yule; W.H. Hicks",
+    "year": 2007,
+    "venue": "Journal of Visual Impairment & Blindness",
+    "url": "https://journals.sagepub.com/doi/10.1177/0145482X0710100703",
+    "doi": "10.1177/0145482X0710100703"
+  },
+  "relations": []
+}

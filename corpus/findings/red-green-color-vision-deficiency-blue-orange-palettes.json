@@ -1,0 +1,24 @@
+{
+  "slug": "red-green-color-vision-deficiency-blue-orange-palettes",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Red-green color vision deficiency and blue/orange palettes",
+  "statement": "To support the 8% of men with red-green color vision deficiencies (Deuteranomaly/Protanomaly), maps and interfaces should use blue/orange diverging palettes rather than red/green.\n\nOptions:\n- Colorblind Safe: Blue / Orange Palette (fits: charts, system status)\n- Unsafe (Requires Icons): Red / Green Palette (fits: avoid unless supplemented)\n- Monochromatic Safe: Lightness Stepping (fits: heatmaps, density plots)",
+  "appliesWhen": "Applies to: data visualization, dashboards, status indicators. Audience: general.",
+  "tags": [
+    "accessibility",
+    "avoid-unless-supplemented",
+    "charts",
+    "density-plots",
+    "heatmaps",
+    "system-status"
+  ],
+  "source": {
+    "title": "Color Design for the Color Vision Impaired",
+    "authors": "Bernhard Jenny; Nathaniel V. Kelso",
+    "year": 2007,
+    "venue": "Cartographic Perspectives",
+    "url": "https://cartographicperspectives.org/index.php/journal/article/view/cp58-jenny-kelso"
+  },
+  "relations": []
+}

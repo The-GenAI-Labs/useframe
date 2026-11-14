@@ -5,10 +5,25 @@ import { Redis } from "ioredis";
 import { prisma } from "@useframe/db";
 import { QUEUES } from "@repo/events";
 import { parseFindingFile, type FindingFile } from "./findingFile.js";
-import { ingestFinding, corpusJobId, type CorpusEvent } from "./ingestion.js";
+import {
+  ingestFinding,
+  corpusJobId,
+  isTransient,
+  pendingEmbeddingTexts,
+  type CorpusEvent,
+} from "./ingestion.js";
 import { corpusStorage, type CorpusStorage } from "./storage.js";
-import { assertEmbeddingDimensions } from "./embeddings.js";
+import {
+  assertEmbeddingDimensions,
+  prefetchedEmbedder,
+  voyageProvider,
+  type EmbeddingProvider,
+} from "./embeddings.js";
 import { ragConfig } from "./config.js";
+import { backoffMs } from "./http.js";
+
+const CLI_ATTEMPTS = 3;
+const outcomes = new Map<string, number>();
 
 async function localFiles(directory: string) {
   return (await readdir(directory, { withFileTypes: true }))
@@ -95,7 +110,14 @@ async function ingest(target: string) {
       report: async () => {},
       list: async () => [],
     };
-    for (const file of await localFiles(target)) {
+    const files = await localFiles(target);
+    const texts = new Map(
+      await Promise.all(
+        files.map(async (f) => [f, await readFile(f, "utf8")] as const),
+      ),
+    );
+    const embedder = await prefetchEmbeddings(files, texts);
+    for (const file of files) {
       const key = `findings/${basename(file)}`;
       if (remote && (await remote.currentGeneration(key)))
         throw new Error(
@@ -115,19 +137,67 @@ async function ingest(target: string) {
           objectGeneration: generation,
           eventType: "CLI",
         },
-        { storage, localText: await readFile(file, "utf8") },
+        { storage, embedder, localText: texts.get(file)! },
       );
     }
+  }
+}
+async function prefetchEmbeddings(
+  files: string[],
+  texts: Map<string, string>,
+): Promise<EmbeddingProvider> {
+  const base = voyageProvider();
+  const pending: string[] = [];
+  for (const path of files) {
+    try {
+      const file = parseFindingFile(
+        JSON.parse(texts.get(path)!),
+        `findings/${basename(path)}`,
+      );
+      pending.push(...(await pendingEmbeddingTexts(file, base)));
+    } catch {
+      // Invalid files are reported by ingestFinding itself.
+    }
+  }
+  const unique = [...new Set(pending)];
+  if (!unique.length) return base;
+  try {
+    const vectors = await base.embedDocuments(unique);
+    console.log(`Embedded ${unique.length} chunks ahead of ingest`);
+    return prefetchedEmbedder(
+      base,
+      new Map(unique.map((t, i) => [t, vectors[i]!])),
+    );
+  } catch (error) {
+    console.warn(
+      `Batch embedding failed (${error instanceof Error ? error.message : "unknown error"}); embedding per file`,
+    );
+    return base;
   }
 }
 async function run(
   event: CorpusEvent,
   options: Parameters<typeof ingestFinding>[1],
 ) {
-  const result = await ingestFinding(event, options);
-  console.log(`${event.objectId}: ${JSON.stringify(result)}`);
-  if (result.outcome === "FAILED" || result.outcome === "INVALID")
-    process.exitCode = 1;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const result = await ingestFinding(event, {
+        ...options,
+        finalAttempt: attempt >= CLI_ATTEMPTS,
+      });
+      console.log(`${event.objectId}: ${JSON.stringify(result)}`);
+      outcomes.set(result.outcome, (outcomes.get(result.outcome) ?? 0) + 1);
+      if (result.outcome === "FAILED" || result.outcome === "INVALID")
+        process.exitCode = 1;
+      return;
+    } catch (error) {
+      if (attempt >= CLI_ATTEMPTS || !isTransient(error)) throw error;
+      console.warn(
+        `${event.objectId}: transient failure (${error instanceof Error ? error.message : "unknown"}), retry ${attempt}/${CLI_ATTEMPTS - 1}`,
+      );
+      await new Promise((r) => setTimeout(r, backoffMs(attempt)));
+    }
+  }
 }
 async function reembed(args: string[]) {
   await assertEmbeddingDimensions(ragConfig().EMBEDDING_DIMS);
@@ -261,5 +331,7 @@ try {
   );
   process.exitCode = 1;
 } finally {
+  if (outcomes.size)
+    console.log(`Summary: ${JSON.stringify(Object.fromEntries(outcomes))}`);
   await prisma.$disconnect();
 }

@@ -90,6 +90,29 @@ export function createRetriever(
           hyde = direct();
         }
       }
+      const applying = hyde.areas.filter((q) => q.applies);
+      let queryVectors: Promise<number[][]> | undefined;
+      const embedAll = () =>
+        (queryVectors ??= trace.span(
+          "embed_queries",
+          { model: deps.embedder.model, count: applying.length },
+          async () => {
+            const vectors = await deps.embedder.embedQueries(
+              applying.map((q) => q.passage),
+            );
+            if (
+              vectors.length !== applying.length ||
+              vectors.some(
+                (v) =>
+                  v.length !== deps.embedder.dims ||
+                  v.some((n) => !Number.isFinite(n)),
+              )
+            )
+              throw new Error("Query embedding dimension mismatch");
+            return vectors;
+          },
+          (v) => ({ count: v.length }),
+        ));
       const areas: RetrievalResult["areas"] = [];
       let cursor = 0;
       await Promise.all(
@@ -99,24 +122,8 @@ export function createRetriever(
             const query = hyde.areas.find((q) => q.area === area)!;
             let findings: RetrievedFinding[] = [];
             if (query.applies) {
-              let embedding: Promise<number[]> | undefined;
-              const embed = () =>
-                (embedding ??= trace.span(
-                  `${area}.embed_query`,
-                  { model: deps.embedder.model },
-                  async () => {
-                    const vector = await deps.embedder.embedQuery(
-                      query.passage,
-                    );
-                    if (
-                      vector.length !== deps.embedder.dims ||
-                      vector.some((n) => !Number.isFinite(n))
-                    )
-                      throw new Error("Query embedding dimension mismatch");
-                    return vector;
-                  },
-                  (v) => ({ dimensions: v.length }),
-                ));
+              const embed = async () =>
+                (await embedAll())[applying.indexOf(query)]!;
               const run = async () => {
                 const findings: RetrievedFinding[] = [];
                 let cacheable = true;

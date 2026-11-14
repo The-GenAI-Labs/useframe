@@ -1,0 +1,27 @@
+{
+  "slug": "2025-chinese-education-14px-font-1-5-spacing",
+  "status": "VERIFIED",
+  "category": "TYPOGRAPHY",
+  "title": "2025 Chinese online-education study of 14px font and 1.5 line spacing",
+  "statement": "A 2025 study of Chinese online-education interfaces with 161 children found 14px font size paired with 1.5 line spacing to optimize learning-related readability, reading speed, visual fatigue, and learning efficacy in that tested context.\n\nOptions:\n- Study-tested optimum: 14px / 1.5 (fits: educational, balanced)\n- Larger reading: 16px / 1.5 (fits: friendly, comfortable)\n- High readability: 18px / 1.5 (fits: access-first, playful)\n- Extra airy: 16px / 1.6 (fits: calm, friendly)",
+  "appliesWhen": "Applies to: education, mobile web, web apps. Audience: children under 10, general.",
+  "tags": [
+    "typography",
+    "friendly",
+    "access-first",
+    "balanced",
+    "calm",
+    "comfortable",
+    "educational",
+    "playful"
+  ],
+  "source": {
+    "title": "Evaluating the Effect of Font Size and Line Spacing in Chinese Online Education User Interfaces on Children’s Learning Experience",
+    "authors": "Ruichen Niu; Wei Wu; Qiang Li; Yudong Fang",
+    "year": 2025,
+    "venue": "International Journal of Human-Computer Interaction",
+    "url": "https://doi.org/10.1080/10447318.2025.2524495",
+    "doi": "10.1080/10447318.2025.2524495"
+  },
+  "relations": []
+}

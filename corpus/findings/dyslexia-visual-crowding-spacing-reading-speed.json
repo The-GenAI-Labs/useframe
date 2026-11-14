@@ -1,0 +1,26 @@
+{
+  "slug": "dyslexia-visual-crowding-spacing-reading-speed",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Dyslexia, visual crowding, and increased letter, word, and line spacing",
+  "statement": "Among adults with dyslexia who showed elevated visual crowding, increased letter, word, and line spacing improved reading speed, so spacing adjustments are especially defensible as an optional reading mode rather than as a one-size-fits-all default.\n\nOptions:\n- Default: standard spacing (fits: compact, professional)\n- Expanded: letter-spacing: +0.05em; word-spacing: +0.08em; line-height: 1.5 (fits: comfortable, accessible)\n- Reading mode: letter-spacing: +0.10em; word-spacing: +0.12em; line-height: 1.8 (fits: access-first, calm)",
+  "appliesWhen": "Applies to: accessibility, content sites, web apps, education. Audience: adults, general.",
+  "tags": [
+    "accessibility",
+    "access-first",
+    "accessible",
+    "calm",
+    "comfortable",
+    "compact",
+    "professional"
+  ],
+  "source": {
+    "title": "Optimizing text for an individual's visual system: The contribution of visual crowding to reading difficulties",
+    "authors": "Sung Jun Joo; Alex L. White; Douglas J. Strodtman; Jason D. Yeatman",
+    "year": 2018,
+    "venue": "Cortex",
+    "url": "https://doi.org/10.1016/j.cortex.2018.03.013",
+    "doi": "10.1016/j.cortex.2018.03.013"
+  },
+  "relations": []
+}

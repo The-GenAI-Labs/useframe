@@ -1,0 +1,18 @@
+{
+  "slug": "security-features-over-trust-seals",
+  "status": "DRAFT",
+  "category": "LAYOUT",
+  "title": "Concrete security features valued over trust seals",
+  "statement": "In an experimental study of e-commerce trust, consumers valued concrete security features significantly more than third-party privacy seals, privacy statements, or third-party security seals, so visible functional security evidence can be a stronger trust surface than certification marks alone. (ScienceDirect)\n\nOptions:\n- Security architecture: security_architecture_explainer (fits: technical, transparent)\n- Access-control detail: sso_rbac_and_access_controls (fits: enterprise, technical)\n- Data-protection detail: encryption_data_retention_and_residency (fits: privacy led, compliance)\n- Security assessment: self_service_security_assessment (fits: enterprise, procurement ready)",
+  "appliesWhen": "Applies to: ecommerce, online security sensitive transactions. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "enterprise",
+    "technical",
+    "compliance",
+    "privacy-led",
+    "procurement-ready",
+    "transparent"
+  ],
+  "relations": []
+}

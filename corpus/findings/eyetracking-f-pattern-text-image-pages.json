@@ -1,0 +1,29 @@
+{
+  "slug": "eyetracking-f-pattern-text-image-pages",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Eyetracking F-pattern on text and image-based pages",
+  "statement": "In an eyetracking study on an e-commerce site, the F-pattern was confirmed on text-based pages for both browsing and searching, while image-based pages produced a fairly uniform scan path with fixations on images dropping sharply near and below the fold, so the most important image-led content should sit at or above the fold.\n\nOptions:\n- Text sections built for F-scanning: Text-heavy sections formatted for F-scanning: front-loaded copy with clear headings (fits: editorial, clear, professional)\n- Key image above the fold: Image-led sections (product grids, feature visuals) with the most important image at or above the fold (fits: visual, retail, bold)\n- Priority items in top rows: Long image grids with the highest-priority items in the top rows, since fixations drop sharply near and below the fold (fits: retail, practical, organized)\n- Support searchers with clear labelling: Clear category labels and navigation for goal-directed visitors, who used unique scan paths on image-based pages (fits: practical, clear, friendly)",
+  "appliesWhen": "Applies to: ecommerce. Audience: general.",
+  "tags": [
+    "layout",
+    "clear",
+    "practical",
+    "retail",
+    "bold",
+    "editorial",
+    "friendly",
+    "organized",
+    "professional",
+    "visual"
+  ],
+  "source": {
+    "title": "\"F\" Pattern Scanning of Text and Images in Web Pages",
+    "authors": "Sav Shrestha; Kelsi Lenz; Justin Owens; Barbara Chaparro",
+    "year": 2007,
+    "venue": "51st Annual Meeting of the Human Factors and Ergonomics Society (HFES), Baltimore",
+    "url": "https://doi.org/10.1177/154193120705101831",
+    "doi": "10.1177/154193120705101831"
+  },
+  "relations": []
+}

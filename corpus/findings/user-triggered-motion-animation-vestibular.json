@@ -1,0 +1,25 @@
+{
+  "slug": "user-triggered-motion-animation-vestibular",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "User-triggered motion animation and vestibular disorder symptoms",
+  "statement": "Motion animation triggered by user interaction can trigger nausea or dizziness in users with vestibular disorders, requiring an option to disable non-essential motion.\n\nOptions:\n- OS-Level Respect: Query @media (prefers-reduced-motion) (fits: all websites, compliance standards)\n- Vestibular-Safe Fallback: Replace movement with crossfade (fits: page routing, modal opens)\n- High Vestibular Risk: High-velocity parallax (fits: use only if opt in)",
+  "appliesWhen": "Applies to: parallax effects, scroll animations, page transitions. Audience: general.",
+  "tags": [
+    "accessibility",
+    "motion",
+    "all-websites",
+    "compliance-standards",
+    "modal-opens",
+    "page-routing",
+    "use-only-if-opt-in"
+  ],
+  "source": {
+    "title": "Web Content Accessibility Guidelines (WCAG) 2.1",
+    "authors": "World Wide Web Consortium (W3C)",
+    "year": 2018,
+    "venue": "Web Content Accessibility Guidelines (WCAG) 2.1",
+    "url": "https://www.w3.org/TR/WCAG21/"
+  },
+  "relations": []
+}

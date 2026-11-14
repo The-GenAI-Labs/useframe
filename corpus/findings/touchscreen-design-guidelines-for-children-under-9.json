@@ -1,0 +1,30 @@
+{
+  "slug": "touchscreen-design-guidelines-for-children-under-9",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Touchscreen design guidelines for children under 9",
+  "statement": "For touchscreen designs aimed at children under 9, use big targets (NN/g recommends at least 2 cm × 2 cm for young children, four times the 1 cm × 1 cm adult guideline), rely on tapping and swiping, offer more than one way to complete an action (for example tap or drag), and avoid precision dragging or scrolling with a mouse or trackpad, which children in this age group found hard.\n\nOptions:\n- 2 cm minimum targets: Primary tap targets of at least 2 cm × 2 cm (≈ 76 × 76 CSS px) for children under 9 (fits: playful, friendly, bold)\n- Tap-or-drag flexibility: Dual-input actions: every drag interaction also works by tapping the destination or a large arrow button (fits: inclusive, forgiving, playful)\n- Single big button: One large single-button primary action per screen (for example a single big Play button) (fits: simple, calm, gentle)\n- Click-only desktop: Desktop: click-only or simple keyboard-arrow interactions for under-9s; no long-distance dragging, scroll-dependent tasks or small-target clicking (fits: simple, accessible, friendly)\n- Recommend, don't navigate: Reduce navigation by recommending related content after each item instead of sending children back to a homepage (fits: curious, engaging, playful)",
+  "appliesWhen": "Applies to: kids apps, kids websites, mobile web, educational games. Audience: children under 10.",
+  "tags": [
+    "accessibility",
+    "playful",
+    "friendly",
+    "simple",
+    "accessible",
+    "bold",
+    "calm",
+    "curious",
+    "engaging",
+    "forgiving",
+    "gentle",
+    "inclusive"
+  ],
+  "source": {
+    "title": "Design for Kids Based on Their Stage of Physical Development",
+    "authors": "Feifei Liu",
+    "year": 2018,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/children-ux-physical-development/"
+  },
+  "relations": []
+}

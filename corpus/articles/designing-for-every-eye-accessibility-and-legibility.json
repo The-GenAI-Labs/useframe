@@ -1,0 +1,82 @@
+{
+  "slug": "designing-for-every-eye-accessibility-and-legibility",
+  "title": "Designing for Every Eye: Accessibility and Legibility",
+  "kind": "ARTICLE",
+  "category": "ACCESSIBILITY",
+  "summary": "Accessible color design isn't just about compliance—it is rooted in the psychophysics of reading and visual inclusivity.",
+  "sections": [
+    {
+      "heading": "Luminance Trumps Chromaticity",
+      "body": "It is a biological fact of human vision that we read based on light-dark differences, not color differences. Legge et al. (1990) established that reading speed drops drastically if text relies solely on chromatic contrast. This means a bright green on a bright red background might look distinct, but it is incredibly difficult to read because the luminance contrast is near zero."
+    },
+    {
+      "heading": "The Global Standard: WCAG",
+      "body": "To codify these biological realities, the W3C (2018) established the Web Content Accessibility Guidelines (WCAG) 2.1. The specification requires a strict mathematical contrast ratio of 4.5:1 for standard text to ensure that users with low vision or aging eyes can actually consume your content without strain."
+    },
+    {
+      "heading": "Designing for Color Vision Deficiency",
+      "body": "Approximately 8% of men have some form of red-green color vision deficiency. Jenny and Kelso (2007) proved that relying on red and green to communicate diverging states (like success vs. failure, or data heatmaps) is fundamentally flawed. A blue and orange diverging palette ensures total accessibility across colorblind spectrums."
+    },
+    {
+      "heading": "The Truth About Dark Mode",
+      "body": "While dark mode is aesthetically popular, Dobres et al. (2017) demonstrated that positive polarity (dark text on a light background) still supports faster cognitive processing and reading speeds under normal daytime ambient lighting. Negative polarity should be treated as an environmental adaptation for low-light, not necessarily a superior baseline for legibility."
+    }
+  ],
+  "body": "# Designing for Every Eye: Accessibility and Legibility\n\nAccessible color design isn't just about compliance—it is rooted in the psychophysics of reading and visual inclusivity.\n\n## Luminance Trumps Chromaticity\n\nIt is a biological fact of human vision that we read based on light-dark differences, not color differences. Legge et al. (1990) established that reading speed drops drastically if text relies solely on chromatic contrast. This means a bright green on a bright red background might look distinct, but it is incredibly difficult to read because the luminance contrast is near zero.\n\n## The Global Standard: WCAG\n\nTo codify these biological realities, the W3C (2018) established the Web Content Accessibility Guidelines (WCAG) 2.1. The specification requires a strict mathematical contrast ratio of 4.5:1 for standard text to ensure that users with low vision or aging eyes can actually consume your content without strain. \n\n## Designing for Color Vision Deficiency\n\nApproximately 8% of men have some form of red-green color vision deficiency. Jenny and Kelso (2007) proved that relying on red and green to communicate diverging states (like success vs. failure, or data heatmaps) is fundamentally flawed. A blue and orange diverging palette ensures total accessibility across colorblind spectrums, removing the ambiguity of standard traffic-light colors.\n\n## The Truth About Dark Mode\n\nWhile dark mode is aesthetically popular, Dobres et al. (2017) demonstrated that positive polarity (dark text on a light background) still supports faster cognitive processing and reading speeds under normal daytime ambient lighting. Negative polarity should be treated as an environmental adaptation for low-light contexts, not a globally superior baseline for legibility.",
+  "tags": [
+    "wcag",
+    "accessibility",
+    "legibility",
+    "dark mode"
+  ],
+  "references": [
+    {
+      "title": "Psychophysics of reading. XI. Comparing color contrast and luminance contrast",
+      "url": "https://opg.optica.org/josaa/abstract.cfm?uri=josaa-7-10-2002",
+      "authors": [
+        "Gordon E. Legge",
+        "Denis G. Pelli",
+        "S. S. Rubin",
+        "R. A. Schleske"
+      ],
+      "publishedIn": "Journal of the Optical Society of America A",
+      "year": 1990,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Web Content Accessibility Guidelines (WCAG) 2.1",
+      "url": "https://www.w3.org/TR/WCAG21/",
+      "authors": [
+        "World Wide Web Consortium (W3C)"
+      ],
+      "publishedIn": "W3C",
+      "year": 2018,
+      "publicationType": "standard_specification"
+    },
+    {
+      "title": "Color Design for the Color Vision Impaired",
+      "url": "https://cartographicperspectives.org/index.php/journal/article/view/cp58-jenny-kelso",
+      "authors": [
+        "Bernhard Jenny",
+        "Nathaniel V. Kelso"
+      ],
+      "publishedIn": "Cartographic Perspectives",
+      "year": 2007,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Effects of ambient illumination, contrast polarity, and letter size on text legibility",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28169004/",
+      "authors": [
+        "Jonathan Dobres",
+        "Nadine Chahine",
+        "Bruce Reimer",
+        "David Mehler"
+      ],
+      "publishedIn": "Applied Ergonomics",
+      "year": 2017,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "39-percent-checkout-abandonment-costs",
+  "status": "VERIFIED",
+  "category": "CONVERSION",
+  "title": "39% checkout abandonment from additional costs",
+  "statement": "Late-disclosed fees are a major checkout objection: Baymard reported in 2026 that 39% of surveyed shoppers had abandoned a checkout because of additional costs, supporting upfront full-cost or clearly explained estimated-cost presentation. (Baymard Institute)\n\nOptions:\n- Upfront total: full-landed-price-on-product-page (fits: transparent, price sensitive, high trust need)\n- Itemized cart total: itemized-cart-cost-summary (fits: complex pricing, transparent, comparison shopping)\n- Early shipping estimate: shipping-cost-calculator-before-checkout (fits: location dependent, mobile first, risk reducing)\n- Explained estimate: estimated-total-with-explanation (fits: variable fees, transparent, service based)",
+  "appliesWhen": "Applies to: ecommerce, online retail, marketplaces, subscription checkout. Audience: adults, general.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "transparent",
+    "comparison-shopping",
+    "complex-pricing",
+    "high-trust-need",
+    "location-dependent",
+    "mobile-first",
+    "price-sensitive",
+    "risk-reducing",
+    "service-based",
+    "variable-fees"
+  ],
+  "source": {
+    "title": "How to Reduce Cart Abandonment (Data-Backed UX Strategies)",
+    "authors": "Carl MacDonald",
+    "year": 2026,
+    "venue": "Baymard Institute",
+    "url": "https://baymard.com/blog/reduce-cart-abandonment"
+  },
+  "relations": []
+}

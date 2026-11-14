@@ -1,0 +1,26 @@
+{
+  "slug": "high-saturation-low-brightness-arousal-attention",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "High saturation and low brightness for physiological arousal and attention",
+  "statement": "High color saturation combined with low brightness produces the highest levels of physiological arousal, making these colors highly effective for grabbing immediate attention.\n\nOptions:\n- Intense Arousal: High Saturation / Low Brightness (fits: alert banners, critical errors)\n- Calming / Restful: Low Saturation / High Brightness (fits: backgrounds, empty states)\n- Energetic / Happy: High Saturation / High Brightness (fits: onboarding illustrations)",
+  "appliesWhen": "Applies to: notifications, gaming ui. Audience: general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "alert-banners",
+    "backgrounds",
+    "critical-errors",
+    "empty-states",
+    "onboarding-illustrations"
+  ],
+  "source": {
+    "title": "Color and emotion: effects of hue, saturation, and brightness",
+    "authors": "Lisa Wilms; Daniel Oberfeld",
+    "year": 2018,
+    "venue": "Psychological Research",
+    "url": "https://link.springer.com/article/10.1007/s00426-017-0895-8",
+    "doi": "10.1007/s00426-017-0895-8"
+  },
+  "relations": []
+}

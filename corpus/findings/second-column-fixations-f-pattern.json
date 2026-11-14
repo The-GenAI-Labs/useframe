@@ -1,0 +1,29 @@
+{
+  "slug": "second-column-fixations-f-pattern",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "Second-column fixations and F-pattern in text-page eyetracking",
+  "statement": "In an eyetracking study of text web pages, information in a second column received more fixations than the same information lower in a single column, and the F-pattern appeared in the left column but not the right, so a right-hand column can lift secondary content into view but should not be expected to be scanned like the main column.\n\nOptions:\n- Single column: Single-column long text with clear headings (simple, mobile-friendly) (fits: editorial, calm, simple)\n- Main plus supporting column: Two columns with the main story on the left and supporting facts or proof in a second column kept in view (fits: informational, professional, organized)\n- Self-contained columns: Two self-contained columns, each with its own heading (for example a comparison), so neither depends on being scanned like the other (fits: technical, clear, modern)\n- No ad neighbours: Keep ads or promotional blocks out of columns that carry key content, since browsing viewers looked at ads more than searching viewers (fits: trustworthy, editorial)",
+  "appliesWhen": "Applies to: media publishing. Audience: general.",
+  "tags": [
+    "layout",
+    "editorial",
+    "calm",
+    "clear",
+    "informational",
+    "modern",
+    "organized",
+    "professional",
+    "simple",
+    "technical",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "Eye Movements on a Single-Column and Double-Column Text Web Page",
+    "authors": "Sav Shrestha; Justin Owens; Barbara S. Chaparro",
+    "year": 2008,
+    "venue": "52nd Annual Meeting of the Human Factors and Ergonomics Society (HFES), New York",
+    "url": "https://portfolio.erau.edu/en/publications/eye-movements-on-a-single-column-and-double-column-text-web-page/"
+  },
+  "relations": []
+}

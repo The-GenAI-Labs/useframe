@@ -1,0 +1,63 @@
+{
+  "slug": "optimizing-reading-speed-and-scannability-on-the-web",
+  "title": "Optimizing Reading Speed and Scannability on the Web",
+  "kind": "ARTICLE",
+  "category": "LAYOUT",
+  "summary": "People don't read web pages like they read books; they scan them. By optimizing line lengths and breaking up text with strong visual hierarchies, designers can help users absorb information more efficiently.",
+  "sections": [
+    {
+      "heading": "The Optimal Line Length",
+      "body": "Full-width text on a desktop monitor looks broken, and research explains why. In a 2001 study published in the *International Journal of Human-Computer Studies*, Dyson and Haselgrove analyzed the effects of line length on reading speed. They found that a medium line length of roughly 55 to 70 characters per line is optimal. When lines are too short, the eye is forced to jump rapidly back and forth, breaking rhythm. When lines are too long (80+ characters), users suffer from saccadic fatigue and frequently lose their place when tracking back to the start of the next line [1]."
+    },
+    {
+      "heading": "Combating the F-Shaped Pattern",
+      "body": "If you present users with an unformatted wall of text, their eyes will track in an 'F-shaped' pattern, absorbing the first few lines and progressively scanning only the left edge of the content below. Kara Pernice's 2017 eyetracking research for the Nielsen Norman Group confirms that the F-pattern causes users to miss crucial information. To fix this, designers must force a 'layer-cake' scanning pattern by aggressively utilizing bold keywords, bulleted lists, and highly visible subheadings to anchor the reader's attention as they scroll [2]."
+    },
+    {
+      "heading": "Letter Casing and Speed",
+      "body": "While graphic designers often play with ALL-CAPS or all-lowercase text for aesthetic reasons, structural casing impacts reading speed. Arditi and Cho's 2007 study in *Vision Research* demonstrated that mixed-case (sentence case) text is read significantly faster than all-caps at normal viewing sizes. Because lowercase letters contain ascenders and descenders (like the stems on 'd' or 'p'), they create distinct, recognizable word shapes that our brains process instantly. All-caps text forms uniform rectangles that force readers to decode letter-by-letter [3]."
+    }
+  ],
+  "body": "People don't read web pages like they read books; they scan them. By optimizing line lengths and breaking up text with strong visual hierarchies, designers can help users absorb information more efficiently.\n\n### The Optimal Line Length\nFull-width text on a desktop monitor looks broken, and research explains why. In a 2001 study published in the *International Journal of Human-Computer Studies*, Dyson and Haselgrove analyzed the effects of line length on reading speed. They found that a medium line length of roughly 55 to 70 characters per line is optimal. When lines are too short, the eye is forced to jump rapidly back and forth, breaking rhythm. When lines are too long (80+ characters), users suffer from saccadic fatigue and frequently lose their place when tracking back to the start of the next line [1].\n\n### Combating the F-Shaped Pattern\nIf you present users with an unformatted wall of text, their eyes will track in an 'F-shaped' pattern, absorbing the first few lines and progressively scanning only the left edge of the content below. Kara Pernice's 2017 eyetracking research for the Nielsen Norman Group confirms that the F-pattern causes users to miss crucial information. To fix this, designers must force a 'layer-cake' scanning pattern by aggressively utilizing bold keywords, bulleted lists, and highly visible subheadings to anchor the reader's attention as they scroll [2].\n\n### Letter Casing and Speed\nWhile graphic designers often play with ALL-CAPS or all-lowercase text for aesthetic reasons, structural casing impacts reading speed. Arditi and Cho's 2007 study in *Vision Research* demonstrated that mixed-case (sentence case) text is read significantly faster than all-caps at normal viewing sizes. Because lowercase letters contain ascenders and descenders (like the stems on 'd' or 'p'), they create distinct, recognizable word shapes that our brains process instantly. All-caps text forms uniform rectangles that force readers to decode letter-by-letter [3].",
+  "tags": [
+    "layout",
+    "reading_patterns",
+    "ux_research",
+    "typography"
+  ],
+  "references": [
+    {
+      "title": "The influence of reading speed and line length on the effectiveness of reading from screen",
+      "url": "https://dl.acm.org/doi/10.1006/ijhc.2001.0458",
+      "authors": [
+        "Mary C. Dyson",
+        "Mark Haselgrove"
+      ],
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "year": 2001,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "F-Shaped Pattern of Reading on the Web: Misunderstood, But Still Relevant (Even on Mobile)",
+      "url": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/",
+      "authors": [
+        "Kara Pernice"
+      ],
+      "publishedIn": "Nielsen Norman Group",
+      "year": 2017,
+      "publicationType": "industry_report"
+    },
+    {
+      "title": "Letter case and text legibility in normal and low vision",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/17675131/",
+      "authors": [
+        "Aries Arditi",
+        "Jianna Cho"
+      ],
+      "publishedIn": "Vision Research",
+      "year": 2007,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

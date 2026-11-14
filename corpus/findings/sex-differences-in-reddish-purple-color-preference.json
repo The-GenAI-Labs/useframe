@@ -1,0 +1,26 @@
+{
+  "slug": "sex-differences-in-reddish-purple-color-preference",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Sex differences in reddish-purple color preference",
+  "statement": "Biological components of sex differences reveal a universal female preference toward the reddish-purple region of the color spectrum compared to males.\n\nOptions:\n- Female Demographic Skew: #9C27B0 (Reddish-Purple) (fits: women apparel, cosmetics)\n- Male Demographic Skew: #009688 (Blue-Green) (fits: men grooming, hardware)\n- Gender Neutral: #607D8B (Neutral Blue-Grey) (fits: utilities, b2b software)",
+  "appliesWhen": "Applies to: consumer goods, apparel ecommerce. Audience: adults.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "b2b-software",
+    "cosmetics",
+    "hardware",
+    "men-grooming",
+    "utilities",
+    "women-apparel"
+  ],
+  "source": {
+    "title": "Biological Components of Sex Differences in Color Preference",
+    "authors": "Anya C. Hurlbert; Yazhu Ling",
+    "year": 2007,
+    "venue": "Current Biology",
+    "url": "https://www.cell.com/current-biology/fulltext/S0960-9822(07)01559-X"
+  },
+  "relations": []
+}

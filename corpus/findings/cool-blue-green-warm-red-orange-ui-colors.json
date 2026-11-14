@@ -1,0 +1,30 @@
+{
+  "slug": "cool-blue-green-warm-red-orange-ui-colors",
+  "status": "VERIFIED",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Cool blue/green versus warm red/orange UI colors in healthcare and finance apps",
+  "statement": "Cool blue/green UI color combinations elicit higher trust, calmness, and comfort than warm red/orange combinations in healthcare and finance app interfaces, increasing willingness to use the product.\n\nOptions:\n- Cool professional: #1E90FF mid-blue / #2E8B57 mid-green (fits: trustworthy, calming, clinical)\n- Approachable cool: #00CED1 teal / #3CB371 soft green (fits: modern health, fintech challenger)\n- Warm urgent: #FF6347 warm coral / #FF8C00 orange (fits: alert states, high energy campaign)\n- Conservative cool: #4682B4 steel blue + muted accents (fits: traditional bank, hospital system)",
+  "appliesWhen": "Applies to: health, fintech. Audience: adults, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "alert-states",
+    "calming",
+    "clinical",
+    "fintech-challenger",
+    "high-energy-campaign",
+    "hospital-system",
+    "modern-health",
+    "traditional-bank",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "Colour psychology in UI and UX design: Eliciting emotional responses through colour combination choices",
+    "authors": "Design Journal study authors (2026 mixed-methods experiment)",
+    "year": 2026,
+    "venue": "The Design Journal",
+    "url": "https://www.tandfonline.com/doi/full/10.1080/14606925.2026.2663037",
+    "doi": "10.1080/14606925.2026.2663037"
+  },
+  "relations": []
+}

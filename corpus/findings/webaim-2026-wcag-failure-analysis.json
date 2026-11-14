@@ -1,0 +1,30 @@
+{
+  "slug": "webaim-2026-wcag-failure-analysis",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "WebAIM 2026 one-million-home-page WCAG failure analysis",
+  "statement": "WebAIM's 2026 analysis of one million home pages found 95.9% with detectable WCAG failures and six error types accounting for 96% of errors (low-contrast text on 83.9% of pages, missing image alt text 53.1%, missing form labels 51%, empty links 46.3%, empty buttons 30.6%, missing document language 13.5%), so getting those six right in a landing page design system avoids most detectable barriers.\n\nOptions:\n- Pre-checked color tokens: Design-system color tokens pre-checked for at least 4.5:1 text contrast and 3:1 UI contrast (fits: systematic, professional, polished)\n- Labels and names by default: Every input has a visible label and every icon-only button or link has an accessible name (fits: clear, practical, trustworthy)\n- Alt required at build: Image component that forces an alt decision (descriptive or empty) at build time (fits: systematic, technical, careful)\n- Language and link text: html lang set on every page and descriptive link text instead of 'click here' or 'more' (15.2% of pages had ambiguous link text) (fits: clear, editorial, professional)\n- Native and simple over heavy: Native HTML controls and simple components in place of heavy ARIA widgets or slider libraries (pages with ARIA averaged 59.1 detected errors versus 42 without, and pages using Slick, OWL Carousel or Swiper averaged 26-32% more; correlational) (fits: minimal, technical, efficient)",
+  "appliesWhen": "Applies to: general web. Audience: general.",
+  "tags": [
+    "accessibility",
+    "clear",
+    "professional",
+    "systematic",
+    "technical",
+    "careful",
+    "editorial",
+    "efficient",
+    "minimal",
+    "polished",
+    "practical",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "The WebAIM Million: The 2026 report on the accessibility of the top 1,000,000 home pages",
+    "authors": "WebAIM (Web Accessibility In Mind), Utah State University",
+    "year": 2026,
+    "venue": "WebAIM, Utah State University (The WebAIM Million, 2026 report)",
+    "url": "https://webaim.org/projects/million/"
+  },
+  "relations": []
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "vendor-size-reputation-trust-patronage",
+  "status": "DRAFT",
+  "category": "LAYOUT",
+  "title": "Vendor size and reputation effects on trust and patronage",
+  "statement": "Consumers in an Internet-store experiment recognized differences in vendor size and reputation, and those differences influenced trust, perceived risk, and willingness to patronize, supporting visible real-company evidence for unfamiliar vendors. (DOI)\n\nOptions:\n- Recognized customers: customer_logo_strip_with_context (fits: established, social proof)\n- Company longevity: years_operating_and_company_footprint (fits: mature, stable)\n- Partner ecosystem: recognized_partner_ecosystem (fits: connected, enterprise)\n- Real company details: named_company_contact_and_location (fits: transparent, human)",
+  "appliesWhen": "Applies to: online retail, unfamiliar online vendors. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "connected",
+    "enterprise",
+    "established",
+    "human",
+    "mature",
+    "social-proof",
+    "stable",
+    "transparent"
+  ],
+  "relations": []
+}

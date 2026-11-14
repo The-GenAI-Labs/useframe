@@ -1,0 +1,19 @@
+{
+  "slug": "third-party-assurance-seals-and-initial-trust",
+  "status": "DRAFT",
+  "category": "LAYOUT",
+  "title": "Third-party assurance seals and initial trust",
+  "statement": "Third-party web assurance seals can raise initial trust, but combining multiple assurance functions does not necessarily make the effect stronger and can attenuate the effect of individual functions. (Hong Kong Baptist University)\n\nOptions:\n- One security badge: single_primary_security_assurance_badge (fits: focused, technical)\n- One privacy badge: single_primary_privacy_assurance_badge (fits: privacy led, focused)\n- Trust-center link: trust_center_link_with_context (fits: minimal, transparent)\n- Explained badge set: multi_badge_row_with_function_labels (fits: compliance heavy, enterprise)",
+  "appliesWhen": "Applies to: online vendor sites, high risk online purchase flows. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "focused",
+    "compliance-heavy",
+    "enterprise",
+    "minimal",
+    "privacy-led",
+    "technical",
+    "transparent"
+  ],
+  "relations": []
+}

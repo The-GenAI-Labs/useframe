@@ -1,0 +1,26 @@
+{
+  "slug": "pause-stop-hide-five-seconds",
+  "status": "VERIFIED",
+  "category": "ACCESSIBILITY",
+  "title": "Pause stop hide for content over five seconds",
+  "statement": "Any moving, blinking, or scrolling information that starts automatically and lasts longer than five seconds must include a mechanism for the user to pause, stop, or hide it.\n\nOptions:\n- Explicit Control: Visible Play/Pause button (fits: hero carousels, background videos)\n- Passive Compliance: Auto-stop after 4 seconds (fits: toast notifications, success animations)\n- Interactive Pausing: Hover/Focus to pause (fits: news tickers, scrolling logos)",
+  "appliesWhen": "Applies to: carousels, video backgrounds, tickers. Audience: general.",
+  "tags": [
+    "accessibility",
+    "motion",
+    "background-videos",
+    "hero-carousels",
+    "news-tickers",
+    "scrolling-logos",
+    "success-animations",
+    "toast-notifications"
+  ],
+  "source": {
+    "title": "Web Content Accessibility Guidelines (WCAG) 2.0",
+    "authors": "World Wide Web Consortium (W3C)",
+    "year": 2008,
+    "venue": "Web Content Accessibility Guidelines (WCAG) 2.0",
+    "url": "https://www.w3.org/TR/WCAG20/"
+  },
+  "relations": []
+}

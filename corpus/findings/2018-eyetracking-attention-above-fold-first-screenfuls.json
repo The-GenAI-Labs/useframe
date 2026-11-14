@@ -1,0 +1,30 @@
+{
+  "slug": "2018-eyetracking-attention-above-fold-first-screenfuls",
+  "status": "VERIFIED",
+  "category": "LAYOUT",
+  "title": "2018 eyetracking attention above fold and first screenfuls",
+  "statement": "NN/g's 2018 eyetracking data show about 57% of viewing time above the fold (down from 80% in 2010) and 81% within the first three screenfuls, so the fold has moved down but attention still decays steeply, and important content belongs in the first one to two screenfuls.\n\nOptions:\n- CTA in screenful one: Primary CTA and value proposition in the first screenful (fits: confident, professional, conversion-focused)\n- Proof in screenful two: Second screenful (about 17% of viewing time) used for reinforcing proof and the next-most important content (fits: trustworthy, authoritative)\n- Essentials within three screenfuls: Essential content kept within the first three screenfuls, which held about 81% of viewing time (fits: focused, practical, minimal)\n- Repeat CTA deeper down: Repeat CTA near the end of the second or third screenful for people who keep scrolling (fits: persuasive, energetic)",
+  "appliesWhen": "Applies to: general web, ecommerce, media publishing. Audience: general.",
+  "tags": [
+    "layout",
+    "conversion-structure",
+    "authoritative",
+    "confident",
+    "conversion-focused",
+    "energetic",
+    "focused",
+    "minimal",
+    "persuasive",
+    "practical",
+    "professional",
+    "trustworthy"
+  ],
+  "source": {
+    "title": "Scrolling and Attention",
+    "authors": "Therese Fessenden",
+    "year": 2018,
+    "venue": "Nielsen Norman Group",
+    "url": "https://www.nngroup.com/articles/scrolling-and-attention/"
+  },
+  "relations": []
+}

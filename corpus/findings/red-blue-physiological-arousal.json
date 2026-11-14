@@ -1,0 +1,21 @@
+{
+  "slug": "red-blue-physiological-arousal",
+  "status": "DRAFT",
+  "category": "COLOR_PSYCHOLOGY",
+  "title": "Red and blue effects on physiological arousal",
+  "statement": "Red increases physiological arousal (heart rate, blood pressure) while blue decreases it, providing a basis for calming versus stimulating interface choices.\n\nOptions:\n- Calming blue: #0000FF pure blue (fits: patient portal, banking login)\n- Arousing red: #FF0000 pure red (fits: alert, high intensity)\n- Agreeable green: #00FF00 green (fits: success, healing)\n- Stimulating yellow: #FFFF00 yellow (fits: attention, caution)",
+  "appliesWhen": "Applies to: health, fintech. Audience: adults, seniors, general.",
+  "tags": [
+    "color-psychology",
+    "primary-color",
+    "alert",
+    "attention",
+    "banking-login",
+    "caution",
+    "healing",
+    "high-intensity",
+    "patient-portal",
+    "success"
+  ],
+  "relations": []
+}

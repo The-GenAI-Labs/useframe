@@ -1,0 +1,21 @@
+{
+  "slug": "gartner-2024-b2b-rep-free-self-service-regret",
+  "status": "DRAFT",
+  "category": "CONVERSION",
+  "title": "Gartner 2024 B2B rep-free buying and self-service purchase regret",
+  "statement": "Gartner reported in 2024 that 75% of B2B buyers preferred a rep-free purchase experience, while buyers using self-service digital commerce were 1.65 times more likely to experience purchase regret than those using traditional sales channels, implying that self-service landing pages should expose enough evaluative information to support independent decisions while retaining an optional human path. (Gartner)\n\nOptions:\n- Self-guided tour: self_guided_product_tour (fits: product led, hands on)\n- Transparent pricing: transparent_pricing_and_packaging (fits: direct, efficient)\n- Product documentation: documentation_and_integration_hub (fits: technical, self service)\n- Try plus talk: trial_or_sandbox_plus_optional_sales (fits: flexible, low pressure)",
+  "appliesWhen": "Applies to: b2b saas, enterprise software. Audience: b2b buyers.",
+  "tags": [
+    "conversion",
+    "conversion-structure",
+    "direct",
+    "efficient",
+    "flexible",
+    "hands-on",
+    "low-pressure",
+    "product-led",
+    "self-service",
+    "technical"
+  ],
+  "relations": []
+}

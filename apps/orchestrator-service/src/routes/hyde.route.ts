@@ -21,6 +21,7 @@ router.post("/internal/research/hyde", async (req, res) => {
       model: getModelForTier("free"),
       providerOptions: getProviderOptionsForTier("free"),
       schema: HydeSchema,
+      mode: "json",
       system: HYDE_SYSTEM,
       prompt: JSON.stringify(parsed.data),
       maxRetries: 0,

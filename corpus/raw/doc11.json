@@ -1,0 +1,519 @@
+{
+  "findings": [
+    {
+      "claim": "Cool blue/green UI color combinations elicit higher trust, calmness, and comfort than warm red/orange combinations in healthcare and finance app interfaces, increasing willingness to use the product.",
+      "authors": [
+        "Design Journal study authors (2026 mixed-methods experiment)"
+      ],
+      "publicationYear": 2026,
+      "publishedIn": "The Design Journal",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://www.tandfonline.com/doi/full/10.1080/14606925.2026.2663037",
+      "field": "color_psychology",
+      "appliesTo": ["health", "fintech"],
+      "audience": ["adults", "general"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "#1E90FF mid-blue / #2E8B57 mid-green",
+          "label": "Cool professional",
+          "fits": ["trustworthy", "calming", "clinical"]
+        },
+        {
+          "value": "#00CED1 teal / #3CB371 soft green",
+          "label": "Approachable cool",
+          "fits": ["modern_health", "fintech_challenger"]
+        },
+        {
+          "value": "#FF6347 warm coral / #FF8C00 orange",
+          "label": "Warm urgent",
+          "fits": ["alert_states", "high_energy_campaign"]
+        },
+        {
+          "value": "#4682B4 steel blue + muted accents",
+          "label": "Conservative cool",
+          "fits": ["traditional_bank", "hospital_system"]
+        }
+      ],
+      "contextHeader": "A 2026 Design Journal mixed-methods study of 100 participants found cooler UI color combinations produce higher trust and calmness specifically in healthcare and finance contexts.",
+      "verified": true
+    },
+    {
+      "claim": "Blue increases perceived trust more than red in brand and interface contexts, supported by both implicit and explicit measures.",
+      "authors": ["Lixun Su", "Michael Walsh"],
+      "publicationYear": 2019,
+      "publishedIn": "Journal of Marketing Theory and Practice",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://www.tandfonline.com/doi/full/10.1080/10696679.2019.1616560",
+      "field": "color_psychology",
+      "appliesTo": ["fintech", "health"],
+      "audience": ["adults", "b2b_buyers", "general"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "#003366 navy",
+          "label": "Institutional blue",
+          "fits": ["legacy_bank", "hospital_brand"]
+        },
+        {
+          "value": "#007BFF bright blue",
+          "label": "Modern trust blue",
+          "fits": ["fintech_app", "telehealth"]
+        },
+        {
+          "value": "#DC143C crimson",
+          "label": "Alert red",
+          "fits": ["error_state", "urgent_CTA"]
+        },
+        {
+          "value": "#4169E1 royal blue",
+          "label": "Competent blue",
+          "fits": ["professional_services"]
+        }
+      ],
+      "contextHeader": "Su and Walsh (2019) in the Journal of Marketing Theory and Practice demonstrated across three studies that blue elevates trust relative to red using both implicit and explicit measures.",
+      "verified": true
+    },
+    {
+      "claim": "Lower color saturation increases perceived status of luxury brands by signaling continuity heritage and the passage of time.",
+      "authors": ["Xinyue Zhou", "Chunqu Xiao", "Sunyee Yoon", "Hong Zhu"],
+      "publicationYear": 2025,
+      "publishedIn": "Journal of Consumer Research",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://academic.oup.com/jcr/article/52/6/1232/8120421",
+      "field": "color_psychology",
+      "appliesTo": ["luxury"],
+      "audience": ["adults", "general"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "saturation <30% muted tones",
+          "label": "Heritage muted",
+          "fits": ["heritage_luxury", "timeless"]
+        },
+        {
+          "value": "saturation 40-60% moderate",
+          "label": "Balanced prestige",
+          "fits": ["contemporary_luxury"]
+        },
+        {
+          "value": "saturation >70% vivid",
+          "label": "High-impact saturated",
+          "fits": ["innovative_luxury", "campaign_accent"]
+        },
+        {
+          "value": "desaturated neutrals + metallic accent",
+          "label": "Quiet luxury",
+          "fits": ["minimalist_luxury"]
+        }
+      ],
+      "contextHeader": "Zhou, Xiao, Yoon and Zhu (2025) in the Journal of Consumer Research showed across seven studies that low saturation elevates luxury brand status via perceived continuity heritage.",
+      "verified": true
+    },
+    {
+      "claim": "Children's application interfaces use higher saturation and brightness than adult interfaces; educational apps favor cool hues while game apps favor warm hues.",
+      "authors": ["F. Lyu", "R. Xi", "Y. Liu"],
+      "publicationYear": 2022,
+      "publishedIn": "Color Research & Application",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://onlinelibrary.wiley.com/doi/abs/10.1002/col.22726",
+      "field": "color_psychology",
+      "appliesTo": ["kids"],
+      "audience": ["children_under_10", "parents"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "high-sat blue #00BFFF",
+          "label": "Cool educational",
+          "fits": ["edtech", "learning_app"]
+        },
+        {
+          "value": "high-sat red/orange #FF4500",
+          "label": "Warm playful",
+          "fits": ["game_app", "entertainment"]
+        },
+        {
+          "value": "bright pastels high brightness",
+          "label": "Child-bright",
+          "fits": ["preschool", "fun"]
+        },
+        {
+          "value": "lower-sat adult-like palette",
+          "label": "Mature kid",
+          "fits": ["older_children_9-11"]
+        }
+      ],
+      "contextHeader": "Lyu, Xi and Liu (2022) in Color Research & Application analyzed 223 children's apps and found higher saturation/brightness overall, with cool hues preferred in educational interfaces and warm hues in games.",
+      "verified": true
+    },
+    {
+      "claim": "Blue is mapped to competence and red to excitement in brand personality dimensions, allowing strategic color choice to shape perceived brand traits.",
+      "authors": ["Lauren I. Labrecque", "George R. Milne"],
+      "publicationYear": 2011,
+      "publishedIn": "Journal of the Academy of Marketing Science",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://link.springer.com/article/10.1007/s11747-010-0245-y",
+      "field": "color_psychology",
+      "appliesTo": ["fintech", "luxury", "health"],
+      "audience": ["adults", "b2b_buyers", "general"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "#0000CD medium blue",
+          "label": "Competent blue",
+          "fits": ["trust", "professional"]
+        },
+        {
+          "value": "#FF0000 pure red",
+          "label": "Exciting red",
+          "fits": ["energetic", "attention"]
+        },
+        {
+          "value": "#4B0082 indigo",
+          "label": "Sophisticated purple",
+          "fits": ["premium", "innovative"]
+        },
+        {
+          "value": "#228B22 forest green",
+          "label": "Sincere green",
+          "fits": ["growth", "health"]
+        }
+      ],
+      "contextHeader": "Labrecque and Milne (2011) in the Journal of the Academy of Marketing Science mapped hues to brand personality, showing blue signals competence and red signals excitement.",
+      "verified": true
+    },
+    {
+      "claim": "Individuals with anxiety or depression more frequently associate their mood with grey shades, while healthy individuals more often associate mood with yellow.",
+      "authors": [
+        "Helen R. Carruthers",
+        "Julie Morris",
+        "Nicholas Tarrier",
+        "Peter J. Whorwell"
+      ],
+      "publicationYear": 2010,
+      "publishedIn": "BMC Medical Research Methodology",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://link.springer.com/article/10.1186/1471-2288-10-12",
+      "field": "color_psychology",
+      "appliesTo": ["health"],
+      "audience": ["adults", "seniors"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "#FFD700 soft yellow",
+          "label": "Positive mood yellow",
+          "fits": ["wellness", "optimistic"]
+        },
+        {
+          "value": "#808080 mid-grey",
+          "label": "Neutral-to-negative grey",
+          "fits": ["avoid_for_mood_support"]
+        },
+        {
+          "value": "#87CEEB sky blue",
+          "label": "Calm favourite blue",
+          "fits": ["mental_health_app"]
+        },
+        {
+          "value": "#90EE90 light green",
+          "label": "Restorative green",
+          "fits": ["recovery", "balance"]
+        }
+      ],
+      "contextHeader": "Carruthers et al. (2010) in BMC Medical Research Methodology validated the Manchester Color Wheel, finding grey linked to anxious/depressed mood and yellow to healthy mood.",
+      "verified": true
+    },
+    {
+      "claim": "Red increases physiological arousal (heart rate, blood pressure) while blue decreases it, providing a basis for calming versus stimulating interface choices.",
+      "authors": ["Kurt Goldstein"],
+      "publicationYear": 1942,
+      "publishedIn": "Occupational Therapy & Rehabilitation (American Journal of Physical Medicine & Rehabilitation)",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://journals.lww.com/ajpmr/citation/1942/06000/some_experimental_observations_concerning_the.2.aspx",
+      "field": "color_psychology",
+      "appliesTo": ["health", "fintech"],
+      "audience": ["adults", "seniors", "general"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "#0000FF pure blue",
+          "label": "Calming blue",
+          "fits": ["patient_portal", "banking_login"]
+        },
+        {
+          "value": "#FF0000 pure red",
+          "label": "Arousing red",
+          "fits": ["alert", "high_intensity"]
+        },
+        {
+          "value": "#00FF00 green",
+          "label": "Agreeable green",
+          "fits": ["success", "healing"]
+        },
+        {
+          "value": "#FFFF00 yellow",
+          "label": "Stimulating yellow",
+          "fits": ["attention", "caution"]
+        }
+      ],
+      "contextHeader": "Goldstein (1942) reported experimental observations that red elevates and blue reduces physiological arousal measures such as heart rate and blood pressure.",
+      "verified": true
+    },
+    {
+      "claim": "Color norms exist within product categories; differentiation from category color norms can help or harm brand equity depending on involvement and presence of a dominant leader.",
+      "authors": ["Lauren I. Labrecque", "George R. Milne"],
+      "publicationYear": 2013,
+      "publishedIn": "Marketing Letters",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": null,
+      "field": "color_psychology",
+      "appliesTo": ["fintech", "health", "luxury"],
+      "audience": ["adults", "b2b_buyers"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "category-norm blue",
+          "label": "Conform to norm",
+          "fits": ["high_involvement", "trust_category"]
+        },
+        {
+          "value": "differentiated teal",
+          "label": "Mild differentiation",
+          "fits": ["challenger_brand"]
+        },
+        {
+          "value": "category-atypical warm",
+          "label": "Strong differentiation",
+          "fits": ["low_involvement", "disruptive"]
+        },
+        {
+          "value": "norm + accent contrast",
+          "label": "Norm with accent",
+          "fits": ["balanced_equity"]
+        }
+      ],
+      "contextHeader": "Labrecque and Milne (2013) in Marketing Letters quantified category color homogeneity across 15 product categories and linked differentiation benefits to involvement and market structure.",
+      "verified": true
+    },
+    {
+      "claim": "Blue is the most frequently used primary color in healthcare branding and interfaces because of its associations with trust, calm, and competence across age groups.",
+      "authors": [],
+      "publicationYear": null,
+      "publishedIn": "Industry observation consistent with multiple reviews (e.g., Labrecque & Milne frameworks; healthcare design literature)",
+      "publicationType": "practitioner_consensus",
+      "sourceUrl": null,
+      "field": "color_psychology",
+      "appliesTo": ["health"],
+      "audience": ["adults", "seniors", "parents"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "#1E90FF mid-blue",
+          "label": "Standard health blue",
+          "fits": ["telehealth", "clinic"]
+        },
+        {
+          "value": "#20B2AA light sea green",
+          "label": "Healing teal",
+          "fits": ["wellness", "mental_health"]
+        },
+        {
+          "value": "#F5F5F5 off-white + blue accent",
+          "label": "Clean clinical",
+          "fits": ["sterile", "professional"]
+        },
+        {
+          "value": "#228B22 green primary",
+          "label": "Nature health",
+          "fits": ["holistic", "recovery"]
+        }
+      ],
+      "contextHeader": "Practitioner consensus across healthcare design and branding reviews holds that blue dominates as the primary trust and calm signal in medical interfaces and logos.",
+      "verified": false
+    },
+    {
+      "claim": "In pediatric patient-room and related design contexts, blue and green are preferred over white by both children and design professionals, supporting calm, non-clinical primary palettes for child-facing health interfaces.",
+      "authors": ["Park et al."],
+      "publicationYear": 2026,
+      "publishedIn": "Color Research & Application",
+      "publicationType": "peer_reviewed_journal",
+      "sourceUrl": "https://onlinelibrary.wiley.com/doi/10.1002/col.70008",
+      "field": "color_psychology",
+      "appliesTo": ["health", "kids"],
+      "audience": ["children_under_10", "parents"],
+      "decision": "primary_color",
+      "options": [
+        {
+          "value": "#4169E1 royal blue",
+          "label": "Preferred blue",
+          "fits": ["pediatric_portal"]
+        },
+        {
+          "value": "#3CB371 medium sea green",
+          "label": "Preferred green",
+          "fits": ["child_health_app"]
+        },
+        {
+          "value": "#FFFFFF pure white",
+          "label": "Least preferred",
+          "fits": ["avoid_as_dominant"]
+        },
+        {
+          "value": "#FFD700 soft yellow",
+          "label": "Secondary warm",
+          "fits": ["accent_only"]
+        }
+      ],
+      "contextHeader": "A 2026 Color Research & Application study comparing children and design professionals found blue and green most preferred and white least preferred for pediatric patient-room color schemes.",
+      "verified": true
+    }
+  ],
+  "articles": [
+    {
+      "title": "Why Cool Blues and Greens Build Trust in Health and Fintech Interfaces",
+      "category": "Color Psychology",
+      "summary": "Research shows cooler color combinations outperform warmer ones for trust and calm in healthcare and finance apps. Here's how to choose the right shade for your product.",
+      "sections": [
+        {
+          "heading": "Cool vs warm in serious domains",
+          "body": "A 2026 mixed-methods study published in The Design Journal tested cool blue/green versus warm red/orange interfaces across healthcare, finance, and education apps. Participants rated cool combinations higher on trust, calmness, and comfort, especially in health and finance contexts. Warm schemes felt urgent or alarming when the stakes were high."
+        },
+        {
+          "heading": "Blue specifically elevates trust",
+          "body": "Su and Walsh (2019) confirmed in the Journal of Marketing Theory and Practice that blue increases trust more than red on both implicit and explicit measures. This aligns with decades of banking and medical branding that trained users to read blue as reliable."
+        },
+        {
+          "heading": "Practical palette ranges",
+          "body": "For traditional institutions, navy or mid-blue works. Fintech and telehealth challengers can use brighter or teal variants while staying inside the cool family. Reserve warm reds and oranges for alerts and high-energy moments so they retain their signal value."
+        },
+        {
+          "heading": "Physiological backing",
+          "body": "Classic observations by Kurt Goldstein (1942) noted that red raises heart rate and blood pressure while blue lowers them. Modern reviews continue to treat these directional effects as useful starting points for calming versus stimulating UI decisions."
+        }
+      ],
+      "body": "## Why Cool Blues and Greens Build Trust in Health and Fintech Interfaces\n\nWhen users open a banking or health app, they are often already anxious. Color is one of the fastest ways to signal safety or risk.\n\nA 2026 study in *The Design Journal* asked 100 adults to evaluate app interfaces that used either cool blue/green combinations or warm red/orange combinations. Cool schemes produced higher ratings of trust, calmness, and comfort, particularly in healthcare and finance contexts. Participants said they would be more willing to use the cool-toned products. Warm schemes felt professional only when the domain expected urgency; otherwise they created tension.\n\nComplementing that finding, Su and Walsh (2019) published in the *Journal of Marketing Theory and Practice* three studies showing blue elevates trust relative to red on both implicit association tests and explicit ratings. Blue has become the default for banks and hospitals partly because the association is now culturally reinforced.\n\nPhysiological observations go back further. Kurt Goldstein reported in 1942 that red stimulation increased heart rate and blood pressure while blue reduced them. Although methods have advanced, the directional pattern still guides designers who want calming primary surfaces for login, account overview, or patient-portal screens.\n\n**Design takeaway:** Anchor primary UI chrome and key CTAs in the cool range (mid-blues around #1E90FF or teals around #20B2AA). Keep high-saturation warm colors for true alerts and success states so the emotional contrast remains clear. Test saturation levels carefully—overly vivid cool colors can still feel aggressive in clinical or financial settings.\n\nThis approach is not universal. Education and entertainment products can safely use warmer, higher-energy palettes. But for trust-critical domains, cool remains the evidence-backed default.",
+      "tags": [
+        "color psychology",
+        "trust",
+        "healthcare UX",
+        "fintech UX",
+        "blue"
+      ],
+      "references": [
+        {
+          "authors": ["Design Journal 2026 study"],
+          "title": "Colour psychology in UI and UX design: Eliciting emotional responses through colour combination choices",
+          "publishedIn": "The Design Journal",
+          "year": 2026,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/14606925.2026.2663037"
+        },
+        {
+          "authors": ["Lixun Su", "Michael Walsh"],
+          "title": "Trustworthy Blue or Untrustworthy Red: The Influence of Colors on Trust",
+          "publishedIn": "Journal of Marketing Theory and Practice",
+          "year": 2019,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/10696679.2019.1616560"
+        },
+        {
+          "authors": ["Kurt Goldstein"],
+          "title": "Some experimental observations concerning the influence of colors on the function of the organism",
+          "publishedIn": "Occupational Therapy & Rehabilitation",
+          "year": 1942,
+          "publicationType": "peer_reviewed_journal",
+          "url": null
+        }
+      ]
+    },
+    {
+      "title": "Luxury Color Strategy: Why Muted Tones Signal Higher Status",
+      "category": "Color Psychology",
+      "summary": "Lower saturation makes luxury products feel more prestigious by triggering associations with heritage and the passage of time. High saturation can reverse the effect for innovative brands.",
+      "sections": [
+        {
+          "heading": "The saturation-status link",
+          "body": "Zhou, Xiao, Yoon and Zhu (2025) published seven experimental and field studies in the Journal of Consumer Research. Lower color saturation increased perceived brand status for luxury goods. The mechanism is learned association: faded or muted colors feel older and therefore more continuous with heritage."
+        },
+        {
+          "heading": "When the effect flips",
+          "body": "The same paper showed the effect weakens if the brand emphasizes a recent founding year and reverses if the brand positions itself as innovative. High saturation then becomes a signal of modernity rather than a status deficit."
+        },
+        {
+          "heading": "Practical ranges for digital luxury",
+          "body": "For heritage or quiet-luxury positioning, keep primary product and UI colors below roughly 30% saturation. For disruptive or campaign work, higher saturation is acceptable and can even raise status when innovation is the explicit story."
+        }
+      ],
+      "body": "## Luxury Color Strategy: Why Muted Tones Signal Higher Status\n\nLuxury brands have long favored muted palettes. Recent experimental work explains why.\n\nIn the *Journal of Consumer Research* (2025), Zhou and colleagues ran seven studies measuring how color saturation affects status perceptions of luxury products. Low-saturation versions consistently scored higher on brand status. Mediation analysis pointed to \"continuity heritage\": consumers associate less saturated colors with the passage of time and therefore with longevity and provenance.\n\nBoundary conditions matter. When the brand highlighted a recent founding date, the advantage of low saturation shrank. When the brand was framed as innovative, high saturation actually produced higher status ratings. Extremely high saturation (around 90%) tended to lower status even for traditional brands.\n\nFor digital interfaces and product visualization, the practical rule is straightforward. Heritage and quiet-luxury experiences should live in the desaturated range—think dusty navy, muted burgundy, soft ivory. Campaign or innovation-focused experiences can push saturation higher provided the brand narrative supports modernity. Always pair color decisions with the story the brand is telling; saturation alone does not create status.",
+      "tags": ["luxury", "color saturation", "brand status", "heritage"],
+      "references": [
+        {
+          "authors": ["Xinyue Zhou", "Chunqu Xiao", "Sunyee Yoon", "Hong Zhu"],
+          "title": "Color of Status: Color Saturation, Brand Heritage, and Perceived Status of Luxury Brands",
+          "publishedIn": "Journal of Consumer Research",
+          "year": 2025,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://academic.oup.com/jcr/article/52/6/1232/8120421"
+        }
+      ]
+    },
+    {
+      "title": "Designing Color for Kids: Higher Saturation, Cool for Learning, Warm for Play",
+      "category": "Color Psychology",
+      "summary": "Children's apps reliably use brighter, more saturated colors than adult apps. Educational interfaces lean cool; game interfaces lean warm. Matching these patterns improves engagement.",
+      "sections": [
+        {
+          "heading": "What the data show",
+          "body": "Lyu, Xi and Liu (2022) analyzed 223 popular children's applications from the Apple App Store across three age bands (3–5, 6–8, 9–11) plus adult comparison apps. Children's interfaces showed higher saturation and brightness frequencies. Educational apps more often used cool hues such as blue; game apps more often used warm hues such as red and orange."
+        },
+        {
+          "heading": "Pediatric preference for blue and green",
+          "body": "A 2026 study in Color Research & Application compared color preferences for pediatric patient rooms among healthy children, outpatients, inpatients, and design professionals. Blue and green ranked highest; white ranked lowest across groups."
+        },
+        {
+          "heading": "Mood color signals for health products",
+          "body": "The Manchester Color Wheel research (Carruthers et al., 2010) found that healthy participants more often linked yellow to current mood while anxious and depressed participants more often chose grey. For child-facing wellness tools, avoiding dominant grey and offering positive warm or cool accents can support emotional tone."
+        }
+      ],
+      "body": "## Designing Color for Kids: Higher Saturation, Cool for Learning, Warm for Play\n\nChildren's digital products look different from adult products for good reason.\n\nIn *Color Research & Application* (2022), Lyu and colleagues extracted color statistics from 223 children's apps and 58 adult apps. Children's interfaces used high-saturation and high-brightness colors more frequently. Educational apps skewed toward cool hues (blue), while game apps skewed toward warm hues (red, orange). These patterns align with traditional developmental color-preference findings and give designers concrete defaults.\n\nA later 2026 study in the same journal examined pediatric patient-room color preferences. Across healthy children, outpatients, inpatients, and design professionals, blue and green were most preferred and white least preferred. This suggests that purely clinical white-heavy interfaces may feel less welcoming to child users even when the product is medical.\n\nMood-color research adds another layer. Carruthers et al. (2010) developed and validated the Manchester Color Wheel and found grey more strongly associated with anxious or depressed mood and yellow with healthy mood. For wellness or mental-health features aimed at families, dominant greys are best avoided; soft yellows or clear blues and greens provide safer emotional framing.\n\n**Practical ranges:** For educational kids' products use high-brightness cool primaries. For games use high-saturation warm primaries. For pediatric health interfaces prefer blue or green over stark white. Always pair color with clear icons and text for accessibility.",
+      "tags": [
+        "children",
+        "kids UX",
+        "educational apps",
+        "game design",
+        "pediatric"
+      ],
+      "references": [
+        {
+          "authors": ["F. Lyu", "R. Xi", "Y. Liu"],
+          "title": "Color design in application interfaces for children",
+          "publishedIn": "Color Research & Application",
+          "year": 2022,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1002/col.22726"
+        },
+        {
+          "authors": [
+            "Helen R. Carruthers",
+            "Julie Morris",
+            "Nicholas Tarrier",
+            "Peter J. Whorwell"
+          ],
+          "title": "The Manchester Color Wheel: development of a novel way of identifying color choice and its validation in healthy, anxious and depressed individuals",
+          "publishedIn": "BMC Medical Research Methodology",
+          "year": 2010,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://link.springer.com/article/10.1186/1471-2288-10-12"
+        },
+        {
+          "authors": ["Park et al."],
+          "title": "Design Professionals' Viewpoint on Color Application in the Design of Pediatric Patients' Rooms",
+          "publishedIn": "Color Research & Application",
+          "year": 2026,
+          "publicationType": "peer_reviewed_journal",
+          "url": "https://onlinelibrary.wiley.com/doi/10.1002/col.70008"
+        }
+      ]
+    }
+  ]
+}

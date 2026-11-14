@@ -5361,6 +5361,7 @@ export const PlanScalarFieldEnum = {
   priceMinor: 'priceMinor',
   credits: 'credits',
   highlighted: 'highlighted',
+  unlocksFullResearch: 'unlocksFullResearch',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

@@ -1,0 +1,86 @@
+{
+  "slug": "how-wide-and-airy-should-reading-text-be",
+  "title": "How Wide and Airy Should Reading Text Be?",
+  "kind": "ARTICLE",
+  "category": "LAYOUT",
+  "summary": "Line length, line spacing, and alignment all involve tradeoffs between speed, scanning, accuracy, and subjective comfort. The research supports deliberate ranges rather than a single universally optimal layout.",
+  "sections": [
+    {
+      "heading": "Wide lines can be faster",
+      "body": "Shaikh and Chaparro found the fastest reading at 95 characters per line in their online-news experiment. Ling and van Schaik similarly found longer lines could facilitate visual scanning. These results matter for information-dense pages where users need to scan and retrieve facts quickly."
+    },
+    {
+      "heading": "Shorter lines can feel better",
+      "body": "The same body of research also shows why narrow columns remain common. Ling and van Schaik found shorter line lengths led to better subjective outcomes, while Shaikh and Chaparro reported mixed preference patterns across their tested widths. A line width that maximizes speed is not necessarily the line width that feels most comfortable."
+    },
+    {
+      "heading": "More vertical space helps task performance",
+      "body": "In a web visual-search study, single, 1.5, and double line spacing were compared. Accuracy and reaction-time performance improved as spacing widened, with double spacing outperforming 1.5 and 1.5 outperforming single spacing (Ling & van Schaik, 2007). That creates a useful product range: tighter spacing for dense tools, 1.5 for reading, and larger spacing for search-heavy or access-focused views."
+    },
+    {
+      "heading": "Alignment is another tradeoff",
+      "body": "The same study found that left-aligned text produced better performance than fully justified text, even though participants preferred justified text. This is a classic example of why performance and preference should both be measured. A left-aligned default is easier to defend for utility-oriented content, while a justified treatment may be appropriate where visual style is deliberately part of the experience."
+    },
+    {
+      "heading": "Spacing can be personalized",
+      "body": "Sung Jun Joo and colleagues found that adults with dyslexia and elevated visual crowding read faster when letter, word, and line spacing were increased. The result is strongest as an argument for adjustable reading modes, because the benefit was concentrated in a subgroup rather than applying equally to everyone."
+    }
+  ],
+  "body": "## How Wide and Airy Should Reading Text Be?\n\nReading layouts are full of tradeoffs. A wide text block can reduce the number of line breaks and speed scanning, while a narrower block can feel easier to follow. More line spacing can improve visual separation, but it also consumes vertical space. Good frontend typography therefore depends on the task, not on one universal number.\n\n### Wide lines can be faster\n\nA. Dawn Shaikh and Barbara S. Chaparro tested online news articles at 35, 55, 75, and 95 characters per line. The 95-character condition produced the fastest reading (Shaikh & Chaparro, 2005). Jonathan Ling and Paul van Schaik also found that longer lines facilitated visual scanning in web pages (Ling & van Schaik, 2006).\n\nFor dashboards, reference screens, search results, or fact-heavy content, that is relevant evidence. A wider measure can reduce the number of line changes users need to make while scanning.\n\n### Shorter lines can feel better\n\nSpeed is not the whole story. Ling and van Schaik found shorter line lengths produced better subjective outcomes even when longer lines helped scanning (Ling & van Schaik, 2006). Shaikh and Chaparro likewise found that preference did not map neatly onto the fastest condition (Shaikh & Chaparro, 2005).\n\nThat makes a range useful. A narrower column can suit article reading, a middle width can balance comfort and density, and a wider measure can support scanning-heavy tasks.\n\n### More vertical space helps task performance\n\nLing and van Schaik also tested one-line, 1.5-line, and double-line spacing. Where performance differences appeared, users did better with wider spacing: double spacing outperformed 1.5, and 1.5 outperformed single spacing (Ling & van Schaik, 2007). That gives product teams a defensible set of options rather than a single magic line-height token.\n\n### Alignment is a tradeoff too\n\nIn the same study, left-aligned text produced better performance than fully justified text, but participants preferred the justified version (Ling & van Schaik, 2007). A practical default is therefore left alignment for utility and reading interfaces, while justified text can be used intentionally when appearance is a stronger goal and the team has checked the result with real users.\n\n### Spacing can be personalized\n\nSung Jun Joo, Alex L. White, Douglas J. Strodtman, and Jason D. Yeatman found that a subgroup of adults with dyslexia and elevated visual crowding read faster when letter, word, and line spacing were increased (Joo et al., 2018). The most useful frontend implication is not “add lots of spacing for everybody.” It is “make room for a more spacious reading mode when the audience needs it.”\n\nReferences: Shaikh & Chaparro (2005); Ling & van Schaik (2006); Ling & van Schaik (2007); Joo et al. (2018).",
+  "tags": [
+    "line-length",
+    "line-height",
+    "alignment",
+    "text-spacing",
+    "reading-layout"
+  ],
+  "references": [
+    {
+      "title": "The Effects of Line Length on Reading Performance of Online News Articles",
+      "url": "https://doi.org/10.1177/154193120504900514",
+      "authors": [
+        "A. Dawn Shaikh",
+        "Barbara S. Chaparro"
+      ],
+      "publishedIn": "Proceedings of the Human Factors and Ergonomics Society Annual Meeting",
+      "year": 2005,
+      "publicationType": "conference_paper"
+    },
+    {
+      "title": "The influence of font type and line length on visual search and information retrieval in web pages",
+      "url": "https://doi.org/10.1016/j.ijhcs.2005.08.015",
+      "authors": [
+        "Jonathan Ling",
+        "Paul van Schaik"
+      ],
+      "publishedIn": "International Journal of Human-Computer Studies",
+      "year": 2006,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "The influence of line spacing and text alignment on visual search of web pages",
+      "url": "https://doi.org/10.1016/j.displa.2007.04.003",
+      "authors": [
+        "Jonathan Ling",
+        "Paul van Schaik"
+      ],
+      "publishedIn": "Displays",
+      "year": 2007,
+      "publicationType": "peer_reviewed_journal"
+    },
+    {
+      "title": "Optimizing text for an individual's visual system: The contribution of visual crowding to reading difficulties",
+      "url": "https://doi.org/10.1016/j.cortex.2018.03.013",
+      "authors": [
+        "Sung Jun Joo",
+        "Alex L. White",
+        "Douglas J. Strodtman",
+        "Jason D. Yeatman"
+      ],
+      "publishedIn": "Cortex",
+      "year": 2018,
+      "publicationType": "peer_reviewed_journal"
+    }
+  ],
+  "isPublished": true
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "website-design-and-e-trust-across-genders",
+  "status": "DRAFT",
+  "category": "LAYOUT",
+  "title": "Website design and e-trust across genders",
+  "statement": "A study of 532 online shoppers found that website design meaningfully contributed to e-trust, with visual design acting as a key driver across genders while the relative influence of information design and navigation differed by gender. (IGI Global)\n\nOptions:\n- Visual-first hero: visual_first_hero_with_product_screenshot (fits: modern, product led)\n- Information-first layout: information_first_comparison_table (fits: analytical, enterprise)\n- Navigation-first layout: persistent_anchor_navigation (fits: efficient, information rich)\n- Balanced hybrid: hybrid_visual_and_structured_proof (fits: credible, versatile)",
+  "appliesWhen": "Applies to: ecommerce, consumer websites. Audience: adults, general.",
+  "tags": [
+    "layout",
+    "analytical",
+    "credible",
+    "efficient",
+    "enterprise",
+    "information-rich",
+    "modern",
+    "product-led",
+    "versatile"
+  ],
+  "relations": []
+}
