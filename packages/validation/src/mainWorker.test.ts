@@ -16,7 +16,7 @@ const mocks = vi.hoisted(() => ({
   cleanup: vi.fn(),
   launch: vi.fn(),
 }));
-vi.mock("../../db/src/index.js", () => ({
+vi.mock("../../db/dist/src/index.js", () => ({
   prisma: {
     validationRun: {
       findUniqueOrThrow: mocks.run,

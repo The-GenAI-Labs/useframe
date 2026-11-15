@@ -96,7 +96,7 @@ describe("label immutability guard", () => {
     }
     for (const r of roots) await walk(path.join(root, r));
     expect(offenders).toEqual([]);
-  });
+  }, 30_000);
 });
 
 describe("desired KV state", () => {

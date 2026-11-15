@@ -6,7 +6,7 @@ const mocks = vi.hoisted(() => ({
   ensure: vi.fn(),
   add: vi.fn(),
 }));
-vi.mock("../../db/src/index.js", () => ({
+const dbModule = vi.hoisted(() => () => ({
   prisma: {
     project: { findUniqueOrThrow: mocks.project },
     projectVersion: { findFirstOrThrow: mocks.version },
@@ -14,6 +14,8 @@ vi.mock("../../db/src/index.js", () => ({
   },
   ensureValidationRun: mocks.ensure,
 }));
+vi.mock("../../db/src/index.js", dbModule);
+vi.mock("../../db/dist/src/index.js", dbModule);
 vi.mock("../../../apps/orchestrator-service/src/config/env.js", () => ({
   env: { GCS_BUCKET: "fixture" },
 }));
