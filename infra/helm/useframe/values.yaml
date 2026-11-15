@@ -148,8 +148,8 @@ services:
       limits: { memory: 512Mi }
 
   # AI planning/generation (apps/orchestrator-service). Streams SSE generation responses.
-  # NOTE: apps/web calls this service directly from the browser (NEXT_PUBLIC_ORCHESTRATOR_URL).
-  # Exposing it is a separate decision: set ingress.enabled=true and ingress.host (README "Ingress").
+  # apps/web calls it directly from the browser (NEXT_PUBLIC_ORCHESTRATOR_URL), so production gives it
+  # its own host on the same Ingress (values-production.yaml). CORS allows only CLIENT_URL.
   orchestrator-service:
     enabled: true
     image:
@@ -278,8 +278,8 @@ services:
       requests: { cpu: "2", memory: 5Gi }
       limits: { cpu: "4", memory: 6Gi }
 
-  # Not in the initial rollout; images exist (Part 1). apps/server calls both, so enable them before
-  # relying on billing or scoring endpoints.
+  # Off by default; production enables both. apps/server calls both, and Razorpay posts its webhooks
+  # straight to billing (/webhooks/razorpay; routed on the api host in values-production.yaml).
   billing-service:
     enabled: false
     image:
@@ -340,6 +340,50 @@ services:
       MEDIA_MAX_VIDEO_SECONDS: "60"
       MEDIA_DESCRIBE_ENABLED: "true"
     envFromSecrets: [media-service-secrets]
+    resources:
+      requests: { cpu: "1", memory: 2Gi }
+      limits: { memory: 3Gi }
+
+  # BullMQ processors (apps/worker, `node dist/index.js`): competitor scans, SEO audits, scoring,
+  # research PDFs, domain checks, payment webhooks, auto-reload and cache expiry. No HTTP API; the
+  # port is only the health listener. Chromium (Playwright, Lighthouse) needs the memory-backed
+  # /dev/shm, and writes its profile under HOME=/tmp. Off by default; production enables it.
+  worker:
+    enabled: false
+    image:
+      name: useframe-worker
+    args: ["node", "dist/index.js"]
+    # Health listener only (HEALTH_PORT); 200 while every BullMQ worker runs and Redis is ready.
+    port: 8080
+    portEnv: HEALTH_PORT
+    healthPath: /healthz
+    service:
+      enabled: false
+    # Kubernetes API access is only needed for isolated validation previews (GCS_BUCKET set);
+    # see README "worker". Without it the pod gets no ServiceAccount and no token.
+    serviceAccount:
+      create: false
+    # Memory-backed: /dev/shm counts against the memory limit.
+    emptyDirs:
+      - name: tmp
+        mountPath: /tmp
+        sizeLimit: 1Gi
+      - name: dshm
+        mountPath: /dev/shm
+        medium: Memory
+        sizeLimit: 1Gi
+    # Longer than the longest job (an SEO audit is capped at 5 min); SIGTERM lets in-flight jobs finish.
+    terminationGracePeriodSeconds: 600
+    preStopSleepSeconds: 0
+    autoscaling:
+      enabled: false
+    pdb:
+      enabled: false
+    env:
+      HOME: /tmp
+      ORCHESTRATOR_URL: '{{ include "useframe.serviceUrl" (list . "orchestrator-service") }}'
+      SCORING_SERVICE_URL: '{{ include "useframe.serviceUrl" (list . "scoring-service") }}'
+    envFromSecrets: [worker-secrets]
     resources:
       requests: { cpu: "1", memory: 2Gi }
       limits: { memory: 3Gi }

@@ -11,6 +11,7 @@ function withTeamQuery(url: string): string {
 }
 
 async function vercelFetch(path: string, init: RequestInit): Promise<unknown> {
+  if (!env.VERCEL_TOKEN) throw new Error("VERCEL_TOKEN is not configured")
   const res = await fetch(withTeamQuery(`${VERCEL_API}${path}`), {
     ...init,
     headers: {

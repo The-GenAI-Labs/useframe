@@ -11,6 +11,7 @@ const envSchema = z
       .default("development"),
     DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
     REDIS_URL: z.string().default("redis://localhost:6379"),
+    HEALTH_PORT: z.coerce.number().int().min(1).max(65535).optional(),
 
     GCS_BUCKET: z.string().min(1).optional(),
     VALIDATION_PREVIEW_NAMESPACE: z.string().default("useframe-validation"),
@@ -30,7 +31,7 @@ const envSchema = z
     DEEPSEEK_API_KEY: z.string().optional(),
     OPENAI_API_KEY: z.string().optional(),
 
-    VERCEL_TOKEN: z.string().min(1, "VERCEL_TOKEN is required"),
+    VERCEL_TOKEN: z.string().min(1).optional(),
     VERCEL_TEAM_ID: z.string().optional(),
     VERCEL_ORG_ID: z.string().optional(),
     VERCEL_PROJECT_NAME_PREFIX: z.string().default("useframe"),

@@ -53,3 +53,11 @@ tests:
       - equal:
           path: spec.podSelector.matchLabels["app.kubernetes.io/component"]
           value: deploy-service-worker
+
+  - it: denies all ingress to the BullMQ worker
+    set:
+      networkPolicy.enabled: true
+      services.worker.enabled: true
+    documentSelector: { path: metadata.name, value: useframe-worker }
+    asserts:
+      - equal: { path: spec.ingress, value: [] }

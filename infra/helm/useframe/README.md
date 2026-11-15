@@ -10,20 +10,20 @@ git push → CI → docker.io/<ns>/useframe-<service>:sha-<7>          (Part 1)
 helm upgrade --install useframe infra/helm/useframe --set global.image.tag=sha-<7>   (this chart)
 ```
 
-| Workload (`services.<key>`)  | Image                           | Default  | Exposed                         | Health                                       |
-| ---------------------------- | ------------------------------- | -------- | ------------------------------- | -------------------------------------------- |
-| `server`                     | `useframe-server`               | on       | Ingress `api.useframe.in`       | `GET /health` :4000                          |
-| `orchestrator-service`       | `useframe-orchestrator-service` | on       | ClusterIP (see "Ingress" below) | `GET /health` :4001                          |
-| `research-service`           | `useframe-research-service`     | on       | ClusterIP                       | `GET /health` :4004                          |
-| `deploy-service-server`      | `useframe-deploy-service`       | on       | ClusterIP                       | `GET /healthz` :4005                         |
-| `deploy-service-worker`      | `useframe-deploy-service`       | **off**  | none (no Service)               | `GET /healthz` :8080 (`HEALTH_PORT`)         |
-| `billing-service`            | `useframe-billing-service`      | off      | ClusterIP                       | `GET /health` :4002                          |
-| `scoring-service`            | `useframe-scoring-service`      | off      | ClusterIP                       | `GET /health` :4003                          |
-| migration hook (`migration`) | `useframe-migrate`              | prod: on | —                               | `prisma migrate deploy`, pre-install/upgrade |
+| Workload (`services.<key>`)  | Image                           | Default       | Exposed                                                    | Health                                       |
+| ---------------------------- | ------------------------------- | ------------- | ---------------------------------------------------------- | -------------------------------------------- |
+| `server`                     | `useframe-server`               | on            | Ingress `api.useframe.in`                                  | `GET /health` :4000                          |
+| `orchestrator-service`       | `useframe-orchestrator-service` | on            | ClusterIP; prod: Ingress `orchestrator.useframe.in`        | `GET /health` :4001                          |
+| `research-service`           | `useframe-research-service`     | on            | ClusterIP                                                  | `GET /health` :4004                          |
+| `deploy-service-server`      | `useframe-deploy-service`       | on            | ClusterIP                                                  | `GET /healthz` :4005                         |
+| `deploy-service-worker`      | `useframe-deploy-service`       | **off**       | none (no Service)                                          | `GET /healthz` :8080 (`HEALTH_PORT`)         |
+| `billing-service`            | `useframe-billing-service`      | off; prod: on | ClusterIP; prod: `api.useframe.in/webhooks/razorpay` only  | `GET /health` :4002                          |
+| `scoring-service`            | `useframe-scoring-service`      | off; prod: on | ClusterIP                                                  | `GET /health` :4003                          |
+| `media-service`              | `useframe-media-service`        | off; prod: on | none (no Service)                                          | `GET /healthz` :8080 (`HEALTH_PORT`)         |
+| `worker`                     | `useframe-worker`               | off; prod: on | none (no Service)                                          | `GET /healthz` :8080 (`HEALTH_PORT`)         |
+| migration hook (`migration`) | `useframe-migrate`              | prod: on      | —                                                          | `prisma migrate deploy`, pre-install/upgrade |
 
-Not in this chart: `apps/web` (Vercel), `apps/site-edge` (Cloudflare Worker), `apps/worker` (needs a
-health endpoint, `/dev/shm`, and the `useframe-worker` ServiceAccount/RBAC from
-`packages/validation/gke-preview.yaml` before it can be added), Postgres, Redis.
+Not in this chart: `apps/web` (Vercel), `apps/site-edge` (Cloudflare Worker), Postgres, Redis.
 
 Files: `values.yaml` (documented defaults), `values-production.yaml` (sizes, hosts, replicas),
 `values-single-repo.yaml` (Part 1's single-repo naming), `values.schema.json`, `ENV.md` (every env
@@ -95,10 +95,16 @@ gcloud compute addresses create useframe-api --global --project <project>
 gcloud compute addresses describe useframe-api --global --format="value(address)"
 ```
 
-**DNS.** In Cloudflare, `api.useframe.in` is an **A record to that IP, DNS only (grey cloud)**. The
-Google-managed certificate only provisions when the hostname resolves directly to the load
-balancer. A proxied (orange) record never validates. This matches
-`apps/deploy-service/RUNBOOK.md` §1.2.
+**DNS.** In Cloudflare, `api.useframe.in` and `orchestrator.useframe.in` are both **A records to
+that same IP, DNS only (grey cloud)**. One Ingress serves both hosts, and one Google-managed
+certificate lists both domains. It only provisions once **every** listed hostname resolves directly
+to the load balancer, so create both records before the first install. A proxied (orange) record
+never validates. This matches `apps/deploy-service/RUNBOOK.md` §1.2.
+
+**Redis (Memorystore).** Create the instance with AUTH enabled and `maxmemory-policy=noeviction`
+(BullMQ loses jobs and locks under any evicting policy). Every Secret's `REDIS_URL` is then
+`redis://:<auth string>@<host>:6379`. All BullMQ clients use one ioredis connection per service with
+`maxRetriesPerRequest: null`. Keep in-transit encryption off (plain `redis://`), or see §10 "Redis".
 
 **Private cluster egress.** A private cluster needs Cloud NAT for Docker Hub, Cloudflare, the
 databases and the LLM providers. All nodes then share the NAT IP for Docker Hub pulls, which is
@@ -137,8 +143,10 @@ shape with placeholders.
 | `research-service-secrets`     | research-service                                |
 | `deploy-service-secrets`       | deploy-service-server and deploy-service-worker |
 | `migrate-secrets`              | migration hook Job (`DATABASE_URL` only)        |
-| `billing-service-secrets`      | billing-service (when enabled)                  |
-| `scoring-service-secrets`      | scoring-service (when enabled)                  |
+| `billing-service-secrets`      | billing-service (when enabled; on in prod)      |
+| `scoring-service-secrets`      | scoring-service (when enabled; on in prod)      |
+| `media-service-secrets`        | media-service (when enabled; on in prod)        |
+| `worker-secrets`               | worker (when enabled; on in prod)               |
 
 ```bash
 # server.env holds KEY=value lines; keep it outside the repo or git-ignored, and delete it afterwards.
@@ -198,6 +206,8 @@ kubectl -n useframe rollout status deploy/useframe-server
 kubectl -n useframe get ingress useframe-ingress          # ADDRESS = the static IP
 kubectl -n useframe describe managedcertificate useframe-ingress
 curl -fsS https://api.useframe.in/health
+curl -fsS https://orchestrator.useframe.in/health
+kubectl -n useframe rollout status deploy/useframe-worker
 ```
 
 PowerShell: use `curl.exe -fsS https://api.useframe.in/health` (plain `curl` is an alias there).
@@ -241,9 +251,9 @@ digest instead of a tag.
   (the HPA then owns the replica count). In production, `server` autoscales from 2 to 6 at 70% CPU.
 - **Draining a node:** every workload running more than one replica has a PDB with `minAvailable: 1`,
   so `kubectl drain` evicts pods one at a time and waits for the replacements to become Ready.
-  Single-replica workloads have no PDB and are briefly unavailable during a drain. The build worker
-  has none on purpose: an eviction sends SIGTERM, and it finishes in-flight builds within its 900 s
-  grace period.
+  Single-replica workloads have no PDB and are briefly unavailable during a drain. The build worker,
+  media-service and worker have none on purpose: an eviction sends SIGTERM, and they finish in-flight
+  jobs within their grace periods (900 s, 240 s and 600 s).
 - **Logs:**
   `kubectl -n useframe logs deploy/useframe-server -f`, or `--previous` after a crash.
 - **Shutdown timing:** every HTTP pod gets a `preStop` sleep (5–15 s) so the load balancer and
@@ -270,9 +280,8 @@ digest instead of a tag.
 - **server**: the public API. It is the only workload behind the ingress. It streams SSE to the
   browser, so the load balancer timeout is 3600 s instead of GKE's 30 s default.
 - **orchestrator-service**: AI planning and generation. It calls research-service in-cluster. The
-  browser also calls it **directly** today (`NEXT_PUBLIC_ORCHESTRATOR_URL` in `apps/web`: generation,
-  chat, clarify, extract, replicate), so it must get a public host before the hosted frontend can
-  generate sites. That decision isn't made in this chart. When you make it:
+  browser also calls it **directly** (`NEXT_PUBLIC_ORCHESTRATOR_URL` in `apps/web`: generation,
+  chat, clarify, extract, replicate), so `values-production.yaml` gives it its own host:
 
   ```yaml
   services:
@@ -280,8 +289,12 @@ digest instead of a tag.
       ingress: { enabled: true, host: orchestrator.useframe.in }
   ```
 
-  The same Ingress, ManagedCertificate (one cert, both domains), BackendConfig (3600 s) and NEG then
-  apply. Add the DNS-only A record and set the frontend's `NEXT_PUBLIC_ORCHESTRATOR_URL`.
+  It is an extra rule in the same Ingress, on the same static IP, with the same ManagedCertificate
+  (one cert, both domains), a BackendConfig with the SSE-length 3600 s timeout, and the NEG
+  annotation. CORS stays in the app: it allows exactly `CLIENT_URL` (`https://useframe.in`) with
+  credentials, never a wildcard. Set the frontend's `NEXT_PUBLIC_ORCHESTRATOR_URL` to
+  `https://orchestrator.useframe.in`. Its `/internal/*` routes become reachable from the internet
+  but still require `INTERNAL_SERVICE_SECRET`.
 
 - **research-service**: retrieval over the research corpus. Internal only. `RESEARCH_MOCK` defaults
   to `"true"` (mock research, labelled as mock). Switch it to `"false"` only once the corpus and the
@@ -304,7 +317,38 @@ digest instead of a tag.
   in-flight builds, and its health endpoint (`HEALTH_PORT`) stays green while it drains so liveness
   doesn't cut builds short. Builds share the pod network: see the RUNBOOK's "In-cluster reach" note
   and consider `networkPolicy.enabled` on clusters that enforce it.
+- **billing-service**: Razorpay checkout, payment methods and webhooks. `apps/server` calls it
+  in-cluster. Razorpay posts webhooks to it directly, so production routes only
+  `api.useframe.in/webhooks/razorpay` to billing (a more specific path on the api host); set that
+  URL in the Razorpay dashboard. Two replicas with a PDB.
+- **worker**: the BullMQ processors in `apps/worker`: competitor scans, SEO audits, scoring, research
+  PDFs, domain checks, payment webhooks, auto-reload and cache expiry. Research and payments stall
+  without it. It has no HTTP API and no Service. Its `HEALTH_PORT` listener (8080, `/healthz`) answers
+  200 only while every BullMQ worker runs and Redis is ready, and stays green while it drains after
+  SIGTERM. Chromium (Playwright, Lighthouse) gets a memory-backed `/dev/shm` (1 GiB, counted against
+  the 3 GiB limit) and `/tmp` as `HOME` on an otherwise read-only root. Its 600 s grace period covers
+  the longest job (an SEO audit is capped at 5 min).
+
+  **Kubernetes API access is off.** Only the isolated validation previews call the API, and they
+  start only when `GCS_BUCKET` is set: create/get/delete a `Pod` and create/patch/delete a
+  `ConfigMap` in `useframe-validation` per preview, plus list/delete of expired ones every 10 min.
+  The worker never sets `GCS_BUCKET` in this chart. To turn validation on, apply
+  `packages/validation/gke-preview.yaml` (Role + RoleBinding to ServiceAccount `useframe-worker`,
+  plus its NetworkPolicy), then set on `services.worker`: `serviceAccount.create: true`,
+  `automountServiceAccountToken: true`, `podLabels: { app: useframe-worker }` (the preview
+  NetworkPolicy selects that label), `env.GCS_BUCKET` and `env.VALIDATION_PREVIEW_IMAGE`. The
+  release must be named `useframe` for the KSA name to match the RoleBinding.
 - **migration hook**: `prisma migrate deploy` with `useframe-migrate`, before every install/upgrade.
+
+### Redis
+
+Every service except research-service runs BullMQ (or plain commands) on one shared ioredis
+connection created with `maxRetriesPerRequest: null`, from `REDIS_URL`. ioredis reads the password
+from `redis://:<auth>@<host>:6379`, and the services that validate it as a URL (deploy-service,
+media-service) accept that form. research-service uses Redis only as a best-effort cache
+(`maxRetriesPerRequest: 0`, no offline queue), not BullMQ. With a `rediss://` URL every service
+currently turns certificate verification **off** (a dev workaround for Upstash), so keep
+Memorystore's in-transit encryption off and use `redis://` on the private VPC until that is fixed.
 
 ## Ingress modes
 

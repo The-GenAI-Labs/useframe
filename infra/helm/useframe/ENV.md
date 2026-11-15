@@ -91,7 +91,7 @@ Every workload also gets `NODE_ENV=production` from `global.env`.
 | `KIMI_API_KEY`                    | one of 4\* | `""`                             | yes    | Secret                                                                   |
 | `BRAVE_API_KEY`                   | no         | `""` (competitor search no-ops)  | yes    | Secret                                                                   |
 | `RESEARCH_SERVICE_URL`            | no         | `http://localhost:4004`          | no     | chart                                                                    |
-| `CLIENT_URL`                      | no         | `http://localhost:3000`          | no     | values (CORS origin for direct browser calls)                            |
+| `CLIENT_URL`                      | no         | `http://localhost:3000`          | no     | values (the only CORS origin, with credentials; production `https://useframe.in`) |
 | `GCS_BUCKET`                      | no         | unset (validation disabled)      | no     | values; **omit, never `""`**. Needs Workload Identity with bucket access |
 | `OFF_TOPIC_THRESHOLD`             | no         | `0.65`                           | no     | values                                                                   |
 | `MAX_HISTORY_MESSAGES`            | no         | `10`                             | no     | values                                                                   |
@@ -187,7 +187,7 @@ environment only (`PATH`, `HOME`, `CI`, `NODE_OPTIONS`, `NEXT_TELEMETRY_DISABLED
 | `MEDIA_R2_READ_ACCESS_KEY_ID` / `MEDIA_R2_READ_SECRET_ACCESS_KEY` | no | unset (deploys of sites with media fail clearly) | yes | Secret (R2 Object Read only on `useframe-media`) |
 | `MEDIA_R2_BUCKET` / `MEDIA_R2_ENDPOINT` | no       | `useframe-media` / derived from the account id | no    | values                                            |
 
-## media-service (disabled by default, Secret `media-service-secrets`)
+## media-service (disabled by default, on in production, Secret `media-service-secrets`)
 
 | Name                                                        | Required        | Default                    | Secret | Set in                              |
 | ----------------------------------------------------------- | --------------- | -------------------------- | ------ | ----------------------------------- |
@@ -205,6 +205,41 @@ environment only (`PATH`, `HOME`, `CI`, `NODE_OPTIONS`, `NEXT_TELEMETRY_DISABLED
 | `MEDIA_MAX_INPUT_PIXELS` / `MEDIA_MAX_VIDEO_SECONDS`        | no              | `60000000` / `60`          | no     | values                              |
 | `MEDIA_PAID_MAX_IMAGE_BYTES` / `MEDIA_PAID_MAX_VIDEO_BYTES` | no              | `20971520` / `157286400`   | no     | values (hard ceilings for any file) |
 | `MEDIA_DESCRIBE_ENABLED` / `MEDIA_DESCRIBE_TIMEOUT_MS`      | no              | `true` / `30000`           | no     | values                              |
+
+## worker (`services.worker`, disabled by default, on in production, Secret `worker-secrets`)
+
+BullMQ processors in `apps/worker` (`apps/worker/src/config/env.ts`, plus `CorpusEnvSchema` from
+`packages/rag`). `HOME=/tmp` keeps Chromium's profile on the writable emptyDir.
+
+| Name                                                                   | Required      | Default                                                        | Secret | Set in                                                             |
+| ---------------------------------------------------------------------- | ------------- | -------------------------------------------------------------- | ------ | ------------------------------------------------------------------ |
+| `HEALTH_PORT`                                                          | no            | unset (no health listener)                                     | no     | chart (`8080`)                                                     |
+| `HOME`                                                                 | no            | `/tmp` (image)                                                 | no     | values (`/tmp`)                                                    |
+| `DATABASE_URL`                                                         | **yes**       | —                                                              | yes    | Secret                                                             |
+| `REDIS_URL`                                                            | no            | `redis://localhost:6379`                                       | yes    | Secret (set it: the default is unreachable in-cluster)             |
+| `INTERNAL_SERVICE_SECRET`                                              | **yes**       | — (≥ 16 chars)                                                 | yes    | Secret (same value as every other Secret that has it)              |
+| `RAZORPAY_KEY_ID`                                                      | **yes**       | —                                                              | no     | Secret (kept with its secret; same account as billing)             |
+| `RAZORPAY_KEY_SECRET`                                                  | **yes**       | —                                                              | yes    | Secret (auto-reload charges)                                       |
+| `VERCEL_TOKEN`                                                         | no            | unset                                                          | yes    | not set (legacy Vercel domain poll; see below)                     |
+| `VERCEL_TEAM_ID`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_NAME_PREFIX`        | no            | unset / unset / `useframe`                                     | no     | not set (legacy)                                                   |
+| `ANTHROPIC_API_KEY` / `OPENAI_API_KEY`                                 | one of 2\*\*  | unset                                                          | yes    | Secret (SEO audit analysis)                                        |
+| `DEEPSEEK_API_KEY`                                                     | no            | unset                                                          | yes    | not needed                                                         |
+| `ORCHESTRATOR_URL`                                                     | no            | `http://localhost:4001`                                        | no     | chart (in-cluster URL)                                             |
+| `SCORING_SERVICE_URL`                                                  | no            | `http://localhost:4003`                                        | no     | chart (in-cluster URL)                                             |
+| `AUTO_RELOAD_ENABLED`                                                  | no            | `false`                                                        | no     | values (same value as server)                                      |
+| `SEO_AUDIT_MAX_PAGES` / `SEO_AUDIT_CONCURRENCY`                        | no            | `8` / `2`                                                      | no     | values                                                             |
+| `BRIEF_DRAFT_TTL_DAYS`                                                 | no            | `30`                                                           | no     | values                                                             |
+| `GCS_BUCKET`                                                           | no            | unset (validation workers off)                                 | no     | values; **omit, never `""`**. Needs Kubernetes API access (README) |
+| `VALIDATION_PREVIEW_NAMESPACE` / `_RUNTIME_CLASS` / `_IMAGE`           | no            | `useframe-validation` / `gvisor` / `useframe-validation:local` | no     | values (only with `GCS_BUCKET`)                                    |
+| `GCS_RESEARCH_CORPUS_BUCKET`                                           | no            | unset (corpus worker off)                                      | no     | values; **omit, never `""`**                                       |
+| `CORPUS_PUBSUB_SUBSCRIPTION` / `CORPUS_PUBSUB_TOPIC` / `GCP_PROJECT_ID` | no           | unset                                                          | no     | values (the subscription needs `GCS_RESEARCH_CORPUS_BUCKET`)       |
+| `VOYAGE_API_KEY`                                                       | with corpus   | `""`                                                           | yes    | Secret (the corpus worker refuses to start without it)             |
+| `EMBEDDING_MODEL` / `EMBEDDING_DIMS`                                   | no            | `voyage-4` / `1024` (checked at startup)                       | no     | values (same as research-service)                                  |
+
+`VERCEL_TOKEN` is only used by the legacy Vercel domain poll, which does nothing for projects without a
+`vercelProjectId` (every Cloudflare-hosted project); leave it out.
+
+\*\* Without either key, SEO audit jobs fail with "No LLM provider is configured"; other queues work.
 
 ## AI media (server, orchestrator-service and media-service)
 
@@ -241,7 +276,10 @@ default; see `docs/media-ai.md`. Set the shared block to the same values on all 
 | -------------- | -------- | ------- | ------ | ----------------------------------------------------------- |
 | `DATABASE_URL` | **yes**  | —       | yes    | Secret (a role allowed to run DDL; `prisma migrate deploy`) |
 
-## billing-service (disabled by default, Secret `billing-service-secrets`)
+## billing-service (disabled by default, on in production, Secret `billing-service-secrets`)
+
+Razorpay's webhook URL is `https://api.useframe.in/webhooks/razorpay`: production routes only that
+path on the api host to billing; every other billing route stays in-cluster.
 
 | Name                      | Required | Default                  | Secret | Set in |
 | ------------------------- | -------- | ------------------------ | ------ | ------ |
@@ -253,7 +291,7 @@ default; see `docs/media-ai.md`. Set the shared block to the same values on all 
 | `RAZORPAY_WEBHOOK_SECRET` | **yes**  | —                        | yes    | Secret |
 | `CLIENT_URL`              | no       | `http://localhost:3000`  | no     | values |
 
-## scoring-service (disabled by default, Secret `scoring-service-secrets`)
+## scoring-service (disabled by default, on in production, Secret `scoring-service-secrets`)
 
 | Name                      | Required   | Default                  | Secret | Set in |
 | ------------------------- | ---------- | ------------------------ | ------ | ------ |

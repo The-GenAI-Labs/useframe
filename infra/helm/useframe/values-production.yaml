@@ -23,7 +23,12 @@ services:
       requests: { cpu: 250m, memory: 512Mi }
       limits: { memory: 1Gi }
 
+  # Public host for the browser's direct calls (NEXT_PUBLIC_ORCHESTRATOR_URL in apps/web). Same Ingress,
+  # static IP, ManagedCertificate and SSE-length BackendConfig timeout as the api host.
   orchestrator-service:
+    ingress:
+      enabled: true
+      host: orchestrator.useframe.in
     replicas: 2
     resources:
       requests: { cpu: 500m, memory: 1Gi }
@@ -42,7 +47,8 @@ services:
       requests: { cpu: 100m, memory: 256Mi }
       limits: { memory: 512Mi }
 
-  # Enable only after confirming the cluster is GKE Standard (README "Build worker"):
+  # Stays off until both spikes in apps/deploy-service/RUNBOOK.md pass (§2 Stage 1 spike, S2.1
+  # spike:domains) and the cluster is confirmed to be GKE Standard (README "Build worker"):
   #   gcloud container clusters describe <cluster> --location <loc> --format="value(autopilot.enabled)"
   # prints nothing / False on Standard. Sizes follow infra/k8s/deploy-service/worker.yaml.
   deploy-service-worker:
@@ -51,10 +57,47 @@ services:
       requests: { cpu: "2", memory: 5Gi }
       limits: { cpu: "4", memory: 6Gi }
 
+  # Razorpay posts webhooks straight to billing, so only that path is routed on the api host; every
+  # other billing route stays in-cluster (apps/server calls it).
+  billing-service:
+    enabled: true
+    replicas: 2
+    ingress:
+      enabled: true
+      host: api.useframe.in
+      path: /webhooks/razorpay
+    resources:
+      requests: { cpu: 100m, memory: 256Mi }
+      limits: { memory: 512Mi }
+
+  scoring-service:
+    enabled: true
+    replicas: 1
+    resources:
+      requests: { cpu: 250m, memory: 512Mi }
+      limits: { memory: 1Gi }
+
+  # Needs the media bucket and media-service-secrets (ENV.md "media-service").
+  media-service:
+    enabled: true
+    replicas: 1
+    resources:
+      requests: { cpu: "1", memory: 2Gi }
+      limits: { memory: 3Gi }
+
+  # One replica: every BullMQ worker inside it already runs with its own concurrency.
+  worker:
+    enabled: true
+    replicas: 1
+    resources:
+      requests: { cpu: "1", memory: 2Gi }
+      limits: { memory: 3Gi }
+
 ingress:
   host: api.useframe.in
   gke:
     # gcloud compute addresses create useframe-api --global
+    # api.useframe.in and orchestrator.useframe.in are both A records to this IP, DNS only (grey cloud).
     staticIpName: useframe-api
 
 migration:
