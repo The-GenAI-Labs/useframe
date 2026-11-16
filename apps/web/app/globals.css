@@ -215,6 +215,12 @@ html, body {
   .hint { animation: none; }
 }
 
+/* Before the session check returns, show the app shell to visitors who were signed in (src/lib/sessionHint.ts). */
+.session-shell { display: none; }
+.signed-out-view { display: contents; }
+html[data-session="1"] .session-shell { display: flex; }
+html[data-session="1"] .signed-out-view { display: none; }
+
 /* Tailwind v4 resets buttons to the default cursor. */
 @layer base {
   button:not(:disabled),

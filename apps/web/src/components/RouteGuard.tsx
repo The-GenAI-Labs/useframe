@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/lib/authContext";
+import { AppShellSkeleton } from "@/components/layout/AppShellSkeleton";
 
 const PUBLIC_ROUTES = ["/"];
 
@@ -20,7 +21,7 @@ export function RouteGuard({ children }: { children: React.ReactNode }) {
   }, [status, isPublic, pathname, router]);
 
   if (status === "loading" && !isPublic) {
-    return null;
+    return <AppShellSkeleton />;
   }
 
   if (status === "unauthenticated" && !isPublic) {
