@@ -4,6 +4,8 @@
 # Sizes are starting points; tune them after observing real usage (kubectl top pods).
 
 global:
+  # The images on Docker Hub are public, so nodes pull them anonymously.
+  imagePullSecrets: []
   env:
     CLIENT_URL: https://useframe.in
 
@@ -11,6 +13,7 @@ services:
   server:
     env:
       FRONTEND_URL: https://useframe.in
+      MEDIA_PUBLIC_BASE_URL: https://api.useframe.in
       GOOGLE_REDIRECT_URI: https://api.useframe.in/api/auth/google/callback
       GITHUB_REDIRECT_URI: https://api.useframe.in/api/auth/github/callback
     replicas: 2
@@ -35,13 +38,16 @@ services:
       limits: { memory: 2Gi }
 
   research-service:
+    env:
+      RESEARCH_MOCK: "false"
     replicas: 2
     resources:
       requests: { cpu: 500m, memory: 1Gi }
       limits: { memory: 2Gi }
 
-  # Two replicas, as in infra/k8s/deploy-service/server.yaml.
+  # Off until infra/terraform/envs/production is applied: it needs SITES_KV_NAMESPACE_ID and the sites bucket.
   deploy-service-server:
+    enabled: false
     replicas: 2
     resources:
       requests: { cpu: 100m, memory: 256Mi }
