@@ -7,6 +7,7 @@ import type {
   WebContainerProcess,
 } from "@webcontainer/api";
 import { withScaffold, type ReplicationNextFile } from "./nextScaffold";
+import { reloadUnlessCrossOriginIsolated } from "@/lib/crossOriginIsolation";
 
 type WCState =
   | { status: "idle" }
@@ -25,6 +26,7 @@ let cancelActive: (() => void) | null = null;
 let runningProcess: WebContainerProcess | null = null;
 
 async function getWebContainer() {
+  if (reloadUnlessCrossOriginIsolated(true)) return new Promise<never>(() => {});
   if (!wcBootPromise) {
     wcBootPromise = import("@webcontainer/api")
       .then(({ WebContainer }) => WebContainer.boot({ coep: "credentialless" }))

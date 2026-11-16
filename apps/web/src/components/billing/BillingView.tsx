@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { openRazorpayCheckout } from "@/lib/razorpay";
+import { reloadUnlessCrossOriginIsolated } from "@/lib/crossOriginIsolation";
 import { creditsApi } from "@/lib/api/services/credits.service";
 import { billingApi } from "@/lib/api/services/billing.service";
 import { serif } from "@/components/home/fonts";
@@ -59,6 +60,10 @@ export default function BillingView() {
     const [autoReloadSaving, setAutoReloadSaving] = useState(false);
     const [autoReloadError, setAutoReloadError] = useState<string | null>(null);
     const [autoReloadSynced, setAutoReloadSynced] = useState(false);
+
+    useEffect(() => {
+        reloadUnlessCrossOriginIsolated(false);
+    }, []);
 
     useEffect(() => {
         if (autoReloadSynced || !summary?.autoReload) return;

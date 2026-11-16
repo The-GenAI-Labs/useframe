@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react"
 import type { ResolvedMediaAsset, SiteSpec } from "@repo/schemas"
 import { buildFsTree } from "./fsTree"
+import { reloadUnlessCrossOriginIsolated } from "@/lib/crossOriginIsolation"
 
 type WCState =
   | { status: "idle" }
@@ -25,6 +26,7 @@ let currentDevProcess: import("@webcontainer/api").WebContainerProcess | null = 
 let activeToken = 0
 
 async function getWebContainer() {
+  if (reloadUnlessCrossOriginIsolated(true)) return new Promise<never>(() => {})
   const { WebContainer } = await import("@webcontainer/api")
   if (wcInstance) return wcInstance
   if (!wcBootPromise) wcBootPromise = WebContainer.boot({ coep: "credentialless" })
