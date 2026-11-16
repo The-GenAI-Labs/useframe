@@ -403,7 +403,7 @@ export default function ChatHomeView() {
           )}
 
           {user?.plan === "FREE" && (
-            <p className="mb-3 text-xs text-mut">
+            <p className="text-center text-xs text-mut">
               Free-tier generations may be slightly less accurate than Pro.{" "}
               <Link href="/billing" className="underline">
                 Upgrade for higher-fidelity builds →
