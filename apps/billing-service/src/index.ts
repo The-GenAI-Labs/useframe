@@ -9,6 +9,7 @@ import paymentMethodRoute from "@/routes/paymentMethod.route.js"
 import autoReloadRoute from "@/routes/autoReload.route.js"
 import { prisma } from "@useframe/db"
 import { redis } from "@/lib/redis.js"
+import { useBodyParsers } from "@/lib/bodyParsers.js"
 
 const app = express()
 
@@ -32,12 +33,9 @@ app.get("/health", (_req, res) => {
   })
 })
 
-// Razorpay signature verification hashes the raw request body, so this route
-// must be mounted with express.raw() BEFORE the global express.json() below.
-app.use("/", express.raw({ type: "application/json" }), webhookRoute)
+useBodyParsers(app)
 
-app.use(express.json({ limit: "1mb" }))
-
+app.use("/", webhookRoute)
 app.use("/", checkoutRoute)
 app.use("/", paymentMethodRoute)
 app.use("/", autoReloadRoute)
