@@ -7,7 +7,7 @@ import type {
   WebContainerProcess,
 } from "@webcontainer/api";
 import { withScaffold, type ReplicationNextFile } from "./nextScaffold";
-import { reloadUnlessCrossOriginIsolated } from "@/lib/crossOriginIsolation";
+import { reloadUnlessCrossOriginIsolated } from "../../lib/crossOriginIsolation";
 
 type WCState =
   | { status: "idle" }

@@ -53,6 +53,8 @@ function processResult(code?: number, output = "") {
 beforeEach(() => {
   vi.resetModules();
   vi.clearAllMocks();
+  // Preview pages are served with COOP/COEP, so the browser reports isolation.
+  vi.stubGlobal("crossOriginIsolated", true);
   mocks.readdir.mockResolvedValue([]);
   mocks.rm.mockResolvedValue(undefined);
   mocks.mount.mockResolvedValue(undefined);

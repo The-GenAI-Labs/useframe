@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react"
 import type { ResolvedMediaAsset, SiteSpec } from "@repo/schemas"
 import { buildFsTree } from "./fsTree"
-import { reloadUnlessCrossOriginIsolated } from "@/lib/crossOriginIsolation"
+import { reloadUnlessCrossOriginIsolated } from "../../lib/crossOriginIsolation"
 
 type WCState =
   | { status: "idle" }
