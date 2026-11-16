@@ -107,7 +107,7 @@ function parseEnv(text) {
 
 function gcloud(args, { input, allowFail } = {}) {
   const win = process.platform === "win32";
-  const r = spawnSync("gcloud", win ? args.map((a) => `"${a}"`) : args, { input, encoding: "utf8", shell: win, maxBuffer: 16 * 1024 * 1024 });
+  const r = spawnSync("gcloud", win ? args.map((a) => `"${a}"`) : args, { input, encoding: "utf8", shell: win, maxBuffer: 16 * 1024 * 1024, env: { ...process.env, PYTHONIOENCODING: "utf-8", PYTHONUTF8: "1" } });
   if (r.status !== 0 && !allowFail) throw new Error(`gcloud ${args.slice(0, 3).join(" ")} failed: ${(r.stderr || "").trim().split("\n").pop()}`);
   return r;
 }
@@ -233,8 +233,9 @@ function main() {
       gcloud(["secrets", "create", u.secret, `--project=${opts.project}`, "--replication-policy=automatic", `--labels=${u.labels}`]);
       status = "created";
     }
-    const current = exists ? gcloud(["secrets", "versions", "access", "latest", `--secret=${u.secret}`, `--project=${opts.project}`], { allowFail: true }) : null;
-    if (!current || current.status !== 0 || current.stdout !== u.content) {
+    const current = exists ? gcloud(["secrets", "versions", "access", "latest", `--secret=${u.secret}`, `--project=${opts.project}`, "--format=json"], { allowFail: true }) : null;
+    const stored = current?.status === 0 ? Buffer.from(JSON.parse(current.stdout).payload.data, "base64") : null;
+    if (!stored || !stored.equals(Buffer.from(u.content, "utf8"))) {
       gcloud(["secrets", "versions", "add", u.secret, `--project=${opts.project}`, "--data-file=-"], { input: u.content });
       if (status !== "created") status = "updated";
     }
