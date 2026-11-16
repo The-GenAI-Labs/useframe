@@ -126,6 +126,50 @@ export class InsufficientCreditsError extends Error {
   }
 }
 
+export const ADMIN_GRANT_REF_TYPE = "ADMIN_GRANT";
+const NO_EXPIRY = new Date("2099-01-01T00:00:00Z");
+
+export type GrantResult = { transactionId: string; balanceBefore: number; balanceAfter: number; alreadyGranted: boolean };
+
+// Idempotent manual grant: the user row lock serialises concurrent runs, and a
+// grant already recorded under the same key is returned instead of repeated.
+export async function grantCredits(
+  client: Pick<PrismaClient, "$transaction">,
+  input: { userId: string; amount: number; reason: string; idempotencyKey: string },
+): Promise<GrantResult> {
+  if (!Number.isInteger(input.amount) || input.amount <= 0) throw new Error("amount must be a positive integer");
+  return client.$transaction(async (tx) => {
+    await tx.$queryRaw`SELECT id FROM "users" WHERE id = ${input.userId} FOR UPDATE`;
+    const current = await tx.creditBalance.findUnique({ where: { userId: input.userId }, select: { balance: true } });
+    const balanceBefore = current?.balance ?? 0;
+    const existing = await tx.creditTransaction.findFirst({
+      where: { userId: input.userId, refType: ADMIN_GRANT_REF_TYPE, refId: input.idempotencyKey },
+      select: { id: true },
+    });
+    if (existing) return { transactionId: existing.id, balanceBefore, balanceAfter: balanceBefore, alreadyGranted: true };
+
+    const balance = await tx.creditBalance.upsert({
+      where: { userId: input.userId },
+      create: { userId: input.userId, balance: input.amount, periodEnd: NO_EXPIRY },
+      update: { balance: { increment: input.amount } },
+      select: { balance: true },
+    });
+    const transaction = await tx.creditTransaction.create({
+      data: {
+        userId: input.userId,
+        delta: input.amount,
+        type: "ADJUSTMENT",
+        reason: input.reason,
+        balanceAfter: balance.balance,
+        refType: ADMIN_GRANT_REF_TYPE,
+        refId: input.idempotencyKey,
+      },
+      select: { id: true },
+    });
+    return { transactionId: transaction.id, balanceBefore, balanceAfter: balance.balance, alreadyGranted: false };
+  });
+}
+
 // Atomic deduction used by services outside apps/server (media reservations).
 export async function spendCredits(
   client: Pick<PrismaClient, "$transaction">,
