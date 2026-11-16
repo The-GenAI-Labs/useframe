@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/authContext";
 import { isFreeTierExhausted } from "@/lib/freeTierError";
 import GridBackground from "@/components/chat/GridBackground";
-import WelcomeCards, { type WelcomeTab } from "@/components/chat/WelcomeCards";
+import HomeShowcase, { SHOWCASE_PANEL_ID, type ShowcaseTab } from "@/components/chat/HomeShowcase";
 import ChatInput from "@/components/chat/ChatInput";
 import { useClarify } from "@/hooks/useClarify";
 import { useClarifyStore } from "@/stores/clarifyStore";
@@ -47,23 +47,17 @@ function ChatHomeSkeleton() {
     >
       <GridBackground />
 
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-8 py-12">
-        <div className="flex flex-col gap-6 w-1/2 min-w-[420px] animate-pulse">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4 py-12 sm:px-8">
+        <div className="flex flex-col gap-6 w-full sm:w-1/2 sm:min-w-[420px] animate-pulse">
           <div className="flex flex-col items-center text-center gap-3">
             <div className={`h-6 w-32 rounded-full ${glass}`} />
             <div className={`h-10 w-80 rounded-lg ${glass}`} />
             <div className={`h-5 w-56 rounded-lg ${glass}`} />
           </div>
 
-          <div className="flex flex-row gap-3 w-full px-1 py-1">
-            <div
-              className={`flex-1 rounded-3xl ${glass}`}
-              style={{ height: "220px" }}
-            />
-            <div
-              className={`flex-1 rounded-3xl ${glass}`}
-              style={{ height: "220px" }}
-            />
+          <div className={`mx-auto w-full max-w-[min(560px,92vw)] rounded-3xl p-3 ${glass}`}>
+            <div className="w-full rounded-2xl bg-white/30" style={{ aspectRatio: "536 / 246" }} />
+            <div className="h-[76px]" />
           </div>
 
           <div className={`w-full h-24 rounded-3xl ${glass}`} />
@@ -83,7 +77,8 @@ export default function ChatHomeView() {
   const [isCreatingProject, setIsCreatingProject] = useState(false);
   const [greeting, setGreeting] = useState("Hi");
   const [showSkeleton, setShowSkeleton] = useState(true);
-  const [activeTab, setActiveTab] = useState<WelcomeTab>("RESEARCH");
+  const [activeTab, setActiveTab] = useState<ShowcaseTab>("RESEARCH");
+  const [prefill, setPrefill] = useState<{ text: string; nonce: number } | null>(null);
   const openBriefModal = useProjectModalStore((s) => s.open);
   // Once a project exists — either from typing an idea here, or from the
   // create-project modal's "Start generation" — the home page renders the
@@ -284,8 +279,8 @@ export default function ChatHomeView() {
     ],
   );
 
-  const handleCardClick = useCallback((id: string) => {
-    console.log("card:", id);
+  const handleShowcaseAction = useCallback((text: string) => {
+    setPrefill({ text, nonce: Date.now() });
   }, []);
 
   // A visitor typed an idea into the marketing homepage's hero chatbox
@@ -349,8 +344,8 @@ export default function ChatHomeView() {
     >
       <GridBackground />
 
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-8 py-12">
-        <div className="flex flex-col gap-6 w-1/2 min-w-[420px]">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4 py-12 sm:px-8">
+        <div className="flex flex-col gap-6 w-full sm:w-1/2 sm:min-w-[420px]">
           {isIdle ? (
             <>
               <div className="flex flex-col items-center text-center">
@@ -378,9 +373,11 @@ export default function ChatHomeView() {
                 activeStep={activeTab}
                 interactive
                 ignoreLock
-                onSelectStep={(id) => setActiveTab(id as WelcomeTab)}
+                onSelectStep={(id) => setActiveTab(id as ShowcaseTab)}
+                tabPanelId={SHOWCASE_PANEL_ID}
+                tabListLabel="What useframe does"
               />
-              <WelcomeCards tab={activeTab} onCardClick={handleCardClick} />
+              <HomeShowcase tab={activeTab} onAction={handleShowcaseAction} />
             </>
           ) : (
             <div
@@ -426,7 +423,7 @@ export default function ChatHomeView() {
             </p>
           )}
           {phase !== "generating" && (
-            <ChatInput onSubmit={handleSubmit} autoFocus={shouldAutoFocus} />
+            <ChatInput onSubmit={handleSubmit} autoFocus={shouldAutoFocus} prefill={prefill} />
           )}
         </div>
       </div>
