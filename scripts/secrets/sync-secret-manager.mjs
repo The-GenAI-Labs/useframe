@@ -59,7 +59,7 @@ const SECRETS = {
   "worker-secrets": {
     env: "apps/worker",
     required: ["DATABASE_URL", "REDIS_URL", "INTERNAL_SERVICE_SECRET", "RAZORPAY_KEY_ID", "RAZORPAY_KEY_SECRET"],
-    optional: ["ANTHROPIC_API_KEY", "OPENAI_API_KEY", "VOYAGE_API_KEY"],
+    optional: ["ANTHROPIC_API_KEY", "DEEPSEEK_API_KEY", "OPENAI_API_KEY", "VOYAGE_API_KEY"],
   },
   "migrate-secrets": {
     env: "packages/db",
