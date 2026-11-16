@@ -13,3 +13,7 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
   workerd: true
+# Image scans fail on these CRITICAL CVEs: proxy-addr IP spoofing, and Go stdlib in esbuild builds older than 0.27.3.
+overrides:
+  proxy-addr: ^2.0.8
+  esbuild: ^0.27.7

@@ -24,8 +24,8 @@ export type RunChildOptions = {
 
 const MAX_OUTPUT = 64 * 1024;
 
-// --legacy-peer-deps: the Replicate scaffold pins next@15.0.3 with react@19.0.0,
-// whose declared peer range excludes stable React 19, so strict resolution fails.
+// --legacy-peer-deps: projects generated before the scaffold moved to next@15.5 pin next@15.0.3
+// with react@19.0.0, whose declared peer range excludes stable React 19.
 export const INSTALL_ARGS = [
   "install",
   "--ignore-scripts",

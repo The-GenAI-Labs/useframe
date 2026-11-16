@@ -10,7 +10,7 @@ const PACKAGE_JSON = JSON.stringify(
       start: "node node_modules/next/dist/bin/next start",
     },
     dependencies: {
-      next: "15.0.3",
+      next: "15.5.28",
       react: "19.0.0",
       "react-dom": "19.0.0",
     },
