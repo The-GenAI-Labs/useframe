@@ -6,7 +6,7 @@
 - Do not introduce new libraries, abstractions, folders, or architectural patterns when the existing implementation can solve the problem.
 - Do not add unnecessary comments. Add a comment only when clarification is required: explain a non-obvious constraint, tradeoff, invariant, or workaround, rather than restating the code.
 - After every significant implementation change, restart the affected project services with the new changes and verify that the frontend and API server are running. Rebuild shared packages first when consumers use their compiled output. Do not rely only on hot reload.
-- At the end of every final response, list any new or changed environment variables and required `.env` changes, including the target file, purpose, and whether each variable is required. Never print secret values. If none changed, say: "Environment changes: none."
+- At the end of every final response, list any new or changed environment variables and required `.env` changes, including the target file, purpose, and whether each variable is required. Do not print secret values in this end-of-response report. If none changed, say: "Environment changes: none."
 - Keep `AGENTS.md`, `CLAUDE.md`, and `GEMINI.md` synchronized when updating project guidance. These rules apply throughout the repository; also inspect any more specific instructions in the area being edited.
 
 ## Project
@@ -103,7 +103,7 @@ The frontend currently has both `src/store` and `src/stores`. Follow the relevan
 - Scope access to the authenticated owner and parent resource. Check nested versions, scans, replication records, research documents, jobs, and streams; knowing an ID or slug is not authorization.
 - Preserve access/refresh token separation, expiry, refresh-session invalidation, OAuth state checks, single-use tickets/magic links, and secure cookie settings. Do not store refresh tokens in browser storage.
 - Preserve internal-service authentication, CORS restrictions, rate limits, Turnstile checks, and billing webhook signature verification. UI route guards do not replace backend authorization.
-- Never commit or log secrets, full tokens, sensitive payment data, or private `.env` contents. Only genuinely public configuration belongs in `NEXT_PUBLIC_*`.
+- Reading `.env` files and their values is allowed when a task needs them, and printing values is allowed when the user asks for them. Never commit secrets, full tokens, sensitive payment data, or private `.env` contents, and never write them into application logs. Only genuinely public configuration belongs in `NEXT_PUBLIC_*`.
 - Treat submitted URLs, scraped content, AI outputs, and generated code as untrusted. Validate URL destinations/redirects against SSRF, preserve preview isolation, and prevent generated file paths from escaping their intended root.
 - Validate AI output against shared schemas before persisting or rendering it. Keep retrieved sources/citation IDs intact; do not present mock research as real evidence.
 
