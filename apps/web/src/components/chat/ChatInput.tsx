@@ -12,8 +12,6 @@ interface ChatInputForm {
 interface ChatInputProps {
     onSubmit: (message: string) => void;
     autoFocus?: boolean;
-    /** Replaces the message and focuses it; a new `nonce` re-applies the same text. */
-    prefill?: { text: string; nonce: number } | null;
 }
 
 const SUGGESTIONS = [
@@ -22,8 +20,8 @@ const SUGGESTIONS = [
     { label: "Build New",          color: "#EAB308" },
 ];
 
-export default memo(function ChatInput({ onSubmit, autoFocus, prefill }: ChatInputProps) {
-    const { register, handleSubmit, reset, watch, setFocus, setValue } = useForm<ChatInputForm>({
+export default memo(function ChatInput({ onSubmit, autoFocus }: ChatInputProps) {
+    const { register, handleSubmit, reset, watch, setFocus } = useForm<ChatInputForm>({
         defaultValues: { message: "" },
     });
     const { defaultMode, setDefaultMode } = usePipelineModeStore();
@@ -33,12 +31,6 @@ export default memo(function ChatInput({ onSubmit, autoFocus, prefill }: ChatInp
     useEffect(() => {
         if (autoFocus) setFocus("message");
     }, [autoFocus, setFocus]);
-
-    useEffect(() => {
-        if (!prefill) return;
-        setValue("message", prefill.text, { shouldDirty: true });
-        setFocus("message");
-    }, [prefill, setValue, setFocus]);
 
     const onFormSubmit = useCallback(
         (data: ChatInputForm) => {

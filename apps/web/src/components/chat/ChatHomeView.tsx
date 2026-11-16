@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/authContext";
 import { isFreeTierExhausted } from "@/lib/freeTierError";
 import GridBackground from "@/components/chat/GridBackground";
-import HomeShowcase, { SHOWCASE_PANEL_ID, type ShowcaseTab } from "@/components/chat/HomeShowcase";
 import ChatInput from "@/components/chat/ChatInput";
 import { useClarify } from "@/hooks/useClarify";
 import { useClarifyStore } from "@/stores/clarifyStore";
@@ -55,10 +54,6 @@ function ChatHomeSkeleton() {
             <div className={`h-5 w-56 rounded-lg ${glass}`} />
           </div>
 
-          <div className={`mx-auto w-full max-w-[min(560px,92vw)] rounded-3xl p-3 ${glass}`}>
-            <div className="w-full rounded-2xl bg-white/30" style={{ aspectRatio: "536 / 246" }} />
-            <div className="h-[76px]" />
-          </div>
 
           <div className={`w-full h-24 rounded-3xl ${glass}`} />
         </div>
@@ -77,8 +72,7 @@ export default function ChatHomeView() {
   const [isCreatingProject, setIsCreatingProject] = useState(false);
   const [greeting, setGreeting] = useState("Hi");
   const [showSkeleton, setShowSkeleton] = useState(true);
-  const [activeTab, setActiveTab] = useState<ShowcaseTab>("RESEARCH");
-  const [prefill, setPrefill] = useState<{ text: string; nonce: number } | null>(null);
+  const [activeTab, setActiveTab] = useState<PipelineToggleStep["id"]>("RESEARCH");
   const openBriefModal = useProjectModalStore((s) => s.open);
   // Once a project exists — either from typing an idea here, or from the
   // create-project modal's "Start generation" — the home page renders the
@@ -279,9 +273,6 @@ export default function ChatHomeView() {
     ],
   );
 
-  const handleShowcaseAction = useCallback((text: string) => {
-    setPrefill({ text, nonce: Date.now() });
-  }, []);
 
   // A visitor typed an idea into the marketing homepage's hero chatbox
   // while signed out, then landed here after completing sign-in. Pick up
@@ -373,11 +364,8 @@ export default function ChatHomeView() {
                 activeStep={activeTab}
                 interactive
                 ignoreLock
-                onSelectStep={(id) => setActiveTab(id as ShowcaseTab)}
-                tabPanelId={SHOWCASE_PANEL_ID}
-                tabListLabel="What useframe does"
+                onSelectStep={setActiveTab}
               />
-              <HomeShowcase tab={activeTab} onAction={handleShowcaseAction} />
             </>
           ) : (
             <div
@@ -423,7 +411,7 @@ export default function ChatHomeView() {
             </p>
           )}
           {phase !== "generating" && (
-            <ChatInput onSubmit={handleSubmit} autoFocus={shouldAutoFocus} prefill={prefill} />
+            <ChatInput onSubmit={handleSubmit} autoFocus={shouldAutoFocus} />
           )}
         </div>
       </div>
