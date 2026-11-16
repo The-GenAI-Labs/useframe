@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback, memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Hint } from "@/components/ui/hint";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/lib/authContext";
 import { useChatModalStore } from "@/store/chatModalStore";
@@ -15,27 +16,14 @@ interface SidebarProps {
 
 interface RailTooltipProps {
     label: string;
-    children: React.ReactNode;
+    children: React.ReactElement;
 }
 
 const RailTooltip = memo(function RailTooltip({ label, children }: RailTooltipProps) {
-    const [show, setShow] = useState(false);
     return (
-        <div
-            className="relative flex items-center justify-center"
-            onMouseEnter={() => setShow(true)}
-            onMouseLeave={() => setShow(false)}
-        >
+        <Hint label={label} side="right">
             {children}
-            <div
-                role="tooltip"
-                className={`pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-2.5 z-9999 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[12px] font-semibold shadow-lg transition-all duration-150 ease-out bg-white text-black dark:bg-white dark:text-black ${
-                    show ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1"
-                }`}
-            >
-                {label}
-            </div>
-        </div>
+        </Hint>
     );
 });
 

@@ -1,5 +1,7 @@
 "use client"
 
+import { Hint } from "@/components/ui/hint"
+
 type PipelineMode = "AUTO" | "MANUAL"
 
 type Props = {
@@ -27,33 +29,36 @@ function AutoIcon() {
   )
 }
 
+const MODES: { mode: PipelineMode; label: string; hint: string; Icon: () => React.JSX.Element }[] = [
+  { mode: "MANUAL", label: "Manual mode", hint: "Manual — review and approve each step", Icon: HandIcon },
+  { mode: "AUTO", label: "Auto mode", hint: "Auto — runs Research, Website and SEO without pausing; Deploy still needs a click", Icon: AutoIcon },
+]
+
 export function PipelineModeToggle({ mode, onChange, disabled }: Props) {
   return (
     <div className="inline-flex items-center gap-0.5 p-0.5 rounded-lg bg-tertiary shrink-0">
-      <button
-        type="button"
-        title="Manual — step through and approve each stage"
-        disabled={disabled}
-        onClick={() => onChange("MANUAL")}
-        className={`p-1.5 rounded-md transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 ${
-          mode === "MANUAL" ? "" : "text-mut hover:text-sec"
-        }`}
-        style={mode === "MANUAL" ? { backgroundColor: "var(--text-primary)", color: "var(--bg-primary)" } : undefined}
-      >
-        <HandIcon />
-      </button>
-      <button
-        type="button"
-        title="Auto — runs Research → Website → SEO without pausing (Deploy still needs a click)"
-        disabled={disabled}
-        onClick={() => onChange("AUTO")}
-        className={`p-1.5 rounded-md transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 ${
-          mode === "AUTO" ? "" : "text-mut hover:text-sec"
-        }`}
-        style={mode === "AUTO" ? { backgroundColor: "var(--text-primary)", color: "var(--bg-primary)" } : undefined}
-      >
-        <AutoIcon />
-      </button>
+      {MODES.map(({ mode: value, label, hint, Icon }) => {
+        const button = (
+          <button
+            type="button"
+            aria-label={label}
+            aria-pressed={mode === value}
+            disabled={disabled}
+            onClick={() => onChange(value)}
+            className={`p-1.5 rounded-md transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 ${
+              mode === value ? "" : "text-mut hover:text-sec"
+            }`}
+            style={mode === value ? { backgroundColor: "var(--text-primary)", color: "var(--bg-primary)" } : undefined}
+          >
+            <Icon />
+          </button>
+        )
+        return (
+          <Hint key={value} label={hint}>
+            {disabled ? <span className="inline-flex">{button}</span> : button}
+          </Hint>
+        )
+      })}
     </div>
   )
 }
