@@ -16,7 +16,7 @@ describe("replication scaffold", () => {
     expect(
       JSON.parse(files.find((file) => file.path === "package.json")!.content)
         .dependencies.next,
-    ).toBe("15.0.3");
+    ).toBe("15.5.28");
     expect(files.some((file) => file.path === "app/layout.tsx")).toBe(true);
     expect(
       JSON.parse(files.find((file) => file.path === "package.json")!.content)
