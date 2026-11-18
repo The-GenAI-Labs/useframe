@@ -91,6 +91,9 @@ export const SECTION_MEDIA_SLOTS: Partial<Record<SectionType, SectionMediaSlots>
   TEAM: {
     itemSlot: { purpose: "team_photo", kinds: ["image"], aspect: "1:1", display: "inline", priority: "normal", sizes: ITEM_SIZES },
   },
+  LOGOS: {
+    itemSlot: { purpose: "logo", kinds: ["image"], display: "inline", priority: "normal", sizes: "160px" },
+  },
   CTA: {
     slots: [
       {
@@ -141,7 +144,8 @@ export function slotsForSection(section: Pick<Section, "type" | "content">): Med
   if (!def) return [];
   const slots = [...(def.slots ?? [])];
   if (def.itemSlot) {
-    const count = Math.min(section.content?.items?.length ?? 0, MAX_ITEM_SLOTS);
+    const items = section.type === "LOGOS" && section.content?.logos?.length ? section.content.logos : section.content?.items;
+    const count = Math.min(items?.length ?? 0, MAX_ITEM_SLOTS);
     for (let i = 0; i < count; i++) slots.push({ ...def.itemSlot, key: `item-${i}` });
   }
   return slots;

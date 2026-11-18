@@ -21,6 +21,7 @@ const SECTION_LABELS: Record<string, string> = {
   CTA: "Call to action",
   CUSTOM: "Showcase",
   HEADER: "Header",
+  LOGOS: "Logos",
 }
 
 export function usageLabel(usage: MediaUsage): string {

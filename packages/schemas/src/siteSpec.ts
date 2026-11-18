@@ -3,6 +3,7 @@ import { CitationSchema } from "./citation.schema.js";
 import { DesignBriefSchema } from "./designBrief.schema.js";
 import { MediaBindingsSchema } from "./media.schema.js";
 import { ResearchReportDataSchema } from "./research.schema.js";
+import { ALL_SECTION_VARIANTS, SiteThemeSchema } from "./theme.schema.js";
 
 export const SeoSchema = z.object({
   title: z.string(),
@@ -29,10 +30,15 @@ export const SectionSchema = z.object({
     "HEADER",
     "FOOTER",
     "CUSTOM",
+    "STATS",
+    "LOGOS",
   ]),
   index: z.number(),
+  // Unknown or mismatched variants fall back to the type's default at render time.
+  variant: z.enum(ALL_SECTION_VARIANTS).optional().catch(undefined),
   content: z
     .object({
+      eyebrow: z.string().optional(),
       headline: z.string().optional(),
       subheadline: z.string().optional(),
       body: z.string().optional(),
@@ -50,9 +56,30 @@ export const SectionSchema = z.object({
             title: z.string(),
             description: z.string(),
             icon: z.string().optional(),
+            meta: z.string().optional(),
+            author: z.string().optional(),
+            role: z.string().optional(),
+            company: z.string().optional(),
           }),
         )
         .optional(),
+      stats: z.array(z.object({ value: z.string(), label: z.string() })).optional(),
+      plans: z
+        .array(
+          z.object({
+            name: z.string(),
+            price: z.string().optional(),
+            period: z.string().optional(),
+            description: z.string().optional(),
+            features: z.array(z.string()).optional(),
+            cta: z.string().optional(),
+            ctaHref: z.string().optional(),
+            highlighted: z.boolean().optional(),
+          }),
+        )
+        .optional(),
+      logos: z.array(z.object({ name: z.string() })).optional(),
+      links: z.array(z.object({ label: z.string(), href: z.string() })).optional(),
       mediaUrl: z.string().optional(),
       mediaAlt: z.string().optional(),
     })
@@ -94,6 +121,7 @@ export const SiteSpecSchema = z.object({
   copyFramework: z.enum(["AIDA", "PAS", "FAB", "PASTOR"]),
   citations: z.array(CitationSchema),
   designBrief: DesignBriefSchema.optional(),
+  theme: SiteThemeSchema.optional(),
   // slotId ("{pageSlug}/{sectionId}/{slotKey}") -> media asset binding.
   media: MediaBindingsSchema.optional(),
 });

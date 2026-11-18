@@ -16,14 +16,22 @@
     "check-types": "tsc --noEmit",
     "test": "vitest run",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "gallery": "tsx gallery/run.ts"
   },
   "dependencies": {
     "@repo/schemas": "workspace:*",
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "playwright": "^1.48.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "tsx": "^4.22.1",
     "typescript": "5.9.2",
+    "vite": "^5.4.0",
     "vitest": "^2.1.9"
   }
 }
