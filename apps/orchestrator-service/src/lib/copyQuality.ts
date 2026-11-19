@@ -1,6 +1,7 @@
 import {
   checkCta,
   checkSectionContent,
+  groundedIn,
   contentContract,
   COPY_LIMITS,
   type GenerateRequest,
@@ -32,14 +33,17 @@ export function contractText(type: SectionType, variant?: string): string {
         : `items ${c.items.min}-${c.items.max}: title (≤${c.items.titleMax}), description (≤${c.items.descriptionMax}), icon from the menu`
       : "no items",
   ]
+  if (type === "FEATURES") parts.push("every item includes basis: the exact phrase from the facts it comes from; never write an item the facts do not support")
   if (type === "CONTACT") parts.push("contact details are added by code; do not write emails or phone numbers")
   if (type === "CUSTOM") parts.push("write only from the brief's differentiators and current alternative; no invented procedures, examples, data or anecdotes")
   return parts.filter(Boolean).join("; ")
 }
 
-type PageCopy = { primaryCta: string; sections: (Content & { index: number })[] }
+type PageCopy = { primaryCta: string; sections: (Omit<Content, "items"> & { index: number; items?: GroundedItem[] })[] }
 
-const ISSUE_CODES_FOR_COPY = new Set(["missing", "limit", "placeholder", "banned", "invented_proof", "items"])
+const ISSUE_CODES_FOR_COPY = new Set(["missing", "limit", "placeholder", "banned", "invented_proof", "items", "restated"])
+
+type GroundedItem = { title: string; description: string; icon?: string; basis?: string }
 
 export function validatePageCopy(copy: PageCopy, written: Pick<Section, "type" | "index" | "variant">[], facts: string): string[] {
   const issues: QualityIssue[] = []
@@ -53,6 +57,13 @@ export function validatePageCopy(copy: PageCopy, written: Pick<Section, "type" |
       continue
     }
     issues.push(...checkSectionContent(section.type, section.variant, content, facts, `sections[index=${section.index}].`).filter((i) => ISSUE_CODES_FOR_COPY.has(i.code)))
+    if (section.type === "FEATURES") {
+      content.items?.forEach((item, i) => {
+        if (!groundedIn(item.basis, facts)) {
+          issues.push({ code: "ungrounded", path: `sections[index=${section.index}].items.${i}`, detail: `"${item.title}" is not supported by the facts; cite the exact phrase it comes from in basis, or remove the item` })
+        }
+      })
+    }
     const h = content.headline?.trim().toLowerCase()
     if (!h) continue
     if (seenHeadlines.has(h)) issues.push({ code: "duplicate", path: `sections[index=${section.index}].headline`, detail: `same headline as index ${seenHeadlines.get(h)}` })
@@ -77,11 +88,22 @@ export function clampText(text: string, max: number): string {
 
 const ICON_NAMES = new Set(Object.keys(ICONS))
 
-// Mechanical fixes only: limits and unknown icons. Anything else is left for
-// the caller's fallback decision.
-export function repairContent(type: SectionType, variant: string | undefined, content: Content): Content {
+// Features need at least this many grounded items to stand on their own.
+const MIN_FEATURE_ITEMS = 2
+
+// Picks a FEATURES variant that suits however many grounded items survived.
+export function fitFeatureVariant(variant: string | undefined, count: number): Section["variant"] | undefined {
+  if (count >= 4) return variant as Section["variant"]
+  if (count === 3) return variant === "bento" ? "grid" : (variant as Section["variant"])
+  return count >= MIN_FEATURE_ITEMS ? "alternating" : (variant as Section["variant"])
+}
+
+// Mechanical fixes only: limits, unknown icons and, given the facts, dropping
+// feature items they do not support. The citation itself is never stored.
+export function repairContent(type: SectionType, variant: string | undefined, content: Omit<Content, "items"> & { items?: GroundedItem[] }, facts?: string): Content {
   const c = contentContract(type, variant)
-  const out: Content = { ...content }
+  const grounded = type === "FEATURES" && facts !== undefined ? content.items?.filter((item) => groundedIn(item.basis, facts)) : content.items
+  const out: Content = { ...content, items: grounded?.map(({ basis: _basis, ...item }) => item) }
   if (out.headline) out.headline = clampText(out.headline, c.headlineMax)
   if (out.subheadline) out.subheadline = clampText(out.subheadline, COPY_LIMITS.subheadline)
   if (out.body) out.body = clampText(out.body, COPY_LIMITS.body * (type === "CUSTOM" ? 2 : 1))

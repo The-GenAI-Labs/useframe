@@ -89,9 +89,9 @@ const goodCopy = {
       index: 1,
       headline: "Less phone tag for your front desk",
       items: [
-        { title: "Waitlist that refills itself", description: "Cancelled slots go to the next patient on the list automatically.", icon: "refresh" },
-        { title: "Two-tap confirmations", description: "Patients confirm or move visits from a text message.", icon: "message" },
-        { title: "Your real calendar", description: "Bookings sync with the schedule your team already uses.", icon: "calendar" },
+        { title: "Waitlist that refills itself", description: "Cancelled slots go to the next patient on the list automatically.", icon: "refresh", basis: "fill cancelled appointments from a waitlist" },
+        { title: "Made for independent clinics", description: "Built around how a small clinic with one front desk actually runs its week.", icon: "users", basis: "owners of independent dental clinics" },
+        { title: "Booking without phone tag", description: "Patients take freed appointments online instead of waiting on hold.", icon: "calendar", basis: "booking software" },
       ],
     },
     {
@@ -167,6 +167,22 @@ describe("copy agent", () => {
     expect(text).not.toMatch(/Section"|seamless|cutting-edge/i)
     for (const s of sections) expect(isPlaceholder(s.content?.headline ?? "ok")).toBe(false)
     expect(sections[0]!.content!.cta!.primary).toBe(sections[1]!.content!.cta!.primary)
+  })
+
+  it("drops features the facts do not support and refits the layout", async () => {
+    const withInvented = structuredClone(goodCopy)
+    withInvented.sections[1]!.items!.push({ title: "Safe redaction", description: "Strip sensitive fields before anything is stored or shared.", icon: "shield", basis: "redacts sensitive fields" })
+    const spec = plannedSpec()
+    spec.pages![0]!.sections[1]!.variant = "bento"
+    const { model, prompts } = scriptedModel([withInvented])
+    const out = await runCopyAgent(fakeRes().res, spec, request, model)
+    expect(prompts).toHaveLength(2)
+    expect(prompts[1]).toContain("Safe redaction")
+    const features = out.pages![0]!.sections.find((s) => s.type === "FEATURES")!
+    expect(features.content!.items!.map((i) => i.title)).not.toContain("Safe redaction")
+    expect(features.content!.items).toHaveLength(3)
+    expect(features.variant).toBe("grid")
+    expect(JSON.stringify(features.content)).not.toContain("basis")
   })
 
   it("falls back to the user's own brief facts", () => {
@@ -343,6 +359,40 @@ describe("critique patches", () => {
     expect(sections.map((s) => s.type)).toEqual(["HERO", "FAQ", "FEATURES", "CTA", "FOOTER"])
     expect(sections.find((s) => s.type === "FEATURES")!.variant).toBe("bento")
     expect(out.theme).toEqual({ preset: "minimal", density: "airy" })
+  })
+})
+
+describe("critique moves", () => {
+  const venuePage = (): Partial<SiteSpec> => ({
+    pages: [
+      {
+        type: "HOME",
+        slug: "home",
+        title: "x",
+        sections: [
+          { type: "HERO", index: 0 },
+          { type: "FEATURES", index: 1 },
+          { type: "FAQ", index: 2 },
+          { type: "HOW_IT_WORKS", index: 3 },
+          { type: "CTA", index: 4 },
+          { type: "FOOTER", index: 5 },
+        ],
+      },
+    ],
+  })
+  const move = { op: "move" as const, pageSlug: "home", sectionIndex: 3, toPosition: 2 }
+
+  it("keeps the narrative arc when code chose the order", () => {
+    const venue = pickArchetype({ idea: "A wood-fired restaurant" })
+    const { applied, rejected } = applyCritiquePatches(venuePage(), [move], "", venue)
+    expect(applied).toBe(0)
+    expect(rejected[0]).toMatch(/narrative arc/)
+  })
+
+  it("still reorders a planner-decided layout", () => {
+    const { spec, applied } = applyCritiquePatches(venuePage(), [move], "")
+    expect(applied).toBe(1)
+    expect(spec.pages![0]!.sections.map((s) => s.type)).toEqual(["HERO", "FEATURES", "HOW_IT_WORKS", "FAQ", "CTA", "FOOTER"])
   })
 })
 

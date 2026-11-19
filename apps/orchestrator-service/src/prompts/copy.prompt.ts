@@ -27,7 +27,7 @@ export type CopyPromptVars = {
 
 const EXAMPLES = `GOLD-STANDARD EXAMPLES (tone and density only; a fictional product called Brightdesk, booking software for dental clinics. Never copy their words):
 {"index":0,"eyebrow":"For independent dental clinics","headline":"Fill every chair without phone tag","subheadline":"Brightdesk lets patients book, move and confirm visits online, and texts reminders so fewer appointments go empty.","cta":{"primary":"Start free trial","secondary":"See how it works"}}
-{"index":2,"headline":"Less front-desk juggling, more time with patients","items":[{"title":"Booking in your own colours","description":"Patients pick a slot from your real calendar on any phone, with nothing to install.","icon":"calendar"},{"title":"Reminders that confirm themselves","description":"Texts go out two days and two hours before each visit; replies update the calendar.","icon":"message"},{"title":"A waitlist that fills gaps","description":"When someone cancels, the next patient on the waitlist is offered the slot straight away.","icon":"refresh"}]}`
+{"index":2,"headline":"Less front-desk juggling, more time with patients","items":[{"title":"Booking in your own colours","description":"Patients pick a slot from your real calendar on any phone, with nothing to install.","icon":"calendar","basis":"online booking from the clinic calendar"},{"title":"Reminders that confirm themselves","description":"Texts go out two days and two hours before each visit; replies update the calendar.","icon":"message","basis":"automatic text reminders"},{"title":"A waitlist that fills gaps","description":"When someone cancels, the next patient on the waitlist is offered the slot straight away.","icon":"refresh","basis":"fills cancellations from a waitlist"}]}`
 
 export const DEFAULT_COPY_PROMPT = (v: CopyPromptVars): string => `
 ${PERSONA}
@@ -60,6 +60,6 @@ ${HONESTY_RULES}
 
 ${EXAMPLES}
 
-Respond with JSON: { "primaryCta": "the one primary CTA label", "sections": [ { "index": 0, "eyebrow"?, "headline", "subheadline"?, "body"?, "cta"?: { "primary"?, "secondary"? }, "items"?: [{ "title", "description", "icon"? }] } ] }
+Respond with JSON: { "primaryCta": "the one primary CTA label", "sections": [ { "index": 0, "eyebrow"?, "headline", "subheadline"?, "body"?, "cta"?: { "primary"?, "secondary"? }, "items"?: [{ "title", "description", "icon"?, "basis"? }] } ] }
 Include only the fields each contract allows.
 `.trim()

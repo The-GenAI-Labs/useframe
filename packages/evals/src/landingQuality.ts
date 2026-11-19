@@ -66,7 +66,7 @@ export function scoreSite(result: Result, brief: Brief): SiteScore {
     limitViolations: count("limit", "items"),
     bannedPhrases: count("banned"),
     inventedProof: count("invented_proof"),
-    repeatedHeadlines: count("duplicate_headline", "repeated_opening"),
+    repeatedHeadlines: count("duplicate_headline", "repeated_opening", "restated"),
     adjacentRepeats: count("adjacent_variant"),
     ctaDrift: count("cta_inconsistent"),
     customSections: sections.filter((s) => s.type === "CUSTOM").length,
@@ -140,7 +140,7 @@ function main() {
   }
   const cols: [string, keyof ReturnType<typeof totals>][] = [
     ["Sites generated", "sites"], ["Schema valid", "schema"], ["Placeholder strings", "placeholders"], ["Empty sections", "empty"],
-    ["Limit violations", "limits"], ["Banned phrases", "banned"], ["Invented proof", "proof"], ["Repeated headlines/openings", "repeats"],
+    ["Limit violations", "limits"], ["Banned phrases", "banned"], ["Invented proof", "proof"], ["Repeated headlines/openings/restatements", "repeats"],
     ["Adjacent layout repeats", "adjacent"], ["Sites with differing primary CTA labels", "cta"], ["CUSTOM sections (no brief content exists)", "custom"],
     [`Distinct home-page section orders (target ≥ ${MIN_DISTINCT_ORDERS})`, "orders"], ["Distinct variants per site", "variants"], ["Contrast pass (rendered)", "contrast"],
     ["Brand colour carries readable text", "brand"], ["LLM judge (1-10)", "judge"],

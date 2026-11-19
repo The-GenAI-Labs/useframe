@@ -263,6 +263,44 @@ export function checkCta(issues: QualityIssue[], path: string, label: string | u
 }
 
 // Validates written copy for one section against its contract.
+const STOPWORDS = new Set("a an and are as at be but by can for from has have how in into is it its more no not of on or our so than that the their them then they this to up was we what when which who will with you your".split(" "));
+
+function contentWords(text: string): Set<string> {
+  return new Set(
+    text
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}\s]/gu, " ")
+      .split(/\s+/)
+      .filter((w) => w.length > 2 && !STOPWORDS.has(w))
+      .map((w) => w.replace(/(ies|es|s)$/, "")),
+  );
+}
+
+// Share of the shorter text's content words that the longer one repeats.
+export function overlapRatio(a: string, b: string): number {
+  const x = contentWords(a);
+  const y = contentWords(b);
+  const [small, large] = x.size <= y.size ? [x, y] : [y, x];
+  if (small.size < 2) return 0;
+  let shared = 0;
+  for (const w of small) if (large.has(w)) shared++;
+  return shared / small.size;
+}
+
+const RESTATED = 0.75;
+
+// True when the cited basis really comes from the facts: most of its content
+// words appear there. Lets code verify a claim instead of trusting the model.
+export function groundedIn(basis: string | undefined, facts: string): boolean {
+  if (!basis?.trim()) return false;
+  const words = contentWords(basis);
+  if (words.size === 0) return false;
+  const factWords = contentWords(facts);
+  let found = 0;
+  for (const w of words) if (factWords.has(w)) found++;
+  return found / words.size >= 0.6;
+}
+
 export function checkSectionContent(type: SectionType, variant: string | undefined, content: Content | undefined, facts: string, prefix = ""): QualityIssue[] {
   const issues: QualityIssue[] = [];
   const contract = contentContract(type, variant);
@@ -273,6 +311,9 @@ export function checkSectionContent(type: SectionType, variant: string | undefin
   checkText(issues, p("subheadline"), c.subheadline, COPY_LIMITS.subheadline, facts, contract.subheadline === "required");
   checkText(issues, p("body"), c.body, COPY_LIMITS.body * (type === "CUSTOM" ? 2 : 1), facts);
   checkText(issues, p("eyebrow"), c.eyebrow, COPY_LIMITS.eyebrow, facts);
+  if (c.headline && c.subheadline && overlapRatio(c.headline, c.subheadline) >= RESTATED) {
+    issues.push({ code: "restated", path: p("subheadline"), detail: "subheadline repeats the headline; add new information" });
+  }
   if (contract.cta !== "none") {
     checkCta(issues, p("cta.primary"), c.cta?.primary, contract.cta === "required");
     checkCta(issues, p("cta.secondary"), c.cta?.secondary, false);
@@ -285,6 +326,9 @@ export function checkSectionContent(type: SectionType, variant: string | undefin
     items.forEach((item, i) => {
       checkText(issues, p(`items.${i}.title`), item.title, contract.items!.titleMax, facts, true);
       checkText(issues, p(`items.${i}.description`), item.description, contract.items!.descriptionMax, facts, true);
+      if (item.title && item.description && type !== "FAQ" && overlapRatio(item.title, item.description) >= RESTATED && contentWords(item.description).size <= contentWords(item.title).size + 2) {
+        issues.push({ code: "restated", path: p(`items.${i}.description`), detail: "description only repeats the title" });
+      }
     });
   }
   return issues;

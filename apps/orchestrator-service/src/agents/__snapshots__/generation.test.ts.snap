@@ -21,6 +21,7 @@ WRITING RULES:
 - The hero answers in five seconds: what it is, who it is for, why it is better. Concrete words, no metaphors standing in for meaning.
 - Specific beats generic: use the product's real features, outcomes and the words from the facts.
 - Benefit-led headlines, feature-backed bodies. One idea per section. No two headlines may start with the same two words.
+- A subheadline adds information the headline does not have; an item description says more than its title. Never restate.
 - CTAs are 2-4 words, start with a verb, match the primary goal, and the primary CTA label is identical everywhere.
 - Match the reading level to the audience: plainer and shorter for seniors, parents and non-experts.
 - FAQ answers real objections for this product: price, setup time, data and privacy, cancelling, who it is for.
@@ -36,9 +37,9 @@ HONESTY (absolute):
 
 GOLD-STANDARD EXAMPLES (tone and density only; a fictional product called Brightdesk, booking software for dental clinics. Never copy their words):
 {"index":0,"eyebrow":"For independent dental clinics","headline":"Fill every chair without phone tag","subheadline":"Brightdesk lets patients book, move and confirm visits online, and texts reminders so fewer appointments go empty.","cta":{"primary":"Start free trial","secondary":"See how it works"}}
-{"index":2,"headline":"Less front-desk juggling, more time with patients","items":[{"title":"Booking in your own colours","description":"Patients pick a slot from your real calendar on any phone, with nothing to install.","icon":"calendar"},{"title":"Reminders that confirm themselves","description":"Texts go out two days and two hours before each visit; replies update the calendar.","icon":"message"},{"title":"A waitlist that fills gaps","description":"When someone cancels, the next patient on the waitlist is offered the slot straight away.","icon":"refresh"}]}
+{"index":2,"headline":"Less front-desk juggling, more time with patients","items":[{"title":"Booking in your own colours","description":"Patients pick a slot from your real calendar on any phone, with nothing to install.","icon":"calendar","basis":"online booking from the clinic calendar"},{"title":"Reminders that confirm themselves","description":"Texts go out two days and two hours before each visit; replies update the calendar.","icon":"message","basis":"automatic text reminders"},{"title":"A waitlist that fills gaps","description":"When someone cancels, the next patient on the waitlist is offered the slot straight away.","icon":"refresh","basis":"fills cancellations from a waitlist"}]}
 
-Respond with JSON: { "primaryCta": "the one primary CTA label", "sections": [ { "index": 0, "eyebrow"?, "headline", "subheadline"?, "body"?, "cta"?: { "primary"?, "secondary"? }, "items"?: [{ "title", "description", "icon"? }] } ] }
+Respond with JSON: { "primaryCta": "the one primary CTA label", "sections": [ { "index": 0, "eyebrow"?, "headline", "subheadline"?, "body"?, "cta"?: { "primary"?, "secondary"? }, "items"?: [{ "title", "description", "icon"?, "basis"? }] } ] }
 Include only the fields each contract allows."
 `;
 
@@ -110,6 +111,7 @@ WRITING RULES:
 - The hero answers in five seconds: what it is, who it is for, why it is better. Concrete words, no metaphors standing in for meaning.
 - Specific beats generic: use the product's real features, outcomes and the words from the facts.
 - Benefit-led headlines, feature-backed bodies. One idea per section. No two headlines may start with the same two words.
+- A subheadline adds information the headline does not have; an item description says more than its title. Never restate.
 - CTAs are 2-4 words, start with a verb, match the primary goal, and the primary CTA label is identical everywhere.
 - Match the reading level to the audience: plainer and shorter for seniors, parents and non-experts.
 - FAQ answers real objections for this product: price, setup time, data and privacy, cancelling, who it is for.

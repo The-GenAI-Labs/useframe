@@ -12,13 +12,15 @@ import {
   copyFacts,
   fallbackContent,
   fallbackSource,
+  fitFeatureVariant,
   headerContent,
   repairContent,
   severeIssues,
   validatePageCopy,
 } from "@/lib/copyQuality.js"
 
-const CopyItem = z.object({ title: z.string(), description: z.string(), icon: z.string().optional() })
+// basis: the phrase from the facts a feature comes from, checked by code and never stored.
+const CopyItem = z.object({ title: z.string(), description: z.string(), icon: z.string().optional(), basis: z.string().optional() })
 
 export const SectionCopySchema = z.object({
   eyebrow: z.string().optional(),
@@ -65,6 +67,7 @@ export async function runCopyAgent(
     }
 
     const copied = new Map<number, Content>()
+    const refitted = new Map<number, Section["variant"]>()
     let primaryCta = briefCtaLabel ?? source.ctaLabel
     if (written.length > 0) {
       const { object, issues } = await generateValidated({
@@ -108,14 +111,23 @@ export async function runCopyAgent(
       for (const section of written) {
         const raw = copied.get(section.index)
         const withCta = raw && (section.type === "HERO" || section.type === "CTA") ? { ...raw, cta: { ...raw.cta, primary: primaryCta } } : raw
-        copied.set(section.index, withCta ? repairContent(section.type, section.variant, withCta) : {})
+        const repaired = withCta ? repairContent(section.type, section.variant, withCta, facts) : {}
+        copied.set(section.index, repaired)
+        if (section.type === "FEATURES") {
+          const variant = fitFeatureVariant(section.variant, repaired.items?.length ?? 0)
+          if (variant !== section.variant) refitted.set(section.index, variant)
+        }
       }
     }
 
     const sections: Section[] = []
     for (const section of page.sections) {
-      let next: Section = { ...section, content: fixed.get(section.index) ?? copied.get(section.index) ?? {} }
-      if (written.includes(section) && severeIssues(section.type, section.variant, next.content!, facts).length > 0) {
+      let next: Section = {
+        ...section,
+        ...(refitted.has(section.index) ? { variant: refitted.get(section.index) } : {}),
+        content: fixed.get(section.index) ?? copied.get(section.index) ?? {},
+      }
+      if (written.includes(section) && severeIssues(section.type, next.variant, next.content!, facts).length > 0) {
         const fallback = fallbackContent(section.type, section.variant, { ...source, ctaLabel: primaryCta })
         if (!fallback) {
           console.warn(`[copy] dropped ${section.type} on ${page.slug}: no acceptable copy and no brief facts`)

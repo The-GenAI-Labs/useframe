@@ -18,6 +18,8 @@ import type { getProviderOptionsForTier } from "@/llm/router.js"
 import { generateValidated } from "@/llm/structured.js"
 import type { ProjectBriefContext } from "@/lib/briefPipeline.js"
 import { copyFacts } from "@/lib/copyQuality.js"
+import { orderByArc, type Archetype } from "@/lib/narrative.js"
+import { archetypeFor } from "./structure.agent.js"
 
 const score = z.number().int().min(1).max(10)
 export const CritiqueScoresSchema = z.object({
@@ -45,7 +47,7 @@ export type CritiquePatch = z.infer<typeof CritiquePatchSchema>
 export const CritiqueSchema = z.object({ scores: CritiqueScoresSchema, patches: z.array(CritiquePatchSchema).max(12) })
 
 const CONTENT_FIELD = /^(eyebrow|headline|subheadline|body|cta\.primary|cta\.secondary|items\.(\d+)\.(title|description))$/
-const SCORED_CODES = new Set(["missing", "limit", "placeholder", "banned", "invented_proof", "items"])
+const SCORED_CODES = new Set(["missing", "limit", "placeholder", "banned", "invented_proof", "items", "restated"])
 
 type Content = NonNullable<Section["content"]>
 
@@ -71,6 +73,8 @@ export function applyCritiquePatches(
   spec: Partial<SiteSpec>,
   patches: CritiquePatch[],
   facts: string,
+  // When code chose the order from a narrative arc, moves may not break it.
+  archetype?: Archetype,
 ): { spec: Partial<SiteSpec>; applied: number; rejected: string[] } {
   const pages = structuredClone(spec.pages ?? [])
   let theme = spec.theme ? { ...spec.theme } : undefined
@@ -134,6 +138,11 @@ export function applyCritiquePatches(
         reject(patch, "move would repeat a layout")
         continue
       }
+      const body = reordered.filter((s) => s.type !== "FOOTER" && s.type !== "HEADER")
+      if (archetype && orderByArc(body, archetype).some((s, i) => s !== body[i])) {
+        reject(patch, "move would break the narrative arc")
+        continue
+      }
       page.sections = reordered
     }
     applied++
@@ -195,7 +204,7 @@ export async function runCritiqueAgent(
     console.warn("[critique] no valid review; spec left unchanged")
     return spec
   }
-  const result = applyCritiquePatches(spec, object.patches, facts)
+  const result = applyCritiquePatches(spec, object.patches, facts, spec.designBrief ? undefined : archetypeFor(request, briefCtx))
   console.log(`[critique] scores ${JSON.stringify(object.scores)} patches ${result.applied}/${object.patches.length} applied`)
   return result.spec
 }

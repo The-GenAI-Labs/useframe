@@ -22,6 +22,7 @@ export const WRITING_RULES = `WRITING RULES:
 - The hero answers in five seconds: what it is, who it is for, why it is better. Concrete words, no metaphors standing in for meaning.
 - Specific beats generic: use the product's real features, outcomes and the words from the facts.
 - Benefit-led headlines, feature-backed bodies. One idea per section. No two headlines may start with the same two words.
+- A subheadline adds information the headline does not have; an item description says more than its title. Never restate.
 - CTAs are ${COPY_LIMITS.ctaMinWords}-${COPY_LIMITS.ctaMaxWords} words, start with a verb, match the primary goal, and the primary CTA label is identical everywhere.
 - Match the reading level to the audience: plainer and shorter for seniors, parents and non-experts.
 - FAQ answers real objections for this product: price, setup time, data and privacy, cancelling, who it is for.

@@ -5,7 +5,9 @@ import {
   checkSpecQuality,
   contentContract,
   FONT_PAIRINGS,
+  groundedIn,
   inventedClaims,
+  overlapRatio,
   isPlaceholder,
   repeatsLayout,
 } from "./generation.schema.js"
@@ -44,6 +46,23 @@ describe("copy rules", () => {
     expect(bento.some((i) => i.code === "items")).toBe(true)
     expect(contentContract("FAQ").items).toMatchObject({ min: 4, titleMax: 90, descriptionMax: 300 })
     expect(checkSectionContent("CTA", undefined, { headline: "Book your first visit", cta: { primary: "Book a visit" } }, "")).toEqual([])
+  })
+
+  it("flags a subheadline that only restates its headline", () => {
+    const restated = checkSectionContent("FEATURES", "grid", {
+      headline: "Fewer ingredients to question",
+      subheadline: "Fewer ingredients to question, and a shorter routine to keep.",
+      items: [1, 2, 3].map((i) => ({ title: `Item ${i}`, description: `A real description of item number ${i}.` })),
+    }, "")
+    expect(restated.map((i) => i.code)).toContain("restated")
+    expect(overlapRatio("Fill every chair without phone tag", "Patients book and confirm visits online.")).toBe(0)
+  })
+
+  it("verifies that a cited basis really comes from the facts", () => {
+    const facts = "An open-source tool that records production errors with the exact request and database queries that caused them"
+    expect(groundedIn("records production errors with the exact request", facts)).toBe(true)
+    expect(groundedIn("redacts sensitive fields before storage", facts)).toBe(false)
+    expect(groundedIn(undefined, facts)).toBe(false)
   })
 
   it("ships 14 curated font pairings", () => {
