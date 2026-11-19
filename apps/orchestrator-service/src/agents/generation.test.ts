@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs"
 import { describe, expect, it, vi } from "vitest"
 import { simulateReadableStream } from "ai"
 import { MockLanguageModelV1 } from "ai/test"
@@ -13,6 +14,7 @@ const { structureFromModelOutput, separateLayouts } = await import("./structure.
 const { applyCritiquePatches } = await import("./critique.agent.js")
 const { colorIssues, designSystemFrom, fallbackDesign } = await import("@/lib/designTheme.js")
 const { clampText, fallbackContent, fallbackSource } = await import("@/lib/copyQuality.js")
+const { arcCapacity, arcFactsFor, arcText, orderByArc, pickArchetype } = await import("@/lib/narrative.js")
 const { DEFAULT_STRUCTURE_PROMPT } = await import("@/prompts/structure.prompt.js")
 const { DEFAULT_COPY_PROMPT } = await import("@/prompts/copy.prompt.js")
 const { DEFAULT_DESIGN_PROMPT } = await import("@/prompts/design.prompt.js")
@@ -220,6 +222,100 @@ describe("structure", () => {
   })
 })
 
+describe("narrative arcs", () => {
+  const briefs = JSON.parse(readFileSync(new URL("../../../../packages/evals/datasets/landing-briefs.json", import.meta.url), "utf8")) as {
+    id: string
+    niche: string
+    startupIdea: string
+  }[]
+
+  it("maps businesses to arcs and gives the eval briefs at least four section orders", () => {
+    const picked = Object.fromEntries(briefs.map((b) => [b.id, pickArchetype({ niche: b.niche, idea: b.startupIdea }).id]))
+    expect(picked).toMatchObject({
+      "b2b-saas": "product",
+      "dev-tool": "product",
+      "seniors-healthcare": "service",
+      "legal-services": "service",
+      "fitness-coach": "service",
+      "kids-edtech": "consumer",
+      "d2c-skincare": "consumer",
+      restaurant: "venue",
+      "non-profit": "mission",
+    })
+    const orders = new Set(
+      briefs.map((b) => {
+        const archetype = pickArchetype({ niche: b.niche, idea: b.startupIdea })
+        const page = structureFromModelOutput({ pages: [{ type: "HOME", slug: "home", title: "x", sections: [] }] }, null, undefined, undefined, archetype).pages[0]!
+        return page.sections.map((s) => s.type).join(">")
+      }),
+    )
+    expect(orders.size).toBeGreaterThanOrEqual(4)
+  })
+
+  it("puts the model's sections in the arc's order, fills required slots and drops CUSTOM without facts", () => {
+    const archetype = pickArchetype({ niche: "OTHER", idea: "A law firm for renters" })
+    const page = structureFromModelOutput(
+      {
+        pages: [
+          {
+            type: "HOME",
+            slug: "home",
+            title: "x",
+            sections: [
+              { type: "HERO", variant: "split" },
+              { type: "FAQ" },
+              { type: "CUSTOM", variant: "prose", purpose: "A typical day" },
+              { type: "FEATURES", variant: "list", purpose: "The offer" },
+              { type: "TESTIMONIALS" },
+              { type: "CTA" },
+            ],
+          },
+        ],
+      },
+      null,
+      undefined,
+      undefined,
+      archetype,
+    ).pages[0]!
+    expect(page.sections.map((s) => s.type)).toEqual(["HERO", "HOW_IT_WORKS", "FEATURES", "FAQ", "CTA", "FOOTER"])
+    expect(page.sections[1]!.purpose).toMatch(/working together/)
+    expect(page.sections[2]!.purpose).toBe("The offer")
+  })
+
+  it("adds a second features section only when the brief has enough real features", () => {
+    const product = pickArchetype({ niche: "SAAS_B2B", idea: "Scheduling software" })
+    const all = () => true
+    expect(arcCapacity(product, all, arcFactsFor(null)).get("FEATURES")).toBe(1)
+    const fourFeatures = [1, 2, 3, 4].map((i) => ({ title: `f${i}`, benefit: "a real benefit" }))
+    expect(arcCapacity(product, all, arcFactsFor({ features: fourFeatures })).get("FEATURES")).toBe(2)
+    const page = structureFromModelOutput(
+      { pages: [{ type: "HOME", slug: "home", title: "x", sections: [{ type: "HERO" }, { type: "FEATURES" }, { type: "HOW_IT_WORKS" }, { type: "FEATURES" }, { type: "FAQ" }, { type: "CTA" }] }] },
+      null,
+      undefined,
+      undefined,
+      product,
+    ).pages[0]!
+    expect(page.sections.filter((s) => s.type === "FEATURES")).toHaveLength(1)
+  })
+
+  it("puts the booking steps or ways to help right before the ask", () => {
+    const order = (idea: string) =>
+      structureFromModelOutput({ pages: [{ type: "HOME", slug: "home", title: "x", sections: [] }] }, null, undefined, undefined, pickArchetype({ idea }))
+        .pages[0]!.sections.map((s) => s.type)
+        .join(">")
+    expect(order("A wood-fired restaurant")).toBe("HERO>FEATURES>FAQ>HOW_IT_WORKS>CTA>FOOTER")
+    expect(order("A non-profit run by volunteers")).toBe("HERO>HOW_IT_WORKS>FAQ>FEATURES>CTA>FOOTER")
+  })
+
+  it("orders repeated types into their own slots", () => {
+    const ordered = orderByArc(
+      [{ type: "HOW_IT_WORKS" as const }, { type: "FEATURES" as const, n: 1 }, { type: "HERO" as const }, { type: "FEATURES" as const, n: 2 }, { type: "CTA" as const }],
+      pickArchetype({ niche: "ECOMMERCE", idea: "A skincare subscription" }),
+    )
+    expect(ordered.map((s) => s.type)).toEqual(["HERO", "FEATURES", "FEATURES", "HOW_IT_WORKS", "CTA"])
+  })
+})
+
 describe("critique patches", () => {
   const spec = (): Partial<SiteSpec> => ({ ...plannedSpec(), theme: { preset: "minimal" }, pages: [{ ...plannedSpec().pages![0]!, sections: plannedSpec().pages![0]!.sections.map((s) => ({ ...s, content: goodCopy.sections.find((c) => c.index === s.index) ?? {} })) }] })
 
@@ -267,7 +363,11 @@ describe("design", () => {
 
 describe("prompts", () => {
   it("structure prompt", () => {
-    expect(DEFAULT_STRUCTURE_PROMPT({ startupIdea: "Idea", niche: "FINTECH", targetAudience: "Freelancers", inputType: "FROM_SCRATCH" })).toMatchSnapshot()
+    const archetype = pickArchetype({ niche: "FINTECH", idea: "Invoicing software" })
+    const allowed = (t: string) => !["TESTIMONIALS", "LOGOS", "STATS", "PRICING", "TEAM", "CONTACT", "CUSTOM"].includes(t)
+    expect(
+      DEFAULT_STRUCTURE_PROMPT({ startupIdea: "Idea", niche: "FINTECH", targetAudience: "Freelancers", inputType: "FROM_SCRATCH", arc: arcText(archetype, allowed) }),
+    ).toMatchSnapshot()
   })
   it("copy prompt", () => {
     expect(

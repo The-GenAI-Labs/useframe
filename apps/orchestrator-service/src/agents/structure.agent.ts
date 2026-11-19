@@ -3,7 +3,9 @@ import type { Response } from "express"
 import { z } from "zod"
 import { sseWrite } from "@/llm/stream.js"
 import {
+  isSectionAllowed,
   isVariantOf,
+  nicheToDomain,
   repeatsLayout,
   SECTION_PURPOSES,
   SECTION_VARIANTS,
@@ -17,7 +19,10 @@ import { resolveVariants } from "@repo/site-builder"
 import { DEFAULT_STRUCTURE_PROMPT, type StructurePromptVars } from "@/prompts/structure.prompt.js"
 import type { getProviderOptionsForTier } from "@/llm/router.js"
 import { generateValidated } from "@/llm/structured.js"
-import { allowedSectionTypes, briefFactsBlock, filterSections, type ProjectBriefContext } from "@/lib/briefPipeline.js"
+import { briefFactsBlock, type ProjectBriefContext } from "@/lib/briefPipeline.js"
+import { callDomainPattern } from "@/lib/researchService.js"
+import { arcCapacity, arcFactsFor, arcSlots, arcText, orderByArc, pickArchetype, type Archetype } from "@/lib/narrative.js"
+import type { PlannerDomainPattern } from "@/prompts/planner.prompt.js"
 import { themeFromBrief } from "@/lib/designTheme.js"
 
 const VALID_SECTION_TYPES = new Set<string>(Object.keys(SECTION_VARIANTS))
@@ -58,17 +63,57 @@ export function separateLayouts<T extends Pick<Section, "type" | "variant">>(sec
   return out
 }
 
-// Closed menus, honest sections, HERO first and FOOTER last on the home page.
-function normalizeSections(raw: { type: string; variant?: string; purpose?: string }[], briefCtx: ProjectBriefContext | null, home: boolean): PlannedSection[] {
-  const known = raw.filter((s) => VALID_SECTION_TYPES.has(s.type) && s.type !== "HEADER")
-  let sections = filterSections(known, briefCtx).map((s) => ({
-    type: s.type as SectionType,
-    variant: isVariantOf(s.type as SectionType, s.variant) ? (s.variant as Section["variant"]) : undefined,
-    purpose: s.purpose?.trim().slice(0, 160) || SECTION_PURPOSES[s.type as SectionType],
-  }))
+// Without a brief there are no user facts, so proof, contact and CUSTOM
+// sections have nothing honest to show.
+const NEEDS_FACTS: SectionType[] = ["TESTIMONIALS", "LOGOS", "STATS", "PRICING", "TEAM", "CONTACT", "CUSTOM"]
+
+export function sectionAllowed(type: SectionType, briefCtx: ProjectBriefContext | null): boolean {
+  if (type === "HEADER") return false
+  return briefCtx ? isSectionAllowed(type, briefCtx.input.contentAvailability) : !NEEDS_FACTS.includes(type)
+}
+
+export function archetypeFor(request: Pick<GenerateRequest, "niche" | "startupIdea">, briefCtx: ProjectBriefContext | null): Archetype {
+  return pickArchetype({ niche: request.niche, idea: request.startupIdea, brief: briefCtx?.data })
+}
+
+// Closed menus, honest sections, the arc's order on the home page (filling
+// any required slot the model left out), FOOTER last.
+function normalizeSections(
+  raw: { type: string; variant?: string; purpose?: string }[],
+  briefCtx: ProjectBriefContext | null,
+  home: boolean,
+  archetype?: Archetype,
+): PlannedSection[] {
+  let sections = raw
+    .filter((s) => VALID_SECTION_TYPES.has(s.type) && (s.type === "FOOTER" || sectionAllowed(s.type as SectionType, briefCtx)))
+    .map((s) => ({
+      type: s.type as SectionType,
+      variant: isVariantOf(s.type as SectionType, s.variant) ? (s.variant as Section["variant"]) : undefined,
+      purpose: s.purpose?.trim().slice(0, 160) || SECTION_PURPOSES[s.type as SectionType],
+    }))
   const footer = sections.filter((s) => s.type === "FOOTER").slice(-1)
   sections = sections.filter((s) => s.type !== "FOOTER")
-  if (home) {
+  if (home && archetype) {
+    const capacity = arcCapacity(archetype, (type) => sectionAllowed(type, briefCtx), arcFactsFor(briefCtx?.data))
+    const kept = new Map<SectionType, number>()
+    sections = sections.filter((s) => {
+      const n = (kept.get(s.type) ?? 0) + 1
+      kept.set(s.type, n)
+      return n <= (capacity.get(s.type) ?? 0)
+    })
+    const have = new Map<SectionType, number>()
+    for (const s of sections) have.set(s.type, (have.get(s.type) ?? 0) + 1)
+    const seen = new Map<SectionType, number>()
+    for (const slot of archetype.arc.filter((s) => !s.optional)) {
+      const n = (seen.get(slot.type) ?? 0) + 1
+      seen.set(slot.type, n)
+      if ((have.get(slot.type) ?? 0) < n) {
+        sections.push({ type: slot.type, variant: isVariantOf(slot.type, slot.variant) ? (slot.variant as Section["variant"]) : undefined, purpose: slot.job })
+        have.set(slot.type, (have.get(slot.type) ?? 0) + 1)
+      }
+    }
+    sections = orderByArc(sections, archetype)
+  } else if (home) {
     const hero = sections.findIndex((s) => s.type === "HERO")
     if (hero > 0) sections.unshift(...sections.splice(hero, 1))
     if (hero < 0) sections.unshift({ type: "HERO", variant: undefined, purpose: SECTION_PURPOSES.HERO })
@@ -85,6 +130,7 @@ export function structureFromModelOutput(
   briefCtx: ProjectBriefContext | null,
   preferredSiteType?: SiteSpec["siteType"],
   homeTitle?: string,
+  archetype?: Archetype,
 ): Pick<SiteSpec, "siteType" | "copyFramework" | "pages"> {
   const pages = (parsed.pages ?? []).filter((p) => (PAGE_TYPES as readonly string[]).includes(p.type))
   return {
@@ -96,21 +142,20 @@ export function structureFromModelOutput(
         type: p.type as SiteSpec["pages"][number]["type"],
         slug: home ? "home" : p.slug.replace(/[^a-z0-9-]/gi, "").toLowerCase() || `page-${i}`,
         title: home && homeTitle ? homeTitle : p.title,
-        sections: normalizeSections(p.sections ?? [], briefCtx, home),
+        sections: normalizeSections(p.sections ?? [], briefCtx, home, home ? archetype : undefined),
       }
     }),
   }
 }
 
 // Issues worth one retry; anything else is fixed deterministically.
-function planIssues(plan: StructurePlan, briefCtx: ProjectBriefContext | null): string[] {
+function planIssues(plan: StructurePlan, briefCtx: ProjectBriefContext | null, archetype: Archetype): string[] {
   const issues: string[] = []
-  const allowed = new Set(briefCtx ? allowedSectionTypes(briefCtx) : [...VALID_SECTION_TYPES])
   for (const page of plan.pages) {
     page.sections.forEach((s, i) => {
       if (!VALID_SECTION_TYPES.has(s.type)) issues.push(`pages.${page.slug}.sections.${i}: unknown type "${s.type}"`)
-      else if (!allowed.has(s.type) || (!briefCtx && ["TESTIMONIALS", "LOGOS", "STATS", "PRICING", "TEAM"].includes(s.type))) {
-        issues.push(`pages.${page.slug}.sections.${i}: ${s.type} is not available (no user-provided facts)`)
+      else if (s.type !== "FOOTER" && !sectionAllowed(s.type as SectionType, briefCtx)) {
+        issues.push(`pages.${page.slug}.sections.${i}: ${s.type} is not available (no user-provided facts for it)`)
       } else if (s.variant && !isVariantOf(s.type as SectionType, s.variant)) {
         issues.push(`pages.${page.slug}.sections.${i}: "${s.variant}" is not a ${s.type} variant`)
       }
@@ -118,26 +163,56 @@ function planIssues(plan: StructurePlan, briefCtx: ProjectBriefContext | null): 
     })
   }
   const home = plan.pages.find((p) => p.type === "HOME") ?? plan.pages[0]
-  const body = home?.sections.filter((s) => s.type !== "FOOTER" && s.type !== "HEADER").length ?? 0
-  if (plan.siteType === "SINGLE_PAGE" && (body < 5 || body > 9)) issues.push(`home page needs 5-9 sections before the footer, got ${body}`)
+  if (home) {
+    const body = home.sections.filter((s) => s.type !== "FOOTER" && s.type !== "HEADER" && VALID_SECTION_TYPES.has(s.type) && sectionAllowed(s.type as SectionType, briefCtx))
+    const got = body.map((s) => s.type).join(" > ")
+    const expected = normalizeSections(body, briefCtx, true, archetype).filter((s) => s.type !== "FOOTER").map((s) => s.type).join(" > ")
+    if (got !== expected) issues.push(`home page must follow the narrative arc: expected ${expected}, got ${got}`)
+    if (plan.siteType === "SINGLE_PAGE" && (body.length < 5 || body.length > 9)) issues.push(`home page needs 5-9 sections before the footer, got ${body.length}`)
+  }
   return issues
 }
 
-export function structurePromptVars(request: GenerateRequest, briefCtx: ProjectBriefContext | null): StructurePromptVars {
+const PATTERN_TIMEOUT_MS = 5000
+
+async function domainPatternFor(niche: string): Promise<PlannerDomainPattern | null> {
+  let timer: ReturnType<typeof setTimeout> | undefined
+  const timeout = new Promise<null>((resolve) => {
+    timer = setTimeout(() => resolve(null), PATTERN_TIMEOUT_MS)
+  })
+  try {
+    return await Promise.race([callDomainPattern(nicheToDomain(niche)), timeout])
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+export async function structurePromptVars(request: GenerateRequest, briefCtx: ProjectBriefContext | null): Promise<StructurePromptVars> {
+  const archetype = archetypeFor(request, briefCtx)
+  const allowed = (type: SectionType) => sectionAllowed(type, briefCtx)
+  const pattern = await domainPatternFor(request.niche)
+  const facts = arcFactsFor(briefCtx?.data)
   return {
     startupIdea: request.startupIdea,
     niche: request.niche,
     targetAudience: request.targetAudience,
     inputType: request.inputType,
-    ...(briefCtx ? { allowedSections: allowedSectionTypes(briefCtx), briefFacts: briefFactsBlock(briefCtx) } : {}),
+    allowedSections: [...new Set([...arcSlots(archetype, allowed, facts).map((s) => s.type as string), "FOOTER"])],
+    arc: arcText(archetype, allowed, pattern, facts),
+    ...(briefCtx ? { briefFacts: briefFactsBlock(briefCtx) } : {}),
   }
 }
 
 // Validation for the blueprint's full mode: the same reading, plus no empty pages.
-export function parseStructureForBlueprint(raw: unknown, briefCtx: ProjectBriefContext | null):
+export function parseStructureForBlueprint(
+  raw: unknown,
+  briefCtx: ProjectBriefContext | null,
+  request?: Pick<GenerateRequest, "niche" | "startupIdea">,
+):
   | { ok: true; value: Pick<SiteSpec, "siteType" | "copyFramework" | "pages"> }
   | { ok: false; errors: string[] } {
-  const value = structureFromModelOutput(raw as Parameters<typeof structureFromModelOutput>[0], briefCtx, structurePreferredSiteType(briefCtx))
+  const archetype = request ? archetypeFor(request, briefCtx) : undefined
+  const value = structureFromModelOutput(raw as Parameters<typeof structureFromModelOutput>[0], briefCtx, structurePreferredSiteType(briefCtx), undefined, archetype)
   const errors: string[] = []
   if (value.pages.length === 0) errors.push("pages: at least one page is required")
   for (const page of value.pages) if (page.sections.filter((s) => s.type !== "FOOTER").length === 0) errors.push(`pages.${page.slug}: no allowed sections left`)
@@ -158,8 +233,6 @@ function sectionsFromBrief(types: string[], citations: { layout?: string; colors
     citationIds: [citations.layout, ...(s.type === "HERO" ? [citations.colors, citations.typography] : [])].filter((id): id is string => !!id),
   }))
 }
-
-const FALLBACK_TYPES = ["HERO", "FEATURES", "HOW_IT_WORKS", "FAQ", "CTA", "FOOTER"]
 
 export async function runStructureAgent(
   res: Response,
@@ -198,18 +271,19 @@ export async function runStructureAgent(
     }
   }
 
+  const archetype = archetypeFor(request, briefCtx)
   const { object } = await generateValidated({
     model,
     schema: StructurePlanSchema,
-    prompt: promptFn(structurePromptVars(request, briefCtx)),
+    prompt: promptFn(await structurePromptVars(request, briefCtx)),
     providerOptions,
     maxTokens: 3000,
     functionId: "structure-agent",
-    validate: (plan) => planIssues(plan, briefCtx),
+    validate: (plan) => planIssues(plan, briefCtx, archetype),
     onDelta: (delta) => sseWrite(res, { type: "token", delta }),
   })
 
-  const parsed = object ? structureFromModelOutput(object, briefCtx, preferredSiteType, request.name) : null
+  const parsed = object ? structureFromModelOutput(object, briefCtx, preferredSiteType, request.name, archetype) : null
   if (parsed && parsed.pages.length > 0) return { ...spec, ...parsed, citations: [] }
 
   console.warn("[structure] using the deterministic fallback structure")
@@ -222,10 +296,7 @@ export async function runStructureAgent(
         type: "HOME",
         slug: "home",
         title: request.name ?? "Home",
-        sections: normalizeSections(FALLBACK_TYPES.map((type) => ({ type })), briefCtx, true).map((s, i, all) => ({
-          ...s,
-          variant: resolveVariants(all as Section[], "minimal")[i] as Section["variant"],
-        })),
+        sections: normalizeSections([], briefCtx, true, archetype),
       },
     ],
     citations: [],

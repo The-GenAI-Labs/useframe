@@ -1,5 +1,6 @@
 import type { RetrievalResult } from "@repo/schemas"
 import { THEME_MENU } from "./rules.js"
+import { arcText, pickArchetype } from "@/lib/narrative.js"
 
 export type PlannerFinding = {
   id: string
@@ -139,8 +140,12 @@ RULES:
 4. If two findings conflict, state which you prioritized and why in that field's rationale.
 5. If a decision had no findings retrieved, make a reasonable judgment call and say so plainly in
    the rationale — do not fabricate a citation for it.
-6. The layout.sections array should reflect the domain pattern's typical sections, adjusted for
-   the specific product where the retrieved layout findings suggest a deviation.
+6. The layout.sections array follows this narrative arc for the business type (its order matters),
+   adjusted by the domain pattern's typical sections and any retrieved layout findings:
+${arcText(
+  pickArchetype({ idea: v.extracted.startupIdea, niche: v.extracted.domain.toUpperCase() }),
+  (type) => (v.brief ? v.brief.allowedSections.includes(type) : !["TESTIMONIALS", "LOGOS", "STATS", "PRICING", "TEAM", "CONTACT", "CUSTOM"].includes(type)),
+)}
 7. Respect the audience modifier's constraints (density, motion, contrast, avoid list) in your
    final decisions.
 8. Choose theme (preset, colorMode and every token) and fontPairing only from the menus below.

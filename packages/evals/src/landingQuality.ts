@@ -24,6 +24,8 @@ export type SiteScore = {
   repeatedHeadlines: number
   adjacentRepeats: number
   ctaDrift: number
+  customSections: number
+  sectionOrder: string
   distinctVariants: number
   contrastPass: boolean
   brandColourReadable: boolean
@@ -31,6 +33,7 @@ export type SiteScore = {
 }
 
 const here = path.dirname(fileURLToPath(import.meta.url))
+const MIN_DISTINCT_ORDERS = 4
 
 function strings(value: unknown, out: string[] = []): string[] {
   if (typeof value === "string") out.push(value)
@@ -42,7 +45,7 @@ function strings(value: unknown, out: string[] = []): string[] {
 export function scoreSite(result: Result, brief: Brief): SiteScore {
   const empty: SiteScore = {
     id: result.id, ok: false, schemaValid: false, placeholders: 0, emptySections: 0, limitViolations: 0, bannedPhrases: 0,
-    inventedProof: 0, repeatedHeadlines: 0, adjacentRepeats: 0, ctaDrift: 0, distinctVariants: 0, contrastPass: false, brandColourReadable: false, judge: null,
+    inventedProof: 0, repeatedHeadlines: 0, adjacentRepeats: 0, ctaDrift: 0, customSections: 0, sectionOrder: "", distinctVariants: 0, contrastPass: false, brandColourReadable: false, judge: null,
   }
   const spec = result.spec
   if (!spec?.pages || !spec.designSystem) return empty
@@ -66,6 +69,8 @@ export function scoreSite(result: Result, brief: Brief): SiteScore {
     repeatedHeadlines: count("duplicate_headline", "repeated_opening"),
     adjacentRepeats: count("adjacent_variant"),
     ctaDrift: count("cta_inconsistent"),
+    customSections: sections.filter((s) => s.type === "CUSTOM").length,
+    sectionOrder: (spec.pages.find((p) => p.type === "HOME") ?? spec.pages[0]!).sections.map((s) => s.type).filter((t) => t !== "HEADER" && t !== "FOOTER").join(" > "),
     distinctVariants: new Set(sections.map((s) => s.variant).filter(Boolean)).size,
     contrastPass: contrastPairs(theme.palette).every((p) => contrastRatio(p.fg, p.bg) >= p.min),
     brandColourReadable: primaryReadable >= 4.5,
@@ -125,6 +130,8 @@ function main() {
       repeats: sum(ok, "repeatedHeadlines"),
       adjacent: sum(ok, "adjacentRepeats"),
       cta: `${sum(ok, "ctaDrift")}/${ok.length}`,
+      custom: sum(ok, "customSections"),
+      orders: `${new Set(ok.map((r) => r.sectionOrder)).size}${ok.length >= 10 ? (new Set(ok.map((r) => r.sectionOrder)).size >= MIN_DISTINCT_ORDERS ? " (pass)" : " (fail)") : ""}`,
       variants: fmt(mean(ok.map((r) => r.distinctVariants))),
       contrast: `${ok.filter((r) => r.contrastPass).length}/${ok.length}`,
       brand: `${ok.filter((r) => r.brandColourReadable).length}/${ok.length}`,
@@ -134,7 +141,8 @@ function main() {
   const cols: [string, keyof ReturnType<typeof totals>][] = [
     ["Sites generated", "sites"], ["Schema valid", "schema"], ["Placeholder strings", "placeholders"], ["Empty sections", "empty"],
     ["Limit violations", "limits"], ["Banned phrases", "banned"], ["Invented proof", "proof"], ["Repeated headlines/openings", "repeats"],
-    ["Adjacent layout repeats", "adjacent"], ["Sites with differing primary CTA labels", "cta"], ["Distinct variants per site", "variants"], ["Contrast pass (rendered)", "contrast"],
+    ["Adjacent layout repeats", "adjacent"], ["Sites with differing primary CTA labels", "cta"], ["CUSTOM sections (no brief content exists)", "custom"],
+    [`Distinct home-page section orders (target ≥ ${MIN_DISTINCT_ORDERS})`, "orders"], ["Distinct variants per site", "variants"], ["Contrast pass (rendered)", "contrast"],
     ["Brand colour carries readable text", "brand"], ["LLM judge (1-10)", "judge"],
   ]
   const tb = totals(b)
@@ -142,6 +150,8 @@ function main() {
   const tp = totals(p)
   lines.push("", `| Check | Before (${before?.tier ?? "–"}) | After (${after?.tier ?? "–"}) |${paid ? ` After (${paid.tier}, ${p.length} briefs) |` : ""}`, `|---|---|---|${paid ? "---|" : ""}`)
   for (const [label, key] of cols) lines.push(`| ${label} | ${tb[key]} | ${ta[key]} |${paid ? ` ${tp[key]} |` : ""}`)
+  lines.push("", "Home-page section order per brief (after):")
+  for (const s of a) lines.push(`- ${s.id}: ${s.sectionOrder || "–"}`)
   lines.push("", "Cost per site:")
   for (const run of [before, after, paid]) if (run) lines.push(`- ${usageLine(run)}`)
   for (const run of [before, after, paid]) {

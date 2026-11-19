@@ -13,6 +13,7 @@ export const PERSONA = `You are a senior product designer and conversion copywri
 export const HONESTY_RULES = `HONESTY (absolute):
 - Never invent testimonials, customer names, logos, customer counts, metrics, percentages, ratings, awards, certifications, press mentions or prices.
 - Numbers and proof may appear only when they are in the facts given to you, copied exactly.
+- Never invent product capabilities, integrations, specifications, ingredients, quantities, procedures or service details. Describe only what the facts state or directly imply; when facts are thin, write fewer, broader items instead of inventing specifics.
 - Proof sections (TESTIMONIALS, LOGOS, STATS, PRICING, TEAM) are filled by code from user-provided facts; never write them yourself.`
 
 export const ICON_MENU = Object.keys(ICONS).filter((name) => !["dot", "x", "plus", "chevron-right", "arrow-right", "quote"].includes(name))

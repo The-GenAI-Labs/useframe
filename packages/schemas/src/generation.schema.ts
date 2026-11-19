@@ -157,7 +157,7 @@ export function contentContract(type: SectionType, variant?: string): ContentCon
           variant === "bento"
             ? { ...FEATURE_ITEMS, min: 4, max: 6 }
             : variant === "alternating"
-              ? { ...FEATURE_ITEMS, min: 3, max: 4 }
+              ? { ...FEATURE_ITEMS, min: 2, max: 4 }
               : FEATURE_ITEMS,
       };
     case "HOW_IT_WORKS":
@@ -196,7 +196,7 @@ export const SECTION_PURPOSES: Record<SectionType, string> = {
   TEAM: "Puts real faces behind the product.",
   CONTACT: "Gives a direct way to reach a person.",
   FOOTER: "Closes the page with navigation and legal basics.",
-  CUSTOM: "Covers a product-specific topic the standard sections do not.",
+  CUSTOM: "Explains why this beats how people solve it today, from the user's own differentiators.",
 };
 
 export function isVariantOf(type: SectionType, variant: string | undefined): boolean {

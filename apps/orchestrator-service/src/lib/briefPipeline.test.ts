@@ -47,6 +47,12 @@ describe("brief-driven generation", () => {
     expect(deterministicContent("PRICING", ctx)?.plans).toEqual([])
   })
 
+  it("offers CUSTOM only when the user wrote differentiators or a current alternative", () => {
+    expect(allowedSectionTypes(ctxFor({ ...base, differentiators: [] }))).not.toContain("CUSTOM")
+    expect(allowedSectionTypes(ctxFor({ ...base, differentiators: ["Checks rotas against labour rules"] }))).toContain("CUSTOM")
+    expect(allowedSectionTypes(ctxFor({ ...base, differentiators: [], currentAlternative: "Spreadsheets and WhatsApp" }))).toContain("CUSTOM")
+  })
+
   it("fills stats and logos only from the user's attested proof", () => {
     const ctx = ctxFor({
       ...base,

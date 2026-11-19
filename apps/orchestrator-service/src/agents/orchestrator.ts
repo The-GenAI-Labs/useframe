@@ -156,8 +156,8 @@ export async function runOrchestrator(
         spec,
         briefCtx,
         full: {
-          prompt: DEFAULT_STRUCTURE_PROMPT(structurePromptVars(request, briefCtx)),
-          parse: (raw) => parseStructureForBlueprint(raw, briefCtx),
+          prompt: DEFAULT_STRUCTURE_PROMPT(await structurePromptVars(request, briefCtx)),
+          parse: (raw) => parseStructureForBlueprint(raw, briefCtx, request),
         },
       });
       spec = media.structure

@@ -31,6 +31,7 @@ WRITING RULES:
 HONESTY (absolute):
 - Never invent testimonials, customer names, logos, customer counts, metrics, percentages, ratings, awards, certifications, press mentions or prices.
 - Numbers and proof may appear only when they are in the facts given to you, copied exactly.
+- Never invent product capabilities, integrations, specifications, ingredients, quantities, procedures or service details. Describe only what the facts state or directly imply; when facts are thin, write fewer, broader items instead of inventing specifics.
 - Proof sections (TESTIMONIALS, LOGOS, STATS, PRICING, TEAM) are filled by code from user-provided facts; never write them yourself.
 
 GOLD-STANDARD EXAMPLES (tone and density only; a fictional product called Brightdesk, booking software for dental clinics. Never copy their words):
@@ -62,7 +63,7 @@ RUBRIC (score each 1-10):
 - hierarchy: one clear message per section, headlines lead, bodies support
 - repetition: no repeated headlines, openings or ideas
 - ctaConsistency: one primary CTA label, verb-first, used everywhere
-- proofHonesty: no invented numbers, customers, ratings or awards
+- proofHonesty: no invented numbers, customers, ratings, awards, or capabilities and details the facts do not support
 - lengthLimits: every field within its limit
 - accessibility: contrast and body size from the measurements, plain language for the audience
 - visualRhythm: section variants vary; no two neighbours share a layout
@@ -118,6 +119,7 @@ WRITING RULES:
 HONESTY (absolute):
 - Never invent testimonials, customer names, logos, customer counts, metrics, percentages, ratings, awards, certifications, press mentions or prices.
 - Numbers and proof may appear only when they are in the facts given to you, copied exactly.
+- Never invent product capabilities, integrations, specifications, ingredients, quantities, procedures or service details. Describe only what the facts state or directly imply; when facts are thin, write fewer, broader items instead of inventing specifics.
 - Proof sections (TESTIMONIALS, LOGOS, STATS, PRICING, TEAM) are filled by code from user-provided facts; never write them yourself.
 
 Respond with JSON: { "scores": { "clarity", "specificity", "hierarchy", "repetition", "ctaConsistency", "proofHonesty", "lengthLimits", "accessibility", "visualRhythm" }, "patches": [ ... ] }
@@ -186,8 +188,15 @@ Niche: FINTECH
 Target audience: Freelancers
 Input type: FROM_SCRATCH
 
-SECTION TYPES you may use (no others): HERO, FEATURES, HOW_IT_WORKS, FAQ, CTA, CUSTOM, CONTACT, FOOTER
-Proof sections (TESTIMONIALS, LOGOS, STATS, PRICING, TEAM) are unavailable: there are no user-provided facts for them.
+SECTION TYPES you may use (no others): HERO, FEATURES, HOW_IT_WORKS, FAQ, CTA, FOOTER
+Proof sections (TESTIMONIALS, LOGOS, STATS, PRICING, TEAM), CONTACT and CUSTOM appear only when listed: they need facts the user supplied.
+
+NARRATIVE ARC for a product-led software (use these sections in this order; FOOTER follows):
+1. HERO — What it is, who it is for, why it is better.
+2. FEATURES (suggested variant: bento) — The core capabilities, shown before anything else.
+3. HOW_IT_WORKS — How a team gets from sign-up to value.
+4. FAQ — Setup, data, pricing and fit objections.
+5. CTA — The primary action once more, with the main benefit.
 
 VARIANTS (choose one per section, only from its own list):
 HEADER: bar | centered
@@ -206,8 +215,8 @@ FOOTER: columns | minimal
 CUSTOM: prose
 
 RULES:
-- Single page: one HOME page with HERO first, then 5-8 sections, then FOOTER last. The header is added automatically.
-- Follow the classic arc: promise (HERO) → proof, if available → how it works → value detail (FEATURES) → objection handling (FAQ) → final CTA → FOOTER.
+- The home page uses exactly the arc's sections in the arc's order, then FOOTER. The header is added automatically.
+- A suggested variant is a starting point; pick another from the same list if it suits this product better.
 - Two neighbouring sections must not use the same layout (e.g. a card grid next to another card grid).
 - Each section gets a one-line purpose: the job it does for this visitor, specific to this product (max 140 characters).
 - Multi page only when the product clearly needs separate pages (2-4 pages, each with its own HERO-like opener).

@@ -14,7 +14,7 @@ export const CRITIQUE_RUBRIC = `RUBRIC (score each 1-10):
 - hierarchy: one clear message per section, headlines lead, bodies support
 - repetition: no repeated headlines, openings or ideas
 - ctaConsistency: one primary CTA label, verb-first, used everywhere
-- proofHonesty: no invented numbers, customers, ratings or awards
+- proofHonesty: no invented numbers, customers, ratings, awards, or capabilities and details the facts do not support
 - lengthLimits: every field within its limit
 - accessibility: contrast and body size from the measurements, plain language for the audience
 - visualRhythm: section variants vary; no two neighbours share a layout`

@@ -33,6 +33,7 @@ export function contractText(type: SectionType, variant?: string): string {
       : "no items",
   ]
   if (type === "CONTACT") parts.push("contact details are added by code; do not write emails or phone numbers")
+  if (type === "CUSTOM") parts.push("write only from the brief's differentiators and current alternative; no invented procedures, examples, data or anecdotes")
   return parts.filter(Boolean).join("; ")
 }
 
