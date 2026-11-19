@@ -708,7 +708,7 @@ a.contact-card:hover { border-color: var(--c-primary); }
 
 /* Motion */
 @media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
+  html.uf-motion { scroll-behavior: smooth; }
   .uf-motion [data-reveal] { opacity: 0; transform: translateY(var(--reveal-y)); transition: opacity var(--reveal-dur) var(--ease), transform var(--reveal-dur) var(--ease); }
   .uf-motion [data-reveal].is-in { opacity: 1; transform: none; }
   .faq-item[open] .faq-a { animation: faq-open var(--dur) var(--ease); }

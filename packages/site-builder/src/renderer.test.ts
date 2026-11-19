@@ -163,6 +163,14 @@ describe("page chrome", () => {
     expect(html).toContain(`class="skip-link" href="#main"`);
   });
 
+  it("keeps programmatic scrolling instant and brand initials alphanumeric", async () => {
+    const { pages, css } = await renderSpec(pageSpec([{ type: "HERO", index: 0, content: { headline: "Hi" } }], { pages: [{ type: "HOME", slug: "home", title: "[beta] Acme", sections: [{ type: "HERO", index: 0 }] }] }));
+    // Smooth scrolling is opt-in for visitors only, so automated full-page captures are not mid-animation.
+    expect(css).not.toMatch(/(^|[\s}])html\s*\{\s*scroll-behavior/);
+    expect(css).toContain("html.uf-motion { scroll-behavior: smooth; }");
+    expect(pages[0]).toContain(`<span class="brand-mark" aria-hidden="true">B</span>`);
+  });
+
   it("links pages in multi-page sites and reuses the home footer", async () => {
     const [, , , , , fintech] = fixtures();
     const { pages } = await renderSpec(fintech!.spec);

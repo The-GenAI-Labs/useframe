@@ -116,6 +116,7 @@ function seedOf(text: string): number {
 
 function initials(name: string): string {
   const letters = name
+    .replace(/[^\p{L}\p{N}\s]/gu, "")
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
