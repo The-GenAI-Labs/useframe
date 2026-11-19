@@ -1,4 +1,5 @@
 import type { RetrievalResult } from "@repo/schemas"
+import { THEME_MENU } from "./rules.js"
 
 export type PlannerFinding = {
   id: string
@@ -142,9 +143,15 @@ RULES:
    the specific product where the retrieved layout findings suggest a deviation.
 7. Respect the audience modifier's constraints (density, motion, contrast, avoid list) in your
    final decisions.
+8. Choose theme (preset, colorMode and every token) and fontPairing only from the menus below.
+   Map findings onto them where they apply: minimum body size → typography.minSize, line length and
+   density → density, motion → motionIntensity, contrast → colorContrast; cite those findings as usual.
+   typography.primary/secondary must be the pairing's two fonts. Never default to indigo.
+
+${THEME_MENU}
 ${
   v.brief
-    ? `8. layout.sections may only use these section types: ${v.brief.allowedSections.join(", ")}.
+    ? `9. layout.sections may only use these section types: ${v.brief.allowedSections.join(", ")}.
    Sections that need proof the user hasn't given (testimonials, pricing plans, team) are not available.
 
 ${v.brief.facts}`

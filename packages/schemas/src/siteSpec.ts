@@ -36,6 +36,8 @@ export const SectionSchema = z.object({
   index: z.number(),
   // Unknown or mismatched variants fall back to the type's default at render time.
   variant: z.enum(ALL_SECTION_VARIANTS).optional().catch(undefined),
+  // The job this section does for the visitor; guides copy and critique.
+  purpose: z.string().optional(),
   content: z
     .object({
       eyebrow: z.string().optional(),

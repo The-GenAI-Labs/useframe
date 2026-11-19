@@ -7,17 +7,20 @@ export function toSnapshot(spec: SiteSpec): SiteSpec {
     siteType: spec.siteType,
     copyFramework: spec.copyFramework,
     designSystem: spec.designSystem ?? {
-      primaryColor: "#6366f1",
-      secondaryColor: "#1e1b4b",
-      accentColor: "#a5b4fc",
-      fontPrimary: "Inter",
-      fontSecondary: "DM Sans",
+      primaryColor: "#0F766E",
+      secondaryColor: "#E6F2F1",
+      accentColor: "#D97706",
+      fontPrimary: "Manrope",
+      fontSecondary: "Inter",
       spacing: "comfortable",
       borderRadius: "md",
       animationStyle: "subtle",
     },
     pages: spec.pages ?? [],
     citations: spec.citations ?? [],
+    ...(spec.theme ? { theme: spec.theme } : {}),
+    // The renderer reads the brief's minimum text size and touch target.
+    ...(spec.designBrief ? { designBrief: spec.designBrief } : {}),
     ...(spec.media && Object.keys(spec.media).length > 0 ? { media: spec.media } : {}),
   }
 }

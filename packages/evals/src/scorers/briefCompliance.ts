@@ -3,11 +3,9 @@ import type { SiteSpec, DesignBrief } from "@repo/schemas"
 export type BriefComplianceResult = { compliant: boolean; violations: string[] }
 
 /**
- * Standalone duplicate of apps/orchestrator-service/src/lib/critiqueChecks.ts's
- * diffSpecAgainstBrief — evals can't import from apps/orchestrator-service
- * (not a publishable workspace dependency), so this is intentionally
- * duplicated rather than imported, matching this monorepo's existing
- * precedent for small duplications over a cross-app import.
+ * Standalone brief-compliance check. Evals can't import from
+ * apps/orchestrator-service (not a workspace dependency), so this small
+ * check lives here rather than behind a cross-app import.
  */
 export function checkBriefCompliance(spec: Partial<SiteSpec>, brief: DesignBrief): BriefComplianceResult {
   const violations: string[] = []

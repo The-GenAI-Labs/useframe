@@ -1,25 +1,27 @@
-import { generateText } from "ai"
 import type { LanguageModelV1 } from "ai"
 import type { Response } from "express"
+import { z } from "zod"
 import { sseWrite } from "@/llm/stream.js"
-import type { SiteSpec } from "@repo/schemas"
-import type { GenerateRequest } from "@repo/schemas"
-import {
-  DEFAULT_DESIGN_PROMPT,
-  type DesignPromptVars,
-} from "@/prompts/design.prompt.js"
+import { DesignTokensSchema, FONT_PAIRING_IDS, THEME_PRESETS, type GenerateRequest, type SiteSpec } from "@repo/schemas"
+import { DEFAULT_DESIGN_PROMPT, type DesignPromptVars } from "@/prompts/design.prompt.js"
 import type { getProviderOptionsForTier } from "@/llm/router.js"
+import { generateValidated } from "@/llm/structured.js"
+import { colorIssues, designSystemFrom, fallbackDesign, fontsFor, themeFromBrief, type DesignChoice } from "@/lib/designTheme.js"
 
-const FALLBACK_DESIGN_SYSTEM: SiteSpec["designSystem"] = {
-  primaryColor: "#6366f1",
-  secondaryColor: "#1e1b4b",
-  accentColor: "#a5b4fc",
-  fontPrimary: "Inter",
-  fontSecondary: "DM Sans",
-  spacing: "comfortable",
-  borderRadius: "md",
-  animationStyle: "subtle",
-}
+const HEX = z.string().regex(/^#[0-9a-fA-F]{6}$/, "6-digit hex like #1A7F5A")
+
+export const DesignChoiceSchema = z.object({
+  primaryColor: HEX,
+  secondaryColor: HEX,
+  accentColor: HEX,
+  fontPairing: z.enum(FONT_PAIRING_IDS),
+  theme: z.object({
+    preset: z.enum(THEME_PRESETS),
+    colorMode: z.enum(["light", "dark"]),
+    ...DesignTokensSchema.shape,
+  }),
+  rationale: z.string(),
+})
 
 export async function runDesignAgent(
   res: Response,
@@ -35,51 +37,51 @@ export async function runDesignAgent(
     message: "Applying design system...",
   })
 
-  // When a DesignBrief was approved via the Research step, its colors and
-  // typography are already grounded in retrieved research — copy them
-  // directly instead of asking the model to invent a design system from
-  // scratch. spacing/borderRadius aren't part of the brief, so they keep
-  // sane fallback defaults either way.
+  // An approved DesignBrief's colours and type are grounded in research, so
+  // they are used as-is; the theme comes from the brief or is derived from it.
   if (spec.designBrief) {
     const brief = spec.designBrief
+    const theme = themeFromBrief(brief, request.niche)
+    const base = designSystemFrom({ ...fallbackDesign(request.niche), theme })
     return {
       ...spec,
+      theme,
       designSystem: {
-        ...FALLBACK_DESIGN_SYSTEM,
+        ...base,
         primaryColor: brief.colors.primary,
         secondaryColor: brief.colors.secondary,
         accentColor: brief.colors.accent,
-        fontPrimary: brief.typography.primary,
-        fontSecondary: brief.typography.secondary,
-        animationStyle: brief.motion,
+        ...fontsFor(brief.fontPairing, brief.typography),
       },
       citations: brief.citations,
     }
   }
 
-  const prompt = promptFn({
-    startupIdea: request.startupIdea,
-    niche: request.niche,
-    targetAudience: request.targetAudience,
-  })
-
-  const { text } = await generateText({
+  const sectionPlan = spec.pages?.flatMap((p) => p.sections.map((s) => `${s.type}${s.variant ? `/${s.variant}` : ""}`)).join(", ")
+  const { object, issues } = await generateValidated({
     model,
-    prompt,
-    maxTokens: 500,
+    schema: DesignChoiceSchema,
+    prompt: promptFn({
+      startupIdea: request.startupIdea,
+      niche: request.niche,
+      targetAudience: request.targetAudience,
+      brandPersonality: request.brandPersonality,
+      pricePositioning: request.pricePositioning,
+      sectionPlan,
+    }),
     providerOptions,
-    experimental_telemetry: { isEnabled: true, functionId: "design-agent" },
+    maxTokens: 1500,
+    functionId: "design-agent",
+    validate: colorIssues,
   })
 
-  let designSystem = FALLBACK_DESIGN_SYSTEM
-  try {
-    const jsonMatch = text.match(/\{[\s\S]*\}/)
-    if (jsonMatch) {
-      const parsed = JSON.parse(jsonMatch[0])
-      designSystem = { ...FALLBACK_DESIGN_SYSTEM, ...parsed }
-    }
-  } catch {
-  }
-
-  return { ...spec, designSystem }
+  // Schema-valid but with colour problems: keep the theme and fonts, swap the colours.
+  const fallback = fallbackDesign(request.niche)
+  const chosen: DesignChoice = !object
+    ? fallback
+    : issues.length === 0
+      ? object
+      : { ...object, primaryColor: fallback.primaryColor, secondaryColor: fallback.secondaryColor, accentColor: fallback.accentColor }
+  if (!object || issues.length > 0) console.warn(`[design] fell back for ${object ? "colours" : "the whole design"} (${issues.length} issues)`)
+  return { ...spec, theme: chosen.theme, designSystem: designSystemFrom(chosen) }
 }

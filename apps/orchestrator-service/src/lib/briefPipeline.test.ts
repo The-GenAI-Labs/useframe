@@ -40,8 +40,23 @@ describe("brief-driven generation", () => {
       spec([{ type: "TESTIMONIALS", index: 0, content: { headline: "x", items: [{ title: "Tim Cook", description: "Invented" }] } }]),
       ctx,
     )
-    expect(out.pages![0]!.sections[0]!.content!.items).toEqual([{ title: "Ana Ruiz, Designer", description: "“Saved my weekends.”" }])
+    expect(out.pages![0]!.sections[0]!.content!.items).toEqual([
+      { title: "Ana Ruiz, Designer", description: "“Saved my weekends.”", author: "Ana Ruiz", role: "Designer" },
+    ])
     expect(deterministicContent("PRICING", ctx)?.items).toEqual([])
+    expect(deterministicContent("PRICING", ctx)?.plans).toEqual([])
+  })
+
+  it("fills stats and logos only from the user's attested proof", () => {
+    const ctx = ctxFor({
+      ...base,
+      metrics: [{ value: "4,200", label: "Invoices sent", sourceNote: "Internal dashboard, May" }],
+      trustedBy: ["Northwind"],
+      proofAttested: true,
+    })
+    expect(deterministicContent("STATS", ctx)).toEqual({ stats: [{ value: "4,200", label: "Invoices sent" }] })
+    expect(deterministicContent("LOGOS", ctx)).toEqual({ headline: "Trusted by", logos: [{ name: "Northwind" }] })
+    expect(filterSections([{ type: "STATS" }, { type: "LOGOS" }], ctxFor(base))).toEqual([])
   })
 
   it("sets the user's button and strips competitor names", () => {

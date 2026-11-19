@@ -204,7 +204,7 @@ export async function runOrchestrator(
       stage: "CRITIQUE",
       message: "Running critique pass...",
     });
-    spec = await runCritiqueAgent(spec, request, model, providerOptions);
+    spec = await runCritiqueAgent(spec, request, model, providerOptions, undefined, briefCtx);
     spec = applyBriefToSpec(spec, briefCtx);
 
     if (media.jobId) {

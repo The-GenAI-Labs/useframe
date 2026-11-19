@@ -16,6 +16,7 @@ export default defineConfig({
       "src/lib/siteMedia.test.ts",
       "src/lib/planCitations.test.ts",
       "src/prompts/planner.prompt.test.ts",
+      "src/agents/generation.test.ts",
     ],
   },
 });

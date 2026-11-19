@@ -9,7 +9,8 @@
     "check-types": "tsc --noEmit",
     "eval:retrieval": "tsx retrieval/run.ts",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "eval:landing": "tsx src/landingQuality.ts"
   },
   "dependencies": {
     "@repo/schemas": "workspace:*",
@@ -17,7 +18,8 @@
     "jsonwebtoken": "^9.0.2",
     "zod": "^3.25.76",
     "@repo/rag": "workspace:*",
-    "@repo/jev": "workspace:*"
+    "@repo/jev": "workspace:*",
+    "@repo/site-builder": "workspace:*"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.7",
