@@ -58,6 +58,8 @@ export type ContentAvailability = {
   competitorsListed: boolean
   formHandler: boolean
   publicContact: boolean
+  // User-written "why us" material a CUSTOM section can be built from.
+  narrative: boolean
 }
 
 export function contentAvailability(data: BriefData, caps: BuilderCapabilities): ContentAvailability {
@@ -71,6 +73,7 @@ export function contentAvailability(data: BriefData, caps: BuilderCapabilities):
     formHandler: caps.formHandler,
     publicContact:
       (!!data.contactEmail && data.showContactPublicly !== false) || !isBlankValue(data.phone),
+    narrative: !isBlankValue(data.differentiators) || !isBlankValue(data.currentAlternative),
   }
 }
 
@@ -79,9 +82,12 @@ export function contentAvailability(data: BriefData, caps: BuilderCapabilities):
 // stripped if a model proposes it anyway. TEAM has no brief data yet.
 export const SECTION_REQUIRES_BRIEF: Partial<Record<SectionType, (keyof ContentAvailability | "unavailable")[]>> = {
   TESTIMONIALS: ["testimonials"],
+  STATS: ["metrics"],
+  LOGOS: ["trustedBy"],
   PRICING: ["pricingPlans"],
   CONTACT: ["publicContact"],
   TEAM: ["unavailable"],
+  CUSTOM: ["narrative"],
 }
 
 export function isSectionAllowed(type: string, availability: ContentAvailability): boolean {

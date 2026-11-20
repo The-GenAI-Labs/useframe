@@ -156,8 +156,8 @@ export async function runOrchestrator(
         spec,
         briefCtx,
         full: {
-          prompt: DEFAULT_STRUCTURE_PROMPT(structurePromptVars(request, briefCtx)),
-          parse: (raw) => parseStructureForBlueprint(raw, briefCtx),
+          prompt: DEFAULT_STRUCTURE_PROMPT(await structurePromptVars(request, briefCtx)),
+          parse: (raw) => parseStructureForBlueprint(raw, briefCtx, request),
         },
       });
       spec = media.structure
@@ -204,7 +204,7 @@ export async function runOrchestrator(
       stage: "CRITIQUE",
       message: "Running critique pass...",
     });
-    spec = await runCritiqueAgent(spec, request, model, providerOptions);
+    spec = await runCritiqueAgent(spec, request, model, providerOptions, undefined, briefCtx);
     spec = applyBriefToSpec(spec, briefCtx);
 
     if (media.jobId) {

@@ -1,6 +1,14 @@
 "use client"
 
 import type { PipelineStepId, PipelineStepStatus } from "@/lib/api/services/pipeline.service"
+import { Hint } from "@/components/ui/hint"
+
+const STEP_HINTS: Record<PipelineStepId, string> = {
+  RESEARCH: "Cited findings, a palette and your competitors",
+  WEBSITE: "Build the site from your research",
+  SEO: "Check titles, headings, alt text and speed",
+  DEPLOY: "Publish settings and your domain",
+}
 
 export type PipelineToggleStep = {
   id: PipelineStepId
@@ -52,13 +60,17 @@ export function PipelineToggle({ steps, activeStep, onSelectStep, interactive = 
         const isApproved = step.status === "APPROVED"
         const clickable = interactive && !isLocked
 
-        return (
+        const hint = step.hardLocked
+          ? step.hardLockedReason ?? "Locked"
+          : isSequenceLocked
+            ? "Unlocks when the previous step is approved"
+            : STEP_HINTS[step.id]
+
+        const button = (
           <button
-            key={step.id}
             type="button"
             disabled={!clickable}
             onClick={() => clickable && onSelectStep?.(step.id)}
-            title={step.hardLocked ? step.hardLockedReason : undefined}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-[12.5px] font-semibold transition-all ${
               clickable ? "cursor-pointer" : "cursor-not-allowed"
             } ${
@@ -74,6 +86,11 @@ export function PipelineToggle({ steps, activeStep, onSelectStep, interactive = 
             {isApproved && !isActive && <CheckIcon />}
             {step.label}
           </button>
+        )
+        return (
+          <Hint key={step.id} label={hint} side="bottom">
+            {clickable ? button : <span className="inline-flex">{button}</span>}
+          </Hint>
         )
       })}
     </div>

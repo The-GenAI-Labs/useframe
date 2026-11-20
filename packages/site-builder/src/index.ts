@@ -1,16 +1,29 @@
-import { safeHref, type ResolvedMediaAsset, type Section, type SiteSpec } from "@repo/schemas";
+import { type ResolvedMediaAsset, type Section, type SiteSpec } from "@repo/schemas";
 import {
   createMediaContext,
-  hasBoundSlot,
   listMediaSlots,
   MEDIA_PLAYBACK_JS,
-  renderSlotMedia,
-  slotIdOf,
-  slotsForSection,
+  sectionIdOf,
   type MediaFileRef,
   type MediaRenderContext,
   type MediaTarget,
 } from "./media.js";
+import {
+  contactMethods,
+  defaultSiteContext,
+  deriveBrand,
+  navLabel,
+  resolveVariants,
+  sectionToJsx,
+  siteHref,
+  willRender,
+  type Band,
+  type SiteContext,
+  type SiteLink,
+} from "./sections.js";
+import { SITE_UI_JS } from "./siteUi.js";
+import { buildDesignSystemCss } from "./theme/css.js";
+import { googleFontsHref, resolveTheme, type ResolvedTheme } from "./theme/theme.js";
 
 export type SeoFiles = {
   robotsTxt?: string;
@@ -18,17 +31,6 @@ export type SeoFiles = {
 };
 
 export type GeneratedFile = { path: string; content: string };
-
-// User- and model-supplied strings reach generated source code, so every
-// value is emitted as a JS string literal inside a JSX expression (React then
-// escapes it as text) and every href goes through safeHref.
-function jsxText(value: unknown): string {
-  return `{${JSON.stringify(typeof value === "string" ? value : "")}}`;
-}
-
-function jsxHref(value: unknown): string {
-  return `{${JSON.stringify(safeHref(value) ?? "#")}}`;
-}
 
 export function escapeHtml(value: string): string {
   return value
@@ -39,156 +41,118 @@ export function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
-function cssColor(value: string, fallback: string): string {
-  return /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(value) ? value : fallback;
-}
-
-export function cssFontName(value: string): string {
-  const cleaned = value.replace(/[^A-Za-z0-9 -]/g, "").trim().slice(0, 60);
-  return cleaned || "Inter";
-}
-
 export function cssVars(ds: SiteSpec["designSystem"]): string {
-  return `:root {
-  --primary: ${cssColor(ds.primaryColor, "#2563EB")};
-  --secondary: ${cssColor(ds.secondaryColor, "#F1F5F9")};
-  --accent: ${cssColor(ds.accentColor, "#F97316")};
-  --font-primary: "${cssFontName(ds.fontPrimary)}", system-ui, sans-serif;
-  --font-secondary: "${cssFontName(ds.fontSecondary)}", system-ui, sans-serif;
-  --radius: ${ds.borderRadius === "none" ? "0" : ds.borderRadius === "sm" ? "4px" : ds.borderRadius === "lg" ? "12px" : ds.borderRadius === "full" ? "9999px" : "8px"};
+  return buildDesignSystemCss(resolveTheme({ designSystem: ds }));
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: var(--font-primary);
-  color: #111;
-  background: #fff;
-  line-height: 1.6;
-}
-`;
-}
+type Page = SiteSpec["pages"][number];
 
-type SectionMedia = { ctx: MediaRenderContext; pageSlug: string };
-
-function slotMarkup(media: SectionMedia | undefined, section: Section, key: string): string {
-  if (!media) return "";
-  const slot = slotsForSection(section).find((s) => s.key === key);
-  return slot ? renderSlotMedia(media.ctx, slotIdOf(media.pageSlug, section, key), slot) : "";
+function pageBands(sections: Section[]): Band[] {
+  let n = 0;
+  return sections.map((s) => {
+    if (s.type === "STATS") return "tint";
+    if (s.type === "HERO" || s.type === "LOGOS" || s.type === "CTA") return "base";
+    return n++ % 2 === 0 ? "base" : "subtle";
+  });
 }
 
-function itemCards(items: NonNullable<Section["content"]>["items"], itemMedia: (i: number) => string): string {
-  return (items ?? [])
-    .map((item, i) => {
-      const visual = itemMedia(i);
-      return `<div style={{ padding: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "var(--radius)" }}>
-      ${visual ? `<div style={{ marginBottom: "1rem" }}>${visual}</div>` : ""}<h3 style={{ fontWeight: 600, marginBottom: ".5rem" }}>${jsxText(item.title)}</h3>
-      <p style={{ color: "#6b7280", fontSize: ".9rem" }}>${jsxText(item.description)}</p>
-    </div>`;
-    })
-    .join("\n    ");
-}
-
-const ITEMS_GRID = `display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "2rem"`;
-
-export function sectionToJsx(section: Section, media?: SectionMedia): string {
-  const c = section.content ?? {};
-  const headline = c.headline ?? section.type;
-  const subheadline = c.subheadline ?? "";
-  const body = c.body ?? "";
-  const ctaPrimary = c.cta?.primary ?? "";
-  const ctaHref = jsxHref(c.cta?.primaryHref);
-  const items = c.items ?? [];
-  const itemMedia = (i: number) => slotMarkup(media, section, `item-${i}`);
-
-  // Only emitted when a section actually carries citations, so generated
-  // markup stays clean for the common case. Consumed by the citationHover.js
-  // script this same package injects via buildSiteFiles — one shared
-  // definition keeps the WebContainer preview and the real deployed build
-  // from ever drifting apart on this.
-  const citationAttr =
-    section.citationIds && section.citationIds.length > 0
-      ? ` data-citation-ids={${JSON.stringify(JSON.stringify(section.citationIds))}}`
-      : "";
-
-  // Background media sits at z 0, its scrim at z 1 and the content above both.
-  const background = slotMarkup(media, section, "background");
-  const layered = background ? `position: "relative", overflow: "hidden", ` : "";
-  const front = (inner: string) =>
-    background ? `<div style={{ position: "relative", zIndex: 2 }}>${inner}</div>` : inner;
-
-  switch (section.type) {
-    case "HERO": {
-      const visual = slotMarkup(media, section, "visual");
-      return `
-<section${citationAttr} style={{ ${layered}padding: "80px 24px", textAlign: "center", background: "var(--primary)", color: "#fff" }}>
-  ${background}${front(`
-  <h1 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 800, marginBottom: "1rem" }}>${jsxText(headline)}</h1>
-  ${subheadline ? `<p style={{ fontSize: "1.25rem", opacity: 0.85, marginBottom: "2rem" }}>${jsxText(subheadline)}</p>` : ""}
-  ${ctaPrimary ? `<a href=${ctaHref} style={{ display: "inline-block", padding: "14px 32px", background: "#fff", color: "var(--primary)", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${jsxText(ctaPrimary)}</a>` : ""}
-  ${visual ? `<div style={{ maxWidth: "960px", margin: "2.5rem auto 0" }}>${visual}</div>` : ""}`)}
-</section>`;
-    }
-
-    case "FEATURES":
-      return `
-<section${citationAttr} style={{ padding: "80px 24px", maxWidth: "1100px", margin: "0 auto" }}>
-  <h2 style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center", marginBottom: "3rem" }}>${jsxText(headline)}</h2>
-  <div style={{ ${ITEMS_GRID} }}>
-    ${itemCards(items, itemMedia)}
-  </div>
-</section>`;
-
-    case "CTA":
-      return `
-<section${citationAttr} style={{ ${layered}padding: "80px 24px", background: "var(--accent)", textAlign: "center" }}>
-  ${background}${front(`
-  <h2 style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "1rem" }}>${jsxText(headline)}</h2>
-  ${body ? `<p style={{ marginBottom: "2rem", color: "#374151" }}>${jsxText(body)}</p>` : ""}
-  ${ctaPrimary ? `<a href=${ctaHref} style={{ display: "inline-block", padding: "14px 32px", background: "var(--primary)", color: "#fff", borderRadius: "var(--radius)", fontWeight: 700, textDecoration: "none" }}>${jsxText(ctaPrimary)}</a>` : ""}`)}
-</section>`;
-
-    case "FOOTER":
-      return `
-<footer${citationAttr} style={{ padding: "2rem 24px", borderTop: "1px solid #e5e7eb", textAlign: "center", color: "#9ca3af", fontSize: ".85rem" }}>
-  <p>${jsxText(headline || "© 2025 All rights reserved.")}</p>
-</footer>`;
-
-    default: {
-      const logo = slotMarkup(media, section, "logo");
-      const showcase = slotMarkup(media, section, "showcase");
-      // Item cards appear only when an item has media, so media-less sections render as before.
-      const cards = items.some((_, i) => hasBoundSlot(media?.ctx, media ? slotIdOf(media.pageSlug, section, `item-${i}`) : ""))
-        ? `<div style={{ ${ITEMS_GRID}, marginTop: "2rem" }}>
-    ${itemCards(items, itemMedia)}
-  </div>`
-        : "";
-      return `
-<section${citationAttr} style={{ ${layered}padding: "60px 24px", maxWidth: "${cards || showcase ? "1100px" : "900px"}", margin: "0 auto" }}>
-  ${background}${front(`
-  ${logo ? `<div style={{ marginBottom: "1rem" }}>${logo}</div>` : ""}<h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1rem" }}>${jsxText(headline)}</h2>
-  ${body ? `<p style={{ color: "#374151" }}>${jsxText(body)}</p>` : ""}
-  ${showcase ? `<div style={{ marginTop: "2rem" }}>${showcase}</div>` : ""}${cards}`)}
-</section>`;
-    }
-  }
-}
-
-export function pageToComponent(
-  page: SiteSpec["pages"][number],
-  componentName: string,
-  mediaCtx?: MediaRenderContext,
-): string {
-  const sections = page.sections
-    .map((section) => sectionToJsx(section, mediaCtx ? { ctx: mediaCtx, pageSlug: page.slug } : undefined))
+export function pageToComponent(page: Page, componentName: string, mediaCtx?: MediaRenderContext, site?: SiteContext): string {
+  const ctx = site ?? defaultSiteContext();
+  const media = mediaCtx ? { ctx: mediaCtx, pageSlug: page.slug } : undefined;
+  const header = page.sections.find((s) => s.type === "HEADER");
+  const footer = [...page.sections].reverse().find((s) => s.type === "FOOTER");
+  const body = page.sections.filter((s) => s.type !== "HEADER" && s.type !== "FOOTER" && willRender(s));
+  const variants = resolveVariants(body, ctx.preset);
+  const bands = pageBands(body);
+  const heroAt = body.findIndex((s) => s.type === "HERO");
+  const h1At = heroAt >= 0 ? heroAt : body.findIndex((s) => s.type !== "LOGOS" && s.type !== "STATS");
+  // Auto-inserted chrome has no slots of its own, so it never gets media.
+  const chrome = (section: Section, real: boolean) =>
+    sectionToJsx(section, real ? media : undefined, {
+      site: ctx,
+      variant: resolveVariants([section], ctx.preset)[0],
+      headingLevel: 2,
+    });
+  const headerJsx = chrome(header ?? ctx.chrome?.header ?? { type: "HEADER", index: 0 }, !!header);
+  const footerJsx = chrome(footer ?? ctx.chrome?.footer ?? { type: "FOOTER", index: page.sections.length }, !!footer);
+  const sections = body
+    .map((section, i) =>
+      sectionToJsx(section, media, { site: ctx, variant: variants[i], band: bands[i], headingLevel: i === h1At ? 1 : 2 }),
+    )
     .join("\n");
-  return `export default function ${componentName}() {
+  const srTitle = h1At < 0 ? `<h1 className="sr-only">{${JSON.stringify(page.title)}}</h1>` : "";
+  const imports = ctx.multiPage ? `import { Link } from "react-router-dom"\n\n` : "";
+  return `${imports}export default function ${componentName}() {
   return (
-    <main>
-      ${sections}
-    </main>
+    <>
+      <a className="skip-link" href="#main">Skip to content</a>
+      ${headerJsx}
+      <main id="main">
+      ${srTitle}${sections}
+      </main>
+      ${footerJsx}
+    </>
   )
 }
 `;
+}
+
+const anchor = (s: Section): SiteLink => ({ label: "", href: `#${sectionIdOf(s)}`, route: false });
+const SHORT_LABEL = 28;
+
+function primaryCtaFor(page: Page): SiteLink | undefined {
+  const target = page.sections.find((s) => (s.type === "CTA" || s.type === "PRICING" || s.type === "CONTACT") && willRender(s));
+  for (const type of ["HERO", "CTA"] as const) {
+    const cta = page.sections.find((s) => s.type === type && s.content?.cta?.primary?.trim())?.content?.cta;
+    if (cta?.primary) {
+      return { label: cta.primary, href: siteHref(cta.primaryHref) ?? (target ? anchor(target).href : "#main"), route: false };
+    }
+  }
+  return undefined;
+}
+
+export function buildSiteContext(spec: SiteSpec, pageMeta: PageMeta[], theme: ResolvedTheme, page: Page): SiteContext {
+  const multiPage = pageMeta.length > 1;
+  const nav: SiteLink[] = multiPage
+    ? pageMeta.slice(0, 6).map((m) => ({ label: m.page.title, href: m.routePath, route: true }))
+    : page.sections
+        .filter((s) => willRender(s) && navLabel(s))
+        .map((s) => ({ ...anchor(s), label: navLabel(s)! }))
+        .filter((l, i, all) => all.findIndex((o) => o.label === l.label) === i)
+        .slice(0, 5);
+  const home = pageMeta.find((m) => m.routePath === "/")?.page ?? spec.pages[0]!;
+  const learnMore = page.sections.find((s) => (s.type === "FEATURES" || s.type === "HOW_IT_WORKS") && willRender(s));
+  const featureSource = [page, home]
+    .flatMap((p) => p.sections)
+    .find((s) => s.type === "FEATURES" && (s.content?.items?.length ?? 0) > 0);
+  const featureLabels = (featureSource?.content?.items ?? [])
+    .map((i) => i.title.trim())
+    .filter((t) => t && t.length <= SHORT_LABEL)
+    .slice(0, 4);
+  const contactLinks = spec.pages
+    .flatMap((p) => p.sections)
+    .filter((s) => s.type === "CONTACT")
+    .flatMap((s) => contactMethods(s.content ?? {}))
+    .filter((m): m is typeof m & { href: string } => !!m.href)
+    .slice(0, 3)
+    .map((m) => ({ label: /^(mailto|tel):/.test(m.href) ? m.value : m.label, href: m.href, route: false }));
+  const heroSub = home.sections.find((s) => s.type === "HERO")?.content?.subheadline?.trim();
+  return {
+    brand: deriveBrand(spec),
+    tagline: heroSub && heroSub.length <= 140 ? heroSub : undefined,
+    year: new Date().getFullYear(),
+    multiPage,
+    preset: theme.preset,
+    nav,
+    primaryCta: primaryCtaFor(page) ?? (page === home ? undefined : primaryCtaFor(home)),
+    secondaryHref: learnMore ? anchor(learnMore).href : "#main",
+    featureLabels,
+    contactLinks,
+    chrome: {
+      header: home.sections.find((s) => s.type === "HEADER"),
+      footer: [...home.sections].reverse().find((s) => s.type === "FOOTER"),
+    },
+  };
 }
 
 export function toRoutePath(slug: string): string {
@@ -271,9 +235,11 @@ export function buildSite(
   for (const slotId of Object.keys(spec.media ?? {})) {
     if (!knownSlots.has(slotId)) mediaCtx.warnings.push(`${slotId}: media dropped (unknown slot)`);
   }
+  const theme = resolveTheme(spec);
   const renderPage = (page: SiteSpec["pages"][number], componentName: string) => {
     const before = mediaCtx.autoplayCount;
-    const source = pageToComponent(page, componentName, hasMedia ? mediaCtx : undefined);
+    const site = buildSiteContext(spec, pageMeta, theme, page);
+    const source = pageToComponent(page, componentName, hasMedia ? mediaCtx : undefined, site);
     if (mediaCtx.autoplayCount - before > maxAutoplay) {
       mediaCtx.warnings.push(`${page.slug}: more than ${maxAutoplay} autoplaying videos on one page`);
     }
@@ -286,8 +252,10 @@ export function buildSite(
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(homePage.seo?.title ?? homePage.title)}</title>
+    <meta name="theme-color" content="${theme.palette.bg}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=${encodeURIComponent(cssFontName(spec.designSystem.fontPrimary))}:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="${escapeHtml(googleFontsHref(theme))}" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
@@ -302,6 +270,7 @@ export function buildSite(
 import App from "./App"
 import "./index.css"
 import "./citationHover.js"
+import "./siteUi.js"
 ${mediaImport}createRoot(document.getElementById("root")).render(<App />)
 `;
 
@@ -310,6 +279,7 @@ import { BrowserRouter } from "react-router-dom"
 import App from "./App"
 import "./index.css"
 import "./citationHover.js"
+import "./siteUi.js"
 ${mediaImport}createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <App />
@@ -405,8 +375,9 @@ export default defineConfig({
       path: "src/App.jsx",
       content: isMultiPage ? appJsxMultiPage : appJsxSinglePage,
     },
-    { path: "src/index.css", content: cssVars(spec.designSystem) },
+    { path: "src/index.css", content: buildDesignSystemCss(theme) },
     { path: "src/citationHover.js", content: citationHoverJs },
+    { path: "src/siteUi.js", content: SITE_UI_JS },
   ];
   if (hasMedia) files.push({ path: "src/mediaPlayback.js", content: MEDIA_PLAYBACK_JS });
 
@@ -437,5 +408,19 @@ export {
   type KeywordValidationResult,
 } from "./seoFiles.js";
 export * from "./theme/tokens.js";
+export { cssFontName, PRESETS, resolveTheme, googleFontsHref, type ResolvedTheme } from "./theme/theme.js";
+export { buildPalette, contrastPairs, type Palette } from "./theme/palette.js";
+export { contrastRatio } from "./theme/color.js";
+export { buildDesignSystemCss } from "./theme/css.js";
+export { ICONS, iconSvg, resolveIconName } from "./icons.js";
+export {
+  sectionToJsx,
+  resolveVariants,
+  willRender,
+  deriveBrand,
+  type SectionMedia,
+  type SectionRenderOptions,
+  type SiteContext,
+} from "./sections.js";
 export * from "./capabilities.js";
 export * from "./media.js";

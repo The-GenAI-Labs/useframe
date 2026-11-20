@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { setSessionHint } from "./sessionHint";
 
 const API_SERVICE_URL = process.env.NEXT_PUBLIC_API_SERVICE_URL ?? "http://localhost:4000";
 
@@ -110,6 +111,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (token) setAccessToken(token);
         return token;
     }, [setAccessToken]);
+
+    useEffect(() => {
+        if (status === "loading" || (status === "unauthenticated" && skipMountRefresh)) return;
+        setSessionHint(status === "authenticated");
+    }, [status, skipMountRefresh]);
 
     const logout = useCallback(async () => {
         try {

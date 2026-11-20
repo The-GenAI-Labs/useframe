@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/providers";
 import { ThemeInitializer } from "@/components/ThemeInitializer";
 import { AttributionCapture } from "@/components/AttributionCapture";
+import { SESSION_HINT_SCRIPT } from "@/lib/sessionHint";
 import {
   pageMetadata,
   SITE_DESCRIPTION,
@@ -38,7 +39,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: SESSION_HINT_SCRIPT }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable}`}
         suppressHydrationWarning

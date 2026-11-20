@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/lib/authContext";
+import { HintProvider } from "@/components/ui/hint";
 import { useRef } from "react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -23,7 +24,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <AuthProvider>
             <QueryClientProvider client={clientRef.current}>
-                {children}
+                <HintProvider>{children}</HintProvider>
             </QueryClientProvider>
         </AuthProvider>
     );

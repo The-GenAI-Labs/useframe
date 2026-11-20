@@ -37,7 +37,7 @@ function getGreeting(hour: number): string {
   return "Good evening";
 }
 
-function ChatHomeSkeleton() {
+export function ChatHomeSkeleton() {
   const glass = "bg-white/30 backdrop-blur-md border border-white/40";
   return (
     <div
@@ -87,6 +87,7 @@ export default function ChatHomeView() {
 
   useEffect(() => {
     setGreeting(getGreeting(new Date().getHours()));
+    setShowSkeleton(false);
   }, []);
 
   // Arriving from the create-project modal's "Start generation" — load
@@ -107,11 +108,6 @@ export default function ChatHomeView() {
       cancelled = true;
     };
   }, [searchParams]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setShowSkeleton(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const userName = user?.name ?? "there";
 

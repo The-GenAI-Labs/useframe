@@ -17,7 +17,9 @@ const nextConfig = {
     },
     headers: async () => [
         {
-            source: '/(.*)',
+            // Not /billing: COEP blocks Razorpay's checkout iframe, which sends no
+            // COEP header of its own (see src/lib/crossOriginIsolation.ts).
+            source: '/:path((?!billing(?:/|$)).*)',
             headers: [
                 {
                     key: 'Cross-Origin-Opener-Policy',

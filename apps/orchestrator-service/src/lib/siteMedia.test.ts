@@ -199,9 +199,7 @@ describe("copy context (Call 2)", () => {
       targetAudience: "z",
       pageTitle: "Home",
       pageType: "HOME",
-      sectionType: "HERO",
-      sectionIndex: 0,
-      mediaContext: context,
+      sections: [{ index: 0, type: "HERO", contract: "headline required", mediaContext: context }],
     })
     expect(prompt).toContain(DATA_PARAGRAPH)
     expect(prompt).toMatch(/<DATA name="VISUALS">[\s\S]*<\/DATA>/)

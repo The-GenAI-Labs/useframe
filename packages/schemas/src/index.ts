@@ -1,5 +1,7 @@
 export * from "./citation.schema.js";
 export * from "./siteSpec.js";
+export * from "./theme.schema.js";
+export * from "./generation.schema.js";
 export * from "./project.schema.js";
 export * from "./models.js";
 export * from "./chat.schema.js";

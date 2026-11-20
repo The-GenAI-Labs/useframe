@@ -34,6 +34,8 @@ const ALL_SECTION_TYPES = [
   "HEADER",
   "FOOTER",
   "CUSTOM",
+  "STATS",
+  "LOGOS",
 ] as const
 
 // The pipeline's only way into a brief: an approved brief owned by the
@@ -142,7 +144,20 @@ export function testimonialItems(data: BriefData): NonNullable<NonNullable<Secti
     .map((t) => ({
       title: [t.personName, t.role, t.company].filter(Boolean).join(", "),
       description: `“${t.quote}”`,
+      author: t.personName,
+      ...(t.role ? { role: t.role } : {}),
+      ...(t.company ? { company: t.company } : {}),
     }))
+}
+
+export function pricingPlans(data: BriefData): NonNullable<NonNullable<Section["content"]>["plans"]> {
+  const interval = { MONTHLY: "/month", YEARLY: "/year", ONE_TIME: "", CUSTOM: "" } as const
+  return (data.pricing?.plans ?? []).map((p) => ({
+    name: p.name,
+    price: `${p.currency} ${p.price}`,
+    ...(interval[p.interval] ? { period: interval[p.interval] } : {}),
+    features: p.features,
+  }))
 }
 
 export function pricingItems(data: BriefData): NonNullable<NonNullable<Section["content"]>["items"]> {
@@ -155,7 +170,9 @@ export function pricingItems(data: BriefData): NonNullable<NonNullable<Section["
 // Sections whose content must come from the user verbatim, never a model.
 export function deterministicContent(type: string, ctx: ProjectBriefContext): Section["content"] | null {
   if (type === "TESTIMONIALS") return { headline: "What customers say", items: testimonialItems(ctx.data) }
-  if (type === "PRICING") return { headline: "Pricing", items: pricingItems(ctx.data) }
+  if (type === "PRICING") return { headline: "Pricing", items: pricingItems(ctx.data), plans: pricingPlans(ctx.data) }
+  if (type === "STATS") return { stats: (ctx.data.metrics ?? []).map((m) => ({ value: m.value, label: m.label })) }
+  if (type === "LOGOS") return { headline: "Trusted by", logos: (ctx.data.trustedBy ?? []).map((name) => ({ name })) }
   return null
 }
 
