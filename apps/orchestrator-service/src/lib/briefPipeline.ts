@@ -34,6 +34,8 @@ const ALL_SECTION_TYPES = [
   "HEADER",
   "FOOTER",
   "CUSTOM",
+  "STATS",
+  "LOGOS",
 ] as const
 
 // The pipeline's only way into a brief: an approved brief owned by the

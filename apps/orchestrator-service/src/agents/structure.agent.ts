@@ -18,7 +18,7 @@ import {
 
 const VALID_SECTION_TYPES = new Set<string>([
   "HERO", "FEATURES", "HOW_IT_WORKS", "TESTIMONIALS", "PRICING",
-  "CTA", "FAQ", "TEAM", "CONTACT", "HEADER", "FOOTER", "CUSTOM",
+  "CTA", "FAQ", "TEAM", "CONTACT", "HEADER", "FOOTER", "CUSTOM", "STATS", "LOGOS",
 ])
 
 function sectionsFromBrief(

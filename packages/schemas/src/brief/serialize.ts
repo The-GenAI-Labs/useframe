@@ -79,6 +79,8 @@ export function contentAvailability(data: BriefData, caps: BuilderCapabilities):
 // stripped if a model proposes it anyway. TEAM has no brief data yet.
 export const SECTION_REQUIRES_BRIEF: Partial<Record<SectionType, (keyof ContentAvailability | "unavailable")[]>> = {
   TESTIMONIALS: ["testimonials"],
+  STATS: ["metrics"],
+  LOGOS: ["trustedBy"],
   PRICING: ["pricingPlans"],
   CONTACT: ["publicContact"],
   TEAM: ["unavailable"],
