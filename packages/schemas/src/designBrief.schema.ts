@@ -1,5 +1,7 @@
 import { z } from "zod"
 import { CitationSchema } from "./citation.schema.js"
+import { FONT_PAIRING_IDS } from "./generation.schema.js"
+import { SiteThemeSchema } from "./theme.schema.js"
 
 export const DesignBriefSchema = z.object({
   product: z.string(),
@@ -42,6 +44,9 @@ export const DesignBriefSchema = z.object({
   }),
   avoid: z.array(z.string()),
   citations: z.array(CitationSchema),
+  // Renderer theme and curated font pairing; absent on briefs made before them.
+  theme: SiteThemeSchema.optional(),
+  fontPairing: z.enum(FONT_PAIRING_IDS).optional(),
 })
 
 export type DesignBrief = z.infer<typeof DesignBriefSchema>

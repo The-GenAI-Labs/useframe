@@ -1,0 +1,102 @@
+[
+  {
+    "id": "b2b-saas",
+    "name": "Shiftboard",
+    "niche": "SAAS_B2B",
+    "startupIdea": "Shift scheduling software for warehouses that builds weekly rotas from staff availability and labour rules, and lets workers swap shifts from their phone with manager approval.",
+    "targetAudience": "operations managers at warehouses with 50 to 500 hourly staff",
+    "differentiator": "Checks every rota against local labour rules before it is published",
+    "brandPersonality": "dependable and practical",
+    "pricePositioning": "mid-range"
+  },
+  {
+    "id": "fintech",
+    "name": "Tallypot",
+    "niche": "FINTECH",
+    "startupIdea": "A business current account for freelancers that automatically moves a share of every incoming payment into a tax pot and sends invoices that chase late payers.",
+    "targetAudience": "UK freelancers and sole traders who dread tax season",
+    "differentiator": "Tax set-aside happens the moment money lands, not at year end",
+    "brandPersonality": "calm and trustworthy",
+    "pricePositioning": "affordable"
+  },
+  {
+    "id": "seniors-healthcare",
+    "name": "HomeHelp Circle",
+    "niche": "HEALTH_WELLNESS",
+    "startupIdea": "An in-home care service that matches older adults with a small, consistent team of vetted carers for daily help, companionship and medication reminders, arranged with one phone call.",
+    "targetAudience": "adults over 75 living at home and their adult children",
+    "differentiator": "The same two or three carers every week, never a stranger",
+    "brandPersonality": "warm, steady and respectful",
+    "pricePositioning": "mid-range"
+  },
+  {
+    "id": "kids-edtech",
+    "name": "Mathbeans",
+    "niche": "KIDS",
+    "startupIdea": "A maths practice app for children aged 6 to 10 with ten-minute puzzle games that adapt to each child, plus a weekly progress email for parents.",
+    "targetAudience": "parents of primary school children who struggle with maths",
+    "differentiator": "No ads and no in-app purchases, ever",
+    "brandPersonality": "playful and encouraging",
+    "pricePositioning": "affordable"
+  },
+  {
+    "id": "d2c-skincare",
+    "name": "Mosswell",
+    "niche": "ECOMMERCE",
+    "startupIdea": "A three-step skincare routine for sensitive skin made with short, fully disclosed ingredient lists, sold direct as a subscription that ships every eight weeks.",
+    "targetAudience": "adults with sensitive or reactive skin tired of guessing at ingredients",
+    "differentiator": "Every ingredient and its purpose is listed on the front of the bottle",
+    "brandPersonality": "honest and gentle",
+    "pricePositioning": "premium"
+  },
+  {
+    "id": "fitness-coach",
+    "name": "Coach Dana Strength",
+    "niche": "FITNESS",
+    "startupIdea": "Online strength coaching from a certified personal trainer: a custom 12-week programme, weekly video form checks and a monthly call, for people training at home or in a gym.",
+    "targetAudience": "busy adults in their 30s and 40s who want to get strong without injury",
+    "differentiator": "Every programme is written by the coach herself, not generated",
+    "brandPersonality": "energetic and no-nonsense",
+    "pricePositioning": "premium"
+  },
+  {
+    "id": "legal-services",
+    "name": "Harbor Lane Law",
+    "niche": "OTHER",
+    "startupIdea": "A small law firm handling tenancy disputes for renters, offering a fixed-fee first consultation and plain-English letters to landlords.",
+    "targetAudience": "renters facing deposit disputes, repairs refusals or eviction notices",
+    "differentiator": "Fixed fees agreed up front, no hourly billing surprises",
+    "brandPersonality": "clear, calm and authoritative",
+    "pricePositioning": "mid-range"
+  },
+  {
+    "id": "dev-tool",
+    "name": "Tracelight",
+    "niche": "SAAS_B2B",
+    "startupIdea": "An open-source tool that records production errors with the exact request and database queries that caused them, and replays them locally with one command.",
+    "targetAudience": "backend engineers at startups debugging production issues",
+    "differentiator": "Replays the failing request locally instead of just showing a stack trace",
+    "brandPersonality": "technical and precise",
+    "pricePositioning": "free open source with a paid cloud tier"
+  },
+  {
+    "id": "restaurant",
+    "name": "Little Ember",
+    "niche": "FOOD_LIFESTYLE",
+    "startupIdea": "A neighbourhood wood-fired restaurant with a short seasonal menu that changes weekly, open Wednesday to Sunday evenings, with online table booking.",
+    "targetAudience": "local couples and small groups looking for a relaxed dinner out",
+    "differentiator": "Everything is cooked over the wood fire, including dessert",
+    "brandPersonality": "warm and unpretentious",
+    "pricePositioning": "mid-range"
+  },
+  {
+    "id": "non-profit",
+    "name": "Second Shelf",
+    "niche": "OTHER",
+    "startupIdea": "A non-profit that collects surplus food from supermarkets and delivers it to community pantries the same day, run by volunteers who can sign up for two-hour driving shifts.",
+    "targetAudience": "local residents who want to volunteer or donate",
+    "differentiator": "Same-day delivery so fresh food is never wasted",
+    "brandPersonality": "hopeful and community-minded",
+    "pricePositioning": "donation-funded"
+  }
+]

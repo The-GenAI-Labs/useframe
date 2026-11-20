@@ -44,3 +44,5 @@ corpus/_review/
 # Site-builder review gallery (screenshots and build scratch)
 docs/site-builder-gallery/*.png
 packages/site-builder/.gallery-tmp
+apps/orchestrator-service/.eval-legacy
+docs/generation-v2-samples/*.png

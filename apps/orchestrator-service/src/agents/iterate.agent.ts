@@ -1,6 +1,9 @@
 import { generateText, generateObject } from "ai";
 import { z } from "zod";
-import { SiteSpecSchema } from "@repo/schemas";
+import { checkSectionContent, PROOF_SECTION_TYPES, SiteSpecSchema } from "@repo/schemas";
+import { generateValidated } from "@/llm/structured.js";
+import { contractText } from "@/lib/copyQuality.js";
+import { SectionCopySchema } from "./copy.agent.js";
 import { validateReplicationFiles } from "./replicationNextGen.js";
 import type { SiteSpec, IterateRequest, IterateChange } from "@repo/schemas";
 import { getModel } from "@/llm/providers.js";
@@ -133,33 +136,31 @@ async function runContentIteration(
     );
     if (!section) continue;
 
-    const sectionPrompt = DEFAULT_ITERATE_SECTION_PROMPT({
-      instruction: change.instruction,
-      sectionType: section.type,
-      currentContent: section.content ?? {},
-      pageTitle: page.title,
-      siteType: updatedSpec.siteType,
-    });
-
-    const sectionResult = await generateText({
+    const current = section.content ?? {};
+    // The owner's instruction and the current copy are the only facts an edit may use.
+    const facts = `${request.instruction}\n${change.instruction}\n${JSON.stringify(current)}`;
+    const { object, issues } = await generateValidated({
       model,
-      prompt: sectionPrompt,
-      maxTokens: 1000,
-      experimental_telemetry: {
-        isEnabled: true,
-        functionId: "iterate-agent-section",
-      },
+      schema: SectionCopySchema,
+      prompt: DEFAULT_ITERATE_SECTION_PROMPT({
+        instruction: change.instruction,
+        sectionType: section.type,
+        variant: section.variant,
+        contract: contractText(section.type, section.variant),
+        currentContent: current,
+        pageTitle: page.title,
+        siteType: updatedSpec.siteType,
+      }),
+      maxTokens: 2000,
+      functionId: "iterate-agent-section",
+      validate: (content) =>
+        checkSectionContent(section.type, section.variant, { ...current, ...content }, facts)
+          .filter((i) => !PROOF_SECTION_TYPES.includes(section.type) || ["placeholder", "banned", "invented_proof"].includes(i.code))
+          .map((i) => `${i.path}: ${i.detail}`),
     });
 
-    try {
-      section.content = extractJson(
-        sectionResult.text,
-      ) as typeof section.content;
-    } catch {
-      // Leave the section's existing content untouched if the model's
-      // response wasn't valid JSON — better to no-op this one section
-      // than to corrupt it with partial/garbage content.
-    }
+    // An edit that still breaks the copy rules leaves the section untouched.
+    if (object && issues.length === 0) section.content = { ...current, ...object };
   }
 
   return {
