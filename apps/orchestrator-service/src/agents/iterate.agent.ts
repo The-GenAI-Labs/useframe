@@ -7,6 +7,7 @@ import { SectionCopySchema } from "./copy.agent.js";
 import { validateReplicationFiles } from "./replicationNextGen.js";
 import type { SiteSpec, IterateRequest, IterateChange } from "@repo/schemas";
 import { getModel } from "@/llm/providers.js";
+import { resolveModelById } from "@/llm/router.js";
 import { DEFAULT_ITERATE_PLAN_PROMPT } from "@/prompts/iteratePlan.prompt.js";
 import { DEFAULT_ITERATE_SECTION_PROMPT } from "@/prompts/iterateSection.prompt.js";
 import { loadAssetMenu, runMediaPlacement, sanitizeMediaBindings } from "./mediaPlacement.agent.js";
@@ -63,7 +64,7 @@ export async function runIteration(
   includeDesign = false,
   options: { userId?: string } = {},
 ): Promise<IterateResult> {
-  const model = getModel(request.modelId);
+  const model = await resolveModelById(request.modelId);
   return settleMedia(await runContentIteration(request, includeDesign, model), request, model, options.userId);
 }
 

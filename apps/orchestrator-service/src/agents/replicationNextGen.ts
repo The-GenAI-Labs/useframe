@@ -1,5 +1,5 @@
 import { generateText } from "ai";
-import { getModelForTier, getProviderOptionsForTier } from "@/llm/router.js";
+import { resolveTierModel, type getModelForTier, type getProviderOptionsForTier } from "@/llm/router.js";
 import type { Tier } from "@repo/schemas";
 import path from "node:path";
 
@@ -359,8 +359,7 @@ export async function generateReplicationNextFiles(
   tier: Tier,
   onProgress?: (message: string) => void,
 ): Promise<ReplicationNextFile[]> {
-  const model = getModelForTier(tier);
-  const providerOptions = getProviderOptionsForTier(tier);
+  const { model, providerOptions } = await resolveTierModel(tier);
   const signal = AbortSignal.timeout(25 * 60_000);
 
   const messages: { role: "system" | "user" | "assistant"; content: string }[] =

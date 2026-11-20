@@ -9,6 +9,8 @@ import { checkSpecQuality, isPlaceholder, type GenerateRequest, type Section, ty
 vi.mock("@useframe/db", () => ({ prisma: {}, briefStateOf: () => ({}), latestBriefRevision: async () => null, writeBriefFields: async () => ({}) }))
 
 const { generateValidated } = await import("@/llm/structured.js")
+const { claudeAvailable, isProviderOutage, resetClaudeProbe, resolveTierModel } = await import("@/llm/router.js")
+const { runSeoAgent } = await import("./seo.agent.js")
 const { runCopyAgent } = await import("./copy.agent.js")
 const { structureFromModelOutput, separateLayouts } = await import("./structure.agent.js")
 const { applyCritiquePatches } = await import("./critique.agent.js")
@@ -393,6 +395,57 @@ describe("critique moves", () => {
     const { spec, applied } = applyCritiquePatches(venuePage(), [move], "")
     expect(applied).toBe(1)
     expect(spec.pages![0]!.sections.map((s) => s.type)).toEqual(["HERO", "FEATURES", "HOW_IT_WORKS", "FAQ", "CTA", "FOOTER"])
+  })
+})
+
+describe("Claude outage failover", () => {
+  const credit = Object.assign(new Error("Your credit balance is too low to access the Anthropic API."), { statusCode: 400 })
+
+  it("tells outages apart from bad requests", () => {
+    expect(isProviderOutage(credit)).toBe(true)
+    expect(isProviderOutage(Object.assign(new Error("nope"), { statusCode: 401 }))).toBe(true)
+    expect(isProviderOutage(Object.assign(new Error("Overloaded"), { statusCode: 529 }))).toBe(true)
+    expect(isProviderOutage(Object.assign(new Error("max_tokens: must be positive"), { statusCode: 400 }))).toBe(false)
+  })
+
+  it("serves paid requests from DeepSeek while Claude is down, probing once per window", async () => {
+    resetClaudeProbe()
+    let probes = 0
+    const probe = async () => {
+      probes++
+      throw credit
+    }
+    const first = await resolveTierModel("paid", { probe, now: 1_000, hasFallback: true })
+    const second = await resolveTierModel("paid", { probe, now: 2_000, hasFallback: true })
+    expect(first.failover).toBe(true)
+    expect(first.model.provider).toMatch(/deepseek/)
+    expect(first.providerOptions).toBeDefined()
+    expect(second.failover).toBe(true)
+    expect(probes).toBe(1)
+    const later = await resolveTierModel("paid", { probe: async () => {}, now: 1_000 + 6 * 60_000, hasFallback: true })
+    expect(later).toMatchObject({ failover: false })
+    expect(later.model.provider).toMatch(/anthropic/)
+    resetClaudeProbe()
+  })
+
+  it("never fails over without a fallback, for non-outage errors, or for the free tier", async () => {
+    resetClaudeProbe()
+    expect(await claudeAvailable({ probe: async () => Promise.reject(credit), hasFallback: false })).toBe(true)
+    resetClaudeProbe()
+    expect(await claudeAvailable({ probe: async () => Promise.reject(new Error("timeout")), now: 1, hasFallback: true })).toBe(true)
+    resetClaudeProbe()
+    expect((await resolveTierModel("free", { probe: async () => Promise.reject(credit), hasFallback: true })).failover).toBe(false)
+    resetClaudeProbe()
+  })
+
+  it("keeps default SEO instead of failing when the model call throws", async () => {
+    const failing = new MockLanguageModelV1({
+      doGenerate: async () => {
+        throw credit
+      },
+    })
+    const out = await runSeoAgent(plannedSpec(), request, failing)
+    expect(out.pages![0]!.seo).toMatchObject({ title: expect.stringContaining("Brightdesk"), description: expect.any(String) })
   })
 })
 

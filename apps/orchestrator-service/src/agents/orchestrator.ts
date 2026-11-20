@@ -1,7 +1,7 @@
 import { enqueueValidation } from "../lib/validationQueue.js";
 import type { Response } from "express";
 import { sseWrite, sseError } from "@/llm/stream.js";
-import { getModelForTier, getProviderOptionsForTier } from "@/llm/router.js";
+import { resolveTierModel } from "@/llm/router.js";
 import { runStructureAgent } from "./structure.agent.js";
 import { runCopyAgent } from "./copy.agent.js";
 import { runDesignAgent } from "./design.agent.js";
@@ -85,10 +85,9 @@ export async function runOrchestrator(
   request: GenerateRequest,
   userId: string,
 ): Promise<void> {
-  const model = getModelForTier(request.tier);
-  const providerOptions = getProviderOptionsForTier(request.tier);
+  const { model, providerOptions, failover } = await resolveTierModel(request.tier);
 
-  console.log(`[orchestrator] Using tier: ${request.tier}`);
+  console.log(`[orchestrator] Using tier: ${request.tier}${failover ? " (Claude unavailable, DeepSeek failover)" : ""}`);
 
   let projectId = request.projectId;
   let versionId = request.versionId;
