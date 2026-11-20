@@ -29,13 +29,21 @@ export async function runSeoAgent(
       pageSlug: page.slug,
     })
 
-    const { text } = await generateText({
+    // SEO is never worth failing a generation over: on a provider error the
+    // deterministic title and description below are kept.
+    const text = await generateText({
       model,
       prompt,
       maxTokens: 400,
       providerOptions,
       experimental_telemetry: { isEnabled: true, functionId: "seo-agent" },
-    })
+    }).then(
+      (r) => r.text,
+      (err: unknown) => {
+        console.warn(`[seo] ${page.slug}: model call failed, using defaults (${err instanceof Error ? err.message.slice(0, 120) : "unknown"})`)
+        return ""
+      },
+    )
 
     let seo = {
       title: `${page.title} | ${request.startupIdea.slice(0, 30)}`,

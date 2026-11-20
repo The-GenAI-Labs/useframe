@@ -4,7 +4,7 @@ import { PlanSSERequestSchema, buildHeroPreviewDataUrl, nicheToDomain, inferAudi
 import type { DesignBrief, DesignBriefCandidates } from "@repo/schemas"
 import { verifyToken } from "@/lib/auth.js"
 import { initSSE, sseWrite, sseError } from "@/llm/stream.js"
-import { getModelForTier, getProviderOptionsForTier } from "@/llm/router.js"
+import { getModelForTier, getProviderOptionsForTier, resolveTierModel } from "@/llm/router.js"
 import { runPlannerAgent, runPlannerCandidatesAgent } from "@/agents/planner.agent.js"
 import { runResearchAgent } from "@/agents/research.agent.js"
 import { callRetrieve, callDomainPattern, callAudienceModifier } from "@/lib/researchService.js"
@@ -53,8 +53,7 @@ router.post("/plan", (req: Request, res: Response): void => {
     try {
       const domain = nicheToDomain(niche)
       const audience = inferAudienceKey(targetAudience)
-      const model = getModelForTier(tier)
-      const providerOptions = getProviderOptionsForTier(tier)
+      const { model, providerOptions } = await resolveTierModel(tier)
       const briefCtx = await loadBriefContext(projectId, user.id)
       const userCompetitorUrls = (briefCtx?.input.userCompetitors ?? []).flatMap((c) => (c.url ? [c.url] : []))
 
