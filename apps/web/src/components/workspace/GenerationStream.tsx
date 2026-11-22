@@ -1,22 +1,48 @@
 "use client"
 
+import { useRef } from "react"
+import type { PipelineStage } from "@repo/schemas"
 import { useGenerationStore } from "@/stores/generationStore"
 
-const STAGE_LABELS: Record<string, string> = {
-  RESEARCH: "Querying research corpus",
-  GENERATE: "Building page structure",
-  COPY: "Writing conversion copy",
-  DESIGN: "Applying design system",
-  SEO: "Optimising for search",
-  CRITIQUE: "Running critique pass",
-  COMPLETE: "Generation complete",
-  SCAN: "Scanning site",
-  FAILED: "Generation failed",
+const STEPS = [
+  "Planning your page structure",
+  "Writing your copy",
+  "Applying your design direction",
+  "Optimising for search",
+  "Final quality review",
+]
+
+// GENERATE is reused for structure, design and media placement, so the message disambiguates it.
+function stepIndexOf(stage: PipelineStage | null, message: string): number {
+  switch (stage) {
+    case "COPY":
+      return 1
+    case "SEO":
+      return 3
+    case "CRITIQUE":
+      return 4
+    case "COMPLETE":
+      return STEPS.length
+    case "GENERATE":
+      if (/design/i.test(message)) return 2
+      if (/placing your media/i.test(message)) return 4
+      return 0
+    default:
+      return 0
+  }
+}
+
+function CheckIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  )
 }
 
 export function GenerationStream({ onRetry }: { onRetry?: () => void }) {
-  const { currentStage, stageMessage, substep, streamBuffer, isStreaming, error } =
-    useGenerationStore()
+  const { currentStage, stageMessage, substep, error } = useGenerationStore()
+  const furthest = useRef(0)
 
   if (error) {
     return (
@@ -38,41 +64,54 @@ export function GenerationStream({ onRetry }: { onRetry?: () => void }) {
     )
   }
 
-  if (!isStreaming && !currentStage) {
-    return (
-      <div className="flex h-full flex-col items-center justify-center p-8 text-muted-foreground">
-        <p className="text-sm">Waiting to start generation...</p>
-      </div>
-    )
-  }
+  if (!currentStage) furthest.current = 0
+  furthest.current = Math.max(furthest.current, stepIndexOf(currentStage, stageMessage))
+  const active = furthest.current
 
   return (
-    <div className="flex h-full flex-col">
-      {currentStage && (
-        <div className="border-b border-border bg-muted/30 px-4 py-3">
-          <div className="flex items-center gap-2">
-            {isStreaming && (
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500" />
-              </span>
-            )}
-            <span className="text-sm font-medium">
-              {STAGE_LABELS[currentStage] ?? stageMessage}
-            </span>
-          </div>
-          {substep && (
-            <p className="mt-1 pl-4 text-xs text-muted-foreground" aria-live="polite">
-              {stageMessage}
-            </p>
-          )}
+    <div className="flex h-full flex-col items-center justify-center p-8">
+      <div role="status" aria-live="polite" className="w-full max-w-sm">
+        <div className="mb-6 flex flex-col items-center gap-3 text-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-indigo-500 border-t-transparent motion-reduce:animate-none" />
+          <p className="text-sm font-semibold text-pri">Building your website</p>
+          <p className="text-[12.5px] text-mut">This usually takes a few minutes. You can stay on this page.</p>
         </div>
-      )}
 
-      <div className="flex-1 overflow-auto p-4">
-        <pre className="whitespace-pre-wrap font-mono text-xs text-muted-foreground">
-          {streamBuffer}
-        </pre>
+        <ol className="flex flex-col gap-2.5">
+          {STEPS.map((label, i) => {
+            const done = i < active
+            const current = i === active
+            return (
+              <li key={label} className="flex items-start gap-3">
+                <span
+                  className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
+                    done
+                      ? "border-emerald-500 bg-emerald-500 text-white"
+                      : current
+                        ? "border-indigo-500"
+                        : "border-base"
+                  }`}
+                >
+                  {done ? (
+                    <CheckIcon />
+                  ) : current ? (
+                    <span className="h-2 w-2 animate-pulse rounded-full bg-indigo-500 motion-reduce:animate-none" />
+                  ) : null}
+                </span>
+                <div className="min-w-0">
+                  <p className={`text-[13px] ${current ? "font-medium text-pri" : done ? "text-sec" : "text-mut"}`}>
+                    {label}
+                    {done && <span className="sr-only"> (done)</span>}
+                    {current && <span className="sr-only"> (in progress)</span>}
+                  </p>
+                  {current && substep && stageMessage && (
+                    <p className="mt-0.5 text-[12px] text-mut">{stageMessage}</p>
+                  )}
+                </div>
+              </li>
+            )
+          })}
+        </ol>
       </div>
     </div>
   )
