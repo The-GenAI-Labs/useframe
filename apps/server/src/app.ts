@@ -39,7 +39,8 @@ app.use(helmet());
 app.use("/media", mediaServeRouter);
 app.use(cors(corsOptions(env.CLIENT_URL)));
 
-const BRIEF_BODY_PATH = /^\/api\/(?:briefs(?:\/|$)|projects\/[^/]+\/brief(?:\/|$))/;
+const BRIEF_BODY_PATH =
+  /^\/api\/(?:briefs(?:\/|$)|projects\/[^/]+\/(?:brief|research)(?:\/|$))/;
 app.use((req, res, next) =>
   BRIEF_BODY_PATH.test(req.path) ? briefJsonParser(req, res, next) : next(),
 );

@@ -14,8 +14,8 @@ import {
   type PrefillBriefInput,
 } from "./briefs.schema.js"
 
-// Brief bodies (pre-fill text, full drafts) exceed the app-wide 10kb JSON
-// limit; mounted ahead of the global parser for these paths only.
+// Brief bodies (pre-fill text, full drafts, design-brief candidates) exceed the
+// app-wide 10kb JSON limit; mounted ahead of the global parser for these paths only.
 export const briefJsonParser = express.json({ limit: "200kb" })
 
 const uploadParser = express.raw({
