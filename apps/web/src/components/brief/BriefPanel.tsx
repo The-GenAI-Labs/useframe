@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import {
   BRIEF_PANEL_COPY,
@@ -68,7 +68,9 @@ export function BriefPanel({ slug, brief, staleVersion, onRegenerate, onApproved
 
   const reviewing = brief.status === "AWAITING_REVIEW"
   const pendingClaims = brief.needsConfirmation
-  const allConfirmed = pendingClaims.every((p) => confirmed.has(p))
+  const unconfirmed = pendingClaims.filter((p) => !confirmed.has(p))
+  const claimsRef = useRef<HTMLDivElement>(null)
+  const [attention, setAttention] = useState(false)
 
   const rows = useMemo(
     () =>
@@ -122,6 +124,16 @@ export function BriefPanel({ slug, brief, staleVersion, onRegenerate, onApproved
     } finally {
       setBusy(false)
     }
+  }
+
+  const approveOrPoint = async () => {
+    if (unconfirmed.length > 0) {
+      setAttention(true)
+      claimsRef.current?.scrollIntoView({ behavior: "smooth", block: "center" })
+      claimsRef.current?.focus({ preventScroll: true })
+      return
+    }
+    await approve()
   }
 
   return (
@@ -271,15 +283,36 @@ export function BriefPanel({ slug, brief, staleVersion, onRegenerate, onApproved
       )}
 
       {reviewing && (
-        <div className="flex flex-col items-start gap-1.5">
-          <button type="button" disabled={busy || !allConfirmed} onClick={() => void approve()} className="rounded-xl bg-inv px-5 py-2.5 text-[13px] font-semibold text-inv hover:opacity-90 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40">
-            {BRIEF_PANEL_COPY.approve}
-          </button>
-          {!allConfirmed && (
-            <p className="text-[11.5px] text-mut">
-              Confirm or remove: {pendingClaims.filter((p) => !confirmed.has(p)).map(fieldLabel).join(", ")}
-            </p>
+        <div className="flex flex-col items-start gap-3">
+          {unconfirmed.length > 0 && (
+            <div ref={claimsRef} tabIndex={-1} className={cn("w-full rounded-2xl border bg-amber-50 px-4 py-3 text-amber-900 outline-none transition-shadow dark:bg-amber-950/30 dark:text-amber-200", attention ? "border-amber-500 ring-[3px] ring-amber-400/60" : "border-amber-200 dark:border-amber-900")}>
+              <p className="text-[12.5px] font-semibold">
+                {unconfirmed.length === 1 ? "One thing to check before we build" : `${unconfirmed.length} things to check before we build`}
+              </p>
+              <p className="mt-0.5 text-[12px]">We wrote this for you. Keep it if it&apos;s true, or remove it.</p>
+              <ul className="mt-2 flex flex-col gap-2">
+                {unconfirmed.map((id) => (
+                  <li key={id} className="flex flex-col gap-2 rounded-xl bg-surface px-3 py-2.5 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="min-w-0">
+                      <p className="text-[12.5px] font-medium text-pri">{fieldLabel(id)}</p>
+                      <p className="break-words text-[12.5px] text-sec">{summarize(id, brief.data)}</p>
+                    </div>
+                    <div className="flex shrink-0 gap-2">
+                      <button type="button" onClick={() => setConfirmed((prev) => new Set(prev).add(id))} className="rounded-lg bg-inv px-3 py-1.5 text-[12px] font-semibold text-inv hover:opacity-90 focus-visible:ring-[3px] focus-visible:ring-ring/50">
+                        Keep it
+                      </button>
+                      <button type="button" disabled={busy} onClick={() => void remove(id)} className="rounded-lg border border-base px-3 py-1.5 text-[12px] font-semibold text-sec hover:bg-tertiary focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40">
+                        {BRIEF_PANEL_COPY.remove}
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
+          <button type="button" disabled={busy} onClick={() => void approveOrPoint()} className="rounded-xl bg-inv px-5 py-2.5 text-[13px] font-semibold text-inv hover:opacity-90 focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:opacity-40">
+            {busy ? "Saving…" : BRIEF_PANEL_COPY.approve}
+          </button>
         </div>
       )}
     </section>
