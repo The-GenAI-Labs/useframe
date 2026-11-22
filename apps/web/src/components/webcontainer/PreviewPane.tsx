@@ -14,10 +14,59 @@ type Props = {
 
 type HoverState = { citationIds: string[]; rect: { top: number; left: number; width: number; height: number } } | null
 
+function ExpandIcon({ expanded }: { expanded: boolean }) {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {expanded ? (
+        <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" />
+      ) : (
+        <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
+      )}
+    </svg>
+  )
+}
+
 export function PreviewPane({ projectSlug, siteSpec, active }: Props) {
   const { state, boot } = useWebContainer()
   const [hover, setHover] = useState<HoverState>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  const frameBoxRef = useRef<HTMLDivElement>(null)
+  const [nativeFullscreen, setNativeFullscreen] = useState(false)
+  const [overlay, setOverlay] = useState(false)
+  const expanded = nativeFullscreen || overlay
+
+  useEffect(() => {
+    const sync = () => setNativeFullscreen(document.fullscreenElement === frameBoxRef.current)
+    document.addEventListener("fullscreenchange", sync)
+    return () => document.removeEventListener("fullscreenchange", sync)
+  }, [])
+
+  useEffect(() => {
+    if (!overlay) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOverlay(false)
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [overlay])
+
+  useEffect(() => {
+    if (active) return
+    setOverlay(false)
+    if (document.fullscreenElement === frameBoxRef.current) void document.exitFullscreen()
+  }, [active])
+
+  // Browsers without the element Fullscreen API (iOS Safari) get a fixed overlay instead.
+  const toggleFullscreen = () => {
+    if (expanded) {
+      setOverlay(false)
+      if (document.fullscreenElement) void document.exitFullscreen()
+    } else if (document.fullscreenEnabled && frameBoxRef.current) {
+      frameBoxRef.current.requestFullscreen().catch(() => setOverlay(true))
+    } else {
+      setOverlay(true)
+    }
+  }
 
   useEffect(() => {
     if (!active) return
@@ -72,7 +121,14 @@ export function PreviewPane({ projectSlug, siteSpec, active }: Props) {
 
   if (state.status === "ready") {
     return (
-      <>
+      <div
+        ref={frameBoxRef}
+        className={
+          overlay
+            ? "fixed inset-0 z-[100] bg-surface"
+            : "relative h-full w-full bg-surface"
+        }
+      >
         <iframe
           ref={iframeRef}
           src={state.url}
@@ -80,6 +136,16 @@ export function PreviewPane({ projectSlug, siteSpec, active }: Props) {
           allow="cross-origin-isolated"
           title="Site preview"
         />
+        <button
+          type="button"
+          onClick={toggleFullscreen}
+          aria-pressed={expanded}
+          title={expanded ? "Exit full screen (Esc)" : "View full screen"}
+          className="absolute right-3 top-3 z-10 flex items-center gap-1.5 rounded-lg border border-white/15 bg-black/60 px-2.5 py-1.5 text-[12px] font-semibold text-white opacity-80 shadow-lg backdrop-blur transition-opacity duration-150 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white cursor-pointer"
+        >
+          <ExpandIcon expanded={expanded} />
+          {expanded ? "Exit full screen" : "Full screen"}
+        </button>
         {hover && (
           <CitationTooltip
             citationIds={hover.citationIds}
@@ -87,7 +153,7 @@ export function PreviewPane({ projectSlug, siteSpec, active }: Props) {
             rect={hover.rect}
           />
         )}
-      </>
+      </div>
     )
   }
 
