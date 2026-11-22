@@ -48,6 +48,21 @@ export const errorHandler = (
 
     console.error(`[${new Date().toISOString()}] ${err.name}: ${err.message}`)
 
+    const parserError = err as { type?: unknown; status?: unknown; expose?: unknown }
+    if (
+        typeof parserError.type === "string" &&
+        parserError.expose === true &&
+        typeof parserError.status === "number" &&
+        parserError.status >= 400 &&
+        parserError.status < 500
+    ) {
+        res.status(parserError.status).json({
+            success: false,
+            message: parserError.status === 413 ? "Request body too large" : "Invalid request body",
+        })
+        return
+    }
+
     if ((err as { code?: unknown }).code === "P2002") {
         res.status(409).json({ success: false, message: "Already exists" })
         return
