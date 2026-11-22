@@ -85,6 +85,27 @@ export async function runOrchestrator(
   request: GenerateRequest,
   userId: string,
 ): Promise<void> {
+  if (request.projectId && request.versionId) {
+    const target = await prisma.projectVersion.findFirst({
+      where: {
+        id: request.versionId,
+        projectId: request.projectId,
+        project: { userId, deletedAt: null },
+      },
+      select: { project: { select: { pipelineState: { select: { websiteStatus: true } } } } },
+    });
+    const refusal = !target
+      ? "Project not found"
+      : target.project.pipelineState?.websiteStatus === "LOCKED"
+        ? "Finish the Research step before building the website."
+        : null;
+    if (refusal) {
+      sseError(res, refusal);
+      res.end();
+      return;
+    }
+  }
+
   const { model, providerOptions, failover } = await resolveTierModel(request.tier);
 
   console.log(`[orchestrator] Using tier: ${request.tier}${failover ? " (Claude unavailable, DeepSeek failover)" : ""}`);

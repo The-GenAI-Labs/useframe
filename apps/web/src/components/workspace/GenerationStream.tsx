@@ -14,16 +14,25 @@ const STAGE_LABELS: Record<string, string> = {
   FAILED: "Generation failed",
 }
 
-export function GenerationStream() {
+export function GenerationStream({ onRetry }: { onRetry?: () => void }) {
   const { currentStage, stageMessage, substep, streamBuffer, isStreaming, error } =
     useGenerationStore()
 
   if (error) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3 p-8">
-        <div className="rounded-xl border border-destructive/30 bg-destructive/10 p-6 text-center">
+        <div role="alert" className="rounded-xl border border-destructive/30 bg-destructive/10 p-6 text-center">
           <p className="font-medium text-destructive">Generation failed</p>
           <p className="mt-1 text-sm text-muted-foreground">{error}</p>
+          {onRetry && (
+            <button
+              type="button"
+              onClick={onRetry}
+              className="mt-4 rounded-lg bg-bubble px-3.5 py-2 text-[12.5px] font-semibold text-pri transition-opacity duration-150 hover:opacity-80 focus-visible:outline-2 cursor-pointer"
+            >
+              Try again
+            </button>
+          )}
         </div>
       </div>
     )
