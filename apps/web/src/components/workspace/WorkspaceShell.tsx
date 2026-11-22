@@ -74,10 +74,10 @@ export function WorkspaceShell({ project }: Props) {
   const queryClient = useQueryClient();
   const isScanning = searchParams.get("status") === "scanning";
   const arrivedGenerating = searchParams.get("status") === "generating";
-  const { startGeneration } = useGenerationStream();
-  const { isStreaming, siteSpec } = useGenerationStore();
+  const { startGeneration, stopGeneration } = useGenerationStream();
+  const { isStreaming, siteSpec, error: generationError } = useGenerationStore();
   const { selectedModelId } = useModelStore();
-  const [generationStarted, setGenerationStarted] = useState(false);
+  const [startedVersionId, setStartedVersionId] = useState<string | null>(null);
   const [streamVersionId, setStreamVersionId] = useState<string | null>(
     arrivedGenerating ? (project.versions[0]?.id ?? null) : null,
   );
@@ -89,7 +89,7 @@ export function WorkspaceShell({ project }: Props) {
   );
   const [viewingStep, setViewingStep] = useState<PipelineStepId | null>(null);
   const generatingVersionId =
-    streamVersionId && isStreaming ? streamVersionId : null;
+    streamVersionId && (isStreaming || generationError) ? streamVersionId : null;
 
   const setVersions = useProjectStore((s) => s.setVersions);
   const addVersion = useProjectStore((s) => s.addVersion);
@@ -132,7 +132,7 @@ export function WorkspaceShell({ project }: Props) {
       cancelled = true;
     };
   }, [validationRevision, project.slug, setVersions]);
-  const { data: pipelineData } = useQuery({
+  const { data: pipelineData, isSuccess: pipelineReady } = useQuery({
     queryKey: ["pipeline", project.slug],
     queryFn: () => pipelineApi.get(project.slug),
     refetchInterval: 4000,
@@ -226,51 +226,90 @@ export function WorkspaceShell({ project }: Props) {
 
   const latestVersion = project.versions[0];
   const latestScan = project.competitorScans[0];
-  const needsGeneration = latestVersion && !hasSnapshot(latestVersion.snapshot);
 
-  // ?status=generating means generation was already kicked off elsewhere (the
-  // home page's clarify flow) and this navigation is just following the SSE
-  // stream's project_created event — the generationStore singleton already
-  // has the in-flight stream, so don't start a second one here.
-  const alreadyStreamingFromElsewhere =
-    arrivedGenerating && (isStreaming || !!siteSpec);
+  // The pipeline gate: nothing is built until the pipeline has loaded and
+  // Research has unlocked the Website step.
+  const websiteUnlocked =
+    pipelineReady && (!pipeline || pipeline.websiteStatus !== "LOCKED");
+  // PENDING means Research was approved but nothing has been built from that
+  // brief yet, so any existing snapshot predates the chosen direction.
+  const websitePending = pipeline?.websiteStatus === "PENDING";
+  const needsGeneration =
+    !!latestVersion &&
+    (!hasSnapshot(latestVersion.snapshot) || websitePending);
 
-  // Website generation only auto-starts once Research has been approved
-  // (websiteStatus unlocked from LOCKED) — this is the pipeline gate.
-  const websiteUnlocked = !pipeline || pipeline.websiteStatus !== "LOCKED";
+  const runGeneration = useCallback(
+    (versionId: string) => {
+      setStartedVersionId(versionId);
+      setStreamVersionId(versionId);
+      const index = project.versions.findIndex((v) => v.id === versionId);
+      if (index >= 0) setActiveIndex(index);
+      startGeneration(ORCHESTRATOR_URL, {
+        projectId: project.id,
+        versionId,
+        startupIdea: project.startupIdea,
+        niche: project.niche,
+        targetAudience: project.targetAudience,
+        inputType: project.inputType,
+        sourceUrl: project.sourceUrl ?? undefined,
+        scanResult: latestScan?.extractedContent as
+          | Record<string, unknown>
+          | undefined,
+        modelId: selectedModelId,
+      });
+    },
+    [project, latestScan, selectedModelId, startGeneration],
+  );
 
   useEffect(() => {
-    if (generationStarted || !needsGeneration || !websiteUnlocked) return;
+    if (!latestVersion || !needsGeneration || !websiteUnlocked) return;
+    if (startedVersionId === latestVersion.id || isStreaming) return;
     if (isScanning && project.status === "GENERATING") return;
-    if (alreadyStreamingFromElsewhere) return;
-
-    setGenerationStarted(true);
-    setStreamVersionId(latestVersion.id);
-    startGeneration(ORCHESTRATOR_URL, {
-      projectId: project.id,
-      versionId: latestVersion.id,
-      startupIdea: project.startupIdea,
-      niche: project.niche,
-      targetAudience: project.targetAudience,
-      inputType: project.inputType,
-      sourceUrl: project.sourceUrl ?? undefined,
-      scanResult: latestScan?.extractedContent as
-        | Record<string, unknown>
-        | undefined,
-      modelId: selectedModelId,
-    });
+    runGeneration(latestVersion.id);
   }, [
-    project,
     latestVersion,
-    latestScan,
-    isScanning,
-    generationStarted,
     needsGeneration,
     websiteUnlocked,
-    startGeneration,
-    selectedModelId,
-    alreadyStreamingFromElsewhere,
+    startedVersionId,
+    isStreaming,
+    isScanning,
+    project.status,
+    runGeneration,
   ]);
+
+  useEffect(() => {
+    if (!siteSpec || !streamVersionId) return;
+    setLocalVersions((prev) =>
+      prev.map((v) =>
+        v.id === streamVersionId ? { ...v, snapshot: siteSpec } : v,
+      ),
+    );
+    invalidatePipeline();
+    router.refresh();
+  }, [siteSpec, streamVersionId, invalidatePipeline, router]);
+
+  useEffect(
+    () => () => {
+      stopGeneration();
+      useGenerationStore.getState().reset();
+    },
+    [stopGeneration],
+  );
+
+  const emptyVersionState = !pipelineReady
+    ? { message: "Loading…" }
+    : !websiteUnlocked
+      ? {
+          message:
+            "Your website is built from the design direction you pick in Research.",
+          actionLabel: "Go to Research",
+          onAction: () => setViewingStep("RESEARCH"),
+        }
+      : {
+          message: "This version hasn't been built yet.",
+          actionLabel: "Build website",
+          onAction: runGeneration,
+        };
 
   const handleWebsiteApprove = useCallback(() => {
     websiteApi.approve(project.slug).then(invalidatePipeline);
@@ -510,6 +549,9 @@ export function WorkspaceShell({ project }: Props) {
                 generatingVersionId={generatingVersionId}
                 activeIndex={activeIndex}
                 onActiveIndexChange={setActiveIndex}
+                emptyState={emptyVersionState}
+                onRetry={runGeneration}
+                busy={isStreaming}
               />
             </div>
             {isStepApproved("WEBSITE") ? (

@@ -20,6 +20,13 @@ type Props = {
   generatingVersionId: string | null;
   activeIndex: number;
   onActiveIndexChange: (index: number) => void;
+  emptyState: {
+    message: string;
+    actionLabel?: string;
+    onAction?: (versionId: string) => void;
+  };
+  onRetry: (versionId: string) => void;
+  busy: boolean;
 };
 
 function hasSnapshot(snapshot: unknown): snapshot is SiteSpec {
@@ -36,6 +43,9 @@ export function VersionSlider({
   generatingVersionId,
   activeIndex,
   onActiveIndexChange,
+  emptyState,
+  onRetry,
+  busy,
 }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -82,7 +92,7 @@ export function VersionSlider({
         {versions.map((version) => (
           <div key={version.id} className="h-full w-full shrink-0 snap-start">
             {version.id === generatingVersionId ? (
-              <GenerationStream />
+              <GenerationStream onRetry={() => onRetry(version.id)} />
             ) : hasSnapshot(version.snapshot) ? (
               <PreviewPane
                 projectSlug={projectSlug}
@@ -90,10 +100,20 @@ export function VersionSlider({
                 active={version.id === versions[activeIndex]?.id}
               />
             ) : (
-              <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
-                <p className="text-[13px] text-mut">
-                  This version hasn&apos;t been generated yet.
+              <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
+                <p className="max-w-sm text-[13px] text-mut">
+                  {emptyState.message}
                 </p>
+                {emptyState.actionLabel && emptyState.onAction && (
+                  <button
+                    type="button"
+                    onClick={() => emptyState.onAction?.(version.id)}
+                    disabled={busy}
+                    className="rounded-lg bg-bubble px-3.5 py-2 text-[12.5px] font-semibold text-pri transition-opacity duration-150 hover:opacity-80 focus-visible:outline-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  >
+                    {emptyState.actionLabel}
+                  </button>
+                )}
               </div>
             )}
           </div>
