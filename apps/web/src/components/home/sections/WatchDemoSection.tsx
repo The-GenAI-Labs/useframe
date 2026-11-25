@@ -22,9 +22,8 @@ import {
 import { landingFont } from "../fonts";
 import styles from "./WatchDemoSection.module.css";
 
-const VIDEO_URL = "https://www.youtube.com/watch?v=DhJBlhw8Ye8";
-const EMBED_URL =
-  "https://www.youtube.com/embed/DhJBlhw8Ye8?autoplay=1&controls=1&playsinline=1&rel=0";
+const VIDEO_URL =
+  "https://storage.googleapis.com/useframe-public-assets/demo/useframe-demo.mp4";
 const EASE = [0.22, 1, 0.36, 1] as const;
 const CARDS = [
   {
@@ -221,7 +220,6 @@ export const WatchDemoSection = memo(function WatchDemoSection() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [focused, setFocused] = useState<string | null>(null);
   const [playing, setPlaying] = useState(false);
-  const [thumbnailFailed, setThumbnailFailed] = useState(false);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -279,13 +277,12 @@ export const WatchDemoSection = memo(function WatchDemoSection() {
           </div>
           <div className={styles.player}>
             {playing ? (
-              <iframe
-                {...{ credentialless: "" }}
-                src={EMBED_URL}
-                title="UseFrame demo — YouTube video player"
-                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
+              <video
+                src={VIDEO_URL}
+                title="UseFrame demo video"
+                controls
+                autoPlay
+                playsInline
               />
             ) : (
               <button
@@ -295,21 +292,14 @@ export const WatchDemoSection = memo(function WatchDemoSection() {
                 onClick={() => setPlaying(true)}
                 aria-label="Play UseFrame demo"
               >
-                {/* YouTube's thumbnail falls back to the existing product artwork when unavailable. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={
-                    thumbnailFailed
-                      ? "/chat/useframe landing.png"
-                      : "https://i.ytimg.com/vi/DhJBlhw8Ye8/maxresdefault.jpg"
-                  }
-                  alt=""
-                  loading="lazy"
-                  onError={() => setThumbnailFailed(true)}
-                  onLoad={(event) => {
-                    if (event.currentTarget.naturalWidth < 200)
-                      setThumbnailFailed(true);
-                  }}
+                {/* #t seeks past the opening frame so the preview isn't blank. */}
+                <video
+                  src={`${VIDEO_URL}#t=1`}
+                  muted
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                  tabIndex={-1}
                 />
                 <span className={styles.previewShade} />
                 <span className={styles.playIcon}>
@@ -349,7 +339,7 @@ export const WatchDemoSection = memo(function WatchDemoSection() {
             <p className={styles.fallback}>
               Having trouble playing?{" "}
               <a href={VIDEO_URL} target="_blank" rel="noopener noreferrer">
-                Watch on YouTube <ArrowUpRight size={12} aria-hidden="true" />
+                Open the video <ArrowUpRight size={12} aria-hidden="true" />
               </a>
             </p>
           )}
